@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role','api_token'
     ];
 
     /**
@@ -36,6 +36,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Get user role name
+     *
+     * $return string
+     */
+    public function rolename()
+    {
+        return config('variables.role')[$this->attributes['role']];
+    }
+
+    /**
+     * Découvrez si l'utilisateur a un rôle spécifique
+     *
+     * $return boolean
+     */
+    public function hasRole($roles)
+    {
+        return in_array($this->rolename(), explode("|", $roles));
+    }
+
     /*
     | Relationship between models
    */

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Questionnaire;
+use App\User;
 use Illuminate\Http\Request;
+use phpseclib\Crypt\Hash;
 
 class HomeController extends Controller
 {
@@ -27,4 +29,5 @@ class HomeController extends Controller
         $questionnaires = auth()->user()->questionnaires;
         return view('home',compact('questionnaires'));
     }
+
 }

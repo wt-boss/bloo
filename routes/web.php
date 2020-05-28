@@ -37,3 +37,6 @@ Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionCo
 
 Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
 
+Route::post('/log','QuestionController@test');
+
+

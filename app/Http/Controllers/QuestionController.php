@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Questionnaire;
+use App\User;
 use http\Exception\BadConversionException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class QuestionController extends Controller
 {
@@ -87,4 +90,6 @@ class QuestionController extends Controller
         $question->delete();
         return back()->withSuccess('Question et réponses associees suprimés avec success');
     }
+
+
 }
