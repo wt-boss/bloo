@@ -11,28 +11,16 @@
                             @csrf
                             @foreach($questionnaire->questions as $key=>$question)
                                 <div class="card mt-4">
-                                    <div class="card-header"><strong>Question {{ $key+1 }} - {{ $question->question }}</strong></div>
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <p class="col-9"><strong>Question {{ $key+1 }} - {{ $question->question }}</strong></p>
+                                            <p class="col-3 font-italic">Nombre de reponse : {{$question->responses->count()}} </p>
+                                        </div>
+
+                                    </div>
                                     <div class="card-body">
                                         <ul class="list-group">
-                                            @if($question->question_type === 'text')
-                                                <div class="form-group">
-                                                    <label for="reponse">Nombre de reponse</label>
-                                                    <input type="text" class="form-control" id="reponse"  name="responsest[{{$key}}][answer]" value="{{$question->responses->count()}}" diseable>
-                                                </div>
-                                                <br>
-                                            @elseif($question->question_type === 'number')
-                                                <div class="form-group">
-                                                    <label for="reponse">Nombre de reponse</label>
-                                                    <input type="text" class="form-control" id="reponse"  name="responsest[{{$key}}][answer]" value="{{$question->responses->count()}}" diseable>
-                                                </div>
-                                                <br>
-                                            @elseif($question->question_type === 'textarea')
-                                                <div class="form-group">
-                                                    <label for="reponse">Nombre de reponse</label>
-                                                    <input type="text" class="form-control" id="reponse"  name="responsest[{{$key}}][answer]" value="{{$question->responses->count()}}" diseable>
-                                                </div>
-                                                <br>
-                                            @elseif($question->question_type === 'checkbox')
+                                          @if($question->question_type === 'checkbox')
                                                 @foreach($question->answers as $val => $answer)
                                                     <label for="answer{{$answer->id}}">
                                                         <li class="list-group-item d-flex justify-content-between ">

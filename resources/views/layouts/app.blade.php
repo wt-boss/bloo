@@ -80,6 +80,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" ></script>
     <script type="text/javascript">
+
         // Set default CSRF header
         $.ajaxSetup({
             headers: {
@@ -88,7 +89,6 @@
         });
         // Intercept login form
         $('#login-form').submit(function(e){
-
             // Prevent normal form submission, we well do in JS instead
             e.preventDefault();
             // Get form data
@@ -103,7 +103,11 @@
                     // If login success, redirect
                     window.location.replace(response.redirect);
                 }
-            });
+            }).catch(error =>{
+                    console.log(error.responseJSON.errors);
+                    var ereur = error.responseJSON.errors.email[0] ;
+                    document.getElementById('error-login').textContent = ereur;
+                })
         });
         // Intercept register form
         $('#register-form').submit(function(e){
@@ -123,7 +127,13 @@
                     // If register success, redirect
                     window.location.replace(response.redirect);
                 }
-            });
+            }).catch(error =>{
+                console.log(error.responseJSON.errors);
+                var errormail = error.responseJSON.errors.email[0];
+                var errorpassword = error.responseJSON.errors.password[0];
+                document.getElementById('error-mail').textContent = errormail;
+                document.getElementById('error-password').textContent = errorpassword;
+            })
         });
     </script>
     @yield('js')
