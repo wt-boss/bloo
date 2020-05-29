@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::count();
+
+        $widget = [
+            'users' => $users,
+            //...
+        ];
+
+        return view('home', compact('widget'));
     }
+    public function admin()
+    {
+
+
+        return view('admin');
+    }
+
+
+    public function language()
+	{
+		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
+
+		return redirect()->back();
+	}
 }
