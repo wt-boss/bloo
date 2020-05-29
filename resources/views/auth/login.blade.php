@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.app')
 
 @section('content')
@@ -63,3 +64,6 @@
     </div>
 </div>
 @endsection
+=======
+@extends('adminlte::login')
+>>>>>>> kirra
