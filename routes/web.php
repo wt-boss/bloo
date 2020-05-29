@@ -27,6 +27,14 @@ Route::post('/questionnaire','QuestionnaireController@store')->name('questionnai
 Route::post('/questionnaire//update/{questionnaire}','QuestionnaireController@update')->name('questionnaire.update');
 Route::get('/questionnaire/{questionnaire}','QuestionnaireController@show')->name('questionnaire.show');
 Route::get('/questionnaire/stats/{questionnaire}','QuestionnaireController@stats')->name('questionnaire.stat');
+Route::get('/questionnaire/create/free','QuestionnaireController@free')->name('questionnaire.free');
+Route::get('/questionnaire/view/free','QuestionnaireController@login_free')->name('questionnaire.login_free');
+Route::post('/questionnaire/view/free','QuestionnaireController@identify_free')->name('questionnaire.identify_free');
+Route::post('/questionnaire/create','QuestionnaireController@store_free')->name('questionnaire.store_free');
+Route::post('/questionnaire/create/validate/{questionnaire}','QuestionnaireController@valid')->name('questionnaire.validate_free');
+Route::post('/questionnaire/create/active/{questionnaire}','QuestionnaireController@active')->name('questionnaire.active');
+
+
 
 Route::get('/questionnaire/{questionnaire}/edit','QuestionnaireController@edit')->name('questionnaire.edit');
 Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');

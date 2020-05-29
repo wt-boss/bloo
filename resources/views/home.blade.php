@@ -26,6 +26,12 @@
             <div class="card mt-4">
                 <div class="card-header">Mes questionnaires</div>
                 <div class="card-body">
+                   <a  href="{{route('questionnaire.free')}}">
+                       <input type="submit" class="btn btn-info" value="creer un sondage gratuit">
+                   </a>
+                    <a  href="{{route('questionnaire.login_free')}}">
+                        <input type="submit" class="btn btn-info" value="voir mon sondage gratuit">
+                    </a>
                     <ul class="list-group">
                       @forelse($questionnaires as $questionnaire)
                           <li class="list-group-item">
