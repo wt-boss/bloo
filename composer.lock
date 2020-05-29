@@ -4,11 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "content-hash": "0e820acdab0115807b79acdd3a270c37",
-=======
-    "content-hash": "d4c7d6b1bdbb177881296ed7bb8d4cc8",
->>>>>>> kirra
+
     "packages": [
         {
             "name": "almasaeed2010/adminlte",

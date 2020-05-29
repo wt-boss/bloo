@@ -36,7 +36,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-<<<<<<< HEAD
+
     /**
      * Get user role name
      *
@@ -63,15 +63,7 @@ class User extends Authenticatable
     public function questionnaires()
     {
         return $this->hasMany(Questionnaire::class);
-=======
-
-    public function getFullNameAttribute()
-    {
-        if (is_null($this->last_name)) {
-            return "{$this->name}";
-        }
-
-        return "{$this->name} {$this->last_name}";
->>>>>>> kirra
     }
+
+
 }

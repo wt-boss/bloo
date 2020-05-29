@@ -41,7 +41,7 @@
                     <h2 class="heading">{{ trans('prix_free') }}</h2>
                     <span class="price"> <span class="number">{{ trans('prix1') }}</span></span>
                     <span class="excerpt d-block">{{ trans('prix_offre_freee') }}</span>
-                    <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
+                    <a href="{{route('questionnaire.free')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
 
                     <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>

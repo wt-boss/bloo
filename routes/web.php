@@ -14,17 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-<<<<<<< HEAD
+Route::get('/home2', 'HomeController@index2')->name('home2');
 Route::get('/take_survey/{questionnaire}', 'QuestionnaireController@view')->name('take_survey');
 Route::get('/stat_survey', 'HomeController@index')->name('stat_survey');
-
-
 Route::get('/questionnaire/create','QuestionnaireController@create')->name('questionnaire.create');
 Route::post('/questionnaire','QuestionnaireController@store')->name('questionnaire.store');
 Route::post('/questionnaire//update/{questionnaire}','QuestionnaireController@update')->name('questionnaire.update');
@@ -36,61 +32,38 @@ Route::post('/questionnaire/view/free','QuestionnaireController@identify_free')-
 Route::post('/questionnaire/create','QuestionnaireController@store_free')->name('questionnaire.store_free');
 Route::post('/questionnaire/create/validate/{questionnaire}','QuestionnaireController@valid')->name('questionnaire.validate_free');
 Route::post('/questionnaire/create/active/{questionnaire}','QuestionnaireController@active')->name('questionnaire.active');
-
-
-
 Route::get('/questionnaire/{questionnaire}/edit','QuestionnaireController@edit')->name('questionnaire.edit');
 Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');
-
 Route::post('/question/{questionnaire}','QuestionController@store')->name('question.store');
-
 Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionController@destroy')->name('question.destroy');
-
 Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
-
 Route::post('/log','QuestionController@test');
-=======
 Route::get('/admin', 'HomeController@admin')->name('admin');
 //language
 Route::get('language', 'HomeController@language')->name('language');
-
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
-
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-
-
 // pages route
 Route::group(['middleware'=>['web']],function(){
-
     Route::get('home','pagesController@getHome')->name('home');
     Route::get('services', 'pagesController@getServices')->name('services');
     Route::get('sondages', 'pagesController@getSondage')->name('sondages');
     Route::get('prix', 'pagesController@getPrix')->name('prix');
-
-     //contact
-     Route::get('/contact', [
+    //contact
+    Route::get('/contact', [
         "as"=>'contact_path',
-         'uses'=>'ContactsController@create'
-       ])->name('contact');
-
-       Route::post('/contact', [
-           "as"=>'contact_path',
-           'uses'=>'ContactsController@store'
-        ]);
-
-
-        Route::get('/test-email', function () {
-           return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour Krada');
-       });
-
-       // dashboard route
-
-
-
+        'uses'=>'ContactsController@create'
+    ])->name('contact');
+    Route::post('/contact', [
+        "as"=>'contact_path',
+        'uses'=>'ContactsController@store'
+    ]);
+    Route::get('/test-email', function () {
+        return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour Krada');
+    });
 });
->>>>>>> kirra
 
 

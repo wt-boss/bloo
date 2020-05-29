@@ -3998,7 +3998,7 @@ jquery-datetimepicker@^2.5.4:
   resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
   integrity sha1-BvAzXxbjU6aV5yBr9QUDy1I6buU=
 
-"jquery@>= 1.7.2", jquery@>=1.7, jquery@^3.4.1:
+"jquery@>= 1.7.2", jquery@>=1.7, jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==

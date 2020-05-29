@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Questionnaire;
 use App\User;
 use Illuminate\Http\Request;
 use phpseclib\Crypt\Hash;
-=======
-use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
->>>>>>> kirra
+
 
 class HomeController extends Controller
 {
@@ -30,36 +26,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index2()
     {
-<<<<<<< HEAD
+
         $questionnaires = auth()->user()->questionnaires;
-        return view('home',compact('questionnaires'));
+        return view('home2',compact('questionnaires'));
     }
 
-=======
+    public function index()
+    {
         $users = User::count();
 
         $widget = [
             'users' => $users,
             //...
         ];
-
         return view('home', compact('widget'));
     }
     public function admin()
     {
-
-
         return view('admin');
     }
-
-
     public function language()
 	{
 		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
-
 		return redirect()->back();
 	}
->>>>>>> kirra
 }
