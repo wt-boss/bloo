@@ -19,7 +19,7 @@
           <div class="container-fluid">
             <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
               <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('prix_fil') }}</span></p>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ trans('prix_fil') }}</span></p>
                 <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('prix_fil') }}</h1>
               </div>
             </div>
@@ -54,7 +54,7 @@
                       <br>
                       <br>
 
-                      <li>All features</li>
+                        <li>Toutes les fonctionalitées</li>
                     </ul>
                     </div>
                   </div>
@@ -77,7 +77,7 @@
                         <li><strong>{{ trans('prix_offre_prenuim2') }}</strong></li>
                         <li><strong>{{ trans('prix_offre_prenuim3') }}</strong></li>
 
-                        <li>All features</li>
+                        <li>Toutes les fonctionalitées</li>
                       </ul>
                       </div>
                     </div>
@@ -101,7 +101,7 @@
                         <li><strong>{{ trans('prix_offre_llimite2') }}</strong></li>
                         <li><strong>{{ trans('prix_offre_llimite3') }}</strong></li>
 
-                        <li>All features</li>
+                          <li>Toutes les fonctionalitées</li>
                       </ul>
                       </div>
                     </div>

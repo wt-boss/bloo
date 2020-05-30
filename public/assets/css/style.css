@@ -7473,7 +7473,7 @@ h1, h2, h3, h4, h5,
     background: -ms-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
     background: -webkit-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
     background: -o-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
-    background: linear-gradient(135deg, #2ebdc4 0%, #68e5b2 100%);
+    background: linear-gradient(135deg, #217dff 0%, #68e5b2 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ebdc4', endColorstr='#68e5b2', GradientType=1 ); }
   .hero-wrap .circle-bg:after {
     position: absolute;
@@ -7810,7 +7810,7 @@ h1, h2, h3, h4, h5,
     background: #d4f8e6; }
   .services .icon span {
     font-size: 60px;
-    color: #22d47b; }
+    color: #217dff; }
 
 .services .media-body h3 {
   font-size: 20px; }
@@ -7840,7 +7840,7 @@ h1, h2, h3, h4, h5,
     background: -ms-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
     background: -webkit-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
     background: -o-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
-    background: linear-gradient(135deg, #2ebdc4 0%, #68e5b2 100%);
+    background: linear-gradient(135deg, #2ebdc4 0%, #217dff 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ebdc4', endColorstr='#68e5b2', GradientType=1 ); }
   .ftco-section-parallax .heading-section-white h2 {
     font-weight: 400 !important; }
@@ -8412,15 +8412,15 @@ textarea.form-control {
     content: '';
     z-index: -1;
     opacity: .9;
-    background: #2ebdc4;
+    background: #217dff;
     background: -moz-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
     background: -webkit-gradient(left top, right bottom, color-stop(0%, #2ebdc4), color-stop(100%, #68e5b2));
     background: -webkit-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
     background: -o-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
     background: -ms-linear-gradient(-45deg, #2ebdc4 0%, #68e5b2 100%);
-    background: -webkit-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
+    background: -webkit-linear-gradient(315deg, #2ebdc4 0%, #217dff 100%);
     background: -o-linear-gradient(315deg, #2ebdc4 0%, #68e5b2 100%);
-    background: linear-gradient(135deg, #2ebdc4 0%, #68e5b2 100%);
+    background: linear-gradient(135deg, #217dff 0%, #78 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ebdc4', endColorstr='#68e5b2', GradientType=1 ); }
 
 .ftco-counter {

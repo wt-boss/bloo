@@ -56,6 +56,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('services', 'pagesController@getServices')->name('services');
     Route::get('sondages', 'pagesController@getSondage')->name('sondages');
     Route::get('prix', 'pagesController@getPrix')->name('prix');
+    // route inscription
+    Route::get('inscription', 'pagesController@getInscription')->name('inscription');
+    Route::get('password ', 'pagesController@getPassword')->name('password');
+
     //contact
     Route::get('/contact', [
         "as"=>'contact_path',
@@ -68,6 +72,8 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/test-email', function () {
         return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour Krada');
     });
+
+
 });
 
 

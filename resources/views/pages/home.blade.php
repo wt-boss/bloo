@@ -18,7 +18,7 @@
             <div class="one-forth pr-md-4 ftco-animate align-self-md-center" data-scrollax=" properties: { translateY: '70%' }">
                 <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ trans('homme_title') }}  </h1>
               <p class="mb-md-5 mb-sm-3" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('homme_title_content') }}</p>
-              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3">{{ trans('homme_title_button') }}</a></p>
+              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{{route('services')}}" class="btn btn-primary px-4 py-3">{{ trans('homme_title_button') }}</a> <a href="{{route('questionnaire.free')}}" class="btn btn-primary px-4 py-3">Créer un sondage</a></p>
             </div>
             <div class="one-half align-self-md-end align-self-sm-center">
                 <div class="slider-carousel owl-carousel">
@@ -171,8 +171,8 @@
           <div class="container">
               <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2 class="mb-4">Some fun facts</h2>
-              <span class="subheading">More than 100,000 websites hosted</span>
+              <h2 class="mb-4">Données traitées</h2>
+              <span class="subheading">information sur nos  données</span>
             </div>
           </div>
               <div class="row justify-content-center">
@@ -181,8 +181,8 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="2000">0</strong>
-                          <span>CMS Installation</span>
+                          <strong class="number" data-number="+4000">0</strong>
+                          <span>données traitées chaque jour… </span>
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@
                       <div class="block-18 text-center">
                         <div class="text">
                           <strong class="number" data-number="100">0</strong>
-                          <span>Awards Won</span>
+                          <span>questionnaires/jours</span>
                         </div>
                       </div>
                     </div>
@@ -198,7 +198,7 @@
                       <div class="block-18 text-center">
                         <div class="text">
                           <strong class="number" data-number="32000">0</strong>
-                          <span>Registered Domains</span>
+                          <span>Nombre de  clients</span>
                         </div>
                       </div>
                     </div>
@@ -206,7 +206,7 @@
                       <div class="block-18 text-center">
                         <div class="text">
                           <strong class="number" data-number="31998">0</strong>
-                          <span>Satisfied Customers</span>
+                          <span>Nombre d'opérateurs</span>
                         </div>
                       </div>
                     </div>
