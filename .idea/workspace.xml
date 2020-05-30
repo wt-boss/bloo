@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afb897d4-b0bf-4c10-b9bf-8e985e956480" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionnaireController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionnaireController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_26_084900_create_questionnaires_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_26_084900_create_questionnaires_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontend/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontend/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/login_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/login_free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/resume_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/resume_free.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/show_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/show_free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/stats.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/stats.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/toriko.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/toriko.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/validate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/validate.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,7 +166,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1590828927915</updated>
-      <workItem from="1590828929799" duration="15933000" />
+      <workItem from="1590828929799" duration="18205000" />
     </task>
     <servers />
   </component>

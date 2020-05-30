@@ -161,7 +161,9 @@ class QuestionnaireController extends Controller
      */
     public function edit(Questionnaire $questionnaire)
     {
-        return view('questionnaire.edit',compact('questionnaire'));
+        $start = date('Y-m-d', strtotime($questionnaire->date_start));
+        $end = date('Y-m-d', strtotime($questionnaire->date_end));
+        return view('questionnaire.edit',compact('questionnaire','start','end'));
     }
 
     /**
@@ -176,7 +178,7 @@ class QuestionnaireController extends Controller
       $data = request()->all();
       $questionnaire = Questionnaire::findOrFail($id);
       $questionnaire->update($data);
-      return redirect('/home')->withSuccess('Questionnaires mis a jour avec success');
+         return redirect(url('/questionnaire/create/validate/'.$questionnaire->slug));
      }
     /**
      * Remove the specified resource from storage.
