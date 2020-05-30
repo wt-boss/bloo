@@ -40,32 +40,77 @@
                     <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                         <div class="d-md-flex">
                             <div class="one-forth align-self-center">
-                                <img src="{{asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
+                                <center><h2>Créer votre sondage</h2></center>
+                                {!! Form::open(['route' => 'questionnaire.store_free']) !!}
+                                {!! Form::token();!!}
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="title">Titre</label>
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="purpose">Objectif</label>
+                                        <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="date_start">Date de debut</label>
+                                        <input type="date" class="form-control" id="date_start" name="date_start">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="date_end">Date de fin</label>
+                                        <input type="date" class="form-control" id="date_end" name="date_end">
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary float-right col-4"/>
+                                {!! Form::close() !!}
+
                             </div>
                             <div class="one-half ml-md-5 align-self-center">
-                                      <center><h2>Créer votre sondage</h2></center>
-                                            {!! Form::open(['route' => 'questionnaire.store_free']) !!}
-                                            {!! Form::token();!!}
-                                            <div class="row">
-                                                <div class="form-group col-6">
-                                                    <label for="title">Titre</label>
-                                                    <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
-                                                </div>
-                                                <div class="form-group col-6">
-                                                    <label for="purpose">Objectif</label>
-                                                    <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif">
-                                                </div>
-                                                <div class="form-group col-6">
-                                                    <label for="date_start">Date de debut</label>
-                                                    <input type="date" class="form-control" id="date_start" name="date_start">
-                                                </div>
-                                                <div class="form-group col-6">
-                                                    <label for="date_end">Date de fin</label>
-                                                    <input type="date" class="form-control" id="date_end" name="date_end">
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Valider</button>
-                                            {!! Form::close() !!}
+                                @if (Session::has('errors'))
+                                    <div class="alert alert-danger" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <ul class="list-unstyled">
+                                            @foreach (Session::get('errors')->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if (Session::has('warning'))
+                                    <div class="alert alert-warning" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('warning')}}
+                                    </div>
+                                @endif
+                                @if (Session::has('info'))
+                                    <div class="alert alert-info" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('info')}}
+                                    </div>
+                                @endif
+                                @if (Session::has('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('success')}}
+                                    </div>
+                                @endif
+                                      <center><h2>Administrer votre sondage</h2></center>
+                                <form method="POST"    action="{{ route('questionnaire.identify_free') }}">
+                                    @csrf
+                                    <div class="form-group ">
+                                        <label for="token" class="col-md-4 col-form-label">ID du sondage</label>
+                                        <div class="col-md-12">
+                                            <input id="token" type="text" class="form-control" name="token" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-4 col-form-label">Mot de passe</label>
+                                        <div class="col-md-12">
+                                            <input id="password" type="password" class="form-control " name="password" >
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary float-right col-4"/>
+                                </form>
 
                             </div>
                         </div>

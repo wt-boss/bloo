@@ -26,21 +26,13 @@
             <div class="row justify-content-center">
 
                 <div class="col-md-12">
-                    @if(Session::has('success'))
-                        <div class="alert alert-success">
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
                     <div class="card">
 
                         <div class="card-header">
                             <div class="row">
-                                <a href="{{route('take_survey',[$questionnaire->id])}}" class="col-3"> <input type="button" class="btn btn-primary" value="Passer ce questionnaire"/></a>
-                                <a href="{{route('questionnaire.edit',[$questionnaire->id])}}" class="col-3"> <input type="button" class="btn btn-warning" value="Editer questionnaire"/></a>
-                                @if($questionnaire->active == 0)
-                                    <a href="{{route('questionnaire.active',[$questionnaire->id])}}" class="col-3"> <input type="button" class="btn btn-secondary" value="Valider ce questionnaire"/></a>
-                                @endif
-                                <a href="{{route('questionnaire.stat',[$questionnaire->id])}}" class="col-3"> <input type="button" class="btn btn-info float-right" value="Statistique questionnaire"/></a>
+                                <a href="{{route('take_survey',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-primary" value="Passer ce questionnaire"/></a>
+                                <a href="{{route('questionnaire.edit',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-warning" value="Editer questionnaire"/></a>
+                                <a href="{{route('questionnaire.stat',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-info float-right" value="Statistique questionnaire"/></a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -53,6 +45,11 @@
                                     <label for="objectif">Objectif</label>
                                     <input type="text" class="form-control" id="objectif" name="objectif" value="{{$questionnaire->purpose}}" disabled>
                                 </div>
+                                <div class="form-group col-12">
+                                    <label for="date_start">Sondage ID</label>
+                                    <input type="text" class="form-control" name="date_start" id="date_start" aria-describedby="titre" value="{{$questionnaire->token}}" disabled>
+                                </div>
+
                                 <div class="form-group col-6">
                                     <label for="date_start">Date de debut</label>
                                     <input type="text" class="form-control" name="date_start" id="date_start" aria-describedby="titre" value="{{$questionnaire->date_start}}" disabled>
@@ -61,16 +58,46 @@
                                     <label for="date_end">Date de fin</label>
                                     <input type="text" class="form-control" id="date_end" name="date_end" value="{{$questionnaire->date_end}}" disabled>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="card mt-4">
                         <div class="card-header">Questions</div>
                         <div class="card-body">
+                            @if (Session::has('errors'))
+                                <div class="alert alert-danger" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <ul class="list-unstyled">
+                                        @foreach (Session::get('errors')->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (Session::has('warning'))
+                                <div class="alert alert-warning" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    {{Session::get('warning')}}
+                                </div>
+                            @endif
+                            @if (Session::has('info'))
+                                <div class="alert alert-info" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    {{Session::get('info')}}
+                                </div>
+                            @endif
+                            @if (Session::has('success'))
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    {{Session::get('success')}}
+                                </div>
+                                @endif
                             <ul class="list-group">
                                 @forelse($questionnaire->questions as $question)
                                     <li class="list-group-item d-flex justify-content-between">{{$question->question}}
-                                        @if( $question->responses->count() !== 0)
+                                        <img src="{{asset('img/svg/circle.svg')}}" alt="" width="32" height="32" title="Bootstrap">
+                                        @if( $question->responses->count() == 0)
                                             <form action="/questionnaires/{{ $questionnaire->id}}/questions/{{$question->id}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
@@ -79,7 +106,7 @@
                                         @endif
                                     </li>
                                 @empty
-                                    <li class="list-group-item">Pas de question dans ce formulaire</li>
+                                    <div class="alert alert-warning">Pas de question dans ce formulaire</div>
                                 @endforelse
                             </ul>
                             <br>
@@ -87,9 +114,14 @@
                             {!! Form::token();!!}
                             <h5 class="text-uppercase text-justify">Ajouter une question</h5>
                             <div class="form-group">
+
                                 <label for="exampleFormControlSelect1">Choisir votre option</label>
                                 <select class="form-control" name="questions[question_type]" id="question_type">
-                                    <option value="text">Text</option>
+                                    <option value="text">
+                                        <div>
+                                            Text
+                                        </div>
+                                    </option>
                                     <option value="number">Number</option>
                                     <option value="textarea">Textarea</option>
                                     <option value="checkbox">Checkbox</option>
@@ -101,7 +133,10 @@
                                 <input type="text" class="form-control" name="questions[question]" >
                             </div>
                             <span class="form-g"></span>
-                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                            <input type="submit" class="btn btn-primary col-3" value="Ajouter"/>
+                                @if($questionnaire->active == 0)
+                                    <a href="{{route('questionnaire.active',[$questionnaire->id])}}" class="col-3 float-right"> <input type="button" class="btn btn-secondary" value="Valider ce questionnaire"/></a>
+                                @endif
                             {!! Form::close() !!}
 
                         </div>
@@ -110,13 +145,12 @@
             </div>
         </div>
     </section>
+    <br>
 
 @push('js')
-
-
 @endpush
+
 @endsection
 @section('scripts')
-
 
 @endsection
