@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\kirra belloche\Desktop\bloo\Bloo\resources\views/admin.blade.php ENDPATH**/ ?>
