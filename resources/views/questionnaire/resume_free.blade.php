@@ -21,7 +21,7 @@
                                 <div class="form-group col-12" >
                                     <label for="exampleInputEmail1">Token</label>
                                     <input type="text" class="form-control" id="token" aria-describedby="token" value="{{$questionnaire->token}}" disabled>
-                                    <small id="token" class="form-text text-muted">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                                    <small id="token" class="form-text text-muted text-success">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
                                 </div>
                                 <div class=" offset-2 form-group col-4">
                                     <a href="">

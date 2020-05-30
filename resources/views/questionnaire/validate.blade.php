@@ -25,8 +25,12 @@
 <section>
     <div class="container">
         <div class="row">
-            <center><h1>Valider votre formulaire</h1></center>
-            <form method="post" action="{{route('questionnaire.validate_free',[$questionnaire->id])}}">
+            <center>
+                <div>
+                    <h1>Valider votre formulaire</h1>
+                </div>
+            </center>
+            <form method="post" action="{{route('questionnaire.validate_free',[$questionnaire->slug])}}">
                 @csrf
                 <div class="row">
                     <div class="form-group col-6">
@@ -40,22 +44,22 @@
                     <div class="form-group col-8" >
                         <label for="exampleInputEmail1">Token</label>
                         <input type="text" class="form-control" id="token" aria-describedby="token" value="{{$questionnaire->token}}" disabled>
-                        <small id="token" class="form-text text-muted">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                        <small id="token" class="form-text text-success text-capitalize">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
                     </div>
                     <div class="form-group col-4">
                         <label for="exampleInputEmail1">Mot de passe</label>
-                        <input type="password" class="form-control" name="password" id="password" aria-describedby="password">
-                        <small id="password"  class="form-text text-muted">Entrer un mot de passe pour avoir acces a votre formulaire prochainement</small>
+                        <input type="password" class="form-control" name="password" id="password" aria-describedby="password" required>
+                        <small id="password"  class="form-text text-success">Entrer un mot de passe pour avoir acces a votre formulaire prochainement</small>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary float-right">Valider</button>
             </form>
+
         </div>
     </div>
 
 </section>
-
+    <br>  <br>
 @push('js')
 
 

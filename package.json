@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.0.0-alpha4",
         "chosen-js": "^1.8.0",
         "ckeditor": "^4.7.2",
         "datatables": "^1.10.13",
