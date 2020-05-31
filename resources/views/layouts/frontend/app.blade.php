@@ -57,6 +57,60 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script type="text/javascript">
+
+        // Intercept login form
+        $('#login-form').submit(function(e){
+            // Prevent normal form submission, we well do in JS instead
+            e.preventDefault();
+            // Get form data
+            var data = {
+                "_token": $('#token').val(),
+                email: $('[name=email]').val(),
+                password: $('[name=password]').val(),
+                remember: $('[name=remember]').val(),
+
+            };
+            // Send the request
+            $.post($('this').attr('action'), data, function(response) {
+                if (response.success) {
+                    // If login success, redirect
+                    window.location.replace(response.redirect);
+                }
+            }).catch(error =>{
+                console.log(error);
+                console.log(data);
+                var ereur = error.responseJSON.errors.email[0] ;
+                document.getElementById('error-login').textContent = ereur;
+            })
+        });
+        // Intercept register form
+        $('#register-form').submit(function(e){
+
+            // Prevent normal form submission, we well do in JS instead
+            e.preventDefault();
+            // Get form data
+            var data = {
+                "_token": $('#token').val(),
+                name: $('[name=name]').val(),
+                email: $('[name=email]').val(),
+                password: $('[name=password]').val(),
+                password_confirmation: $('[name=password_confirmation]').val(),
+            };
+            // Send the request
+            $.post($('this').attr('action'), data, function(response) {
+                if (response.success) {
+                    // If register success, redirect
+                    window.location.replace(response.redirect);
+                }
+            }).catch(error =>{
+                var errormail = error.responseJSON.errors.email;
+                var errorpassword = error.responseJSON.errors.password;
+                document.getElementById('error-mail').textContent = errormail;
+                document.getElementById('error-password').textContent = errorpassword;
+            })
+        });
+    </script>
   <script src="{{asset('assets/js/jquery-migrate-3.0.1.min.js')}}"></script>
   <script src="{{asset('assets/js/popper.min.js')}}"></script>
   <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -68,12 +122,9 @@
   <script src="{{asset('assets/js/aos.js')}}"></script>
   <script src="{{asset('assets/js/jquery.animateNumber.min.js')}}"></script>
   <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
-  <script src="{{asset('assets/js/jquery.timepicker.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
   <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="{{asset('assets/js/google-map.js')}}"></script>
   <script src="{{asset('assets/js/main.js')}}"></script>
-
     <script>
         $(document).on('click', '.delete-option', function() {
             $(this).parent(".input-field").remove();
@@ -99,5 +150,6 @@
             }
         });
     </script>
+
   </body>
 </html>

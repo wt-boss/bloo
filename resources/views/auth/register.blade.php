@@ -29,11 +29,9 @@
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
                 <span class="subheading">Inscription</span>
-                <h2 class="mb-4">Renplis le formulaire d'inscription</h2>{{ trans('') }}
-
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-
+                <h2 class="mb-4">Remplir le formulaire d'inscription</h2>{{ trans('') }}
+                <form method="POST" id="register-form"  action="{{ route('register') }}">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -53,12 +51,9 @@
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                            <span>
+                                        <strong id="error-mail"></strong>
                                     </span>
-                            @enderror
                         </div>
                     </div>
 
@@ -68,11 +63,9 @@
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                            <span>
+                                        <strong id="error-password"></strong>
                                     </span>
-                            @enderror
                         </div>
                     </div>
 
@@ -85,14 +78,13 @@
                     </div>
 
                     <div class="form-group row mb-0">
-                        <div class="col-md-9 offset-md-4">
+                        <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Register') }}
                             </button>
                         </div>
                     </div>
                 </form>
-
 
             </div>
         </div>

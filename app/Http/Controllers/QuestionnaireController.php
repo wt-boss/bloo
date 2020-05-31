@@ -178,7 +178,7 @@ class QuestionnaireController extends Controller
       $data = request()->all();
       $questionnaire = Questionnaire::findOrFail($id);
       $questionnaire->update($data);
-         return redirect(url('/questionnaire/create/validate/'.$questionnaire->slug));
+      return redirect('/home')->withSuccess('Questionnaires mis a jour avec success');
      }
     /**
      * Remove the specified resource from storage.

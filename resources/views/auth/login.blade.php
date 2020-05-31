@@ -1,13 +1,7 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-@section('title', 'BLOO')
 
-@push('css')
-
-
-
-@endpush
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -22,28 +16,23 @@
     </div>
 </div>
 
-
-
 <section class="ftco-section services-section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
                 <span class="subheading">Connexion</span>
-                <h2 class="mb-4">Renplis le formulaire de connexion</h2>{{ trans('') }}
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-
+                <h2 class="mb-4">Remplir le formulaire de connexion</h2>{{ trans('') }}
+                <form method="POST" id="login-form"   action="{{ route('login') }}">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <center> <span>
+                                        <strong id="error-login"></strong>
+                                    </span></center>
                     <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                     </div>
 
@@ -53,11 +42,6 @@
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                     </div>
 
@@ -69,17 +53,6 @@
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-6 offset-md-4">
-                            <div class="form-check">
-
-                                <a class="btn btn-link" href="{{ route('register') }}">
-                                    {{ __('Inscription') }}
-                                </a>
-
                             </div>
                         </div>
                     </div>
@@ -98,7 +71,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
         <div class="row">
@@ -110,14 +82,8 @@
     </div>
 </section>
 
-
-
-
-@push('js')
-
-
-@endpush
 @endsection
+
 @section('scripts')
 
 
