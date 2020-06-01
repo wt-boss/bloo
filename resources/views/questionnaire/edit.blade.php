@@ -1,14 +1,6 @@
-
-
-
-
 @extends('layouts.frontend.app')
 
 @section('content')
-@section('title', 'BLOO')
-
-@push('css')
-@endpush
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -29,8 +21,8 @@
                 <div class="card">
                     <div class="card-header">Editer questionnaire</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => ['questionnaire.update',$questionnaire->id],'method' => 'post']) !!}
-                        {!! Form::token();!!}
+                        <form action="{{route('questionnaire.store_free')}}" method="post" onsubmit="return verifDate(this)">
+                            @csrf
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="title">Titre</label>
@@ -41,16 +33,33 @@
                                 <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif" value="{{$questionnaire->purpose}}">
                             </div>
                             <div class="form-group col-6">
-                                <label for="date_start" >Date de debut</label>
-                                <input type="date" class="form-control" id="date_start" name="date_start" value="{{$start}}" required>
+                                <label for="date_start">Date de debut</label>
+                                <input type="date" class="form-control" id="date_start" name="date_start"  >
                             </div>
                             <div class="form-group col-6">
                                 <label for="date_end">Date de fin</label>
-                                <input type="date" class="form-control" id="date_end" name="date_end"  value="{{$end}}"  required>
+                                <input type="date" class="form-control" id="date_end" name="date_end" >
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                        {!! Form::close() !!}
+                        </form>
+                        <script>
+                            function verifDate()
+                            {
+                                var date = new Date();
+                                var start = new  Date(document.getElementById('date_start').value);
+                                var end = new  Date(document.getElementById('date_end').value);
+                                if(start > date && end > start)
+                                {
+                                    return true;
+                                }
+                                else{
+                                    alert('Veuillez choisir une date de debut superieur a la date actuelle et une date de fin superieur a celle de debut');
+                                    return false;
+                                }
+                            }
+                        </script>
+
                     </div>
                 </div>
             </div>
@@ -58,13 +67,6 @@
     </div>
 
     </section>
-
-@push('js')
-
-
-@endpush
-@endsection
-@section('scripts')
 
 
 @endsection

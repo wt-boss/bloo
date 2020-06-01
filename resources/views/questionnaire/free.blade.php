@@ -5,10 +5,8 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-@section('title', 'BLOO')
 
-@push('css')
-@endpush
+
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -32,7 +30,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-md-12 align-items-center ftco-animate">
 
                 <div class="tab-content ftco-animate" id="v-pills-tabContent">
@@ -41,28 +38,44 @@
                         <div class="d-md-flex">
                             <div class="one-forth align-self-center">
                                 <center><h2>Créer votre sondage</h2></center>
-                                {!! Form::open(['route' => 'questionnaire.store_free']) !!}
-                                {!! Form::token();!!}
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="title">Titre</label>
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                <form action="{{route('questionnaire.store_free')}}" method="post" onsubmit="return verifDate(this)">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="title">Titre</label>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="purpose">Objectif</label>
+                                            <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="date_start">Date de debut</label>
+                                            <input type="date" class="form-control" id="date_start" name="date_start"  >
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="date_end">Date de fin</label>
+                                            <input type="date" class="form-control" id="date_end" name="date_end" >
+                                        </div>
                                     </div>
-                                    <div class="form-group col-6">
-                                        <label for="purpose">Objectif</label>
-                                        <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif">
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="date_start">Date de debut</label>
-                                        <input type="date" class="form-control" id="date_start" name="date_start">
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="date_end">Date de fin</label>
-                                        <input type="date" class="form-control" id="date_end" name="date_end">
-                                    </div>
-                                </div>
-                                <input type="submit" class="btn btn-primary float-right col-4"/>
-                                {!! Form::close() !!}
+                                    <input type="submit" class="btn btn-primary float-right col-4"/>
+                                </form>
+                                <script>
+                                    function verifDate()
+                                    {
+                                        var date = new Date();
+                                        var start = new  Date(document.getElementById('date_start').value);
+                                        var end = new  Date(document.getElementById('date_end').value);
+                                        if(start > date && end > start)
+                                        {
+                                            return true;
+                                        }
+                                        else{
+                                            alert('Veuillez choisir une date de debut superieur a la date actuelle et une date de fin superieur a celle de debut');
+                                            return false;
+                                        }
+                                    }
+                                </script>
 
                             </div>
                             <div class="one-half ml-md-5 align-self-center">
@@ -120,13 +133,6 @@
         </div>
     </div>
 </section>
-
-@push('js')
-
-
-@endpush
-@endsection
-@section('scripts')
 
 
 @endsection

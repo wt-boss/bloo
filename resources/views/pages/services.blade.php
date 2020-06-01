@@ -1,14 +1,6 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-    @section('title', 'Services')
-
-@push('css')
-
-
-
-    @endpush
-
     <div class="hero-wrap">
         <div class="overlay"></div>
         <div class="circle-bg"></div>
@@ -139,10 +131,6 @@
         </div>
         </div>
     </section>
-
-
-
-
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
@@ -179,12 +167,6 @@
         </div>
         </div>
     </section>
-
-
-
-
-
-
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(assets/images/bg_1.jpg);">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -233,17 +215,5 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-@push('js')
-
-
-    @endpush
-    @endsection
-     @section('scripts')
-
 
 @endsection

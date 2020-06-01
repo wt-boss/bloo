@@ -1,24 +1,7 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="container">
-
-    </div>
-@endsection
-
-
-
-
-
-
-
 @extends('layouts.frontend.app')
 
 @section('content')
-@section('title', 'BLOO')
 
-@push('css')
-@endpush
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -86,10 +69,5 @@
     </section>
     <br>
 
-@push('js')
-@endpush
-
-@endsection
-@section('scripts')
 
 @endsection

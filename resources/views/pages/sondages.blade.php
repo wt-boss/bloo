@@ -1,14 +1,6 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-    @section('title', 'Sondage en ligne')
-
-@push('css')
-
-
-
-    @endpush
-
     <div class="hero-wrap">
         <div class="overlay"></div>
         <div class="circle-bg"></div>
@@ -22,7 +14,6 @@
           </div>
         </div>
       </div>
-
       <section class="ftco-section bg-light">
           <div class="container">
               <div class="row justify-content-center mb-5">
@@ -36,7 +27,6 @@
 
           </div>
       </section>
-
       <section class="ftco-section">
           <div class="container">
               <div class="row justify-content-center mb-5">
@@ -96,7 +86,6 @@
               </div>
           </div>
       </section>
-
       <section class="ftco-section bg-light">
     	<div class="container">
     		<div class="row justify-content-center mb-5">
@@ -178,16 +167,4 @@
     		</div>
     	</div>
     </section>
-
-
-
-
-@push('js')
-
-
-    @endpush
-    @endsection
-     @section('scripts')
-
-
 @endsection

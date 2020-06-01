@@ -1,14 +1,6 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-    @section('title', 'BLOO')
-
-@push('css')
-
-
-
-    @endpush
-
 
 
     <!-- <div class="js-fullheight"> -->
@@ -235,18 +227,5 @@
                 </div>
             </div>
         </section>
-
-
-
-
-
-
-@push('js')
-
-
-    @endpush
-    @endsection
-     @section('scripts')
-
 
 @endsection
