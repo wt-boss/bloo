@@ -3,21 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="afb897d4-b0bf-4c10-b9bf-8e985e956480" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/inscription.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/inscription.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/password.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/prix.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/prix.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/services.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/services.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/sondages.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/sondages.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/login_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/login_free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/resume_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/resume_free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/show_free.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/show_free.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/stats.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/stats.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/validate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/validate.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/questionnaire/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionnaire/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,7 +165,7 @@
       <workItem from="1590828929799" duration="19083000" />
       <workItem from="1590872440282" duration="7000" />
       <workItem from="1590944402935" duration="2349000" />
-      <workItem from="1590956964715" duration="12364000" />
+      <workItem from="1590956964715" duration="18481000" />
     </task>
     <servers />
   </component>
