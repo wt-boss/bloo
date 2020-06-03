@@ -35,11 +35,15 @@
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
-  'jeroennoten/laravel-adminlte' => 
+  'intervention/image' => 
   array (
     'providers' => 
     array (
-      0 => 'JeroenNoten\\LaravelAdminLte\\AdminLteServiceProvider',
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'laravel/tinker' => 

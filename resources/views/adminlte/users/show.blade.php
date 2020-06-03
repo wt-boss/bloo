@@ -10,13 +10,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Users</h1>
+                    <h1 class="m-0 text-dark">Users/Profile</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
-                        <li class="breadcrumb-item active">Users</li>
+                        <li class="breadcrumb-item active"><a href="#">Users</a></li>
                         <li class="breadcrumb-item active">Profile</li>
                     </ol>
                 </div>
@@ -43,7 +43,7 @@
                     <h5 class="widget-user-desc">{{  $user->rolename() }}</h5>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="{{asset('adminlte/dist/img/user1-128x128.jpg')}}" alt="User Avatar">
+                    <img class="img-circle elevation-2"  src="{{asset($user->avatar)}}" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                     <div class="row">
