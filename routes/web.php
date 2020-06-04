@@ -16,7 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.home');
 });
+Route::get('/test', function () {
+    return view('adminlte.index');
+});
+
+Route::get('/test2', function () {
+    return view('adminlte.home');
+});
 Auth::routes();
+
+Route::resource('users','UsersController');
 
 Route::get('/home2', 'HomeController@index2')->name('home2');
 Route::get('/take_survey/{questionnaire}', 'QuestionnaireController@view')->name('take_survey');

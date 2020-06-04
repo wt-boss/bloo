@@ -27,7 +27,7 @@
     23 => 'Facade\\Ignition\\IgnitionServiceProvider',
     24 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     25 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    26 => 'JeroenNoten\\LaravelAdminLte\\AdminLteServiceProvider',
+    26 => 'Intervention\\Image\\ImageServiceProvider',
     27 => 'Laravel\\Tinker\\TinkerServiceProvider',
     28 => 'Laravel\\Ui\\UiServiceProvider',
     29 => 'Collective\\Html\\HtmlServiceProvider',
@@ -37,6 +37,8 @@
     33 => 'App\\Providers\\AuthServiceProvider',
     34 => 'App\\Providers\\EventServiceProvider',
     35 => 'App\\Providers\\RouteServiceProvider',
+    36 => 'App\\Providers\\MacroServiceProvider',
+    37 => 'App\\Providers\\HelperServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,13 +56,15 @@
     11 => 'Facade\\Ignition\\IgnitionServiceProvider',
     12 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     13 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    14 => 'JeroenNoten\\LaravelAdminLte\\AdminLteServiceProvider',
+    14 => 'Intervention\\Image\\ImageServiceProvider',
     15 => 'Carbon\\Laravel\\ServiceProvider',
     16 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     17 => 'App\\Providers\\AppServiceProvider',
     18 => 'App\\Providers\\AuthServiceProvider',
     19 => 'App\\Providers\\EventServiceProvider',
     20 => 'App\\Providers\\RouteServiceProvider',
+    21 => 'App\\Providers\\MacroServiceProvider',
+    22 => 'App\\Providers\\HelperServiceProvider',
   ),
   'deferred' => 
   array (
