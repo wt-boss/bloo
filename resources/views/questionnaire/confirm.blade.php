@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="form-group col-12">
                                         <label for="date_start">Partarger le lien : </label>
-                                        <a href="{{ asset('take_survey').'/'.$questionnaire->slug  }}"><h6> {{ asset('take_survey').'/'.$questionnaire->slug  }}</h6></a>
+                                        <a href="{{ asset('take_survey').'/'.$questionnaire->slug  }}"  ><h6> {{ asset('take_survey').'/'.$questionnaire->slug  }}</h6></a>
                                     </div>
 
                                 </div>
