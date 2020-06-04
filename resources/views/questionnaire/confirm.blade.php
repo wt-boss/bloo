@@ -43,9 +43,38 @@
                                     </div>
                                     <div class="form-group col-12">
                                         <label for="date_start">Partarger le lien : </label>
-                                        <a href="{{ asset('take_survey').'/'.$questionnaire->slug  }}"  ><h6> {{ asset('take_survey').'/'.$questionnaire->slug  }}</h6></a>
+                                        <textarea id="to-copy" class="form-control" spellcheck="false"> {{ asset('take_survey').'/'.$questionnaire->slug  }}</textarea>
+                                        <div class="row">
+                                            <button id="copy" class="btn btn-outline-success btn-sm col-3" type="button">Copier</button>
+                                            <small class="form-text text-success text-capitalize col-9">Lien à partarger pour faire passer votre questionnaire</small>
+                                        </div>
+                                        <textarea id="cleared" style="display:none;" placeholder="Paste your copied content here. Just to test…"></textarea>
                                     </div>
+                                    <script>
+                                        var toCopy  = document.getElementById( 'to-copy' ),
+                                            btnCopy = document.getElementById( 'copy' ),
+                                            paste   = document.getElementById( 'cleared' );
 
+                                        btnCopy.addEventListener( 'click', function(){
+                                            toCopy.select();
+                                            paste.value = '';
+
+                                            if ( document.execCommand( 'copy' ) ) {
+                                                btnCopy.classList.add( 'copied' );
+                                                paste.focus();
+
+                                                var temp = setInterval( function(){
+                                                    btnCopy.classList.remove( 'copied' );
+                                                    clearInterval(temp);
+                                                }, 600 );
+
+                                            } else {
+                                                console.info( 'document.execCommand went wrong…' )
+                                            }
+
+                                            return false;
+                                        } );
+                                    </script>
                                 </div>
                             </div>
 

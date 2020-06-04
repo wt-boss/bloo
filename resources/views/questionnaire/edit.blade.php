@@ -13,7 +13,6 @@
             </div>
         </div>
     </div>
-
     <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -34,11 +33,11 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="date_start">Date de debut</label>
-                                <input type="date" class="form-control" id="date_start" name="date_start"  >
+                                <input type="date" class="form-control" id="date_start" name="date_start"  value="{{$start}}" >
                             </div>
                             <div class="form-group col-6">
                                 <label for="date_end">Date de fin</label>
-                                <input type="date" class="form-control" id="date_end" name="date_end" >
+                                <input type="date" class="form-control" id="date_end" name="date_end" value="{{$end}}" >
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Mettre à jour</button>

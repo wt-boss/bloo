@@ -166,8 +166,9 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questionnaire $questionnaire)
+    public function edit($slug)
     {
+        $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $start = date('Y-m-d', strtotime($questionnaire->date_start));
         $end = date('Y-m-d', strtotime($questionnaire->date_end));
         return view('questionnaire.edit',compact('questionnaire','start','end'));

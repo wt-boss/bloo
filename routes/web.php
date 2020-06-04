@@ -46,7 +46,7 @@ Route::get('/questionnaire/create/validate/confirm/{slug}','QuestionnaireControl
 
 
 Route::match(['post','get'],'/questionnaire/create/active/{questionnaire}','QuestionnaireController@active')->name('questionnaire.active');
-Route::get('/questionnaire/{questionnaire}/edit','QuestionnaireController@edit')->name('questionnaire.edit');
+Route::get('/questionnaire/{slug}/edit','QuestionnaireController@edit')->name('questionnaire.edit');
 Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');
 Route::post('/question/{questionnaire}','QuestionController@store')->name('question.store');
 Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionController@destroy')->name('question.destroy');
