@@ -53,7 +53,7 @@ Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
 Route::post('/log','QuestionController@test');
 Route::get('/admin', 'HomeController@admin')->name('admin');
 //language
-Route::get('language', 'HomeController@language')->name('language');
+Route::get('language', 'pagesController@language')->name('language');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::get('/about', function () {
@@ -65,9 +65,12 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('services', 'pagesController@getServices')->name('services');
     Route::get('sondages', 'pagesController@getSondage')->name('sondages');
     Route::get('prix', 'pagesController@getPrix')->name('prix');
-    // route inscription
-    Route::get('inscription', 'pagesController@getInscription')->name('inscription');
-    Route::get('password ', 'pagesController@getPassword')->name('password');
+
+    // footer
+    Route::get('apropos', 'pagesController@getApropos')->name('apropos');
+    Route::get('carriere', 'pagesController@getCarriere')->name('carriere');
+    Route::get('intimite', 'pagesController@getIntimite')->name('intimite');
+    Route::get('tc', 'pagesController@getTc')->name('tc');
 
     //contact
     Route::get('/contact', [
@@ -79,7 +82,7 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ContactsController@store'
     ]);
     Route::get('/test-email', function () {
-        return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour Krada');
+        return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour bloo');
     });
 
 
