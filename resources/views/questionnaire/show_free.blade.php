@@ -1,11 +1,5 @@
-
-
-
-
 @extends('layouts.frontend.app')
-
 @section('content')
-
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -24,14 +18,6 @@
 
                 <div class="col-md-12">
                     <div class="card">
-
-                        <div class="card-header">
-                            <div class="row">
-                                <a href="{{route('take_survey',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-primary" value="Passer ce questionnaire"/></a>
-                                <a href="{{route('questionnaire.edit',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-warning" value="Editer questionnaire"/></a>
-                                <a href="{{route('questionnaire.stat',[$questionnaire->id])}}" class="col-4"> <input type="button" class="btn btn-info float-right" value="Statistique questionnaire"/></a>
-                            </div>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-6">
@@ -58,6 +44,7 @@
 
                             </div>
                         </div>
+
                     </div>
                     <div class="card mt-4">
                         <div class="card-header">Questions</div>
@@ -111,17 +98,13 @@
                             <h5 class="text-uppercase text-justify">Ajouter une question</h5>
                             <div class="form-group">
 
-                                <label for="exampleFormControlSelect1">Choisir votre option</label>
+                                <label for="exampleFormControlSelect1">Type de question</label>
                                 <select class="form-control" name="questions[question_type]" id="question_type">
-                                    <option value="text">
-                                        <div>
-                                            Text
-                                        </div>
-                                    </option>
-                                    <option value="number">Number</option>
-                                    <option value="textarea">Textarea</option>
-                                    <option value="checkbox">Checkbox</option>
-                                    <option value="radio">Radio Buttons</option>
+                                    <option value="text">Texte court</option>
+                                    <option value="number">Chiffre</option>
+                                    <option value="textarea">Texte Long</option>
+                                    <option value="checkbox">Choix multiple</option>
+                                    <option value="radio">Choix Unique</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -131,10 +114,15 @@
                             <span class="form-g"></span>
                             <input type="submit" class="btn btn-primary col-3" value="Ajouter"/>
                                 @if($questionnaire->active == 0)
-                                    <a href="{{route('questionnaire.active',[$questionnaire->id])}}" class="col-3 float-right"> <input type="button" class="btn btn-secondary" value="Valider ce questionnaire"/></a>
+                                    <a href="{{route('questionnaire.confirm',[$questionnaire->slug])}}" class="col-3 float-right"> <input type="button" class="btn btn-secondary" value="Valider ce questionnaire"/></a>
                                 @endif
                             {!! Form::close() !!}
 
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
+                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
+                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>
                         </div>
                     </div>
                 </div>
