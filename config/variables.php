@@ -2,14 +2,14 @@
 return [
 
 'boolean' => [
-'0' => 'No',
-'1' => 'Yes',
+'0' => 'Non',
+'1' => 'Oui',
 ],
 
 'role' => [
 '0' => 'Lecteur',
 '1' => 'Opérateur',
-'4' => 'AccoountManager',
+'4' => 'Account Manager',
 '5' => 'Superadmin',
 ],
 

@@ -305,6 +305,7 @@
                                     <!-- /.description-block -->
                                 </div>
                                 <!-- /.col -->
+
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
                                         <h5 class="description-header">13,000</h5>

@@ -10,7 +10,7 @@ composer install                   # Install backend dependencies
 cp .env.example .env               # Update database credentials configuration
                                    # (Dont forget to create database name following credentials configuration)
 php artisan key:generate           # Generate new keys for Laravel
-php artisan migrate:refresh --seed # Run migration and seed users and categories for testing
+php artisan migrate:refresh --seed       # Run migration and seed users and categories for testing
 npm install                        # Install node dependencies
 npm run dev                        # To compile assets for prod
 ```
