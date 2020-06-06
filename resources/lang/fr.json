@@ -110,21 +110,22 @@
          "prix_offre_free1":"Pas d'opération",
          "prix_offre_free2":"Pas facturée",
          "prix_offre_free3":"pas d'oppérateur",
-         "prix1":"0 xaf",
+         "prix1":" 0",
 
          "prix_offre_prenuim":"Idéale pour un sondage ou une étude de marché ponctuelle ",
          "prix_offre_prenuim1":"Opération unique ",
          "prix_offre_prenuim2":"Facturation à l’opération ",
          "prix_offre_prenuim3":"Forfait par Opérateur ",
-         "prix2":"2.000.000xaf ",
+         "prix2":"2 000 000",
 
          "prix_offre_illimite":"Idéale pour plusieurs opérations sur l’année ",
          "prix_offre_illimite1":"Opérations illimitées ",
          "prix_offre_llimite2":"Facturation à l’année",
          "prix_offre_llimite3":"78 opérateurs offerts  ",
-         "prix3":"40.000.000xaf  ",
+         "prix3":"40 000 000",
 
-
+        "prix_services_title" : "Nos Tarifs",
+        "prix_plans" : "Grille tarifaire",
 
 
          "contact_fil":"Contact",

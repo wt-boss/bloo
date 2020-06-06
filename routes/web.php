@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+// Route::get('/', function () {
+//     return view('pages.home');
+// });
 Route::get('/test', function () {
     return view('adminlte.index');
 });
@@ -23,6 +23,7 @@ Route::get('/test', function () {
 Route::get('/test2', function () {
     return view('adminlte.home');
 });
+
 Auth::routes();
 
 Route::resource('users','UsersController');
@@ -54,7 +55,7 @@ Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
 Route::post('/log','QuestionController@test');
 Route::get('/admin', 'HomeController@admin')->name('admin');
 //language
-Route::get('language', 'pagesController@language')->name('language');
+Route::get('language', 'PagesController@language')->name('language');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::get('/about', function () {
@@ -62,16 +63,16 @@ Route::get('/about', function () {
 })->name('about');
 // pages route
 Route::group(['middleware'=>['web']],function(){
-    Route::get('home','pagesController@getHome')->name('home');
-    Route::get('services', 'pagesController@getServices')->name('services');
-    Route::get('sondages', 'pagesController@getSondage')->name('sondages');
-    Route::get('prix', 'pagesController@getPrix')->name('prix');
+    Route::get('/','PagesController@getHome')->name('home');
+    Route::get('services', 'PagesController@getServices')->name('services');
+    Route::get('sondages', 'PagesController@getSondage')->name('sondages');
+    Route::get('prix', 'PagesController@getPrix')->name('prix');
 
     // footer
-    Route::get('apropos', 'pagesController@getApropos')->name('apropos');
-    Route::get('carriere', 'pagesController@getCarriere')->name('carriere');
-    Route::get('intimite', 'pagesController@getIntimite')->name('intimite');
-    Route::get('tc', 'pagesController@getTc')->name('tc');
+    Route::get('apropos', 'PagesController@getApropos')->name('apropos');
+    Route::get('carriere', 'PagesController@getCarriere')->name('carriere');
+    Route::get('intimite', 'PagesController@getIntimite')->name('intimite');
+    Route::get('tc', 'PagesController@getTc')->name('tc');
 
     //contact
     Route::get('/contact', [
