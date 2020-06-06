@@ -20,6 +20,11 @@
 
                 <div class="col-md-12">
                     <div class="card">
+                        <div class="card-header">
+                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
+                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
+                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-6">
