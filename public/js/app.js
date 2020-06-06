@@ -49839,8 +49839,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ENVY\Desktop\Final Getsuga Tensei\Bloo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ENVY\Desktop\Final Getsuga Tensei\Bloo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
