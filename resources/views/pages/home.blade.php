@@ -108,8 +108,11 @@
                 <div class="text-center">
                 <h2 class="heading">{{ trans('prix_free') }}</h2>
                 <span class="price"> <span class="number">{{ trans('prix1') }}</span></span>
-                <span class="excerpt d-block">{{ trans('prix_offre_freee') }}</span>
-                <br>
+                <span class="excerpt d-block">{{ trans('prix_offre_freee') }}
+                    <br>
+                    {{ trans('prix_offre_detail') }}
+                </span>
+                
                 <a href="{{route('questionnaire.free')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
 
@@ -252,14 +255,23 @@
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn1') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn2') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn3') }}</button>
-                <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn4') }}</button>
+            </p>
+
+            <p>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn5') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn6') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn7') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn9') }}</button>
+            </p>
+            
+                
+            <p>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn10') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn11') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn12') }}</button>
+            </p>
+               
+                
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn13') }}</button>
 
 

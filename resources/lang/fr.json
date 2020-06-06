@@ -104,7 +104,8 @@
          "prix_introduc":"Profitez de toutes les fonctionnalités",
          "prix_introduc1":"Toutes les fonctionnalités sont incluses",
          "prix_btn":"Commencer",
-         "prix_offre_freee":"100% gratuit. Pour toujours",
+         "prix_offre_freee":"100% gratuit. ",
+         "prix_offre_detail":"Pour toujours",
          "prix_offre_free":"creation des 5 sondages",
          "prix_offre_free1":"Pas d'opération",
          "prix_offre_free2":"Pas facturée",
@@ -136,10 +137,11 @@
          "footer_apropos":"A propos",
          "footer_career":"Carrière",
          "footer_privacy":"Intimité",
-         "footer_tc":"T&C",
+         "footer_tc":"Termes et Conditions",
          "navigation":"Navigation",
          "footer_btn":"Créer un compte" ,
          "change_langue":"Changer la langue",
+         "lien":"liens rapides",
 
 
 
