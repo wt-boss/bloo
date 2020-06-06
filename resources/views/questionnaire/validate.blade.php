@@ -36,8 +36,12 @@
                     </div>
                     <div class="form-group col-8" >
                         <label for="exampleInputEmail1">Token</label>
-                        <input type="text" class="form-control" id="token" aria-describedby="token" value="{{$questionnaire->token}}" disabled>
-                        <small id="token" class="form-text text-success text-capitalize">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                        <textarea id="to-copy" class="form-control" spellcheck="false">{{$questionnaire->token}}</textarea>
+                        <div class="row">
+                            <button id="copy" class="btn btn-outline-success btn-sm col-3" type="button">Copier</button>
+                            <small class="form-text text-success text-capitalize col-9">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                        </div>
+                        <textarea id="cleared" style="display:none;" placeholder="Paste your copied content here. Just to test…"></textarea>
                     </div>
                     <div class="form-group col-4">
                         <label for="exampleInputEmail1">Mot de passe</label>
@@ -47,11 +51,34 @@
                 </div>
                 <button type="submit" class="btn btn-primary float-right">Valider</button>
             </form>
+             <script>
+                 var toCopy  = document.getElementById( 'to-copy' ),
+                     btnCopy = document.getElementById( 'copy' ),
+                     paste   = document.getElementById( 'cleared' );
 
+                 btnCopy.addEventListener( 'click', function(){
+                     toCopy.select();
+                     paste.value = '';
+
+                     if ( document.execCommand( 'copy' ) ) {
+                         btnCopy.classList.add( 'copied' );
+                         paste.focus();
+
+                         var temp = setInterval( function(){
+                             btnCopy.classList.remove( 'copied' );
+                             clearInterval(temp);
+                         }, 600 );
+
+                     } else {
+                         console.info( 'document.execCommand went wrong…' )
+                     }
+
+                     return false;
+                 } );
+             </script>
         </div>
     </div>
 
 </section>
     <br>  <br>
-
 @endsection

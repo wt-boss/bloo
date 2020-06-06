@@ -78,9 +78,10 @@
                         </td>
                         @if(Auth::user()->rolename() == "Superadmin")
                             <td class="actions">
-
                                 <div class='btn-group'>
-                                    <a href="{{ route( 'users.edit', $user->id) }}" class="btn btn-primary" title="Modifier utilisateur" ><i class="fas fa-pen"></i></a></li>
+                                    @if ( $user->hasRole('Admin|Opérateur|Lecteur') or $user->id == Auth::user()->id )
+                                        <a href="{{ route( 'users.edit', $user->id) }}" class="btn btn-primary" title="Modifier utilisateur" ><i class="fas fa-pen"></i></a></li>
+                                    @endif
                                     <form method="post" action="{{route('users.destroy',$user->id)}}">
                                         @csrf
                                         @method('DELETE')
