@@ -144,6 +144,18 @@
          "change_langue":"Changer la langue",
          "lien":"liens rapides",
 
+         "login": "Connexion",
+         "mots_Connect" :"Remplir le formulaire de connexion",
+         "email_adress":"Adress E-mail",
+         "password":"Mot de passe",
+         " remember_me": "Se souvenir de moi",
+         
+         "forgot_you_password":"Mot de passe oublié?",
+         "acount":"Créer un Compte",
+
+
+
+
 
 
 

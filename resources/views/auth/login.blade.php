@@ -21,14 +21,14 @@
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
                 <span class="subheading">Connexion</span>
-                <h2 class="mb-4">Remplir le formulaire de connexion</h2>{{ trans('') }}
+                <h2 class="mb-4">{{ trans('mots_Connect') }}</h2>{{ trans('') }}
                 <form method="POST" id="login-form"   action="{{ route('login') }}">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <center> <span>
                                         <strong id="error-login"></strong>
                                     </span></center>
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans('email_adress') }}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('password') }}</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -57,15 +57,28 @@
                         </div>
                     </div>
 
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                           
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ __('acount') }}
+                                </a>
+                           
+                        </div>
+                        <br>
+                    </div>
+                    
+
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
+                                {{ __('login') }}
                             </button>
 
                             @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('forgot_you_password') }}
                                 </a>
                             @endif
                         </div>
