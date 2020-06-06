@@ -9,8 +9,8 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ __('Login') }}</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ __('Login') }}</h1>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ __('login') }}</span></p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ __('login') }}</h1>
             </div>
         </div>
     </div>
@@ -57,17 +57,6 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                           
-                                <a class="btn btn-link" href="{{ route('register') }}">
-                                    {{ __('acount') }}
-                                </a>
-                           
-                        </div>
-                        <br>
-                    </div>
                     
 
                     <div class="form-group row mb-0">
