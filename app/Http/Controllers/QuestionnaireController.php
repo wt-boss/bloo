@@ -60,7 +60,13 @@ class QuestionnaireController extends Controller
         auth()->user()->questionnaires()->create($data);
         return redirect('/home')->withSuccess('Questionnaire créer avec sucess');
     }
-
+    public function confirm($slug)
+    {
+        $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
+        $questionnaire['active'] = 1;
+        $questionnaire->save();
+        return view('questionnaire.confirm',compact('questionnaire'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -121,8 +127,9 @@ class QuestionnaireController extends Controller
         return view('questionnaire.show_free',compact('questionnaire'));
     }
 
-    public function view(Questionnaire $questionnaire)
+    public function view($slug)
     {
+        $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $questionnaire->load('questions.answers');
         return view('questionnaire.view',compact('questionnaire'));
     }
@@ -159,8 +166,9 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questionnaire $questionnaire)
+    public function edit($slug)
     {
+        $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $start = date('Y-m-d', strtotime($questionnaire->date_start));
         $end = date('Y-m-d', strtotime($questionnaire->date_end));
         return view('questionnaire.edit',compact('questionnaire','start','end'));

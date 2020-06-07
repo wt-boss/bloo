@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role','api_token'
+        'name', 'email', 'password', 'role', 'active', 'api_token','avatar'
     ];
 
     /**
@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     /**
      * Get user role name
      *
@@ -55,6 +56,21 @@ class User extends Authenticatable
     public function hasRole($roles)
     {
         return in_array($this->rolename(), explode("|", $roles));
+    }
+
+
+    public function getAvatarAttribute($value)
+    {
+        if (!$value) {
+
+            return url('/') . config('variables.avatar.public') . 'avatar0.png';
+        }
+
+        return url('/') . config('variables.avatar.public') . $value;
+    }
+    public function setAvatarAttribute($photo)
+    {
+        $this->attributes['avatar'] = (new Http\move)->move_file($photo, 'avatar.image');
     }
 
     /*
