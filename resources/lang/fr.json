@@ -20,17 +20,34 @@
      "home_content_section2_title": "Industries dans lesquelles nous nous spécialisons",
      "home_content_section2_content":"Bloo analyse les chiffres en:",
      "home_content_section2_content1":"B2B, Politique, Caritatif, Produits de Grande Consommation, Nourritures & boissons, Mode & Beauté], [Services financiers, Media, BTP, Vente au détail, Sports & Loisirs, Technologie & Télécoms, Transports & Logistiques, Voyages & Tourisme, Fortunes, Emploi  ",
+     "homme_btn":"B2B",
+     "homme_btn1":"Politique",
+     "homme_btn2":"Caritatif",
+     "homme_btn3":"Produits de Grande Consommation",
+     "homme_btn4":"Nourritures & boissons ",
+     "homme_btn5":"Mode & Beauté",
+     "homme_btn6":"Services financiers",
+     "homme_btn7":"Media",
+     "homme_btn8":"Vente au détail",
+     "homme_btn9":"Sports & Loisirs",
+     "homme_btn10":"echnologie & Télécoms",
+
+     "homme_btn11":"Transports & Logistiques",
+     "homme_btn12":"Voyages & Tourisme",
+     "homme_btn13":"Fortunes, Emploi ",
      "home_content_section2_content2":"Avantages",
      "home_content_section2_content3":"Travailler avec Bloo c’est:  ",
      "home_content_section2_content4":"Avoir l’information pertinente sur son activité, partout et en temps réel et être à même de comprendre les bons et les mauvais résultats ",
      "home_content_section2_content5":"Avoir la possibilité d’anticiper sur les changements moindres ou majeurs dans son industrie et savoir la réponse efficace attendue par son public-cible ",
      "home_content_section2_content6":"Contrôler la ressource cruciale et si insaisissable qu’est le temps, autant dans la prise de décision que dans la gestion de vos opérations ",
      "home_content_section2_newleter_title": "Abonnez-vous à notre newsletter",
-     "home_content_section2_newleter_body": "laissez votre email pour vous notifier pour toutes informations",
+     "home_content_section2_newleter_body": "Laissez votre email pour vous notifier pour toute information",
      "home_content_section2_newleter_email": "Entrez votre email",
 
 
-     "service_fil":"services",
+     "service_fil":"Services",
+     "btn_home":"Découvrez Bloo",
+     "btn_home_sondage":"Créer un Sondage",
 
 
    "service_section_header":"Collecte & Analyse de données ",
@@ -87,26 +104,28 @@
          "prix_introduc":"Profitez de toutes les fonctionnalités",
          "prix_introduc1":"Toutes les fonctionnalités sont incluses",
          "prix_btn":"Commencer",
-         "prix_offre_freee":"100% gratuit. Pour toujours",
+         "prix_offre_freee":"100% gratuit. ",
+         "prix_offre_detail":"Pour toujours",
          "prix_offre_free":"creation des 5 sondages",
          "prix_offre_free1":"Pas d'opération",
          "prix_offre_free2":"Pas facturée",
          "prix_offre_free3":"pas d'oppérateur",
-         "prix1":"0 xaf",
+         "prix1":" 0",
 
          "prix_offre_prenuim":"Idéale pour un sondage ou une étude de marché ponctuelle ",
          "prix_offre_prenuim1":"Opération unique ",
          "prix_offre_prenuim2":"Facturation à l’opération ",
          "prix_offre_prenuim3":"Forfait par Opérateur ",
-         "prix2":"2.000.000xaf ",
+         "prix2":"2 000 000",
 
          "prix_offre_illimite":"Idéale pour plusieurs opérations sur l’année ",
          "prix_offre_illimite1":"Opérations illimitées ",
          "prix_offre_llimite2":"Facturation à l’année",
          "prix_offre_llimite3":"78 opérateurs offerts  ",
-         "prix3":"40.000.000xaf  ",
+         "prix3":"40 000 000",
 
-
+        "prix_services_title" : "Nos Tarifs",
+        "prix_plans" : "Grille tarifaire",
 
 
          "contact_fil":"Contact",
@@ -116,6 +135,29 @@
          "contact_infos1":"Le résultat? Une gamme complète de services de collecte et de traitement de données à l'échelle sous régionale, associés à une expertise approfondie du secteur, des enjeux et de la méthodologie, livrés avec un esprit d'entreprise et une mentalité axée sur le client. ",
          "contact_infos3":"Tout pour aider nos clients à prendre de meilleures décisions.",
          "home_fil":"Accueil",
+         "footer_apropos":"A propos",
+         "footer_career":"Carrière",
+         "footer_privacy":"Intimité",
+         "footer_tc":"Termes et Conditions",
+         "navigation":"Navigation",
+         "footer_btn":"Créer un compte" ,
+         "change_langue":"Changer la langue",
+         "lien":"liens rapides",
+
+         "login": "Connexion",
+         "mots_Connect" :"Remplir le formulaire de connexion",
+         "email_adress":"Adress E-mail",
+         "password":"Mot de passe",
+         " remember_me": "Se souvenir de moi",
+         
+         "forgot_you_password":"Mot de passe oublié?",
+         "acount":"Créer un Compte",
+
+
+
+
+
+
 
 
 
@@ -127,7 +169,6 @@
     "savoir":"À savoir",
     "text1":"Bloo est un service de traitement des données, de recherche et de conseil à croissance rapide.",
     "text2": "Nous informons et inspirons nos clients grâce à des données pertinentes, une technologie innovante et des conseils à fort impact. Tout est conçu pour aider nos clients à prendre de meilleures décisions et à progresser plus rapidement."
-
 
 
 

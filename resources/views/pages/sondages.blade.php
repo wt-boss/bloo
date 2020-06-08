@@ -31,8 +31,8 @@
           <div class="container">
               <div class="row justify-content-center mb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
-              <span class="subheading">Pricing Plans</span>
-              <h2 class="mb-4">Domain Pricing</h2>
+            <span class="subheading">{{ trans('prix_plans') }}</span>
+            <h2 class="mb-4">{{ trans('prix_services_title') }}</h2>
             </div>
           </div>
               <div class="row">
@@ -86,85 +86,5 @@
               </div>
           </div>
       </section>
-      <section class="ftco-section bg-light">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <span class="subheading">{{ trans('service_section_header') }}</span>
-            <h2 class="mb-4">{{ trans('service_section_tetle') }}</h2>
-            <p>{{ trans('service_section_content') }}</p>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div id="accordion">
-    					<div class="row">
-    						<div class="col-md-6">
-    							<div class="card">
-						        <div class="card-header">
-										  <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('service_section_content_question') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-						        </div>
-						        <div id="menuone" class="collapse show">
-						          <div class="card-body">
-												<p>{{ trans('service_section_content1') }}</p>
-						          </div>
-						        </div>
-						      </div>
 
-						      <div class="card">
-						        <div class="card-header">
-										  <a class="card-link" data-toggle="collapse"  href="#menutwo" aria-expanded="false" aria-controls="menutwo">{{ trans('service_section_content_question1') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-						        </div>
-						        <div id="menutwo" class="collapse">
-						          <div class="card-body">
-                                                <p>{{ trans('service_section_content2') }}</p>
-                                                <p>{{ trans('service_section_content21') }}</p>
-						          </div>
-						        </div>
-						      </div>
-
-
-    						</div>
-
-    						<div class="col-md-6">
-
-                                <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menu3" aria-expanded="false" aria-controls="menu3">{{ trans('service_section_content_question3') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menu3" class="collapse">
-                                      <div class="card-body">
-                                             <p>{{ trans('service_section_content22') }}</p>
-                                             <p>{{ trans('service_section_content23') }}</p>
-                                             <p>{{ trans('service_section_content24') }}</p>
-                                             <p>{{ trans('service_section_content25') }}</p>
-                                             <p>{{ trans('service_section_content26') }}</p>
-                                             <p>{{ trans('service_section_content27') }}</p>
-                                             <p>{{ trans('service_section_content28') }}</p>
-
-                                      </div>
-                                    </div>
-                                  </div>
-
-    							<div class="card">
-						        <div class="card-header">
-										  <a class="card-link" data-toggle="collapse"  href="#menu4" aria-expanded="false" aria-controls="menu4">{{ trans('service_section_content_question4') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-						        </div>
-						        <div id="menu4" class="collapse">
-						          <div class="card-body">
-                                    <p>{{ trans('service_section_content29') }}</p>
-						          </div>
-						        </div>
-						      </div>
-
-
-
-
-    						</div>
-    					</div>
-				    </div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
 @endsection

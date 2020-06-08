@@ -1,7 +1,5 @@
 @extends('layouts.frontend.app')
-
 @section('content')
-
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>

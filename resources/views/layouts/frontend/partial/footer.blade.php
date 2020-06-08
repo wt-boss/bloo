@@ -5,30 +5,43 @@
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">BLOO</h2>
             <p>Outils de visualisation et d'analyse des données </p>
-            <p class="mt-4"><a href="{{route('register')}}" class="btn btn-primary p-3">Inscription</a></p>
+
+            <p>{{ trans('change_langue') }} </p>
+
+                {!! link_to('language', session('locale') == 'fr' ? 'English' : 'Français', ['class' => 'btn btn-primary']) !!}
+
+
           </div>
         </div>
+
+        <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+             <h2 class="ftco-heading-2">{{ trans('navigation') }}</h2>
+             <ul class="list-unstyled">
+                 <li class="{{Request::is('home')? "active": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
+                 <li class="{{Request::is('services')? "active": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
+                 <li class="{{Request::is('sondages')? "active": "nav-item"}}"><a href="{{ route('sondages') }}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
+                 <li class="{{Request::is('prix')? "active": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
+
+
+
+             </ul>
+           </div>
+         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4 ml-md-5">
-            <h2 class="ftco-heading-2">Unseful Links</h2>
+            <h2 class="ftco-heading-2">{{ trans('lien') }}</h2>
             <ul class="list-unstyled">
-                <li><a href="{{ route('sondages') }}" class="py-2 d-block">{{ trans('sondage_fil')}}</a></li>
-                <li><a href="{{ route('prix') }}" class="py-2 d-block">{{ trans('prix_fil')}}</a></li>
-                <li><a href="{{ route('contact_path') }}" class="py-2 d-block">{{ trans('contact_fil')}}</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md">
-           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Navigation</h2>
-            <ul class="list-unstyled">
-              <li><a href="{{ route('home') }}" class="py-2 d-block">{{ trans('home_fil')}}</a></li>
-              <li><a href="{{ route('services') }}" class="py-2 d-block">{{ trans('service_fil')}}</a></li>
+                <li><a href="{{ route('apropos') }}" class="py-2 d-block">{{ trans('footer_apropos')}}</a></li>
+                <li><a href="{{ route('carriere') }}" class="py-2 d-block">{{ trans('footer_career')}}</a></li>
+                <li><a href="{{ route('intimite') }}" class="py-2 d-block">{{ trans('footer_privacy')}}</a></li>
+                <li><a href="{{ route('tc') }}" class="py-2 d-block">{{ trans('footer_tc')}}</a></li>
 
 
             </ul>
           </div>
         </div>
+
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
               <div class="block-23 mb-3">
