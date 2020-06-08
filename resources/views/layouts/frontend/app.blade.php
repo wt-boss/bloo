@@ -151,6 +151,7 @@
             }
         });
     </script>
+  <script src="{{asset('js/dist/clipboard.js')}}"></script>
 
   </body>
 </html>

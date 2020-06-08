@@ -27,6 +27,7 @@
         "bootstrap-icons": "^1.0.0-alpha4",
         "chosen-js": "^1.8.0",
         "ckeditor": "^4.7.2",
+        "clipboard": "^2.0.6",
         "datatables": "^1.10.13",
         "datatables-all": "^1.10.13",
         "font-awesome": "^4.7.0",
