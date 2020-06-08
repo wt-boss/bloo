@@ -60,6 +60,7 @@ class QuestionnaireController extends Controller
         auth()->user()->questionnaires()->create($data);
         return redirect('/home')->withSuccess('Questionnaire créer avec sucess');
     }
+
     public function confirm($slug)
     {
         $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
@@ -83,8 +84,7 @@ class QuestionnaireController extends Controller
         $data['token'] = $token;
         $data['slug'] = $slug;
         $questionnaire = Questionnaire::create($data);
-
-        return view('questionnaire.validate',compact('questionnaire'));
+        return view('questionnaire.show_free',compact('questionnaire'));
     }
 
      public function active(Questionnaire $questionnaire)

@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">{{$questionnaire->title}} || {{$questionnaire->purpose}}</div>
                         <div class="card-body">
-                            <form  action="#" method="post">
+                            <form  action="/surveys/{{$questionnaire->id}}-{{Str::slug($questionnaire->title)}}" method="post">
                                 @csrf
                                 @foreach($questionnaire->questions as $key=>$question)
                                     <div class="card mt-4">
@@ -52,8 +52,7 @@
                                                 @elseif($question->question_type === 'textarea')
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1">Reponse</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="responsest[{{$key}}][answer]">
-                                                    </textarea>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="responsest[{{$key}}][answer]"></textarea>
                                                         <input type="hidden" name="responsest[{{$key}}][question_id]" value="{{$question->id}}">
                                                         <input type="hidden" name="responsest[{{$key}}][answer_id]" value="">
                                                     </div>

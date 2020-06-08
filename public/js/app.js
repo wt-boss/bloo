@@ -49840,12 +49840,21 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\kirra belloche\Desktop\bloo\bloo1.0\Bloo\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\kirra belloche\Desktop\bloo\bloo1.0\Bloo\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
 __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> 3f1b621d6baf4bba77e2850fd08a8e802c035243
+=======
+__webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo2\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\ENVY\Desktop\Final Getsuga Tensei\Bloo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ENVY\Desktop\Final Getsuga Tensei\Bloo\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> parent of 4aad74d7... fixed operation while try pull
+>>>>>>> FrankyNoah
 
 
 /***/ })

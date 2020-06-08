@@ -100,6 +100,7 @@
                             <br>
                             {!! Form::open(['route' => ['question.store',$questionnaire->id]]) !!}
                             {!! Form::token();!!}
+
                             <h5 class="text-uppercase text-justify">Ajouter une question</h5>
                             <div class="form-group">
 
@@ -127,7 +128,7 @@
                         <div class="card-footer">
                             <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
                             <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
-                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>
+{{--                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>--}}
                         </div>
                     </div>
                 </div>
