@@ -45,10 +45,10 @@
                         <script>
                             function verifDate()
                             {
-                                var date = new Date();
-                                var start = new  Date(document.getElementById('date_start').value);
-                                var end = new  Date(document.getElementById('date_end').value);
-                                if(start > date && end > start)
+                                var date = new Date().toISOString().slice(0, 10);
+                                var start = new  Date(document.getElementById('date_start').value).toISOString().slice(0, 10);
+                                var end = new  Date(document.getElementById('date_end').value).toISOString().slice(0, 10);
+                                if(start >=  date && end > start)
                                 {
                                     return true;
                                 }

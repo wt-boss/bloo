@@ -46,7 +46,7 @@ class QuestionController extends Controller
          {
              $question->answers()->createMany($data['answers']);
          }
-        return back()->withSuccess('Question creer avec success');
+        return redirect('/questionnaire/create/validate/'.$questionnaire->slug)->withSuccess('Question creer avec success');
     }
 
 
