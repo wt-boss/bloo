@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">{{$questionnaire->title}} || {{$questionnaire->purpose}}</div>
                         <div class="card-body">
-                            <form  action="#" method="post">
+                            <form  action="" method="post">
                                 @csrf
                                 @foreach($questionnaire->questions as $key=>$question)
                                     <div class="card mt-4">
