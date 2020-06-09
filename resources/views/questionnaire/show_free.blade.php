@@ -51,7 +51,7 @@
                         </div>
 
                     </div>
-                    <div class="card mt-4">
+                    <div class="card mt-4" id="questions">
                         <div class="card-header">Questions</div>
                         <div class="card-body">
                             @if (Session::has('errors'))
@@ -85,7 +85,7 @@
                             <ul class="list-group">
                                 @forelse($questionnaire->questions as $question)
                                     <li class="list-group-item d-flex justify-content-between">{{$question->question}}
-                                        @if( $question->responses->count() == 0)
+                                        @if( $question->responses->count() === 0)
                                             <form action="/questionnaires/{{ $questionnaire->id}}/questions/{{$question->id}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
@@ -100,7 +100,6 @@
                             <br>
                             {!! Form::open(['route' => ['question.store',$questionnaire->id]]) !!}
                             {!! Form::token();!!}
-
                             <h5 class="text-uppercase text-justify">Ajouter une question</h5>
                             <div class="form-group">
 
@@ -119,15 +118,18 @@
                             </div>
                             <span class="form-g"></span>
                             <input type="submit" class="btn btn-primary col-3" value="Ajouter"/>
-                                @if($questionnaire->active == 0)
-                                    <a href="{{route('questionnaire.confirm',[$questionnaire->slug])}}" class="col-3 float-right"> <input type="button" class="btn btn-secondary" value="Valider ce questionnaire"/></a>
+                                @if($questionnaire->questions->count() !== 0 && $questionnaire->active == 0)
+                                <a href="/questionnaires/{{ $questionnaire->id}}/answer"><input class="btn btn-primary col-3 offset-1" value="Supprimer reponses test"/></a>
+                                @endif
+                                @if($questionnaire->questions->count() !== 0 && $questionnaire->active == 0)
+                                    <a href="{{route('questionnaire.confirm',[$questionnaire->slug])}}"> <input type="button" class="btn btn-secondary float-right col-3"   value="Valider ce questionnaire"/></a>
                                 @endif
                             {!! Form::close() !!}
 
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
-                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
+                            <a href="{{route('take_survey',[$questionnaire->slug])}}"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
+                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
 {{--                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>--}}
                         </div>
                     </div>
