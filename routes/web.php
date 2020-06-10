@@ -59,8 +59,6 @@ Route::match(['post','get'],'/questionnaire/create/active/{questionnaire}','Ques
 Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');
 Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionController@destroy')->name('question.destroy');
 
-
-
 //language
 Route::get('language', 'PagesController@language')->name('language');
 Route::get('/profile', 'ProfileController@index')->name('profile');
@@ -98,4 +96,7 @@ Route::group(['middleware'=>['web']],function(){
 
 });
 
+// offres
+Route::get('/offres/primus','SurveyController@primus')->name('primus');
+Route::get('/offres/illimité','SurveyController@illimité')->name('illimité');
 

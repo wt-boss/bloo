@@ -35,24 +35,11 @@
     <!-- END nav -->
 
 
-
-
-
-
     @include('layouts.frontend.partial.nav')
 
     @yield('content')
+
     @include('layouts.frontend.partial.footer')
-
-
-
-
-
-
-
-
-
-
 
 
 

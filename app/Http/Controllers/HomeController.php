@@ -32,7 +32,6 @@ class HomeController extends Controller
         $questionnaires = auth()->user()->questionnaires;
         return view('home2',compact('questionnaires'));
     }
-
     public function index()
     {
         $users = User::count();
@@ -53,4 +52,5 @@ class HomeController extends Controller
 		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
 		return redirect()->back();
 	}
+
 }

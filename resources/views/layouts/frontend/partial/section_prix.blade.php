@@ -17,7 +17,7 @@
               <br>
               {{ trans('prix_offre_detail') }}
             </span>
-            
+
             <a href="{{route('questionnaire.free')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
 
@@ -46,7 +46,7 @@
               <h2 class="heading">{{ trans('prix_prenuim') }}</h2>
               <span class="price"> <span class="apd">ADP</span> <span class="number">{{ trans('prix2') }}</span><span class="xaf">XAF</span> </span>
               <span class="excerpt d-block">{{ trans('prix_introduc1') }}</span>
-              <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
+              <a href="{{route('primus')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
 
               <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
@@ -72,7 +72,7 @@
               <h2 class="heading">{{ trans('prix_illimite') }}</h2>
               <span class="price"> <span class="apd">ADP</span> <span class="number">{{ trans('prix3') }}</span><span class="xaf">XAF</span> </span>
               <span class="excerpt d-block">{{ trans('prix_introduc1') }}</span>
-              <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
+              <a href="{{route('illimité')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
 
               <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
