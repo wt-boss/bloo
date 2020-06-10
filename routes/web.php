@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
      return view('pages.home');
  });
 Route::get('/test', function () {
-    return view('adminlte.index');
+    return view('offres.oneshot');
 });
 
 Route::get('/test2', function () {
@@ -55,8 +55,6 @@ Route::post('/question/{questionnaire}','QuestionController@store')->name('quest
 Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
 Route::post('/log','QuestionController@test');
 
-
-
 Route::match(['post','get'],'/questionnaire/create/active/{questionnaire}','QuestionnaireController@active')->name('questionnaire.active');
 Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');
 Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionController@destroy')->name('question.destroy');
@@ -70,7 +68,6 @@ Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-
 
 // pages route
 Route::group(['middleware'=>['web']],function(){

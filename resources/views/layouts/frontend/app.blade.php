@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/mystyle.css')}}">
+      @yield('css')
   </head>
   <body>
 
@@ -157,6 +158,6 @@
         });
     </script>
   <script src="{{asset('js/dist/clipboard.js')}}"></script>
-
+    @yield('script')
   </body>
 </html>
