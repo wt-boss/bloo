@@ -100,3 +100,10 @@ Route::group(['middleware'=>['web']],function(){
 Route::get('/offres/primus','SurveyController@primus')->name('primus');
 Route::get('/offres/illimité','SurveyController@illimité')->name('illimité');
 
+//paypal
+
+// route for processing payment
+Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
+
+// route for check status of the payment
+Route::get('status/{données}', 'PaymentController@getPaymentStatus')->name('status');

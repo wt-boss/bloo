@@ -53,9 +53,10 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 msf-form">
-            <form role="form" action="" method="post">
+            <form role="form"  method="POST" id="payment-form" action="{{route('paypal')}}">
                 <fieldset>
                     <br>
+                    @csrf
                     <h4><span class="step">INFORMATIONS SUR L'OPERATION (ETAPE 1 / 2)</span></h4>
                     <div class="row">
                         <div class="form-group col-6">
@@ -98,11 +99,11 @@
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
                             <label for="name_enterprise">Nom :</label>
-                            <input type="text" class="form-control"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" required>
+                            <input type="text" class="form-control"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
                         </div>
                         <div class="form-group col-6">
                             <label for="address_enterprise">Adresse :</label>
-                            <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" required>
+                            <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">Numero Contribuable:</label>
@@ -144,6 +145,7 @@
                             <input type="password" name="address-city" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6">
+                            <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
                         </div>
 
                     </div>
@@ -152,7 +154,7 @@
                             <button type="button" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
                         </div>
                         <div class="form-group col-6">
-                            <button type="submit" class="btn btn-outline-success col-6 float-right">Valider</button>
+                            <button type="submit" class="btn btn-success col-6 float-right">Payer avec PayPal</button>
                         </div>
                     </div>
 
