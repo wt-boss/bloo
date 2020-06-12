@@ -76,7 +76,8 @@ Route::get('/about', function () {
 Route::group(['middleware'=>['web']],function(){
     Route::get('/','PagesController@getHome')->name('home');
     Route::get('services', 'PagesController@getServices')->name('services');
-    Route::get('sondages', 'PagesController@getSondage')->name('sondages');
+    Route::get('sondages', 'QuestionnaireController@free')->name('sondages');
+    //Route::get('sondages', 'PagesController@getSondage')->name('sondages');
     Route::get('prix', 'PagesController@getPrix')->name('prix');
 
     // footer

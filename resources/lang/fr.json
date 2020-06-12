@@ -2,7 +2,8 @@
     "About us": "A propos de moi",
     "a": "information utilisateur",
     "homme_title": "plateforme de gestion des sondages en temps réel",
-    "homme_title_content": "Données et perspectives dans plusieurs dizaines d’industries à l’échelle sous régionale Anticipez vos prochaines actions, qu’importe le changement.",
+    "homme_title_content": "Données et perspectives dans plusieurs dizaines d’industries   à l’échelle sous régionale.",
+    "homme_title_content1": "Anticipez vos prochaines actions, qu’importe le changement.",
     "homme_title_button": "Découvrez Bloo",
 
     "home_content_section1": "À savoir",
@@ -13,7 +14,7 @@
     "home_content_section1_content_p_title_3": "Réseau de partenaires qualifiés",
     "home_content_section1_content_p": "Une gamme complète de solutions de collecte de données en temps réel, ouvertes, flexibles, en ligne et/ou sur le sur le terrain, pour grand public et entreprises.",
     "home_content_section1_content_p1": "Un suivi personnalisé: chaque étude de marché étant ficelée et réalisée en collaboration avec vos équipes, avec un système d’échange mis en place dès le lancement .",
-    "home_content_section1_content_p2": "Aussi bien des opérateurs que des statisticiens ou psychologues, Bloo possède un large réseau d'experts en support pour répondre à vos préoccupations'.",
+    "home_content_section1_content_p2": "Aussi bien des opérateurs que des statisticiens ou psychologues, Bloo possède un large réseau d'experts en support pour répondre à vos préoccupations.",
 
     "home_content_section2": "Nos domaines",
     "home_content_section2_title": "Industries dans lesquelles nous nous spécialisons",
@@ -24,8 +25,8 @@
     "home_content_section2_content4": "Avoir l’information pertinente sur son activité, partout et en temps réel et être à même de comprendre les bons et les mauvais résultats ",
     "home_content_section2_content5": "Avoir la possibilité d’anticiper sur les changements moindres ou majeurs dans son industrie et savoir la réponse efficace attendue par son public-cible ",
     "home_content_section2_content6": "Contrôler la ressource cruciale et si insaisissable qu’est le temps, autant dans la prise de décision que dans la gestion de vos opérations ",
-    "home_content_section2_newleter_title": "Abonnez-vous à notre newsletter",
-    "home_content_section2_newleter_body": "laissez votre email pour vous notifier pour toutes informations",
+    "home_content_section2_newleter_title": "AbonneAbonnez-vous à notre service Bloo Market Vue ",
+    "home_content_section2_newleter_body": " Recevez directement dans votre boîte email les rapports d’études Bloo sur les secteurs qui vous intéressent.",
     "home_content_section2_newleter_email": "Entrez votre email",
 
 
@@ -81,30 +82,38 @@
     "prix_title": "Nos offres",
     "prix_content": "Soucrivez à une offre",
     "prix_free": "Offre free ",
-    "prix_prenuim": "Offre Primus",
-    "prix_illimite": "Offre illimitée ",
+    "prix_prenuim": "Offre Silver",
+    "prix_illimite": "Offre Platinum",
     "prix_introduc": "Profitez de toutes les fonctionnalités",
     "prix_introduc1": "Toutes les fonctionnalités sont incluses",
     "prix_btn": "Commencer",
     "prix_offre_freee": "100% gratuit. ",
     "prix_offre_detail": "Pour toujours",
-    "prix_offre_free": "creation des 5 sondages",
-    "prix_offre_free1": "Pas d'opération",
-    "prix_offre_free2": "Pas facturée",
-    "prix_offre_free3": "pas d'oppérateur",
-    "prix1": " 0",
+    "prix_offre_free": " Administration 100% en ligne",
+    "prix_offre_free1": "Sans facturation",
+    "prix_offre_free2": "Sans abonnement ",
+    "prix_offre_free3": " Panneau de contrôle",
+    "prix_offre_free4": " Export en PDF",
 
-    "prix_offre_prenuim": "Idéale pour un sondage ou une étude de marché ponctuelle ",
-    "prix_offre_prenuim1": "Opération unique ",
-    "prix_offre_prenuim2": "Facturation à l’opération ",
-    "prix_offre_prenuim3": "Forfait par Opérateur ",
-    "prix2": "2 000 000",
 
-    "prix_offre_illimite": "Idéale pour plusieurs opérations sur l’année ",
-    "prix_offre_illimite1": "Opérations illimitées ",
-    "prix_offre_llimite2": "Facturation à l’année",
-    "prix_offre_llimite3": "78 opérateurs offerts  ",
-    "prix3": "40 000 000",
+    "prix_offre_prenuim": " Déployer et piloter une étude en temps réel dans plus de 20 villes en simultané",
+    "prix_offre_prenuim1": "Profitez de toutes les fonctionnalités",
+    "prix_offre_prenuim2": "Déploiement sur le terrain",
+    "prix_offre_prenuim3": " Pilotage en ligne ",
+    "prix_offre_prenuim4": " Opération unique",
+    "prix_offre_prenuim5": "  Facturation à l’opération ",
+    "prix_offre_prenuim6": "  Account manager dédié ",
+    "prix_offre_prenuim7": "  Rapport d’étude ",
+
+
+    "prix_platinuin":"Visualisez votre activité et anticipez qu’importe les changements",
+    "prix_offre_illimite": " Opérations illimitées ",
+    "prix_offre_illimite1": "Facturation à l’année ",
+    "prix_offre_llimite2": "Account manager dédié",
+    "prix_offre_llimite3": "Rapports d’étudess  ",
+    "prix_offre_llimite4": "Accès MarketVue",
+
+
 
     "prix_services_title": "Nos Tarifs",
     "prix_plans": "Grille tarifaire",
@@ -134,6 +143,15 @@
     "forgot_you_password": "Mot de passe oublié?",
     "acount": "Créer un Compte",
 
+
+
+     "données_tile":"Bloo en chiffres",
+     "données_tile1":"Pour vous assurer qualité et précision, Bloo c’est",
+     "données1":"Données traitées/jr",
+     "données2":"Questionnaires/jr",
+     "données3":"Opérateurs en CEMAC",
+     "données4":"Experts",
+     "données5":"",
 
 
 
