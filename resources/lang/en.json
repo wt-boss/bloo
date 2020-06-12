@@ -120,7 +120,14 @@
 
     "savoir":"À savoir",
     "text1":"Bloo est un service de traitement des données, de recherche et de conseil à croissance rapide.",
-    "text2": "Nous informons et inspirons nos clients grâce à des données pertinentes, une technologie innovante et des conseils à fort impact. Tout est conçu pour aider nos clients à prendre de meilleures décisions et à progresser plus rapidement."
+    "text2": "Nous informons et inspirons nos clients grâce à des données pertinentes, une technologie innovante et des conseils à fort impact. Tout est conçu pour aider nos clients à prendre de meilleures décisions et à progresser plus rapidement.",
+
+    "free__home": "Home",
+    "free_header0": "Get the answers you need",
+    "free_header": "We collect answers to 1 million questions every day. Get the advice you need with our free survey software. Join the hundreds of companies and individuals who trust Bloonline to benefit from instant data with a human face",
+    "free_content1": "Create your survey",
+    "free_content2": "Administer your survey",
+    "free_button": "Validate"
 
 
 }

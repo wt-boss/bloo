@@ -43,13 +43,12 @@ class QuestionnaireController extends Controller
     {
         $data = $request->all();
         $date = Carbon::now()->toDateTimeString();
-        $type = $data['title'].$data['purpose'].$date;
+        $type = $data['title'].$date;
         $token = base64_encode($type);
         $data['slug'] = $token;
         auth()->user()->questionnaires()->create($data);
         return redirect('/home')->withSuccess('Questionnaire créer avec sucess');
     }
-
 
     public function confirm($slug)
     {
@@ -58,7 +57,6 @@ class QuestionnaireController extends Controller
         $questionnaire->save();
         return view('questionnaire.confirm',compact('questionnaire'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -70,7 +68,7 @@ class QuestionnaireController extends Controller
     {
         $data = $request->all();
         $date = Carbon::now()->toDateTimeString();
-        $type = $data['title'].$data['purpose'].$date;
+        $type = $data['title'].$date;
         $slug = base64_encode($type);
         $token = Hash::make($type);
         $data['token'] = $token;
@@ -110,7 +108,6 @@ class QuestionnaireController extends Controller
          }
      }
 
-
     public function valid($slug)
     {
         $data = request()->all();
@@ -121,14 +118,12 @@ class QuestionnaireController extends Controller
         return view('questionnaire.show_free',compact('questionnaire'));
     }
 
-
     public function view($slug)
     {
         $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $questionnaire->load('questions.answers');
         return view('questionnaire.view',compact('questionnaire'));
     }
-
 
     /**
      * Display the specified resource.
@@ -142,7 +137,6 @@ class QuestionnaireController extends Controller
         return view('questionnaire.show',compact('questionnaire'));
     }
 
-
     public function show_free($slug)
     {
         $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
@@ -150,13 +144,11 @@ class QuestionnaireController extends Controller
         return view('questionnaire.show_free',compact('questionnaire'));
     }
 
-
     public function stats(Questionnaire $questionnaire)
     {
         $questionnaire->load('questions.answers.responses');
         return view('questionnaire.stats',compact('questionnaire'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -172,7 +164,6 @@ class QuestionnaireController extends Controller
         return view('questionnaire.edit',compact('questionnaire','start','end'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -187,7 +178,6 @@ class QuestionnaireController extends Controller
       $questionnaire->update($data);
       return redirect('/home')->withSuccess('Questionnaires mis a jour avec success');
      }
-
 
     /**
      * Remove the specified resource from storage.

@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use AkibTanjim\Currency\Currency;
+use App\Entreprise;
+use App\Offre;
+use App\Opération;
+use App\Paiement;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -40,6 +47,11 @@ class PaymentController extends Controller
         );
         $this->_api_context->setConfig($paypal_conf['settings']);
 
+    }
+
+    public function rates(){
+        $response = Currency::getRates();
+        return response()->json($response);
     }
 
     public function payWithpaypal(Request $request)
@@ -80,7 +92,6 @@ class PaymentController extends Controller
                 \Session::put('error', 'Some error occur, sorry for inconvenient');
                 return Redirect::to('/');
             }
-
         }
         foreach ($payment->getLinks() as $link) {
             if ($link->getRel() == 'approval_url') {
@@ -90,6 +101,49 @@ class PaymentController extends Controller
         }
         /** add payment ID to session **/
         Session::put('paypal_payment_id', $payment->getId());
+        /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
+        /** Création de l'utilisateur */
+        $user = new User();
+        $user->name = $donées["user_name_entreprise"];
+        $user->email = $donées["user_email_entreprise"];
+        $user->password = Hash::make($donées["user_password_entreprise"]);
+        $user->api_token = Str::random(80);
+        $user->role = 0;
+        $user->active = 1;
+        $user->save();
+        $user_id = $user->id;
+        /** Si on a affaire a une entreprise alors création de l'utilisateur */
+        if($donées["options"] === "ENTREPRISE")
+        {
+            $entreprise = new Entreprise();
+            $entreprise->user_id = $user_id;
+            $entreprise->nom = $donées["name_enterprise"];
+            $entreprise->addrese = $donées["address_enterprise"];
+            $entreprise->Numero_contribuable = $donées["contribuanle_enterprise"];
+            $entreprise->numero_siret = $donées["siret_enterprise"];
+            $entreprise->pays = $donées["pays_entreprise"];
+            $entreprise->ville = $donées["ville_entreprise"];
+            $entreprise->telephone =  $donées["telephone_entreprise"];
+            $entreprise->save();
+        }
+        /** Si l'offre choisi est primus alors, creation d'une operation */
+        if($donées['amount'] == "3466.22" )
+        {
+            $operation = new Opération();
+            $operation->user_id = $user_id;
+            $operation->nom = $donées["operation_name"];
+            $operation->description = $donées["operation_purpose"];
+            $operation->date_start =$donées["date_start"];
+            $operation->date_end = $donées["date_end"];
+            $operation->save();
+        }
+        /** Recherche de l'offre choisi**/
+       //$offre_id = Offre::where('montant','=',$donées['amount'])->pluck('id')->get()->first();
+        /** Création du paiement **/
+        $paiement = new Paiement();
+        $paiement->paiement_id = $payment->getId();
+        $paiement->user_id = $user_id;
+        $paiement->save();
         if (isset($redirect_url)) {
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
@@ -98,14 +152,13 @@ class PaymentController extends Controller
         return Redirect::to('/');
     }
 
-    public function getPaymentStatus($données)
+    public function getPaymentStatus()
     {
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-
             \Session::put('error', 'Payment failed');
             return Redirect::to('/');
         }
@@ -121,6 +174,5 @@ class PaymentController extends Controller
         }
         \Session::put('error', 'Payment failed');
         return Redirect::to('/');
-
     }
 }

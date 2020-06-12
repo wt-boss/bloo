@@ -1,4 +1,26 @@
 <?php return array (
+  'akibtanjim/currency-converter' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'AkibTanjim\\Currency\\CurrencyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Currency' => 'AkibTanjim\\Currency\\Facades\\CurrencyConverter',
+    ),
+  ),
+  'danielme85/laravel-cconverter' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'danielme85\\CConverter\\CConverterServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Currency' => 'danielme85\\CConverter\\CConverter',
+    ),
+  ),
   'devmarketer/easynav' => 
   array (
     'providers' => 
@@ -28,6 +50,17 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'florianv/laravel-swap' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Swap\\Laravel\\SwapServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Swap' => 'Swap\\Laravel\\Facades\\Swap',
+    ),
+  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 
@@ -44,6 +77,17 @@
     'aliases' => 
     array (
       'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
+  'ixudra/curl' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Ixudra\\Curl\\CurlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Curl' => 'Ixudra\\Curl\\Facades\\Curl',
     ),
   ),
   'laravel/tinker' => 

@@ -80,6 +80,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Questionnaire::class);
     }
+    public function entreprises()
+    {
+        return $this->hasMany(Entreprise::class);
+    }
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
+    }
+    public function operations()
+    {
+        return $this->hasMany(Paiement::class);
+    }
 
 
 }

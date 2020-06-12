@@ -106,4 +106,6 @@ Route::get('/offres/illimité','SurveyController@illimité')->name('illimité');
 Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
 
 // route for check status of the payment
-Route::get('status/{données}', 'PaymentController@getPaymentStatus')->name('status');
+Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
+
+Route::get('devise','PaymentController@rates');

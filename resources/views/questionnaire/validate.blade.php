@@ -36,10 +36,10 @@
                         <label for="objectif">Objectif</label>
                         <input type="text" class="form-control" id="objectif"  value="{{$questionnaire->purpose}}" disabled>
                     </div>
-                    <div class="form-group col-8">
-                        <label for="exampleInputEmail1">Token</label>
+                    <div class="form-group col-6">
+                        <label for="exampleInputEmail1">ID du sondage</label>
                         <div class="input-group mb-3">
-                            <p class="form-control" style="font-size: 16px"  id="token"> {{$questionnaire->token}}</p>
+                            <input class="form-control" style="font-size: 16px"  id="token" value="{{$questionnaire->token}}">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                                     <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
@@ -48,7 +48,7 @@
                         </div>
                         <small class="form-text text-success text-capitalize col-9">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
                     </div>
-                    <div class="form-group col-4">
+                    <div class="form-group col-6">
                         <label for="exampleInputEmail1">Mot de passe</label>
                         <input type="password" class="form-control" name="password" id="password" aria-describedby="password" required>
                         <small id="password"  class="form-text text-success">Entrer un mot de passe pour avoir acces a votre formulaire prochainement</small>

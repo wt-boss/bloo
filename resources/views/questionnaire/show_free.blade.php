@@ -7,8 +7,8 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Gestion du sondage gratuit</h1>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{$questionnaire->purpose}}</p>
+                <h1 class="mb-3 bread text-uppercase" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{$questionnaire->title}}</h1>
             </div>
         </div>
     </div>
@@ -19,9 +19,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
-                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
-                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>
+                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Aperçu"/></a>
+                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3 " value="Editer"/></a>
+                            @if($questionnaire->questions->count() !== 0 && $questionnaire->active == 0)
+                                <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistiques"/></a>
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -89,12 +91,12 @@
                                             <form action="/questionnaires/{{ $questionnaire->id}}/questions/{{$question->id}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Supprimser cette question</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
                                             </form>
                                         @endif
                                     </li>
                                 @empty
-                                    <div class="alert alert-warning">Pas de question dans ce formulaire</div>
+                                    <div class="alert alert-warning">Pas encore de questions, Veuillez ajouter.</div>
                                 @endforelse
                             </ul>
                             <br>
@@ -103,7 +105,7 @@
                             <h5 class="text-uppercase text-justify">Ajouter une question</h5>
                             <div class="form-group">
 
-                                <label for="exampleFormControlSelect1">Type de question</label>
+                                <label for="exampleFormControlSelect1">Choisir le format de réponse</label>
                                 <select class="form-control" name="questions[question_type]" id="question_type">
                                     <option value="text">Texte court</option>
                                     <option value="number">Chiffre</option>
@@ -113,7 +115,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">question</label>
+                                <label for="exampleFormControlInput1">Saisir la question</label>
                                 <input type="text" class="form-control" name="questions[question]" >
                             </div>
                             <span class="form-g"></span>
@@ -128,9 +130,11 @@
 
                         </div>
                         <div class="card-footer">
-                            <a href="{{route('take_survey',[$questionnaire->slug])}}"> <input type="button" class="btn btn-primary col-3" value="Prévisualiser"/></a>
-                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}"> <input type="button" class="btn btn-warning col-3 offset-1" value="Editer"/></a>
-{{--                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistique"/></a>--}}
+                            <a href="{{route('take_survey',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-primary col-3" value="Aperçu"/></a>
+                            <a href="{{route('questionnaire.edit',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-warning col-3" value="Editer"/></a>
+                            @if($questionnaire->questions->count() !== 0 && $questionnaire->active == 0)
+                            <a href="{{route('questionnaire.stat',[$questionnaire->slug])}}" class="col-4"> <input type="button" class="btn btn-info float-right col-3" value="Statistiques"/></a>
+                                @endif
                         </div>
                     </div>
                 </div>

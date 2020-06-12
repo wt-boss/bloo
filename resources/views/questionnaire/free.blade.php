@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{trans('free__home')}}</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
                 <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Sondage gratuit</h1>
             </div>
         </div>
@@ -20,42 +20,47 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <span class="subheading">Creation du formulire gratuit</span>
-                <h2 class="mb-4">Créer gratuitement un sondage, administré le et ayez accès aux statistiques de ce sonndage </h2>
+            <div class="col-md-12 text-center heading-section ftco-animate">
+                <span class="subheading">{{trans('free_header0')}}</span>
+                <h2 class="mb-4 text-justify">{{trans('free_header')}}</h2>
 
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 align-items-center ftco-animate">
-
                 <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
                     <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                         <div class="d-md-flex">
                             <div class="one-forth align-self-center">
-                                <center><h2>Créer votre sondage</h2></center>
+
+                                <center><h2>{{trans('free_content1')}}</h2></center>
+
                                 <form action="{{route('questionnaire.store_free')}}" method="post" onsubmit="return verifDate(this)">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="title">Titre</label>
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                            <label for="title">{{trans('free_form1_label1')}}</label>
+                                            <input type="text" class="form-control" id="title" name="title"  required>
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="purpose">Objectif</label>
-                                            <input type="text" class="form-control" id="purpose"  name="purpose"  placeholder="Enter l'objectif">
+                                            <label for="purpose">{{trans('free_form1_label2')}}</label>
+                                            <input type="text" class="form-control" id="purpose"  name="purpose" required >
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="date_start">Date de debut</label>
-                                            <input type="date" class="form-control" id="date_start" name="date_start"  >
+                                            <label for="date_start">{{trans('free_form1_label3')}}</label>
+                                            <input type="date" class="form-control" id="date_start" name="date_start"  required >
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="date_end">Date de fin</label>
-                                            <input type="date" class="form-control" id="date_end" name="date_end" >
+                                            <label for="date_end">{{trans('free_form1_label4')}}</label>
+                                            <input type="date" class="form-control" id="date_end" name="date_end" required>
+                                        </div>
+                                        <div class="form-group col-6">
+
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <input type="submit" class="btn btn-primary col-12"/>
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn btn-primary float-right col-4"/>
                                 </form>
                                 <script>
                                     function verifDate()
@@ -76,8 +81,7 @@
                                         }
                                     }
                                 </script>
-
-                            </div>
+                                </div>
                             <div class="one-half ml-md-5 align-self-center">
                                 @if (Session::has('errors'))
                                     <div class="alert alert-danger" role="alert">
@@ -107,24 +111,25 @@
                                         {{Session::get('success')}}
                                     </div>
                                 @endif
-                                      <center><h2>Administrer votre sondage</h2></center>
-                                <form method="POST"    action="{{ route('questionnaire.identify_free') }}">
+                                    <center><h2>{{trans('free_content2')}}</h2></center>
+                                <form action="{{ route('questionnaire.identify_free') }}" method="post" onsubmit="return verifDate(this)">
                                     @csrf
-                                    <div class="form-group ">
-                                        <label for="token" class="col-md-4 col-form-label">ID du sondage</label>
-                                        <div class="col-md-12">
-                                            <input id="token" type="text" class="form-control" name="token" >
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label for="token">{{trans('free_form2_label1')}}</label>
+                                            <input id="token" type="text" class="form-control" name="token" placeholder="Entrer l'ID du sondage" required >
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for="password">{{trans('free_form2_label2')}}</label>
+                                            <input id="password" type="password" class="form-control " name="password">
+                                        </div>
+                                        <div class="form-group col-6">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <input type="submit" class="btn btn-primary col-12"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-md-4 col-form-label">Mot de passe</label>
-                                        <div class="col-md-12">
-                                            <input id="password" type="password" class="form-control " name="password" >
-                                        </div>
-                                    </div>
-                                    <input type="submit" class="btn btn-primary float-right col-4"/>
                                 </form>
-
                             </div>
                         </div>
                     </div>

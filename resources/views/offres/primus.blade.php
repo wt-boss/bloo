@@ -98,57 +98,65 @@
                     </div>
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
-                            <label for="name_enterprise">Nom :</label>
+                            <label for="name_enterprise">Nom de l'entreprise :</label>
                             <input type="text" class="form-control"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
                         </div>
                         <div class="form-group col-6">
-                            <label for="address_enterprise">Adresse :</label>
+                            <label for="address_enterprise">Adresse de l'entreprise :</label>
                             <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-country">Numero Contribuable:</label>
+                            <label for="birth-country">Numero Contribuable de l'entreprise :</label>
                             <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-country">Numero SIRET/RCCM:</label><br>
+                            <label for="birth-country">Numero SIRET/RCCM de l'entreprise :</label><br>
                             <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-date">Ville:</label><br>
-                            <input type="text" name="ville_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer la ville">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="birth-date">Pays:</label><br>
+                            <label for="birth-date">Pays de l'entreprise :</label><br>
                             <input type="text" name="pays_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer le pays">
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-date">Telephone:</label><br>
-                            <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le pays">
+                            <label for="birth-date">Ville de l'entreprise :</label><br>
+                            <input type="text" name="ville_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer la ville">
                         </div>
                         <div class="form-group col-6">
+                            <label for="birth-date">Telephone de l'entreprise :</label><br>
+                            <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="particulier_name">Nom de l'utilisateur:</label><br>
+                            <input type="text" name="user_name_entreprise" class="address form-control" id="particulier_name">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
+                            <input type="email" name="user_email_entreprise" class="address-city form-control" id="particulier_email">
+                        </div>
+                        <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
-                            <input type="password" name="address-city" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_password_entreprise" class="address-city form-control" id="particulier_email">
                         </div>
                     </div>
 
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
                             <label for="particulier_name">Nom:</label><br>
-                            <input type="text" name="particulier_name" class="address form-control" id="particulier_name">
+                            <input type="text" name="user_name" class="address form-control" id="particulier_name">
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email :</label><br>
-                            <input type="email" name="address-city" class="address-city form-control" id="particulier_email">
+                            <input type="email" name="user_email" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
-                            <input type="password" name="address-city" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_password" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6">
                             <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
                         </div>
-
                     </div>
+
                     <div class="row">
                         <div class="form-group col-6">
                             <button type="button" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>

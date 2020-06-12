@@ -168,8 +168,19 @@
     "Name":"Nom",
     "savoir":"À savoir",
     "text1":"Bloo est un service de traitement des données, de recherche et de conseil à croissance rapide.",
-    "text2": "Nous informons et inspirons nos clients grâce à des données pertinentes, une technologie innovante et des conseils à fort impact. Tout est conçu pour aider nos clients à prendre de meilleures décisions et à progresser plus rapidement."
+    "text2": "Nous informons et inspirons nos clients grâce à des données pertinentes, une technologie innovante et des conseils à fort impact. Tout est conçu pour aider nos clients à prendre de meilleures décisions et à progresser plus rapidement.",
 
-
-
+    "free__home": "Accueil",
+    "free__home": "Accueil",
+    "free_header0": "Obtenez les reponses dont vous avez besoin",
+    "free_header": "Nous receuillons chaque jour les réponses à 1 million de questions. Obtenez les avis dont vous avez besoin grace à notre logiciel de sondage gratuit. Rejoignez les centaines d'entreprises et de particuliers qui font confiance à Bloonline pour benéficier de données instantanées à visage humain.",
+    "free_content1": "Créer votre sondage",
+    "free_content2": "Administer votre sondage",
+    "free_button": "Valider",
+    "free_form1_label1" : "Titre",
+    "free_form1_label2" : "Objectif",
+    "free_form1_label3" : "Date de début",
+    "free_form1_label4": "Date de fin",
+    "free_form2_label1" : "Titre",
+    "free_form2_label2" : "Mot de passe"
 }
