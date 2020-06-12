@@ -101,4 +101,4 @@ Route::group(['middleware'=>['web']],function(){
 
 });
 
-
+Route::resource('operation', 'OperationController');
