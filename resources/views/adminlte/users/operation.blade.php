@@ -277,6 +277,7 @@
       // var test= $(this).children('option[value='+selectedOption+']');
       // console.log(test);
       var x=document.getElementById('myselect');
+      var x=$('#myselect').siblings('.')
 x.remove(x.selectedIndex);
        // $(this).children('option[value='+selectedOption+']').hide();
 
