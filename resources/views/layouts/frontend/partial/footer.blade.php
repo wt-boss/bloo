@@ -2,42 +2,33 @@
     <div class="container">
       <div class="row mb-5">
         <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">BLOO</h2>
-            <p>Outils de visualisation et d'analyse des données </p>
-
-            <p>{{ trans('change_langue') }} </p>
-
+            <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">BLOO</h2>
+                <p>Outils de visualisation et d'analyse des données </p>
+                <p>{{ trans('change_langue') }} </p>
                 {!! link_to('language', session('locale') == 'fr' ? 'English' : 'Français', ['class' => 'btn btn-primary']) !!}
-
-
-          </div>
+            </div>
         </div>
 
         <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-             <h2 class="ftco-heading-2">{{ trans('navigation') }}</h2>
-             <ul class="list-unstyled">
-                 <li class="{{Request::is('home')? "active": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
-                 <li class="{{Request::is('services')? "active": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
-                 <li class="{{Request::is('sondages')? "active": "nav-item"}}"><a href="{{ route('sondages') }}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
-                 <li class="{{Request::is('prix')? "active": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
-
-
-
-             </ul>
+                <h2 class="ftco-heading-2">{{ trans('navigation') }}</h2>
+                <ul class="list-unstyled">
+                    <li class="{{Request::is('home')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('home') }}">{{  trans('home_fil')  }}</a></li>
+                    <li class="{{Request::is('services')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('services') }}">{{  trans('service_fil')  }}</a></li>
+                    <li class="{{Request::is('sondages')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('sondages') }}">{{  trans('sondage_fil')  }}</a></li>
+                    <li class="{{Request::is('prix')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
+                </ul>
            </div>
          </div>
         <div class="col-md">
-          <div class="ftco-footer-widget mb-4 ml-md-5">
+          <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">{{ trans('lien') }}</h2>
             <ul class="list-unstyled">
                 <li><a href="{{ route('apropos') }}" class="py-2 d-block">{{ trans('footer_apropos')}}</a></li>
                 <li><a href="{{ route('carriere') }}" class="py-2 d-block">{{ trans('footer_career')}}</a></li>
                 <li><a href="{{ route('intimite') }}" class="py-2 d-block">{{ trans('footer_privacy')}}</a></li>
                 <li><a href="{{ route('tc') }}" class="py-2 d-block">{{ trans('footer_tc')}}</a></li>
-
-
             </ul>
           </div>
         </div>

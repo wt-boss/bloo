@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<section class="ftco-section services-section">
+<section class="ftco-section services-section login-page">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
 
-                    
+
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
@@ -74,12 +74,6 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="row">
-
-
-
-
         </div>
     </div>
 </section>
