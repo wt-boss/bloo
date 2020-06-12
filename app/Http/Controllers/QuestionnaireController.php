@@ -13,17 +13,6 @@ use Illuminate\Support\Facades\Hash;
 class QuestionnaireController extends Controller
 {
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Renvoie a la page de connection pour la creation d'un formulaire gratuit
      *
@@ -60,6 +49,8 @@ class QuestionnaireController extends Controller
         auth()->user()->questionnaires()->create($data);
         return redirect('/home')->withSuccess('Questionnaire créer avec sucess');
     }
+
+
     public function confirm($slug)
     {
         $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
@@ -67,6 +58,8 @@ class QuestionnaireController extends Controller
         $questionnaire->save();
         return view('questionnaire.confirm',compact('questionnaire'));
     }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -83,7 +76,6 @@ class QuestionnaireController extends Controller
         $data['token'] = $token;
         $data['slug'] = $slug;
         $questionnaire = Questionnaire::create($data);
-
         return view('questionnaire.validate',compact('questionnaire'));
     }
 
@@ -97,6 +89,7 @@ class QuestionnaireController extends Controller
      public function login_free(){
         return view('questionnaire.login_free');
      }
+
      public function identify_free(Request $request)
      {
          $data = $request->all();
@@ -117,6 +110,7 @@ class QuestionnaireController extends Controller
          }
      }
 
+
     public function valid($slug)
     {
         $data = request()->all();
@@ -127,12 +121,14 @@ class QuestionnaireController extends Controller
         return view('questionnaire.show_free',compact('questionnaire'));
     }
 
+
     public function view($slug)
     {
         $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $questionnaire->load('questions.answers');
         return view('questionnaire.view',compact('questionnaire'));
     }
+
 
     /**
      * Display the specified resource.
@@ -145,6 +141,7 @@ class QuestionnaireController extends Controller
         $questionnaire->load('questions.answers.responses');
         return view('questionnaire.show',compact('questionnaire'));
     }
+
 
     public function show_free($slug)
     {
@@ -160,18 +157,21 @@ class QuestionnaireController extends Controller
         return view('questionnaire.stats',compact('questionnaire'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questionnaire $questionnaire)
+    public function edit($slug)
     {
+        $questionnaire = Questionnaire::where('slug',$slug)->get()->first();
         $start = date('Y-m-d', strtotime($questionnaire->date_start));
         $end = date('Y-m-d', strtotime($questionnaire->date_end));
         return view('questionnaire.edit',compact('questionnaire','start','end'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -187,6 +187,8 @@ class QuestionnaireController extends Controller
       $questionnaire->update($data);
       return redirect('/home')->withSuccess('Questionnaires mis a jour avec success');
      }
+
+
     /**
      * Remove the specified resource from storage.
      *

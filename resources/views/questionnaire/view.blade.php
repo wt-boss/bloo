@@ -13,8 +13,8 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('service_fil') }}</span></p>{{ trans('') }}
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Validation du sondage gratuit</h1>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{$questionnaire->purpose}}</p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{$questionnaire->title}}</h1>
             </div>
         </div>
     </div>
@@ -23,9 +23,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">{{$questionnaire->title}} || {{$questionnaire->purpose}}</div>
                         <div class="card-body">
-                            <form  action="#" method="post">
+                            <form  action="/surveys/{{$questionnaire->id}}-{{Str::slug($questionnaire->title)}}" method="post">
                                 @csrf
                                 @foreach($questionnaire->questions as $key=>$question)
                                     <div class="card mt-4">
@@ -52,8 +51,7 @@
                                                 @elseif($question->question_type === 'textarea')
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1">Reponse</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="responsest[{{$key}}][answer]">
-                                                    </textarea>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="responsest[{{$key}}][answer]"></textarea>
                                                         <input type="hidden" name="responsest[{{$key}}][question_id]" value="{{$question->id}}">
                                                         <input type="hidden" name="responsest[{{$key}}][answer_id]" value="">
                                                     </div>

@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -34,20 +36,66 @@
                         <label for="objectif">Objectif</label>
                         <input type="text" class="form-control" id="objectif"  value="{{$questionnaire->purpose}}" disabled>
                     </div>
-                    <div class="form-group col-8" >
+                    <div class="form-group col-8">
                         <label for="exampleInputEmail1">Token</label>
-                        <input type="text" class="form-control" id="token" aria-describedby="token" value="{{$questionnaire->token}}" disabled>
-                        <small id="token" class="form-text text-success text-capitalize">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                        <div class="input-group mb-3">
+                            <p class="form-control" style="font-size: 16px"  id="token"> {{$questionnaire->token}}</p>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
+                                    <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <small class="form-text text-success text-capitalize col-9">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
                     </div>
                     <div class="form-group col-4">
                         <label for="exampleInputEmail1">Mot de passe</label>
                         <input type="password" class="form-control" name="password" id="password" aria-describedby="password" required>
                         <small id="password"  class="form-text text-success">Entrer un mot de passe pour avoir acces a votre formulaire prochainement</small>
                     </div>
+
+
+
                 </div>
                 <button type="submit" class="btn btn-primary float-right">Valider</button>
             </form>
+            <script src="{{asset('js/dist/clipboard.js')}}"></script>
+            <script>
+                 var toCopy  = document.getElementById( 'to-copy' ),
+                     btnCopy = document.getElementById( 'copy' ),
+                     paste   = document.getElementById( 'cleared' );
 
+                 btnCopy.addEventListener( 'click', function(){
+                     toCopy.select();
+                     paste.value = '';
+
+                     if ( document.execCommand( 'copy' ) ) {
+                         btnCopy.classList.add( 'copied' );
+                         paste.focus();
+
+                         var temp = setInterval( function(){
+                             btnCopy.classList.remove( 'copied' );
+                             clearInterval(temp);
+                         }, 600 );
+
+                     } else {
+                         console.info( 'document.execCommand went wrong…' )
+                     }
+
+                     return false;
+                 } );
+             </script>
+            <script>
+                var clipboard = new ClipboardJS('.btn');
+
+                clipboard.on('success', function(e) {
+                    console.log(e);
+                });
+
+                clipboard.on('error', function(e) {
+                    console.log(e);
+                });
+            </script>
         </div>
     </div>
 

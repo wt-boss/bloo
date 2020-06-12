@@ -131,6 +131,11 @@
             $(this).parent(".input-field").remove();
         });
         // will replace .form-g class when referenced
+        var material1 = '<div class="form-group input-field input-g">' +
+            '<input name="answers[][answer]" id="nom_option[]" type="text" class="form-control"  placeholder="Entrer option">' +
+            '<span class="add-option badge badge-info" style="cursor:pointer;">Ajouter une autre</span>' +
+            '</div>';
+
         var material = '<div class="form-group input-field input-g">' +
             '<input name="answers[][answer]" id="nom_option[]" type="text" class="form-control"  placeholder="Entrer option">' +
             '<span style="float:right; cursor:pointer;"class="delete-option badge badge-danger">Supprimer</span>' +
@@ -145,12 +150,13 @@
         $(document).on('change', '#question_type', function() {
             var selected_option = $('#question_type :selected').val();
             if (selected_option === "radio" || selected_option === "checkbox") {
-                $(".form-g").html(material);
+                $(".form-g").html(material1);
             } else {
                 $(".input-g").remove();
             }
         });
     </script>
+  <script src="{{asset('js/dist/clipboard.js')}}"></script>
 
   </body>
 </html>
