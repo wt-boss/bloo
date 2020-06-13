@@ -17,7 +17,7 @@ class CreatePaiementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('paiement_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('offre_id');
+            $table->unsignedBigInteger('offre_id')->nullable();
             $table->timestamps();
         });
     }

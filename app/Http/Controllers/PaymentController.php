@@ -102,19 +102,22 @@ class PaymentController extends Controller
         /** add payment ID to session **/
         Session::put('paypal_payment_id', $payment->getId());
         /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
+
         /** Création de l'utilisateur */
-        $user = new User();
-        $user->name = $donées["user_name_entreprise"];
-        $user->email = $donées["user_email_entreprise"];
-        $user->password = Hash::make($donées["user_password_entreprise"]);
-        $user->api_token = Str::random(80);
-        $user->role = 0;
-        $user->active = 1;
-        $user->save();
-        $user_id = $user->id;
+
         /** Si on a affaire a une entreprise alors création de l'utilisateur */
         if($donées["options"] === "ENTREPRISE")
         {
+            $user = new User();
+            $user->name = $donées["user_name_entreprise"];
+            $user->email = $donées["user_email_entreprise"];
+            $user->password = Hash::make($donées["user_password_entreprise"]);
+            $user->api_token = Str::random(80);
+            $user->role = 0;
+            $user->active = 1;
+            $user->save();
+            $user_id = $user->id;
+
             $entreprise = new Entreprise();
             $entreprise->user_id = $user_id;
             $entreprise->nom = $donées["name_enterprise"];
@@ -125,6 +128,17 @@ class PaymentController extends Controller
             $entreprise->ville = $donées["ville_entreprise"];
             $entreprise->telephone =  $donées["telephone_entreprise"];
             $entreprise->save();
+        }
+        else{
+            $user = new User();
+            $user->name = $donées["user_name"];
+            $user->email = $donées["user_email"];
+            $user->password = Hash::make($donées["user_password"]);
+            $user->api_token = Str::random(80);
+            $user->role = 0;
+            $user->active = 1;
+            $user->save();
+            $user_id = $user->id;
         }
         /** Si l'offre choisi est primus alors, creation d'une operation */
         if($donées['amount'] == "3466.22" )
