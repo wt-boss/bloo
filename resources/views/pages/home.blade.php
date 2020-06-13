@@ -145,8 +145,6 @@
           </div>
       </section>
 
-
-
       <section class="ftco-section" >
           <div class="container">
               <div class="row justify-content-center mb-5 pb-5">
@@ -154,7 +152,7 @@
               <span class="subheading">{{ trans('home_content_section2') }}</span>
               <h2 class="mb-4">{{ trans('home_content_section2_title') }}</h2>
               <p>{{ trans('home_content_section2_content') }}</p>
-<<<<<<< HEAD
+
               <p >
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn1') }}</button>
@@ -178,11 +176,6 @@
 
 
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn13') }}</button>
-
-
-
-=======
->>>>>>> fd59059aec062d4ee57b1eae85c9a851178da681
 
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn') }}</button>
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn1') }}</button>

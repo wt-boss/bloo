@@ -18,7 +18,6 @@
 </div>
 
 <section class="ftco-section">
-
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-12 text-center heading-section ftco-animate">
