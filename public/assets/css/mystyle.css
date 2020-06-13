@@ -13,13 +13,16 @@
 .plus
 {
    margin-top:-10px;
-
+}
 
 .bloo-home-btn {
     margin-bottom: 10px;
 }
 .cloud-btn {
     margin-bottom: 5px;
+}
+.sondages.ftco-section {
+    padding: 4em 0 8em 0 !important;
 }
 
 /* Edit css for under s screen size */
