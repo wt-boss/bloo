@@ -11,7 +11,7 @@
           <div class="block-7">
             <div class="text-center">
             <h2 class="heading">{{ trans('prix_free') }}</h2>
-            <span class="price"> <span class="apd"></span> <span class="number">{{ trans('prix1') }}</span><span class="xaf">XAF</span> </span>
+           {{-- <span class="apd"></span> <span class="number">{{ trans('prix1') }}</span><span class="xaf">XAF</span> </span> --}}<span class="price">
             <span class="excerpt d-block">
               {{ trans('prix_offre_freee') }}
               <br>
@@ -33,8 +33,12 @@
               <li><strong>{{ trans('prix_offre_free2') }}</strong></li>
               <hr>
               <li><strong>{{ trans('prix_offre_free3') }}</strong></li>
+              <hr>
+              <li><strong>{{ trans('prix_offre_free4') }}</strong></li>
+
+
             </ul>
-            <br>
+
 
             </div>
           </div>
@@ -44,22 +48,28 @@
             <div class="block-7">
               <div class="text-center">
               <h2 class="heading">{{ trans('prix_prenuim') }}</h2>
-              <span class="price"> <span class="apd">ADP</span> <span class="number">{{ trans('prix2') }}</span><span class="xaf">XAF</span> </span>
-              <span class="excerpt d-block">{{ trans('prix_introduc1') }}</span>
-              <a href="{{route('primus')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
+             {{--  <span class="price"> <span class="apd">ADP</span> <span class="number">{{ trans('prix2') }}</span><span class="xaf">XAF</span> </span> --}}
+              <span class="excerpt d-block">{{ trans('prix_offre_prenuim') }}</span>
+              <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
               <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
               <hr>
 
               <ul class="pricing-text">
-                <li><strong>{{ trans('prix_offre_prenuim') }}</strong> </li>
-                <hr>
-                <li><strong>{{ trans('prix_offre_prenuim1') }}</strong></li>
-                <hr>
                 <li><strong>{{ trans('prix_offre_prenuim2') }}</strong></li>
                 <hr>
                 <li><strong>{{ trans('prix_offre_prenuim3') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_prenuim4') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_prenuim5') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_prenuim6') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_prenuim7') }}</strong></li>
+
+
               </ul>
               </div>
             </div>
@@ -70,24 +80,31 @@
             <div class="block-7">
               <div class="text-center">
               <h2 class="heading">{{ trans('prix_illimite') }}</h2>
+
               <span class="price"> <span class="apd">ADP</span> <span class="number">{{ trans('prix3') }}</span><span class="xaf">XAF</span> </span>
               <span class="excerpt d-block">{{ trans('prix_introduc1') }}</span>
               <a href="{{route('illimité')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
+
 
 
               <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
               <hr>
 
               <ul class="pricing-text">
-                <li><strong>{{ trans('prix_offre_illimite') }}</strong> </li>
+
+                <li><strong>{{ trans('prix_offre_prenuim2') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_prenuim3') }}</strong></li>
+                <hr>
+                <li><strong>{{ trans('prix_offre_illimite') }}</strong></li>
                 <hr>
                 <li><strong>{{ trans('prix_offre_illimite1') }}</strong></li>
                 <hr>
                 <li><strong>{{ trans('prix_offre_llimite2') }}</strong></li>
                 <hr>
                 <li><strong>{{ trans('prix_offre_llimite3') }}</strong></li>
-
-
+                <hr>
+                <li><strong>{{ trans('prix_offre_llimite4') }}</strong></li>
               </ul>
               </div>
             </div>

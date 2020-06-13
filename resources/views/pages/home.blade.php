@@ -11,8 +11,10 @@
 
             <div class="one-forth pr-md-4 ftco-animate align-self-md-center" data-scrollax=" properties: { translateY: '70%' }">
                 <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ trans('homme_title') }}  </h1>
-              <p class="mb-md-5 mb-sm-3" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('homme_title_content') }}</p>
-              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{{route('services')}}" class="btn btn-primary px-4 py-3">{{ trans('homme_title_button') }}</a> <a href="{{route('questionnaire.free')}}" class="btn btn-primary px-4 py-3">{{ trans('btn_home_sondage') }}</a></p>
+              <p class="mb-md-5 mb-sm-3" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('homme_title_content') }} <br> {{ trans('homme_title_content1') }}</p>
+              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                  <a href="{{route('services')}}" class="btn btn-primary px-4 py-3 bloo-home-btn">{{ trans('homme_title_button') }}</a>
+                  <a href="{{route('questionnaire.free')}}" class="btn btn-primary px-4 py-3 bloo-home-btn">{{ trans('btn_home_sondage') }}</a></p>
             </div>
             <div class="one-half align-self-md-end align-self-sm-center">
                 <div class="slider-carousel owl-carousel">
@@ -39,29 +41,27 @@
                 <div class="col-md-7 text-center heading-section ftco-animate">
                     <span class="subheading">{{ trans('home_content_section1') }}</span>
                     <br>
-                  </div>
+                </div>
 
-
-                  <div class="col-md-12 align-items-center ftco-animate">
+                <div class="col-md-12 align-items-center ftco-animate">
 
                     <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-                      <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                          <div class="d-md-flex">
-                            <div class="one-half ml-md-5 align-self-center">
-                                <h2 class="mb-4">{{ trans('home_content_section1_title') }}</h2>{{ trans('') }}
-                              </div>
-                              <div class="one-half ml-md-5 align-self-center">
-                                <p>
-                                    {{ trans('home_content_section1_content') }}
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
+                        <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                            <div class="d-md-flex">
+                                <div class="one-half ml-md-5 align-self-center">
+                                    <h2 class="mb-4 text-center-global">{{ trans('home_content_section1_title') }}</h2>{{ trans('') }}
+                                </div>
+                                <div class="one-half ml-md-5 align-self-center">
+                                    <p class="text-center-global">
+                                        {{ trans('home_content_section1_content') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                </div>
+            </div>
 
-          </div>
           <div class="row">
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
@@ -100,8 +100,8 @@
           <div class="container">
               <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2 class="mb-4">Données traitées</h2>
-              <span class="subheading">information sur nos  données</span>
+              <h2 class="mb-4">{{trans( 'données_tile') }}</h2>
+              <span class="subheading">{{ trans('données_tile1') }}</span>
             </div>
           </div>
               <div class="row justify-content-center">
@@ -110,8 +110,8 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="+4000">0</strong>
-                          <span>données traitées chaque jour… </span>
+                          <strong class="number" data-number="25.000">0</strong>
+                          <span>{{ trans('données1') }} </span>
                         </div>
                       </div>
                     </div>
@@ -119,23 +119,23 @@
                       <div class="block-18 text-center">
                         <div class="text">
                           <strong class="number" data-number="100">0</strong>
-                          <span>questionnaires/jours</span>
+                          <span>{{ trans('données2') }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="32000">0</strong>
-                          <span>Nombre de  clients</span>
+                          <strong class="number" data-number="218">0</strong>
+                          <span>{{ trans('données3') }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="31998">0</strong>
-                          <span>Nombre d'opérateurs</span>
+                          <strong class="number" data-number="12">0</strong>
+                          <span>{{ trans('données4') }}</span>
                         </div>
                       </div>
                     </div>
@@ -147,40 +147,55 @@
 
 
 
-      <section class="ftco-section">
+      <section class="ftco-section" >
           <div class="container">
               <div class="row justify-content-center mb-5 pb-5">
                   <div class="col-md-7 text-center heading-section ftco-animate">
               <span class="subheading">{{ trans('home_content_section2') }}</span>
               <h2 class="mb-4">{{ trans('home_content_section2_title') }}</h2>
               <p>{{ trans('home_content_section2_content') }}</p>
-              <p>
+<<<<<<< HEAD
+              <p >
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn1') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn2') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn3') }}</button>
             </p>
 
-            <p>
+            <p class="plus">
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn5') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn6') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn7') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn9') }}</button>
             </p>
-            
-                
-            <p>
+
+
+            <p class="plus">
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn10') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn11') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn12') }}</button>
             </p>
-               
-                
+
+
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn13') }}</button>
 
 
 
+=======
+>>>>>>> fd59059aec062d4ee57b1eae85c9a851178da681
 
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn1') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn2') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn3') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn5') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn6') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn7') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn9') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn10') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn11') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn12') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn13') }}</button>
             </p>
             </div>
               </div>

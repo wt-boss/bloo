@@ -212,8 +212,8 @@
                         <div class="card-body">
                             <div class="row">
                               <div class="col-12 col-sm-6">
-                                <select id="myselect" class="selectpicker" data-live-search="true" cslass="browser-default" disabled>
-                                    <option value="" disabled="disabled">Choose Tagging</option>
+                                <select id="myselect" class="selectpicker" onchange="deleteOption()" data-live-search="true" >
+                                    <option ></option>
                                     <option value="java">Java</option>
                                     <option value="php">PHP</option>
                                     <option value="python">Python</option>
@@ -276,15 +276,25 @@
         //$(this .option:selected)
       // var test= $(this).children('option[value='+selectedOption+']');
       // console.log(test);
-        $(this).children('option[value='+selectedOption+']').hide();
+      var x=document.getElementById('myselect');
+      var x=$('#myselect').siblings('.')
+x.remove(x.selectedIndex);
+       // $(this).children('option[value='+selectedOption+']').hide();
+
         $('.closeSelect').on('click',function(e){
             e.preventDefault();
            // alert('hello');
-            $(this).parent('div').parents('.card-primary').hide();
+            $(this).parent('div').parents('.card-primary').toggle();
+          var title=  $('.selectValue').children('div').last().children('div').children('h3').text();
+          var html='<option value='+title+'>'+title+'</option>';
+          $('#myselect').append(html);
+
         });
     });
 
+function deleteOption(){
 
+}
     $(function () {
       //Initialize Select2 Elements
       $('.select2').select2()

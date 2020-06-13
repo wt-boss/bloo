@@ -18,14 +18,37 @@
 </div>
 
 <section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-12 text-center heading-section ftco-animate">
-                <span class="subheading">{{trans('free_header0')}}</span>
-                <h2 class="mb-4 text-justify">{{trans('free_header')}}</h2>
 
-            </div>
-        </div>
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-5">
+                <div class="col-md-12 text-center heading-section ftco-animate">
+                    <span class="subheading">{{trans('free_header0')}}</span>
+                    <h2 class="mb-4 text-justify">{{trans('free_header')}}</h2>
+
+
+                  <div class="col-md-12 align-items-center ftco-animate">
+
+                    <div class="tab-content ftco-animate" id="v-pills-tabContent">
+
+                      <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                          <div class="d-md-flex">
+                            <div class="one-half ml-md-5 align-self-center">
+                                <p>
+                                Rejoignez les centaines d’entreprises et de particuliers qui font confiance à Bloonline pour bénéficier de données instantanées à visage humain.
+                              </p>
+                              </div>
+                              <div class="one-half ml-md-5 align-self-center">
+                                <p>
+                                    Rejoignez les centaines d’entreprises et de particuliers qui font confiance à Bloonline pour bénéficier de données instantanées à visage humain.
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
         <div class="row">
             <div class="col-md-12 align-items-center ftco-animate">
                 <div class="tab-content ftco-animate" id="v-pills-tabContent">
