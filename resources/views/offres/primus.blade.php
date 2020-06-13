@@ -60,7 +60,7 @@
                     <h4><span class="step">INFORMATIONS SUR L'OPERATION (ETAPE 1 / 2)</span></h4>
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="operation_name">Nom :</label>
+                            <label for="operation_name">Titre :</label>
                             <input type="text" class="form-control" id="operation_name" name="operation_name" placeholder="Entrer le nom de l'operation" required>
                         </div>
                         <div class="form-group col-6">
