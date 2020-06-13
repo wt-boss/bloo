@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
+use Illuminate\Support\Facades\Input;
 
 /** All Paypal Details class **/
 use PayPal\Api\ItemList;
@@ -172,7 +173,7 @@ class PaymentController extends Controller
         $payment_id = Session::get('paypal_payment_id');
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+        if (empty((new \Illuminate\Http\Request)->input('PayerID')) || empty((new \Illuminate\Http\Request)->input('token'))) {
             \Session::put('error', 'Payment failed');
             return Redirect::to('/');
         }
