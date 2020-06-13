@@ -1,5 +1,5 @@
 /*!
- * 
+ *
  */
 .apd, .xaf {
     font-variant: all-small-caps;
@@ -9,4 +9,8 @@
 
 .xaf {
     color : rgb(33, 125, 255);
+}
+.plus
+{
+   margin-top:-10px;
 }

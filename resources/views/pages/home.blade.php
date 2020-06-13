@@ -147,21 +147,21 @@
 
 
 
-      <section class="ftco-section">
+      <section class="ftco-section" >
           <div class="container">
               <div class="row justify-content-center mb-5 pb-5">
                   <div class="col-md-7 text-center heading-section ftco-animate">
               <span class="subheading">{{ trans('home_content_section2') }}</span>
               <h2 class="mb-4">{{ trans('home_content_section2_title') }}</h2>
               <p>{{ trans('home_content_section2_content') }}</p>
-              <p>
+              <p >
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn1') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn2') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn3') }}</button>
             </p>
 
-            <p>
+            <p class="plus">
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn5') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn6') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn7') }}</button>
@@ -169,7 +169,7 @@
             </p>
 
 
-            <p>
+            <p class="plus">
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn10') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn11') }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ trans('homme_btn12') }}</button>

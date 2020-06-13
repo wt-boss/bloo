@@ -35,10 +35,8 @@
               <li><strong>{{ trans('prix_offre_free3') }}</strong></li>
               <hr>
               <li><strong>{{ trans('prix_offre_free4') }}</strong></li>
-              <br>
-              <br>
-              <br>
-              <br>
+
+
             </ul>
 
 
@@ -70,8 +68,8 @@
                 <li><strong>{{ trans('prix_offre_prenuim6') }}</strong></li>
                 <hr>
                 <li><strong>{{ trans('prix_offre_prenuim7') }}</strong></li>
-                <br>
-                <br>
+                
+
               </ul>
               </div>
             </div>
