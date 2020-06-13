@@ -109,3 +109,5 @@ Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
 Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
 
 Route::get('devise','PaymentController@rates');
+Route::resource('operation', 'OperationController');
+

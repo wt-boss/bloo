@@ -24,9 +24,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./index.html" class="nav-link ">
-                        <i class="nav-icon fab fa-centos"></i>
-                        <p>Operations</p>
+                    <a href="{{route('operation.index')}}" class="nav-link <?php echo (  Str::startsWith($route, 'operation') ) ? "active" : '' ?>">
+                        <i class="nav-icon fas fa-poll-h"></i>
+                        <p>Opérations</p>
                     </a>
                 </li>
                 <li class="nav-item">

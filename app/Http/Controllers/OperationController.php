@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class OperationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('adminlte.users.index',compact('users'));
+
+        return view('adminlte.users.operation');
     }
 
     /**
@@ -25,7 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('adminlte.users.create');
+        //
     }
 
     /**
@@ -34,11 +33,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(User $user)
+    public function store(Request $request)
     {
-        $data = request()->all();
-        $user->create($data);
-        return redirect(route('users.index'))->withSuccess('Utilisateur créer avec sucess');
+        //
     }
 
     /**
@@ -49,8 +46,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return view('adminlte.users.show',compact('user'));
+        //
     }
 
     /**
@@ -61,8 +57,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('adminlte.users.edit',compact('user'));
+        //
     }
 
     /**
@@ -74,9 +69,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        return redirect()->route('users.index')->withSuccess('Modification Effectuée');
+        //
     }
 
     /**
@@ -87,8 +80,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::destroy($id);
-        return back()->withSuccess(trans('Utilisateurs suprimé avec success'));
+        //
     }
-
 }
