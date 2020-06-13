@@ -195,6 +195,7 @@
       </section>
 
       <section class="ftco-section-parallax">
+          {{-- ggggggggg --}}
         <div class="parallax-img d-flex align-items-center">
           <div class="container">
             <div class="row d-flex justify-content-center">
