@@ -52,4 +52,14 @@
 .form-check-input {
     margin-top: 0.5rem !important;
 }
-/* Login page */
+#font{
+    font-size: 14px;
+    margin-top: -11px;
+margin-bottom: 0.5rem;
+color: rgb(0, 0, 0);
+
+}
+#font h2{
+    font-size: 21px;
+    color: #000;
+}

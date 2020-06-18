@@ -2,291 +2,142 @@
 
 @section('content')
 
+<!-- <div class="js-fullheight"> -->
+    <div class="hero-wrap">
+      <div class="overlay"></div>
+      <div class="circle-bg"></div>
+      <div class="circle-bg-2"></div>
+      <div class="container-fluid">
+        <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ trans('footer_privacy') }}</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('footer_privacy') }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<section class="ftco-section ftco-degree-bg">
+    <div class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+      <div class="row">
+        <div class="col-md-4 sidebar ftco-animate ">
 
-<div class="js-fullheight">
-        <div class="hero-wrap">
-          <div class="overlay"></div>
-          <div class="circle-bg"></div>
-          <div class="circle-bg-2"></div>
-          <div class="container-fluid">
-            <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-              <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ trans('footer_privacy') }}</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('footer_privacy') }}</h1>
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>{{ trans('footer_privacy') }}</h3>
+                <li ><a href="#1" >{{ trans('politique_quide2') }} </a></li>
+                <li><a href="#2">{{ trans('politique_quide3') }} </a></li>
+                <li><a href="#3">{{ trans('politique_quide4') }} </a></li>
+                <li><a href="#4">{{ trans('politique_quide5') }} </a></li>
+                <li><a href="#5">{{ trans('politique_quide6') }} </a></li>
+                <li><a href="#6">{{ trans('politique_quide7') }} </a></li>
+                <li><a href="#7">{{ trans('politique_quide62') }} </a></li>
+                <li><a href="#8">{{ trans('politique_quide66') }} </a></li>
+                <li><a href="#9">{{ trans('politique_quide68') }} </a></li>
+                <li><a href="#10">{{ trans('guide141') }} </a></li>
+
               </div>
             </div>
           </div>
-        </div>
+        <div class="col-md-8 ftco-animate smooth-scroll list-unstyled " id="font"  >
+          <h2  class="mb-3">{{ trans('pollitique_title') }}</h2>
+          <p>{{ trans('politique_content') }}</p>
+          <p>{{ trans('politique_content1') }}</p>
+          <h2 class="mb-3 mt-5">{{ trans('politique_quide') }}</h2>
+          <p><a href="#1">{{ trans('guide1') }}</a></p>
+          <p><a href="#2"></a></p>
+          <p><a href="#3">{{ trans('guide3') }}</a></p>
+          <p><a href="#4">{{ trans('guide4') }}</a></p>
+          <p><a href="#5">{{ trans('guide5') }}</a></p>
+          <p><a href="#6">{{ trans('guide6') }}</a></p>
+          <p><a href="#7">{{ trans('guide7') }}</a></p>
+          <p><a href="#8">{{ trans('guide8') }}</a></p>
+          <p><a href="#9">{{ trans('guide9') }}</a></p>
+          <p><a href="#10">{{ trans('guide10') }}</a></p>
+          <p><a href=""></a>   {{ trans('guide') }}</p>
 
+          <h2 id="1" class="mb-3 mt-5">{{ trans('politique_quide2') }}</h2>
+          <p>{{ trans('guide12') }}</p>
+          <p>{{ trans('guide13') }}</p>
+          <p>{{ trans('quide14') }}</p>
+          <p>{{ trans('quide15') }}</p>
+          <p>{{ trans('quide16') }}</p>
+          <p>{{ trans('guide17') }}</p>
 
-        <section class="ftco-section bg-light">
-            <div class="container">
-                <div class="row justify-content-center mb-5">
-              <div class="col-md-7 text-center heading-section ftco-animate">
-                <span class="subheading">{{ trans('pollitique_title') }}</span>
-                <h2 class="mb-4"> {{ trans('') }}</h2>
-                    <p>{{ trans('politique_content') }}</p>
-                    <p>{{ trans('politique_content1') }}</p>
-              </div>
-            </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="accordion">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('politique_quide') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menuone" class="collapse show">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide1') }}</p>
-                                          <p>{{ trans('guide2') }}</p>
-                                          <p>{{ trans('guide3') }}</p>
-                                           <p>{{ trans('guide4') }}</p>
-                                           <p>{{ trans('guide6') }}</p>
-                                           <p>{{ trans('guide7') }}</p>
-                                           <p>{{ trans('guide8') }}</p>
-                                           <p>{{ trans('guide9') }}</p>
-                                           <p>{{ trans('guide10') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
+          <h2 id="2" class="mb-3 mt-5">{{ trans('politique_quide3') }}</h2>
+          <p>{{ trans('guide21') }}</p>
+          <p>{{ trans('guide22') }}</p>
 
-                                  <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menutwo" aria-expanded="false" aria-controls="menutwo">{{ trans('politique_quide2') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menutwo" class="collapse">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide12') }}</p>
-                                          <p>{{ trans('guide13') }}</p>
-                                          <p>{{ trans('quide14') }}</p>
-                                          <p>{{ trans('quide15') }}</p>
-                                          <p>{{ trans('quide16') }}</p>
-                                          <p>{{ trans('guide17') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
+          <h2 id="3" class="mb-3 mt-5">{{ trans('politique_quide4') }}</h2>
+          <p>{{ trans('guide31') }}</p>
+          <p>{{ trans('guide32') }}</p>
 
-                                  <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menu3" aria-expanded="false" aria-controls="menu3">{{ trans('politique_quide3') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menu3" class="collapse">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide21') }}</p>
-                                          <p>{{ trans('guide22') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+          <h2 id="" class="mb-3 mt-5">{{ trans('politique_quide5') }}</h2>
+          <p>{{ trans('guide33') }}</p>
+          <p>{{ trans('guide34') }}</p>
+          <p>{{ trans('guide35') }}</p>
+          <p>{{ trans('guide36') }}</p>
 
-                                <div class="col-md-6">
-                                    <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menu4" aria-expanded="false" aria-controls="menu4">{{ trans('politique_quide5') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menu4" class="collapse">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide33') }}</p>
-                                          <p>{{ trans('guide34') }}</p>
-                                          <p>{{ trans('guide35') }}</p>
-                                          <p>{{ trans('guide36') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
+          <h2 id="4" class="mb-3 mt-5">{{ trans('politique_quide6') }}</h2>
+          <p>{{ trans('guide41') }}</p>
+          <p>{{ trans('guide42') }}</p>
+          <p>{{ trans('guide43') }}</p>
 
-                                  <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menu5" aria-expanded="false" aria-controls="menu5">{{ trans('politique_quide6') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menu5" class="collapse">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide41') }}</p>
-                                          <p>{{ trans('guide42') }}</p>
-                                          <p>{{ trans('guide43') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
+          <h2 id="5" class="mb-3 mt-5">{{ trans('politique_quide7') }}</h2>
+          <p>{{ trans('guide51') }}</p>
+          <p>{{ trans('guide52') }}</p>
+          <p>{{ trans('guide54') }}</p>
+          <p>{{ trans('guide55') }}</p>
 
-                                  <div class="card">
-                                    <div class="card-header">
-                                              <a class="card-link" data-toggle="collapse"  href="#menu6" aria-expanded="false" aria-controls="menu6">{{ trans('politique_quide7') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                    </div>
-                                    <div id="menu6" class="collapse">
-                                      <div class="card-body">
-                                          <p>{{ trans('guide51') }}</p>
-                                          <p>{{ trans('guide52') }}</p>
-                                          <p>{{ trans('guide54') }}</p>
-                                          <p>{{ trans('guide55') }}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
+          <h2 class="mb-3 mt-5">{{ trans('politique_quide8') }}</h2>
+          <p>{{ trans('guiuide61') }}</p>
 
-                        <br><br>
+          <h2 id="6" class="mb-3 mt-5">{{ trans('politique_quide62') }}</h2>
+          <p>{{ trans('politique_quide63') }}</p>
+          <p>{{ trans('politique_quide64') }}</p>
+          <p>{{ trans('politique_quide63') }}</p>
 
-                </div>
+          <h2 id="7" class="mb-3 mt-5">{{ trans('politique_quide66') }}</h2>
+          <p>{{ trans('politique_quide67') }}</p>
 
+          <h2 id="8" class="mb-3 mt-5">{{ trans('politique_quide68') }}</h2>
+          <p>{{ trans('politique_quide69') }}</p>
 
-                <div class="row">
-                    <div class="col-md-4 ftco-animate">
-                      <div class="blog-entry">
-                        <div class="text p-4 d-block">
-                            <p>{{ trans('politique_quide8') }}</p>
-                            <p>{{ trans('guiuide61') }}</p>
-                            <p>{{ trans('politique_quide62') }}</p>
-                           <br>
-                           <br>
-                           <br>
-                           <br>
-                           <br>
+          <h2 class="mb-3 mt-5">{{ trans('politique_guide9') }}</h2>
+          <p>{{ trans('politique_guide') }}</p>
+          <p>{{ trans('guide91') }}</p>
+          <p>{{ trans('guide92') }}</p>
+          <p>{{ trans('guide93') }}</p>
+          <p>{{ trans('guide94') }}</p>
+          <p>{{ trans('guide95') }}</p>
+          <p>{{ trans('guide96') }}</p>
+          <p>{{ trans('guide97') }}</p>
+          <p>{{ trans('guide98') }}</p>
+          <p>{{ trans('guide99') }}</p>
+          <p>{{ trans('guide11') }}</p>
 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                      <div class="blog-entry" data-aos-delay="100">
+          <h2 id="9" class="mb-3 mt-5">{{ trans('guide141') }}</h2>
+          <p>{{ trans('politique_guide') }}</p>
+          <p>{{ trans('guide14') }}</p>
 
-                        <div class="text p-4">
-                            <p>{{ trans('politique_quide63') }}</p>
-                            <p>{{ trans('politique_quide64') }}</p>
-                            <p>{{ trans('politique_quide65') }}</p>
-                            <p>{{ trans('politique_quide66') }}</p>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
+          <h2 id="10" class="mb-3 mt-5">{{ trans('guide142') }}</h2>
+          <p>{{ trans('guide143') }}</p>
+          <p>{{ trans('guide144') }}</p>
 
 
 
 
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
-
-                          <div class="text p-4">
-                              <p>{{ trans('politique_quide67') }}</p>
-                              <p>{{ trans('politique_quide68') }}</p>
-                              <p>{{ trans('politique_quide69') }}</p>
-
-
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
-
-                          <div class="text p-4">
-                              <p>{{ trans('politique_guide9') }}</p>
-                              <p>{{ trans('politique_guide') }}</p>
-                              <p>{{ trans('guide91') }}</p>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
-
-                          <div class="text p-4">
-                              <p>{{ trans('guide92') }}</p>
-                              <p>{{ trans('guide93') }}</p>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-
-
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
-
-                          <div class="text p-4">
-                              <p>{{ trans('guide94') }}</p>
-                              <p>{{ trans('guide95') }}</p>
-                              <p>{{ trans('') }}</p>
-
-                          </div>
-                        </div>
-                      </div>
+          </div>
 
 
 
-                      <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
 
-                          <div class="text p-4">
-                              <p>{{ trans('guide96') }}</p>
-                              <p>{{ trans('guide97') }}</p>
-                              <p>{{ trans('') }}</p>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-
-                          </div>
-                        </div>
-                      </div>
+        </div> <!-- .col-md-8 -->
 
 
-
-                    <div class="col-md-4 ftco-animate">
-                      <div class="blog-entry" data-aos-delay="200">
-
-                        <div class="text p-4">
-                            <p>{{ trans('guide98') }}</p>
-                              <p>{{ trans('guide99') }}</p>
-                              <p>{{ trans('') }}</p>
-
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="200">
-
-                          <div class="text p-4">
-                              <p>{{ trans('guide11') }}</p>
-                                <p>{{ trans('guide14') }}</p>
-
-
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-            </div>
-        </section
-     </div>
+      </div>
+    </div>
+  </section> <!-- .section -->
 
 
 

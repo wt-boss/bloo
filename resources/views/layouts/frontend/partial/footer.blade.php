@@ -27,8 +27,8 @@
             <ul class="list-unstyled">
                 <li><a href="{{ route('apropos') }}" class="py-2 d-block">{{ trans('footer_apropos')}}</a></li>
                 <li><a href="{{ route('carriere') }}" class="py-2 d-block">{{ trans('footer_career')}}</a></li>
-                <li><a href="{{ route('intimite') }}" class="py-2 d-block">{{ trans('footer_privacy')}}</a></li>
-                <li><a href="{{ route('tc') }}" class="py-2 d-block">{{ trans('footer_tc')}}</a></li>
+                <li><a href="{{ route('Politique_de_confidentialité') }}" class="py-2 d-block">{{ trans('footer_privacy')}}</a></li>
+                <li><a href="{{ route('Termes_&_Conditions') }}" class="py-2 d-block">{{ trans('footer_tc')}}</a></li>
             </ul>
           </div>
         </div>

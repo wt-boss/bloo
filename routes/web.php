@@ -78,8 +78,8 @@ Route::group(['middleware'=>['web']],function(){
     // footer
     Route::get('apropos', 'PagesController@getApropos')->name('apropos');
     Route::get('carriere', 'PagesController@getCarriere')->name('carriere');
-    Route::get('intimite', 'PagesController@getIntimite')->name('intimite');
-    Route::get('tc', 'PagesController@getTc')->name('tc');
+    Route::get('Politique_de_confidentialité', 'PagesController@getIntimite')->name('Politique_de_confidentialité');
+    Route::get('Termes_&_Conditions', 'PagesController@getTc')->name('Termes_&_Conditions');
 
     //contact
     Route::get('/contact', [

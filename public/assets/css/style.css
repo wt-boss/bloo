@@ -7740,10 +7740,10 @@ h1, h2, h3, h4, h5,
   .table th {
     font-weight: 500; }
   .table .thead-primary {
-    background: #22d47b !important; }
+    background: #c8c8c8   !important; }
     .table .thead-primary tr th {
       padding: 30px 10px;
-      color: #fff !important;
+      color: #000  !important;
       border: 1px solid transparent !important; }
   .table tbody tr td {
     padding: 20px 10px !important;

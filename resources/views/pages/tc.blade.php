@@ -19,161 +19,77 @@
         </div>
 
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5 pb-5">
-    			<div class="col-md-7 text-center heading-section ftco-animate">
-            <span class="subheading">{{ trans('t&c') }}</span>
-            <p class="mb-4"> {{ trans('title_t&c') }}</p>
-          </div>
-    		</div>
-    		<div class="row">
-          <div class="col-md-12 nav-link-wrap mb-5 pb-md-5 pb-sm-1 ftco-animate">
-            <div class="nav ftco-animate nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a class="nav-link active" id="v-pills-nextgen-tab" data-toggle="pill" href="#v-pills-nextgen" role="tab" aria-controls="v-pills-nextgen" aria-selected="true">{{ trans('title1_t&c') }}</a>
+        <section class="ftco-section ftco-degree-bg">
+            <div class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+              <div class="row">
+                <div class="col-md-4 sidebar ftco-animate ">
 
-              <a class="nav-link" id="v-pills-performance-tab" data-toggle="pill" href="#v-pills-performance" role="tab" aria-controls="v-pills-performance" aria-selected="false">{{ trans('title2_t&d') }}</a>
-
-              <a class="nav-link" id="v-pills-effect-tab" data-toggle="pill" href="#v-pills-effect" role="tab" aria-controls="v-pills-effect" aria-selected="false">{{ trans('title3_t&c') }}</a>
-            </div>
-          </div>
-          <div class="col-md-12 align-items-center ftco-animate">
-
-            <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-              <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-              	<div class="d-md-flex">
-	              	<div class="one-forth align-self-center">
-	              		<img src="{{ asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
-	              	</div>
-	              	<div class="one-half ml-md-5 align-self-center">
-		                <h2 class="mb-4">{{ trans('title1_t&c') }}</h2>
-		              	<p>{{ trans('content') }}</p>
-		              </div>
-	              </div>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-performance" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                <div class="d-md-flex">
-	              	<div class="one-forth order-last align-self-center">
-	              		<img src="{{ asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
-	              	</div>
-	              	<div class="one-half order-first mr-md-5 align-self-center">
-		                <h2 class="mb-4">{{ trans('title2_t&d') }}</h2>
-		              	<p>{{ trans('content2') }}</p>
-                        <p>{{ trans('content2.1') }}</p>
-		              </div>
-	              </div>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-effect" role="tabpanel" aria-labelledby="v-pills-effect-tab">
-                <div class="d-md-flex">
-	              	<div class="one-forth align-self-center">
-	              		<img src="{{ asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
-	              	</div>
-	              	<div class="one-half ml-md-5 align-self-center">
-		                <h2 class="mb-4">{{ trans('title3_t&c') }}</h2>
-                          <p>{{ trans('content3') }}</p>
-                          <p>{{ trans('content3.1') }}</p>
-
-		              </div>
-	              </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <br> <br>
-        <hr>
-        <br>
-        <div class="row">
-            <div class="col-md-12 ftco-animate">
-                <div id="accordion">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                            <div class="card-header">
-                                      <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('title04_t&c') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                            </div>
-                            <div id="menuone" class="collapse show">
-                              <div class="card-body">
-                                    <p>{{ trans('content04') }}</p>
-                                    <p>{{ trans('content41') }}</p>
-                                   <p>{{ trans('content42') }}</p>
-                                    <p>{{ trans('content43') }}</p>
-                                    <p>{{ trans('content44') }}</p>
-                                 <p>{{ trans('content45') }}</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="card">
-                            <div class="card-header">
-                                      <a class="card-link" data-toggle="collapse"  href="#menutwo" aria-expanded="false" aria-controls="menutwo">{{ trans('title4_t&c') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                            </div>
-                            <div id="menutwo" class="collapse">
-                              <div class="card-body">
-                                <p>{{ trans('content4') }}</p>
-                                <p>{{ trans('content4.1') }}</p>
-                                <p>{{ trans('conten4.2') }}</p>
-                                <p>{{ trans('conten4.3') }}</p>
-                                 <p>{{ trans('conten4.4') }}</p>
-                                 <p>{{ trans('conten4.5') }}</p>
-                                 <p>{{ trans('conten4.6') }}</p>
-
-                            </div>
-                            </div>
-                          </div>
-
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="card">
-                            <div class="card-header">
-                                      <a class="card-link" data-toggle="collapse"  href="#menu4" aria-expanded="false" aria-controls="menu4">{{ trans('title5_t&c') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                            </div>
-                            <div id="menu4" class="collapse">
-                              <div class="card-body">
-                                    p> {{ trans('content5') }}</p>
-                                    p> {{ trans('content51') }}</p>
-                               </div>
-                            </div>
-                          </div>
-
-                          <div class="card">
-                                <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse"  href="#menu5" aria-expanded="false" aria-controls="menu5">{{ trans('title6_t&c') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                                </div>
-                                <div id="menu5" class="collapse">
-                                    <div class="card-body">
-                                                    <p>{{ trans('content6') }}</p>
-                                                    <p>{{ trans('content61') }}</p>
-                                    </div>
-                                </div>
-                          </div>
-                          <div class="card">
-                            <div class="card-header">
-                                      <a class="card-link" data-toggle="collapse"  href="#menu6" aria-expanded="false" aria-controls="menu6">{{ trans('title7_t&c') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-                            </div>
-                            <div id="menu6" class="collapse">
-                              <div class="card-body">
-                                <p>{{ trans('content7') }}</p>
-                            </div>
-                                </div>
-                            </div>
-                          </div>
-
-
-
-
-                        </div>
+                    <div class="sidebar-box ftco-animate">
+                      <div class="categories">
+                        <h3>{{ trans('t&c') }}</h3>
+                        <li ><a href="#1" >{{ trans('title1_t&c') }} </a></li>
+                        <li><a href="#2">{{ trans('title2_t&d') }} </a></li>
+                        <li><a href="#3">{{ trans('title3_t&c') }} </a></li>
+                        <li><a href="#4">{{ trans('title04_t&c') }} </a></li>
+                        <li><a href="#5">{{ trans('title4_t&c') }} </a></li>
+                        <li><a href="#5">{{ trans('title5_t&c') }} </a></li>
+                        <li><a href="#6">{{ trans('title6_t&c') }} </a></li>
+                        <li><a href="#7">{{ trans('title7_t&c') }} </a></li>
+                      </div>
                     </div>
-                </div>
+                  </div>
+                <div class="col-md-8 ftco-animate smooth-scroll list-unstyled " id="font"  >
+                  <h2 id="1" class="mb-3 mt-5">{{ trans('t&c') }}</h2>
+                  <p>{{ trans('title_t&c') }}</p>
+
+                  <h2 id="2" class="mb-3 mt-5">{{ trans('title1_t&c') }}</h2>
+                  <p>{{ trans('content') }}</p>
+
+                  <h2 id="3" class="mb-3 mt-5">{{ trans('title1_t&c') }}</h2>
+                  <p>{{ trans('content') }}</p>
+
+
+                  <h2 id="4" class="mb-3 mt-5">{{ trans('title2_t&d') }}</h2>
+                  <p>{{ trans('content2') }}</p>
+                  <p>{{ trans('content2.1') }}</p>
+
+                  <h2 id="5" class="mb-3 mt-5">{{ trans('title3_t&c') }}</h2>
+                  <p>{{ trans('content3') }}</p>
+                  <p>{{ trans('content3.1') }}</p>
+
+                  <h2 id="6" class="mb-3 mt-5">{{ trans('title04_t&c') }}</h2>
+                  <p>{{ trans('content04') }}</p>
+                  <p>{{ trans('content41') }}</p>
+                  <p>{{ trans('content42') }}</p>
+                  <p>{{ trans('content43') }}</p>
+                  <p>{{ trans('content44') }}</p>
+                  <p>{{ trans('content45') }}</p>
+
+                  <h2 id="7" class="mb-3 mt-5">{{ trans('title4_t&c') }}</h2>
+                  <p>{{ trans('content4') }}</p>
+                  <p>{{ trans('content4.1') }}</p>
+                  <p>{{ trans('conten4.2') }}</p>
+                  <p>{{ trans('conten4.3') }}</p>
+                  <p>{{ trans('conten4.4') }}</p>
+                  <p>{{ trans('conten4.5') }}</p>
+                  <p>{{ trans('conten4.6') }}</p>
+
+                  <h2 id="8" class="mb-3 mt-5">{{ trans('title5_t&c') }}</h2>
+                  <p>{{ trans('content5') }}</p>
+                  <p>{{ trans('content51') }}</p>
+
+
+                  <h2 id="8" class="mb-3 mt-5">{{ trans('title6_t&c') }}</h2>
+                  <p>{{ trans('content6') }}</p>
+                  <p>{{ trans('content61') }}</p>
+
+
+                  <h2 class="mb-3 mt-5">{{ trans('title7_t&c') }}</h2>
+                  <p>{{ trans('content7') }}</p>
+                  </div>
+                </div> <!-- .col-md-8 -->
+              </div>
             </div>
-        </div>
-    	</div>
-    </section>
+          </section> <!-- .section -->
 
 @endsection
