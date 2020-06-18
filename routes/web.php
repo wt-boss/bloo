@@ -30,34 +30,9 @@ Route::resource('users','UsersController');
 
 //Questionnaire get
 
-Route::get('/home2', 'HomeController@index2')->name('home2');
-Route::get('/take_survey/{slug}', 'QuestionnaireController@view')->name('take_survey');
-Route::get('/stat_survey', 'HomeController@index')->name('stat_survey');
-Route::get('/questionnaire/create','QuestionnaireController@create')->name('questionnaire.create');
-Route::get('/questionnaire/{slug}/edit','QuestionnaireController@edit')->name('questionnaire.edit');
-Route::get('/questionnaire/{questionnaire}','QuestionnaireController@show')->name('questionnaire.show');
-Route::get('/questionnaire/stats/{questionnaire}','QuestionnaireController@stats')->name('questionnaire.stat');
 Route::get('/questionnaire/create/free','QuestionnaireController@free')->name('questionnaire.free');
-Route::get('/questionnaire/view/free','QuestionnaireController@login_free')->name('questionnaire.login_free');
-Route::get('/questionnaire/create/validate/{slug}','QuestionnaireController@show_free');
-Route::get('/questionnaire/create/validate/confirm/{slug}','QuestionnaireController@confirm')->name('questionnaire.confirm');
-Route::get('/questionnaires/{questionnaire}/answer','QuestionController@answer_destroy');
 Route::get('/admin', 'HomeController@admin')->name('admin');
 
-//Questionnaire post
-
-Route::post('/questionnaire','QuestionnaireController@store')->name('questionnaire.store');
-Route::post('/questionnaire/update/{questionnaire}','QuestionnaireController@update')->name('questionnaire.update');
-Route::post('/questionnaire/view_free','QuestionnaireController@identify_free')->name('questionnaire.identify_free');
-Route::post('/questionnaire/create','QuestionnaireController@store_free')->name('questionnaire.store_free');
-Route::post('/questionnaire/create/validate/{slug}','QuestionnaireController@valid')->name('questionnaire.validate_free');
-Route::post('/question/{questionnaire}','QuestionController@store')->name('question.store');
-Route::post('/surveys/{questionnaire}-{slug}','surveyController@store');
-Route::post('/log','QuestionController@test');
-
-Route::match(['post','get'],'/questionnaire/create/active/{questionnaire}','QuestionnaireController@active')->name('questionnaire.active');
-Route::delete('/questionnaire/{questionnaire}','QuestionnaireController@destroy')->name('questionnaire.destroy');
-Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionController@destroy')->name('question.destroy');
 
 //language
 Route::get('language', 'PagesController@language')->name('language');

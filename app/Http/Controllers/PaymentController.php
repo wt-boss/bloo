@@ -50,11 +50,18 @@ class PaymentController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function rates(){
         $response = Currency::getRates();
         return response()->json($response);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function payWithpaypal(Request $request)
     {
         $donées = $request->except('_token');
@@ -167,6 +174,9 @@ class PaymentController extends Controller
         return Redirect::to('/');
     }
 
+    /**
+     * @return mixed
+     */
     public function getPaymentStatus()
     {
         /** Get the payment ID before session clear **/

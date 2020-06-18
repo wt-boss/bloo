@@ -9,16 +9,28 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    /**
+     * ProfileController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Go to profile page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('profile');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {
         $request->validate([

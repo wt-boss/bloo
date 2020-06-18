@@ -12,22 +12,13 @@ use App\Http\Requests\ContactRequest;
 
 class ContactsController extends Controller
 {
+    /**
+     * Show the create view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
-    return view('pages.contact');
+        return view('pages.contact');
     }
 
-
-
-    public function store(ContactRequest $request)
-    {
-
-        $message = Message::create($request->only('name','email', 'subject', 'message'));
-
-        Mail::to(config('krada.admin_support_email'))
-        ->send(new ContactMessageCreated($message));
-        session::flash('success','Nous vous Répondrons Dans Les Plus Brefs Delais!');
-        return redirect()->route('home');
-
-    }
 }

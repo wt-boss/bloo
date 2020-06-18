@@ -26,12 +26,6 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index2()
-    {
-
-        $questionnaires = auth()->user()->questionnaires;
-        return view('home2',compact('questionnaires'));
-    }
     public function index()
     {
         $users = User::count();
@@ -42,11 +36,21 @@ class HomeController extends Controller
         ];
         return view('home', compact('widget'));
     }
+
+    /**
+     * Show the admin dashbord
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function admin()
     {
         $user = auth()->user();
         return view('adminlte.home',compact('user'));
     }
+
+    /**
+     * Change the language of the application
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function language()
 	{
 		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
