@@ -30,8 +30,8 @@ Route::resource('users','UsersController');
 
 //Questionnaire get
 
-Route::get('/questionnaire/create/free','QuestionnaireController@free')->name('questionnaire.free');
-Route::get('/admin', 'HomeController@admin')->name('admin');
+Route::get('/questionnaire/create/free','HomeController@free')->name('questionnaire.free');
+Route::get('/adminlte', 'HomeController@admin')->name('admin');
 
 
 //language
@@ -46,7 +46,7 @@ Route::get('/about', function () {
 Route::group(['middleware'=>['web']],function(){
     Route::get('/','PagesController@getHome')->name('home');
     Route::get('services', 'PagesController@getServices')->name('services');
-    Route::get('sondages', 'QuestionnaireController@free')->name('sondages');
+    Route::get('sondages', 'HomeController@free')->name('sondages');
     //Route::get('sondages', 'PagesController@getSondage')->name('sondages');
     Route::get('prix', 'PagesController@getPrix')->name('prix');
 
@@ -73,8 +73,8 @@ Route::group(['middleware'=>['web']],function(){
 });
 
 // offres
-Route::get('/offres/primus','SurveyController@primus')->name('primus');
-Route::get('/offres/illimité','SurveyController@illimité')->name('illimité');
+Route::get('/offres/primus','HomeController@primus')->name('primus');
+Route::get('/offres/illimité','HomeController@illimité')->name('illimité');
 
 //paypal
 
