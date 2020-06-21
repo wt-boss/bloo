@@ -1,32 +1,73 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ app()->getLocale() }}">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') - {{ config('app.name') }}</title>
 
-    <!-- Fonts -->
-    <link href="{{ asset('vendor/fontawesome/css/all.min.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
+    <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+    @yield('plugin-css')
+    <!-- /global stylesheets -->
 </head>
-<body class="bg-gradient-primary min-vh-100 d-flex justify-content-center align-items-center">
 
-@yield('main-content')
+@php
+    $page_container = $classes['page_container'] ?? '';
+    $should_remove_footer = $remove_footer ?? false;
+@endphp
 
-<!-- Scripts -->
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+<body class="login-container">
+
+    <div class="{{ !empty($page_container) ? $page_container : 'page-container' }}">
+
+        <div class="page-content">
+
+            <div class="content-wrapper">
+
+                <div class="content pb-20">
+
+                    @yield('content')
+
+                    <!-- Footer -->
+                    @if (!$should_remove_footer)
+                        @include('partials.footer')
+                    @endif
+                    <!-- /footer -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Core JS files -->
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    @yield('plugin-scripts')
+    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <!-- /theme JS files -->
+
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
+    @yield('page-script')
 </body>
 </html>

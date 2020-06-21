@@ -20,7 +20,7 @@ class FormController extends Controller
             $query->where('form_collaborators.user_id', $current_user->id);
         })->latest()->get();
 
-        return view('form.forms.form.index', compact('forms', 'current_user'));
+        return view('forms.form.index', compact('forms', 'current_user'));
     }
 
     public function create()
@@ -40,7 +40,7 @@ class FormController extends Controller
             return redirect()->route('forms.index');
         }
 
-        return view('form.forms.form.create');
+        return view('forms.form.create');
     }
 
     public function store(Request $request)
@@ -57,7 +57,7 @@ class FormController extends Controller
 
         $this->validate($request, [
             'title' => 'required|string|min:3|max:190',
-            'description' => 'required|string|max:30000'
+            'description' => 'required|string|min_words:3|max:30000'
         ]);
 
         $form = new Form([
@@ -69,7 +69,7 @@ class FormController extends Controller
         $form->generateCode();
         $current_user->forms()->save($form);
 
-        return redirect()->route('form.forms.show', $form->code);
+        return redirect()->route('forms.show', $form->code);
     }
 
     public function show(Form $form)
@@ -80,7 +80,7 @@ class FormController extends Controller
 
         $form->load('fields', 'collaborationUsers', 'availability');
 
-        return view('form.forms.form.show', compact('form'));
+        return view('forms.form.show', compact('form'));
     }
 
     public function edit(Form $form)
@@ -89,7 +89,7 @@ class FormController extends Controller
         $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
         abort_if($not_allowed, 404);
 
-        return view('form.forms.form.edit', compact('form'));
+        return view('forms.form.edit', compact('form'));
     }
 
     public function update(Request $request, Form $form)
@@ -100,14 +100,14 @@ class FormController extends Controller
 
         $this->validate($request, [
             'title' => 'required|string|min:3|max:190',
-            'description' => 'required|string|max:30000'
+            'description' => 'required|string|min_words:3|max:30000'
         ]);
 
         $form->title = $request->title;
         $form->description = $request->description;
         $form->save();
 
-        return redirect()->route('form.forms.show', $form->code);
+        return redirect()->route('forms.show', $form->code);
     }
 
     public function draftForm(Request $request, $form)
@@ -224,7 +224,7 @@ class FormController extends Controller
         $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
         abort_if($not_allowed, 404);
 
-        return view('form.forms.form.view_form', ['form' => $form, 'view_type' => 'preview']);
+        return view('forms.form.view_form', ['form' => $form, 'view_type' => 'preview']);
     }
 
     public function openFormForResponse(Form $form)
@@ -244,7 +244,7 @@ class FormController extends Controller
             'message' => 'Your form is now open to receive responses. You can now share it with other people.',
         ]);
 
-        return redirect()->route('form.forms.show', $form->code);
+        return redirect()->route('forms.show', $form->code);
     }
 
     public function closeFormToResponse(Form $form)
@@ -264,7 +264,7 @@ class FormController extends Controller
             'message' => 'The form has been successfully closed. You can reopen it if you want to.',
         ]);
 
-        return redirect()->route('form.forms.show', $form->code);
+        return redirect()->route('forms.show', $form->code);
     }
 
     public function viewForm(Form $form)
@@ -272,7 +272,7 @@ class FormController extends Controller
         $not_allowed = !in_array($form->status, [Form::STATUS_OPEN, Form::STATUS_CLOSED]);
         abort_if($not_allowed, 404);
 
-        return view('form.forms.form.view_form', ['form' => $form, 'view_type' => 'form']);
+        return view('forms.form.view_form', ['form' => $form, 'view_type' => 'form']);
     }
 
     public function shareViaEmail(Request $request, $form)
@@ -309,7 +309,7 @@ class FormController extends Controller
                 'recipients_emails' => 'max:20',
                 'recipients_emails.*' => 'email|max:255',
                 'email_subject' => 'required|string|min:3|max:255',
-                'email_message' => 'required|string|max:30000',
+                'email_message' => 'required|string|min_words:3|max:30000',
             ]);
 
             if ($validator->fails()) {

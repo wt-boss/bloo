@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Mail;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'active', 'api_token','avatar'
+        'first_name', 'last_name', 'email', 'password', 'email_token',
     ];
 
     /**
@@ -34,57 +35,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-
-    /**
-     * Get user role name
-     *
-     * $return string
-     */
-    public function rolename()
-    {
-        return config('variables.role')[$this->attributes['role']];
-    }
-
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
     }
-/**
-* Découvrez si l'utilisateur a un rôle spécifique
-     *
-     * $return boolean
-     */
-    public function hasRole($roles)
+
+    public function sendEmailVerificationNotification()
     {
-        return in_array($this->rolename(), explode("|", $roles));
+        $message = new EmailVerificationMail($this);
+        Mail::to($this)->send($message);
     }
 
-
-    public function getAvatarAttribute($value)
+    public function hasVerifiedEmail()
     {
-        if (!$value) {
-
-            return url('/') . config('variables.avatar.public') . 'avatar0.png';
-        }
-
-        return url('/') . config('variables.avatar.public') . $value;
+        return is_null($this->email_token);
     }
-    public function setAvatarAttribute($photo)
-    {
-        $this->attributes['avatar'] = (new Http\move)->move_file($photo, 'avatar.image');
-    }
-
-
 
     public function forms()
     {
