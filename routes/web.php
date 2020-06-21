@@ -17,6 +17,13 @@ Route::get('/home', function () {
     return view('pages.home');
 });
 
+Route::resource('users','UsersController');
+
+
+Route::get('/test2', function () {
+    return view('adminlte.home');
+});
+
 Route::namespace('Form')->group(function () {
     Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view');
     Route::post('forms/{form}/responses', 'ResponseController@store')->name('forms.responses.store');
@@ -145,7 +152,7 @@ Route::delete('/questionnaires/{questionnaire}/questions/{question}','QuestionCo
 
 //language
 Route::get('language', 'PagesController@language')->name('language');
-Route::get('/profile', 'ProfileController@index')->name('profile');
+//Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::get('/about', function () {
     return view('about');

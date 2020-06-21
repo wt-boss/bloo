@@ -174,6 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\MacroServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
@@ -228,6 +230,8 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Moment' => Carbon\Carbon::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Helper' => App\Helpers\Helper::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
