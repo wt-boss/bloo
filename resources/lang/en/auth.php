@@ -13,8 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Invalid email or password',
+    'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'verification_required' => 'Your email address has not been verified. Please check your mailbox',
 ];

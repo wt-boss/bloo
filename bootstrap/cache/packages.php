@@ -1,4 +1,26 @@
 <?php return array (
+  'akibtanjim/currency-converter' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'AkibTanjim\\Currency\\CurrencyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Currency' => 'AkibTanjim\\Currency\\Facades\\CurrencyConverter',
+    ),
+  ),
+  'devmarketer/easynav' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'DevMarketer\\EasyNav\\EasyNavServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Nav' => 'DevMarketer\\EasyNav\\EasyNavFacade',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -17,11 +39,52 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'fruitcake/laravel-cors' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
+  'ixudra/curl' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Ixudra\\Curl\\CurlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Curl' => 'Ixudra\\Curl\\Facades\\Curl',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 
     array (
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
   'maatwebsite/excel' => 

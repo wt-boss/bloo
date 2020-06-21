@@ -40,6 +40,7 @@ return [
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'The :attribute must be a valid email address.',
+    'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
@@ -92,6 +93,7 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'The :attribute must be a number.',
+    'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
     'required' => 'The :attribute field is required.',
@@ -108,6 +110,7 @@ return [
         'string' => 'The :attribute must be :size characters.',
         'array' => 'The :attribute must contain :size items.',
     ],
+    'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => 'The :attribute has already been taken.',
@@ -127,146 +130,9 @@ return [
     */
 
     'custom' => [
-        //form questions
-        'short_answer.*.question' => [
-            'required' => 'Each short answer question is required',
-            'min' => 'Each short answer question must be at least :min characters',
-            'max' => 'Each short answer question must not be more than :max characters',
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
         ],
-        'long_answer.*.question' => [
-            'required' => 'Each long answer question is required',
-            'min' => 'Each long answer question must be at least :min characters',
-            'max' => 'Each long answer question must not be more than :max characters',
-        ],
-        'multiple_choices.*.question' => [
-            'required' => 'Each multiple choice question is required',
-            'min' => 'Each multiple choice question must be at least :min characters',
-            'max' => 'Each multiple choice question must not be more than :max characters',
-        ],
-        'checkboxes.*.question' => [
-            'required' => 'Each checkbox question is required',
-            'min' => 'Each checkbox question must be at least :min characters',
-            'max' => 'Each checkbox question must not be more than :max characters',
-        ],
-        'drop_down.*.question' => [
-            'required' => 'Each drop down question is required',
-            'min' => 'Each drop down question must be at least :min characters',
-            'max' => 'Each drop down question must not be more than :max characters',
-        ],
-        'linear_scale.*.question' => [
-            'required' => 'Each linear scale question is required',
-            'min' => 'Each linear scale question must be at least :min characters',
-            'max' => 'Each linear scale question must not be more than :max characters',
-        ],
-        'date.*.question' => [
-            'required' => 'Each date question is required',
-            'min' => 'Each date question must be at least :min characters',
-            'max' => 'Each date question must not be more than :max characters',
-        ],
-        'time.*.question' => [
-            'required' => 'Each time question is required',
-            'min' => 'Each time question must be at least :min characters',
-            'max' => 'Each time question must not be more than :max characters',
-        ],
-        'multiple_choices.*.options.*' => [
-            'required_with' => 'Each multiple choice question must have at least one option',
-            'string' => 'Each multiple choice question must have at least one option',
-            'min' => 'Each multiple choice question option must be at least :min characters',
-            'max' => 'Each multiple choice question option must not be more than :max characters',
-        ],
-        'checkboxes.*.options.*' => [
-            'required_with' => 'Each checkbox question must have at least one option',
-            'string' => 'Each checkbox question must have at least one option',
-            'min' => 'Each checkbox question option must be at least :min characters',
-            'max' => 'Each checkbox question option must not be more than :max characters',
-        ],
-        'drop_down.*.options.*' => [
-            'required_with' => 'Each drop down question must have at least one option',
-            'string' => 'Each drop down question must have at least one option',
-            'min' => 'Each drop down question option must be at least :min characters',
-            'max' => 'Each drop down question option must not be more than :max characters',
-        ],
-        'linear_scale.*.options.min.value' => [
-            'required_with' => 'Each linear scale question must have at least a minimum scale value',
-            'in' => 'Invalid minimum scale value'
-        ],
-        'linear_scale.*.options.min.label' => [
-            'min' => 'Each linear scale question minimum label must be at least :min characters',
-            'max' => 'Each drop down question minimum label must not be more than :max characters',
-        ],
-        'linear_scale.*.options.max.value' => [
-            'required_with' => 'Each linear scale question must have at least a maximum scale value',
-            'in' => 'Invalid maximum scale value'
-        ],
-        'linear_scale.*.options.max.label' => [
-            'min' => 'Each linear scale question maximum label must be at least :min characters',
-            'max' => 'Each drop down question maximum label must not be more than :max characters',
-        ],
-
-        'emails' => [
-            'required' => 'At least one email address is required',
-        ],
-        'recipients_emails' => [
-            'max' => 'The email addresses entered should not be more than :max'
-        ],
-        'recipients_emails.*' => [
-            'email' => 'One (or more) of the email addresses provided is not valid',
-            'max' => 'The maximum length for each email address is :max'
-        ],
-        'collaborator_emails' => [
-            'required' => 'At least one collaborator email address is required',
-            'max' => 'The email addresses entered should not be more than :max'
-        ],
-        'collaborator_emails.*' => [
-            'email' => 'One (or more) of the email addresses provided is not valid',
-            'max' => 'The maximum length for each email address is :max'
-        ],
-        'open_form_date' => [
-            'required' => 'The date for which the form is open is required',
-            'date' => 'The date for which the form is open is invalid'
-        ],
-        'open_form_time' => [
-            'required' => 'The time for which the form is open is required',
-            'date_format' => 'The time for which the form is open is invalid'
-        ],
-        'open_form_at' => [
-            'date_format' => 'The date or time for which the form is open is invalid',
-            'after' => 'The date and time for which the form is open must be after the current date and time',
-        ],
-        'close_form_date' => [
-            'required' => 'The date for which the form is closed or the response limit must be specified',
-            'date' => 'The date for which the form is closed is invalid'
-        ],
-        'close_form_time' => [
-            'required' => 'The time for which the form is open is required',
-            'date_format' => 'The time for which the form is open is invalid'
-        ],
-        'close_form_at' => [
-            'date_format' => 'The date or time for which the form is closed is invalid',
-            'after' => 'The date and time for which the form is open must be after when the form is open',
-        ],
-        'response_limit' => [
-            'required' => 'Either the date and time for which the form is closed or the response limit must be specified',
-            'min' => 'The response limit must not be less than :min',
-            'max' => 'The response limit must not be more than :max',
-        ],
-        'weekday' => [
-            'required' => 'The day of the week the form should be open is required',
-            'in' => 'The week day is invalid',
-        ],
-        'start_time' => [
-            'required' => 'The day time of the week to open the form is required',
-            'date_format' => 'The day time of the week to open the form is invalid',
-        ],
-        'end_time' => [
-            'required' => 'The day time of the week to close the form is required',
-            'date_format' => 'The day time of the week to close the form is invalid',
-            'after' => 'The day time of the week to close the form must be after the time to open the form'
-        ],
-        'closed_form_message' => [
-            'min_words' => 'The closed form message should be at least 3 words',
-            'max' => 'The closed form message should not be more than :max characters'
-        ]
     ],
 
     /*

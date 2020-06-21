@@ -1,0 +1,55 @@
+/*!
+ *
+ */
+.apd, .xaf {
+    font-variant: all-small-caps;
+    font-size: 14px;
+    color: #3a4348;
+}
+.xaf {
+    color : rgb(33, 125, 255);
+}
+
+.plus
+{
+   margin-top:-10px;
+}
+
+.bloo-home-btn {
+    margin-bottom: 10px;
+}
+.cloud-btn {
+    margin-bottom: 5px;
+}
+.sondages.ftco-section {
+    padding: 4em 0 8em 0 !important;
+}
+
+/* Edit css for under s screen size */
+@media only screen and (max-width: 767px) {
+    .text-center-global {
+        text-align: center;
+    }
+    h2.ftco-heading-2 {
+        margin-bottom: 10px !important;
+    }
+
+    .ftco-footer {
+        padding: 4em 0 !important;
+    }
+
+    /* Contact page */
+    #map {
+        display: none;
+    }
+
+    /* Login page */
+    .ftco-section.login-page {
+        padding: 6em 0 0 0;
+    }
+}
+
+.form-check-input {
+    margin-top: 0.5rem !important;
+}
+/* Login page */
