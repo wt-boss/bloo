@@ -21,7 +21,7 @@ class FormAvailabilityController extends Controller
                 return response()->json([
                     'success' => false,
                     'error_message' => 'not_found',
-                    'error' => 'Form is invalid'
+                    'error' => 'Form invalid'
                 ]);
             }
 

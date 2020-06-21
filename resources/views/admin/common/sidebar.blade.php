@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class=" <?php echo (  Str::startsWith($route, 'sondage') ) ? "active" : '' ?>">
-                <a href="{{route('users.index')}}" >
+                <a href="{{route('sondage.index')}}" >
                     <i class="nav-icon fas fa-poll-h"></i>
                     <span>Sondages</span>
                 </a>
@@ -49,6 +49,7 @@
                     <span>Messages</span>
                 </a>
             </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->

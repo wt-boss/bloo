@@ -16,14 +16,6 @@ class FieldController extends Controller
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
 
-            $current_user = Auth::user();
-            if (!$form || ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id))) {
-                return response()->json([
-                    'success' => false,
-                    'error_message' => 'validation_failed',
-                    'error' =>  'Form is invalid',
-                ]);
-            }
 
             $templates = get_form_templates();
 
@@ -66,15 +58,6 @@ class FieldController extends Controller
     {
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
-
-            $current_user = Auth::user();
-            if (!$form || ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id))) {
-                return response()->json([
-                    'success' => false,
-                    'error_message' => 'validation_failed',
-                    'error' =>  'Form is invalid',
-                ]);
-            }
 
             $field = $form->fields()->where('id', $request->form_field)->first();
 

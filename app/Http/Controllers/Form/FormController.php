@@ -43,6 +43,24 @@ class FormController extends Controller
         return view('forms.form.create');
     }
 
+    public function store_free(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|string|min:3|max:190',
+            'description' => 'required|string|max:30000'
+        ]);
+
+        $form = new Form([
+            'title' => ucfirst($request->title),
+            'description' => ucfirst($request->description),
+            'status' => Form::STATUS_DRAFT
+        ]);
+
+        $form->generateCode();
+        $form->save();
+        return view('questionnaire.validate',compact('form'));
+    }
+
     public function store(Request $request)
     {
         $current_user = Auth::user();
@@ -57,7 +75,7 @@ class FormController extends Controller
 
         $this->validate($request, [
             'title' => 'required|string|min:3|max:190',
-            'description' => 'required|string|min_words:3|max:30000'
+            'description' => 'required|string|max:30000'
         ]);
 
         $form = new Form([
@@ -79,6 +97,17 @@ class FormController extends Controller
         abort_if($not_allowed, 404);
 
         $form->load('fields', 'collaborationUsers', 'availability');
+
+        return view('forms.form.show', compact('form'));
+    }
+
+    public function show_free(Form $form)
+    {
+        $current_user = Auth::user();
+        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
+        abort_if($not_allowed, 404);
+
+        $form->load('fields', 'availability');
 
         return view('forms.form.show', compact('form'));
     }
