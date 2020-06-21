@@ -230,6 +230,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Moment' => Carbon\Carbon::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

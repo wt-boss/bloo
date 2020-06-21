@@ -2,13 +2,19 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Mail\EmailVerificationMail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes, CascadeSoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    protected $cascadeDeletes = [];
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types.
@@ -48,8 +55,12 @@ class User extends Authenticatable
         return config('variables.role')[$this->attributes['role']];
     }
 
-    /**
-     * Découvrez si l'utilisateur a un rôle spécifique
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+/**
+* Découvrez si l'utilisateur a un rôle spécifique
      *
      * $return boolean
      */
@@ -73,25 +84,21 @@ class User extends Authenticatable
         $this->attributes['avatar'] = (new Http\move)->move_file($photo, 'avatar.image');
     }
 
-    /*
-    | Relationship between models
-   */
-    public function questionnaires()
-    {
-        return $this->hasMany(Questionnaire::class);
-    }
-    public function entreprises()
-    {
-        return $this->hasMany(Entreprise::class);
-    }
-    public function paiements()
-    {
-        return $this->hasMany(Paiement::class);
-    }
-    public function operations()
-    {
-        return $this->hasMany(Paiement::class);
-    }
 
 
+    public function forms()
+    {
+        return $this->hasMany(Form::class);
+    }
+
+    public function collaboratedForms()
+    {
+        return $this->belongsToMany(Form::class, 'form_collaborators', 'user_id', 'form_id')
+            ->withTimestamps();
+    }
+
+    public function isFormCollaborator($form)
+    {
+        return !is_null($this->collaboratedForms()->find($form));
+    }
 }

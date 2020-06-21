@@ -116,7 +116,8 @@
             e.preventDefault();
             // Get form data
             var data = {
-                name: $('[name=name]').val(),
+                first_name: $('[name=first_name]').val(),
+                last_name: $('[name=last_name]').val(),
                 email: $('[name=email]').val(),
                 password: $('[name=password]').val(),
                 password_confirmation: $('[name=password_confirmation]').val(),

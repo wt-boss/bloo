@@ -15,7 +15,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('adminlte.users.index',compact('users'));
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('adminlte.users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('adminlte.users.show',compact('user'));
+        return view('admin.users.show',compact('user'));
     }
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('adminlte.users.edit',compact('user'));
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
