@@ -133,7 +133,7 @@ Route::get('/questionnaire/view/free','QuestionnaireController@login_free')->nam
 Route::get('/questionnaire/create/validate/{slug}','QuestionnaireController@show_free');
 Route::get('/questionnaire/create/validate/confirm/{slug}','QuestionnaireController@confirm')->name('questionnaire.confirm');
 Route::get('/questionnaires/{questionnaire}/answer','QuestionController@answer_destroy');
-Route::get('/admin', 'HomeController@admin')->name('admin');
+Route::get('/administration', 'HomeController@admin')->name('admin');
 
 //Questionnaire post
 
