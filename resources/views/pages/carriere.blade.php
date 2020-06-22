@@ -19,6 +19,67 @@
         </div>
 
 
+
+
+        <section class="ftco-section ftco-degree-bg">
+            <div class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+              <div class="row">
+                <div class="col-md-4 sidebar ftco-animate "  id="header">
+
+                    <div class="sidebar-box ftco-animate">
+                      <div class="categories">
+                        <h3>{{ trans('carriere') }}</h3>
+                        <li ><a href="#1" >{{ trans('Recrutement opérateur') }} </a></li>
+                        <li><a href="#2">{{ trans('Offres de stages') }} </a></li>
+                        <li><a href="#3">{{ trans('Offre d’emploi') }} </a></li>
+
+                      </div>
+                    </div>
+                  </div>
+                <div class="col-md-8 ftco-animate smooth-scroll list-unstyled " id="font" style="">
+
+                    <h2 class="mb-3 mt-5">{{ trans('carriere1') }}</h2>
+                    <p>{{ trans('carriere2') }}</p>
+                    <p>{{ trans('carriere3') }}</p>
+
+                  <h2 id="1" class="mb-3 mt-5">{{ trans('Recrutement opérateur') }}</h2>
+                  <p>{{ trans('carriere5') }}</p>
+                  <div class="row">
+                    <div class="col-9 cocustom-file">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
+                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
+                      </div>
+                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+                  </div>
+                  <br>
+
+                  <h2 id="2" class="mb-3 mt-5">{{ trans('Offres de stages') }}</h2>
+                  <p>{{ trans('Offree') }}</p>
+
+                  div class="row">
+                    <div class="col-9 cocustom-file">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
+                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
+                      </div>
+                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+                  </div>
+
+                  <h2 id="3" class="mb-3 mt-5">{{ trans('Offre d’emploi') }}</h2>
+                  <p>{{ trans('carriere6') }}</p>
+
+                  div class="row">
+                    <div class="col-9 cocustom-file">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
+                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
+                      </div>
+                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+                  </div>
+                  </div>
+                </div> <!-- .col-md-8 -->
+              </div>
+            </div>
+          </section> <!-- .section -->
+
 <br> <br>
 
 @endsection

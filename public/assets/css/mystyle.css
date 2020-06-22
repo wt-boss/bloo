@@ -47,6 +47,8 @@
     .ftco-section.login-page {
         padding: 6em 0 0 0;
     }
+
+
 }
 
 .form-check-input {
@@ -63,3 +65,17 @@ color: rgb(0, 0, 0);
     font-size: 21px;
     color: #000;
 }
+
+
+#btn-btn{
+    border-radius:  0.25rem;
+    font-size: 15px;
+    color: #fff;
+    background-color: #217dff;
+    border-color: #217dff;
+    padding: 5px 5px;
+    border: 0 none;
+    font-weight: 150;
+
+}
+

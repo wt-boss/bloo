@@ -3,8 +3,8 @@
 @section('content')
 
 
-    <!-- <div class="js-fullheight"> -->
-        <div class="hero-wrap">
+    <!-- <div class="js-fullheight id="js""  > -->
+        <div class="hero-wrap" >
           <div class="overlay"></div>
           <div class="circle-bg"></div>
           <div class="circle-bg-2"></div>
@@ -22,7 +22,7 @@
         <section class="ftco-section ftco-degree-bg">
             <div class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
               <div class="row">
-                <div class="col-md-4 sidebar ftco-animate ">
+                <div class="col-md-4 sidebar ftco-animate "  id="header">
 
                     <div class="sidebar-box ftco-animate">
                       <div class="categories">
@@ -38,7 +38,7 @@
                       </div>
                     </div>
                   </div>
-                <div class="col-md-8 ftco-animate smooth-scroll list-unstyled " id="font"  >
+                <div class="col-md-8 ftco-animate smooth-scroll list-unstyled " id="font" style="">
                   <h2 id="1" class="mb-3 mt-5">{{ trans('t&c') }}</h2>
                   <p>{{ trans('title_t&c') }}</p>
 
