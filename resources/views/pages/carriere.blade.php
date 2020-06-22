@@ -51,12 +51,10 @@
                       </div>
                       <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
                   </div>
-                  <br>
 
                   <h2 id="2" class="mb-3 mt-5">{{ trans('Offres de stages') }}</h2>
                   <p>{{ trans('Offree') }}</p>
-
-                  div class="row">
+                  <div class="row">
                     <div class="col-9 cocustom-file">
                         <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
                         <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
@@ -66,14 +64,15 @@
 
                   <h2 id="3" class="mb-3 mt-5">{{ trans('Offre d’emploi') }}</h2>
                   <p>{{ trans('carriere6') }}</p>
-
-                  div class="row">
+                  <div class="row">
                     <div class="col-9 cocustom-file">
                         <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
                         <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
                       </div>
                       <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
                   </div>
+
+
                   </div>
                 </div> <!-- .col-md-8 -->
               </div>
