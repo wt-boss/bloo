@@ -64,12 +64,50 @@
 
                   <h2 id="3" class="mb-3 mt-5">{{ trans('Offre d’emploi') }}</h2>
                   <p>{{ trans('carriere6') }}</p>
-                  <div class="row">
-                    <div class="col-9 cocustom-file">
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
-                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
+
+                  <div class="panel panel-primary">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+
+                      @if ($message = Session::get('success'))
+                      <div class="alert alert-success alert-block">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                              <strong>{{ $message }}</strong>
                       </div>
-                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+                      <img src="uploads/{{ Session::get('file') }}">
+                      @endif
+
+                      @if (count($errors) > 0)
+                          <div class="alert alert-danger">
+                              <strong>Whoops!</strong> There were some problems with your input.
+                              <ul>
+                                  @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                  @endforeach
+                              </ul>
+                          </div>
+                      @endif
+
+                      <form   action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          <div class="row">
+
+
+                              <div class="col-9 cocustom-file">
+
+                                <input id="type_offre" name="type_offre" type="hidden" value="Offre d’emploi">
+
+                                  <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
+                                  <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
+                                </div>
+                              <div class="class="col-3>
+                                  <button type="submit" id="btn-btn" class="btn-success">Envoyer votre cv</button>
+                              </div>
+                            </div>
+                          </div>
+                      </form>
+
+
                   </div>
 
 
@@ -79,6 +117,6 @@
             </div>
           </section> <!-- .section -->
 
-<br> <br>
+<br> 
 
 @endsection

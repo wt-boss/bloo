@@ -96,6 +96,9 @@ Route::group(['middleware'=>['web']],function(){
 
 
 });
+//route pour carriere
+Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
+Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
 // offres
 Route::get('/offres/primus','SurveyController@primus')->name('primus');
