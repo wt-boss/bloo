@@ -28,6 +28,8 @@
 @endphp
 
 <body class="{{ !empty($has_sticky_sidebar) ? '' : 'navbar-top' }}{{ $body_class }}">
+<div class="wrapper">
+
     <div class="navbar navbar-inverse bg-indigo{{ !empty($has_sticky_sidebar) ? '' : ' navbar-fixed-top' }}">
         <div class="navbar-header">
             <a class="navbar-brand text-semibold" href="{{ route('forms.index') }}">{{ config('app.name') }} <i class="icon-pencil7 position-right"></i></a>
@@ -71,17 +73,12 @@
 
     @include('partials.footer', ['class' => 'absolute-center-20'])
 
-    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
 
     @yield('plugin-scripts')
 
-    <script src="{{ asset('assets/js/core/app.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
     @yield('page-script')
+
+</div>
 </body>
 </html>

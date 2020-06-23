@@ -10,6 +10,8 @@ $fields = $form->fields()->filled()->get();
 
 @extends('layouts.auth')
 
+
+
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -56,6 +58,12 @@ $fields = $form->fields()->filled()->get();
     </div>
 </div>
 @endsection
+    @section('laraform_script1')
+        <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+    @endsection
 
 @if ($form->status === App\Form::STATUS_OPEN)
     @section('plugin-scripts')

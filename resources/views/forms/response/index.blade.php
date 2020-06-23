@@ -6,7 +6,19 @@
     $current_user = auth()->user();
 @endphp
 
-@extends('layouts.app')
+@extends('admin.top-nav')
+
+@section('laraform_style')
+    <!-- Laraform Link Style -->
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
+    <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+@endsection
 
 @section('plugin-css')
     @stack('styles')
@@ -55,6 +67,13 @@
 @include('forms.partials._form_availability')
 @endsection
 
+@section('laraform_script1')
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+@endsection
+
 @section('plugin-scripts')
     <script src="{{ asset('assets/js/plugins/noty.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
@@ -64,7 +83,11 @@
     <script src="{{ asset('assets/js/plugins/validation/validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/validation/additional-methods.min.js') }}"></script>
 @endsection
-
+@section('laraform_script2')
+    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
+@endsection
 @section('page-script')
     @stack('script')
 

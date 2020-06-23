@@ -9,9 +9,22 @@
     $current_user = auth()->user();
 @endphp
 
-@extends('layouts.app', $page_data)
+@extends('admin.top-nav', $page_data)
+
 
 @section('title', "My Forms | {$form->title}")
+
+@section('laraform_style')
+    <!-- Laraform Link Style -->
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
+    <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
 
@@ -100,11 +113,19 @@
 	</div>
 </div>
 
+
 @includeWhen(($form->status === $form::STATUS_OPEN), 'forms.partials._form-share')
 
 @includeWhen(($form->user_id === $current_user->id), 'forms.partials._form-collaborate')
 
 @include('forms.partials._form_availability')
+@endsection
+
+@section('laraform_script1')
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
 @endsection
 
 @section('plugin-scripts')
@@ -125,4 +146,10 @@
     <script src="{{ asset('assets/js/custom/detached-sticky.js') }}"></script>
     @include('forms.partials._script-show')
     @stack('script')
+@endsection
+
+@section('laraform_script2')
+    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
 @endsection

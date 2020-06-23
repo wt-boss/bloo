@@ -13,12 +13,16 @@
 
 Route::redirect('/', 'forms')->name('home');
 
+
 Route::get('/home', function () {
     return view('pages.home');
 });
 
+Route::get('/top', function () {
+    return view('admin.top-nav');
+});
+
 Route::resource('users','UsersController');
-Route::resource('sondage','SondageController');
 
 Route::get('/test2', function () {
     return view('adminlte.home');

@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('admin.top-nav')
 
 @section('content-header')
     <!-- Content Header (Page header) -->

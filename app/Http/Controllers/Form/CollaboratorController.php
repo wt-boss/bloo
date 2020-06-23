@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Form;
 use Auth;
 use App\Form;
 use App\User;
+use Illuminate\Support\Str;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,7 +77,7 @@ class CollaboratorController extends Controller
 
                     $user = User::create([
                         'email' => $email,
-                        'email_token' => str_random(64),
+                        'email_token' => Str::random(64),
                     ]);
                 }
 

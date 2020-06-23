@@ -61,7 +61,7 @@ class FieldController extends Controller
 
             $field = $form->fields()->where('id', $request->form_field)->first();
 
-            if (!$field || $field->form_id !== $form->id) {
+            if ($field->form_id !== $form->id) {
                 return response()->json([
                     'success' => false,
                     'error_message' => 'validation_failed',
