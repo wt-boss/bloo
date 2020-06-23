@@ -204,10 +204,14 @@
                 <p>{{ trans('home_content_section2_newleter_body') }}</p>
                 <div class="row d-flex justify-content-center mt-5">
                   <div class="col-md-6">
-                    <form action="#" class="subscribe-form">
+                    @if(session('flash'))
+                        <p>{{ session('flash') }}</p>
+                     @endif
+                    <form a action="/subscribe" method="POST" class="subscribe-form">
                       <div class="form-group">
-                        <span class="icon icon-paper-plane"></span>
-                        <input type="text" class="form-control" placeholder="{{ trans('home_content_section2_newleter_email') }}">
+                        <input type="email" class="form-control"  name="email" placeholder="{{ trans('home_content_section2_newleter_email') }}">
+                            <button type="submit" class="btn btn-link"> <span class="icon icon-paper-plane fa-5x"></span></button>
+
                       </div>
                     </form>
                   </div>
