@@ -97,8 +97,8 @@ Route::group(['middleware'=>['web']],function(){
 
 });
 //route pour carriere
-Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
-Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');
+Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit');
+Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit');
 
 // offres
 Route::get('/offres/primus','SurveyController@primus')->name('primus');
@@ -114,4 +114,6 @@ Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
 
 Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
+Route::post('subscribe', 'NewletterController@store')->name('subscribe');
+
 

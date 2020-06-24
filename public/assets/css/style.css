@@ -3043,11 +3043,11 @@ input[type="button"].btn-block {
 
 .custom-file-input {
   position: relative;
-  z-index: 2;
-  width: 100%;
-  height: calc(2.25rem + 2px);
-  margin: 0;
-  opacity: 0; }
+  z-index: 5;
+  width: 80%;
+  height: calc(1.25rem + 2px);
+  margin: 6px;
+  opacity: 0.4; }
   .custom-file-input:focus ~ .custom-file-label {
     border-color: #eaf8fd;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.25);
@@ -7742,11 +7742,11 @@ h1, h2, h3, h4, h5,
   .table .thead-primary {
     background: #c8c8c8   !important; }
     .table .thead-primary tr th {
-      padding: 30px 10px;
+        padding: 11px 23px;
       color: #000  !important;
       border: 1px solid transparent !important; }
   .table tbody tr td {
-    padding: 20px 10px !important;
+    padding: 8px 10px !important;
     color: #3a4348;
     border: 1px solid transparent !important;
     border-bottom: 1px solid #e4e7e9 !important; }

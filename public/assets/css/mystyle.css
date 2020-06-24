@@ -47,6 +47,23 @@
     .ftco-section.login-page {
         padding: 6em 0 0 0;
     }
+    
+#btn-btn{
+    margin-top: 4px;
+margin-left: -70px;
+
+   
+}
+.jt{
+    margin-left: 23px;
+    padding-left: 1px;
+    border-right-width: 0px;
+
+width: 56%;
+height: calc(1.25rem + 5px);
+
+
+}
 
 
 }
@@ -76,9 +93,13 @@ color: rgb(0, 0, 0);
     padding: 5px 5px;
     border: 0 none;
     font-weight: 150;
-    border-left-width: 13px;
+
     border-left-style: solid;
 }
 
+jt{
+   
+
+width: 75%;
 }
 

@@ -44,17 +44,19 @@
           <p>{{ trans('politique_content') }}</p>
           <p>{{ trans('politique_content1') }}</p>
           <h2 class="mb-3 mt-5">{{ trans('politique_quide') }}</h2>
-          <p><a href="#1">{{ trans('guide1') }}</a></p>
-          <p><a href="#2"></a></p>
-          <p><a href="#3">{{ trans('guide3') }}</a></p>
-          <p><a href="#4">{{ trans('guide4') }}</a></p>
-          <p><a href="#5">{{ trans('guide5') }}</a></p>
-          <p><a href="#6">{{ trans('guide6') }}</a></p>
-          <p><a href="#7">{{ trans('guide7') }}</a></p>
-          <p><a href="#8">{{ trans('guide8') }}</a></p>
-          <p><a href="#9">{{ trans('guide9') }}</a></p>
-          <p><a href="#10">{{ trans('guide10') }}</a></p>
+          <ol style="color: rgb(33, 125, 255);">
+          <li><a href="#1">{{ trans('guide1') }}</a></li>
+          <li><a href="#2">{{ trans('guide3') }}</a></li>
+          <li><a href="#3">{{ trans('guide4') }}</a></li>
+          <li><a href="#4">{{ trans('guide5') }}</a></li>
+          <li><a href="#5">{{ trans('guide6') }}</a></li>
+          <li><a href="#6">{{ trans('guide7') }}</a></li>
+          <li><a href="#7">{{ trans('guide8') }}</a></li>
+          <li><a href="#8">{{ trans('guide9') }}</a></li>
+          <li><a href="#9">{{ trans('guide10') }}</a></li>
+          </ol>
           <p><a href=""></a>   {{ trans('guide') }}</p>
+         
 
           <h2 id="1" class="mb-3 mt-5">{{ trans('politique_quide2') }}</h2>
           <p>{{ trans('guide12') }}</p>
