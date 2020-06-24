@@ -207,7 +207,8 @@
                     @if(session('flash'))
                         <p>{{ session('flash') }}</p>
                      @endif
-                    <form a action="/subscribe" method="POST" class="subscribe-form">
+                    <form a action="{{ route('subscribe') }}" method="POST" class="subscribe-form">
+                        @csrf
                       <div class="form-group">
                         <input type="email" class="form-control"  name="email" placeholder="{{ trans('home_content_section2_newleter_email') }}">
                             <button type="submit" class="btn btn-link"> <span class="icon icon-paper-plane fa-5x"></span></button>

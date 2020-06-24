@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Cv;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use League\CommonMark\Block\Element\Document;
 
 class FileUploadController extends Controller
 {
@@ -16,22 +19,38 @@ class FileUploadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fileUploadPost(Request $request)
+    public function cv(Request $request)
     {
-        $request->validate([
+      
+        
+            $this->validate($request, [
 
-            'type_offre' => ['required', 'string', 'max:255'],
-            'file' => 'required|mimes:pdf|max:2048',
+                'filename' => 'required',
+                'filename.*' => 'mimes:doc,pdf,docx,zip'
+
         ]);
+        
+        
+        if($request->hasfile('filename'))
+         {
 
-        $fileName = time().'.'.$request->file->extension();
+            foreach($request->file('filename') as $file)
+            {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path().'/files/', $name);  
+                $data[] = $name;  
+            }
+         }
 
-        $request->file->move(public_path('uploads'), $fileName);
-        dd($fileName);
+         $file= new Cv();
+         $file->name_cv = $request->name_cv;
+         $file->filename=json_encode($data);
+         
+         
+        
+        $file->save();
 
-        return back()
-            ->with('success','You have successfully upload file.')
-            ->with('file',$fileName);
-
+        return back()->with('success', 'Your files has been successfully added');
+    
     }
 }

@@ -44,68 +44,81 @@
 
                   <h2 id="1" class="mb-3 mt-5">{{ trans('Recrutement opérateur') }}</h2>
                   <p>{{ trans('carriere5') }}</p>
-                  <div class="row">
-                    <div class="col-9 cocustom-file">
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
-                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
-                      </div>
-                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+
+                
+                  @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
                   </div>
+                  @endif
+
+                  <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                    <div class="custom-file">
+                        <input type="hidden" name="name_cv" value="cv pour Recrutement opérateur">
+                      <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
+                      border-right-style: 6px;" id="customFileLang" >
+                      <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
+                    </div>
+                    <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
+                  </form>
+             
+                 
 
                   <h2 id="2" class="mb-3 mt-5">{{ trans('Offres de stages') }}</h2>
                   <p>{{ trans('Offree') }}</p>
-                  <div class="row">
-                    <div class="col-9 cocustom-file">
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
-                        <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
-                      </div>
-                      <div class="col-3"> <button type="button" id="btn-btn" class="btn-info">Envoyer votre cv</button></div>
+                  @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
                   </div>
+                  @endif
+
+                  <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                    <div class="custom-file">
+                        <input type="hidden" name="name_cv" value="cv pour demande de stage">
+                      <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
+                      border-right-style: 6px;" id="customFileLang" >
+                      <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
+                    </div>
+                    <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
+                  </form>
 
                   <h2 id="3" class="mb-3 mt-5">{{ trans('Offre d’emploi') }}</h2>
                   <p>{{ trans('carriere6') }}</p>
 
-                  <div class="panel panel-primary">
-                    <div class="panel-heading"></div>
-                    <div class="panel-body">
+                  @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
 
-                      @if ($message = Session::get('success'))
-                      <div class="alert alert-success alert-block">
-                          <button type="button" class="close" data-dismiss="alert">×</button>
-                              <strong>{{ $message }}</strong>
-                      </div>
-                      <img src="uploads/{{ Session::get('file') }}">
-                      @endif
-
-                      @if (count($errors) > 0)
-                          <div class="alert alert-danger">
-                              <strong>Whoops!</strong> There were some problems with your input.
-                              <ul>
-                                  @foreach ($errors->all() as $error)
-                                      <li>{{ $error }}</li>
-                                  @endforeach
-                              </ul>
-                          </div>
-                      @endif
-
-                      <form   action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
-                          @csrf
-                          <div class="row">
-
-
-                              <div class="col-9 cocustom-file">
-
-                                <input id="type_offre" name="type_offre" type="hidden" value="Offre d’emploi">
-
-                                  <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
-                                  <label class="custom-file-label" id="customFileLang"  for="customFileLang">Sélectionner le fichier </label>
-                                </div>
-                              <div class="class="col-3>
-                                  <button type="submit" id="btn-btn" class="btn-success">Envoyer votre cv</button>
-                              </div>
-                            </div>
-                          </div>
-                      </form>
+                  <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                    <div class="custom-file">
+                        <input type="hidden" name="name_cv" value="cv Demande Emplois">
+                      <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
+                      border-right-style: 6px;" id="customFileLang" >
+                      <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
+                    </div>
+                    <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
+                  </form>
+                      
 
 
                   </div>
@@ -117,6 +130,17 @@
             </div>
           </section> <!-- .section -->
 
-<br> 
+<br>
 
+@endsection
+
+@section('js')
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    </script>
 @endsection
