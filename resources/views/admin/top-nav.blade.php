@@ -9,6 +9,10 @@
 
     <title>@yield('title') - {{ config('app.name') }}</title>
   <!-- Tell the browser to be responsive to screen width -->
+
+
+
+
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -22,6 +26,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
+    <!-- Styles -->
 @yield('plugin-css')
 @yield('page-css')
     @yield('laraform_style')
@@ -30,6 +35,8 @@
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
+
+
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
@@ -46,8 +53,7 @@
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-black layout-top-nav {{ $body_class }}">
 
-<div class="wrapper">
-
+<div class="wrapper" id="app">
     <header class="main-header">
         <nav class="navbar navbar-static-top ">
             <div class="container">
@@ -85,7 +91,7 @@
                             </a>
                         </li>
                         <li class="nav-link <?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
-                            <a href="{{route('users.index')}}" >
+                            <a href="{{route('messages_index')}}" >
                                 <i class="nav-icon fas fa-comment-alt"></i>
                                 <span>Messages</span>
                             </a>

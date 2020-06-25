@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return !is_null($this->collaboratedForms()->find($form));
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

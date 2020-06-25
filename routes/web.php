@@ -22,6 +22,10 @@ Route::get('/top', function () {
     return view('admin.top-nav');
 });
 
+Route::get('/kai', function () {
+    return view('testing');
+});
+
 Route::resource('users','UsersController');
 
 Route::get('/test2', function () {
@@ -216,4 +220,8 @@ Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
 
 Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
-
+//Messagerie Route
+Route::get('messages','MessageController@index')->name('messages_index');
+Route::get('/private-message/{user}','MessageController@privateMessages');
+Route::post('/private-message/{user}','MessageController@sendPrivateMessage');
+Route::get('/users_list','MessageController@users');
