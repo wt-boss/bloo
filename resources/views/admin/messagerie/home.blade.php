@@ -22,6 +22,28 @@
 @section('content')
 
     <div class="row">
+        @if (auth()->user()->hasRole('Superadmin|Admin'))
+            <div class="col-md-3">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$operation->nom}}</font></font></h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                {{$operation->description}}
+                                <div class="pull-right">
+                                    <a href="{{route('messages_show',$operation->id)}}">
+                                        <button type="button" class="btn btn-sm btn-primary" >Voir messages</i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </font></font></div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        @endif
         @foreach($operations as $operation)
         <div class="col-md-3">
             <div class="box box-warning">

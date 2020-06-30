@@ -105,12 +105,12 @@
                                     </div>
                                 @endif
                                     <center><h2>{{trans('free_content2')}}</h2></center>
-                                <form action="{{ route('questionnaire.identify_free') }}" method="post" >
+                                <form action="{{ route('forms.show_free') }}" method="post" >
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="token">ID</label>
-                                            <input id="token" type="text" class="form-control" name="token" placeholder="Entrer l'ID du sondage" required >
+                                            <label for="token">Code du formulaire</label>
+                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required >
                                         </div>
 
                                         <div class="form-group col-6">

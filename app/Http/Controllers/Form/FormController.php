@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Form;
 
 
 use App\Form;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,17 +52,29 @@ class FormController extends Controller
             'title' => 'required|string|min:3|max:190',
             'description' => 'required|string|max:30000'
         ]);
+        $date = Carbon::now()->toDateString();
+        $mail = $date."user@free.com";
+        $user = new User();
+        $user->first_name = "free";
+        $user->last_name = "user";
+        $user->email = $mail ;
+        $user->password = Hash::make('123456789') ;
+        $user->role = "3";
+        $user->active = "1";
+        $user->save();
+        Auth::login($user, true);
 
         $form = new Form([
             'title' => ucfirst($request->title),
             'description' => ucfirst($request->description),
-            'status' => Form::STATUS_DRAFT
+            'status' => Form::STATUS_DRAFT,
+            'user_id' => auth()->user()->id
         ]);
-
         $form->generateCode();
         $form->save();
-        return view('questionnaire.validate',compact('form'));
+        return redirect()->route('forms.show', $form->code);
     }
+
 
     public function store(Request $request)
     {
@@ -102,11 +117,13 @@ class FormController extends Controller
         //return view('admin.top-nav',compact('form'));
     }
 
-    public function show_free(Form $form)
+    public function show_free(Request $request)
     {
-        $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
+
+        $form = Form::where('code',$request['code'])->get()->first();
+        $user_id = $form->user_id;
+        $user = User::findOrFail($user_id);
+        Auth::login($user, true);
         $form->load('fields', 'availability');
         return view('forms.form.show', compact('form'));
     }

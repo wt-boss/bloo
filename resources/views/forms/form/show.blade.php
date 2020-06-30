@@ -24,6 +24,8 @@
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -42,6 +44,16 @@
     </div>
     <div class="panel-body">
         {!! str_convert_line_breaks($form->description) !!}
+        @if (auth()->user()->hasRole('Free'))
+            <div class="form-group col-12">
+                <label for="exampleInputEmail1"><b>Code du formulaire</b></label>
+                    <input class="form-control " style="font-size: 16px"  id="token" value="{{$form->code}}">
+                        <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
+                            <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
+                        </button>
+                <small class="form-text text-warning text-capitalize col-9">Vous devez garder ce pour avoir acces a votre formulaire plus tard</small>
+            </div>
+        @endif
     </div>
 </div>
 
@@ -144,6 +156,43 @@
 @section('page-script')
     <script src="{{ asset('assets/js/custom/pages/validation.js') }}"></script>
     <script src="{{ asset('assets/js/custom/detached-sticky.js') }}"></script>
+    <script src="{{asset('js/dist/clipboard.js')}}"></script>
+    <script>
+        var toCopy  = document.getElementById( 'to-copy' ),
+            btnCopy = document.getElementById( 'copy' ),
+            paste   = document.getElementById( 'cleared' );
+
+        btnCopy.addEventListener( 'click', function(){
+            toCopy.select();
+            paste.value = '';
+
+            if ( document.execCommand( 'copy' ) ) {
+                btnCopy.classList.add( 'copied' );
+                paste.focus();
+
+                var temp = setInterval( function(){
+                    btnCopy.classList.remove( 'copied' );
+                    clearInterval(temp);
+                }, 600 );
+
+            } else {
+                console.info( 'document.execCommand went wrong…' )
+            }
+
+            return false;
+        } );
+    </script>
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+
+        clipboard.on('success', function(e) {
+            console.log(e);
+        });
+
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+    </script>
     @include('forms.partials._script-show')
     @stack('script')
 @endsection

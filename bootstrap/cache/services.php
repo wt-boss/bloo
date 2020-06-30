@@ -38,10 +38,11 @@
     34 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     35 => 'App\\Providers\\AppServiceProvider',
     36 => 'App\\Providers\\AuthServiceProvider',
-    37 => 'App\\Providers\\EventServiceProvider',
-    38 => 'App\\Providers\\RouteServiceProvider',
-    39 => 'App\\Providers\\MacroServiceProvider',
-    40 => 'App\\Providers\\HelperServiceProvider',
+    37 => 'App\\Providers\\BroadcastServiceProvider',
+    38 => 'App\\Providers\\EventServiceProvider',
+    39 => 'App\\Providers\\RouteServiceProvider',
+    40 => 'App\\Providers\\MacroServiceProvider',
+    41 => 'App\\Providers\\HelperServiceProvider',
   ),
   'eager' => 
   array (
@@ -68,10 +69,11 @@
     20 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     21 => 'App\\Providers\\AppServiceProvider',
     22 => 'App\\Providers\\AuthServiceProvider',
-    23 => 'App\\Providers\\EventServiceProvider',
-    24 => 'App\\Providers\\RouteServiceProvider',
-    25 => 'App\\Providers\\MacroServiceProvider',
-    26 => 'App\\Providers\\HelperServiceProvider',
+    23 => 'App\\Providers\\BroadcastServiceProvider',
+    24 => 'App\\Providers\\EventServiceProvider',
+    25 => 'App\\Providers\\RouteServiceProvider',
+    26 => 'App\\Providers\\MacroServiceProvider',
+    27 => 'App\\Providers\\HelperServiceProvider',
   ),
   'deferred' => 
   array (

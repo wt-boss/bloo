@@ -17,8 +17,9 @@ class MessageController extends Controller
 
     public function index()
     {
+        $Alloperation = Opération::all();
         $operations = Opération::where('user_id',auth()->user()->id)->first()->get();
-        return view('admin.messagerie.home',compact('operations'));
+        return view('admin.messagerie.home',compact('operations,Alloperation'));
     }
     public function show(Request $request,$id){
         $operation = Opération::findOrFail($id);

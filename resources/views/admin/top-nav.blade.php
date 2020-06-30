@@ -66,40 +66,51 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                         <li  class="<?php echo (  Str::startsWith($route, 'admin') ) ? "active" : '' ?>">
                             <a href="{{route('admin')}}">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="<?php echo (  Str::startsWith($route, 'operation') ) ? "active" : '' ?>">
+                        @endif
+                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+                            <li class="<?php echo (  Str::startsWith($route, 'operation') ) ? "active" : '' ?>">
                             <a href="{{route('operation.index')}}" >
                                 <i class="nav-icon fas fa-poll-h"></i>
                                 <span>Opérations</span>
                             </a>
                         </li>
-                        <li class=" <?php echo (  Str::startsWith($route, 'forms') ) ? "active" : '' ?>">
+                            @endif
+                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+                            <li class=" <?php echo (  Str::startsWith($route, 'forms') ) ? "active" : '' ?>">
                             <a href="{{route('forms.index')}}" >
                                 <i class="nav-icon fas fa-poll-h"></i>
                                 <span>Sondages</span>
                             </a>
                         </li>
-                        <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
+                            @endif
+                            @if (auth()->user()->hasRole('Superadmin'))
+                            <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
                             <a href="{{route('users.index')}}" >
                                 <i class="nav-icon fas fa-users-cog"></i>
                                 <span>Users</span>
                             </a>
                         </li>
-                        <li class="nav-link <?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
+                            @endif
+                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+                              <li class="nav-link <?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
                             <a href="{{route('messages_index')}}" >
                                 <i class="nav-icon fas fa-comment-alt"></i>
                                 <span>Messages</span>
                             </a>
                         </li>
+                              @endif
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
                 <!-- Navbar Right Menu -->
+                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -244,6 +255,7 @@
                     </ul>
                 </div>
                 <!-- /.navbar-custom-menu -->
+                @endif
             </div>
             <!-- /.container-fluid -->
         </nav>
