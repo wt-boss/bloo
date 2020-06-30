@@ -2110,14 +2110,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
+  props: ['user', 'operation'],
   data: function data() {
     return {
       message: null,
       activeFriend: null,
       allMessages: [],
-      users: []
+      users: [],
+      operation_id: null
     };
   },
   watch: {
@@ -2137,7 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
         return alert('Please select friend');
       }
 
-      axios.post('/private-message/' + this.activeFriend, {
+      axios.post('/private-message/' + this.activeFriend + '/' + this.operation_id, {
         message: this.message
       }).then(function (response) {
         console.log(response.data);
@@ -2155,7 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
         return alert('Please select friend');
       }
 
-      axios.get('/private-message/' + this.activeFriend).then(function (response) {
+      axios.get('/private-message/' + this.activeFriend + "/" + this.operation_id).then(function (response) {
         _this2.allMessages = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -37918,10 +37921,16 @@ var render = function() {
                           {
                             class:
                               _vm.user.id === message.user.id
-                                ? "direct-chat-name float-left"
-                                : "direct-chat-name float-right"
+                                ? "direct-chat-name pull-left"
+                                : "direct-chat-name pull-right"
                           },
-                          [_vm._v(_vm._s(message.user.name))]
+                          [
+                            _vm._v(
+                              _vm._s(message.user.first_name) +
+                                " " +
+                                _vm._s(message.user.last_name)
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -37929,8 +37938,8 @@ var render = function() {
                           {
                             class:
                               _vm.user.id === message.user.id
-                                ? "direct-chat-timestamp float-right"
-                                : "direct-chat-timestamp float-left"
+                                ? "direct-chat-timestamp pull-right"
+                                : "direct-chat-timestamp pull-left"
                           },
                           [_vm._v(_vm._s(message.created_at))]
                         )
@@ -37939,7 +37948,7 @@ var render = function() {
                       _c("img", {
                         staticClass: "direct-chat-img",
                         attrs: {
-                          src: "admin/dist/img/user1-128x128.jpg",
+                          src: message.user.avatar,
                           alt: "Message User Image"
                         }
                       }),
@@ -38107,6 +38116,14 @@ var render = function() {
                       ? _c(
                           "li",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: (_vm.operation_id = _vm.operation),
+                                expression: "operation_id = operation"
+                              }
+                            ],
                             key: friend.id,
                             class: "list-group-item",
                             on: {
@@ -38121,7 +38138,7 @@ var render = function() {
                                 _vm._s(friend.first_name) +
                                   " " +
                                   _vm._s(friend.last_name) +
-                                  "  "
+                                  " "
                               )
                             ])
                           ]
@@ -38229,7 +38246,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Opérateurs")]),
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Operateur")]),
       _vm._v(" "),
       _c("div", { staticClass: "box-tools pull-right" }, [
         _c(

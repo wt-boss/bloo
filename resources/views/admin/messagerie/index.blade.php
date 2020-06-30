@@ -23,8 +23,7 @@
 @endsection
 
 @section('content')
-    <private :user="{{auth()->user()}}"></private>
-
+    <private :user="{{auth()->user()}}" :operation="{{$operation->id}}"></private>
 
 @endsection
 

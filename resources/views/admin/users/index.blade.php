@@ -89,6 +89,25 @@
                   <!-- /.box-body -->
               </div>
           </div>
+          <div class="col-md-3">
+              <div class="box box-warning">
+                  <div class="box-header with-border">
+                      <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pliable</font></font></h3>
+
+                      <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                      </div>
+                      <!-- /.box-tools -->
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                              Le corps de la boîte
+                          </font></font></div>
+                  <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+          </div>
       </div>
 
     @endsection

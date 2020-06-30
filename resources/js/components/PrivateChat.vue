@@ -17,10 +17,10 @@
                                  :key="index"
                             >
                                 <div class="direct-chat-infos clearfix">
-                                    <span :class="(user.id===message.user.id)? 'direct-chat-name float-left' : 'direct-chat-name float-right' ">{{message.user.name}}</span>
-                                    <span :class="(user.id===message.user.id)? 'direct-chat-timestamp float-right' : 'direct-chat-timestamp float-left' ">{{message.created_at}}</span>
+                                    <span :class="(user.id===message.user.id)? 'direct-chat-name pull-left' : 'direct-chat-name pull-right' ">{{message.user.first_name}} {{message.user.last_name}}</span>
+                                    <span :class="(user.id===message.user.id)? 'direct-chat-timestamp pull-right' : 'direct-chat-timestamp pull-left' ">{{message.created_at}}</span>
                                 </div>
-                                <img class="direct-chat-img" src="admin/dist/img/user1-128x128.jpg" alt="Message User Image">
+                                <img class="direct-chat-img" :src="message.user.avatar" alt="Message User Image">
                                 <div class="direct-chat-text">
                                     {{message.message}}
                                 </div>
@@ -109,7 +109,7 @@
                     <div class="col-md-12">
                         <div class="box box-warning box-solid">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Opérateurs</h3>
+                                <h3 class="box-title">Operateur</h3>
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
@@ -123,9 +123,10 @@
                                     <li :class="'list-group-item' "
                                         v-for="friend in users"
                                         v-if="user.id !== friend.id && friend.role===1"
+                                        v-show="operation_id = operation"
                                         :key="friend.id"
                                         @click="activeFriend=friend.id"
-                                    >  <a>{{friend.first_name}} {{friend.last_name}}  </a></li>
+                                    > <a>{{friend.first_name}} {{friend.last_name}} </a> </li>
 
                                 </ul>
                             </div>
@@ -133,6 +134,7 @@
                         </div>
                         <!-- /.box -->
                     </div>
+
 
                     <div class="col-md-12">
                         <div class="box box-warning box-solid">
@@ -169,13 +171,14 @@
 
 <script>
     export default {
-        props:['user'],
+        props:['user','operation'],
         data(){
             return{
                 message:null,
                 activeFriend:null,
                 allMessages:[],
                 users:[],
+                operation_id:null,
             }
         },
 
@@ -195,7 +198,7 @@
                 {
                     return alert('Please select friend');
                 }
-                axios.post('/private-message/'+this.activeFriend, {message: this.message}).then(response =>{
+                axios.post('/private-message/'+this.activeFriend+'/'+this.operation_id, {message: this.message}).then(response =>{
                     console.log(response.data);
                     this.message=null;
                     this.fetchMessages();
@@ -208,7 +211,7 @@
                 {
                     return alert('Please select friend');
                 }
-                axios.get('/private-message/'+this.activeFriend).then(response => {
+                axios.get('/private-message/'+this.activeFriend +"/"+this.operation_id).then(response => {
                     this.allMessages = response.data;
                 }).catch(error => {
                     console.log(error);

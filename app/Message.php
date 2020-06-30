@@ -11,4 +11,8 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function operation()
+    {
+        return $this->belongsTo(Opération::class);
+    }
 }

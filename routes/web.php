@@ -222,6 +222,7 @@ Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
 //Messagerie Route
 Route::get('messages','MessageController@index')->name('messages_index');
-Route::get('/private-message/{user}','MessageController@privateMessages');
-Route::post('/private-message/{user}','MessageController@sendPrivateMessage');
+Route::get('messages_show/{operation}','MessageController@show')->name('messages_show');
+Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
+Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
 Route::get('/users_list','MessageController@users');
