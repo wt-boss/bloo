@@ -123,11 +123,4 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'riverskies/laravel-newsletter-subscription' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Riverskies\\LaravelNewsletterSubscription\\Providers\\NewsletterSubscriptionServiceProvider',
-    ),
-  ),
 );
