@@ -16,7 +16,7 @@ Route::redirect('/', 'forms')->name('home');
 
 Route::get('/home', function () {
     return view('pages.home');
-});
+})->middleware('verified');
 
 Route::get('/top', function () {
     return view('admin.top-nav');
@@ -38,6 +38,8 @@ Route::namespace('Form')->group(function () {
 });
 
 // Authentication Routes...
+Auth::routes(['verify' => true]);
+
 Route::namespace('Auth')->group(function () {
     Route::get('register', 'RegisterController@showRegistrationForm')->name('register.show');
     Route::post('register', 'RegisterController@register')->name('register');

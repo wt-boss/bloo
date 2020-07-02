@@ -3,13 +3,14 @@
 namespace App;
 
 use Mail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes, CascadeSoftDeletes;
 
