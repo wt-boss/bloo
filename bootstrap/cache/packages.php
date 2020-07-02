@@ -10,17 +10,6 @@
       'Currency' => 'AkibTanjim\\Currency\\Facades\\CurrencyConverter',
     ),
   ),
-  'danielme85/laravel-cconverter' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'danielme85\\CConverter\\CConverterServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Currency' => 'danielme85\\CConverter\\CConverter',
-    ),
-  ),
   'devmarketer/easynav' => 
   array (
     'providers' => 
@@ -48,17 +37,6 @@
     'providers' => 
     array (
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    ),
-  ),
-  'florianv/laravel-swap' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Swap\\Laravel\\SwapServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Swap' => 'Swap\\Laravel\\Facades\\Swap',
     ),
   ),
   'fruitcake/laravel-cors' => 
