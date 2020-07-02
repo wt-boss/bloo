@@ -1,107 +1,46 @@
-@extends('layouts.frontend.app')
+@extends('layouts.auth')
+
+@section('title', 'Password Recovery')
 
 @section('content')
-@section('title', 'BLOO')
 
-@push('css')
+<form id="password-recover" method="post" action="{{ route('password.email') }}" autocomplete="off">
+    @csrf
 
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-body">
+                <div class="text-center">
+                    <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
+                    <h5 class="content-group">Password recovery <small class="display-block">We'll send you instructions via email</small></h5>
+                </div>
 
+                @php $status = $status ?? null; @endphp
+                @includeWhen(isset($status), 'partials.alert', ['name' => 'login', 'forced_alert' => ['status' => 'success', 'message' => $status]])
 
-@endpush
-<div class="hero-wrap">
-    <div class="overlay"></div>
-    <div class="circle-bg"></div>
-    <div class="circle-bg-2"></div>
-    <div class="container-fluid">
-        <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-            <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ __('Reset Password') }}</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ __('Reset Password') }}</h1>
+                <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
+                    <div class="form-control-feedback">
+                        <i class="icon-mail5 text-muted"></i>
+                    </div>
+                    @if ($errors->has('email'))
+                        <span class="help-block">{{ $errors->first('email') }}</span>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn bg-primary btn-block">Send Password Reset Link <i class="icon-arrow-right14 position-right"></i></button>
             </div>
         </div>
     </div>
-</div>
+</form>
 
-
-
-<section class="ftco-section services-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <span class="subheading">Reinitialisation du mots de passe</span>
-                <h2 class="mb-4">Renplis les information démandé </h2>{{ trans('') }}
-
-                  <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token ?? '' }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-
-            </div>
-        </div>
-
-
-
-
-
-    </div>
-    </div>
-</section>
-
-
-
-
-@push('js')
-
-
-@endpush
 @endsection
-@section('scripts')
 
+@section('plugin-scripts')
+    <script src="{{ asset('assets/js/plugins/validation/validate.min.js') }}"></script>
+@endsection
 
+@section('page-script')
+    <script src="{{ asset('assets/js/custom/pages/validation.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/pages/auth-passwords-email.js') }}"></script>
 @endsection

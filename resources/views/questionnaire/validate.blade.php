@@ -22,43 +22,40 @@
         <div class="row">
             <center>
                 <div>
-                    <h1>Valider votre formulaire</h1>
+                    <h1>Votre formulaire</h1>
                 </div>
             </center>
-            <form method="post" action="{{route('questionnaire.validate_free',[$questionnaire->slug])}}">
-                @csrf
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="titre">Titre</label>
-                        <input type="text" class="form-control" id="titre" aria-describedby="titre" value="{{$questionnaire->title}}" disabled>
+                        <input type="text" class="form-control" id="titre" aria-describedby="titre" value="{{$form->title}}" disabled>
                     </div>
                     <div class="form-group col-6">
                         <label for="objectif">Objectif</label>
-                        <input type="text" class="form-control" id="objectif"  value="{{$questionnaire->purpose}}" disabled>
+                        <input type="text" class="form-control" id="objectif"  value="{{$form->description}}" disabled>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-12">
                         <label for="exampleInputEmail1">ID du sondage</label>
                         <div class="input-group mb-3">
-                            <input class="form-control" style="font-size: 16px"  id="token" value="{{$questionnaire->token}}">
+                            <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                                     <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
                                 </button>
                             </div>
                         </div>
-                        <small class="form-text text-success text-capitalize col-9">Vous devez garder ce token pour avoir acces a votre formulaire plus tard</small>
+                        <small class="form-text text-success text-capitalize col-9">Vous devez garder ce pour avoir acces a votre formulaire plus tard</small>
                     </div>
                     <div class="form-group col-6">
-                        <label for="exampleInputEmail1">Mot de passe</label>
-                        <input type="password" class="form-control" name="password" id="password" aria-describedby="password" required>
-                        <small id="password"  class="form-text text-success">Entrer un mot de passe pour avoir acces a votre formulaire prochainement</small>
+                        <form action="{{route('forms.show_free')}}" method="post">
+                            @csrf
+                            <input type="hidden" value="{{$form->code}}" name="code">
+                            <input type="submit" class="btn btn-primary" value="Suivant">
+                        </form>
                     </div>
-
-
-
                 </div>
-                <button type="submit" class="btn btn-primary float-right">Valider</button>
-            </form>
+
+
             <script src="{{asset('js/dist/clipboard.js')}}"></script>
             <script>
                  var toCopy  = document.getElementById( 'to-copy' ),

@@ -1,111 +1,79 @@
-@extends('layouts.frontend.app')
+@extends('layouts.auth')
+
+@section('title', 'Create an Account')
 
 @section('content')
-@section('title', 'BLOO')
+    @php $params =  (isset($user_data['code'])) ? ['code' => $user_data['code']] : []; @endphp
+    <form id="register" method="post" action="{{ route('register', $params) }}" autocomplete="off">
+        @csrf
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-body">
+                    <div class="text-center">
+                        <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+                        <h5 class="content-group">Create your account <small class="display-block">All fields are required</small></h5>
+                    </div>
 
-@push('css')
+                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autofocus>
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
 
+                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required>
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
 
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="{{ (isset($user_data['email'])) ? $user_data['email'] : old('email') }}" required{{ isset($user_data['email']) ? ' disabled' : '' }}>
+                        <div class="form-control-feedback">
+                            <i class="icon-mail5 text-muted"></i>
+                        </div>
+                    </div>
 
-@endpush
-<div class="hero-wrap">
-    <div class="overlay"></div>
-    <div class="circle-bg"></div>
-    <div class="circle-bg-2"></div>
-    <div class="container-fluid">
-        <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-            <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{  trans('home_fil')  }}</a></span> <span>{{ __('Register') }}</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> {{ __('Register') }}</h1>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                        @if ($errors->has('password'))
+                            <span class="help-block">{{ $errors->first('password') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="mt-30">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="{{ route('login') }}" class="btn btn-link text-left">Have an account already?</a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <button type="submit" class="btn bg-teal-400">Create account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<section class="ftco-section services-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <span class="subheading">Inscription</span>
-                <h2 class="mb-4">Remplir le formulaire d'inscription</h2>{{ trans('') }}
-                <form method="POST" id="register-form"  action="{{ route('register') }}">
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                            <span>
-                                        <strong id="error-mail"></strong>
-                                    </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                            <span>
-                                        <strong id="error-password"></strong>
-                                    </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Register') }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-
-
-
-
-
-        </div>
-    </div>
-</section>
-
-
-
-
-@push('js')
-
-
-@endpush
+    </form>
 @endsection
-@section('scripts')
 
+@section('plugin-scripts')
+    <script src="{{ asset('assets/js/plugins/validation/validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/uniform.min.js') }}"></script>
+@endsection
 
+@section('page-script')
+    <script src="{{ asset('assets/js/custom/pages/validation.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/pages/auth.js') }}"></script>
 @endsection
