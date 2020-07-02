@@ -78,8 +78,8 @@ Route::group(['middleware'=>['web']],function(){
     // footer
     Route::get('apropos', 'PagesController@getApropos')->name('apropos');
     Route::get('carriere', 'PagesController@getCarriere')->name('carriere');
-    Route::get('intimite', 'PagesController@getIntimite')->name('intimite');
-    Route::get('tc', 'PagesController@getTc')->name('tc');
+    Route::get('Politique_de_confidentialité', 'PagesController@getIntimite')->name('Politique_de_confidentialité');
+    Route::get('Termes_&_Conditions', 'PagesController@getTc')->name('Termes_&_Conditions');
 
     //contact
     Route::get('/contact', [
@@ -96,6 +96,9 @@ Route::group(['middleware'=>['web']],function(){
 
 
 });
+//route pour carriere
+Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit');
+Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit');
 
 // offres
 Route::get('/offres/primus','SurveyController@primus')->name('primus');
@@ -111,4 +114,6 @@ Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
 
 Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
+Route::post('subscribe', 'NewletterController@store')->name('subscribe');
+
 

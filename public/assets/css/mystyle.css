@@ -47,9 +47,59 @@
     .ftco-section.login-page {
         padding: 6em 0 0 0;
     }
+    
+#btn-btn{
+    margin-top: 4px;
+margin-left: -70px;
+
+   
+}
+.jt{
+    margin-left: 23px;
+    padding-left: 1px;
+    border-right-width: 0px;
+
+width: 56%;
+height: calc(1.25rem + 5px);
+
+
+}
+
+
 }
 
 .form-check-input {
     margin-top: 0.5rem !important;
 }
-/* Login page */
+#font{
+    font-size: 14px;
+    margin-top: -11px;
+margin-bottom: 0.5rem;
+color: rgb(0, 0, 0);
+
+}
+#font h2{
+    font-size: 21px;
+    color: #000;
+}
+
+
+#btn-btn{
+    border-radius:  0.25rem  0.25rem;
+    font-size: 15px;
+    color: #fff;
+    background-color: #217dff;
+    border-color: #217dff;
+    padding: 5px 5px;
+    border: 0 none;
+    font-weight: 150;
+
+    border-left-style: solid;
+}
+
+jt{
+   
+
+width: 75%;
+}
+

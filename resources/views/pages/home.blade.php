@@ -110,7 +110,7 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="25.000">0</strong>
+                          <strong class="number" data-number="25000">0</strong>
                           <span>{{ trans('données1') }} </span>
                         </div>
                       </div>
@@ -165,6 +165,7 @@
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn11') }}</button>
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn12') }}</button>
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn13') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn14') }}</button>
             </p>
             </div>
               </div>
@@ -204,10 +205,15 @@
                 <p>{{ trans('home_content_section2_newleter_body') }}</p>
                 <div class="row d-flex justify-content-center mt-5">
                   <div class="col-md-6">
-                    <form action="#" class="subscribe-form">
+                    @if(session('flash'))
+                        <p>{{ session('flash') }}</p>
+                     @endif
+                    <form a action="{{ route('subscribe') }}" method="POST" class="subscribe-form">
+                        @csrf
                       <div class="form-group">
-                        <span class="icon icon-paper-plane"></span>
-                        <input type="text" class="form-control" placeholder="{{ trans('home_content_section2_newleter_email') }}">
+                        <input type="email" class="form-control"  name="email" placeholder="{{ trans('home_content_section2_newleter_email') }}">
+                            <button type="submit" class="btn btn-link"> <span class="icon icon-paper-plane fa-5x"></span></button>
+
                       </div>
                     </form>
                   </div>

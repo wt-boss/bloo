@@ -19,6 +19,23 @@
         </div>
 
 
-<br> <br>
+
+
+
+
+      <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span class="subheading">{{ trans('contact_title') }}</span>
+            <h2 class="mb-4">{{ trans('contact_content') }}</h2>
+            <p>{{ trans('contact_infos') }}</p>
+            <p>{{ trans('contact_infos1') }}</p>
+            <p>{{ trans('contact_infos3') }}</p>
+          </div>
+        </div>
+
+        </div>
+    </section>
 
 @endsection
