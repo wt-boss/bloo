@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        @include('layouts.frontend.partial.section_prix')
+     
 
 
 
@@ -63,9 +63,9 @@
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td><i class="icon-book icon-4x" style="color: #217dff;"></i><a href="#">{{ trans('Export des fichiers') }}</a> </td>
-                                    <td> XLS, PDF </td>
-                                    <td>XLS, PDF, PPT </td>
+                                    <td><a href="#">{{ trans('Export des fichiers') }}</a> </td>
+                                    <td> PDF </td>
+                                    <td> PDF </td>
                                     <td>XLS, PDF, PPT </td>
                                   </tr>
                                   <tr>
@@ -124,19 +124,19 @@
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
 
-
-                                  <tr>
-                                    <td> <a href="">{{ trans('Montant') }}</a></td>
-                                    <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
-                                    <td>12KF</td>
-                                    <td>50KF</td>
-                                  </tr>
                                   <tr>
                                     <td> <a href="">{{ trans('Paiement d’acompte en ligne') }}  </a></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
+                                  <tr>
+                                    <td> <a href="">{{ trans('Montant') }}</a></td>
+                                    <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
+                                    <td>12KF</td>
+                                    <td>50KF</td>
+                                  </tr>
+
                                   <tr>
                                     <td> <a href="">{{ trans('Remboursable') }} </a></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>

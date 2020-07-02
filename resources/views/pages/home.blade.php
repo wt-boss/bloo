@@ -110,7 +110,7 @@
                     <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                       <div class="block-18 text-center">
                         <div class="text">
-                          <strong class="number" data-number="25.000">0</strong>
+                          <strong class="number" data-number="25000">0</strong>
                           <span>{{ trans('données1') }} </span>
                         </div>
                       </div>
@@ -165,6 +165,7 @@
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn11') }}</button>
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn12') }}</button>
                 <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn13') }}</button>
+                <button type="button" class="btn btn-outline-primary cloud-btn">{{ trans('homme_btn14') }}</button>
             </p>
             </div>
               </div>
