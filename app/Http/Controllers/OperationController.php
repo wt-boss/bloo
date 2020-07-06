@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Opération;
 use Illuminate\Http\Request;
 
 class OperationController extends Controller
@@ -17,8 +18,8 @@ class OperationController extends Controller
      */
     public function index()
     {
-
-        return view('adminlte.users.operation');
+        $operations = Opération::with('form')->get();
+        return view('admin.operation.index',compact('operations'));
     }
 
     /**

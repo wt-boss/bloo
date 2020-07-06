@@ -66,11 +66,8 @@ Route::get('profile', 'ProfileController@index')->name('profile.index');
 Route::put('profile', 'ProfileController@update')->name('profile.update');
 
 
-
-
 Route::namespace('Form')->group(function () {
     //free Form Route
-
     Route::post('forms_free', 'FormController@store_free')->name('forms.store_free');
     Route::post('form_free', 'FormController@show_free')->name('forms.show_free');
 });

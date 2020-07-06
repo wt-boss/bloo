@@ -80,14 +80,7 @@
                                 <i class="nav-icon fas fa-poll-h"></i>
                                 <span>Opérations</span>
                             </a>
-                        </li>
-                            @endif
-                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
-                            <li class=" <?php echo (  Str::startsWith($route, 'forms') ) ? "active" : '' ?>">
-                            <a href="{{route('forms.index')}}" >
-                                <i class="nav-icon fas fa-poll-h"></i>
-                                <span>Sondages</span>
-                            </a>
+
                         </li>
                             @endif
                             @if (auth()->user()->hasRole('Superadmin'))

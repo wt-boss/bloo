@@ -13,4 +13,8 @@ class Opération extends Model
     public function messages(){
         return $this->hasMany(Message::class);
     }
+    public function form()
+    {
+        return $this->belongsTo(Form::class);
+    }
 }

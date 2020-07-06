@@ -9,6 +9,7 @@ use App\Mail\FormCollaborationMail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Form extends Model
 {
@@ -88,4 +89,9 @@ class Form extends Model
             static::STATUS_CLOSED => ['label' => 'Closed', 'color' => 'pink'],
         ];
     }
+
+     public function operation()
+     {
+        return $this->belongsTo(Opération::class);
+     }
 }
