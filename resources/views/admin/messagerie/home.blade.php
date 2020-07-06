@@ -23,6 +23,7 @@
 
     <div class="row">
         @if (auth()->user()->hasRole('Superadmin|Admin'))
+        @foreach($operations as $operation)
             <div class="col-md-3">
                 <div class="box box-warning">
                     <div class="box-header with-border">
@@ -43,6 +44,7 @@
                 </div>
                 <!-- /.box -->
             </div>
+            @endforeach
         @endif
         @foreach($operations as $operation)
         <div class="col-md-3">
