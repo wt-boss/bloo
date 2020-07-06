@@ -59,11 +59,15 @@
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="title">{{trans('free_form1_label1')}}</label>
-                                            <input type="text" class="form-control" id="title" name="title"  required>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                            <input type="text" class="form-control" id="description"  name="description" required >
+                                            <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for="purpose">Mot de passe</label>
+                                            <input type="password" class="form-control" id="password"  name="password" required >
                                         </div>
 
                                         <div class="form-group col-6">
@@ -111,6 +115,10 @@
                                         <div class="form-group col-12">
                                             <label for="token">Code du formulaire</label>
                                             <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required >
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for="purpose">Mot de passe</label>
+                                            <input type="password" class="form-control" id="password"  name="password" required >
                                         </div>
 
                                         <div class="form-group col-6">

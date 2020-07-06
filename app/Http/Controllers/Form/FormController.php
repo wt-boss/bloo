@@ -52,13 +52,14 @@ class FormController extends Controller
             'title' => 'required|string|min:3|max:190',
             'description' => 'required|string|max:30000'
         ]);
-        $date = Carbon::now()->toDateString();
+        $parameters =$request->all();
+        $date = Carbon::now()->toDateTimeString();
         $mail = $date."user@free.com";
         $user = new User();
         $user->first_name = "free";
         $user->last_name = "user";
         $user->email = $mail ;
-        $user->password = Hash::make('123456789') ;
+        $user->password = Hash::make($parameters['password']) ;
         $user->role = "3";
         $user->active = "1";
         $user->save();
@@ -120,12 +121,28 @@ class FormController extends Controller
     public function show_free(Request $request)
     {
 
+        $parameters = $request->all();
+
         $form = Form::where('code',$request['code'])->get()->first();
-        $user_id = $form->user_id;
-        $user = User::findOrFail($user_id);
-        Auth::login($user, true);
-        $form->load('fields', 'availability');
-        return view('forms.form.show', compact('form'));
+        if (isset($form)){
+            $user_id = $form->user_id;
+            $user = User::findOrFail($user_id);
+            if (Hash::check($parameters['password'], $user->password))
+            {
+                Auth::login($user, true);
+                $form->load('fields', 'availability');
+                return view('forms.form.show', compact('form'));
+            }
+            else{
+                return back()->withErrors('Mot de passe eronns');
+            }
+
+        }
+        else{
+            return back()->withErrors('Code formulaire errones');
+        }
+
+
     }
 
     public function edit(Form $form)
