@@ -19,7 +19,7 @@
         <div class="panel-heading">
             <h4 class="panel-title text-semibold">My operation</h4>
             <div class="heading-elements">
-                <a href="{{ route('users.create') }}" class="btn btn-success heading-btn">Create an operation</a>
+                <a href="{{ route('entreprise') }}" class="btn btn-success heading-btn">Create an operation</a>
             </div>
         </div>
     </div>

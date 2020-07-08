@@ -61,10 +61,9 @@ Route::namespace('Auth')->group(function () {
 });
 
 //Dashboard Routes
-
 Route::get('profile', 'ProfileController@index')->name('profile.index');
 Route::put('profile', 'ProfileController@update')->name('profile.update');
-
+Route::get('entreprise','OperationController@entreprise')->name('entreprise');
 
 Route::namespace('Form')->group(function () {
     //free Form Route
@@ -219,7 +218,6 @@ Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
 
 // route for check status of the payment
 Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
-
 Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
