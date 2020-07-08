@@ -41,60 +41,93 @@
                     <h2 class="mb-3 mt-5">{{ trans('carriere1') }}</h2>
                     <p>{{ trans('carriere2') }}</p>
                     <p>{{ trans('carriere3') }}</p>
+                    <br><br>
+                              {{--  accordeon --}}
 
-                  <h2 id="1" class="mb-3 mt-5">{{ trans('Recrutement opérateur') }}</h2>
-                  <p>{{ trans('carriere5') }}</p>
+<div id="accordion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header">
+                      <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('Recrutement opérateur') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+            </div>
+            <div id="menuone" class="collapse show">
+              <div class="card-body">
+                <p>{{ trans('carriere5') }}</p>
 
-                
-                  @if (count($errors) > 0)
-                  <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                    </ul>
+
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                  <div class="custom-file">
+                      <input type="hidden" name="name_cv" value="cv pour Recrutement opérateur">
+                    <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
+                    border-right-style: 6px;" id="customFileLang" >
+                    <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
                   </div>
-                  @endif
+                  <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
+                </form>
 
-                  <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
-                      @csrf
-                    <div class="custom-file">
-                        <input type="hidden" name="name_cv" value="cv pour Recrutement opérateur">
-                      <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
-                      border-right-style: 6px;" id="customFileLang" >
-                      <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
-                    </div>
-                    <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
-                  </form>
-             
-                 
+              </div>
+            </div>
+          </div>
 
-                  <h2 id="2" class="mb-3 mt-5">{{ trans('Offres de stages') }}</h2>
-                  <p>{{ trans('Offree') }}</p>
-                  @if (count($errors) > 0)
-                  <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                    </ul>
+          <div class="card">
+            <div class="card-header">
+                      <a class="card-link" data-toggle="collapse"  href="#menutwo" aria-expanded="false" aria-controls="menutwo">{{ trans('Offres de stages') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+            </div>
+            <div id="menutwo" class="collapse">
+              <div class="card-body">
+
+                <p>{{ trans('Offree') }}</p>
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                  <div class="custom-file">
+                      <input type="hidden" name="name_cv" value="cv pour demande de stage">
+                    <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
+                    border-right-style: 6px;" id="customFileLang" >
+                    <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
                   </div>
-                  @endif
+                  <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
+                </form>
+              </div>
+            </div>
+          </div>
 
-                  <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
-                      @csrf
-                    <div class="custom-file">
-                        <input type="hidden" name="name_cv" value="cv pour demande de stage">
-                      <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px;
-                      border-right-style: 6px;" id="customFileLang" >
-                      <label class="custom-file-label" id="customFileLang"  style="margin-left: 18px;padding-right: 4.75rem;margin-right: 45px;" for="customFileLang"> </label>
-                    </div>
-                    <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
-                  </form>
 
-                  <h2 id="3" class="mb-3 mt-5">{{ trans('Offre d’emploi') }}</h2>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header">
+                          <a class="card-link" data-toggle="collapse"  href="#menu3" aria-expanded="false" aria-controls="menu3">{{ trans('Offre d’emploi') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                </div>
+                <div id="menu3" class="collapse">
+                  <div class="card-body">
+
+
                   <p>{{ trans('carriere6') }}</p>
 
                   @if (count($errors) > 0)
@@ -118,7 +151,33 @@
                     </div>
                     <div class="col-3 offset-10" > <button type="submit" style="margin-top: 6px;" id="btn-btn" class="btn-info">Envoyer </button></div>
                   </form>
-                      
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+{{--  accordeon --}}
+
+
+
+
+
+
+
+
+
+
 
 
                   </div>

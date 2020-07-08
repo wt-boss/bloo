@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Opération;
+use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class OperationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +20,8 @@ class OperationController extends Controller
      */
     public function index()
     {
-
-        return view('adminlte.users.operation');
+        $operations = Opération::with('form')->get();
+        return view('admin.operation.index',compact('operations'));
     }
 
     /**
@@ -24,7 +31,12 @@ class OperationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.operation.index');
+    }
+
+    public function entreprise()
+    {
+        return view('admin.operation.entreprise');
     }
 
     /**

@@ -97,7 +97,7 @@
     "prix_offre_free4": " Export en PDF",
 
 
-    "prix_offre_prenuim": " Déployer et piloter une étude en temps réel dans plus de 20 villes en simultané",
+    "prix_offre_prenuim": " Déployer et piloter une étude en temps réel dans plus de 20 villes",
     "prix_offre_prenuim1": "Profitez de toutes les fonctionnalités",
     "prix_offre_prenuim2": "Déploiement sur le terrain",
     "prix_offre_prenuim3": " Pilotage en ligne ",
@@ -156,7 +156,8 @@
     "homme_btn10":"Technologie & Télécoms",
     "homme_btn11":"Transports & Logistiques",
     "homme_btn12":"Voyages & Tourisme",
-    "homme_btn13":"Fortunes, Emploi ",
+    "homme_btn13":"Fortunes ",
+    "homme_btn14":"Emploi ",
     "btn_home":"Découvrez Bloo",
     "btn_home_sondage":"Créer un Sondage",
     "prix1":" 0",

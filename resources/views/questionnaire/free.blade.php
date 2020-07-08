@@ -54,25 +54,22 @@
 
                                 <center><h2>{{trans('free_content1')}}</h2></center>
 
-                                <form action="{{route('questionnaire.store_free')}}" method="post" onsubmit="return verifDate(this)">
+                                <form action="{{route('forms.store_free')}}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="title">{{trans('free_form1_label1')}}</label>
-                                            <input type="text" class="form-control" id="title" name="title"  required>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                            <input type="text" class="form-control" id="purpose"  name="purpose" required >
+                                            <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
                                         </div>
-                                        <div class="form-group col-6">
-                                            <label for="date_start">{{trans('free_form1_label3')}}</label>
-                                            <input type="date" class="form-control" id="date_start" name="date_start"  required >
+                                        <div class="form-group col-12">
+                                            <label for="purpose">Mot de passe</label>
+                                            <input type="password" class="form-control" id="password"  name="password" required >
                                         </div>
-                                        <div class="form-group col-6">
-                                            <label for="date_end">{{trans('free_form1_label4')}}</label>
-                                            <input type="date" class="form-control" id="date_end" name="date_end" required>
-                                        </div>
+
                                         <div class="form-group col-6">
 
                                         </div>
@@ -81,25 +78,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <script>
-                                    function verifDate()
-                                    {
-                                        var date = new Date().toISOString().slice(0, 10);
-                                        var start = new  Date(document.getElementById('date_start').value).toISOString().slice(0, 10);
-                                        var end = new  Date(document.getElementById('date_end').value).toISOString().slice(0, 10);
-                                        console.log(start);
-                                        console.log(date);
-                                        console.log(end > start);
-                                        if(start >= date && end > start)
-                                        {
-                                            return true;
-                                        }
-                                        else{
-                                            alert('Veuillez choisir une date de debut superieur a la date actuelle et une date de fin superieur a celle de debut');
-                                            return false;
-                                        }
-                                    }
-                                </script>
                                 </div>
                             <div class="one-half ml-md-5 align-self-center">
                                 @if (Session::has('errors'))
@@ -131,17 +109,18 @@
                                     </div>
                                 @endif
                                     <center><h2>{{trans('free_content2')}}</h2></center>
-                                <form action="{{ route('questionnaire.identify_free') }}" method="post" onsubmit="return verifDate(this)">
+                                <form action="{{ route('forms.show_free') }}" method="post" >
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="token">{{trans('free_form2_label1')}}</label>
-                                            <input id="token" type="text" class="form-control" name="token" placeholder="Entrer l'ID du sondage" required >
+                                            <label for="token">Code du formulaire</label>
+                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required >
                                         </div>
                                         <div class="form-group col-12">
-                                            <label for="password">{{trans('free_form2_label2')}}</label>
-                                            <input id="password" type="password" class="form-control " name="password">
+                                            <label for="purpose">Mot de passe</label>
+                                            <input type="password" class="form-control" id="password"  name="password" required >
                                         </div>
+
                                         <div class="form-group col-6">
                                         </div>
                                         <div class="form-group col-6">

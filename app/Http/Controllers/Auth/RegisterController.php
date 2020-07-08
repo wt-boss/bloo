@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
@@ -28,13 +26,6 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -44,19 +35,63 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm(Request $request)
+    {
+        $user_data = [];
+        if ($request->has('code')) {
+            $user = User::where('email_token', $request->code)->first();
+            abort_if(!$user, 404);
+
+            $user_data = ['code' => $request->code, 'email' => $user->email];
+        }
+
+        return view('auth.register', compact('user_data'));
+    }
+
+    public function register(Request $request)
+    {
+
+        $has_code = $request->has('code');
+        if ($has_code) {
+            $user = User::where('email_token', $request->code)->first();
+            abort_if(!$user, 404);
+        }
+
+        $this->validator($request->all(), $has_code)->validate();
+
+        if ($has_code) {
+            $this->updateUser($user, $request->all());
+
+            auth()->login($user);
+
+            return redirect()->route('forms.index');
+        }
+
+        $user = $this->create($request->all());
+        $user->sendEmailVerificationNotification();
+
+        return view('auth.register-complete', compact('user'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data, $ignore_email = false)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        $rules = [
+            'first_name' => ['required', 'string', 'min:3', 'max:100'],
+            'last_name' => ['required', 'string', 'min:3', 'max:100'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ];
+
+        if (!$ignore_email) {
+            $rules['email'] = ['required', 'string', 'email', 'max:190', 'unique:users,email,null,id,deleted_at,null'];
+        }
+
+        return Validator::make($data, $rules);
     }
 
     /**
@@ -68,40 +103,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => ucwords($data['first_name'], '- '),
+            'last_name' => ucwords($data['last_name'], '- '),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 0,
-            'api_token' => Str::random(80),
+            'email_token' => Str::random(64)
         ]);
     }
 
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
+    protected function updateUser(User $user, array $data)
     {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        if($request->ajax()){
-            // If request from AJAX
-            return [
-                'success' => true,
-                'redirect' => $this->redirectPath() ?: route('home'),
-            ];
-        } else {
-            // Normal POST do redirect
-            return $this->registered($request, $user)
-                ?: redirect($this->redirectPath());
-        }
-
+        $user->first_name = ucwords($data['first_name'], '- ');
+        $user->last_name = ucwords($data['last_name'], '- ');
+        $user->password = Hash::make($data['password']);
+        $user->email_token = null;
+        $user->save();
     }
-
 }
