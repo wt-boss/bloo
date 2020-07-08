@@ -39,7 +39,6 @@
                     <tr>
                         <th></th>
                         <th>name</th>
-                        <th class="text-center">description</th>
                         <th class="text-center">Date debut</th>
                         <th class="text-center">Date fin</th>
                         <th class="text-center">Entreprise</th>
@@ -47,6 +46,7 @@
                         <th class="text-center">Nbre de site</th>
                         <th class="text-center">Nbre d'opérateur</th>
                         <th class="text-center">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +55,6 @@
                         <tr>
                             <td></td>
                         <td>{{ $operation->nom }}</td>
-                            <td class="text-center">{{$operation->description}}</td>
                             <td class="text-center">debut</td>
                             <td class="text-center">fin</td>
                             <td class="text-center">entreprise</td>
@@ -64,7 +63,7 @@
                             <td class="text-center">nombre d'operateur</td>
                             <td class="text-center">
                                 <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn btn-xs btn-success mb-5">Form</a>
-                                <a href="{{ route('operation.show', [$operation->id]) }}" class="btn btn-xs btn-default mb-5 position-right">View</a>
+                                <a href="{{ route('operation.show', [$operation->id]) }}" class="btn btn-xs btn-default mb-5 ">View</a>
                                 <a href="{{  route('operation.edit', [$operation->id]) }}" class="btn btn-xs btn-primary mb-5 position-right">Edit</a>
                                 <a href="{{ route('operation.destroy', $operation->id) }}" class="btn btn-xs btn-danger mb-5 position-right" data-id="{{ $operation->id }}" data-method="delete" data-item="form" data-ajax="true">Delete</a>
                             </td>

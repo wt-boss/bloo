@@ -109,8 +109,6 @@ class FormController extends Controller
     public function show(Form $form)
     {
         $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
 
         $form->load('fields', 'collaborationUsers', 'availability');
 
