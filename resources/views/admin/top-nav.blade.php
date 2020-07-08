@@ -91,14 +91,6 @@
                             </a>
                         </li>
                             @endif
-                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
-                              <li class="nav-link <?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
-                            <a href="{{route('messages_index')}}" >
-                                <i class="nav-icon fas fa-comment-alt"></i>
-                                <span>Messages</span>
-                            </a>
-                        </li>
-                              @endif
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

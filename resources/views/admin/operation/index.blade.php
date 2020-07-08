@@ -65,6 +65,7 @@
                                 <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn btn-xs btn-success mb-5">Form</a>
                                 <a href="{{ route('operation.show', [$operation->id]) }}" class="btn btn-xs btn-default mb-5 ">View</a>
                                 <a href="{{  route('operation.edit', [$operation->id]) }}" class="btn btn-xs btn-primary mb-5 position-right">Edit</a>
+                                <a href="{{route('messages_show',$operation->id)}}" class="btn btn-xs btn-info mb-5 position-right">Messages</a>
                                 <a href="{{ route('operation.destroy', $operation->id) }}" class="btn btn-xs btn-danger mb-5 position-right" data-id="{{ $operation->id }}" data-method="delete" data-item="form" data-ajax="true">Delete</a>
                             </td>
                         </tr>
