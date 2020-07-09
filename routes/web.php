@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::redirect('/', 'forms')->name('home');
 
 
@@ -64,6 +66,7 @@ Route::namespace('Auth')->group(function () {
 Route::get('profile', 'ProfileController@index')->name('profile.index');
 Route::put('profile', 'ProfileController@update')->name('profile.update');
 Route::get('entreprise','OperationController@entreprise')->name('entreprise');
+Route::post('entreprise', 'OperationController@saventreprise')->name('saventreprise');
 
 Route::namespace('Form')->group(function () {
     //free Form Route

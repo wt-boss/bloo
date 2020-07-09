@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Entreprise;
 use App\Opération;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class OperationController extends Controller
 {
@@ -38,14 +39,25 @@ class OperationController extends Controller
         return view('admin.operation.entreprise');
     }
 
-    /**
-     *
-     */
+
     public function saventreprise(Request $request)
     {
         $parameters = $request->all();
-        return view('admin.operation.entreprise');
-        //return true;
+        $entreprise = new Entreprise();
+        $entreprise->user_id = Auth::user()->id;
+        $entreprise->nom = $parameters['nom'];
+        $entreprise->addrese = $parameters['adresse'];
+        $entreprise->Numero_contribuable =  $parameters['contribuable'];
+        $entreprise->numero_siret =  $parameters['siret'];
+        $entreprise->pays =  $parameters['pays'];
+        $entreprise->ville =  $parameters['ville'];
+        $entreprise->telephone =  $parameters['telephone'];
+        $entreprise->save();
+        if(Auth::check())
+        {
+           return view('admin.operation.create');
+        }
+
     }
 
     /**

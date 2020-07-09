@@ -28,22 +28,19 @@
 
     <div class="panel panel-flat">
             <div class="panel-body">
-                {!! Form::open([
-                    'action' => ['OperationController@saventreprise'],
-                    'files' => true
-                ])
-                !!}
-                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
-                        <input class="form-control" type="text" name="adresse" placeholder="Adresse">
-                        <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
-                        <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
-                        <input class="form-control" type="text" name="ville" placeholder="Ville">
-                        <input class="form-control" type="text" name="pays" placeholder="Pays">
-                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
-                        <br>
-                        <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
-                        <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
-                {!! Form::close() !!}
+                        <form method="post" action="{{ route('saventreprise') }}">
+                           @csrf
+                           <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
+                           <input class="form-control" type="text" name="adresse" placeholder="Adresse">
+                           <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
+                           <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
+                           <input class="form-control" type="text" name="ville" placeholder="Ville">
+                           <input class="form-control" type="text" name="pays" placeholder="Pays">
+                           <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
+                           <br>
+                           <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
+                           <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
+                        </form>
 
             </div>
     </div>
