@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Opération;
-use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+
 
 class OperationController extends Controller
 {
@@ -31,12 +30,22 @@ class OperationController extends Controller
      */
     public function create()
     {
-        return view('admin.operation.index');
+        return view('admin.operation.create');
     }
 
     public function entreprise()
     {
         return view('admin.operation.entreprise');
+    }
+
+    /**
+     *
+     */
+    public function saventreprise(Request $request)
+    {
+        $parameters = $request->all();
+        return view('admin.operation.entreprise');
+        //return true;
     }
 
     /**
