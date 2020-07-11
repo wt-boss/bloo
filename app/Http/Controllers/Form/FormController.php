@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Form;
 
 
 use App\Form;
+use App\FormAvailability;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +77,11 @@ class FormController extends Controller
         return redirect()->route('forms.show', $form->code);
     }
 
+    public function logout_free(){
+       $user = Auth::user();
+       Auth::logout($user, true);
+       return redirect('/');
+    }
 
     public function store(Request $request)
     {

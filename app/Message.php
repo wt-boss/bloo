@@ -13,6 +13,6 @@ class Message extends Model
     }
     public function operation()
     {
-        return $this->belongsTo(Opération::class);
+        return $this->belongsTo(Operation::class);
     }
 }

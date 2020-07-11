@@ -12,7 +12,6 @@
 */
 
 
-
 Route::redirect('/', 'forms')->name('home');
 
 
@@ -33,6 +32,10 @@ Route::resource('users','UsersController');
 Route::get('/test2', function () {
     return view('adminlte.home');
 });
+
+Route::get('listlecteurs/{id}','OperationController@listLecteurs');
+Route::get('listoperateurs','OperationController@listOperateurs');
+Route::post('/addlecteurs/id','OperationController@addlecteurs')->name('ajoutlecteur');
 
 Route::namespace('Form')->group(function () {
     Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view');
@@ -68,10 +71,13 @@ Route::put('profile', 'ProfileController@update')->name('profile.update');
 Route::get('entreprise','OperationController@entreprise')->name('entreprise');
 Route::post('entreprise', 'OperationController@saventreprise')->name('saventreprise');
 
+
 Route::namespace('Form')->group(function () {
     //free Form Route
     Route::post('forms_free', 'FormController@store_free')->name('forms.store_free');
     Route::post('form_free', 'FormController@show_free')->name('forms.show_free');
+    Route::get('logout_free', 'FormController@logout_free')->name('forms.logout_free');
+
 });
 
 Route::middleware(['auth', 'verified'])->namespace('Form')->group(function () {

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
-use App\Opération;
+use App\FormAvailability;
+use App\Form;
+use App\Operation;
+use App\OpUsers;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +24,9 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Opération::with('form')->get();
-        return view('admin.operation.index',compact('operations'));
+        $operations = Operation::with('form')->get();
+
+        return view('admin.operation.index', compact('operations'));
     }
 
     /**
@@ -53,11 +58,59 @@ class OperationController extends Controller
         $entreprise->ville =  $parameters['ville'];
         $entreprise->telephone =  $parameters['telephone'];
         $entreprise->save();
-        if(Auth::check())
-        {
-           return view('admin.operation.create');
+        if (Auth::check()) {
+            return view('admin.operation.create');
         }
+    }
 
+
+    public function addlecteurs(Request $request)
+    {
+        $parameters = $request->all();
+        $operation = Operation::findOrFail($parameters['operation']);
+       // dd($parameters);
+        foreach($parameters['lecteurs'] as $lecteur)
+        {
+            $user = User::findOrFail($lecteur);
+            $user->operations()->attach($operation);
+
+        }
+        die();
+
+
+
+    }
+
+    public function listLecteurs($id)
+    {
+        $operation = Operation::with('users')->findOrFail($id);
+        $selected_lecteurs = $operation->users;
+        $lecteurs = User::where('role', '0')->get();
+
+        $opusers = [];
+
+        foreach($lecteurs as $lecteur)
+        {
+            $opuser = new OpUsers();
+            $opuser->user = $lecteur;
+            $opuser->status = false;
+            foreach($selected_lecteurs as $selected)
+            {
+                if($selected->id === $lecteur->id )
+                {
+                    $opuser->status = true;
+                break;
+                }
+            }
+            $opusers[] = $opuser;
+        }
+        return response()->json($opusers);
+    }
+
+    public function listOperateurs()
+    {
+        $operateurs = User::where('role', '1')->get();
+        return response()->json($operateurs);
     }
 
     /**
@@ -68,7 +121,35 @@ class OperationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $parameters = $request->all();
+
+        $form = new Form([
+            'title' => ucfirst($parameters['nom_formulaire']),
+            'description' => ucfirst($parameters['description_formulaire']),
+            'status' => Form::STATUS_DRAFT,
+            'user_id' => auth()->user()->id,
+
+        ]);
+        $form->generateCode();
+        $form->save();
+        $form_id = $form->id;
+
+        $formavalide = new FormAvailability();
+        $formavalide->form_id = $form_id ;
+        $formavalide->open_form_at  = $parameters['date_debut'];
+        $formavalide->close_form_at = $parameters['date_fin'];
+        $formavalide->closed_form_message = "Formulaire clos";
+        $formavalide->save();
+
+        $operation = new Operation();
+        $operation->nom = $parameters['nom_operation'];
+        $operation->form_id = $form_id;
+        $operation->date_start = $parameters['date_debut'];
+        $operation->date_end = $parameters['date_fin'];
+        $operation->user_id = Auth::user()->id;
+        $operation->save();
+
+        return redirect()->route('operation');
     }
 
     /**
@@ -79,7 +160,8 @@ class OperationController extends Controller
      */
     public function show($id)
     {
-        //
+        $operation = Operation::with('users')->findOrFail($id);
+        return view('admin.operation.show',compact('operation','operations'));
     }
 
     /**

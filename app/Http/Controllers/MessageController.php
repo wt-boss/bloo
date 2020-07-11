@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PrivateMessageSent;
 use App\Message;
-use App\Opération;
+use App\Operation;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -17,12 +17,12 @@ class MessageController extends Controller
 
     public function index()
     {
-        $All = Opération::all();
-        $operations = Opération::where('user_id',auth()->user()->id)->first()->get();
+        $All = Operation::all();
+        $operations = Operation::where('user_id',auth()->user()->id)->first()->get();
         return view('admin.messagerie.home',compact('operations','All'));
     }
     public function show(Request $request,$id){
-        $operation = Opération::findOrFail($id);
+        $operation = Operation::findOrFail($id);
         return view('admin.messagerie.index',compact('operation'));
     }
     public function users(){
@@ -30,7 +30,7 @@ class MessageController extends Controller
     }
     public function privateMessages(User $user,$id)
     {
-        $operation = Opération::findOrFail($id);
+        $operation = Operation::findOrFail($id);
         $privateCommunication = Message::with('user')
             ->where(['user_id' => auth()->id(), 'receiver_id' => $user->id])
             ->where(['operation_id' => $operation->id])

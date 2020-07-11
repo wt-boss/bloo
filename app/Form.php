@@ -25,7 +25,7 @@ class Form extends Model
     protected $cascadeDeletes = ['fields', 'responses'];
 
     protected $fillable = [
-        'user_id', 'title', 'description', 'code', 'status',
+        'user_id',  'operation_id', 'title', 'description', 'code', 'status',
     ];
 
     public function getRouteKeyName()
@@ -90,8 +90,8 @@ class Form extends Model
         ];
     }
 
-     public function operation()
+     public function operations()
      {
-        return $this->belongsTo(Opération::class);
+        return $this->hasMany(Operation::class);
      }
 }

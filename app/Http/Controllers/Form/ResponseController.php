@@ -132,7 +132,9 @@ class ResponseController extends Controller
 
             $response = new FormResponse([
                 'respondent_ip' => (string) $request->ip(),
-                'respondent_user_agent' => (string) $request->header('user-agent')
+                'respondent_user_agent' => (string) $request->header('user-agent'),
+                'respondent_id' =>(string) Auth::user()->id
+
             ]);
 
             $response->generateResponseCode();

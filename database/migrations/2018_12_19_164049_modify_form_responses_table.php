@@ -20,6 +20,7 @@ class ModifyFormResponsesTable extends Migration
             $table->string('response_code', 64)->after('form_id');
             $table->ipAddress('respondent_ip')->after('response_code');
             $table->string('respondent_user_agent', 511)->after('respondent_ip');
+            $table->string('respondent_id')->after('respondent_user_agent');
         });
     }
 

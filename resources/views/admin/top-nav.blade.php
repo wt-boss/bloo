@@ -95,10 +95,10 @@
                 </div>
                 <!-- /.navbar-collapse -->
                 <!-- Navbar Right Menu -->
-                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <li class="dropdown messages-menu">
                             <!-- Menu toggle button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -132,8 +132,6 @@
                                 <li class="footer"><a href="#">See All Messages</a></li>
                             </ul>
                         </li>
-                        <!-- /.messages-menu -->
-
                         <!-- Notifications Menu -->
                         <li class="dropdown notifications-menu">
                             <!-- Menu toggle button -->
@@ -237,10 +235,18 @@
                                 </li>
                             </ul>
                         </li>
+                         @endif
+                         @if (auth()->user()->hasRole('Free'))
+                        <li class="dropdown user user-menu">
+                                <a href="{{ route('forms.logout_free') }}">
+                                        <span class="hidden-xs"><b>ACCEUIL</b></span>
+                                </a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
                 <!-- /.navbar-custom-menu -->
-                @endif
+
             </div>
             <!-- /.container-fluid -->
         </nav>

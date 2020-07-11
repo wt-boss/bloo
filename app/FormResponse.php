@@ -12,7 +12,7 @@ class FormResponse extends Model
     use SoftDeletes, CascadeSoftDeletes;
 
     protected $fillable = [
-        'form_id', 'response_code', 'respondent_ip', 'respondent_user_agent'
+        'form_id', 'response_code', 'respondent_ip', 'respondent_user_agent','respondent_id'
     ];
 
     protected $cascadeDeletes = ['fieldResponses'];

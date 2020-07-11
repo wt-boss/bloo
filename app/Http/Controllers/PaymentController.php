@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use AkibTanjim\Currency\Currency;
 use App\Entreprise;
 use App\Offre;
-use App\Opération;
+use App\Operation;
 use App\Paiement;
 use App\User;
 use Illuminate\Http\Request;
@@ -144,7 +144,7 @@ class PaymentController extends Controller
         /** Si l'offre choisi est primus alors, creation d'une operation */
         if($donées['amount'] == "3466.22" )
         {
-            $operation = new Opération();
+            $operation = new Operation();
             $operation->user_id = $user_id;
             $operation->nom = $donées["operation_name"];
             $operation->description = $donées["operation_purpose"];
