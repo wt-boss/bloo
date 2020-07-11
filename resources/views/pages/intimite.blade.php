@@ -1,5 +1,9 @@
 @extends('layouts.frontend.app')
 
+@section('page_title')
+    {{ trans('privacy_title') }}
+@endsection
+
 @section('content')
 
 <!-- <div class="js-fullheight"> -->
@@ -22,7 +26,7 @@
       <div class="row">
         <div class="col-md-4 sidebar ftco-animate ">
 
-            <div class="sidebar-box ftco-animate">
+            <div class="sidebar-box ftco-animate" style="padding-top: 0px;">
               <div class="categories">
                 <h3>{{ trans('footer_privacy') }}</h3>
                 <li ><a href="#1" >{{ trans('politique_quide2') }} </a></li>
@@ -35,7 +39,6 @@
                 <li><a href="#8">{{ trans('politique_quide66') }} </a></li>
                 <li><a href="#9">{{ trans('politique_quide68') }} </a></li>
                 <li><a href="#10">{{ trans('guide141') }} </a></li>
-
               </div>
             </div>
           </div>
@@ -44,7 +47,7 @@
           <p>{{ trans('politique_content') }}</p>
           <p>{{ trans('politique_content1') }}</p>
           <h2 class="mb-3 mt-5">{{ trans('politique_quide') }}</h2>
-          <ol style="color: rgb(33, 125, 255);">
+          <ol style="color: #0065A1;">
           <li><a href="#1">{{ trans('guide1') }}</a></li>
           <li><a href="#2">{{ trans('guide3') }}</a></li>
           <li><a href="#3">{{ trans('guide4') }}</a></li>
@@ -56,7 +59,7 @@
           <li><a href="#9">{{ trans('guide10') }}</a></li>
           </ol>
           <p><a href=""></a>   {{ trans('guide') }}</p>
-         
+
 
           <h2 id="1" class="mb-3 mt-5">{{ trans('politique_quide2') }}</h2>
           <p>{{ trans('guide12') }}</p>

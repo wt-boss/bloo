@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">bloo</a>
+    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('assets/images/bloo_logo.png')}}" alt="Bloo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -11,7 +11,7 @@
           <li class="{{Request::is('services')? "active nav-item": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
           <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{ route('sondages') }}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
           <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
-          <li class="{{Request::is('about')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
+          <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
 
             @if (Auth::check())
                 <li class="nav-item cta"> <div class="dropdown">

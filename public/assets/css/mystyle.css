@@ -1,4 +1,212 @@
-/*!
+/*
+* Font config ...
+font-family: 'Baloo 2', cursive;
+font-family: 'Rubik', sans-serif;
+*/
+/*
+color : #217dff -> #0080BB
+*/
+
+/* Accordeon */
+#accordion .card .card-header a span i {
+    color: #0065A1;
+}
+/* Gestion des titres */
+.heading-section .subheading {
+    font-family: "Baloo 2", cursive;
+    font-size: 20px;
+    font-weight: 500;
+    color: #0065A1;
+}
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    font-family: "Baloo 2", cursive;
+    color: #6F6F6F;
+    font-weight: 600;
+}
+
+/* Global */
+#accordion .card .card-header a {
+    color: #0065A1;
+    font-family: "Baloo 2", sans-serif;
+}
+
+/* Header - navbar */
+.ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.ftco-navbar-light.scrolled .nav-item.cta > a {
+    background: #0065A1;
+}
+.ftco-navbar-light.scrolled .nav-item.cta > a span {
+    display: inline-block;
+    color: #fff !important;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 500;
+}
+.ftco-navbar-light.scrolled .nav-item > a {
+    font-family: "Baloo 2";
+    font-weight: 500;
+}
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Baloo 2", sans-serif;
+}
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Footer */
+.ftco-footer .ftco-footer-widget h2 {
+    font-weight: 500;
+}
+.ftco-footer .ftco-footer-widget .btn-primary {
+    background: #fff !important;
+    border: 2px solid #fff !important;
+    color: #0065A1;
+}
+
+/* Sondage en ligne */
+.ftco-section .nav-pills .nav-link.active, .ftco-section .nav-pills .nav-link:hover {
+    color: #fff;
+    font-family: "Baloo 2", sans-serif;
+    background: #0065A1;
+    border: 1px solid #0065A1;
+    font-weight: 500;
+}
+.ftco-section .nav-pills .nav-link {
+    color: #0065A1;
+    font-family: "Baloo 2", sans-serif;
+    background: #fff;
+    border: 1px solid #0065A1;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.sondage .form-control {
+    background: #fff !important;
+    color: #6F6F6F !important;
+    font-family: "Rubik", sans-serif;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px solid #fff;
+}
+
+.sondage label {
+    font-family: "Baloo 2", sans-serif;
+}
+
+/* Home page */
+.slider-text .btn-primary {
+    color: #0065A1 !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+.services .icon span {
+    font-size: 60px;
+    color: #0065A1;
+}
+.block-7 .heading {
+    font-family: "Baloo 2", sans-serif;
+    background: #0065A1;
+    font-weight: 500;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+}
+.subscribe-form .form-group input {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* Gestion des boutons */
+.btn {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 500;
+}
+.bg-light {
+    background: #EAF5F8 !important;
+    z-index: 0;
+}
+.bg-primary {
+    background:#0065A1;
+}
+.btn:hover, .btn:active, .btn:focus {
+    outline: none;
+}
+/* .btn.btn-primary {
+    background: #EAF5F8;
+    border: 2px solid #EAF5F8;
+    color:#0065A1;
+} */
+.btn.btn-primary {
+    background: #0065A1;
+    border: 2px solid #0065A1;
+    color:#fff;
+}
+.btn.btn-primary:hover {
+    border: 2px solid#0065A1;
+    color:#0065A1;
+}
+.btn.btn-primary.btn-outline-primary {
+    border: 2px solid#0065A1;
+    color:#0065A1;
+}
+.btn.btn-primary.btn-outline-primary:hover {
+    background:#0065A1;
+}
+.btn.btn-outline-white:hover, .btn.btn-outline-white:focus, .btn.btn-outline-white:active {
+    color:#0065A1;
+}
+.btn-outline-primary {
+    color: #0065A1;
+    border-color: #0065A1;
+}
+.btn-outline-primary:hover {
+    color: #212529;
+    background-color: #8AD2E6;
+    border-color: #8AD2E6;
+}
+.btn-outline-primary:focus, .btn-outline-primary.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+}
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #8AD2E6;
+    background-color: transparent;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+    color: #212529;
+    background-color: #8AD2E6;
+    border-color: #8AD2E6;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+}
+
+/* Form details */
+
+
+
+/*
  *
  */
 .apd, .xaf {
@@ -47,25 +255,18 @@
     .ftco-section.login-page {
         padding: 6em 0 0 0;
     }
-    
-#btn-btn{
-    margin-top: 4px;
-margin-left: -70px;
 
-   
-}
-.jt{
-    margin-left: 23px;
-    padding-left: 1px;
-    border-right-width: 0px;
-
-width: 56%;
-height: calc(1.25rem + 5px);
-
-
-}
-
-
+    #btn-btn{
+        margin-top: 4px;
+        margin-left: -70px;
+    }
+    .jt{
+        margin-left: 23px;
+        padding-left: 1px;
+        border-right-width: 0px;
+        width: 56%;
+        height: calc(1.25rem + 5px);
+    }
 }
 
 .form-check-input {
@@ -74,13 +275,8 @@ height: calc(1.25rem + 5px);
 #font{
     font-size: 14px;
     margin-top: -11px;
-margin-bottom: 0.5rem;
-color: rgb(0, 0, 0);
-
-}
-#font h2{
-    font-size: 21px;
-    color: #000;
+    margin-bottom: 0.5rem;
+    /* color: rgb(0, 0, 0); */
 }
 
 
@@ -88,18 +284,58 @@ color: rgb(0, 0, 0);
     border-radius:  0.25rem  0.25rem;
     font-size: 15px;
     color: #fff;
-    background-color: #217dff;
-    border-color: #217dff;
-    padding: 5px 5px;
+    background-color: #0065A1;
+    margin-top: 5px;
+    border-color: #0065A1;
+    padding: 5px 10px;
     border: 0 none;
-    font-weight: 150;
-
+    font-weight: 500;
     border-left-style: solid;
+    font-family: "Baloo 2", sans-serif;
 }
 
 jt{
-   
+    width: 75%;
+}
 
-width: 75%;
+
+/**
+    Ajustement du header -- cnoumbo
+*/
+a.navbar-brand img {
+    width: 100px;
+    height: auto;
+}
+
+/* modification overlay */
+.hero-wrap .overlay {
+    background: #8AD2E6;
+    background: -moz-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, #8AD2E6), color-stop(100%, #0080BB));
+    background: -webkit-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -o-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -ms-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -webkit-linear-gradient(315deg, #8AD2E6 0%, #0080BB 100%);
+    background: -o-linear-gradient(315deg, #8AD2E6 0%, #0080BB 100%);
+    background: linear-gradient(135deg, #8AD2E6 0%, #0080BB 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8AD2E6', endColorstr='#0080BB', GradientType=1 );
+}
+
+/* Before footer */
+.ftco-section-parallax .parallax-img {
+    background: #8AD2E6;
+    background: -moz-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, #8AD2E6), color-stop(100%, #0080BB));
+    background: -webkit-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -o-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -ms-linear-gradient(-45deg, #8AD2E6 0%, #0080BB 100%);
+    background: -webkit-linear-gradient(315deg, #8AD2E6 0%, #0080BB 100%);
+    background: -o-linear-gradient(315deg, #8AD2E6 0%, #0080BB 100%);
+    background: linear-gradient(135deg, #8AD2E6 0%, #0080BB 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8AD2E6', endColorstr='#0080BB', GradientType=1 );
+}
+/* Footer */
+.ftco-footer {
+    background:#0080BB;
 }
 

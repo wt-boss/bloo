@@ -149,7 +149,7 @@
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td> <i class="icon-cloud" style="color: #217dff; "></i> <a href="">{{ trans('Accès Bloo Market Vue') }}</a></td>
+                                    <td><a href="">{{ trans('Accès Bloo Market Vue') }}</a></td>
                                     <td>Payant</td>
                                     <td>Payant</td>
                                     <td>Gratuit</td>
