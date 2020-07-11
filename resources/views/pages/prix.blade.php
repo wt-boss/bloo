@@ -18,7 +18,7 @@
           </div>
         </div>
 
-     
+
 
 
 
@@ -136,7 +136,6 @@
                                     <td>12KF</td>
                                     <td>50KF</td>
                                   </tr>
-
                                   <tr>
                                     <td> <a href="">{{ trans('Remboursable') }} </a></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
@@ -150,7 +149,7 @@
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td> <i class="icon-cloud" style="color: #217dff; "></i> <a href="">{{ trans('Accès Bloo Market Vue') }}</a></td>
+                                    <td><a href="">{{ trans('Accès Bloo Market Vue') }}</a></td>
                                     <td>Payant</td>
                                     <td>Payant</td>
                                     <td>Gratuit</td>

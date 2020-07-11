@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title> BLOO </title>
+    <title> Bloo | @yield('page_title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="{{asset('assets/images/bloo_favicon.png')}}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Rubik:wght@300&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
@@ -30,18 +34,12 @@
       @yield('css')
   </head>
   <body>
-
-
     <!-- END nav -->
-
-
     @include('layouts.frontend.partial.nav')
 
     @yield('content')
 
     @include('layouts.frontend.partial.footer')
-
-
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -144,7 +142,8 @@
             }
         });
     </script>
-  <script src="{{asset('js/dist/clipboard.js')}}"></script>
+    <script src="{{asset('js/dist/clipboard.js')}}"></script>
+    <script src="{{asset('assets/js/myscript.js')}}"></script>
     @yield('script')
   </body>
 </html>

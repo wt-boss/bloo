@@ -52,9 +52,7 @@
 						        </div>
 						      </div>
 
-
     						</div>
-
     						<div class="col-md-6">
 
                                 <div class="card">
@@ -70,11 +68,9 @@
                                              <p>{{ trans('service_section_content26') }}</p>
                                              <p>{{ trans('service_section_content27') }}</p>
                                              <p>{{ trans('service_section_content28') }}</p>
-
                                       </div>
                                     </div>
                                   </div>
-
     							<div class="card">
 						        <div class="card-header">
 										  <a class="card-link" data-toggle="collapse"  href="#menu4" aria-expanded="false" aria-controls="menu4">{{ trans('service_section_content_question4') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
@@ -85,10 +81,6 @@
 						          </div>
 						        </div>
 						      </div>
-
-
-
-
     						</div>
     					</div>
 				    </div>
@@ -101,72 +93,61 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-            <span class="subheading">{{ trans('service_section1_header') }}</span>
-            <h2 class="mb-4">{{ trans('service_section1_title') }}</h2>
-            <p>{{ trans('service_section1_content') }}</p>
-            <p>{{ trans('') }}</p>
-          </div>
+                    <span class="subheading">{{ trans('service_section1_header') }}</span>
+                    <h2 class="mb-4">{{ trans('service_section1_title') }}</h2>
+                    <p>{{ trans('service_section1_content') }}</p>
+                    <p>{{ trans('') }}</p>
+                </div>
             </div>
             <div class="row">
-
-          <div class="col-md-12 align-items-center ftco-animate">
-
-            <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-              <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                  <div class="d-md-flex">
-                      <div class="one-forth align-self-center">
-                          <img src="{{asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
-                      </div>
-                      <div class="one-half ml-md-5 align-self-center">
-                        <p>{{ trans('service_section1_content1') }}</p>
-                        <p>{{ trans('service_section1_content2') }}</p>
-                        <p>{{ trans('service_section1_content3') }}</p>
-
-                      </div>
-                  </div>
-              </div>
+                <div class="col-md-12 align-items-center ftco-animate">
+                    <div class="tab-content ftco-animate" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                            <div class="d-md-flex">
+                                <div class="one-forth align-self-center">
+                                    <img src="{{asset('assets/images/recherche_consulting.jpg') }}" class="img-fluid border" alt="">
+                                </div>
+                                <div class="one-half ml-md-5 align-self-center">
+                                    <p>{{ trans('service_section1_content1') }}</p>
+                                    <p>{{ trans('service_section1_content2') }}</p>
+                                    <p>{{ trans('service_section1_content3') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
         </div>
     </section>
+
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-            <span class="subheading">{{ trans('service_section2_header') }}</span>
-            <h2 class="mb-4">{{ trans('service_section2_title') }}</h2>
-            <p>{{ trans('service_sectio11_content') }}</p>
-            <p>{{ trans('') }}</p>
-          </div>
+                    <span class="subheading">{{ trans('service_section2_header') }}</span>
+                    <h2 class="mb-4">{{ trans('service_section2_title') }}</h2>
+                    <p>{{ trans('service_sectio11_content') }}</p>
+                    <p>{{ trans('') }}</p>
+                </div>
             </div>
             <div class="row">
-
-          <div class="col-md-12 align-items-center ftco-animate">
-
-            <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-              <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                  <div class="d-md-flex">
-
-                      <div class="one-half ml-md-5 align-self-center">
-                        <p>{{ trans('service_sectio11_content1') }}</p>
-                        <p>{{ trans('service_sectio11_content2') }}</p>
-                        <p>{{ trans('service_sectio11_content3') }}</p>
-
-                      </div>
-
-                      <div class="one-forth align-self-center">
-                        <img src="{{asset('assets/images/dashboard_full_1.jpg') }}" class="img-fluid border" alt="">
+                <div class="col-md-12 align-items-center ftco-animate">
+                    <div class="tab-content ftco-animate" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                            <div class="d-md-flex">
+                                <div class="one-half ml-md-5 align-self-center" style="margin-right: 3rem !important;">
+                                    <p>{{ trans('service_sectio11_content1') }}</p>
+                                    <p>{{ trans('service_sectio11_content2') }}</p>
+                                    <p>{{ trans('service_sectio11_content3') }}</p>
+                                </div>
+                                <div class="one-forth align-self-center">
+                                    <img src="{{asset('assets/images/donnees_marche2.jpg') }}" class="img-fluid border" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
         </div>
     </section>
-
-
 @endsection

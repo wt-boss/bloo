@@ -1,5 +1,4 @@
 {
-
     "About us": "A propos de moi",
     "a": "information utilisateur",
     "homme_title": "plateforme de gestion des sondages en temps réel",
@@ -337,20 +336,7 @@
                      "Offres de stages":"Offres de stages",
                      "Offree":"Vous souhaitez appliquer vos savoirs ou développer vos compétences professionnelles avec nous? Alors envoyez-nous votre demande de stage et CV en un seul document. ",
                      "Offre d’emploi ":"Offre d’emploi ",
-                     "carriere6":"Vous êtes un(e) professionnel(le) avec des compétences à partager avec nous, votre profil est susceptible de nous intéresser. Envoyez votre dossier en un seul document."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                     "carriere6":"Vous êtes un(e) professionnel(le) avec des compétences à partager avec nous, votre profil est susceptible de nous intéresser. Envoyez votre dossier en un seul document.",
+    "privacy_title" : "Politique et confidentialité"
 }
 

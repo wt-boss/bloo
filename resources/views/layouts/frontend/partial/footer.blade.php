@@ -37,7 +37,7 @@
           <div class="ftco-footer-widget mb-4">
               <div class="block-23 mb-3">
                 <ul>
-                  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View</span></li>
+                  <li><span class="icon icon-map-marker"></span><span class="text">Deido, Douala</span></li>
 
                   <li><a href="#"><span class="icon icon-envelope"></span><span class="text">bloo@bloosite.com</span></a></li>
 
