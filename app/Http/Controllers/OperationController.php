@@ -81,6 +81,14 @@ class OperationController extends Controller
 
     }
 
+    public function removelecteur($id,$id1){
+
+          $user = User::findOrFail($id);
+          $operation = Operation::findOrFail($id1);
+          $operation->users()->detach($user);
+          return response()->json('true');
+    }
+
     public function listLecteurs($id)
     {
         $operation = Operation::with('users')->findOrFail($id);
@@ -92,7 +100,7 @@ class OperationController extends Controller
         foreach($lecteurs as $lecteur)
         {
             $opuser = new OpUsers();
-            $opuser->user = $lecteur;
+            $opuser = $lecteur;
             $opuser->status = false;
             foreach($selected_lecteurs as $selected)
             {
@@ -161,7 +169,7 @@ class OperationController extends Controller
     public function show($id)
     {
         $operation = Operation::with('users')->findOrFail($id);
-        return view('admin.operation.show',compact('operation','operations'));
+        return view('admin.operation.show',compact('operation'));
     }
 
     /**

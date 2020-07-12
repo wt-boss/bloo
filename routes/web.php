@@ -35,7 +35,9 @@ Route::get('/test2', function () {
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs','OperationController@listOperateurs');
-Route::post('/addlecteurs/id','OperationController@addlecteurs')->name('ajoutlecteur');
+Route::post('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur');
+Route::get('/removelecteurs/{id}/{id1}','OperationController@removelecteur');
+
 
 Route::namespace('Form')->group(function () {
     Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view');

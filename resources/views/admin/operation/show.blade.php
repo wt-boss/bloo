@@ -82,14 +82,13 @@
                         <h3 class="box-title">
                             Lecteurs
                         </h3>
-                        <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" data-toggle="modal" data-target="#modal-default"></i>   </div>
+                        <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>   </div>
                     </div>
 
             </div>
 
             <div class="box-body">
                 <ul class="nav nav-stacked">
-                @foreach ($operations as $operation )
                   @foreach ($operation->users as $user )
                      @if ($user->role === 0)
                      <li>
@@ -97,12 +96,11 @@
                            {{ $user->first_name }} {{ $user->last_name }}
                         </font></font>
                         <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                              <i class="fa fa-minus-circle"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                             </font></font></span>
                     </li>
                       @endif
                   @endforeach
-                @endforeach
                 </ul>
             </div>
             <!-- /.box-body -->
@@ -118,7 +116,7 @@
                         </h3>
                     </div>
                     <div class="col-md-1">
-                        <i class="fa fa-plus-circle" aria-hidden="true" id="getoperateur" data-toggle="modal" data-target="#operateur-default"></i>                    </div>
+                        <i class="fa fa-plus-circle" aria-hidden="true" id="getoperateur" data-toggle="modal" data-target="#"></i>                    </div>
                     <div class="col-md-1">
                         <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </div>
@@ -153,14 +151,34 @@
 
     $('#getlecteur').on('click', function (e) {
         console.log(e);
-        $.get('/listlecteurs', function (data) {
+        var operation_id = e.target.title;
+        $.get('/listlecteurs/' + operation_id, function (data) {
             console.log(data);
             $('#listlecteur').empty();
             $.each(data, function (index, lecteurObj) {
-                $('#listlecteur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'"  ></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></li>');
+                if(lecteurObj.status === true)
+                {
+                    $('#listlecteur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'" disabled></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></li>');
+                }
+                else
+                {
+                    $('#listlecteur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'"></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></li>');
+                }
             })
         });
     });
+
+    $('#removelecteur').on('click', function (e) {
+        console.log(e);
+        var operation_id = e.target.lang;
+        var user_id = e.target.title;
+        $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
+            console.log(data);
+        });
+    });
+
+
+
 
     $('#getoperateur').on('click', function (e) {
         console.log(e);
