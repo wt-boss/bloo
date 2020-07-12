@@ -34,9 +34,11 @@ Route::get('/test2', function () {
 });
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
-Route::get('listoperateurs','OperationController@listOperateurs');
+Route::get('listoperateurs/{id}','OperationController@listOperateurs');
 Route::post('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur');
+Route::post('/addoperateurs','OperationController@addoperateurs')->name('ajoutoperateur');
 Route::get('/removelecteurs/{id}/{id1}','OperationController@removelecteur');
+Route::get('/removeoperateurs/{id}/{id1}','OperationController@removeoperateur');
 
 
 Route::namespace('Form')->group(function () {

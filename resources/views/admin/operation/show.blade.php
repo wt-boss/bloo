@@ -52,9 +52,9 @@
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                     <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span></button>
-                  <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des lecteurs</font></font></h4>
+                  <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des operateur</font></font></h4>
                 </div>
-                <form method="POST" action="{{ route('ajoutlecteur') }}">
+                <form method="POST" action="{{ route('ajoutoperateur') }}">
                     @csrf
                     <input type="hidden" name="operation" value="{{ $operation->id }}">
                      <div class="modal-body">
@@ -87,7 +87,7 @@
 
             </div>
 
-            <div class="box-body">
+            <div class="box-body" id="lecteurs">
                 <ul class="nav nav-stacked">
                   @foreach ($operation->users as $user )
                      @if ($user->role === 0)
@@ -110,25 +110,35 @@
         <div class="box box-info">
             <div class="box-header">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <h3 class="box-title">
-                            Opérateurs
+                            Operateurs
                         </h3>
+                        <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>                    </div>
                     </div>
-                    <div class="col-md-1">
-                        <i class="fa fa-plus-circle" aria-hidden="true" id="getoperateur" data-toggle="modal" data-target="#"></i>                    </div>
-                    <div class="col-md-1">
-                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="box-body">
-                <!-- Color Picker -->
 
+            </div>
+
+            <div class="box-body" id="lecteurs">
+                <ul class="nav nav-stacked">
+                  @foreach ($operation->users as $user )
+                     @if ($user->role === 1)
+                     <li>
+                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                           {{ $user->first_name }} {{ $user->last_name }}
+                        </font></font>
+                        <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                              <i class="fa fa-minus-circle"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                            </font></font></span>
+                    </li>
+                      @endif
+                  @endforeach
+                </ul>
             </div>
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
+
 
     </div>
 
@@ -174,19 +184,36 @@
         var user_id = e.target.title;
         $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
             console.log(data);
+
+        });
+    });
+
+    $('#removeoperateur').on('click', function (e) {
+        console.log(e);
+        var operation_id = e.target.lang;
+        var user_id = e.target.title;
+        $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
+            console.log(data);
+
         });
     });
 
 
-
-
     $('#getoperateur').on('click', function (e) {
         console.log(e);
-        $.get('/listoperateurs', function (data) {
+        var operation_id = e.target.title;
+        $.get('/listoperateurs/' + operation_id, function (data) {
             console.log(data);
             $('#listoperateur').empty();
             $.each(data, function (index, OperateurObj) {
-                $('#listoperateur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operteurs[]" value="'+ OperateurObj.id +'"  ></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></li>');
+                if(OperateurObj.status === true)
+                {
+                    $('#listoperateur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"  disabled></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></li>');
+                }
+                else
+                {
+                    $('#listoperateur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></li>');
+                }
             })
         });
     });

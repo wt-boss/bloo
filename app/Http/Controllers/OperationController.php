@@ -75,10 +75,21 @@ class OperationController extends Controller
             $user->operations()->attach($operation);
 
         }
-        die();
+        return back();
+    }
 
 
+    public function addoperateurs(Request $request)
+    {
+        $parameters = $request->all();
+        $operation = Operation::findOrFail($parameters['operation']);
+        foreach($parameters['operateurs'] as $operateur)
+        {
+            $user = User::findOrFail($operateur);
+            $user->operations()->attach($operation);
 
+        }
+        return back();
     }
 
     public function removelecteur($id,$id1){
@@ -88,6 +99,14 @@ class OperationController extends Controller
           $operation->users()->detach($user);
           return response()->json('true');
     }
+
+    public function removeoperateur($id,$id1){
+
+        $user = User::findOrFail($id);
+        $operation = Operation::findOrFail($id1);
+        $operation->users()->detach($user);
+        return response()->json('true');
+  }
 
     public function listLecteurs($id)
     {
@@ -115,10 +134,28 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    public function listOperateurs()
+    public function listOperateurs($id)
     {
+        $operation = Operation::with('users')->findOrFail($id);
+        $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
-        return response()->json($operateurs);
+        $opusers = [];
+        foreach($operateurs as $operateur)
+        {
+            $opuser = new OpUsers();
+            $opuser = $operateur;
+            $opuser->status = false;
+            foreach($selected_operateur as $selected)
+            {
+                if($selected->id === $operateur->id )
+                {
+                    $opuser->status = true;
+                break;
+                }
+            }
+            $opusers[] = $opuser;
+        }
+        return response()->json($opusers);
     }
 
     /**
