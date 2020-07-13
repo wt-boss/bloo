@@ -1,3 +1,9 @@
 <div class="footer text-muted text-center{{ !empty($class) ? " {$class}" : ''  }}">
-    &copy; {{ date('Y') }} <a href="{{ route('forms.index') }}">{{ config('app.name') }}</a> by <a href="{{ config('custom.app.owner.url') }}" target="_blank">{{ config('custom.app.owner.name') }}</a>
+   <ul>
+       <li><a href="{{ route('Politique_de_confidentialité') }}">Confidentialité</a></li>
+       <li><a href="{{ route('Termes_&_Conditions') }}">Conditions d'utilisation</a></li>
+   </ul>
 </div>
+{{-- <div class="footer text-muted text-center{{ !empty($class) ? " {$class}" : ''  }}">
+    &copy; {{ date('Y') }} <a href="{{ route('forms.index') }}">Bloo</a> by <a href="{{ config('custom.app.owner.url') }}" target="_blank">Infinite Solutions</a>
+</div> --}}

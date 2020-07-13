@@ -1,31 +1,38 @@
 @extends('layouts.auth')
 
-@section('title', 'Login')
+@section('title', 'Prenez le controle')
 
 @section('content')
 <form id="login" method="post" action="{{ route('login') }}" autocomplete="off">
     @csrf
     <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center login-logo-header">
+            <img alt="Bloo" src="{{ asset('assets/images/bloo_logo.png') }}">
+        </div>
         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-body">
+            <div class="panel panel-body form-content">
                 <div class="text-center">
-                    <h5 class="content-group-lg">Login to your account <small class="display-block">Enter your credentials</small></h5>
+                    <h3 class="content-group-lg" style="margin-top: 0;">Prenez le contrôle</h3>
                 </div>
 
                 @include('partials.alert', ['name' => 'login', 'forced_alert' => ($errors->has('email')) ? ['status' => 'danger', 'message' => $errors->first('email')] : null])
 
-                <div class="form-group has-feedback has-feedback-left">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}" required autofocus>
+                <div class="form-group has-feedback has-feedback-left bloo-fg">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
                     <div class="form-control-feedback">
-                        <i class="icon-mail5 text-muted"></i>
+                        <i class="icon-user text-muted"></i>
                     </div>
                 </div>
 
-                <div class="form-group has-feedback has-feedback-left">
-                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <div class="form-group has-feedback has-feedback-left bloo-fg">
+                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block">Connexion</button>
                 </div>
 
                 <div class="form-group login-options">
@@ -33,24 +40,17 @@
                         <div class="col-sm-6">
                             <label class="checkbox-inline">
                                 <input type="checkbox" class="styled" name="remember" checked="checked">
-                                Remember me
+                                Rester connecté
                             </label>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <a href="{{ route('password.request') }}">Forgot password?</a>
+                            <a href="{{ route('password.request') }}">Mot de passe oublié?</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn bg-teal btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
-                </div>
-
-                <div class="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-
-                <a href="{{ route('register') }}" class="btn btn-default btn-block content-group">Create Account</a>
             </div>
         </div>
+        <div class="col-md-4 col-md-offset-4"><hr/></div>
     </div>
 </form>
 @endsection
