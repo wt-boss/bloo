@@ -17,5 +17,9 @@ class Operation extends Model
     {
         return $this->belongsTo(Form::class);
     }
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
+    }
 
 }

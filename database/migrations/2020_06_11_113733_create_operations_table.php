@@ -17,6 +17,7 @@ class CreateOperationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('form_id');
+            $table->unsignedBigInteger('entreprise_id');
             $table->string('nom');
             $table->date('date_start');
             $table->date('date_end');
