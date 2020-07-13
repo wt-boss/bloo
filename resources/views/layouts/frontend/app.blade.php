@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
-      <link rel="stylesheet" href="{{asset('css/app.css')}}">
+      <link rel="stylesheet" href="{{asset('css/app.css') . '?' . time()}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/ionicons.min.css')}}">
 
@@ -29,8 +29,8 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/mystyle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css') . '?' . time()}}">
+    <link rel="stylesheet" href="{{asset('assets/css/mystyle.css') . '?' . time()}}">
       @yield('css')
   </head>
   <body>

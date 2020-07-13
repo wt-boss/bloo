@@ -41,6 +41,21 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+.navbar.scrolled .navbar-brand span {
+    width: 100px;
+    background-image: url('../images/bloo_logo.png');
+    background-size: contain;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+.navbar .navbar-brand span {
+    width: 100px;
+    height: 46px;
+    background-image: url('../images/bloo_logo_white.png');
+    background-size: contain;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
 .ftco-navbar-light.scrolled .nav-item.cta > a {
     background: #0065A1;
 }
