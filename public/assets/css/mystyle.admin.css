@@ -1,0 +1,84 @@
+/*
+* Font config ...
+font-family: 'Baloo 2', cursive;
+font-family: 'Rubik', sans-serif;
+*/
+
+h1,h2,h3,h4,h5,h6,h7 {
+    font-family: 'Baloo 2', sans-serif;
+    color: #0065A1;
+    font-weight: 700;
+}
+body {
+    font-family: 'Rubik', sans-serif;
+}
+
+/* Gestion des icones */
+.has-feedback-left .form-control-feedback {
+    left: 5px;
+}
+
+/* Login page */
+#login .bloo-fg {
+    border-radius: 5px;
+    border: 1px solid #fff;
+    padding: 0 0px;
+    background: #fff;
+}
+
+#login .bloo-fg input[type=email], #login .bloo-fg input[type=password], #login .bloo-fg input[type=email]:focus, #login .bloo-fg input[type=password]:focus {
+    border-bottom-color: transparent;
+}
+
+#login .form-group button {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color : #fff;
+    text-transform: none;
+    border: 1px solid #0065A1;
+    font-size: 20px;
+    background-color: #0065A1;
+}
+#login .form-group button:hover {
+    color: #0065A1;
+    background-color: #fff;
+}
+
+#login .checkbox-inline, #login a, #login a:visited, #login a:hover {
+    color: #0065A1;
+}
+
+#login .panel-body {
+    padding: 40px;
+}
+
+#login hr {
+    border: 1px solid#fff;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#login .form-content {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Login page */
+.login-logo-header {
+    margin-bottom: 100px;
+}
+.login-logo-header img {
+    width: 200px;
+    height: auto;
+}
+
+.footer ul li {
+    list-style: none;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #fff;
+}
+.footer ul li a, .footer ul li a:hover, .footer ul li a:visited   {
+    color: #fff;
+}
