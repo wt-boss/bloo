@@ -27,6 +27,17 @@
                     <input class="form-control" type="date" name="date_fin" placeholder="Date de fin">
                     <input class="form-control" type="text" name="nom_formulaire" placeholder="nom formulaire">
                     <input class="form-control" type="text" name="description_formulaire" placeholder="description formulaire">
+                   @if(isset($entreprise))
+                        <select class="form-control" name="entreprise_id">
+                            <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                        </select>
+                    @else
+                       <select class="form-control" name="entreprise_id">
+                           @foreach($entreprises as $entreprise)
+                               <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                               @endforeach
+                       </select>
+                    @endif
                     <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
                     <a class="btn btn-warning " href="{{ route('users.index') }}"
                         style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>

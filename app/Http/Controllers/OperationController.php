@@ -36,14 +36,14 @@ class OperationController extends Controller
      */
     public function create()
     {
-        return view('admin.operation.create');
+        $entreprises = Entreprise::all();
+        return view('admin.operation.create',compact('entreprises'));
     }
 
     public function entreprise()
     {
         return view('admin.operation.entreprise');
     }
-
 
     public function saventreprise(Request $request)
     {
@@ -59,10 +59,13 @@ class OperationController extends Controller
         $entreprise->telephone =  $parameters['telephone'];
         $entreprise->save();
         if (Auth::check()) {
-            return view('admin.operation.create');
+            return view('admin.operation.create',compact('entreprise'));
+        }
+        else
+        {
+            return redirect()->route('home');
         }
     }
-
 
     public function addlecteurs(Request $request)
     {
@@ -77,7 +80,6 @@ class OperationController extends Controller
         }
         return back();
     }
-
 
     public function addoperateurs(Request $request)
     {
@@ -191,10 +193,11 @@ class OperationController extends Controller
         $operation->form_id = $form_id;
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
+        $operation->entreprise_id = $parameters['entreprise_id'];
         $operation->user_id = Auth::user()->id;
         $operation->save();
 
-        return redirect()->route('operation');
+        return redirect()->route('operation.index');
     }
 
     /**

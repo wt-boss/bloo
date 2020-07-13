@@ -41,7 +41,6 @@
                            <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
                            <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
                         </form>
-
             </div>
     </div>
 @endsection
