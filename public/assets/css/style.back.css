@@ -1,0 +1,78 @@
+/*
+* Font config ...
+font-family: 'Baloo 2', cursive;
+font-family: 'Rubik', sans-serif;
+*/
+/*
+color : #217dff -> #0080BB
+*/
+body {
+    font-family: 'Baloo 2', sans-serif, cursive;
+    font-weight: 500;
+}
+
+/* nav bar */
+.b_logo {
+    display: inline-block !important;
+    width: 65px;
+    margin: 0 !important;
+    height: auto !important;
+}
+
+.b-icon {
+    display: inline-block;
+    height: 25px;
+    margin-right: 5px;;
+}
+.skin-black .main-header .navbar .navbar-nav>li>a.m-link {
+    border: 1px solid #fff;
+    padding: 5px 15px;
+    margin: 10px 5px;
+    background-color: #EAF5F8;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #0065A1;
+    font-family: "Baloo 2", sans-serif, cursive;
+    font-weight: 500;
+}
+.skin-black .main-header .navbar .navbar-nav>li.active>a.m-link {
+    border: 1px solid #0065A1;
+    background-color: #0065A1;
+    border-radius: 5px;
+    color: #fff;
+}
+.skin-black .main-header .navbar .navbar-nav>li>a.h-notif {
+    color: #0065A1;
+    font-family: "Baloo 2", sans-serif, cursive;
+}
+.main-header .navbar .nav>li>a>.label {
+    border-radius: 50%;
+}
+
+/* Footer */
+
+.main-footer li {
+    list-style: none;
+    display: inline-block;
+    text-align: center;
+    color: #0065A1;
+    margin: 0 15px;
+}
+
+
+/* Accordeon */
+#accordion .card .card-header a span i {
+    color: #0065A1;
+}
+/* Gestion des titres */
+.heading-section .subheading {
+    font-family: "Baloo 2", cursive;
+    font-size: 20px;
+    font-weight: 500;
+    color: #0065A1;
+}
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    font-family: "Baloo 2", sans-serif, cursive;
+    color: #6F6F6F;
+    font-weight: 600;
+}

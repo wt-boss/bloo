@@ -11,6 +11,7 @@ h1,h2,h3,h4,h5,h6,h7 {
 }
 body {
     font-family: 'Rubik', sans-serif;
+    background: url(../images/background_login_medium.jpg) center no-repeat;
 }
 
 /* Gestion des icones */
@@ -50,6 +51,7 @@ body {
 
 #login .panel-body {
     padding: 40px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 
 #login hr {

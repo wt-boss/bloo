@@ -2,18 +2,6 @@
 
 @extends('admin.top-nav')
 
-@section('laraform_style')
-    <!-- Laraform Link Style -->
-    <link href="{{ asset('favicon.ico') }}" rel="icon">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
-    <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
     <div class="panel panel-flat border-left-xlg border-left-primary">
         <div class="panel-heading">
