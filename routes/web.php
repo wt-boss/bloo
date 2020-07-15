@@ -235,6 +235,8 @@ Route::get('devise','PaymentController@rates');
 Route::resource('operation', 'OperationController');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
+//Comptes
+Route::resource('compte','CompteController');
 
 //Messagerie Route
 Route::get('messages','MessageController@index')->name('messages_index');

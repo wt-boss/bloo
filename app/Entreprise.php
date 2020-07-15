@@ -12,4 +12,9 @@ class Entreprise extends Model
     {
         return $this->hasMany(Operation::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

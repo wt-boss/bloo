@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use AkibTanjim\Currency\Currency;
 use App\Entreprise;
+use App\Form;
+use App\FormAvailability;
 use App\Offre;
 use App\Operation;
 use App\Paiement;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use PayPal\Api\Amount;
@@ -105,21 +108,21 @@ class PaymentController extends Controller
         /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
 
         /** Création de l'utilisateur */
+        $user = new User();
+        $user->first_name = $donées["user_name"];
+        $user->last_name = $donées["user_name"];
+        $user->email = $donées["user_email"];
+        $user->password = Hash::make($donées["user_password"]);
+        $user->api_token = Str::random(80);
+        $user->role = 0;
+        $user->active = 1;
+        $user->save();
+        $user_id = $user->id;
 
-        /** Si on a affaire a une entreprise alors création de l'utilisateur */
+        $entreprise = new Entreprise();
+
         if($donées["options"] === "ENTREPRISE")
         {
-            $user = new User();
-            $user->name = $donées["user_name_entreprise"];
-            $user->email = $donées["user_email_entreprise"];
-            $user->password = Hash::make($donées["user_password_entreprise"]);
-            $user->api_token = Str::random(80);
-            $user->role = 0;
-            $user->active = 1;
-            $user->save();
-            $user_id = $user->id;
-
-            $entreprise = new Entreprise();
             $entreprise->user_id = $user_id;
             $entreprise->nom = $donées["name_enterprise"];
             $entreprise->addrese = $donées["address_enterprise"];
@@ -128,29 +131,45 @@ class PaymentController extends Controller
             $entreprise->pays = $donées["pays_entreprise"];
             $entreprise->ville = $donées["ville_entreprise"];
             $entreprise->telephone =  $donées["telephone_entreprise"];
-            $entreprise->save();
         }
         else{
-            $user = new User();
-            $user->name = $donées["user_name"];
-            $user->email = $donées["user_email"];
-            $user->password = Hash::make($donées["user_password"]);
-            $user->api_token = Str::random(80);
-            $user->role = 0;
-            $user->active = 1;
-            $user->save();
-            $user_id = $user->id;
+            $entreprise->nom = $donées["user_name"];
+            $entreprise->type = "Personne Physique";
         }
+            $entreprise->save();
+            $entreprise->users()->attach($user);
+
         /** Si l'offre choisi est primus alors, creation d'une operation */
         if($donées['amount'] == "3466.22" )
         {
+            $form = new Form([
+                'title' => ucfirst($donées["operation_name"]),
+                'description' => ucfirst($donées["operation_purpose"]),
+                'status' => Form::STATUS_DRAFT,
+                'user_id' => "1",
+            ]);
+            $form->generateCode();
+            $form->save();
+            $form_id = $form->id;
+
+            $formavalide = new FormAvailability();
+            $formavalide->form_id = $form_id ;
+            $formavalide->open_form_at  = $parameters['date_debut'];
+            $formavalide->close_form_at = $parameters['date_fin'];
+            $formavalide->closed_form_message = "Formulaire clos";
+            $formavalide->save();
+
             $operation = new Operation();
-            $operation->user_id = $user_id;
-            $operation->nom = $donées["operation_name"];
-            $operation->description = $donées["operation_purpose"];
+            $operation->nom = $parameters['nom_operation'];
+            $operation->form_id = $form_id;
+            $operation->date_start = $parameters['date_debut'];
+            $operation->date_end = $parameters['date_fin'];
             $operation->date_start =$donées["date_start"];
             $operation->date_end = $donées["date_end"];
+            $operation->entreprise_id = $entreprise->id;
+            $operation->user_id = "1";
             $operation->save();
+
         }
         /** Recherche de l'offre choisi**/
        //$offre_id = Offre::where('montant','=',$donées['amount'])->pluck('id')->get()->first();
