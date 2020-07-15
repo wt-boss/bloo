@@ -17,21 +17,14 @@ Route::redirect('/', 'forms')->name('home');
 
 Route::get('/home', function () {
     return view('pages.home');
-})->middleware('verified');
-
-Route::get('/top', function () {
-    return view('admin.top-nav');
 });
 
-Route::get('/kai', function () {
-    return view('testing');
+Route::get('/home', function () {
+    return view('pages.home');
 });
+
 
 Route::resource('users','UsersController');
-
-Route::get('/test2', function () {
-    return view('adminlte.home');
-});
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');
@@ -240,7 +233,7 @@ Route::resource('compte','CompteController');
 
 //Messagerie Route
 Route::get('messages','MessageController@index')->name('messages_index');
-Route::get('messages_show/{operation}','MessageController@show')->name('messages_show');
+Route::get('messages_show','MessageController@show')->name('messages_show');
 Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
-Route::get('/users_list','MessageController@users');
+Route::get('/users_list/{id}','MessageController@users');

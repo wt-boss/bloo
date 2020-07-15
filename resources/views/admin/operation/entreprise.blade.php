@@ -19,7 +19,10 @@
         <div class="panel-heading">
             <h4 class="panel-title text-semibold">Create your client account</h4>
             <div class="heading-elements">
+                @if ($entreprises->isEmpty())
+                    @else
                 <a href="{{ route('operation.create') }}" class="btn btn-success heading-btn">Skip</a>
+                    @endif
             </div>
         </div>
     </div>

@@ -132,6 +132,7 @@
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
                             <input type="email" name="user_email_entreprise" class="address-city form-control" id="particulier_email">
+                            {!! $errors->first('user_email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
@@ -147,6 +148,7 @@
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email :</label><br>
                             <input type="email" name="user_email" class="address-city form-control" id="particulier_email">
+                            {!! $errors->first('user_email', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>

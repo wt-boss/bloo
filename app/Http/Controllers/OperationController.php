@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
+use App\Operation_user;
+use Illuminate\Support\Facades\Validator;
 use App\FormAvailability;
 use App\Form;
 use App\Operation;
@@ -42,22 +44,25 @@ class OperationController extends Controller
 
     public function entreprise()
     {
-        return view('admin.operation.entreprise');
+        $entreprises = Entreprise::all();
+        return view('admin.operation.entreprise',compact('entreprises'));
     }
 
     public function saventreprise(Request $request)
     {
         $parameters = $request->all();
         $entreprise = new Entreprise();
-        $entreprise->user_id = Auth::user()->id;
         $entreprise->nom = $parameters['nom'];
         $entreprise->addrese = $parameters['adresse'];
         $entreprise->Numero_contribuable =  $parameters['contribuable'];
         $entreprise->numero_siret =  $parameters['siret'];
         $entreprise->pays =  $parameters['pays'];
         $entreprise->ville =  $parameters['ville'];
+        $entreprise->type =  "Personne Morale";
         $entreprise->telephone =  $parameters['telephone'];
         $entreprise->save();
+        $user = User::findOrFail(Auth::user()->id);
+        $entreprise->users()->attach($user);
         if (Auth::check()) {
             return view('admin.operation.create',compact('entreprise'));
         }
@@ -70,6 +75,7 @@ class OperationController extends Controller
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
+
         $operation = Operation::findOrFail($parameters['operation']);
        // dd($parameters);
         foreach($parameters['lecteurs'] as $lecteur)
@@ -196,6 +202,12 @@ class OperationController extends Controller
         $operation->entreprise_id = $parameters['entreprise_id'];
         $operation->user_id = Auth::user()->id;
         $operation->save();
+
+
+        $operationuser = new Operation_user();
+        $operationuser->user_id = Auth::user()->id;
+        $operationuser->operation_id = $operation->id;
+        $operationuser->save();
 
         return redirect()->route('operation.index');
     }

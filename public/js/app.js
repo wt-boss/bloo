@@ -2065,61 +2065,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user', 'operation'],
+  props: ['user', 'operations'],
   data: function data() {
     return {
       message: null,
       activeFriend: null,
       allMessages: [],
+      allOperateurs: [],
+      allLecteurs: [],
       users: [],
+      operations: [],
       operation_id: null
     };
   },
@@ -2140,7 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
         return alert('Please select friend');
       }
 
-      axios.post('/private-message/' + this.activeFriend + '/' + this.operation_id, {
+      axios.post('/private-message/' + this.activeFriend + '/' + this.operation.id, {
         message: this.message
       }).then(function (response) {
         console.log(response.data);
@@ -2167,7 +2123,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchUsers: function fetchUsers() {
       var _this3 = this;
 
-      axios.get('/users_list').then(function (response) {
+      axios.get('/users_list/' + this.operation_id).then(function (response) {
         _this3.users = response.data;
       });
     }
@@ -37884,7 +37840,118 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-9" }, [
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "box box-success box-solid" }, [
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(_vm.operations, function(operation) {
+                    return _c("li", { class: "list-group-item" }, [
+                      _c("a", [_vm._v(_vm._s(operation.nom) + " ")])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "box box-info box-solid" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "box-body" },
+                _vm._l(_vm.allMessages, function(message, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      class:
+                        _vm.user.id === message.user.id
+                          ? "direct-chat-msg"
+                          : "direct-chat-msg right"
+                    },
+                    [
+                      _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(_vm.allOperateurs, function(operateur, index) {
+                          return _c(
+                            "li",
+                            { key: index, class: "list-group-item" },
+                            [
+                              _c("a", [
+                                _vm._v(
+                                  _vm._s(operateur.first_name) +
+                                    " " +
+                                    _vm._s(operateur.last_name) +
+                                    " "
+                                )
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "box box-info box-solid" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(_vm.users, function(friend) {
+                    return _vm.user.id !== friend.id && friend.role === 0
+                      ? _c(
+                          "li",
+                          {
+                            key: friend.id,
+                            class: "list-group-item",
+                            on: {
+                              click: function($event) {
+                                _vm.activeFriend = friend.id
+                              }
+                            }
+                          },
+                          [
+                            _c("a", [
+                              _vm._v(
+                                _vm._s(friend.first_name) +
+                                  " " +
+                                  _vm._s(friend.last_name)
+                              )
+                            ])
+                          ]
+                        )
+                      : _vm._e()
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8" }, [
         _c(
           "div",
           {
@@ -37893,7 +37960,7 @@ var render = function() {
             attrs: { id: "taille" }
           },
           [
-            _vm._m(0),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "box-body" }, [
               _c(
@@ -38019,177 +38086,6 @@ var render = function() {
             ])
           ]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 5
-                      ? _c(
-                          "li",
-                          {
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name) +
-                                  " "
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 4
-                      ? _c(
-                          "li",
-                          {
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name) +
-                                  " "
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 1
-                      ? _c(
-                          "li",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: (_vm.operation_id = _vm.operation),
-                                expression: "operation_id = operation"
-                              }
-                            ],
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name) +
-                                  " "
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 0
-                      ? _c(
-                          "li",
-                          {
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name)
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ])
-        ])
       ])
     ])
   ])
@@ -38200,83 +38096,23 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Operateur")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Lecteurs")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
       _c("h3", { staticClass: "box-title" }, [_vm._v("Direct Chat")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("SuperAdmin")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Account Manager")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Operateur")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Lecteurs")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
     ])
   }
 ]
@@ -50693,8 +50529,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\blog\blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\blog\blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

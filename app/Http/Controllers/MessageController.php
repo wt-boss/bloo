@@ -20,12 +20,15 @@ class MessageController extends Controller
         $All = Operation::all();
         $operations = Operation::where('user_id',auth()->user()->id)->first()->get();
         return view('admin.messagerie.home',compact('operations','All'));
+
     }
-    public function show(Request $request,$id){
+    public function show(Request $request){
+        $operations = Operation::where('user_id',auth()->user()->id)->first()->get();
+        return view('admin.messagerie.index',compact('operations'));
+    }
+    public function users($id){
         $operation = Operation::findOrFail($id);
-        return view('admin.messagerie.index',compact('operation'));
-    }
-    public function users(){
+        $user = User::with('operations')->where()
         return User::all();
     }
     public function privateMessages(User $user,$id)

@@ -8,6 +8,7 @@ use App\Form;
 use App\FormAvailability;
 use App\Offre;
 use App\Operation;
+use App\Operation_user;
 use App\Paiement;
 use App\User;
 use Illuminate\Http\Request;
@@ -105,31 +106,47 @@ class PaymentController extends Controller
         }
         /** add payment ID to session **/
         Session::put('paypal_payment_id', $payment->getId());
-        /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
 
-        /** Création de l'utilisateur */
-        $user = new User();
-        $user->first_name = $donées["user_name"];
-        $user->last_name = $donées["user_name"];
-        $user->email = $donées["user_email"];
-        $user->password = Hash::make($donées["user_password"]);
-        $user->api_token = Str::random(80);
-        $user->role = 0;
-        $user->active = 1;
-        $user->save();
-        $user_id = $user->id;
+
+        /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
+        if (User::where('email', $donées["user_email"])->exists()|| User::where('email', $donées["user_email_entreprise"])->exists()) {
+            return back()->withErrors('Un compte avec cette adressse email exiistes deja');
+        }
+        else
+        {
+            /** Création de l'utilisateur */
+            $user = new User();
+            if($donées["options"] === "ENTREPRISE")
+            {
+                $user->first_name = $donées["user_name_entreprise"];
+                $user->last_name = $donées["user_name_entreprise"];
+                $user->email = $donées["user_email_entreprise"];
+            }
+            else{
+                $user->first_name = $donées["user_name"];
+                $user->last_name = $donées["user_name"];
+                $user->email = $donées["user_email"];
+            }
+
+            $user->password = Hash::make($donées["user_password"]);
+            $user->api_token = Str::random(80);
+            $user->role = 0;
+            $user->active = 1;
+            $user->save();
+            $user_id = $user->id;
+        }
 
         $entreprise = new Entreprise();
 
         if($donées["options"] === "ENTREPRISE")
         {
-            $entreprise->user_id = $user_id;
             $entreprise->nom = $donées["name_enterprise"];
             $entreprise->addrese = $donées["address_enterprise"];
             $entreprise->Numero_contribuable = $donées["contribuanle_enterprise"];
             $entreprise->numero_siret = $donées["siret_enterprise"];
             $entreprise->pays = $donées["pays_entreprise"];
             $entreprise->ville = $donées["ville_entreprise"];
+            $entreprise->type = "Personne Morale";
             $entreprise->telephone =  $donées["telephone_entreprise"];
         }
         else{
@@ -154,21 +171,24 @@ class PaymentController extends Controller
 
             $formavalide = new FormAvailability();
             $formavalide->form_id = $form_id ;
-            $formavalide->open_form_at  = $parameters['date_debut'];
-            $formavalide->close_form_at = $parameters['date_fin'];
+            $formavalide->open_form_at  = $donées["date_start"];
+            $formavalide->close_form_at = $donées["date_end"];
             $formavalide->closed_form_message = "Formulaire clos";
             $formavalide->save();
 
             $operation = new Operation();
-            $operation->nom = $parameters['nom_operation'];
+            $operation->nom = $donées['operation_name'];
             $operation->form_id = $form_id;
-            $operation->date_start = $parameters['date_debut'];
-            $operation->date_end = $parameters['date_fin'];
             $operation->date_start =$donées["date_start"];
             $operation->date_end = $donées["date_end"];
             $operation->entreprise_id = $entreprise->id;
             $operation->user_id = "1";
             $operation->save();
+
+            $operationuser = new Operation_user();
+            $operationuser->user_id = "1";
+            $operationuser->operation_id = $operation->id;
+            $operationuser->save();
 
         }
         /** Recherche de l'offre choisi**/
