@@ -17,34 +17,48 @@
 @section('content')
     <div class="panel panel-flat border-left-xlg border-left-primary">
         <div class="panel-heading">
-            <h4 class="panel-title text-semibold">Create your client account</h4>
+            <h4 class="panel-title text-semibold">Creer un compte client</h4>
             <div class="heading-elements">
                 @if ($entreprises->isEmpty())
                     @else
-                <a href="{{ route('operation.create') }}" class="btn btn-success heading-btn">Skip</a>
+                <a href="{{ route('operation.create') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
                     @endif
             </div>
         </div>
     </div>
 
     @include('partials.alert', ['name' => 'index'])
-
     <div class="panel panel-flat">
-            <div class="panel-body">
-                        <form method="post" action="{{ route('saventreprise') }}">
-                           @csrf
-                           <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
-                           <input class="form-control" type="text" name="adresse" placeholder="Adresse">
-                           <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
-                           <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
-                           <input class="form-control" type="text" name="ville" placeholder="Ville">
-                           <input class="form-control" type="text" name="pays" placeholder="Pays">
-                           <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
-                           <br>
-                           <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
-                           <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
-                        </form>
+        <div class="row">
+            <div class="d-none d-sm-block col-sm-5 left-side-bloo">
+                <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
+                <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo">
+
+                <h1>Creer un compte client</h1>
             </div>
+            <div class="col-sm-7">
+                <div class="my-content">
+                    <h2 class="bloo-primary left-side-bloo border-left-primary">Prenez le contrôle !</h2>
+                    <p class="text-justify">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
+                        exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+                    </p>
+                    <form method="post" action="{{ route('saventreprise') }}">
+                        @csrf
+                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
+                        <input class="form-control" type="text" name="adresse" placeholder="Adresse">
+                        <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
+                        <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
+                        <input class="form-control" type="text" name="ville" placeholder="Ville">
+                        <input class="form-control" type="text" name="pays" placeholder="Pays">
+                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
+                        <br>
+                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

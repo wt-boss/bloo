@@ -26,8 +26,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('assets/css/style.back.css')}}">
     @yield('plugin-css')
     @yield('page-css')
     {{-- @yield('laraform_style') --}}
@@ -41,6 +39,9 @@
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.back.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -287,7 +288,7 @@
 
     <div class="page-container">
         <div class="page-content">
-            <div class="content-wrapper3">
+            <div class="content-wrapper">
                 <div class="container">
                     <div class="content">
                         @yield('content-header')

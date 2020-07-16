@@ -2,24 +2,34 @@
 
 @section('content-header')
 <!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>
-        Users
-        <small>Création d'un utilisateur</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-        <li><a href="#"><i class="fas fa-user"></i> Users </a></li>
-        <li class="active">Créer</li>
-    </ol>
-</section>
 @endsection
 
 @section('content')
-<section class="content">
+<div class="panel panel-flat border-left-xlg border-left-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title text-semibold">Creez une operation</h4>
+        <div class="heading-elements">
+            <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
+        </div>
+    </div>
+</div>
+
+@include('partials.alert', ['name' => 'index'])
+<div class="panel panel-flat">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="box" style="border:1px solid #d2d6de;">
+        <div class="d-none d-sm-block col-sm-5 left-side-bloo">
+            <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
+            <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" />
+            <h1>Creez une operation</h1>
+        </div>
+        <div class="col-sm-7">
+            <div class="my-content">
+                <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                    ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
+                    exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+                </p>
                 <form method="post" action="{{ route('operation.store') }}">
                     @csrf
                     <input class="form-control" type="text" name="nom_operation" placeholder="Nom ">
@@ -38,10 +48,18 @@
                                @endforeach
                        </select>
                     @endif
-                    <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
-                    <a class="btn btn-warning " href="{{ route('users.index') }}"
-                        style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
+                    <br />
+                    <button type="submit" class="btn btn-bloo">Enregistrer</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box" style="border:1px solid #d2d6de;">
+
             </div>
         </div>
     </div>
