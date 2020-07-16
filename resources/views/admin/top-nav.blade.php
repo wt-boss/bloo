@@ -64,7 +64,7 @@
 
 <div class="wrapper" id="app">
     <header class="main-header">
-        <nav class="navbar navbar-static-top ">
+        <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                 <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
@@ -287,13 +287,15 @@
 
     <div class="page-container">
         <div class="page-content">
-            <div class="content-wrapper">
-                @yield('content-header')
+            <div class="content-wrapper3">
+                <div class="container">
+                    <div class="content">
+                        @yield('content-header')
 
-                @include('admin.common.flash')
+                        @include('admin.common.flash')
 
-                <div class="content">
-                    @yield('content')
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
