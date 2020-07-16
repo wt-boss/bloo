@@ -3,7 +3,7 @@
 @section('page-css')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-    @endsection
+@endsection
 
 @section('content-header')
     <!-- Content Header (Page header) -->

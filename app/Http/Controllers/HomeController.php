@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function admin()
     {
         $user = auth()->user();
-        return view('admin.top-nav',compact('user'));
+        return view('admin.dashboard',compact('user'));
     }
     public function language()
 	{

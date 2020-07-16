@@ -18,27 +18,23 @@
           </div>
         </div>
 
-
-
-
-
         <section class="ftco-section">
             <div class="container">
                 <div class="row justify-content-center mb-5">
               <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-4">{{ trans('prix') }} </h2>
+                {{-- <h2 class="mb-4">{{ trans('prix') }} </h2> --}}
               </div>
             </div>
                 <div class="row">
                     <div class="col-md-12 ftco-animate">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table prix_compte">
                                 <thead class="thead-primary">
                                   <tr class="tab">
                                     <th></th>
                                     <th>Compte Free</th>
                                     <th>Compte Silver </th>
-                                    <th>Compte platinum</th>
+                                    <th>Compte Platinum</th>
 
                                   </tr>
                                 </thead>
@@ -46,8 +42,8 @@
                                   <tr>
                                     <td><a href="#">{{ trans('Prix') }}</a></td>
                                     <td>Gratuit</td>
-                                    <td>Sur devise</td>
-                                    <td>APD 50M</td>
+                                    <td>Sur devis</td>
+                                    <td>APD 80k&euro;</td>
 
                                   </tr>
                                   <tr>
@@ -66,7 +62,7 @@
                                     <td><a href="#">{{ trans('Export des fichiers') }}</a> </td>
                                     <td> PDF </td>
                                     <td> PDF </td>
-                                    <td>XLS, PDF, PPT </td>
+                                    <td>PDF, PPT </td>
                                   </tr>
                                   <tr>
                                     <td><a href="#">{{ trans('Droit de publication') }}</a></td>
@@ -133,8 +129,8 @@
                                   <tr>
                                     <td> <a href="">{{ trans('Montant') }}</a></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
-                                    <td>12KF</td>
-                                    <td>50KF</td>
+                                    <td>20&euro;</td>
+                                    <td>80&euro;</td>
                                   </tr>
                                   <tr>
                                     <td> <a href="">{{ trans('Remboursable') }} </a></td>

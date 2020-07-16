@@ -42,9 +42,6 @@
                   <h2 id="1" class="mb-3 mt-5">{{ trans('t&c') }}</h2>
                   <p>{{ trans('title_t&c') }}</p>
 
-                  <h2 id="2" class="mb-3 mt-5">{{ trans('title1_t&c') }}</h2>
-                  <p>{{ trans('content') }}</p>
-
                   <h2 id="3" class="mb-3 mt-5">{{ trans('title1_t&c') }}</h2>
                   <p>{{ trans('content') }}</p>
 

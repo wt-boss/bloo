@@ -6,6 +6,20 @@ font-family: 'Rubik', sans-serif;
 /*
 color : #217dff -> #0080BB
 */
+/* Global */
+.par {
+    margin-bottom: 0px;
+}
+
+/* Prix et Comptes */
+.table .thead-primary {
+    background: #0065A1 !important;
+}
+.table.prix_compte .thead-primary tr.tab th {
+    color: #fff !important;
+    font-family: 'Baloo 2', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500px;
+}
 
 /* Accordeon */
 #accordion .card .card-header a span i {
@@ -14,7 +28,7 @@ color : #217dff -> #0080BB
 /* Gestion des titres */
 .heading-section .subheading {
     font-family: "Baloo 2", cursive;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
     color: #0065A1;
 }

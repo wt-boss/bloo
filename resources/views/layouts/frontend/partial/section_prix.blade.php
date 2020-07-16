@@ -22,7 +22,7 @@
 
 
 
-            <h2 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h2>
+            {{-- <h2 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h2> --}}
             <hr>
             <ul class="pricing-text">
               <li><strong>{{ trans('prix_offre_free') }}</strong> </li>
@@ -53,7 +53,7 @@
               <span class="excerpt d-block">{{ trans('prix_offre_prenuim') }}</span>
               <a href="{{route('primus')}}" class="btn btn-primary d-block px-3 py-3 mb-4">{{ trans('prix_btn') }}</a>
 
-              <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
+              {{-- <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3> --}}
               <hr>
 
               <ul class="pricing-text">
@@ -86,7 +86,7 @@
 
 
 
-              <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3>
+              {{-- <h3 class="heading-2 mb-3">{{ trans('prix_introduc') }}</h3> --}}
               <hr>
 
               <ul class="pricing-text">
