@@ -10,6 +10,13 @@ body {
     font-family: 'Baloo 2', sans-serif, cursive;
     font-weight: 500;
 }
+.skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side {
+    background-color: transparent;
+}
+
+div.page-container {
+    margin-top: 55px;
+}
 
 /* nav bar */
 .b_logo {
@@ -57,22 +64,4 @@ body {
     text-align: center;
     color: #0065A1;
     margin: 0 15px;
-}
-
-
-/* Accordeon */
-#accordion .card .card-header a span i {
-    color: #0065A1;
-}
-/* Gestion des titres */
-.heading-section .subheading {
-    font-family: "Baloo 2", cursive;
-    font-size: 20px;
-    font-weight: 500;
-    color: #0065A1;
-}
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
-    font-family: "Baloo 2", sans-serif, cursive;
-    color: #6F6F6F;
-    font-weight: 600;
 }

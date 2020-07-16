@@ -64,7 +64,7 @@
 
 <div class="wrapper" id="app">
     <header class="main-header">
-        <nav class="navbar navbar-static-top ">
+        <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                 <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
