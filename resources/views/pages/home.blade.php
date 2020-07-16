@@ -63,16 +63,21 @@
           <div class="row">
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
-                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-guarantee"></span></div></div>
-                <div class="media-body p-2 mt-3">
-                  <h3 class="heading"> {{ trans('home_content_section1_content_p_title_1') }} </h3>
-                  <p>{{ trans('home_content_section1_content_p') }}</p>
-                </div>
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset('assets/images/realtime-icons-01.svg') }}" alt="" style="width: 70px; height: 70px;">
+                    </div>
+                    <div class="media-body p-2 mt-3">
+                        <h3 class="heading"> {{ trans('home_content_section1_content_p_title_1') }} </h3>
+                        <p>{{ trans('home_content_section1_content_p') }}</p>
+                    </div>
               </div>
             </div>
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
-                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-shield"></span></div></div>
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset('assets/images/proximity-icons-02.svg') }}" alt="" style="width: 70px; height: 70px;">
+                </div>
+                {{-- <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-shield"></span></div></div> --}}
                 <div class="media-body p-2 mt-3">
                   <h3 class="heading">{{ trans('home_content_section1_content_p_title_2') }} </h3>
                   <p>{{ trans('home_content_section1_content_p1') }}</p>
@@ -81,7 +86,10 @@
             </div>
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
-                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div>
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset('assets/images/partners-icons-03.svg') }}" alt="" style="width: 70px; height: 70px;">
+                </div>
+                {{-- <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div> --}}
                 <div class="media-body p-2 mt-3">
                   <h3 class="heading">{{ trans('home_content_section1_content_p_title_3') }}</h3>
                   <p>{{ trans('home_content_section1_content_p2') }}</p>

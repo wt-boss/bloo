@@ -108,7 +108,7 @@
           <h2 id="8" class="mb-3 mt-5">{{ trans('politique_quide68') }}</h2>
           <p>{{ trans('politique_quide69') }}</p>
 
-          <h2 class="mb-3 mt-5">{{ trans('politique_guide9') }}</h2>
+          {{-- <h2 class="mb-3 mt-5">{{ trans('politique_guide9') }}</h2> --}}
           <p>{{ trans('politique_guide') }}</p>
           <p>{{ trans('guide91') }}</p>
           <p>{{ trans('guide92') }}</p>
@@ -122,7 +122,7 @@
           <p>{{ trans('guide11') }}</p>
 
           <h2 id="9" class="mb-3 mt-5">{{ trans('guide141') }}</h2>
-          <p>{{ trans('politique_guide') }}</p>
+          {{-- <p>{{ trans('politique_guide') }}</p> --}}
           <p>{{ trans('guide14') }}</p>
 
           <h2 id="10" class="mb-3 mt-5">{{ trans('guide142') }}</h2>

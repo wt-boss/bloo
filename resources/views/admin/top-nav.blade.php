@@ -193,7 +193,6 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
                                 <i class="fas fa-cog"></i>
-                                <span class="label label-danger">9</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="header">You have 9 tasks</li>
@@ -307,7 +306,7 @@
         <div class="container">
             <div class="row">
                 <div class="pull-right hidden-xs">
-                    <b>Powered by </b><a href="#" id="infinites">Infinite Solutions</a>
+                    <b>Powered by </b><a href="#" id="infinites">Kolors</a>
                 </div>
                 <ul class="col-xs-12 col-sm-10 text-center">
                     <li><a href="{{ route('Politique_de_confidentialité') }}">Confidentialité</a></li>

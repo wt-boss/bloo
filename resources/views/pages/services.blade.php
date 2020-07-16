@@ -47,7 +47,6 @@
 						        <div id="menutwo" class="collapse">
 						          <div class="card-body">
                                                 <p>{{ trans('service_section_content2') }}</p>
-                                                <p>{{ trans('service_section_content21') }}</p>
 						          </div>
 						        </div>
 						      </div>
@@ -111,6 +110,8 @@
                                     <p>{{ trans('service_section1_content1') }}</p>
                                     <p>{{ trans('service_section1_content2') }}</p>
                                     <p>{{ trans('service_section1_content3') }}</p>
+                                    <p>{{ trans('service_section1_content4') }}</p>
+                                    <p class="par">{{ trans('service_section1_content5') }}</p>
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@
             <h2 class="mb-4">{{ trans('contact_content') }}</h2>
             <p>{{ trans('contact_infos') }}</p>
             <p>{{ trans('contact_infos1') }}</p>
-            <p>{{ trans('contact_infos3') }}</p>
+            {{-- <p>{{ trans('contact_infos3') }}</p> --}}
           </div>
         </div>
 
