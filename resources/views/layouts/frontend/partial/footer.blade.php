@@ -55,7 +55,7 @@
         <div class="col-md-12 text-center">
 
           <p>
-             Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | BLOO
+            <strong>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bloo.<strong> All rights reserved
           </p>
         </div>
       </div>

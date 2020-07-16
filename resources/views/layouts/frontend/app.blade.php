@@ -13,25 +13,19 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
-      <link rel="stylesheet" href="{{asset('css/app.css') . '?' . time()}}">
-
+    <link rel="stylesheet" href="{{asset('css/app.css') . '?' . time()}}">
     <link rel="stylesheet" href="{{asset('assets/css/ionicons.min.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/jquery.timepicker.css')}}">
-
-
     <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css') . '?' . time()}}">
     <link rel="stylesheet" href="{{asset('assets/css/mystyle.css') . '?' . time()}}">
-      @yield('css')
+    @yield('css')
   </head>
   <body>
     <!-- END nav -->
@@ -112,36 +106,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
   <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
   <script src="{{asset('assets/js/main.js')}}"></script>
-    <script>
-        $(document).on('click', '.delete-option', function() {
-            $(this).parent(".input-field").remove();
-        });
-        // will replace .form-g class when referenced
-        var material1 = '<div class="form-group input-field input-g">' +
-            '<input name="answers[][answer]" id="nom_option[]" type="text" class="form-control"  placeholder="Entrer option">' +
-            '<span class="add-option badge badge-info" style="cursor:pointer;">Ajouter une autre</span>' +
-            '</div>';
-
-        var material = '<div class="form-group input-field input-g">' +
-            '<input name="answers[][answer]" id="nom_option[]" type="text" class="form-control"  placeholder="Entrer option">' +
-            '<span style="float:right; cursor:pointer;"class="delete-option badge badge-danger">Supprimer</span>' +
-            '<span class="add-option badge badge-info" style="cursor:pointer;">Ajouter une autre</span>' +
-            '</div>';
-
-        // for adding new option
-        $(document).on('click', '.add-option', function() {
-            $(".form-g").append(material);
-        });
-        // allow for more options if radio or checkbox is enabled
-        $(document).on('change', '#question_type', function() {
-            var selected_option = $('#question_type :selected').val();
-            if (selected_option === "radio" || selected_option === "checkbox") {
-                $(".form-g").html(material1);
-            } else {
-                $(".input-g").remove();
-            }
-        });
-    </script>
     <script src="{{asset('js/dist/clipboard.js')}}"></script>
     <script src="{{asset('assets/js/myscript.js')}}"></script>
     @yield('script')
