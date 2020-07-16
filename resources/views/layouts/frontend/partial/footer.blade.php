@@ -3,9 +3,9 @@
       <div class="row mb-5">
         <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">BLOO</h2>
-                <p>Outils de visualisation et d'analyse des données </p>
-                <p>{{ trans('change_langue') }} </p>
+                <h2 class="ftco-heading-2">Langue</h2>
+                {{-- <p>Outils de visualisation et d'analyse des données </p>
+                <p>{{ trans('change_langue') }} </p> --}}
                 {!! link_to('language', session('locale') == 'fr' ? 'English' : 'Français', ['class' => 'btn btn-primary']) !!}
             </div>
         </div>

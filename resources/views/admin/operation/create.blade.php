@@ -5,25 +5,28 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat border-left-xlg border-left-primary">
+{{-- <div class="panel panel-flat border-left-xlg border-left-primary">
     <div class="panel-heading">
         <h4 class="panel-title text-semibold">Creez une operation</h4>
         <div class="heading-elements">
             <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
         </div>
     </div>
-</div>
+</div> --}}
 
 @include('partials.alert', ['name' => 'index'])
 <div class="panel panel-flat">
     <div class="row">
         <div class="d-none d-sm-block col-sm-5 left-side-bloo">
             <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
-            <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" />
+            {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
             <h1>Creez une operation</h1>
         </div>
         <div class="col-sm-7">
             <div class="my-content">
+                <div class="pull-right">
+                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
+                </div>
                 <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
