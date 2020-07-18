@@ -9,15 +9,6 @@
 @endsection
 
 @section('content')
-    {{-- <div class="panel panel-flat border-left-xlg border-left-primary">
-        <div class="panel-heading">
-            <h4 class="panel-title text-semibold">My users</h4>
-            <div class="heading-elements">
-                <a href="{{ route('users.create') }}" class="btn btn-success heading-btn">Create an user</a>
-            </div>
-        </div>
-    </div> --}}
-
     @include('partials.alert', ['name' => 'index'])
 
     <div class="panel panel-flat">
@@ -65,9 +56,8 @@
                                         @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-default mb-5">View</a>
+                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5">View</a>
                                     <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right">Edit</a>
-                                    <a href="{{ route('forms.destroy', $user->id) }}" class="btn btn-xs btn-danger mb-5 position-right" data-id="{{ $user->id }}" data-method="delete" data-item="form" data-ajax="true">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
