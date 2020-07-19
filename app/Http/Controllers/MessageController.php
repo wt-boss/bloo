@@ -27,8 +27,9 @@ class MessageController extends Controller
         return view('admin.messagerie.index',compact('operations'));
     }
     public function users($id){
-        $operation = Operation::findOrFail($id);
-        $user = User::with('operations')->where()
+        $operation = Operation::with('user')->findOrFail($id);
+        $user = $operation->users();
+        dd($user);
         return User::all();
     }
     public function privateMessages(User $user,$id)

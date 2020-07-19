@@ -8,6 +8,7 @@ use App\Mail\EmailVerificationMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -24,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'role', 'active', 'api_token','avatar', 'password'
+        'first_name', 'last_name', 'email', 'role', 'active', 'api_token','avatar','password'
     ];
 
     /**
