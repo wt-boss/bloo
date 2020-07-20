@@ -1,7 +1,11 @@
 @extends('admin.top-nav')
 
 @section('page-css')
+    <style>
+        #taille{
 
+        }
+    </style>
 @endsection
 
 @section('content-header')
@@ -19,7 +23,7 @@
 @endsection
 
 @section('content')
-    <private :user="{{auth()->user()}}" :operations="{{$operations}}"></private>
+    <private :user="{{auth()->user()}}" :operation="{{$operation->id}}"></private>
 
 @endsection
 

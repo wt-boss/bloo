@@ -17,14 +17,12 @@ class MessageController extends Controller
 
     public function index()
     {
-        $All = Operation::all();
         $operations = Operation::where('user_id',auth()->user()->id)->first()->get();
-        return view('admin.messagerie.index',compact('operations','All'));
+        return view('admin.messagerie.home',compact('operations'));
     }
-
-    public function show(Request $request){
-        $operations = Operation::where('user_id',auth()->user()->id)->first()->get();
-        return view('admin.messagerie.index',compact('operations'));
+    public function show(Request $request,$id){
+        $operation = Operation::findOrFail($id);
+        return view('admin.messagerie.index',compact('operation'));
     }
     public function users($id){
         $operation = Operation::with('users')->findOrFail($id);

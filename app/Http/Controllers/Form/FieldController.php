@@ -68,12 +68,14 @@ class FieldController extends Controller
                     'error' =>  'Form field is invalid',
                 ]);
             }
-
             $field->delete();
 
-            if (!$form->fields()->count()) {
-                $form->status = Form::STATUS_DRAFT;
-                $form->save();
+            if(auth()->user()->role !== "3")
+            {
+                if (!$form->fields()->count()) {
+                    $form->status = Form::STATUS_DRAFT;
+                    $form->save();
+                }
             }
 
             return response()->json([
