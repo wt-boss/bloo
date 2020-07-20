@@ -7,6 +7,19 @@
     {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 @endsection
+<<<<<<< HEAD
+
+@section('content')
+    {{-- <div class="panel panel-flat border-left-xlg border-left-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title text-semibold">My users</h4>
+            <div class="heading-elements">
+                <a href="{{ route('users.create') }}" class="btn btn-success heading-btn">Create an user</a>
+            </div>
+        </div>
+    </div> --}}
+=======
+>>>>>>> b8880c9e8b932aac05d17d1d0ae8d2b6d2c13305
 
 @section('content')
     @include('partials.alert', ['name' => 'index'])
