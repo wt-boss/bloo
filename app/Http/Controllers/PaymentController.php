@@ -135,9 +135,7 @@ class PaymentController extends Controller
             $user->save();
             $user_id = $user->id;
         }
-
         $entreprise = new Entreprise();
-
         if($donées["options"] === "ENTREPRISE")
         {
             $entreprise->nom = $donées["name_enterprise"];
@@ -153,6 +151,7 @@ class PaymentController extends Controller
             $entreprise->nom = $donées["user_name"];
             $entreprise->type = "Personne Physique";
         }
+
             $entreprise->save();
             $entreprise->users()->attach($user);
 
@@ -184,11 +183,11 @@ class PaymentController extends Controller
             $operation->entreprise_id = $entreprise->id;
             $operation->user_id = "1";
             $operation->save();
-
-            $operationuser = new Operation_user();
-            $operationuser->user_id = "1";
-            $operationuser->operation_id = $operation->id;
-            $operationuser->save();
+            $id = "1";
+            $user = User::findOrFail($id);
+            $user_lect =  User::findOrFail($user_id);
+            $operation->users()->attach($user);
+            $operation->users()->attach($user_lect);
 
         }
         /** Recherche de l'offre choisi**/

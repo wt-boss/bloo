@@ -14,7 +14,7 @@ class CompteController extends Controller
      */
     public function index()
     {
-        $comptes = Entreprise::all();
+        $comptes = Entreprise::with('users','operations')->get();
         return view('admin.compte.index',compact('comptes'));
     }
 

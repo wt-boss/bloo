@@ -32,6 +32,14 @@ class OperationController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function free()
+    {
+        return view('page.free');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -95,7 +103,6 @@ class OperationController extends Controller
         {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
-
         }
         return back();
     }
@@ -200,14 +207,10 @@ class OperationController extends Controller
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
         $operation->entreprise_id = $parameters['entreprise_id'];
-        $operation->user_id = Auth::user()->id;
         $operation->save();
 
-
-        $operationuser = new Operation_user();
-        $operationuser->user_id = Auth::user()->id;
-        $operationuser->operation_id = $operation->id;
-        $operationuser->save();
+        $user = User::findOrFail(Auth::user()->id);
+        $operation->users()->attach($user);
 
         return redirect()->route('operation.index');
     }

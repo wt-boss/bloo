@@ -2065,6 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'operations'],
   data: function data() {
@@ -2124,6 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get('/users_list/' + this.operation_id).then(function (response) {
+        console.log(response.data);
         _this3.users = response.data;
       });
     }
@@ -37849,9 +37852,22 @@ var render = function() {
                   "ul",
                   { staticClass: "list-group" },
                   _vm._l(_vm.operations, function(operation) {
-                    return _c("li", { class: "list-group-item" }, [
-                      _c("a", [_vm._v(_vm._s(operation.nom) + " ")])
-                    ])
+                    return _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: (_vm.operation_id = operation.id),
+                            expression: "operation_id = operation.id"
+                          }
+                        ],
+                        class: "list-group-item",
+                        on: { click: _vm.fetchUsers }
+                      },
+                      [_c("a", [_vm._v(_vm._s(operation.nom) + " ")])]
+                    )
                   }),
                   0
                 )
