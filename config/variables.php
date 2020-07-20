@@ -9,7 +9,6 @@ return [
 'role' => [
 '0' => 'Lecteur',
 '1' => 'Opérateur',
-    '3' =>'Free',
 '4' => 'Account Manager',
 '5' => 'Superadmin',
 ],

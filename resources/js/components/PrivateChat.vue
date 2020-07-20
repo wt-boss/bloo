@@ -9,6 +9,8 @@
                                 <ul class="list-group">
                                     <li :class="'list-group-item' "
                                         v-for="operation in operations"
+                                        v-show="operation_id = operation.id"
+                                        @click="fetchUsers"
                                     > <a>{{operation.nom}} </a> </li>
                                 </ul>
                             </div>
@@ -145,6 +147,7 @@
         },
 
         methods:{
+
             sendMessage(){
                 if(!this.message)
                 {
@@ -162,6 +165,7 @@
                     console.log(error);
                 });
             },
+
             fetchMessages() {
                 if(!this.activeFriend)
                 {
@@ -172,10 +176,11 @@
                 }).catch(error => {
                     console.log(error);
                 });
-
             },
+
             fetchUsers() {
                 axios.get('/users_list/'+ this.operation_id).then(response => {
+                    console.log(response.data);
                     this.users = response.data;
                 });
             },
