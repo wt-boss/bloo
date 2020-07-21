@@ -1,7 +1,7 @@
 @php
 	$page_data = [
 		'has_sticky_sidebar' => true,
-		'classes' => ['body' => ' sidebar-xs has-detached-right']
+		'classes' => ['body' => ' sidebar-xs has-detached-left']
     ];
 
     $fields = $form->fields;
@@ -51,14 +51,52 @@
                         <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                             <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
                         </button>
-                <small class="form-text text-warning text-capitalize col-9">Vous devez garder ce pour avoir acces a votre formulaire plus tard</small>
+                <small class="form-text text-warning text-capitalize col-9">{{ trans('keep_code') }}</small>
             </div>
         @endif
     </div>
 </div>
 
 <div class="panel panel-body">
-	In order to create a form, you need to click on any on the question type in the presentation section (right sidebar) below. Please ensure that you fill in the appropriate field before submitting.
+    <div class="pull-right">
+        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('share') }}</a>
+        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('response_stats') }}</a>
+        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('preview') }}</a>
+        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('response_stats') }}</a>
+    </div>
+
+</div>
+
+<div class="sidebar-detached">
+	<div class="sidebar sidebar-default">
+		<div class="sidebar-content">
+			<div class="sidebar-category">
+				<div class="category-title">
+                    <span>{{ trans('presentation') }}</span>
+					<ul class="icons-list">
+						<li><a href="#" data-action="collapse"></a></li>
+					</ul>
+				</div>
+
+				<div class="category-content no-padding">
+					<ul class="navigation navigation-alt navigation-accordion" data-form="{{ $form->code }}">
+                        <li class="navigation-header">{{ trans('select_question_type') }}</li>
+                    <li><a href="javascript:void()" class="question-template" data-id="short-answer"><i class="icon-minus3"></i>{{ trans('short_question') }}</a></li>
+						<li><a href="javascript:void()" class="question-template" data-id="long-answer"><i class="icon-menu7"></i>{{ trans('long_question') }}</a></li>
+						<li class="navigation-divider"></li>
+                    <li><a href="javascript:void()" class="question-template" data-id="multiple-choices"><i class="icon-radio-checked"></i>{{ trans('choix_unique') }}</a></li>
+						<li><a href="javascript:void()" class="question-template" data-id="checkboxes"><i class="icon-checkbox-checked"></i> {{ trans('choix_mult') }}</a></li>
+						{{-- <li><a href="javascript:void()" class="question-template" data-id="drop-down"><i class="icon-circle-down2"></i> Drop-down</a></li> --}}
+						<li class="navigation-divider"></li>
+						<li><a href="javascript:void()" class="question-template" data-id="linear-scale"><i class="icon-move-horizontal"></i> {{ trans('linear_scale') }}</a></li>
+						<li class="navigation-divider"></li>
+						<li><a href="javascript:void()" class="question-template" data-id="date"><i class="icon-calendar3"></i> {{ trans('date_question') }}</a></li>
+						<li><a href="javascript:void()" class="question-template" data-id="time"><i class="icon-alarm"></i> {{ trans('time_question') }}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="container-detached">
@@ -92,39 +130,6 @@
         </form>
     </div>
 </div>
-
-<div class="sidebar-detached">
-	<div class="sidebar sidebar-default">
-		<div class="sidebar-content">
-			<div class="sidebar-category">
-				<div class="category-title">
-					<span>Presentation</span>
-					<ul class="icons-list">
-						<li><a href="#" data-action="collapse"></a></li>
-					</ul>
-				</div>
-
-				<div class="category-content no-padding">
-					<ul class="navigation navigation-alt navigation-accordion" data-form="{{ $form->code }}">
-						<li class="navigation-header">Select a Question Type</li>
-						<li><a href="javascript:void()" class="question-template" data-id="short-answer"><i class="icon-minus3"></i> Short Answer</a></li>
-						<li><a href="javascript:void()" class="question-template" data-id="long-answer"><i class="icon-menu7"></i> Long Answer</a></li>
-						<li class="navigation-divider"></li>
-						<li><a href="javascript:void()" class="question-template" data-id="multiple-choices"><i class="icon-radio-checked"></i> Multiple Choice</a></li>
-						<li><a href="javascript:void()" class="question-template" data-id="checkboxes"><i class="icon-checkbox-checked"></i> Chechboxes</a></li>
-						<li><a href="javascript:void()" class="question-template" data-id="drop-down"><i class="icon-circle-down2"></i> Drop-down</a></li>
-						<li class="navigation-divider"></li>
-						<li><a href="javascript:void()" class="question-template" data-id="linear-scale"><i class="icon-move-horizontal"></i> Linear Scale</a></li>
-						<li class="navigation-divider"></li>
-						<li><a href="javascript:void()" class="question-template" data-id="date"><i class="icon-calendar3"></i> Date</a></li>
-						<li><a href="javascript:void()" class="question-template" data-id="time"><i class="icon-alarm"></i> Time</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
 
 @includeWhen(($form->status === $form::STATUS_OPEN), 'forms.partials._form-share')
 
