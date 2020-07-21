@@ -1,46 +1,106 @@
 @extends('admin.top-nav')
 
-@section('page-css')
-
-@endsection
-
 @section('content-header')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Users
-            <small>Edition d'un utilisateur</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> Users </a></li>
-            <li class="active">Editer</li>
-        </ol>
-    </section>
+<!-- Content Header (Page header) -->
 @endsection
 
 @section('content')
+{{-- <div class="panel panel-flat border-left-xlg border-left-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title text-semibold">Creez une operation</h4>
+        <div class="heading-elements">
+            <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
+        </div>
+    </div>
+</div> --}}
+
+@include('partials.alert', ['name' => 'index'])
+<div class="panel panel-flat">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="box" style="border:1px solid #d2d6de;">
-                {!! Form::model($user, [
-                        'action' => ['UsersController@update', $user->id],
-                        'method' => 'put',
-                        'files' => true
-                    ])
-                !!}
-
-                <div class="box-body" style="margin:10px;">
-                    @include('admin.users.form')
+        <div class="d-none d-sm-block col-sm-5 left-side-bloo">
+            <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
+            {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
+            <h1>Creez une operation</h1>
+        </div>
+        <div class="col-sm-7">
+            <div class="my-content">
+                <div class="pull-right">
+                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
                 </div>
-
-                <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
-                    <button type="submit" class="btn btn-info" style="width:100px;">Mettre à jour</button>
-                    <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
-                </div>
-
-                {!! Form::close() !!}
+                <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                    ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
+                    exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+                </p>
+                <form method="post" action="{{ route('operation.update',[$operation->id]) }}">
+                    @method('PUT')
+                    @csrf
+                    <input class="form-control" type="text" name="nom_operation" value="{{ $operation->nom }}">
+                    <input class="form-control" type="date" name="date_debut" value="{{ $operation->date_start }}">
+                    <input class="form-control" type="date" name="date_fin" value="{{ $operation->date_end }}">
+                    <input class="form-control" type="hidden" name="form_id" value="{{$operation->form->id }}">
+                    <input class="form-control" type="text" name="nom_formulaire" value="{{ $operation->form->title }}">
+                    <input class="form-control" type="text" name="description_formulaire" value="{{ $operation->form->description }}">
+                   @if(isset($entreprise))
+                        <select class="form-control" name="entreprise_id">
+                            <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                        </select>
+                    @else
+                       <select class="form-control" name="entreprise_id">
+                           @foreach($entreprises as $entreprise)
+                               <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                               @endforeach
+                       </select>
+                    @endif
+                    <br />
+                    <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box" style="border:1px solid #d2d6de;">
+
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+
+@section('laraform_script1')
+<script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+<script type="text/javascript">
+    function addlecteur() {
+        $('.onelecteur').on('click', function (e) {
+            console.log(e);
+            $.get('/listlecteurs', function (data) {
+                console.log(data);
+            });
+            var lecteur_id = e.target.first_name;
+            console.log(lecteur_id);
+        });
+    }
+
+    $('#list').on('click', function (e) {
+        console.log(e);
+        $.get('/listlecteurs', function (data) {
+            console.log(data);
+            $('#listlecteur').empty();
+            $.each(data, function (index, lecteurObj) {
+                $('#listlecteur').append(
+                    '<input type="button" class="onelecteur" id="onelecteur" value="' +
+                    lecteurObj.first_name + '">');
+                setTimeout(addlecteur, 400);
+            })
+        });
+    });
+
+</script>
 @endsection
