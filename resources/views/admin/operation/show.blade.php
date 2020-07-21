@@ -96,7 +96,7 @@
                            {{ $user->first_name }} {{ $user->last_name }}
                         </font></font>
                         <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                              <i class="fa fa-minus-circle"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                              <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                             </font></font></span>
                     </li>
                       @endif
@@ -128,7 +128,7 @@
                            {{ $user->first_name }} {{ $user->last_name }}
                         </font></font>
                         <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                              <i class="fa fa-minus-circle"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                              <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                             </font></font></span>
                     </li>
                       @endif
@@ -178,23 +178,25 @@
         });
     });
 
-    $('#removelecteur').on('click', function (e) {
+    $('.removelecteur').on('click', function (e) {
         console.log(e);
         var operation_id = e.target.lang;
         var user_id = e.target.title;
         $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
-            console.log(data);
-
+            if(data && $.parseJSON('true') == true){
+                $(e.target).parents('li').remove();
+            }
         });
     });
 
-    $('#removeoperateur').on('click', function (e) {
+    $('.removeoperateur').on('click', function (e) {
         console.log(e);
         var operation_id = e.target.lang;
         var user_id = e.target.title;
         $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
-            console.log(data);
-
+            if(data && $.parseJSON('true') == true){
+                $(e.target).parents('li').remove();
+            }
         });
     });
 
