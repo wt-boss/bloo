@@ -66,12 +66,23 @@ class FormController extends Controller
         $user->save();
         Auth::login($user, true);
 
-        $form = new Form([
-            'title' => ucfirst($request->title),
-            'description' => ucfirst($request->description),
-            'status' => Form::STATUS_DRAFT,
-            'user_id' => auth()->user()->id
-        ]);
+        if(auth()->user()->role === "3")
+        {
+            $form = new Form([
+                'title' => ucfirst($request->title),
+                'description' => ucfirst($request->description),
+                'status' => Form::STATUS_OPEN,
+                'user_id' => auth()->user()->id
+            ]);
+        }else
+        {
+            $form = new Form([
+                'title' => ucfirst($request->title),
+                'description' => ucfirst($request->description),
+                'status' => Form::STATUS_DRAFT,
+                'user_id' => auth()->user()->id
+            ]);
+        }
         $form->generateCode();
         $form->save();
         return redirect()->route('forms.show', $form->code);

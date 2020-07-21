@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OperationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +32,7 @@ class OperationController extends Controller
      */
     public function free()
     {
-        return view('page.free');
+        return view('pages.free');
     }
 
     /**

@@ -1,79 +1,7 @@
 <template>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-2">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box box-success box-solid">
-                            <div class="box-body">
-                                <ul class="list-group">
-                                    <li :class="'list-group-item' "
-                                        v-for="operation in operations"
-                                        v-show="operation_id = operation.id"
-                                        @click="fetchUsers"
-                                    > <a>{{operation.nom}} </a> </li>
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box box-info box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Operateur</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div :class="(user.id===message.user.id)? 'direct-chat-msg': 'direct-chat-msg right' "
-                                     v-for="(message,index) in allMessages"
-                                     :key="index"
-                                >
-                                <ul class="list-group">
-                                    <li :class="'list-group-item' "
-                                        v-for="(operateur,index) in allOperateurs"
-                                        :key="index"
-                                    > <a>{{operateur.first_name}} {{operateur.last_name}} </a> </li>
-
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                            </div>
-                        </div>
-                        <!-- /.box -->
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="box box-info box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Lecteurs</h3>
-                                <!-- /.box-tools -->
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <ul class="list-group">
-
-                                        <li :class="'list-group-item' "
-                                            v-for="friend in users"
-                                            v-if="user.id !== friend.id && friend.role===0"
-                                            :key="friend.id"
-                                            @click="activeFriend=friend.id"
-                                        > <a>{{friend.first_name}} {{friend.last_name}}</a> </li>
-
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <!-- DIRECT CHAT PRIMARY -->
                 <div class="box box-primary box-solid direct-chat direct-chat-primary" id="taille">
                     <div class="box-header with-border">
@@ -120,22 +48,136 @@
                 <!--/.direct-chat -->
             </div>
             <!-- /.col -->
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-warning box-solid">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">SuperAdmin</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="list-group">
+
+                                    <li :class="'list-group-item' "
+                                        v-for="friend in users"
+                                        v-if="user.id !== friend.id && friend.role===5"
+                                        :key="friend.id"
+                                        @click="activeFriend=friend.id"
+                                    > <a>{{friend.first_name}} {{friend.last_name}} </a> </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="box box-warning box-solid">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Account Manager</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="list-group">
+
+                                    <li :class="'list-group-item' "
+                                        v-for="friend in users"
+                                        v-if="user.id !== friend.id && friend.role===4"
+                                        :key="friend.id"
+                                        @click="activeFriend=friend.id"
+                                    > <a>{{friend.first_name}} {{friend.last_name}} </a> </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="box box-warning box-solid">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Operateur</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="list-group">
+
+                                    <li :class="'list-group-item' "
+                                        v-for="friend in users"
+                                        v-if="user.id !== friend.id && friend.role===1"
+                                        v-show="operation_id = operation"
+                                        :key="friend.id"
+                                        @click="activeFriend=friend.id"
+                                    > <a>{{friend.first_name}} {{friend.last_name}} </a> </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="box box-warning box-solid">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Lecteurs</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="list-group">
+
+                                    <li :class="'list-group-item' "
+                                        v-for="friend in users"
+                                        v-if="user.id !== friend.id && friend.role===0"
+                                        :key="friend.id"
+                                        @click="activeFriend=friend.id"
+                                    > <a>{{friend.first_name}} {{friend.last_name}}</a> </li>
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props:['user','operations'],
+        props:['user','operation'],
         data(){
             return{
                 message:null,
                 activeFriend:null,
                 allMessages:[],
-                allOperateurs:[],
-                allLecteurs:[],
                 users:[],
-                operations:[],
                 operation_id:null,
             }
         },
@@ -147,7 +189,6 @@
         },
 
         methods:{
-
             sendMessage(){
                 if(!this.message)
                 {
@@ -157,7 +198,7 @@
                 {
                     return alert('Please select friend');
                 }
-                axios.post('/private-message/'+this.activeFriend+'/'+this.operation.id, {message: this.message}).then(response =>{
+                axios.post('/private-message/'+this.activeFriend+'/'+this.operation_id, {message: this.message}).then(response =>{
                     console.log(response.data);
                     this.message=null;
                     this.fetchMessages();
@@ -165,7 +206,6 @@
                     console.log(error);
                 });
             },
-
             fetchMessages() {
                 if(!this.activeFriend)
                 {
@@ -176,11 +216,10 @@
                 }).catch(error => {
                     console.log(error);
                 });
-            },
 
+            },
             fetchUsers() {
-                axios.get('/users_list/'+ this.operation_id).then(response => {
-                    console.log(response.data);
+                axios.get('/users_list').then(response => {
                     this.users = response.data;
                 });
             },
