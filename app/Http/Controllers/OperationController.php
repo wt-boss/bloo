@@ -231,7 +231,10 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $operation = Operation::findOrFail($id);
+        $entreprise_id = $operation->entreprise_id;
+        $entreprise = Entreprise::findOrFail($entreprise_id);
+        return view('admin.operation.edit',compact('operation','entreprise'));
     }
 
     /**
@@ -243,9 +246,25 @@ class OperationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+        $parameters = $request->all();
+        $operation = Operation::findOrFail($id);
+        $operation->nom = $parameters['nom_operation'];
+        $operation->form_id =  $parameters['form_id'];
+        $operation->date_start = $parameters['date_debut'];
+        $operation->date_end = $parameters['date_fin'];
+        $operation->entreprise_id = $parameters['entreprise_id'];
+        $operation->save();
+
+        $form_id = $parameters['form_id'];
+
+        $form = Form::findOrFail($form_id);
+        $form->title = ucfirst($parameters['nom_formulaire']);
+        $form->description = ucfirst($parameters['description_formulaire']);
+        $form->save();
+
+        return redirect()->route('users.index')->withSuccess('Modification Effectuée');
+    }
     /**
      * Remove the specified resource from storage.
      *
