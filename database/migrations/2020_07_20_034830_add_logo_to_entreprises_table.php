@@ -14,7 +14,7 @@ class AddLogoToEntreprisesTable extends Migration
     public function up()
     {
         Schema::table('entreprises', function (Blueprint $table) {
-            $table->string('logo');
+            $table->string('logo')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddLogoToEntreprisesTable extends Migration
     public function down()
     {
         Schema::table('entreprises', function (Blueprint $table) {
-            $table->dropColumn('paid');
+            $table->dropColumn('logo');
         });
     }
 }

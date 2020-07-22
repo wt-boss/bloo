@@ -32,16 +32,17 @@
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
-                        @foreach($user->operations as $operation)
-                        <li><a href="{{route('getmessage',[$user->id,$operation->id]) }}"> {{$operation->nom}}<span class="pull-right badge bg-blue">31</span></a></li>
+                        @foreach($operations as $opera)
+                        <li><a href="{{route('messages_show',[$opera->id])}}"> {{$opera->nom}}<span class="pull-right badge bg-blue">31</span></a></li>
                         @endforeach
                     </ul>
                 </div>
             </div>
             <!-- /.widget-user -->
         </div>
+        {{$operation->id}}
         <div class="col-md-9">
-            <private :user="{{auth()->user()}}"></private>
+            <private :user="{{auth()->user()}}"  :operation="{{$operation->id}}"></private>
         </div>
     </div>
 @endsection

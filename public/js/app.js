@@ -37975,7 +37975,7 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value: (_vm.operation_id = _vm.operation),
-                                expression: "operation_id = operation"
+                                expression: "operation_id=operation"
                               }
                             ],
                             key: friend.id,
@@ -38018,6 +38018,14 @@ var render = function() {
                       ? _c(
                           "li",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: (_vm.operation_id = _vm.operation),
+                                expression: "operation_id=operation"
+                              }
+                            ],
                             key: friend.id,
                             class: "list-group-item",
                             on: {
@@ -50487,8 +50495,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\blog\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\blog\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

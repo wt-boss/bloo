@@ -62,7 +62,7 @@
                                     <li :class="'list-group-item' "
                                         v-for="friend in users"
                                         v-if="user.id !== friend.id && friend.role===1"
-                                        v-show="operation_id = operation"
+                                        v-show="operation_id=operation"
                                         :key="friend.id"
                                         @click="activeFriend=friend.id"
                                     > <a>{{friend.first_name}} {{friend.last_name}} </a> </li>
@@ -85,12 +85,12 @@
                                 <ul class="list-group">
 
                                     <li :class="'list-group-item' "
+                                        v-show="operation_id=operation"
                                         v-for="friend in users"
                                         v-if="user.id !== friend.id && friend.role===0"
                                         :key="friend.id"
                                         @click="activeFriend=friend.id"
                                     > <a>{{friend.first_name}} {{friend.last_name}}</a> </li>
-
                                 </ul>
                             </div>
                             <!-- /.box-body -->
