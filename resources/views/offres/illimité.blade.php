@@ -143,7 +143,53 @@
                 particulier.style.display = "flex";
             }
         });
+        $('.msf-form form fieldset:last-child').find('input').on('blur', function () {
+            var canSubmit = verifyForm();
+            setTimeout(function () {
+                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
+            }, 100);
+        });
+        $('input[name="options"]').change(function () {
+            var canSubmit = verifyForm();
+            setTimeout(function () {
+                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
+            }, 100);
+        });
+
+        setTimeout(function () {
+            $('.msf-form form').find('button[type=submit]').prop('disabled', !verifyForm());
+        }, 100);
     });
+
+    function verifyForm() {
+        const options = $('input[name=options]:checked').val();
+        if (is_null_or_whithe_space(options)) return false;
+        var email = '';
+        switch (options) {
+            case 'ENTREPRISE':
+                if (is_null_or_whithe_space($('#name_enterprise').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_name_entreprise"]').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_password_entreprise"]').val())) return false;
+                email = $('input[name="user_email_entreprise"]').val();
+                if (is_null_or_whithe_space(email)) return false;
+                if (!is_valid_email(email)) return false;
+                break;
+            case 'PARTICULIER':
+                if (is_null_or_whithe_space($('input[name="user_name"]').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_password"]').val())) return false;
+
+                email = $('input[name="user_email"]').val();
+                if (is_null_or_whithe_space(email)) return false;
+                if (!is_valid_email(email)) return false;
+
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
+    
 </script>
 @endsection
 
