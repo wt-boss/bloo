@@ -17,31 +17,28 @@ class MessageController extends Controller
 
     public function index()
     {
-        $user = User::with('operations')->where('id',auth()->user()->id)->get()->first();
-        return view('admin.messagerie.index',compact('user'));
+        $operations = Operation::all();
+        return view('admin.messagerie.index',compact('operations'));
     }
-
     public function show(Request $request,$id){
-        $operation = Operation::findOrFail($id);
-        return view('admin.messagerie.index',compact('operation'));
+        $operations = Operation::all();
+        $operation  =  Operation::findOrFail($id);
+        return view('admin.messagerie.index',compact('operation','operations'));
     }
-
-    public function users($id){
-        $operation = Operation::with('users')->findOrFail($id);
-        $users = $operation->users()->get();
-        return response()->json($users);
+    public function users(){
+        return User::all();
     }
-
-
     public function privateMessages(User $user,$id)
     {
         $operation = Operation::findOrFail($id);
-
         $privateCommunication = Message::with('user')
-            ->where(['user_id' => auth()->id() , 'receiver_id' => $user->id])
+            ->where(['user_id' => auth()->id(), 'receiver_id' => $user->id])
             ->where(['operation_id' => $operation->id])
+            ->orWhere(function ($query) use ($user,$operation) {
+                $query->where(['user_id' => $user->id, 'receiver_id' => auth()->id()])
+                    ->where(['operation_id' => $operation->id]);
+            })
             ->get();
-        dd($privateCommunication);
         return $privateCommunication;
     }
     public function sendPrivateMessage(Request $request,User $user,$id)

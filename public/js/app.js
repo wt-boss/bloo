@@ -37975,7 +37975,7 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value: (_vm.operation_id = _vm.operation),
-                                expression: "operation_id = operation"
+                                expression: "operation_id=operation"
                               }
                             ],
                             key: friend.id,
@@ -38018,6 +38018,14 @@ var render = function() {
                       ? _c(
                           "li",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: (_vm.operation_id = _vm.operation),
+                                expression: "operation_id=operation"
+                              }
+                            ],
                             key: friend.id,
                             class: "list-group-item",
                             on: {
