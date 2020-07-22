@@ -3,8 +3,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="panel-body" style="padding: 0;">
+            <div class="panel-heading pull-left">
+                <a href="{{route('giftoperation')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Attribuer un compte</a>
+            </div>
             <div class="panel-heading pull-right">
-                <a href="http://localhost:500/entreprise" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
+                <a href="{{route('entreprise')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
             </div>
         </div>
     </section>

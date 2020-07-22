@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OperationController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +37,7 @@ class OperationController extends Controller
         return view('admin.operation.index', compact('operations'));
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function free()
-    {
-        return view('pages.free');
-    }
+
 
     /**
      * Show the form for creating a new resource.

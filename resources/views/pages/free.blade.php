@@ -78,10 +78,7 @@
                                         <label for="purpose">{{trans('free_form1_label2')}}</label>
                                         <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
                                     </div>
-                                    <div class="form-group col-12">
-                                        <label for="purpose">Mot de passe</label>
-                                        <input type="password" class="form-control" id="password"  name="password" required >
-                                    </div>
+
                                     <div class="form-group col-12">
                                         <input type="submit" class="btn btn-primary float-right"/>
                                     </div>
@@ -127,11 +124,6 @@
                                             <label for="token">Code du formulaire</label>
                                             <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required >
                                         </div>
-                                        <div class="form-group col-12">
-                                            <label for="purpose">Mot de passe</label>
-                                            <input type="password" class="form-control" id="password"  name="password" required >
-                                        </div>
-
                                         <div class="form-group col-6">
                                         </div>
                                         <div class="form-group col-6">
