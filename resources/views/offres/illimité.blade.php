@@ -125,6 +125,7 @@
 <script src="{{asset('multiform/assets/js/jquery-1.11.1.min.js')}}"></script>
 <script src="{{asset('multiform/assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('multiform/assets/js/jquery.backstretch.min.js')}}"></script>
+<script src="{{asset('common/functions.js')}}"></script>
 <script src="{{asset('multiform/assets/js/scripts.js')}}"></script>
 
 <script>
