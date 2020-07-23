@@ -15,7 +15,6 @@ class CreateOperationsTable extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('form_id');
             $table->unsignedBigInteger('entreprise_id');
             $table->string('nom');

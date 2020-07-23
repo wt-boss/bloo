@@ -60,29 +60,17 @@ class FormController extends Controller
         $user->first_name = "free";
         $user->last_name = "user";
         $user->email = $mail ;
-        $user->password = Hash::make($parameters['password']) ;
+        $user->password = Hash::make('123456789') ;
         $user->role = "3";
         $user->active = "1";
         $user->save();
         Auth::login($user, true);
-
-        if(auth()->user()->role === "3")
-        {
-            $form = new Form([
+        $form = new Form([
                 'title' => ucfirst($request->title),
                 'description' => ucfirst($request->description),
                 'status' => Form::STATUS_OPEN,
                 'user_id' => auth()->user()->id
-            ]);
-        }else
-        {
-            $form = new Form([
-                'title' => ucfirst($request->title),
-                'description' => ucfirst($request->description),
-                'status' => Form::STATUS_DRAFT,
-                'user_id' => auth()->user()->id
-            ]);
-        }
+        ]);
         $form->generateCode();
         $form->save();
         return redirect()->route('forms.show', $form->code);
@@ -142,16 +130,9 @@ class FormController extends Controller
         if (isset($form)){
             $user_id = $form->user_id;
             $user = User::findOrFail($user_id);
-            if (Hash::check($parameters['password'], $user->password))
-            {
                 Auth::login($user, true);
                 $form->load('fields', 'availability');
                 return view('forms.form.show', compact('form'));
-            }
-            else{
-                return back()->withErrors('Mot de passe eronns');
-            }
-
         }
         else{
             return back()->withErrors('Code formulaire errones');

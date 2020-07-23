@@ -2046,72 +2046,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'operation'],
   data: function data() {
@@ -38032,10 +37966,18 @@ var render = function() {
                   "ul",
                   { staticClass: "list-group" },
                   _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 5
+                    return _vm.user.id !== friend.id && friend.role === 1
                       ? _c(
                           "li",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: (_vm.operation_id = _vm.operation),
+                                expression: "operation_id=operation"
+                              }
+                            ],
                             key: friend.id,
                             class: "list-group-item",
                             on: {
@@ -38072,47 +38014,7 @@ var render = function() {
                   "ul",
                   { staticClass: "list-group" },
                   _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 4
-                      ? _c(
-                          "li",
-                          {
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name) +
-                                  " "
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 1
+                    return _vm.user.id !== friend.id && friend.role === 0
                       ? _c(
                           "li",
                           {
@@ -38121,49 +38023,9 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value: (_vm.operation_id = _vm.operation),
-                                expression: "operation_id = operation"
+                                expression: "operation_id=operation"
                               }
                             ],
-                            key: friend.id,
-                            class: "list-group-item",
-                            on: {
-                              click: function($event) {
-                                _vm.activeFriend = friend.id
-                              }
-                            }
-                          },
-                          [
-                            _c("a", [
-                              _vm._v(
-                                _vm._s(friend.first_name) +
-                                  " " +
-                                  _vm._s(friend.last_name) +
-                                  " "
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "box box-warning box-solid" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.users, function(friend) {
-                    return _vm.user.id !== friend.id && friend.role === 0
-                      ? _c(
-                          "li",
-                          {
                             key: friend.id,
                             class: "list-group-item",
                             on: {
@@ -38208,18 +38070,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("SuperAdmin")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Operateur")])
     ])
   },
   function() {
@@ -38227,56 +38078,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Account Manager")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Operateur")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Lecteurs")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-box-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        )
-      ])
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Lecteurs")])
     ])
   }
 ]
@@ -50693,8 +50495,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\blog\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\blog\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Projets\2020\Bloo\repository\bloo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

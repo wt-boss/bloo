@@ -4,12 +4,14 @@
 
 @section('content')
 
-<form id="password-recover" method="post" action="{{ route('password.email') }}" autocomplete="off">
+<form id="login" method="post" action="{{ route('password.email') }}" autocomplete="off">
     @csrf
-
     <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center login-logo-header">
+            <img alt="Bloo" src="{{ asset('assets/images/bloo_logo.png') }}">
+        </div>
         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-body">
+            <div class="panel panel-body form-content">
                 <div class="text-center">
                     <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
                     <h5 class="content-group">Password recovery <small class="display-block">We'll send you instructions via email</small></h5>
@@ -33,11 +35,11 @@
         </div>
     </div>
 </form>
-
 @endsection
 
 @section('plugin-scripts')
     <script src="{{ asset('assets/js/plugins/validation/validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/uniform.min.js') }}"></script>
 @endsection
 
 @section('page-script')
