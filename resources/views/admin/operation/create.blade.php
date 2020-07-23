@@ -52,7 +52,10 @@
                        </select>
                     @endif
                     <br />
-                    <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                    <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>
+                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button>
+                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>
+                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button>
                 </form>
             </div>
         </div>
@@ -74,7 +77,42 @@
 <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+<script src="{{asset('common/functions.js')}}"></script>
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-bloo-action').prop('disabled', true);
+
+        $('form input, form select').on('blur', function () {
+            var canSubmit = validateForm();
+            setTimeout(function () {
+                $('form').find('button[type=submit]').prop('disabled', !canSubmit);
+            }, 100);
+        });
+    });
+
+    function validateForm() {
+        if (is_null_or_whithe_space($('input[name="nom_operation"]').val())) return false;
+
+        var date_debut = $('input[name="date_debut"]').val();
+        if (is_null_or_whithe_space(date_debut)) return false;
+
+        var date_fin = $('input[name="date_fin"]').val();
+        if (is_null_or_whithe_space(date_fin)) return false;
+
+        if (is_null_or_whithe_space($('input[name="nom_formulaire"]').val())) return false;
+        if (is_null_or_whithe_space($('input[name="description_formulaire"]').val())) return false;
+        if (is_null_or_whithe_space($('select[name="entreprise_id"]').val())) return false;
+
+        date_debut = new Date(date_debut);
+        date_fin = new Date(date_fin);
+
+        if (date_debut.getTime() < (new Date().datePart().getTime())) return false;
+        if (date_debut.getTime() > date_fin.getTime()) return false;
+
+        return true;
+    }
+    
     function addlecteur() {
         $('.onelecteur').on('click', function (e) {
             console.log(e);

@@ -51,7 +51,7 @@
                             <input type="date" class="form-control" id="date_end" name="date_end"  required>
                         </div>
                         <div class="form-group col-6 offset-6">
-                            <button type="button" class="btn btn-next col-6 btn-outline-primary float-right">Suivant</button>
+                            <button type="button" data-step-nav="next" data-action="verifyFirstStep" data-continue-with="verifySecondStep" class="btn btn-next col-6 btn-outline-primary float-right">Suivant</button>
                         </div>
                     </div>
                 </fieldset>
@@ -136,7 +136,7 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <button type="button" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
+                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
                         </div>
                         <div class="form-group col-6">
                             <button type="submit" class="btn btn-success col-6 float-right">Payer avec PayPal</button>
@@ -168,12 +168,79 @@
                 particulier.style.display = "flex";
             }
         });
+
+        $('.msf-form form fieldset:first-child').find('input').on('blur', function () {
+            verifyFirstStep();
+        });
+        $('.msf-form form fieldset:last-child').find('input').on('blur', function () {
+            var canSubmit = verifySecondStep();
+            setTimeout(function () {
+                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
+            }, 100);
+        });
+        $('input[name="options"]').change(function () {
+            var canSubmit = verifySecondStep();
+            setTimeout(function () {
+                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
+            }, 100);
+        });
     });
+    
+    function verifyFirstStep() {
+        if (is_null_or_whithe_space($('#operation_name').val())) return false;
+
+        if (is_null_or_whithe_space($('#operation_purpose').val())) return false;
+
+        var date_start = $('#date_start').val();
+        if (is_null_or_whithe_space(date_start)) return false;
+
+        var date_end = $('#date_end').val();
+        if (is_null_or_whithe_space(date_end)) return false;
+
+        date_start = new Date(date_start);
+        date_end = new Date(date_end);
+
+        if (date_start.getTime() < (new Date().datePart().getTime())) return false;
+
+        if (date_start.getTime() > date_end.getTime()) return false;
+
+        return true;
+    }
+    
+    function verifySecondStep() {
+        const options = $('input[name=options]:checked').val();
+        if (is_null_or_whithe_space(options)) return false;
+        var email = '';
+        switch (options) {
+            case 'ENTREPRISE':
+                if (is_null_or_whithe_space($('#name_enterprise').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_name_entreprise"]').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_password_entreprise"]').val())) return false;
+                email = $('input[name="user_email_entreprise"]').val();
+                if (is_null_or_whithe_space(email)) return false;
+                if (!is_valid_email(email)) return false;
+                break;
+            case 'PARTICULIER':
+                if (is_null_or_whithe_space($('input[name="user_name"]').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_password"]').val())) return false;
+
+                email = $('input[name="user_email"]').val();
+                if (is_null_or_whithe_space(email)) return false;
+                if (!is_valid_email(email)) return false;
+
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
 </script>
 
 <script src="{{asset('multiform/assets/js/jquery-1.11.1.min.js')}}"></script>
 <script src="{{asset('multiform/assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('multiform/assets/js/jquery.backstretch.min.js')}}"></script>
+<script src="{{asset('common/functions.js')}}"></script>
 <script src="{{asset('multiform/assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 @endsection
