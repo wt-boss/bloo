@@ -17,8 +17,10 @@ class MessageController extends Controller
 
     public function index()
     {
+        $user = User::with('operations')->where('id',auth()->user()->id)->get()->first();
+        $operation = $user->operations->first();
         $operations = Operation::all();
-        return view('admin.messagerie.index',compact('operations'));
+        return view('admin.messagerie.index',compact('operations','operation'));
     }
     public function show(Request $request,$id){
         $operations = Operation::all();

@@ -32,15 +32,14 @@
             </div>
             <!-- /.widget-user -->
         </div>
-        {{$operation->id}}
         <div class="col-md-9">
-
+            <private :user="{{auth()->user()}}" :operation="{{$operation->id}}"></private>
         </div>
     </div>
 @endsection
 
 @section('admin_lte_script')
-    <script type="text/javascript"  src="{{ asset('js/app.js') }}" ></script>
+
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script type="application/javascript">
