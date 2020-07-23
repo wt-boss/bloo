@@ -17,7 +17,7 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
-   <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/bower_components/fontawesome/css/all.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/Ionicons/css/ionicons.min.css')}}">
@@ -26,11 +26,11 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
-    @yield('plugin-css')
-    @yield('page-css')
-    {{-- @yield('laraform_style') --}}
+@yield('plugin-css')
+@yield('page-css')
+{{-- @yield('laraform_style') --}}
 
-    <!-- Laraform Link Style -->
+<!-- Laraform Link Style -->
     <link href="{{ asset('favicon.ico') }}" rel="icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
     <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
@@ -68,7 +68,7 @@
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
+                    <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -87,41 +87,41 @@
                         @endif
 
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                        <li  class="<?php echo (  Str::startsWith($route, 'dashboard_operation') ) ? "active" : '' ?>">
-                            <a class="m-link" href="{{route('admin')}}">
-                                <i class="fas fa-th-large"></i>
-                                <span>Tableau de bord</span>
-                            </a>
-                        </li>
+                            <li  class="<?php echo (  Str::startsWith($route, 'dashboard_operation') ) ? "active" : '' ?>">
+                                <a class="m-link" href="{{route('admin')}}">
+                                    <i class="fas fa-th-large"></i>
+                                    <span>Tableau de bord</span>
+                                </a>
+                            </li>
                         @endif
 
-                            @if (auth()->user()->hasRole('Superadmin'))
-                                <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
-                                    <a class="m-link" href="{{route('compte.index')}}" >
-                                        <i class="fas fa-briefcase"></i>
-                                        <span>Comptes</span>
-                                    </a>
-                                </li>
-                            @endif
+                        @if (auth()->user()->hasRole('Superadmin'))
+                            <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
+                                <a class="m-link" href="{{route('compte.index')}}" >
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Comptes</span>
+                                </a>
+                            </li>
+                        @endif
 
-                            @if (auth()->user()->hasRole('Superadmin'))
-                                <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
-                                    <a class="m-link" href="{{route('messages_index')}}" >
-                                        {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
-                                        <i class="fas fa-envelope"></i>
-                                        <span>Messagerie</span>
-                                    </a>
-                                </li>
-                            @endif
+                        @if (auth()->user()->hasRole('Superadmin'))
+                            <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
+                                <a class="m-link" href="{{route('messages_index')}}" >
+                                    {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Messagerie</span>
+                                </a>
+                            </li>
+                        @endif
 
-                            @if (auth()->user()->hasRole('Superadmin'))
-                                <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
-                                    <a class="m-link" href="{{route('users.index')}}" >
-                                        <i class="nav-icon fas fa-users-cog"></i>
-                                        <span>Users</span>
-                                    </a>
-                                </li>
-                            @endif
+                        @if (auth()->user()->hasRole('Superadmin'))
+                            <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
+                                <a class="m-link" href="{{route('users.index')}}" >
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                        @endif
 
 
                     </ul>
@@ -130,140 +130,140 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+                    @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <!-- Notifications Menu -->
-                        <li class="dropdown notifications-menu">
-                            <!-- Menu toggle button -->
-                            <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
-                                <i class="fas fa-bell"></i>
-                                <span class="label label-danger">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- Inner Menu: contains the notifications -->
-                                    <ul class="menu">
-                                        <li><!-- start notification -->
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <!-- end notification -->
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <!-- Menu toggle button -->
-                            <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
-                                <i class="fas fa-comment-alt"></i>
-                                <span class="label label-danger">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the messages -->
-                                    <ul class="menu">
-                                        <li><!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <!-- User Image -->
-                                                    <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <!-- Message title and timestamp -->
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <!-- The message -->
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
-                                    </ul>
-                                    <!-- /.menu -->
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks Menu -->
-                        <li class="dropdown tasks-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
-                                <i class="fas fa-cog"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- Inner menu: contains the tasks -->
-                                    <ul class="menu">
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <!-- Task title and progress text -->
-                                                <h3>
-                                                    Design some buttons
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <!-- The progress bar -->
-                                                <div class="progress xs">
-                                                    <!-- Change the css width attribute to simulate progress -->
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- User Account Menu -->
-                        <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- The user image in the navbar-->
-                                <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs"><b>{{auth()->user()->first_name}}</b> {{auth()->user()->last_name}}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- The user image in the menu -->
-                                <li class="user-header">
-                                    <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-                                    <p>
-                                        {{auth()->user()->first_name}}    {{auth()->user()->last_name}}
-                                        <small> {{ Helper::getRolename(auth()->user()->role) }}
-                                        </small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <form method="post" action="{{route('logout')}}">
-                                            @csrf
-                                            <button class="btn btn-default btn-flat">Déconnexion</button>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                         @endif
-                         @if (auth()->user()->hasRole('Free'))
-                        <li class="dropdown user user-menu">
-                                <a href="{{ route('forms.logout_free') }}">
-                                        <span class="hidden-xs"><b>Accueil</b></span>
+                            <li class="dropdown notifications-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="label label-danger">10</span>
                                 </a>
-                        </li>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 10 notifications</li>
+                                    <li>
+                                        <!-- Inner Menu: contains the notifications -->
+                                        <ul class="menu">
+                                            <li><!-- start notification -->
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                </a>
+                                            </li>
+                                            <!-- end notification -->
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
+                            <!-- Messages: style can be found in dropdown.less-->
+                            <li class="dropdown messages-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
+                                    <i class="fas fa-comment-alt"></i>
+                                    <span class="label label-danger">4</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 4 messages</li>
+                                    <li>
+                                        <!-- inner menu: contains the messages -->
+                                        <ul class="menu">
+                                            <li><!-- start message -->
+                                                <a href="#">
+                                                    <div class="pull-left">
+                                                        <!-- User Image -->
+                                                        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                                    </div>
+                                                    <!-- Message title and timestamp -->
+                                                    <h4>
+                                                        Support Team
+                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                    </h4>
+                                                    <!-- The message -->
+                                                    <p>Why not buy a new awesome theme?</p>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        </ul>
+                                        <!-- /.menu -->
+                                    </li>
+                                    <li class="footer"><a href="#">See All Messages</a></li>
+                                </ul>
+                            </li>
+                            <!-- Tasks Menu -->
+                            <li class="dropdown tasks-menu">
+                                <!-- Menu Toggle Button -->
+                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 9 tasks</li>
+                                    <li>
+                                        <!-- Inner menu: contains the tasks -->
+                                        <ul class="menu">
+                                            <li><!-- Task item -->
+                                                <a href="#">
+                                                    <!-- Task title and progress text -->
+                                                    <h3>
+                                                        Design some buttons
+                                                        <small class="pull-right">20%</small>
+                                                    </h3>
+                                                    <!-- The progress bar -->
+                                                    <div class="progress xs">
+                                                        <!-- Change the css width attribute to simulate progress -->
+                                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="sr-only">20% Complete</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- end task item -->
+                                        </ul>
+                                    </li>
+                                    <li class="footer">
+                                        <a href="#">View all tasks</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- User Account Menu -->
+                            <li class="dropdown user user-menu">
+                                <!-- Menu Toggle Button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <!-- The user image in the navbar-->
+                                    <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                    <span class="hidden-xs"><b>{{auth()->user()->first_name}}</b> {{auth()->user()->last_name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- The user image in the menu -->
+                                    <li class="user-header">
+                                        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                        <p>
+                                            {{auth()->user()->first_name}}    {{auth()->user()->last_name}}
+                                            <small> {{ Helper::getRolename(auth()->user()->role) }}
+                                            </small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <form method="post" action="{{route('logout')}}">
+                                                @csrf
+                                                <button class="btn btn-default btn-flat">Déconnexion</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasRole('Free'))
+                            <li class="dropdown user user-menu">
+                                <a href="{{ route('forms.logout_free') }}">
+                                    <span class="hidden-xs"><b>Accueil</b></span>
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </div>
@@ -273,7 +273,7 @@
             <!-- /.container-fluid -->
         </nav>
     </header>
-  <!-- Full Width Column -->
+    <!-- Full Width Column -->
 
     <div class="page-container">
         <div class="page-content">
@@ -290,7 +290,7 @@
             </div>
         </div>
     </div>
-  <!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
 
     <footer class="main-footer">
         <div class="container">
@@ -303,9 +303,6 @@
                     <li><a href="{{ route('Termes_&_Conditions') }}">Conditions d'utilisation</a></li>
                 </ul>
             </div>
-            {{-- <div class="col-xs-12 text-center">
-                <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Bloo.</strong>  All rights reserved.
-            </div> --}}
         </div>
         <!-- /.container -->
     </footer>
@@ -314,7 +311,7 @@
     @yield('plugin-scripts')
     @yield('laraform_script2')
     @yield('page-script')
-    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
 
 </div>
 <!-- ./wrapper -->
