@@ -5,12 +5,12 @@
 
 <div class="panel panel-white">
     <div class="panel-heading">
-        <h6 class="panel-title">Submitted: <small>{{ $response->created_at->format('jS F, Y g:i a') }} ({{ $response->created_at->diffForHumans() }})</small></h6>
+        <h6 class="panel-title">{{ trans('submitted') }}: <small>{{ $response->created_at->format('jS F, Y g:i a') }} ({{ $response->created_at->diffForHumans() }})</small></h6>
         <div class="heading-elements">
             {{ $responses->appends(['type' => 'individual'])->onEachSide(2)->links('vendor.pagination.panel-header', ['pagination_class' => 'pagination-flat pagination-sm position-left']) }}
 
             @if (!empty($response_data))
-                <a href="javascript:void(0)" id="delete-button" data-href="{{ route('forms.responses.destroy.single', [$form->code, $response->id]) }}" data-item="form response" class="btn btn-sm btn-danger position-right">Delete Response</a>
+                <a href="javascript:void(0)" id="delete-button" data-href="{{ route('forms.responses.destroy.single', [$form->code, $response->id]) }}" data-item="form response" class="btn btn-sm btn-danger position-right">{{ trans('delete_response') }}</a>
             @endif
         </div>
     </div>
@@ -30,8 +30,8 @@
                                 $min_label = !empty($options['min']['label']) ? ": {$options['min']['label']}" : '';
                                 $max_label = !empty($options['max']['label']) ? ": {$options['max']['label']}" : '';
 
-                                $range = "(Between {$options['min']['value']}{$min_label} and {$options['max']['value']}{$max_label})";
-                                $value = "Rating of {$data['answer']} {$range}";
+                                $range = "(" . trans('between') . " {$options['min']['value']}{$min_label} " . trans('and') . " {$options['max']['value']}{$max_label})";
+                                $value = trans('rating_of') . " {$data['answer']} {$range}";
                             } else {
                                 $value = $data['answer'];
                             }

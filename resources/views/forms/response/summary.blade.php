@@ -15,14 +15,14 @@
                 <label class="label-xlg">{{ $field->question }}
                     @if ($field->required) <span class="text-danger">*</span> @endif
                 </label>
-                <p>{{ $responses_count }} {{ Str::plural('response', $responses_count) }}</p>
+                <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>
 
                 @if (in_array($field->template, $template_alias_no_options))
                     <div class="table-responsive">
                         <table class="table table-striped-info table-xxs table-framed-info">
                             @foreach ($responses as $response)
                                 @if ($loop->index === 10)
-                                    <tr><strong>Check the individual responses for more information</strong></tr>
+                                    <tr><strong>{{ trans('more_info') }}</strong></tr>
                                     @break
                                 @endif
                                 <tr>

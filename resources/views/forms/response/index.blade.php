@@ -48,11 +48,11 @@
 
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">{{ $response_count . ' ' . Str::plural('Response', $response_count) }}</h5>
+        <h5 class="panel-title">{{ $response_count . ' ' . Str::plural(trans('response'), $response_count) }}</h5>
         <div class="heading-elements">
             <div class="heading-btn">
-                <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">Summary</a>
-                <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">Individual</a>
+            <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">{{ trans('summary') }}</a>
+                <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">{{ trans('individual') }}</a>
             </div>
         </div>
     </div>

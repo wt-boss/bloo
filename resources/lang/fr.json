@@ -352,8 +352,17 @@
     "time_question" : "heure",
     "share" : "Partagez",
     "preview" : "Pré-visualisez",
-    "response_stats" : "Réponses | Statistiques",
-    "keep_code" : "Vous devez garder ce pour avoir acces a votre formulaire plus tard"
-
+    "response_stats" : "Voir les réponses",
+    "keep_code" : "Vous devez garder ce pour avoir acces a votre formulaire plus tard",
+    "form_code" : "Code du formulaire",
+    "summary" : "Resume",
+    "individual" : "Individuel",
+    "response" : "Réponse",
+    "submitted": "Soumis",
+    "delete_response" : "Supprimer la reponse",
+    "rating_of" : " ",
+    "between" : "entre",
+    "and" : "et",
+    "more_info" : "plus de details dans les reponses individuelles"
 }
 

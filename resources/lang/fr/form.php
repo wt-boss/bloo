@@ -8,22 +8,22 @@ $short_answer_sub_template = <<<SUB_TEMPLATE
 				<div class="mb-10">
 					<input type="text" class="form-control input-xlg question-name" id="" name="" placeholder="Question" maxlength="255" minlength="3" required>
 				</div>
-				<input type="text" class="form-control" value="short answer" readonly>
+				<input type="text" class="form-control" value="réponse courte" readonly>
 			</div>
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Francais</span>
+				<span class="heading-text text-semibold">Question à réponse courte</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -34,8 +34,8 @@ $short_answer_main_template = <<<MAIN_TEMPLATE
 	<div class="row template short-answer">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Short Answer Question:</span></label>
-				<input type="text" class="form-control" id="" name="" placeholder="Answer" value="" maxlength="255" minlength="3">
+				<label for="" class="label-xlg field-label"><span class="question">Question à réponse courte:</span></label>
+				<input type="text" class="form-control" id="" name="" placeholder="Reponse" value="" maxlength="255" minlength="3">
 			</div>
 		</div>
 	</div>
@@ -48,22 +48,22 @@ $long_answer_sub_template = <<<SUB_TEMPLATE
 				<div class="mb-10">
 					<input type="text" class="form-control input-xlg question-name" id="" name="" placeholder="Question" maxlength="255" minlength="3" required>
 				</div>
-				<input type="text" class="form-control" value="long answer" readonly>
+				<input type="text" class="form-control" value="reponse longue" readonly>
 			</div>
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Long Answer Question Type</span>
+				<span class="heading-text text-semibold">Question a reponse longue</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -74,8 +74,8 @@ $long_answer_main_template = <<<MAIN_TEMPLATE
 	<div class="row template long-answer">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Long Answer Question:</span></label>
-				<textarea rows="1" cols="5" class="form-control elastic" id="" name="" placeholder="Answer" maxlength="30000" data-rule-min-words="3"></textarea>
+				<label for="" class="label-xlg field-label"><span class="question">Question a reponse longue</span></label>
+				<textarea rows="1" cols="5" class="form-control elastic" id="" name="" placeholder="Reponse" maxlength="30000" data-rule-min-words="3"></textarea>
 			</div>
 		</div>
 	</div>
@@ -96,7 +96,7 @@ $multiple_choices_sub_template = <<<SUB_TEMPLATE
 							</span>
 							<input type="text" id="" name="" class="form-control question-option" placeholder="Option 1" maxlength="255" minlength="3" required>
 							<span class="input-group-addon no-padding-bottom">
-								<button type="button" class="btn btn-xs btn-default add-option">Add Option</button>
+								<button type="button" class="btn btn-xs btn-default add-option">Ajouter</button>
 							</span>
 						</div>
 					</div>
@@ -118,17 +118,17 @@ $multiple_choices_sub_template = <<<SUB_TEMPLATE
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Multiple Choices Question Type</span>
+				<span class="heading-text text-semibold">Question a choix unique</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -139,7 +139,7 @@ $multiple_choices_main_template = <<<MAIN_TEMPLATE
 	<div class="row template multiple-choices">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Multiple Choice Question:</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Question a choix unique</span></label>
 				<div class="options button radios">
 					<div class="radio mt-15 mb-15 sample">
 						<label class="option-label">
@@ -167,7 +167,7 @@ $checkboxes_sub_template = <<<SUB_TEMPLATE
 							</span>
 							<input type="text" id="" name="" class="form-control question-option" placeholder="Option 1" maxlength="255" minlength="3" required>
 							<span class="input-group-addon no-padding-bottom">
-								<button type="button" class="btn btn-xs btn-default add-option">Add Option</button>
+								<button type="button" class="btn btn-xs btn-default add-option">Ajouter</button>
 							</span>
 						</div>
 					</div>
@@ -189,17 +189,17 @@ $checkboxes_sub_template = <<<SUB_TEMPLATE
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Chechboxes Question Type</span>
+				<span class="heading-text text-semibold">Questions a choix multiple</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -210,7 +210,7 @@ $checkboxes_main_template = <<<MAIN_TEMPLATE
 	<div class="row template checkboxes">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Checkbox Question:</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Question a choix multiple</span></label>
 				<div class="options button checkboxes">
 					<div class="checkbox mt-15 mb-15">
 						<label>
@@ -266,11 +266,11 @@ $drop_down_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -307,7 +307,7 @@ $linear_scale_sub_template = <<<SUB_TEMPLATE
 					</div>
 				</div>
 				<div class="col-md-1">
-					<div class="form-control-static text-center">to</div>
+					<div class="form-control-static text-center">a</div>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group">
@@ -331,13 +331,13 @@ $linear_scale_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon min-value" id="">1.</span>
-								<input type="text" id="" name="" class="form-control question-option-label min value" placeholder="Label (optional)">
+								<input type="text" id="" name="" class="form-control question-option-label min value" placeholder="Label (optionel)">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon max-value" id="">5.</span>
-								<input type="text" id="" name="" class="form-control question-option-label max value" placeholder="Label (optional)">
+								<input type="text" id="" name="" class="form-control question-option-label max value" placeholder="Label (optionel)">
 							</div>
 						</div>
 					</div>
@@ -346,17 +346,17 @@ $linear_scale_sub_template = <<<SUB_TEMPLATE
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Linear Scale Question Type</span>
+				<span class="heading-text text-semibold">Question de type echele</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -367,7 +367,7 @@ $linear_scale_main_template = <<<MAIN_TEMPLATE
 	<div class="row template linear-scale">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Linear Scale Question:</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Question de type echele</span></label>
 				<div class="options scale">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2">
@@ -392,23 +392,23 @@ $date_sub_template = <<<SUB_TEMPLATE
 					<span class="input-group-addon">
 						<i class="icon-calendar3"></i>
 					</span>
-					<input type="text" class="form-control" placeholder="Day, Month, Year" readonly>
+					<input type="text" class="form-control" placeholder="Jour, Mois, Annee" readonly>
 				</div>
 			</div>
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Date Question Type</span>
+				<span class="heading-text text-semibold">Question de type date</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -420,7 +420,7 @@ $date_main_template = <<<MAIN_TEMPLATE
 	<div class="row template date">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Date Question:</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Questiond de type date</span></label>
 				<input type="date" name="" class="form-control pickadate" value="" placeholder="$current_date" data-msg="Date is required">
 			</div>
 		</div>
@@ -438,23 +438,23 @@ $time_sub_template = <<<SUB_TEMPLATE
 					<span class="input-group-addon">
 						<i class="icon-alarm"></i>
 					</span>
-					<input type="text" class="form-control" placeholder="Time" readonly>
+					<input type="text" class="form-control" placeholder="Heure" readonly>
 				</div>
 			</div>
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Time Question Type</span>
+				<span class="heading-text text-semibold">Question de type heure</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Required
+								Requis
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Delete</button>
+					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
 				</div>
 			</div>
 		</div>
@@ -466,7 +466,7 @@ $time_main_template = <<<MAIN_TEMPLATE
 	<div class="row template time">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Time Question:</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Question de type heure</span></label>
 				<input type="time" class="form-control pickatime" placeholder="$current_time">
 			</div>
 		</div>
