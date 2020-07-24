@@ -13,7 +13,7 @@ $short_answer_sub_template = <<<SUB_TEMPLATE
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">reponse courte</span>
+				<span class="heading-text text-semibold">Francais</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
