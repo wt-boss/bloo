@@ -14,13 +14,13 @@
             <div class="panel panel-body form-content">
                 <div class="text-center">
                     <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
-                    <h5 class="content-group">Password recovery <small class="display-block">We'll send you instructions via email</small></h5>
+                    <h5 class="content-group">Récupération de mot de passe <small class="display-block">Nous vous enverrons des instructions par e-mail</small></h5>
                 </div>
 
                 @php $status = $status ?? null; @endphp
                 @includeWhen(isset($status), 'partials.alert', ['name' => 'login', 'forced_alert' => ['status' => 'success', 'message' => $status]])
 
-                <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }} has-feedback-left bloo-fg">
                     <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
                     <div class="form-control-feedback">
                         <i class="icon-mail5 text-muted"></i>
@@ -29,10 +29,12 @@
                         <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
-
-                <button type="submit" class="btn bg-primary btn-block">Send Password Reset Link <i class="icon-arrow-right14 position-right"></i></button>
+                <div class="form-group">
+                    <button type="submit" class="btn  btn-block">Envoyer le lien de réinitialisation<i class="icon-arrow-right14 position-right"></i></button>
+                </div>
             </div>
         </div>
+
     </div>
 </form>
 @endsection
