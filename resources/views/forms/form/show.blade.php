@@ -38,20 +38,22 @@
         <h5 class="panel-title">{{ $form->title }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ $symbol['label'] }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
-                @include('forms.partials._form-menu')
+                @if(!auth()->user()->hasRole('Free'))
+                    @include('forms.partials._form-menu')
+                @endif
             </div>
         </div>
     </div>
     <div class="panel-body">
         {!! str_convert_line_breaks($form->description) !!}
         @if (auth()->user()->hasRole('Free'))
-            <div class="form-group col-12">
-                <label for="exampleInputEmail1"><b>Code du formulaire</b></label>
-                    <input class="form-control " style="font-size: 16px"  id="token" value="{{$form->code}}">
-                        <button class="btn btn-outline-secondary" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
-                            <span class="iconify" data-icon="octicon-clippy" data-inline="false"></span>
-                        </button>
-                <small class="form-text text-warning text-capitalize col-9">{{ trans('keep_code') }}</small>
+            <div class="form-group col-xs-12">
+                <label for="exampleInputEmail1"><b>{{ trans('form_code') }}</b></label>
+                <button class="btn pull-right" style="top:38px;" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                </button>
+                <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" />
+                <small class="form-text text-warning text-capitalize col-xs-12">{{ trans('keep_code') }}</small>
             </div>
         @endif
     </div>
@@ -59,10 +61,9 @@
 
 <div class="panel panel-body">
     <div class="pull-right">
-        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('share') }}</a>
-        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('response_stats') }}</a>
-        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('preview') }}</a>
-        <a href="#" class="btn btn-primary btn-xs position-right legitRipple" target="_blank" id="form-preview">{{ trans('response_stats') }}</a>
+        <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
+        <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
+        @include('forms.partials._form-share-free')
     </div>
 
 </div>
@@ -124,7 +125,13 @@
                 <div class="text-right">
                     <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Saving..." data-complete-text="Save">Save</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
-                    <a href="{{ ($form_is_ready) ? route('forms.preview', $form->code) : 'javascript:void(0)' }}" class="btn btn-primary btn-xs position-right{{ ($form_is_ready) ? '' : ' hidden' }}" target="_blank" id="form-preview">Preview</a>
+                    @if(auth()->user()->hasRole('Free'))
+                        <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
+                    @endif
+                    <a href="{{ ($form_is_ready) ? route('forms.preview', $form->code) : 'javascript:void(0)' }}" class="btn btn-primary btn-xs position-right{{ ($form_is_ready) ? '' : ' hidden' }}" target="_blank" id="form-preview"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
+                    @if(auth()->user()->hasRole('Free'))
+                        @include('forms.partials._form-share-free')
+                    @endif
                 </div>
             </div>
         </form>
