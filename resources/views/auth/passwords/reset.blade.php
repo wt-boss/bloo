@@ -4,16 +4,18 @@
 
 @section('content')
 
-<form id="password-reset" method="post" action="{{ route('password.request') }}" autocomplete="off">
+<form id="login" method="post" action="{{ route('password.request') }}" autocomplete="off">
     @csrf
     <input type="hidden" name="token" value="{{ $token }}">
-
     <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center login-logo-header">
+            <img alt="Bloo" src="{{ asset('assets/images/bloo_logo.png') }}">
+        </div>
         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-body">
+            <div class="panel panel-body form-content">
                 <div class="text-center">
                     <div class="icon-object border-warning text-warning"><i class="icon-reset"></i></div>
-                    <h5 class="content-group">Password Reset <small class="display-block">Go ahead to reset your password</small></h5>
+                    <h5 class="content-group">Reinitialiser votre mot de passe <small class="display-block">Go ahead to reset your password</small></h5>
                 </div>
 
                 <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -46,7 +48,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn bg-success btn-block">Reset Password <i class="icon-arrow-right14 position-right"></i></button>
+                <button type="submit" class="btn bg-success btn-block">Reinialiser mot de passe<i class="icon-arrow-right14 position-right"></i></button>
             </div>
         </div>
     </div>

@@ -132,7 +132,7 @@ Route::group(['middleware'=>['web']],function(){
 
 
 });
-Route::get('/questionnaire/create/free','OperationController@free')->name('questionnaire.free');
+Route::get('/questionnaire/create/free','PagesController@free')->name('questionnaire.free');
 
 //Questionnaire get
 
@@ -201,10 +201,13 @@ Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
 Route::resource('compte','CompteController');
+Route::get('comptes/gift','CompteController@donner')->name('giftoperation');
+Route::post('comptes/gift','CompteController@savegift')->name('savegift');
+
 
 //Messagerie Route
 Route::get('messages','MessageController@index')->name('messages_index');
-Route::get('messages_show','MessageController@show')->name('messages_show');
+Route::get('messages_show/{operation}','MessageController@show')->name('messages_show');
 Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
-Route::get('/users_list/{id}','MessageController@users');
+Route::get('/users_list','MessageController@users');

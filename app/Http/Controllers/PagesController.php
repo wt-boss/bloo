@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function free()
+    {
+        return view('pages.free');
+    }
+
     public function getHome(){
         return view('pages.home');
     }
