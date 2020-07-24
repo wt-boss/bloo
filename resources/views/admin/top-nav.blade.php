@@ -13,7 +13,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Rubik:wght@300&display=swap" rel="stylesheet">
-    <script type="text/javascript"  src="{{ asset('js/app.js')}}" defer></script>
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
