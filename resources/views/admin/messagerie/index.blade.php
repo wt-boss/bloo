@@ -25,7 +25,7 @@
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
                         @foreach($operations as $opera)
-                        <li id="{{$opera->id}}" class="operation"><p> {{$opera->nom}}<span class="pull-right badge bg-blue">31</span></p></li>
+                        <li  class="operation" title="{{$opera->id}}" > {{$opera->nom}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -46,8 +46,13 @@
     <script type="application/javascript">
         $('.operation').on('click', function (e) {
             console.log(e);
-            console.log('jiren');
-            // var operation_id = e.target.id;
+            var operation_id = e.target.title;
+            var user_id = e.target.title;
+            $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
+                if(data && $.parseJSON('true') === true){
+                    $(e.target).parents('li').remove();
+                }
+            });
             // $.post('/messages_show/'+operation_id , function (data) {
             //     console.log(data);
             // });
