@@ -49,7 +49,8 @@ class HomeController extends Controller
     }
     public function language()
 	{
-		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
+        Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
+        Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
 		return redirect()->back();
 	}
 
