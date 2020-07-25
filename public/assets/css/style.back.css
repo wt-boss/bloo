@@ -28,6 +28,19 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+.btn-xs-bloo {
+    background-color: #fff;
+    border : 2px solid #0065A1;
+    color : #0065A1;
+    font-weight: 500;
+    padding: 3px 6px;
+    text-transform: none;
+    font-family: 'Baloo 2', sans-serif, cursive;
+}
+.btn-xs-bloo.disabled {
+    border : 2px solid #ABABAB;
+    color : #ABABAB;
+}
 .btn-bloo:hover {
     background-color: #fff;
     color: #0065A1;
@@ -189,6 +202,15 @@ input[type=text].form-control.question-option {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+p.label {
+    color: #ABABAB;
+}
+p.label, p.info-value {
+    display: inline-block;
+}
+.ope-header {
+    padding: 18px 0px;
+}
 
 /* Tableau de bords */
 .small-box .icon {
@@ -202,7 +224,7 @@ ul.box-title li {
     display: inline-block;
     margin-right: 10px;
 }
-.panel.panel-wb {
+.panel.panel-wb, .panel-wb {
     background-color: transparent;
     border-color: transparent;
     border-radius: 0;
