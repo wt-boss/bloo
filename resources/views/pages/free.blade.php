@@ -49,60 +49,87 @@
 <section class="ftco-section bg-light sondage">
     <div class="container">
         <div class="row d-md-flex">
-            <div class="col-md-6 ftco-animate img about-image" style="border-radius: 5px; background-image: url({{asset('assets/images/avantages_bloo_okay.jpg')}});">
-            </div>
+            <div class="col-md-6 ftco-animate img about-image" style="border-radius: 5px; background-image: url({{asset('assets/images/avantages_bloo_okay.jpg')}});"></div>
             <div class="col-md-6 ftco-animate p-md-5">
                 <div class="row">
-              <div class="col-md-12 nav-link-wrap mb-5">
-                <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link active" id="v-pills-whatwedo-tab" data-toggle="pill" href="#v-pills-whatwedo" role="tab" aria-controls="v-pills-whatwedo" aria-selected="true">{{trans('free_content1')}}</a>
+                    <div class="col-md-12 nav-link-wrap mb-5">
+                        <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-whatwedo-tab" data-toggle="pill" href="#v-pills-whatwedo" role="tab" aria-controls="v-pills-whatwedo" aria-selected="true">{{trans('free_content1')}}</a>
 
-                  <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">{{trans('free_content2')}}</a>
-                </div>
-              </div>
-              <div class="col-md-12 d-flex align-items-center">
-
-                <div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-                  <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
-                        <div>
-                            <form action="{{route('forms.store_free')}}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <label for="title">{{trans('free_form1_label1')}}</label>
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                        <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <input type="submit" class="btn btn-primary float-right"/>
-                                    </div>
-                                </div>
-                            </form>
+                        <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">{{trans('free_content2')}}</a>
                         </div>
-                  </div>
-                  <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
-                      <form  id="form2" action="{{ route('forms.show_free') }}" method="post" >
-                        @csrf
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <input type="text" class="form-control" id="title"  placeholder="Entrer le titre" required>
+                    </div>
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="tab-content ftco-animate" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
+                                    <div>
+                                        <form action="{{route('forms.store_free')}}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label for="title">{{trans('free_form1_label1')}}</label>
+                                                    <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="purpose">{{trans('free_form1_label2')}}</label>
+                                                    <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <input type="submit" class="btn btn-primary float-right"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                             </div>
 
-                            <div class="form-group col-12">
-                                <input type="submit" class="btn btn-primary float-right"/>
+                            <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
+                                @if (Session::has('errors'))
+                                    <div class="alert alert-danger" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <ul class="list-unstyled">
+                                            @foreach (Session::get('errors')->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if (Session::has('warning'))
+                                    <div class="alert alert-warning" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('warning')}}
+                                    </div>
+                                @endif
+                                @if (Session::has('info'))
+                                    <div class="alert alert-info" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('info')}}
+                                    </div>
+                                @endif
+                                @if (Session::has('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        {{Session::get('success')}}
+                                    </div>
+                                @endif
+                                    <form action="{{ route('forms.show_free') }}" method="post" >
+                                        <p style="color: transparent;">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non soluta amet accusamus.
+                                        </p>
+
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="token">Code du formulaire</label>
+                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary float-right"/>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
-                    </form>
-                  </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
     </div>
 </section>

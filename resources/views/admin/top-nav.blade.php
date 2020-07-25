@@ -77,7 +77,7 @@
                     <ul class="nav navbar-nav" style="margin: 0 0 0 20px;">
 
                         @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
-                            <li class="<?php echo (  Str::startsWith($route, 'operation') ) ? "active" : '' ?>">
+                            <li class="<?php echo (  Str::startsWith($route, 'operation.index') || Str::startsWith($route, 'operation.view') || Str::startsWith($route, 'edit')) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('operation.index')}}" >
                                     <i class="fas fa-layer-group"></i>
                                     <span>Opérations</span>
@@ -86,7 +86,7 @@
                         @endif
 
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                            <li  class="<?php echo (  Str::startsWith($route, 'dashboard_operation') ) ? "active" : '' ?>">
+                            <li  class="<?php echo (  Str::startsWith($route, 'admin') || Str::startsWith($route, 'operation.show') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('admin')}}">
                                     <i class="fas fa-th-large"></i>
                                     <span>Tableau de bord</span>

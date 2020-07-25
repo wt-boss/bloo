@@ -363,6 +363,27 @@
     "rating_of" : " ",
     "between" : "entre",
     "and" : "et",
-    "more_info" : "plus de details dans les reponses individuelles"
+    "more_info" : "plus de details dans les reponses individuelles",
+    "edit_op" : "Editer l'opération",
+    "view_form" : "Voir Opération",
+    "edit_form" : "Editer Questionnaire",
+    "view_msg" : "Messages",
+    "delete_op" : "Supprimer",
+    "op_name" : "Nom operation",
+    "start_date" : "Date debut",
+    "end_date" : "Date fin",
+    "enterprise" : "Entreprise",
+    "city" : "Villes",
+    "sites" : "Sites",
+    "operator" : "Operateurs",
+    "actions" : "Actions",
+    "accounts" : "Comptes",
+    "operations" : "Operations",
+    "operators" : "Operateurs",
+    "reports" : "Rapports",
+    "client_operations" : "Opérations par clients",
+    "resources" : "ressources",
+    "select_op" : "Sélectionner une opération",
+    "show_form" : "Afficher le questionnaire"
 }
 

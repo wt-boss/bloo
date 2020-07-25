@@ -30,30 +30,95 @@
                 <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                    ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                    exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
                 </p>
                 <form method="post" action="{{ route('operation.store') }}">
                     @csrf
-                    <input class="form-control" type="text" name="nom_operation" placeholder="Nom ">
-                    <input class="form-control" type="date" name="date_debut" placeholder="Date de debut">
-                    <input class="form-control" type="date" name="date_fin" placeholder="Date de fin">
-                    <input class="form-control" type="text" name="nom_formulaire" placeholder="nom formulaire">
-                    <input class="form-control" type="text" name="description_formulaire" placeholder="description formulaire">
-                   @if(isset($entreprise))
+                    <div class="row">
+                        @if(isset($entreprise))
+                            <select class="form-control" name="entreprise_id">
+                                <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                            </select>
+                        @else
                         <select class="form-control" name="entreprise_id">
-                            <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                            @foreach($entreprises as $entreprise)
+                                <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                                @endforeach
                         </select>
-                    @else
-                       <select class="form-control" name="entreprise_id">
-                           @foreach($entreprises as $entreprise)
-                               <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
-                               @endforeach
-                       </select>
-                    @endif
+                        @endif
+                    </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bloo-bloc col-md-5 text-center b-first">
+                            <p class="op-title">Nommer votre operation</p>
+                            <input name="nom_operation" class="form-control" type="text" placeholder="Ex : Municipales 2030">
+                        </div>
+                        <div class="col-md-5 bloo-bloc col-md-offset-1">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p class="op-title">Debut</p>
+                                    <input name="date_debut" class="form-control" type="date">
+                                </div>
+                                <div class="col-xs-6">
+                                    <p class="op-title">Fin</p>
+                                    <input name="date_fin" class="form-control" type="date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bloo-bloc col-md-5 text-center b-first">
+                            <p class="op-title">Nom du formulaire</p>
+                            <input class="form-control" name="nom_formulaire" type="text" placeholder="Ex : Municipales 2030">
+                        </div>
+                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
+                            <p class="op-title">description du formulaire</p>
+                            <input class="form-control" type="text" name="description_formulaire" placeholder="Ex : Description des objectifs du formulaire">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bloo-bloc col-md-5 text-center b-first">
+                            <p class="op-title">Editer le questionnaire</p>
+                            <div>
+                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
+                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
+                            <p class="op-title">Editer les sites d'enquête</p>
+                            <div>
+                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
+                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bloo-bloc col-md-5 text-center b-first">
+                            <p class="op-title">Ajouter les lecteurs</p>
+                            <div id="btn-add-reader" class="btn">
+                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-lect-btn.png') }}" alt="">
+                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
+                            <p class="op-title">Sélectionner les opérateurs</p>
+                            <div>
+                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-ope-btn.png') }}" alt="">
+                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                     <br />
                     <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>
-                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button>
+                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
                     <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>
                     <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button>
                 </form>
@@ -112,7 +177,7 @@
 
         return true;
     }
-    
+
     function addlecteur() {
         $('.onelecteur').on('click', function (e) {
             console.log(e);
