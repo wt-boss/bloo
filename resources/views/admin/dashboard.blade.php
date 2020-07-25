@@ -4,6 +4,15 @@
 
 @section('content')
 
+    {{  $compte->count()  }} {{$operations->count() }}  {{ $operateurs->count() }}
+    <br>
+    <ul>
+        @foreach($lecteurs as $lecteur)
+        <li>{{$lecteur->first_name}}</li>
+            @endforeach
+    </ul>
+
+
 @endsection
 
 @section('laraform_script1')

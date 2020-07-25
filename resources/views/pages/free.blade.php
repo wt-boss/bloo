@@ -2,8 +2,6 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-
-
 <div class="hero-wrap">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
@@ -15,6 +13,7 @@
                 <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Sondage gratuit</h1>
             </div>
         </div>
+    </div>
 </div>
 
 <section class="ftco-section sondages">
@@ -86,52 +85,19 @@
                             </form>
                         </div>
                   </div>
-
                   <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
-                        <div>
-                            @if (Session::has('errors'))
-                                    <div class="alert alert-danger" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <ul class="list-unstyled">
-                                            @foreach (Session::get('errors')->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                @if (Session::has('warning'))
-                                    <div class="alert alert-warning" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        {{Session::get('warning')}}
-                                    </div>
-                                @endif
-                                @if (Session::has('info'))
-                                    <div class="alert alert-info" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        {{Session::get('info')}}
-                                    </div>
-                                @endif
-                                @if (Session::has('success'))
-                                    <div class="alert alert-success" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        {{Session::get('success')}}
-                                    </div>
-                                @endif
-                                <form action="{{ route('forms.show_free') }}" method="post" >
-                                    @csrf
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label for="token">Code du formulaire</label>
-                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required >
-                                        </div>
-                                        <div class="form-group col-6">
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <input type="submit" class="btn btn-primary col-12"/>
-                                        </div>
-                                    </div>
-                                </form>
+                      <form  id="form2" action="{{ route('forms.show_free') }}" method="post" >
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <input type="text" class="form-control" id="title"  placeholder="Entrer le titre" required>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <input type="submit" class="btn btn-primary float-right"/>
+                            </div>
                         </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -142,4 +108,33 @@
 </section>
 
 
+<script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script type="text/javascript">
+   // Définir l'en-tête CSRF par défaut
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    // Interception du Formulaire de connexion
+    $('#form2').submit(function(e){
+
+        // Empêcher la soumission de formulaire normale, nous le faisons bien en JS à la place
+        e.preventDefault();
+        // Obtenir les données du formulaire
+        var data = {
+            title: $('[name=title]').val(),
+        };
+        // Envoyer la demande
+        $.post($('this').attr('action'), data, function(response) {
+            if (response.success) {--}}
+                // Si la connexion réussit, redirection
+                window.location.replace(response.redirect);-
+            }
+       });
+    });
+
+</script>
+
 @endsection
+

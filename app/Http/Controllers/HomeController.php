@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entreprise;
+use App\Operation;
 use App\Questionnaire;
 use App\User;
 use Illuminate\Http\Request;
@@ -45,8 +47,13 @@ class HomeController extends Controller
     public function admin()
     {
         $user = auth()->user();
-        return view('admin.dashboard',compact('user'));
+        $compte = Entreprise::all();
+        $operations = Operation::all();
+        $operateurs = User::where('role','1')->get();
+        $lecteurs = User::where('role','0')->get();
+        return view('admin.dashboard',compact('user','compte','operateurs','operations','lecteurs'));
     }
+
     public function language()
 	{
         Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');

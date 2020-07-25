@@ -123,22 +123,49 @@ class FormController extends Controller
 
     public function show_free(Request $request)
     {
-
         $parameters = $request->all();
 
+        if($request->ajax()){
+            // If request from AJAX
+            return [
+                'success' => true,
+                'redirect' => $this->redirectPath() ?: route('home'),
+            ];
+        } else {
+            // Normal POST do redirect
+            return $this->registered($request, $user)
+                ?: redirect($this->redirectPath());
+        }
+
         $form = Form::where('code',$request['code'])->get()->first();
+
         if (isset($form)){
             $user_id = $form->user_id;
             $user = User::findOrFail($user_id);
-                Auth::login($user, true);
-                $form->load('fields', 'availability');
+            Auth::login($user, true);
+            $form->load('fields', 'availability');
+            if($request->ajax()){
+                // If request from AJAX
+                return [
+                    'success' => true,
+                    'redirect' => $this->redirectPath() ?: view('forms.form.show', compact('form')),
+                ];
+            } else {
                 return view('forms.form.show', compact('form'));
+            }
         }
+
         else{
-            return back()->withErrors('Code formulaire errones');
+            if($request->ajax()){
+                // If request from AJAX
+                return [
+                    'success' => true,
+                    'error' =>  'Form is invalid',
+                ];
+            } else {
+                return back()->withErrors('Code formulaire errones');
+            }
         }
-
-
     }
 
     public function edit(Form $form)
