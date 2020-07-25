@@ -41,14 +41,14 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th class="text-center">Nom operation</th>
-                                <th class="text-center">Date debut</th>
-                                <th class="text-center">Date fin</th>
-                                <th class="text-center">Entreprise</th>
-                                <th class="text-center">Villes</th>
-                                <th class="text-center">Sites</th>
-                                <th class="text-center">Operateurs</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center">{{ trans('op_name') }}</th>
+                                <th class="text-center">{{ trans('start_date') }}</th>
+                                <th class="text-center">{{ trans('end_date') }}</th>
+                                <th class="text-center">{{ trans('enterprise') }}</th>
+                                <th class="text-center">{{ trans('city') }}</th>
+                                <th class="text-center">{{ trans('sites') }}</th>
+                                <th class="text-center">{{ trans('operator') }}</th>
+                                <th class="text-center">{{ trans('actions') }}</th>
 
                             </tr>
                         </thead>
@@ -63,12 +63,8 @@
                                     <td class="text-center">Villes</td>
                                     <td class="text-center">Sites</td>
                                     <td class="text-center">15</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn btn-xs btn-success mb-5">Form</a>
-                                         <a href="{{ route('operation.show', [$operation->id]) }}" class="btn btn-xs btn-default mb-5 ">View</a>
-                                        <a href="{{  route('operation.edit', [$operation->id]) }}" class="btn btn-xs btn-primary mb-5 position-right">Edit</a>
-                                        <a href="{{route('messages_show',$operation->id)}}" class="btn btn-xs btn-info mb-5 position-right">Messages</a>
-                                        <a href="{{ route('operation.destroy', $operation->id) }}" class="btn btn-xs btn-danger mb-5 position-right" data-id="{{ $operation->id }}" data-method="delete" data-item="form" data-ajax="true">Delete</a>
+                                    <td class="text-center" style="position: relative;">
+                                        @include('admin.operation.partials.op-action')
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,8 +72,8 @@
                     </table>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
+    </div>
 @endsection
 
 @section('laraform_script1')

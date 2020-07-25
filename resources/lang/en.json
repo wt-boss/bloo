@@ -354,5 +354,6 @@
     "preview" : "Pré-visualisez",
     "response_stats" : "Réponses | Statistiques",
     "keep_code" : "Vous devez garder ce pour avoir acces a votre formulaire plus tard",
-    "more_info" : "Check the individual responses for more information"
+    "more_info" : "Check the individual responses for more information",
+    "actions" : "actions"
 }
