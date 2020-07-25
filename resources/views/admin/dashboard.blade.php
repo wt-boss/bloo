@@ -2,19 +2,6 @@
 
 @section('title', 'Accueil')
 
-@section('content')
-
-    {{  $compte->count()  }} {{$operations->count() }}  {{ $operateurs->count() }}
-    <br>
-    <ul>
-        @foreach($lecteurs as $lecteur)
-        <li>{{$lecteur->first_name}}</li>
-            @endforeach
-    </ul>
-
-
-@endsection
-
 @section('laraform_script1')
     <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
@@ -80,7 +67,7 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                       <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$comptes->count()}}</h3>
 
                         <p>{{ trans('accounts') }}</p>
                       </div>
@@ -93,7 +80,7 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                       <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$operations->count()}}</h3>
 
                         <p>{{ trans('operations') }}</p>
                       </div>
@@ -106,7 +93,7 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                       <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$operateurs->count()}}</h3>
 
                         <p>{{ trans('operators') }}</p>
                       </div>
@@ -213,36 +200,11 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="table">
+                                @foreach($lecteurs as $lecteur)
                                 <tr>
-                                  <td>Cedric NOUMBO</td>
+                                  <td>{{$lecteur->first_name}} {{$lecteur->last_name}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric NOUMBO</td>
-                                </tr>
+                                @endforeach
                             </table>
                         </div>
                         <!-- /.box-body -->

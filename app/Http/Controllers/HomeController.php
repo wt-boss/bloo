@@ -47,11 +47,11 @@ class HomeController extends Controller
     public function admin()
     {
         $user = auth()->user();
-        $compte = Entreprise::all();
+        $comptes = Entreprise::all();
         $operations = Operation::all();
         $operateurs = User::where('role','1')->get();
         $lecteurs = User::where('role','0')->get();
-        return view('admin.dashboard',compact('user','compte','operateurs','operations','lecteurs'));
+        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs'));
     }
 
     public function language()
