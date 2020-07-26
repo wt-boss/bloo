@@ -215,7 +215,7 @@ Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
 Route::post('message', 'MessageController@sendMessage');
 
 //Route Profile
-Route::get('/profile','HomeController@profile')->middleware('auth');
+Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');
 
 Route::get('/testing', function() {
     $pusher = App::make('pusher');
