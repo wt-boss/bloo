@@ -1,43 +1,78 @@
 @extends('admin.top-nav')
 
-@section('content-header')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Users
-            <small>Création d'un utilisateur</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> Users </a></li>
-            <li class="active">Créer</li>
-        </ol>
-    </section>
+@section('title', trans('create_user'))
+
+@section('laraform_style')
+    <!-- Laraform Link Style -->
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
+    <link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-    <section class="content">
+    @include('partials.alert', ['name' => 'index'])
+    <div class="panel panel-flat">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="box" style="border:1px solid #d2d6de;">
+            <div class="d-none d-sm-block col-sm-5 left-side-bloo">
+                <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
+                {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo_white.png') }}" alt="Bloo"> --}}
+                <h1>Creer un compte utilisateur</h1>
+            </div>
+            <div class="col-sm-7">
+                <div class="my-content create-user">
                     {!! Form::open([
-                            'action' => ['UsersController@store'],
-                            'files' => true
+                        'action' => ['UsersController@store'],
+                        'files' => true
                         ])
                     !!}
-
-                    <div class="box-body" style="margin:10px;">
+                        @csrf
                         @include('admin.users.form')
-                    </div>
-
-                    <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
-                        <button type="submit" class="btn btn-info" style="width:100px;">Sauvegarder</button>
-                        <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Annuler</a>
-                    </div>
-
+                        <br>
+                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
+                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+@endsection
+
+@section('laraform_script1')
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+@endsection
+
+@section('plugin-scripts')
+	<script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
+@endsection
+
+@section('laraform_script2')
+    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
+@endsection
+
+@section('page-script')
+    <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
+@endsection
+@section('laraform_script2')
+    <script src="{{ asset('assets/js/core/app.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
+@endsection
+
+@extends('admin.top-nav')
+
+@section('content-header')
+    <!-- Content Header (Page header) -->
 @endsection
