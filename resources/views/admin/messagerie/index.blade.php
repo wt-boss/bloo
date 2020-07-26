@@ -48,9 +48,6 @@
                             </div>
                             <div class="box-body">
                                 <ul class="nav nav-stacked" id="lecteur">
-                                    <li>
-                                           cedric noumbo
-                                    </li>
                                 </ul>
                             </div>
                             <!-- /.box-body -->
@@ -65,9 +62,6 @@
                             </div>
                             <div class="box-body">
                                 <ul class="nav nav-stacked"  id="operateur">
-                                    <li>
-                                           cedric noumbo
-                                    </li>
                                 </ul>
                             </div>
                             <!-- /.box-body -->
