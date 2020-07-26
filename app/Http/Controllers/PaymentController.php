@@ -181,7 +181,6 @@ class PaymentController extends Controller
             $operation->date_start =$donées["date_start"];
             $operation->date_end = $donées["date_end"];
             $operation->entreprise_id = $entreprise->id;
-            $operation->user_id = "1";
             $operation->save();
             $id = "1";
             $user = User::findOrFail($id);

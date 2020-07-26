@@ -28,6 +28,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 msf-form">
+            @include('admin.common.flash')
             <form role="form"  method="POST" id="payment-form" action="{{route('paypal')}}">
                 <fieldset>
                     <br>
@@ -185,7 +186,7 @@
             }, 100);
         });
     });
-    
+
     function verifyFirstStep() {
         if (is_null_or_whithe_space($('#operation_name').val())) return false;
 
@@ -206,7 +207,7 @@
 
         return true;
     }
-    
+
     function verifySecondStep() {
         const options = $('input[name=options]:checked').val();
         if (is_null_or_whithe_space(options)) return false;
