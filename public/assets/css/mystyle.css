@@ -38,6 +38,14 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     font-weight: 600;
 }
 
+.other-p.hero-wrap {
+    height: 400px;
+}
+.other-p .slider-text {
+    height: 400px;
+    align-items: flex-end !important;
+}
+
 /* Global */
 #accordion .card .card-header a {
     color: #0065A1;
@@ -367,3 +375,13 @@ a.navbar-brand img {
 .ftco-footer {
     background:#0080BB;
 }
+
+/* Carriere */
+.carriere-side-img {
+    background-image: url('../images/background_create_enterprise.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    padding-top: 0;
+}
+
+
