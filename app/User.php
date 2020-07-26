@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Mail\EmailVerificationMail;
@@ -37,6 +38,25 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+
+    public static function rules($update = false, $id = null)
+    {
+        $commun = [
+            'first_name' => 'required|min:2',
+            'last_name' => 'required|min:2',
+            'email'    => "required|email|unique:users,email,$id",
+            'password' => 'nullable|confirmed',
+        ];
+
+        if ($update) {
+            return $commun;
+        }
+
+        return array_merge($commun, [
+            'email'    => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
 /**
 * Get user role name
 *
@@ -56,8 +76,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return in_array($this->rolename(), explode("|", $roles));
     }
-
-
+    public function setPasswordAttribute($value='')
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
     public function getAvatarAttribute($value)
     {
         if (!$value) {
@@ -72,7 +94,22 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['avatar'] = (new Http\move)->move_file($photo, 'avatar.image');
     }
 
-
+    /*
+   |------------------------------------------------------------------------------------
+   | Boot
+   |------------------------------------------------------------------------------------
+   */
+    public static function boot()
+    {
+        parent::boot();
+        static::updating(function($user)
+        {
+            $original = $user->getOriginal();
+            if (Hash::check('', $user->password)) {
+                $user->attributes['password'] = $original['password'];
+            }
+        });
+    }
 
     public function getFullNameAttribute()
     {

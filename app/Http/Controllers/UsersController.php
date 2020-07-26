@@ -31,13 +31,14 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(User $user)
+    public function store(Request $request)
     {
-        $data = request()->all();
-        $user->create($data);
+        $this->validate($request, User::rules());
+        User::create(request()->all());
         return redirect(route('users.index'))->withSuccess('Utilisateur créer avec sucess');
     }
 
