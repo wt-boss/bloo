@@ -206,10 +206,12 @@ Route::post('comptes/gift','CompteController@savegift')->name('savegift');
 
 
 //Messagerie Route
+Route::get('messages','MessageController@index')->name('messages_index');
 Route::get('messages_show/{operation}','MessageController@show')->name('messages_show');
 Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
 Route::get('/users_list','MessageController@users');
+
 Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
 Route::post('message', 'MessageController@sendMessage')->name('messages_index');;
 
