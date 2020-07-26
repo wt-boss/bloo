@@ -196,7 +196,7 @@ Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
 // route for check status of the payment
 Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
 Route::get('devise','PaymentController@rates');
-Route::resource('operation', 'OperationController');
+Route::resource('operation', 'OperationController')->middleware('auth');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
@@ -207,7 +207,27 @@ Route::post('comptes/gift','CompteController@savegift')->name('savegift');
 
 //Messagerie Route
 Route::get('messages','MessageController@index')->name('messages_index');
-Route::get('messages_show/{operation}','MessageController@show')->name('messages_show');
+Route::post('messages_show/{operation}','MessageController@show')->name('messages_show');
 Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
 Route::get('/users_list','MessageController@users');
+Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
+Route::post('message', 'MessageController@sendMessage');
+
+//Route Profile
+Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');
+
+Route::get('/testing', function() {
+    $pusher = App::make('pusher');
+
+    $pusher->trigger( 'test-channel',
+        'test-event',
+        array('text' => 'Preparing the Pusher Laracon.eu workshop!'));
+
+    return view('welcome');
+});
+
+Route::get('/json-lecteurs','OperationController@listLecteurs');
+
+Route::get('/json-operateurs','OperationController@listOperateurs');
+

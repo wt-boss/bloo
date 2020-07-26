@@ -21,22 +21,16 @@
                     <div class="box-body" id="lecteurs">
 
                         <ul class="nav nav-stacked">
-                            <li>
-                                <div class="cir-image">
-                                    <div class="widget-user-image text-center op-msg-list">
-                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" />
-                                        <p>Cedric NOUMBO</p>
+                            @foreach($operations as $operation)
+                            <li id="{{$operation->id}}">
+                                <div class="cir-image" id="{{$operation->id}}">
+                                    <div class="widget-user-image text-center op-msg-list operation" id="{{$operation->id}}">
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$operation->id}}">
+                                        <p id="{{$operation->id}}">{{$operation->nom}}</p>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="cir-image">
-                                    <div class="widget-user-image text-center op-msg-list">
-                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" />
-                                        <p>Cedric NOUMBO</p>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- /.box-body -->
@@ -53,26 +47,9 @@
                                 </ul>
                             </div>
                             <div class="box-body">
-                                <ul class="nav nav-stacked">
+                                <ul class="nav nav-stacked" id="lecteur">
                                     <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                                            cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
                                     </li>
                                 </ul>
                             </div>
@@ -82,31 +59,14 @@
                     <div class="col-xs-12">
                         <div class="box" style="height: 100%;">
                             <div class="box-header with-border">
-                                <ul class="box-title">
+                                <ul class="box-title"  >
                                     <li>Operateurs</li>
                                 </ul>
                             </div>
                             <div class="box-body">
-                                <ul class="nav nav-stacked">
+                                <ul class="nav nav-stacked"  id="operateur">
                                     <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                                            cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
-                                    </li>
-                                    <li>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                           cedric noumbo
-                                        </font>
                                     </li>
                                 </ul>
                             </div>
@@ -133,13 +93,35 @@
 </div>
 @endsection
 
+
+
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script type="application/javascript">
+        $('.operation').on('click', function(e){
+            console.log(e);
+            var operation_id = e.target.id
+            $.get('/json-lecteurs?operation_id=' + operation_id,function(data) {
+                console.log(data);
+                $('#lecteur').empty();
+                $.each(data, function(index, lecteurObj){
+                    $('#lecteur').append('<li id="'+ lecteurObj.id +'">'+ lecteurObj.first_name +'</li>');
+                })
+            });
 
+            $.get('/json-operateurs?operation_id=' + operation_id,function(data) {
+                console.log(data);
+                $('#operateur').empty();
+                $.each(data, function(index, operateurObj){
+                    $('#operateur').append('<li id="'+ operateurObj.id +'">'+ operateurObj.first_name +'</li>');
+                })
+            });
+        });
     </script>
 @endsection
+
+
 
 @section('laraform_script1')
     <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>

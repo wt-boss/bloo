@@ -123,4 +123,15 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'vinkla/pusher' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Pusher\\Laravel\\PusherServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Pusher' => 'Pusher\\Laravel\\Facades\\Pusher',
+    ),
+  ),
 );

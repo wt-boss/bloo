@@ -121,12 +121,12 @@ class OperationController extends Controller
         return response()->json('true');
   }
 
-    public function listLecteurs($id)
+    public function listLecteurs(Request $request)
     {
-        $operation = Operation::with('users')->findOrFail($id);
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::with('users')->findOrFail($operation_id);
         $selected_lecteurs = $operation->users;
         $lecteurs = User::where('role', '0')->get();
-
         $opusers = [];
 
         foreach($lecteurs as $lecteur)
@@ -147,9 +147,10 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    public function listOperateurs($id)
+    public function listOperateurs(Request $request)
     {
-        $operation = Operation::with('users')->findOrFail($id);
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::with('users')->findOrFail($operation_id);
         $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
         $opusers = [];

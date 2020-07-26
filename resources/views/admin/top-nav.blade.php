@@ -131,37 +131,15 @@
                     <ul class="nav navbar-nav">
                     @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <!-- Notifications Menu -->
-                            <li class="dropdown notifications-menu">
-                                <!-- Menu toggle button -->
-                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="label label-danger">10</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
-                                    <li>
-                                        <!-- Inner Menu: contains the notifications -->
-                                        <ul class="menu">
-                                            <li><!-- start notification -->
-                                                <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                                </a>
-                                            </li>
-                                            <!-- end notification -->
-                                        </ul>
-                                    </li>
-                                    <li class="footer"><a href="#">View all</a></li>
-                                </ul>
-                            </li>
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
                                     <i class="fas fa-comment-alt"></i>
-                                    <span class="label label-danger">4</span>
+                                    <span class="label label-danger">{{auth()->user()->notifications->count()}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 4 messages</li>
+                                    <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
                                     <li>
                                         <!-- inner menu: contains the messages -->
                                         <ul class="menu">
@@ -169,15 +147,20 @@
                                                 <a href="#">
                                                     <div class="pull-left">
                                                         <!-- User Image -->
-                                                        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                                        @foreach (auth()->user()->notifications as $notification)
+                                                            <!-- Message title and timestamp -->
+                                                                <h4>
+                                                                    @php
+                                                                     $user = \App\User::findOrFail($notification->data['receiver_id']);
+                                                                    echo $user->first_name." ".$user->last_name;
+                                                                    @endphp
+                                                                    <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
+                                                                </h4>
+                                                                <!-- The message -->
+                                                                <p> {{$notification->data['message']}}</p>
+
+                                                        @endforeach
                                                     </div>
-                                                    <!-- Message title and timestamp -->
-                                                    <h4>
-                                                        Support Team
-                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                    </h4>
-                                                    <!-- The message -->
-                                                    <p>Why not buy a new awesome theme?</p>
                                                 </a>
                                             </li>
                                             <!-- end message -->
@@ -236,7 +219,7 @@
                                     <li class="user-header">
                                         <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                                         <p>
-                                            {{auth()->user()->first_name}}    {{auth()->user()->last_name}}
+                                            {{auth()->user()->getFullNameAttribute()}}
                                             <small> {{ Helper::getRolename(auth()->user()->role) }}
                                             </small>
                                         </p>
@@ -245,7 +228,7 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <a href="{{route('profile')}}" class="btn btn-default btn-flat">Profile</a>
                                         </div>
                                         <div class="pull-right">
                                             <form method="post" action="{{route('logout')}}">

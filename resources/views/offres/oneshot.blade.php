@@ -54,6 +54,7 @@
     <div class="row">
         <div class="col-sm-12 msf-form">
             <form role="form" action="" method="post">
+                @include('admin.common.flash')
                     <fieldset>
                         <br>
                         <h4><span class="step">INFORMATIONS SUR L'OPERATION (ETAPE 1 / 2)</span></h4>

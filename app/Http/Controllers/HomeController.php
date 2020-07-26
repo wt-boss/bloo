@@ -7,6 +7,8 @@ use App\Operation;
 use App\Questionnaire;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use phpseclib\Crypt\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -18,10 +20,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -60,5 +59,14 @@ class HomeController extends Controller
         Session::put('fallback_locale', session('fallback_locale') == 'fr' ? 'en' : 'fr');
 		return redirect()->back();
 	}
+
+	public function profile(){
+        $users = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
+        from users LEFT  JOIN  messages ON users.id = messages.user_id and is_read = 0 and messages.receiver_id = " . Auth::id() . "
+        where users.id != " . Auth::id() . "
+        group by users.id, users.first_name, users.last_name, users.avatar, users.email");
+        return view('admin.users.profile',compact('users'));
+    }
+
 
 }

@@ -28,6 +28,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 msf-form">
+            @include('admin.common.flash')
             <form role="form"  method="POST" id="payment-form" action="{{route('paypal')}}">
                 <fieldset>
                     <br>
