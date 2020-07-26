@@ -236,3 +236,21 @@ ul.box-title li {
         margin-top: 5%;
     }
 }
+/* Messages */
+.msg-content {
+    position: relative;
+}
+.op-msg-list {
+    padding-top: 10px;
+    border-bottom: 1px solid #D3D3D3;
+}
+.widget-user-image .img-circle {
+    width: 45%;
+    height: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.cir-image p {
+    font-size: 12px;
+    font-weight: 500;
+}

@@ -94,7 +94,7 @@
                             <li>{{ trans('statistiques') }}</li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    Dropdown <span class="caret"></span>
+                                    {{ trans('sort_by') }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>

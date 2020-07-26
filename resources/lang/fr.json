@@ -384,6 +384,7 @@
     "client_operations" : "Opérations par clients",
     "resources" : "ressources",
     "select_op" : "Sélectionner une opération",
-    "show_form" : "Afficher le questionnaire"
+    "show_form" : "Afficher le questionnaire",
+    "sort_by" : "trier par"
 }
 
