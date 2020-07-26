@@ -30,7 +30,7 @@ Form::macro('myFileImage', function($name, $label="", $img_url="", $options=[])
         <div class='form-group focused'>
             ". $label . "
             <img src='".$img_url."'
-            style='width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;'> " .
+            style='width:90px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;'> " .
         Form::file($name, array_merge(["class" => "inputfile"], $options)). "
         </div>
     ";

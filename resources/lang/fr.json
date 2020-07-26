@@ -384,6 +384,10 @@
     "client_operations" : "Opérations par clients",
     "resources" : "ressources",
     "select_op" : "Sélectionner une opération",
-    "show_form" : "Afficher le questionnaire"
+    "show_form" : "Afficher le questionnaire",
+    "sort_by" : "trier par",
+    "create_user" : "Creation d'un utilisateur",
+    "first_name" : "noms",
+    "last_name" : "prenoms"
 }
 

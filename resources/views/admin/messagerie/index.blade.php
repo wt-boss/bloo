@@ -1,61 +1,156 @@
 @extends('admin.top-nav')
 
 @section('content-header')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Users
-            <small>Panneau de control</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"> <i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-            <li class="active">Users</li>
-        </ol>
-    </section>
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-3">
-            <!-- Widget: user widget style 1 -->
-            <div class="box box-widget widget-user-2">
-                <div class="widget-user-header bg-yellow">
-                    <h5 class="widget-user-desc">Operations</h5>
+<div class="panel panel-flat panel-wb">
+    <div class="panel-body" style="padding: 0;">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="box-title">
+                                    Operations
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body" id="lecteurs">
+
+                        <ul class="nav nav-stacked">
+                            <li>
+                                <div class="cir-image">
+                                    <div class="widget-user-image text-center op-msg-list">
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" />
+                                        <p>Cedric NOUMBO</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cir-image">
+                                    <div class="widget-user-image text-center op-msg-list">
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" />
+                                        <p>Cedric NOUMBO</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-                        @foreach($operations as $opera)
-                        <li  class="operation" title="{{$opera->id}}" > {{$opera->nom}}</li>
-                        @endforeach
-                    </ul>
+                <!-- /.box -->
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box" style="height: 100%;">
+                            <div class="box-header with-border">
+                                <ul class="box-title">
+                                    <li>Lecteurs</li>
+                                </ul>
+                            </div>
+                            <div class="box-body">
+                                <ul class="nav nav-stacked">
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="box" style="height: 100%;">
+                            <div class="box-header with-border">
+                                <ul class="box-title">
+                                    <li>Operateurs</li>
+                                </ul>
+                            </div>
+                            <div class="box-body">
+                                <ul class="nav nav-stacked">
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                    <li>
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                           cedric noumbo
+                                        </font>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- /.widget-user -->
-        </div>
-        {{$operation->id}}
-        <div class="col-md-9">
-            <private :user="{{auth()->user()}}" :operation="{{$operation->id}}"></private>
+            <div class="col-md-6">
+                <div class="box" style="height: 100%;">
+                    <div class="box-header with-border">
+                        <ul class="box-title">
+                            <li>Mahamat Nour</li>
+                        </ul>
+                    </div>
+                    <div class="box-body">
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('admin_lte_script')
-
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script type="application/javascript">
-        $('.operation').on('click', function (e) {
-            console.log(e);
-            var operation_id = e.target.title;
-            var user_id = e.target.title;
-            $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
-                if(data && $.parseJSON('true') === true){
-                    $(e.target).parents('li').remove();
-                }
-            });
-            // $.post('/messages_show/'+operation_id , function (data) {
-            //     console.log(data);
-            // });
-        });
+
     </script>
+@endsection
+
+@section('laraform_script1')
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+@endsection
+
+
+@section('laraform_script2')
+    {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
 @endsection

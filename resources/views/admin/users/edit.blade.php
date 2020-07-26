@@ -6,40 +6,32 @@
 
 @section('content-header')
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Users
-            <small>Edition d'un utilisateur</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> Users </a></li>
-            <li class="active">Editer</li>
-        </ol>
-    </section>
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="box" style="border:1px solid #d2d6de;">
-                {!! Form::model($user, [
-                        'action' => ['UsersController@update', $user->id],
-                        'method' => 'put',
-                        'files' => true
-                    ])
-                !!}
-
-                <div class="box-body" style="margin:10px;">
-                    @include('admin.users.form2')
+@include('partials.alert', ['name' => 'index'])
+    <div class="panel panel-flat">
+        <div class="row">
+            <div class="d-none d-sm-block col-sm-5 left-side-bloo">
+                <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
+                {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo_white.png') }}" alt="Bloo"> --}}
+                <h1>Mise a jour compte</h1>
+            </div>
+            <div class="col-sm-7">
+                <div class="my-content create-user">
+                    {!! Form::model($user, [
+                            'action' => ['UsersController@update', $user->id],
+                            'method' => 'put',
+                            'files' => true
+                        ])
+                    !!}
+                        @csrf
+                        @include('admin.users.form2')
+                        <br>
+                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
+                        <button type="submit" class="btn btn-bloo">Mettre à jour</button>
+                    {!! Form::close() !!}
                 </div>
-
-                <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
-                    <button type="submit" class="btn btn-info" style="width:100px;">Mettre à jour</button>
-                    <a class="btn btn-warning " href="{{ route('users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
-                </div>
-
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

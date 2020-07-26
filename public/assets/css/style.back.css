@@ -20,6 +20,14 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+.btn-bloo-cancel {
+    background-color: #fff;
+    border : 2px solid #D3D3D3;
+    color : #D3D3D3;
+    font-weight: 700;
+    text-transform: none;
+    font-family: 'Baloo 2', sans-serif, cursive;
+}
 .btn-bloo-w {
     background-color: #fff;
     border : 2px solid #0065A1;
@@ -27,6 +35,19 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     font-weight: 700;
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
+}
+.btn-xs-bloo {
+    background-color: #fff;
+    border : 2px solid #0065A1;
+    color : #0065A1;
+    font-weight: 500;
+    padding: 3px 6px;
+    text-transform: none;
+    font-family: 'Baloo 2', sans-serif, cursive;
+}
+.btn-xs-bloo.disabled {
+    border : 2px solid #ABABAB;
+    color : #ABABAB;
 }
 .btn-bloo:hover {
     background-color: #fff;
@@ -38,6 +59,10 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 a.btn-bloo:hover {
     color: #0065A1;
     background-color : #fff;
+}
+
+.white {
+    color : #fff;
 }
 
 body {
@@ -189,6 +214,15 @@ input[type=text].form-control.question-option {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+p.label {
+    color: #ABABAB;
+}
+p.label, p.info-value {
+    display: inline-block;
+}
+.ope-header {
+    padding: 18px 0px;
+}
 
 /* Tableau de bords */
 .small-box .icon {
@@ -202,7 +236,7 @@ ul.box-title li {
     display: inline-block;
     margin-right: 10px;
 }
-.panel.panel-wb {
+.panel.panel-wb, .panel-wb {
     background-color: transparent;
     border-color: transparent;
     border-radius: 0;
@@ -213,4 +247,87 @@ ul.box-title li {
     .bloo-text {
         margin-top: 5%;
     }
+}
+/* Messages */
+.msg-content {
+    position: relative;
+}
+.op-msg-list {
+    padding-top: 10px;
+    border-bottom: 1px solid #D3D3D3;
+}
+.widget-user-image .img-circle {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.cir-image p {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Comptes */
+.box-widget .description-text {
+    display: block;
+    margin-bottom: 5px;
+    text-transform: none;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.comptes .box {
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+}
+.comptes .box-footer {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 10px;
+    padding-top: 60px;
+    background-color: #fff;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.comptes .widget-user .widget-user-image {
+    top: 45px;
+    left: 50%;
+    margin-left: -70px;
+}
+.comptes .description-block {
+    overflow: hidden;
+}
+.comptes .widget-user .widget-user-image>img {
+    width: 150px;
+    height: 150px;
+}
+.comptes .widget-user .widget-user-header {
+    padding: 20px;
+    height: 130px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.bg-b-blue-gradient {
+    background: rgb(0,101,161);
+    background: -moz-linear-gradient(140deg, rgba(0,101,161,1) 0%, rgba(138,210,230,1) 65%, rgba(0,101,161,1) 100%);
+    background: -webkit-linear-gradient(140deg, rgba(0,101,161,1) 0%, rgba(138,210,230,1) 65%, rgba(0,101,161,1) 100%);
+    background: linear-gradient(140deg, rgba(0,101,161,1) 0%, rgba(138,210,230,1) 65%, rgba(0,101,161,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0065a1",endColorstr="#0065a1",GradientType=1);
+}
+
+/* Create User */
+.create-user .form-group {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.create-user label {
+    margin-bottom: 0;
+}
+
+.create-user .form-control {
+    height: 18px;
 }
