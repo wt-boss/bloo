@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-<div class="hero-wrap">
+<div class="hero-wrap other-p">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
     <div class="circle-bg-2"></div>
@@ -113,6 +113,10 @@
                             <label for="particulier_email">Mot de passe :</label><br>
                             <input type="password" name="user_password_entreprise" class="address-city form-control" id="particulier_email">
                         </div>
+                        <div class="form-group col-6 ">
+                            <label for="particulier_email">Confirmez mot de passe :</label><br>
+                            <input type="password" name="user_conf_password_entreprise" class="address-city form-control" id="particulier_email">
+                        </div>
                     </div>
 
                     <div class="row" id="particulier">
@@ -128,6 +132,10 @@
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
                             <input type="password" name="user_password" class="address-city form-control" id="particulier_email">
+                        </div>
+                        <div class="form-group col-6 ">
+                            <label for="particulier_email">Confirmez mot de passe :</label><br>
+                            <input type="password" name="user_conf_password" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6">
                             <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
@@ -185,7 +193,7 @@
             }, 100);
         });
     });
-    
+
     function verifyFirstStep() {
         if (is_null_or_whithe_space($('#operation_name').val())) return false;
 
@@ -206,7 +214,7 @@
 
         return true;
     }
-    
+
     function verifySecondStep() {
         const options = $('input[name=options]:checked').val();
         if (is_null_or_whithe_space(options)) return false;
