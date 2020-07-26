@@ -134,10 +134,23 @@
 @endsection
 
 @section('admin_lte_script')
-
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script type="application/javascript">
 
     </script>
+@endsection
+
+@section('laraform_script1')
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+@endsection
+
+
+@section('laraform_script2')
+    {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
 @endsection
