@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- <div class="js-fullheight"> -->
-<div class="hero-wrap">
+<div class="hero-wrap other-p">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
     <div class="circle-bg-2"></div>
@@ -20,17 +20,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 sidebar ftco-animate"  id="header">
-                <div class="sidebar-box ftco-animate" style="padding-top: 0px;">
-                    <div class="categories">
-                        <h3>{{ trans('carriere') }}</h3>
-                        <li ><a href="#1" >{{ trans('Recrutement opérateur') }} </a></li>
-                        <li><a href="#2">{{ trans('Offres de stages') }} </a></li>
-                        <li><a href="#3">{{ trans('Offre d’emploi') }} </a></li>
-                    </div>
+                <div class="sidebar-box ftco-animate carriere-side-img">
+
                 </div>
             </div> <!-- .col-md-4 -->
 
             <div class="col-md-8 ftco-animate">
+                <div class="heading-section">
+                    <h3 class="subheading">{{ trans('carriere') }}</h3>
+                </div>
                 <h2>{{ trans('carriere1') }}</h2>
                 <p>{{ trans('carriere2') }}</p>
                 <p>{{ trans('carriere3') }}</p>
