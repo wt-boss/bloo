@@ -35,6 +35,21 @@ class MessageController extends Controller
         return view('messages.index', ['messages' => $messages]);
     }
 
+    public function getOperationMessage($user_id,$operation_id){
+        $my_id = Auth::id();
+        // Make read all unread message
+        Message::where(['user_id' => $user_id, 'receiver_id' => $my_id, 'operation_id' => $operation_id])->update(['is_read' => 1]);
+
+        // Get all message from selected user
+        $messages = Message::where(function ($query) use ($user_id, $my_id,$operation_id) {
+            $query->where('user_id', $user_id)->where('receiver_id', $my_id)->where('operation_id', $operation_id);
+        })->oRwhere(function ($query) use ($user_id, $my_id,$operation_id) {
+            $query->where('user_id', $my_id)->where('receiver_id', $user_id)->where('operation_id', $operation_id);
+        })->get();
+
+        return view('messages.index', ['messages' => $messages]);
+    }
+
     public function deleteDuplicate($user, $image)
     {
         DB::table('notifications')
@@ -51,12 +66,17 @@ class MessageController extends Controller
         $from = Auth::id();
         $to = $request->receiver_id;
         $message = $request->message;
+        $operation_id = $request->operation_id;
 
         $data = new Message();
         $data->user_id = $from;
         $data->receiver_id = $to;
         $data->message = $message;
         $data->is_read = 0; // message will be unread when sending message
+        if(isset($operation_id))
+        {
+            $data->operation_id = $operation_id;
+        }
         $data->save();
 
         // Notification
@@ -66,6 +86,13 @@ class MessageController extends Controller
         $pusher = App::make('pusher');
         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'my-event', $data);
+    }
+
+    public function getUser(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $user = User::findOrFail($user_id);
+        return response()->json($user);
     }
 
     public function index()

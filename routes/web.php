@@ -212,7 +212,10 @@ Route::get('/private-message/{user}/{operation}','MessageController@privateMessa
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
 Route::get('/users_list','MessageController@users');
 Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
+Route::get('/operation_messages/{id1}/{id2}', 'MessageController@getOperationMessage')->name('operationmessage');
 Route::post('message', 'MessageController@sendMessage');
+Route::post('message', 'MessageController@sendMessage');
+
 
 //Route Profile
 Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');
@@ -228,6 +231,8 @@ Route::get('/testing', function() {
 });
 
 Route::get('/json-lecteurs','OperationController@listLecteurs');
-
+Route::get('/json-lecteursoperations','OperationController@getoperationLecteurs');
+Route::get('/json-operateuroperations','OperationController@getoperationOperateurs');
 Route::get('/json-operateurs','OperationController@listOperateurs');
+Route::get('/json-user','MessageController@getUser');
 
