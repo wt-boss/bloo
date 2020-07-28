@@ -23,7 +23,7 @@
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
             <div class="panel-heading pull-right">
-                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> Creer une operation</a>
+                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('create_op') }}</a>
             </div>
         </div>
         @if ($operations->isEmpty())
@@ -126,6 +126,8 @@
                 minimumResultsForSearch: Infinity,
                 width: 'auto'
             });
+
+            // Set onclick cbg-colour .btn-success
         });
     </script>
 @endsection

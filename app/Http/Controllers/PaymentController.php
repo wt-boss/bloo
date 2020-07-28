@@ -181,12 +181,14 @@ class PaymentController extends Controller
             $operation->date_start =$donées["date_start"];
             $operation->date_end = $donées["date_end"];
             $operation->entreprise_id = $entreprise->id;
+            // $operation->user_id = "1";
             $operation->save();
-            $id = "1";
-            $user = User::findOrFail($id);
-            $user_lect =  User::findOrFail($user_id);
+            // $id = "1";
+            // $user = User::findOrFail($id);
+            $user = User::get()->first();
+            // $user_lect =  User::findOrFail($user_id);
             $operation->users()->attach($user);
-            $operation->users()->attach($user_lect);
+            // $operation->users()->attach($user_lect);
 
         }
         /** Recherche de l'offre choisi**/

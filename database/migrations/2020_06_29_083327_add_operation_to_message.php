@@ -14,7 +14,7 @@ class AddOperationToMessage extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->unsignedBigInteger('operation_id');
+            $table->unsignedBigInteger('operation_id')->nullable();
         });
     }
 

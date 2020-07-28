@@ -20,6 +20,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+.btn-bloo-success, .btn-bloo-success:hover, .btn-bloo-success.active, .btn-bloo-success:active, .open > .dropdown-toggle.btn-success {
+    background-color: #8AD2E6 ;
+    border-color: #8AD2E6;
+    color: #fff;
+}
 .btn-bloo-cancel {
     background-color: #fff;
     border : 2px solid #D3D3D3;
@@ -206,9 +211,9 @@ input[type=text].form-control.question-option {
 }
 
 /* Operations */
-.btn-bloo-action {
-    background-color: #D3D3D3;
-    border : 2px solid #D3D3D3;
+.btn-bloo-action, .btn-bloo-action:active, .btn-bloo-action.active, .btn-bloo-action:hover {
+    background-color: #CAE8F0;
+    border : 2px solid #CAE8F0;
     color : #fff !important;
     font-weight: 500 !important;
     text-transform: none;
