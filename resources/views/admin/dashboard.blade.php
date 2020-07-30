@@ -20,6 +20,7 @@
 	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 @endsection
 
 @section('page-script')
@@ -45,13 +46,11 @@
                     },
                     { responsivePriority: 1, targets: 0 },
                 ],
+                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                "bInfo":false,
             });
 
-            // Enable Select2 select for the length option
-            $('.dataTables_length select').select2({
-                minimumResultsForSearch: Infinity,
-                width: 'auto'
-            });
+
         });
     </script>
 @endsection
@@ -106,7 +105,7 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                       <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$rapports->count()}}</h3>
 
                         <p>{{ trans('reports') }}</p>
                       </div>
@@ -153,9 +152,9 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <table class="table">
+                            <table class="datatable table">
                                 <tr>
-                                  <td>Abong Mbang</td>
+                                  <td>NOAH</td>
                                 </tr>
                                 <tr>
                                     <td>Abong Mbang</td>
@@ -199,7 +198,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <table class="table">
+                            <table class="datatable table">
                                 @foreach($lecteurs as $lecteur)
                                 <tr>
                                   <td>{{$lecteur->first_name}} {{$lecteur->last_name}}</td>

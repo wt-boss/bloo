@@ -9,14 +9,6 @@
 @endsection
 
 @section('content')
-    {{-- <div class="panel panel-flat border-left-xlg border-left-bloo-primary">
-        <div class="panel-heading">
-            <h4 class="panel-title text-semibold">Mes operations</h4>
-            <div class="heading-elements">
-                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> Creer une operation</a>
-            </div>
-        </div>
-    </div> --}}
 
     @include('partials.alert', ['name' => 'index'])
 
@@ -74,6 +66,24 @@
             </div>
         @endif
     </div>
+
+    <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('1702f90c00112df631a4', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
 @endsection
 
 @section('laraform_script1')

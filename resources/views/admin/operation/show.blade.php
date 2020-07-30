@@ -17,41 +17,41 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="info">
                                     <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="info-value">{{$operation->date_start}}</p>
                                 </div>
                                 <div class="info">
                                     <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
-                                </div>
-                                <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="info-value">{{$operation->date_end}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="label">Villes</p>
+                                    <p class="info-value">10</p>
                                 </div>
                                 <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="label">Sites</p>
+                                    <p class="info-value">25</p>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="label">Lecteurs</p>
+                                    <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
                                 </div>
                                 <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">08/08/2020</p>
+                                    <p class="label">Operateur</p>
+                                    <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="info">
+                                    <p class="label">Clent</p>
+                                    <p class="info-value">{{$operation->entreprise->nom}}</p>
+                                </div>
+                                <div class="info">
+                                    <p class="label">Fondé</p>
+                                    <p class="info-value">{{$operation->users()->where('role','4')->get()->pluck('last_name')->last()}}</p>
                                 </div>
                             </div>
                     </div>
@@ -66,12 +66,12 @@
                         <div class="row">
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a class="btn form-control">Afficher le questionnaire</a>
+                                    <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">Afficher le questionnaire</a>
                                 </div>
                             </div>
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a class="btn form-control">Afficher le questionnaire</a>
+                                    <a href="{{ route('operation.index') }}"  class="btn form-control">Selectionner une opération</a>
                                 </div>
                             </div>
                         </div>
