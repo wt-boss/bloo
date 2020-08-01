@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -15,8 +18,27 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->guard = "api";
     }
+
+
+    public function register(Request $request){
+        $validator = Validator::make($request->all(),[
+            'first_name'=>'required|string|max:255',
+            'last_name'=>'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        if($validator->fails())
+        {
+            return response(['errors' => $validator->errors()->all()],422);
+        }
+        $user = User::create($request->toArray());
+
+        return response($user,200);
+    }
+
 
     /**
      * Get a JWT via given credentials.
@@ -27,7 +49,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth($this->guard)->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -41,7 +63,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth($this->guard)->user());
     }
 
     /**
@@ -51,7 +73,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth($this->guard)->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -63,7 +85,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth($this->guard)->refresh());
     }
 
     /**
@@ -78,7 +100,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth($this->guard)->factory()->getTTL()*60
         ]);
     }
      public function create(Request $request){

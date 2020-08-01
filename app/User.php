@@ -13,7 +13,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmail , JWTSubject
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, SoftDeletes, CascadeSoftDeletes;
 
