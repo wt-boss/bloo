@@ -355,5 +355,20 @@
     "response_stats" : "Réponses | Statistiques",
     "keep_code" : "Vous devez garder ce pour avoir acces a votre formulaire plus tard",
     "more_info" : "Check the individual responses for more information",
-    "actions" : "actions"
+    "actions" : "actions",
+    "menu_form_1" : "Share",
+    "menu_form_2" : "Share Form",
+    "menu_form_3" : "Form Collaborators",
+    "menu_form_4" : "Responses",
+    "menu_form_5" : "View Responses",
+    "menu_form_6": "Delete all Responses",
+    "menu_form_7" : "Download Responses as Spreadsheet",
+    "menu_form_8" : "Form Menu",
+    "menu_form_9" : "Form Availability Settings",
+    "menu_form_10" : "View Form Template",
+    "menu_form_11" : "Open Form for Response",
+    "menu_form_12" : "Close Form to Response",
+    "menu_form_13" : "Edit Form",
+    "menu_form_14" : "Delete Form",
+    "menu_form_15" : "All Forms"
 }
