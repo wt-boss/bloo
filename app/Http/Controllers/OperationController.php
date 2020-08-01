@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entreprise;
 use App\Operation_user;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use App\FormAvailability;
 use App\Form;
@@ -226,7 +227,9 @@ class OperationController extends Controller
 
         $user = User::findOrFail(Auth::user()->id);
         $operation->users()->attach($user);
-
+        $pusher = App::make('pusher');
+        $data = "Une operation a été créer" ;
+        $pusher->trigger('my-channel', 'my-event', $data);
         return redirect()->route('operation.index');
     }
 

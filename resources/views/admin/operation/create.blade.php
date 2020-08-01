@@ -5,14 +5,7 @@
 @endsection
 
 @section('content')
-{{-- <div class="panel panel-flat border-left-xlg border-left-primary">
-    <div class="panel-heading">
-        <h4 class="panel-title text-semibold">Creez une operation</h4>
-        <div class="heading-elements">
-            <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
-        </div>
-    </div>
-</div> --}}
+
 
 @include('partials.alert', ['name' => 'index'])
 <div class="panel panel-flat">
@@ -79,43 +72,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Editer le questionnaire</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
-                        </div>
-                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">Editer les sites d'enquête</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Ajouter les lecteurs</p>
-                            <div id="btn-add-reader" class="btn">
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-lect-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
-                        </div>
-                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">Sélectionner les opérateurs</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-ope-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                     <br />
                     <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>
                     {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}

@@ -50,16 +50,15 @@ class HomeController extends Controller
         $operations = Operation::all();
         $operateurs = User::where('role','1')->get();
         $lecteurs = User::where('role','0')->get();
-        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs'));
+        $rapports = Operation::where('status','TERMINER')->get();
+        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports'));
     }
-
     public function language()
 	{
         Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
         Session::put('fallback_locale', session('fallback_locale') == 'fr' ? 'en' : 'fr');
 		return redirect()->back();
 	}
-
 	public function profile(){
         $users = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
         from users LEFT  JOIN  messages ON users.id = messages.user_id and is_read = 0 and messages.receiver_id = " . Auth::id() . "
@@ -67,6 +66,4 @@ class HomeController extends Controller
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
         return view('admin.users.profile',compact('users'));
     }
-
-
 }

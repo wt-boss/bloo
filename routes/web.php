@@ -200,7 +200,7 @@ Route::resource('operation', 'OperationController')->middleware('auth');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
-Route::resource('compte','CompteController');
+Route::resource('compte','CompteController')->middleware('Role:Superadmin');;
 Route::get('comptes/gift','CompteController@donner')->name('giftoperation');
 Route::post('comptes/gift','CompteController@savegift')->name('savegift');
 
@@ -236,3 +236,9 @@ Route::get('/json-operateuroperations','OperationController@getoperationOperateu
 Route::get('/json-operateurs','OperationController@listOperateurs');
 Route::get('/json-user','MessageController@getUser');
 
+Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});

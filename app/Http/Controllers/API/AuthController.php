@@ -28,6 +28,7 @@ class AuthController extends Controller
         $response = ['token'=> $user['api_token'] ];
         return response($response,200);
     }
+
     public function login(Request $request)
     {
         $user = User::where('email',$request->email)->first();

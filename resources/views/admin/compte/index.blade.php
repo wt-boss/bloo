@@ -31,15 +31,15 @@
                 <div class="row">
                     <div class="col-sm-12 border-right">
                         <div class="description-block">
+                            {{$compte->users()->where('role','4')->get()->pluck('last_name')->last()}}
                             <h5 class="description-header" title="{{$compte->nom}}">{{$compte->nom}}</h5>
                             <span class="description-text">
-                                Compte Primus (
+                                Compte Primus
                                 @if($compte->type === "Personne Physique")
-                                    Particulier
+
                                 @else
                                     Entreprise
                                 @endif
-                                )
                             </span>
                             <span class="description-text">{{$compte->ville}}, {{$compte->pays}}</span>
                             <span class="description-text">{{$compte->operations->count()}} operations</span>
