@@ -18,11 +18,9 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register',]]);
         $this->guard = "api";
     }
-
-
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
             'first_name'=>'required|string|max:255',
@@ -38,8 +36,6 @@ class AuthController extends Controller
 
         return response($user,200);
     }
-
-
     /**
      * Get a JWT via given credentials.
      *
@@ -48,11 +44,9 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
         if (! $token = auth($this->guard)->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
         return $this->respondWithToken($token);
     }
 
@@ -63,7 +57,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth($this->guard)->user());
+        return response()->json(auth()->user());
     }
 
     /**
@@ -85,7 +79,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth($this->guard)->refresh());
+        return $this->respondWithToken(auth()->refresh());
     }
 
     /**
@@ -103,8 +97,4 @@ class AuthController extends Controller
             'expires_in' => auth($this->guard)->factory()->getTTL()*60
         ]);
     }
-     public function create(Request $request){
-        $user = User::create($request->all());
-        return response()->json($user);
-     }
 }
