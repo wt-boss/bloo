@@ -95,7 +95,10 @@
                             <p class="op-title">Editer les sites d'enquête</p>
                             <div>
                                 <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
+                                <a href="{{route('sites')}}">
                                 <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+
+                                </a>
                             </div>
                         </div>
                     </div>
