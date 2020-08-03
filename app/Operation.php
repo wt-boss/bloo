@@ -21,5 +21,9 @@ class Operation extends Model
     {
         return $this->belongsTo(Entreprise::class);
     }
+    public function sites()
+    {
+        return $this->hasMany(Site::class);
+    }
 
 }

@@ -37,7 +37,7 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $parameters = $request->all();
         //dd($parameters);
         $site = Site::where('lat',$parameters['lat'])->where('lng',$parameters['lng'])->get()->first();

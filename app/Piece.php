@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Site extends Model
+class Piece extends Model
 {
     protected $guarded = [];
 
-    public function operations()
+    public function user()
     {
-        return $this->belongsTo(Operation::class);
+        $this->belongsTo(User::class);
     }
+
 }

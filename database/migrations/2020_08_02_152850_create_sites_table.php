@@ -15,13 +15,14 @@ class CreateSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('operation_id');
             $table->string('nom');
             $table->integer('rayon');
             $table->string('pays');
             $table->string('ville');
             $table->float('lat', 60, 25);
             $table->float('lng', 60, 25);
-            $table->unique(array('lat', 'lng'));
+            $table->unique(array('lat', 'lng','operation_id'));
             $table->timestamps();
         });
     }
