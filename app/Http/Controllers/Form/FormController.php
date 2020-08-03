@@ -125,18 +125,6 @@ class FormController extends Controller
     {
         $parameters = $request->all();
 
-        if($request->ajax()){
-            // If request from AJAX
-            return [
-                'success' => true,
-                'redirect' => $this->redirectPath() ?: route('home'),
-            ];
-        } else {
-            // Normal POST do redirect
-            return $this->registered($request, $user)
-                ?: redirect($this->redirectPath());
-        }
-
         $form = Form::where('code',$request['code'])->get()->first();
 
         if (isset($form)){

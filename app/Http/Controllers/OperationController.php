@@ -298,9 +298,18 @@ class OperationController extends Controller
     }
 
     /**Retourne la map */
-    public function operationsites()
+    public function operationsites($id)
     {
         $sites = Site::all();
-        return view('admin.operation.map',compact('sites'));
+        $operation = Operation::findOrFail($id);
+        return view('admin.operation.map',compact('sites','operation'));
+    }
+
+    public function terminer_operation($id)
+    {
+        $operation = Operation::findOrFail($id);
+        $operation->status = "TERMINER";
+        $operation->save();
+        return back()->withSuccess('Operation cloturer avec success');
     }
 }

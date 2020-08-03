@@ -37,6 +37,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, User::rules());
         User::create(request()->all());
         return redirect(route('users.index'))->withSuccess('Utilisateur créer avec sucess');

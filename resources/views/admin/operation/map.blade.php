@@ -16,6 +16,7 @@
             <form class="pac-form" method="post" action={{route('sites.store')}}>
                 @csrf
                 <input id="nom" name="nom" class="controls" type="text" placeholder="Nom du site" required>
+                <input type="text" name="operation_id" value="{{$operation->id}}">
                 <input id="rayon" name="rayon"class="controls" type="number" placeholder="Rayon" required>
                 <input id="pays" name="pays" class="controls" type="text" placeholder="Pays">
                 <input id="ville" name="ville" class="controls" type="text" placeholder="Ville">
@@ -47,7 +48,7 @@
                     <td>{{$site->ville}}</td>
                     <td>
                         <form method="post" action="{{route('sites.destroy',[$site->id])}}">
-                           @csrf 
+                           @csrf
                            @method('DELETE')
                            <input type="submit" class="btn btn-danger" value="Supprimer">
                         </form>
