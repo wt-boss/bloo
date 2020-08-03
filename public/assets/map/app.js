@@ -33,14 +33,6 @@ function initMap() {
     },
   });
 
-  var myLatLng = { lat: 4.050000, lng: 9.700000 };
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
-
-
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -75,7 +67,7 @@ function initMap() {
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
     marker.setVisible(false);
-    var place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
     if (!place.geometry) {
       window.alert("No details available for input: '" + place.name + "'");
@@ -120,6 +112,71 @@ function initMap() {
     infowindowContent.children['place-name'].textContent = place.name;
     infowindowContent.children['place-address'].textContent = address;
     infowindow.open(map, marker);
+  });
+
+  // Configure the click listener.
+  map.addListener('click', function(mapsMouseEvent) {
+    //réinitialisationn du formulaire
+    $('.pac-form').trigger("reset");
+    $('#pac-input').val('');
+    
+    // Close the current InfoWindow.
+    infowindow.close();
+    marker.setVisible(false);
+    
+    let position = mapsMouseEvent.latLng;
+    marker.setPosition(position);
+    marker.setVisible(true);
+    
+    const request = {
+        location: position,
+        radius: '1000'
+    };
+
+    
+    const service = new google.maps.places.PlacesService(map);
+
+    service.nearbySearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            const request2 = {
+                placeId: results[0].place_id,
+                fields: ["name", "icon", "geometry", "address_components"]
+            };
+            
+            service.getDetails(request2, (place, etat) => {
+                if (etat === google.maps.places.PlacesServiceStatus.OK) {
+                    let address = '';
+                    if (place.address_components) {
+                      address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || ''),
+                        //(place.address_components[3] && place.address_components[3].short_name || '')
+                      ].join(' ');
+                    }
+
+                    infowindowContent.children['place-icon'].src = place.icon;
+                    infowindowContent.children['place-name'].textContent = place.name;
+                    infowindowContent.children['place-address'].textContent = address;
+                    infowindow.open(map, marker);
+                    
+                    //remplissage du formulaire
+                    for(var i = 0; i < place.address_components.length; i += 1) {
+                      var addressObj = place.address_components[i];
+                      for(var j = 0; j < addressObj.types.length; j += 1) {
+                        if (addressObj.types[j] === 'country') {
+                          document.getElementById('pays').value = addressObj.long_name; // Pays
+                        }else if (addressObj.types[j] === 'locality') {
+                          document.getElementById('ville').value = addressObj.long_name; // Ville
+                        }
+                      }
+                    }
+                    document.getElementById('lat').value = place.geometry.location.lat(); // latitude
+                    document.getElementById('lng').value = place.geometry.location.lng(); // longitude
+                }
+            }); 
+        }
+    });
   });
 
   //add markers

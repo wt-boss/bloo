@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<div class="panel panel-body">
+<div class="panel panel-body sticky-up">
     <div class="pull-right">
         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
         <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
@@ -68,7 +68,7 @@
 
 </div>
 
-<div class="sidebar-detached">
+<div class="sidebar-detached sticky">
 	<div class="sidebar sidebar-default">
 		<div class="sidebar-content">
 			<div class="sidebar-category">

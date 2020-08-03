@@ -384,4 +384,7 @@ a.navbar-brand img {
     padding-top: 0;
 }
 
-
+/* Smouth Scroll */
+html{
+    scroll-behavior: smooth;
+}
