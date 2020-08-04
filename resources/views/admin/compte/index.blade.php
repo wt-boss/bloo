@@ -8,7 +8,7 @@
                     <a href="{{route('giftoperation')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Attribuer un compte</a>
                 </div>
                 <div class="pull-right">
-                    <a href="{{route('entreprise')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
+                    <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
                 </div>
             </div>
         </div>

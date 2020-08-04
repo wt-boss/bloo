@@ -174,3 +174,19 @@
 #form-availability-form .pickatime + .picker>.picker__holder {
     width: 75% !important;
 }
+
+/* sticky */
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 135px;
+    opacity: 1;
+    z-index: 99;
+}
+.sticky-up {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 52px;
+    opacity: 1;
+    z-index: 99;
+}

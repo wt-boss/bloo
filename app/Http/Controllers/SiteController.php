@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Entreprise;
-use App\User;
 use Illuminate\Http\Request;
-
-class CompteController extends Controller
+use App\Site;
+use Illuminate\Validation\Rule;
+use Validator;
+class SiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,24 +15,8 @@ class CompteController extends Controller
      */
     public function index()
     {
-        $comptes = Entreprise::with('users','operations')->get();
-        return view('admin.compte.index',compact('comptes'));
-    }
-
-    public function savegift(Request $request)
-    {
-       $parameters = $request->all();
-       $user = User::findOrFail($parameters['user_id']);
-       $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
-       $user->entreprises()->attach($entreprise);
-       return redirect()->route('operation.index');
-    }
-
-    public function donner()
-    {
-        $entreprises =  Entreprise::all();
-        $users = User::where('role','4')->get();
-        return view('admin.compte.gift',compact('entreprises','users'));
+        $sites = Site::all();
+        return response()->json($sites);
     }
 
     /**
@@ -42,7 +26,7 @@ class CompteController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -53,7 +37,19 @@ class CompteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $parameters = $request->all();
+        //dd($parameters);
+        $site = Site::where('lat',$parameters['lat'])->where('lng',$parameters['lng'])->get()->first();
+        if(isset($site))
+        {
+          $result = ["Erreur" => "Donnees deja en base"];
+        }
+        else{
+            $sites = Site::create($request->all());
+            $result = Site::get()->last();
+        }
+        return response()->json($result);
     }
 
     /**
@@ -98,6 +94,7 @@ class CompteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Site::destroy($id);
+        return back();
     }
 }

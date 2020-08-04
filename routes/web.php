@@ -236,9 +236,8 @@ Route::get('/json-operateuroperations','OperationController@getoperationOperateu
 Route::get('/json-operateurs','OperationController@listOperateurs');
 Route::get('/json-user','MessageController@getUser');
 
-Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-});
+/**Site operation */
+Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
+/**Site routes */
+Route::resource('sites','SiteController');
+Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');

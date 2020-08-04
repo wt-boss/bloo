@@ -11,6 +11,7 @@ use App\Form;
 use App\Operation;
 use App\OpUsers;
 use App\User;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -277,9 +278,7 @@ class OperationController extends Controller
         $operation->date_end = $parameters['date_fin'];
         $operation->entreprise_id = $parameters['entreprise_id'];
         $operation->save();
-
         $form_id = $parameters['form_id'];
-
         $form = Form::findOrFail($form_id);
         $form->title = ucfirst($parameters['nom_formulaire']);
         $form->description = ucfirst($parameters['description_formulaire']);
@@ -296,5 +295,21 @@ class OperationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**Retourne la map */
+    public function operationsites($id)
+    {
+        $sites = Site::all();
+        $operation = Operation::findOrFail($id);
+        return view('admin.operation.map',compact('sites','operation'));
+    }
+
+    public function terminer_operation($id)
+    {
+        $operation = Operation::findOrFail($id);
+        $operation->status = "TERMINER";
+        $operation->save();
+        return back()->withSuccess('Operation cloturer avec success');
     }
 }
