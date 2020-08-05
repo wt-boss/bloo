@@ -36,7 +36,9 @@
         <h5 class="panel-title">{{ $page }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ $symbol['label'] }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
-                @include('forms.partials._form-menu')
+                @if(!auth()->user()->hasRole('Free'))
+                    @include('forms.partials._form-menu')
+                @endif
             </div>
         </div>
     </div>
@@ -51,8 +53,8 @@
         <h5 class="panel-title">{{ $response_count . ' ' . Str::plural(trans('response'), $response_count) }}</h5>
         <div class="heading-elements">
             <div class="heading-btn">
-            <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">{{ trans('summary') }}</a>
-                <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-teal' : 'btn-default' }}">{{ trans('individual') }}</a>
+            <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('summary') }}</a>
+                <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('individual') }}</a>
             </div>
         </div>
     </div>
@@ -100,7 +102,7 @@
                 maxChars: 255,
                 trimValue: true,
                 tagClass: function(item){
-                    return 'label bg-teal';
+                    return 'label bg-bloo-c1';
                 },
             });
 

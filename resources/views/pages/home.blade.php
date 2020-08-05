@@ -47,7 +47,7 @@
                         <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                             <div class="d-md-flex">
                                 <div class="one-half ml-md-5 align-self-center">
-                                    <h2 class="mb-4 text-center-global">{{ trans('home_content_section1_title') }}</h2>{{ trans('') }}
+                                    <h2 class="mb-4 text-center-global">{{ trans('home_content_section1_title') }}</h2>
                                 </div>
                                 <div class="one-half ml-md-5 align-self-center">
                                     <p class="text-center-global">
