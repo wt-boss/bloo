@@ -39,10 +39,10 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .other-p.hero-wrap {
-    height: 400px;
+    height: 300px;
 }
 .other-p .slider-text {
-    height: 400px;
+    height: 300px;
     align-items: flex-end !important;
 }
 
@@ -378,7 +378,7 @@ a.navbar-brand img {
 
 /* Carriere */
 .carriere-side-img {
-    background-image: url('../images/background_create_enterprise.jpg');
+    background-image: url('../images/careers_02.jpg');
     background-repeat: no-repeat;
     height: 100%;
     padding-top: 0;
