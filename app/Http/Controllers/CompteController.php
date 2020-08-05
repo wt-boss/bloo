@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entreprise;
 use App\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Compound;
 
 class CompteController extends Controller
 {
@@ -16,7 +17,8 @@ class CompteController extends Controller
     public function index()
     {
         $comptes = Entreprise::with('users','operations')->get();
-        return view('admin.compte.index',compact('comptes'));
+        $users = User::where('role','4')->get();
+        return view('admin.compte.index',compact('comptes','users'));
     }
 
     public function savegift(Request $request)
@@ -25,7 +27,9 @@ class CompteController extends Controller
        $user = User::findOrFail($parameters['user_id']);
        $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
        $user->entreprises()->attach($entreprise);
-       return redirect()->route('operation.index');
+       $comptes  = Entreprise::all();
+        $users = User::where('role','4')->get();
+       return view('admin.compte.index',compact('comptes','users'))->withSuccess('Operation attribuer avec success');
     }
 
     public function donner()
@@ -42,7 +46,7 @@ class CompteController extends Controller
      */
     public function create()
     {
-        
+        return view('admin.compte.create');
     }
 
     /**
@@ -53,7 +57,9 @@ class CompteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Entreprise::create($request->all());
+       $comptes = Entreprise::all();
+        return view('admin.compte.index',compact('comptes'))->withSuccess('Compte creer avec success');
     }
 
     /**
