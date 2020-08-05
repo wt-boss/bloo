@@ -29,13 +29,13 @@
                     <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                         <div class="d-md-flex">
                             <div class="one-half ml-md-5 align-self-center">
-                                <p>
-                                    {{ trans('sondage_content') }}
-                                </p>
+                                <h2 class="mb-4 text-center-global">
+                                        {{ trans('sondage_content1') }}
+                                </h2>
                             </div>
                             <div class="one-half ml-md-5 align-self-center">
-                                <p>
-                                    {{ trans('sondage_content1') }}
+                                <p class="text-center-global">
+                                    {{ trans('sondage_content') }}
                                 </p>
                             </div>
                         </div>
