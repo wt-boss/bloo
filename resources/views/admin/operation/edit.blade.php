@@ -82,64 +82,57 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Editer le questionnaire</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+               <div class="row">
+                   <div class="col-xs-12">
+                       <div class="bloo-bloc col-md-5 text-center b-first">
+                           <p class="op-title">Editer le questionnaire</p>
+                           <div>
+                               <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
+                               <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
                             </div>
-                        </div>
-                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">Editer les sites d'enquête</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
-                                <a href="{{route('sites',[$operation->id])}}">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Ajouter les lecteurs</p>
-                            <div id="btn-add-reader" class="btn">
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-lect-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
-                        </div>
-                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">Sélectionner les opérateurs</p>
-                            <div>
-                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-ope-btn.png') }}" alt="">
-                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
-                            </div>
+                       </div>
+                       <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
+                           <p class="op-title">Editer les sites d'enquête</p>
+                           <div>
+                               <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
+                               <a href="{{route('sites',[$operation->id])}}">
+                               <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                               </a>
+                           </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-bloo">Enregistrer</button>
+{{--                <div class="row">--}}
+{{--                    <div class="col-xs-12">--}}
+{{--                        <div class="bloo-bloc col-md-5 text-center b-first">--}}
+{{--                            <p class="op-title">Ajouter les lecteurs</p>--}}
+{{--                            <div id="btn-add-reader" class="btn">--}}
+{{--                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-lect-btn.png') }}" alt="">--}}
+{{--                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">--}}
+{{--                            <p class="op-title">Sélectionner les opérateurs</p>--}}
+{{--                            <div>--}}
+{{--                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-ope-btn.png') }}" alt="">--}}
+{{--                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                     <br />
-                    <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>
-                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
-                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>
-                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button>
+                <button type="submit" class="btn btn-bloo">Enregistrer</button>
+
+{{--                    <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>--}}
+{{--                     <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
+{{--                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>--}}
+{{--                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button>--}}
                 </form>
             </div>
         </div>
     </div>
 </div>
-<section class="content">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="box" style="border:1px solid #d2d6de;">
 
-            </div>
-        </div>
-    </div>
-</section>
 @endsection
 
 @section('laraform_script1')

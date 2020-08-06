@@ -19,11 +19,11 @@ $short_answer_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -59,11 +59,11 @@ $long_answer_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -124,11 +124,11 @@ $multiple_choices_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -195,11 +195,11 @@ $checkboxes_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -266,11 +266,11 @@ $drop_down_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -352,11 +352,11 @@ $linear_scale_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -404,11 +404,11 @@ $date_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -450,11 +450,11 @@ $time_sub_template = <<<SUB_TEMPLATE
 						<div class="form-group">
 							<label class="checkbox-inline checkbox-right checkbox-switchery switchery-sm">
 								<input type="checkbox" class="switchery question-required" name="" id="" checked="checked">
-								Requis
+								Obligatoire
 							</label>
 						</div>
 					</div>
-					<button type="button" class="btn bg-danger-400 btn-xs heading-btn question-delete" data-form="" data-form-field="">Supprimer</button>
+					<button type="button" class="btn  btn-xs heading-btn question-delete" data-form="" data-form-field=""><i class="fa fa-trash" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>

@@ -94,7 +94,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->hasRole('Superadmin'))
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                             <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('compte.index')}}" >
                                     <i class="fas fa-briefcase"></i>

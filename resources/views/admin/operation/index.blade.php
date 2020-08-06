@@ -14,15 +14,22 @@
 
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
+            @if (auth()->user()->hasRole('Superadmin|Account Manager'))
             <div class="panel-heading pull-right">
-                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('create_op') }}</a>
+                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>
             </div>
+                @endif
         </div>
         @if ($operations->isEmpty())
-
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
-                    <h6 class="text-semibold">Creer des maintenant votre premiere operation</h6>
+                    <h6 class="text-semibold">
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                            Creer des maintenant votre premiere operation
+                            @else
+                            Vous N'avez pas d'operation en cours
+                        @endif
+                    </h6>
                 </div>
             </div>
         @else
@@ -71,14 +78,11 @@
     <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     <script>
-
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
-
         var pusher = new Pusher('1702f90c00112df631a4', {
             cluster: 'ap2'
         });
-
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
             alert(JSON.stringify(data));

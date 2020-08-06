@@ -11,6 +11,7 @@ use App\Form;
 use App\Operation;
 use App\OpUsers;
 use App\User;
+use App\Country;
 use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,8 +35,16 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Operation::with('form')->get();
+        $operations = "";
+        if(auth()->user()->id === 1)
+        {
+            $operations = Operation::with('form')->get();
+        }
+        else
+        {
+            $operations = auth()->user()->operations()->get();
 
+        }
         return view('admin.operation.index', compact('operations'));
     }
 
@@ -50,25 +59,42 @@ class OperationController extends Controller
         return view('admin.operation.create',compact('entreprises'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        return view('admin.operation.entreprise',compact('entreprises'));
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return view('admin.operation.entreprise',compact('entreprises', 'countries'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function saventreprise(Request $request)
     {
-        $parameters = $request->all();
-        $entreprise = new Entreprise();
-        $entreprise->nom = $parameters['nom'];
-        $entreprise->addrese = $parameters['adresse'];
-        $entreprise->Numero_contribuable =  $parameters['contribuable'];
-        $entreprise->numero_siret =  $parameters['siret'];
-        $entreprise->pays =  $parameters['pays'];
-        $entreprise->ville =  $parameters['ville'];
-        $entreprise->type =  "Personne Morale";
-        $entreprise->telephone =  $parameters['telephone'];
-        $entreprise->save();
+        // $parameters = $request->all();
+        // $entreprise = new Entreprise();
+        // $entreprise->nom = $parameters['nom'];
+        // $entreprise->addrese = $parameters['adresse'];
+        // $entreprise->Numero_contribuable =  $parameters['contribuable'];
+        // $entreprise->numero_siret =  $parameters['siret'];
+        // $entreprise->pays =  $parameters['pays'];
+        // $entreprise->ville =  $parameters['ville'];
+        // $entreprise->type =  "Personne Morale";
+        // $entreprise->telephone =  $parameters['telephone'];
+        // $entreprise->save();
+        $entreprise = Entreprise::create($request->all());
         $user = User::findOrFail(Auth::user()->id);
         $entreprise->users()->attach($user);
         if (Auth::check()) {
@@ -85,7 +111,7 @@ class OperationController extends Controller
         $parameters = $request->all();
 
         $operation = Operation::findOrFail($parameters['operation']);
-       // dd($parameters);
+        // dd($parameters);
         foreach($parameters['lecteurs'] as $lecteur)
         {
             $user = User::findOrFail($lecteur);
@@ -109,10 +135,10 @@ class OperationController extends Controller
 
     public function removelecteur($id,$id1){
 
-          $user = User::findOrFail($id);
-          $operation = Operation::findOrFail($id1);
-          $operation->users()->detach($user);
-          return response()->json('true');
+        $user = User::findOrFail($id);
+        $operation = Operation::findOrFail($id1);
+        $operation->users()->detach($user);
+        return response()->json('true');
     }
 
     public function removeoperateur($id,$id1){
@@ -121,14 +147,14 @@ class OperationController extends Controller
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
         return response()->json('true');
-  }
+    }
 
-    public function listLecteurs(Request $request)
+    public function listLecteurs($id)
     {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::with('users')->findOrFail($operation_id);
+        $operation = Operation::with('users')->findOrFail($id);
         $selected_lecteurs = $operation->users;
         $lecteurs = User::where('role', '0')->get();
+
         $opusers = [];
 
         foreach($lecteurs as $lecteur)
@@ -141,7 +167,7 @@ class OperationController extends Controller
                 if($selected->id === $lecteur->id )
                 {
                     $opuser->status = true;
-                break;
+                    break;
                 }
             }
             $opusers[] = $opuser;
@@ -149,10 +175,9 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    public function listOperateurs(Request $request)
+    public function listOperateurs($id)
     {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::with('users')->findOrFail($operation_id);
+        $operation = Operation::with('users')->findOrFail($id);
         $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
         $opusers = [];
@@ -166,7 +191,7 @@ class OperationController extends Controller
                 if($selected->id === $operateur->id )
                 {
                     $opuser->status = true;
-                break;
+                    break;
                 }
             }
             $opusers[] = $opuser;
@@ -174,21 +199,6 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    public function getoperationLecteurs(Request $request)
-    {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','0')->get();
-        return response()->json($user);
-    }
-
-    public function getoperationOperateurs(Request $request)
-    {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','1')->get();
-        return response()->json($user);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -286,6 +296,8 @@ class OperationController extends Controller
 
         return redirect()->route('operation.index')->withSuccess('Modification Effectuée');
     }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -297,14 +309,21 @@ class OperationController extends Controller
         //
     }
 
-    /**Retourne la map */
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function operationsites($id)
     {
-        $sites = Site::all();
+        $sites = Site::orderby('id','desc')->get();
         $operation = Operation::findOrFail($id);
         return view('admin.operation.map',compact('sites','operation'));
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function terminer_operation($id)
     {
         $operation = Operation::findOrFail($id);
