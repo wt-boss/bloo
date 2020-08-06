@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- <div class="js-fullheight"> -->
-<div class="hero-wrap other-p">
+<div class="hero-wrap other-p col-sm-hidden">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
     <div class="circle-bg-2"></div>
@@ -25,7 +25,7 @@
                 </div>
             </div> <!-- .col-md-4 -->
 
-            <div class="col-md-8 ftco-animate">
+            <div class="col-md-8 col-sm-12 ftco-animate">
                 <div class="heading-section">
                     <h3 class="subheading">{{ trans('carriere') }}</h3>
                 </div>

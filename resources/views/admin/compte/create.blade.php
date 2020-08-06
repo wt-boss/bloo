@@ -25,16 +25,13 @@
             </div>
             <div class="col-sm-7">
                 <div class="my-content">
-                    <div class="pull-right">
-                        <a class="btn btn-bloo-w" href="{{ !$entreprises->isEmpty() ? route('operation.create') : '#'}}" {{$entreprises->isEmpty() ? 'disabled' : '' }}>Suivant</a>
-                    </div>
                     <h2 class="bloo-primary left-side-bloo border-left-primary">Prenez le contrôle !</h2>
                     <p class="text-justify">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
                         ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
                         exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
                     </p>
-                    <form method="post" action="{{ route('saventreprise') }}">
+                    <form method="post" action="{{ route('compte.store') }}">
                         @csrf
                         <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise" required>
                         <input class="form-control" type="text" name="adresse" placeholder="Adresse" required>
@@ -55,16 +52,6 @@
                         <input class="form-control" type="email" name="email" placeholder="Emailphp" required>
                         <br>
                         <button type="submit" class="btn btn-bloo">Enregistrer</button>
-                        {{-- @csrf
-                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
-                        <input class="form-control" type="text" name="adresse" placeholder="Adresse">
-                        <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
-                        <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
-                        <input class="form-control" type="text" name="ville" placeholder="Ville">
-                        <input class="form-control" type="text" name="pays" placeholder="Pays">
-                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
-                        <br>
-                        <button type="submit" class="btn btn-bloo">Enregistrer</button> --}}
                     </form>
                 </div>
             </div>
@@ -80,8 +67,8 @@
 @endsection
 
 @section('plugin-scripts')
-	<script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
-	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
 @endsection
