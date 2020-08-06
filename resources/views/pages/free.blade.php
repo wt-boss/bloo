@@ -63,16 +63,44 @@
                         <div class="tab-content ftco-animate" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
                                     <div>
+                                    @if (Session::has('errors'))
+                                            <div class="alert alert-danger" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                <ul class="list-unstyled">
+                                                    @foreach (Session::get('errors')->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        @if (Session::has('warning'))
+                                            <div class="alert alert-warning" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                {{Session::get('warning')}}
+                                            </div>
+                                        @endif
+                                        @if (Session::has('info'))
+                                            <div class="alert alert-info" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                {{Session::get('info')}}
+                                            </div>
+                                        @endif
+                                        @if (Session::has('success'))
+                                            <div class="alert alert-success" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                {{Session::get('success')}}
+                                            </div>
+                                        @endif
                                         <form action="{{route('forms.store_free')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="form-group col-12">
                                                     <label for="title">{{trans('free_form1_label1')}}</label>
-                                                    <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                                    <input type="text" minlength="3" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                                    <input type="text" class="form-control" id="description"  name="description" placeholder="Entrer l'objectif" required >
+                                                    <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="Entrer l'objectif" required >
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <input type="submit" class="btn btn-primary float-right"/>
