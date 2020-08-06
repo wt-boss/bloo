@@ -150,6 +150,12 @@
                                     <td>Payant</td>
                                     <td>Gratuit</td>
                                   </tr>
+                                  <tr>
+                                    <td><a href=""></td>
+                                    <td><a href="{{route('questionnaire.free')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
+                                    <td><a href="{{route('primus')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
+                                    <td><a href="{{route('illimité')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
+                                  </tr>
                                 </tbody>
                               </table>
                           </div>
