@@ -7,6 +7,7 @@
 @endsection
 
 @section('content-header')
+    @include('admin.common.flash')
     <!-- Content Header (Page header) -->
     <section class="content-header" style="margin-bottom: 10px;">
         <div class="panel-body" style="padding: 0;">
@@ -20,6 +21,7 @@
 @endsection
 
 @section('content')
+
 <div class="row comptes">
     <table class="datatable table stripe">
         <thead>
@@ -61,10 +63,12 @@
                                             @endif
                                             )
                                         </span>
-                                        <span class="description-text">{{$compte->ville}}, {{$compte->pays}}</span>
+                                        <span class="description-text">{{$compte->ville}} {{$compte->pays}}</span>
                                         <span class="description-text">{{$compte->operations->count()}} operations</span>
                                         <span class="description-text">{{$compte->email}}</span>
+                                        @if (auth()->user()->hasRole('Superadmin'))
                                         <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Parametres</button>
+                                        @endif
                                     </div>
                                     <!-- /.description-block -->
                                 </div>

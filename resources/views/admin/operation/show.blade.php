@@ -139,14 +139,7 @@
                                       <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="1"  lang="1" aria-hidden="true"></i>
                                     </font></font></span>
                             </li>
-                            <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                   alex mimbeu
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                      <i class="fa fa-minus-circle removelecteur"  id="removelecteur2" title="2"  lang="2" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
+
                           @foreach ($operation->users as $user )
                              @if ($user->role === 0)
                              <li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Country;
 use App\Entreprise;
+use App\Entreprise_user;
 use App\User;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
@@ -18,21 +19,39 @@ class CompteController extends Controller
      */
     public function index()
     {
-        $comptes = Entreprise::with('users','operations')->get();
+
+        $comptes = "";
+        if(auth()->user()->id === 1)
+        {
+            $comptes = Entreprise::with('users','operations')->get();
+        }
+        else
+        {
+            $comptes = auth()->user()->entreprises()->get();
+        }
+
         $users = User::where('role','4')->get();
         return view('admin.compte.index',compact('comptes','users'));
     }
 
     public function savegift(Request $request)
     {
-       $parameters = $request->all();
-       $user = User::findOrFail($parameters['user_id']);
-       $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
-       $user->entreprises()->attach($entreprise);
-       $comptes  = Entreprise::all();
+        $parameters = $request->all();
+        $comptes  = Entreprise::all();
         $users = User::where('role','4')->get();
-       return view('admin.compte.index',compact('comptes','users'))->withSuccess('Operation attribuer avec success');
+        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->get();
+        if(empty($user_entreprise))
+        {
+            $user = User::findOrFail($parameters['user_id']);
+            $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
+            $user->entreprises()->attach($entreprise);
+            return view('admin.compte.index',compact('comptes','users'))->withSuccess('Operation attribuer avec success');
+        }
+        else {
+                return view('admin.compte.index',compact('comptes','users'))->withErrors('Cet Acount Manager a deja ce compte');
+            }
     }
+
 
     public function donner()
     {

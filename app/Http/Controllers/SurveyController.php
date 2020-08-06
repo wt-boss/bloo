@@ -23,6 +23,15 @@ class SurveyController extends Controller
         return view('offres.primus',compact('countries'));
     }
     public function illimité(){
-        return view('offres.illimité');
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return view('offres.illimité',compact('countries'));
     }
 }

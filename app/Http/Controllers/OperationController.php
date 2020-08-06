@@ -34,8 +34,16 @@ class OperationController extends Controller
      */
     public function index()
     {
-        $operations = Operation::with('form')->get();
-
+        $operations = "";
+        if(auth()->user()->id === 1)
+        {
+            $operations = Operation::with('form')->get();
+        }
+        else
+        {
+            $operations = auth()->user()->operations()->get();
+           
+        }
         return view('admin.operation.index', compact('operations'));
     }
 
@@ -50,12 +58,19 @@ class OperationController extends Controller
         return view('admin.operation.create',compact('entreprises'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function entreprise()
     {
         $entreprises = Entreprise::all();
         return view('admin.operation.entreprise',compact('entreprises'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function saventreprise(Request $request)
     {
         $parameters = $request->all();
@@ -80,6 +95,10 @@ class OperationController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
@@ -95,6 +114,10 @@ class OperationController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addoperateurs(Request $request)
     {
         $parameters = $request->all();
@@ -107,6 +130,11 @@ class OperationController extends Controller
         return back();
     }
 
+    /**
+     * @param $id
+     * @param $id1
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removelecteur($id,$id1){
 
           $user = User::findOrFail($id);
@@ -115,6 +143,11 @@ class OperationController extends Controller
           return response()->json('true');
     }
 
+    /**
+     * @param $id
+     * @param $id1
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removeoperateur($id,$id1){
 
         $user = User::findOrFail($id);
@@ -123,6 +156,10 @@ class OperationController extends Controller
         return response()->json('true');
   }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function listLecteurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -149,6 +186,10 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function listOperateurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -174,6 +215,10 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getoperationLecteurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -182,6 +227,10 @@ class OperationController extends Controller
         return response()->json($user);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getoperationOperateurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -286,6 +335,8 @@ class OperationController extends Controller
 
         return redirect()->route('operation.index')->withSuccess('Modification Effectuée');
     }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -297,7 +348,10 @@ class OperationController extends Controller
         //
     }
 
-    /**Retourne la map */
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function operationsites($id)
     {
         $sites = Site::all();
@@ -305,6 +359,10 @@ class OperationController extends Controller
         return view('admin.operation.map',compact('sites','operation'));
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function terminer_operation($id)
     {
         $operation = Operation::findOrFail($id);
