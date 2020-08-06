@@ -63,7 +63,7 @@
                                         </span>
                                         <span class="description-text">{{$compte->ville}}, {{$compte->pays}}</span>
                                         <span class="description-text">{{$compte->operations->count()}} operations</span>
-                                        <span class="description-text">email@email.com</span>
+                                        <span class="description-text">{{$compte->email}}</span>
                                         <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Parametres</button>
                                     </div>
                                     <!-- /.description-block -->

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\Country;
 use App\Entreprise;
 use App\User;
 use Illuminate\Http\Request;
@@ -46,7 +48,23 @@ class CompteController extends Controller
      */
     public function create()
     {
-        return view('admin.compte.create');
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return view('admin.compte.create',compact('countries'));
+    }
+
+    public function getvilles(Request $request)
+    {
+        $country_id = $request->input('country_id');
+        $cities = City::where('country_id',$country_id)->get();
+        return response()->json($cities);
     }
 
     /**
@@ -58,8 +76,9 @@ class CompteController extends Controller
     public function store(Request $request)
     {
         Entreprise::create($request->all());
-       $comptes = Entreprise::all();
-        return view('admin.compte.index',compact('comptes'))->withSuccess('Compte creer avec success');
+         $comptes = Entreprise::all();
+        $users = User::where('role','4')->get();
+        return view('admin.compte.index',compact('comptes','users'))->withSuccess('Compte creer avec success');
     }
 
     /**

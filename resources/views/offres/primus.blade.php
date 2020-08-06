@@ -91,7 +91,11 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-date">Pays de l'entreprise :</label><br>
-                            <input type="text" name="pays_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer le pays">
+                            <select class="birth-date form-control" name="" id="country" required>
+                                @foreach($countries as $country)
+                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-date">Ville de l'entreprise :</label><br>
@@ -135,7 +139,7 @@
                             <input type="password" name="user_password" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6 ">
-                            <label for="particulier_email">Confirmez mot de passe :</label><br>
+                            <label for="confirm_pass">Confirmez mot de passe :</label><br>
                             <input type="password" name="user_conf_password" class="address-city form-control" id="particulier_email">
                         </div>
                         <div class="form-group col-6">

@@ -51,11 +51,12 @@ class FormController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|min:3|max:190',
-            'description' => 'required|string|max:30000'
+            'description' => 'required|string|max:30000',
         ]);
-        $parameters =$request->all();
+
         $date = Carbon::now()->toDateTimeString();
         $mail = $date."user@free.com";
+        $this->validate($request, User::rules());
         $user = new User();
         $user->first_name = "free";
         $user->last_name = "user";
