@@ -11,6 +11,7 @@ use App\Form;
 use App\Operation;
 use App\OpUsers;
 use App\User;
+use App\Country;
 use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,16 @@ class OperationController extends Controller
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        return view('admin.operation.entreprise',compact('entreprises'));
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return view('admin.operation.entreprise',compact('entreprises', 'countries'));
     }
 
     /**
@@ -73,17 +83,18 @@ class OperationController extends Controller
      */
     public function saventreprise(Request $request)
     {
-        $parameters = $request->all();
-        $entreprise = new Entreprise();
-        $entreprise->nom = $parameters['nom'];
-        $entreprise->addrese = $parameters['adresse'];
-        $entreprise->Numero_contribuable =  $parameters['contribuable'];
-        $entreprise->numero_siret =  $parameters['siret'];
-        $entreprise->pays =  $parameters['pays'];
-        $entreprise->ville =  $parameters['ville'];
-        $entreprise->type =  "Personne Morale";
-        $entreprise->telephone =  $parameters['telephone'];
-        $entreprise->save();
+        // $parameters = $request->all();
+        // $entreprise = new Entreprise();
+        // $entreprise->nom = $parameters['nom'];
+        // $entreprise->addrese = $parameters['adresse'];
+        // $entreprise->Numero_contribuable =  $parameters['contribuable'];
+        // $entreprise->numero_siret =  $parameters['siret'];
+        // $entreprise->pays =  $parameters['pays'];
+        // $entreprise->ville =  $parameters['ville'];
+        // $entreprise->type =  "Personne Morale";
+        // $entreprise->telephone =  $parameters['telephone'];
+        // $entreprise->save();
+        $entreprise = Entreprise::create($request->all());
         $user = User::findOrFail(Auth::user()->id);
         $entreprise->users()->attach($user);
         if (Auth::check()) {

@@ -39,8 +39,8 @@ class CompteController extends Controller
         $parameters = $request->all();
         $comptes  = Entreprise::all();
         $users = User::where('role','4')->get();
-        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->get();
-        if(empty($user_entreprise))
+        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
+        if($user_entreprise == 0)
         {
             $user = User::findOrFail($parameters['user_id']);
             $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
