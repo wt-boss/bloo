@@ -42,7 +42,7 @@ class OperationController extends Controller
         else
         {
             $operations = auth()->user()->operations()->get();
-           
+
         }
         return view('admin.operation.index', compact('operations'));
     }
@@ -95,16 +95,12 @@ class OperationController extends Controller
         }
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
 
         $operation = Operation::findOrFail($parameters['operation']);
-       // dd($parameters);
+        // dd($parameters);
         foreach($parameters['lecteurs'] as $lecteur)
         {
             $user = User::findOrFail($lecteur);
@@ -114,10 +110,6 @@ class OperationController extends Controller
         return back();
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function addoperateurs(Request $request)
     {
         $parameters = $request->all();
@@ -130,42 +122,28 @@ class OperationController extends Controller
         return back();
     }
 
-    /**
-     * @param $id
-     * @param $id1
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function removelecteur($id,$id1){
 
-          $user = User::findOrFail($id);
-          $operation = Operation::findOrFail($id1);
-          $operation->users()->detach($user);
-          return response()->json('true');
+        $user = User::findOrFail($id);
+        $operation = Operation::findOrFail($id1);
+        $operation->users()->detach($user);
+        return response()->json('true');
     }
 
-    /**
-     * @param $id
-     * @param $id1
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function removeoperateur($id,$id1){
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
         return response()->json('true');
-  }
+    }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function listLecteurs(Request $request)
+    public function listLecteurs($id)
     {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::with('users')->findOrFail($operation_id);
+        $operation = Operation::with('users')->findOrFail($id);
         $selected_lecteurs = $operation->users;
         $lecteurs = User::where('role', '0')->get();
+
         $opusers = [];
 
         foreach($lecteurs as $lecteur)
@@ -178,7 +156,7 @@ class OperationController extends Controller
                 if($selected->id === $lecteur->id )
                 {
                     $opuser->status = true;
-                break;
+                    break;
                 }
             }
             $opusers[] = $opuser;
@@ -186,14 +164,9 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function listOperateurs(Request $request)
+    public function listOperateurs($id)
     {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::with('users')->findOrFail($operation_id);
+        $operation = Operation::with('users')->findOrFail($id);
         $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
         $opusers = [];
@@ -207,7 +180,7 @@ class OperationController extends Controller
                 if($selected->id === $operateur->id )
                 {
                     $opuser->status = true;
-                break;
+                    break;
                 }
             }
             $opusers[] = $opuser;
@@ -215,29 +188,6 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getoperationLecteurs(Request $request)
-    {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','0')->get();
-        return response()->json($user);
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getoperationOperateurs(Request $request)
-    {
-        $operation_id = $request->input('operation_id');
-        $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','1')->get();
-        return response()->json($user);
-    }
 
     /**
      * Store a newly created resource in storage.

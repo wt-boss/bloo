@@ -131,15 +131,6 @@
 
                     <div class="box-body" id="lecteurs">
                         <ul class="nav nav-stacked">
-                            <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                   cedric noumbo
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                      <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="1"  lang="1" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
-
                           @foreach ($operation->users as $user )
                              @if ($user->role === 0)
                              <li>
@@ -167,9 +158,7 @@
                                 </h3>
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>                    </div>
                             </div>
-
                     </div>
-
                     <div class="box-body" id="lecteurs">
                         <ul class="nav nav-stacked">
                           @foreach ($operation->users as $user )
