@@ -172,7 +172,7 @@ function initMap() {
                       }
                     }
                     document.getElementById('lat').value = place.geometry.location.lat(); // latitude
-                    document.getElementById('lng').value = place.geometry.location.lng(); // longitude
+                    document.getElementById('long').value = place.geometry.location.lng(); // longitude
                 }
             }); 
         }
@@ -304,7 +304,7 @@ $('.pac-form').on('submit', function(e){
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
-      alert('Erreur de chargement des sites');
+      alert("'Erreur d'enregistremet'");
       console.log("Erreur: impossible de charger les sites ", textStatus);
     }
   });
