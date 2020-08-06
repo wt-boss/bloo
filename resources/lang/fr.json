@@ -173,7 +173,7 @@
     "free_header0": "Obtenez les reponses dont vous avez besoin",
     "free_header": "Nous receuillons chaque jour les réponses à 1 million de questions. Obtenez les avis dont vous avez besoin grace à notre logiciel de sondage gratuit. Rejoignez les centaines d'entreprises et de particuliers qui font confiance à Bloonline pour benéficier de données instantanées à visage humain.",
     "free_content1": "Créer votre sondage",
-    "free_content2": "Résultats des sondages",
+    "free_content2": "Visualisez votre sondage",
     "free_button": "Valider",
     "free_form1_label1" : "Titre",
     "free_form1_label2" : "Objectif",
@@ -391,6 +391,16 @@
     "first_name" : "noms",
     "last_name" : "prénoms",
     "end operation" : "Cloturer l'Opération",
-    "Create" : "Créer une opération"
+    "Create" : "Créer une opération",
+    "Contact Information" : "Vos informations",
+    "Address" : "Adresse",
+    "Phone" : "Téléphone",
+    "Email" : "Email",
+    "Website" : "Adresse web",
+    "Your Name" : "Votre Nom",
+    "Your EMail" : "Votre Email",
+    "Subject" : "Sujet",
+    "Message" : "Message",
+    "Send Message" : "Envoyer"
 }
 
