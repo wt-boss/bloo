@@ -1,6 +1,5 @@
 //réinitialisationn du formulaire
-$('.pac-form').trigger("reset");
-$('#pac-input').val('');
+resetForm();
 // Chargement des sites
 var sites;
 var getUrl = window.location;
@@ -12,12 +11,12 @@ $.ajax({
   success: function(data)
   {
     sites = data;
-    console.log(sites);
+    // console.log(sites);
   },
   error: function (jqXHR, textStatus, errorThrown)
   {
     alert('Erreur de chargement des sites');
-    console.log("Erreur: impossible de charger les sites ", textStatus);
+    // console.log("Erreur: impossible de charger les sites ", textStatus);
   }
 });
 
@@ -27,7 +26,7 @@ let markers = [];
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 4.050000, lng: 9.700000 },
-    zoom: 7,
+    zoom: 8,
     mapTypeControlOptions: {
       position: google.maps.ControlPosition.TOP_RIGHT
     },
@@ -117,8 +116,7 @@ function initMap() {
   // Configure the click listener.
   map.addListener('click', function(mapsMouseEvent) {
     //réinitialisationn du formulaire
-    $('.pac-form').trigger("reset");
-    $('#pac-input').val('');
+    resetForm();
     
     // Close the current InfoWindow.
     infowindow.close();
@@ -127,6 +125,9 @@ function initMap() {
     let position = mapsMouseEvent.latLng;
     marker.setPosition(position);
     marker.setVisible(true);
+
+    document.getElementById('lat').value = position.lat(); // latitude
+    document.getElementById('long').value = position.lng(); // longitude
     
     const request = {
         location: position,
@@ -171,8 +172,6 @@ function initMap() {
                         }
                       }
                     }
-                    document.getElementById('lat').value = place.geometry.location.lat(); // latitude
-                    document.getElementById('long').value = place.geometry.location.lng(); // longitude
                 }
             }); 
         }
@@ -243,7 +242,7 @@ function unfade(element) {
 
 // jquery table
 $('.tablemanager').tablemanager({
-  firstSort: [[3,0],[2,0],[1,'asc']],
+  // firstSort: [[3,0],[2,0],[1,'asc']],
   disable: ["last"],
   appendFilterby: true,
   dateFormat: [[4,"mm-dd-yyyy"]],
@@ -271,6 +270,7 @@ $('.pac-pick').click(function () {
 // envoie du formulaire
 $('.pac-form').on('submit', function(e){
   e.preventDefault();
+  $('.controls-btn').prop( "disabled", true );
   $.ajax({
     url : $(this).attr('action'), //A remplacer par la bonne route
     type: "POST",
@@ -278,12 +278,12 @@ $('.pac-form').on('submit', function(e){
     data: $(this).serialize(),
     success: function(data)
     {
-      // console.log(data);
+      console.log(data);
       if(data.Erreur){
         alert(data.Erreur);
       }else{
         let last_site = data;
-        let url = base_url + "/sites/delete/" + last_site.id;
+        let url = base_url + "/sites/" + last_site.id;
   
         // Ajouter à la fin du tableau
         let ligne = "<tr>"+
@@ -295,26 +295,41 @@ $('.pac-form').on('submit', function(e){
             "<td><a href='"+ url +"' class='del-site'>Supprimer</a></td>"+
         "</tr>";
   
-        $('.tablemanager tbody').append(ligne);
+        $('.tablemanager tbody').prepend(ligne);
   
         // reset form
-        $('#pac-input').val('');
-        $('.pac-form').trigger("reset");
+        resetForm();
       }
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
       alert("'Erreur d'enregistremet'");
-      console.log("Erreur: impossible de charger les sites ", textStatus);
+      // console.log("Erreur: impossible de charger les sites ", textStatus);
     }
   });
 });
 
 // suppression d'une ville
-$('.del-site').on('click', function(e){
+$('html').on('click', '.del-site', function(e){
   e.preventDefault();
+  let data = {
+    _method: "DELETE",
+    _token: csrftoken()
+  };
+  // console.log(data);
   if(confirm('Vous êtes sur de vouloir supprimer ce site?')){
     $(this).parents('tr').remove();
-    $.post($(this).attr('href'));
+    $.post($(this).attr('href'), data);
   }
 });
+
+//get token
+function csrftoken(){
+  return $('meta[name="csrf-token"]').attr('content');
+}
+
+function resetForm(){
+  $('#pac-input').val('');
+  $('.pac-form').trigger("reset");
+  $('.controls-btn').prop( "disabled", false );
+}

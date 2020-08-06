@@ -56,7 +56,7 @@ class FormController extends Controller
 
         $date = Carbon::now()->toDateTimeString();
         $mail = $date."user@free.com";
-        $this->validate($request, User::rules());
+        
         $user = new User();
         $user->first_name = "free";
         $user->last_name = "user";

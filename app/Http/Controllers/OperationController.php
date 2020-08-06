@@ -300,7 +300,7 @@ class OperationController extends Controller
     /**Retourne la map */
     public function operationsites($id)
     {
-        $sites = Site::all();
+        $sites = Site::orderby('id','desc')->get();
         $operation = Operation::findOrFail($id);
         return view('admin.operation.map',compact('sites','operation'));
     }
