@@ -61,6 +61,15 @@ class PaymentController extends Controller
 
     public function payWithpaypal(Request $request)
     {
+        $parameters = $request->all();
+        if($parameters['user_password'] != $parameters['user_conf_password'])
+        {
+           return back()->withErrors("Veillez confirmer votre mot de passe.");
+        }
+        if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
+        {
+            return back()->withErrors("Veillez confirmer votre mot de passe.");
+        }
         $donées = $request->except('_token');
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
@@ -139,9 +148,9 @@ class PaymentController extends Controller
         if($donées["options"] === "ENTREPRISE")
         {
             $entreprise->nom = $donées["name_enterprise"];
-            $entreprise->addrese = $donées["address_enterprise"];
-            $entreprise->Numero_contribuable = $donées["contribuanle_enterprise"];
-            $entreprise->numero_siret = $donées["siret_enterprise"];
+            $entreprise->adresse = $donées["address_enterprise"];
+            $entreprise->contribuable = $donées["contribuanle_enterprise"];
+            $entreprise->siret = $donées["siret_enterprise"];
             $entreprise->pays = $donées["pays_entreprise"];
             $entreprise->ville = $donées["ville_entreprise"];
             $entreprise->type = "Personne Morale";

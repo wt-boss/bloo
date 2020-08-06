@@ -47,6 +47,10 @@
                     <td>{{$site->pays}}</td>
                     <td>{{$site->ville}}</td>
                     <td>
+                        <a href="{{ route('sites.destroy', $site->id) }}" class="btn btn-xs btn-danger mb-5 position-right" data-id="{{$site->id }}" data-method="delete" data-item="form" data-ajax="true">Delete</a>
+
+                    </td>
+                    <td>
                         <form method="post" action="{{route('sites.destroy',[$site->id])}}">
                            @csrf
                            @method('DELETE')
