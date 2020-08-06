@@ -33,14 +33,23 @@
                     </p>
                     <form method="post" action="{{ route('compte.store') }}">
                         @csrf
-                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
-                        <input class="form-control" type="text" name="adresse" placeholder="Adresse">
+                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise" required>
+                        <input class="form-control" type="text" name="adresse" placeholder="Adresse" required>
                         <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
-                        <input class="form-control" type="text" name="ville" placeholder="Ville">
-                        <input class="form-control" type="text" name="pays" placeholder="Pays">
+                        <select class="form-control" name="" id="country" required>
+                            @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                        <div id="div_ville" style="display:none">
+                            <select class="form-control" name="city_id" id="ville" required>
+
+                            </select>
+                        </div>
                         <input class="form-control" type="hidden" name="type" value="Personne Morale">
-                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone">
+                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone" required>
+                        <input class="form-control" type="email" name="email" placeholder="Emailphp" required>
                         <br>
                         <button type="submit" class="btn btn-bloo">Enregistrer</button>
                     </form>
@@ -72,6 +81,27 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
+    <script type="text/javascript">
+
+        function affCache(idDiv) {
+            var div = document.getElementById(idDiv);
+            if (div.style.display === "none"){
+                div.style.display = "";
+            }
+        }
+
+        $('#country').on('change', function(e){
+            console.log(e);
+            var country_id = e.target.value;
+            affCache('div_ville');
+            $.get('/json-cities?country_id=' + country_id,function(data) {
+                $('#ville').empty();
+                $.each(data, function(index, villeObj){
+                    $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                })
+            });
+        });
+    </script>
 @endsection
 @section('laraform_script2')
     <script src="{{ asset('assets/js/core/app.js') }}"></script>
