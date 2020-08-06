@@ -1,13 +1,16 @@
 @extends('admin.top-nav')
+
+@section('page-css')
+    <!-- DataTables -->
+    {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+@endsection
+
 @section('content-header')
     <!-- Content Header (Page header) -->
     <section class="content-header" style="margin-bottom: 10px;">
         <div class="panel-body" style="padding: 0;">
             <div class="row">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-bloo heading-btn legitRipple" data-toggle="modal" data-target="#staticBackdrop">
-                    <i class="fas fa-plus-circle"></i>Attribuer un compte
-                </button>
                 <div class="pull-right">
                     <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
                 </div>
@@ -18,21 +21,23 @@
 
 @section('content')
 <div class="row comptes">
-
-
-
     <table class="datatable table stripe">
         <thead>
-        <tr>
-            <th></th>
-        </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-
-        <tr>
-            @foreach($comptes as $compte)
-            <th>
-                <div class="col-md-3 col-sm-6 col-xs-12">
+        @php $i = 0; @endphp
+        @foreach($comptes as $compte)
+            @if ($i % 4 == 0)
+            <tr>
+            @endif
+            <td>
+                <div class="col-xs-12">
                     <!-- Widget: user widget style 1 -->
                     <div class="box box-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -45,20 +50,21 @@
                             <div class="row">
                                 <div class="col-sm-12 border-right">
                                     <div class="description-block">
-                                        {{$compte->users()->where('role','4')->get()->pluck('last_name')->last()}}
+                                        <span style="color: #0065A1;">@php echo !empty($compte->users()->where('role','4')->get()->pluck('last_name')->last()) ? $compte->users()->where('role','4')->get()->pluck('last_name')->last() :  trans('no account manager'); @endphp</span>
                                         <h5 class="description-header" title="{{$compte->nom}}">{{$compte->nom}}</h5>
                                         <span class="description-text">
-                                Compte Primus
-                                @if($compte->type === "Personne Physique")
+                                            Type Compte (
+                                            @if($compte->type === "Personne Physique")
                                                 Particulier
                                             @else
                                                 Entreprise
                                             @endif
-                            </span>
+                                            )
+                                        </span>
                                         <span class="description-text">{{$compte->ville}}, {{$compte->pays}}</span>
                                         <span class="description-text">{{$compte->operations->count()}} operations</span>
                                         <span class="description-text">{{$compte->email}}</span>
-                                        <button class=" btn btn-xs-bloo"><i class="fas fa-cog"></i> Parametres</button>
+                                        <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Parametres</button>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -70,9 +76,12 @@
                     <!-- /.widget-user -->
                 </div>
                 <!-- /.col -->
-            </th>
-            @endforeach
-        </tr>
+            </td>
+            @if ($i+1 % 4 == 0)
+                </tr>
+            @endif
+            @php $i++ @endphp
+        @endforeach
 
         </tbody>
     </table>
@@ -129,5 +138,18 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         })
+    </script>
+@endsection
+@section('plugin-scripts')
+    <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script> --}}
+@endsection
+
+@section('page-script')
+    {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
+    <script>
+        $(function() {
+            $('.datatable').DataTable();
+        }
     </script>
 @endsection

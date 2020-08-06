@@ -238,7 +238,9 @@ p.label, p.info-value {
 /* Tableau de bords */
 .small-box .icon {
     color: #0065A1;
+    font-size: 70px;
 }
+
 .small-box:hover {
     color: #6F6F6F;
 }
