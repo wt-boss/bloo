@@ -8,8 +8,7 @@ class Site extends Model
 {
     protected $guarded = [];
 
-
-        public static function rules($update = false, $id = null)
+    public static function rules($update = false, $id = null)
     {
         $commun = [
             'lat' =>  'required|unique:sites,lat,'.$id.'|unique:sites,lng,'.$id,
@@ -23,5 +22,10 @@ class Site extends Model
             'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
+    }
+
+    public function operation()
+    {
+        return $this->belongsTo(Operation::class);
     }
 }
