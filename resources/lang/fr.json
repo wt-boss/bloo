@@ -401,6 +401,21 @@
     "Your EMail" : "Votre Email",
     "Subject" : "Sujet",
     "Message" : "Message",
-    "Send Message" : "Envoyer"
+    "Send Message" : "Envoyer",
+    "menu_form_1" :"Partager",
+    "menu_form_2" :"Partager Formulaire",
+    "menu_form_3" :"A enlever",
+    "menu_form_4" :"Réponses",
+    "menu_form_5" :"Afficher les réponses",
+    "menu_form_6" :"Supprimer les réponses",
+    "menu_form_7" :"Télécharger les réponses sous forme de feuille de calcul",
+    "menu_form_8" :"menu formulaire",
+    "menu_form_9" :"paramètres de disponibilité des formulaires",
+    "menu_form_10" :"fermer le formulaire aux réponses",
+    "menu_form_11" :"Modifier le formulaire",
+    "menu_form_12" :"tout formulaire",
+    "menu_form_13" :"PARTARGER",
+    "menu_form_14" :"PARTARGER",
+    "menu_form_15" :"PARTARGER"
 }
 
