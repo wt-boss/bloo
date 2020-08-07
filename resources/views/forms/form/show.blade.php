@@ -45,12 +45,12 @@
         </div>
     </div>
     <div class="panel-body">
-        {!! str_convert_line_breaks($form->description) !!}
+        {{-- {!! str_convert_line_breaks($form->description) !!} --}}
         @if (auth()->user()->hasRole('Free'))
             <div class="form-group col-xs-12">
-                <label for="exampleInputEmail1"><b>{{ trans('form_code') }}</b></label>
+                {{-- <label for="exampleInputEmail1"><b>{{ trans('form_code') }}</b></label> --}}
                 <button class="btn pull-right" style="top:38px;" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
-                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <i class="fa fa-clone" aria-hidden="true"></i>
                 </button>
                 <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" />
                 <small class="form-text text-warning text-capitalize col-xs-12">{{ trans('keep_code') }}</small>
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<div class="panel panel-body">
+<div class="panel panel-body sticky-up">
     <div class="pull-right">
         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
         <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
@@ -68,7 +68,7 @@
 
 </div>
 
-<div class="sidebar-detached">
+<div class="sidebar-detached sticky">
 	<div class="sidebar sidebar-default">
 		<div class="sidebar-content">
 			<div class="sidebar-category">
@@ -123,7 +123,7 @@
 
             <div class="panel panel-body submit hidden">
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Saving..." data-complete-text="Save">Save</button>
+                    <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Saving..." data-complete-text="Save">{{ trans('save') }}</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
                     @if(auth()->user()->hasRole('Free'))
                         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>

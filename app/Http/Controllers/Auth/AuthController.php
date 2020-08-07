@@ -67,7 +67,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth($this->guard)->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }

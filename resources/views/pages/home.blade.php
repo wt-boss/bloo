@@ -14,7 +14,7 @@
               <p class="mb-md-5 mb-sm-3" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('homme_title_content') }} <br> {{ trans('homme_title_content1') }}</p>
               <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
                   <a href="{{route('services')}}" class="btn btn-primary px-4 py-3 bloo-home-btn">{{ trans('homme_title_button') }}</a>
-                  <a href="{{route('questionnaire.free')}}" class="btn btn-primary px-4 py-3 bloo-home-btn">{{ trans('btn_home_sondage') }}</a></p>
+                  <a href="#sondage" class="btn btn-primary px-4 py-3 bloo-home-btn">{{ trans('btn_home_sondage') }}</a></p>
             </div>
             <div class="one-half align-self-md-end align-self-sm-center">
                 <div class="slider-carousel owl-carousel">
@@ -47,7 +47,7 @@
                         <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                             <div class="d-md-flex">
                                 <div class="one-half ml-md-5 align-self-center">
-                                    <h2 class="mb-4 text-center-global">{{ trans('home_content_section1_title') }}</h2>{{ trans('') }}
+                                    <h2 class="mb-4 text-center-global">{{ trans('home_content_section1_title') }}</h2>
                                 </div>
                                 <div class="one-half ml-md-5 align-self-center">
                                     <p class="text-center-global">

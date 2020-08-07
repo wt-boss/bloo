@@ -234,16 +234,11 @@ Route::get('/json-lecteurs','OperationController@listLecteurs');
 Route::get('/json-lecteursoperations','OperationController@getoperationLecteurs');
 Route::get('/json-operateuroperations','OperationController@getoperationOperateurs');
 Route::get('/json-operateurs','OperationController@listOperateurs');
+Route::get('/json-cities','CompteController@getvilles');
 Route::get('/json-user','MessageController@getUser');
 
 /**Site operation */
-Route::get('operationsite','OperationController@operationsites')->name('sites');
+Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
 /**Site routes */
 Route::resource('sites','SiteController');
-
-Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-});
+Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');

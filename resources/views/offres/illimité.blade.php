@@ -63,12 +63,21 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-date">Pays de l'entreprise :</label><br>
-                            <input type="text" name="pays_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer le pays">
+                            <select class="birth-date form-control" name="" id="country" required>
+                                @foreach($countries as $country)
+                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="form-group col-6">
-                            <label for="birth-date">Ville de l'entreprise :</label><br>
-                            <input type="text" name="ville_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer la ville">
+                        <div id="div_ville" style="display:none">
+                            <div class="form-group col-6">
+                                <label for="birth-date">Ville de l'entreprise :</label><br>
+                                <select class="form-control" name="city_id" id="ville" required>
+
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group col-6">
                             <label for="birth-date">Telephone de l'entreprise :</label><br>
                             <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
@@ -78,15 +87,24 @@
                             <input type="text" name="user_name_entreprise" class="address form-control" id="particulier_name">
                         </div>
                         <div class="form-group col-6">
+                            <label for="particulier_email">Addresse Email de l'entreprise :</label><br>
+                            <input type="email" name="email_entreprise" class="address-city form-control" id="particulier_email">
+                            {!! $errors->first('email_entreprise', '<small class="help-block">:message</small>') !!}
+                        </div>
+                        <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
                             <input type="email" name="user_email_entreprise" class="address-city form-control" id="particulier_email">
+                            {!! $errors->first('user_email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
                             <input type="password" name="user_password_entreprise" class="address-city form-control" id="particulier_email">
                         </div>
+                        <div class="form-group col-6 ">
+                            <label for="particulier_email">Confirmez mot de passe :</label><br>
+                            <input type="password" name="user_conf_password_entreprise" class="address-city form-control" id="particulier_email">
+                        </div>
                     </div>
-
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
                             <label for="particulier_name">Nom:</label><br>
@@ -95,19 +113,23 @@
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email :</label><br>
                             <input type="email" name="user_email" class="address-city form-control" id="particulier_email">
+                            {!! $errors->first('user_email', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
                             <input type="password" name="user_password" class="address-city form-control" id="particulier_email">
                         </div>
+                        <div class="form-group col-6 ">
+                            <label for="confirm_pass">Confirmez mot de passe :</label><br>
+                            <input type="password" name="user_conf_password" class="address-city form-control" id="particulier_email">
+                        </div>
                         <div class="form-group col-6">
-                            <input type="hidden"  value="68918.55" name="amount" id="amount" class="address-city form-control" >
+                            <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="form-group col-6">
-
+                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
                         </div>
                         <div class="form-group col-6">
                             <button type="submit" class="btn btn-success col-6 float-right">Payer avec PayPal</button>
@@ -127,7 +149,27 @@
 <script src="{{asset('multiform/assets/js/jquery.backstretch.min.js')}}"></script>
 <script src="{{asset('common/functions.js')}}"></script>
 <script src="{{asset('multiform/assets/js/scripts.js')}}"></script>
+<script type="text/javascript">
 
+    function affCache(idDiv) {
+        var div = document.getElementById(idDiv);
+        if (div.style.display === "none"){
+            div.style.display = "";
+        }
+    }
+
+    $('#country').on('change', function(e){
+        console.log(e);
+        var country_id = e.target.value;
+        affCache('div_ville');
+        $.get('/json-cities?country_id=' + country_id,function(data) {
+            $('#ville').empty();
+            $.each(data, function(index, villeObj){
+                $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+            })
+        });
+    });
+</script>
 <script>
     $(function($){
         $('.button').click(function(e){
@@ -190,6 +232,7 @@
 
         return true;
     }
+
 
 </script>
 @endsection

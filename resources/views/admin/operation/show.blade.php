@@ -37,7 +37,7 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="info">
                                     <p class="label">Lecteurs</p>
-                                    <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
+                                    <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
                                 </div>
                                 <div class="info">
                                     <p class="label">Operateur</p>
@@ -131,22 +131,6 @@
 
                     <div class="box-body" id="lecteurs">
                         <ul class="nav nav-stacked">
-                            <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                   cedric noumbo
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                      <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="1"  lang="1" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
-                            <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                   alex mimbeu
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                      <i class="fa fa-minus-circle removelecteur"  id="removelecteur2" title="2"  lang="2" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
                           @foreach ($operation->users as $user )
                              @if ($user->role === 0)
                              <li>
@@ -174,9 +158,7 @@
                                 </h3>
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>                    </div>
                             </div>
-
                     </div>
-
                     <div class="box-body" id="lecteurs">
                         <ul class="nav nav-stacked">
                           @foreach ($operation->users as $user )

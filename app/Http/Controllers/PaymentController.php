@@ -61,7 +61,19 @@ class PaymentController extends Controller
 
     public function payWithpaypal(Request $request)
     {
+        $parameters = $request->all();
+
+        if($parameters['user_password'] != $parameters['user_conf_password'])
+        {
+           return back()->withErrors("Veillez confirmer votre mot de passe.");
+        }
+        if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
+        {
+            return back()->withErrors("Veillez confirmer votre mot de passe.");
+        }
+
         $donées = $request->except('_token');
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $item_1 = new Item();
@@ -74,6 +86,7 @@ class PaymentController extends Controller
         $amount = new Amount();
         $amount->setCurrency('USD')
             ->setTotal($request->get('amount'));
+
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
@@ -81,6 +94,7 @@ class PaymentController extends Controller
         $redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(route('status' ) ) /** Specify return URL **/
         ->setCancelUrl(URL::to('status'));
+
         $payment = new Payment();
         $payment->setIntent('Sale')
             ->setPayer($payer)
@@ -139,12 +153,12 @@ class PaymentController extends Controller
         if($donées["options"] === "ENTREPRISE")
         {
             $entreprise->nom = $donées["name_enterprise"];
-            $entreprise->addrese = $donées["address_enterprise"];
-            $entreprise->Numero_contribuable = $donées["contribuanle_enterprise"];
-            $entreprise->numero_siret = $donées["siret_enterprise"];
-            $entreprise->pays = $donées["pays_entreprise"];
+            $entreprise->adresse = $donées["address_enterprise"];
+            $entreprise->contribuable = $donées["contribuanle_enterprise"];
+            $entreprise->siret = $donées["siret_enterprise"];
             $entreprise->ville = $donées["ville_entreprise"];
             $entreprise->type = "Personne Morale";
+            $entreprise->city_id = $donées["city_id"];
             $entreprise->telephone =  $donées["telephone_entreprise"];
         }
         else{

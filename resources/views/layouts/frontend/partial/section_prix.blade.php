@@ -3,7 +3,7 @@
         <div class="row justify-content-center mb-5 pb-5">
       <div class="col-md-7 text-center heading-section ftco-animate">
         <span class="subheading">{{ trans('prix_title') }}</span>{{ trans('') }}
-        <h2 class="mb-4">{{ trans('prix_content') }}</h2>
+        <h2 class="mb-4" id="sondage">{{ trans('prix_content') }}</h2>
       </div>
     </div>
         <div class="row">

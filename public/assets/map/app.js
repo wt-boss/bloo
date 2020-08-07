@@ -1,6 +1,5 @@
 //réinitialisationn du formulaire
-$('.pac-form').trigger("reset");
-$('#pac-input').val('');
+resetForm();
 // Chargement des sites
 var sites;
 var getUrl = window.location;
@@ -12,12 +11,12 @@ $.ajax({
   success: function(data)
   {
     sites = data;
-    console.log(sites);
+    // console.log(sites);
   },
   error: function (jqXHR, textStatus, errorThrown)
   {
     alert('Erreur de chargement des sites');
-    console.log("Erreur: impossible de charger les sites ", textStatus);
+    // console.log("Erreur: impossible de charger les sites ", textStatus);
   }
 });
 
@@ -27,19 +26,11 @@ let markers = [];
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 4.050000, lng: 9.700000 },
-    zoom: 7,
+    zoom: 8,
     mapTypeControlOptions: {
       position: google.maps.ControlPosition.TOP_RIGHT
     },
   });
-
-  var myLatLng = { lat: 4.050000, lng: 9.700000 };
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
-
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -75,7 +66,7 @@ function initMap() {
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
     marker.setVisible(false);
-    var place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
     if (!place.geometry) {
       window.alert("No details available for input: '" + place.name + "'");
@@ -120,6 +111,71 @@ function initMap() {
     infowindowContent.children['place-name'].textContent = place.name;
     infowindowContent.children['place-address'].textContent = address;
     infowindow.open(map, marker);
+  });
+
+  // Configure the click listener.
+  map.addListener('click', function(mapsMouseEvent) {
+    //réinitialisationn du formulaire
+    resetForm();
+    
+    // Close the current InfoWindow.
+    infowindow.close();
+    marker.setVisible(false);
+    
+    let position = mapsMouseEvent.latLng;
+    marker.setPosition(position);
+    marker.setVisible(true);
+
+    document.getElementById('lat').value = position.lat(); // latitude
+    document.getElementById('long').value = position.lng(); // longitude
+    
+    const request = {
+        location: position,
+        radius: '1000'
+    };
+
+    
+    const service = new google.maps.places.PlacesService(map);
+
+    service.nearbySearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            const request2 = {
+                placeId: results[0].place_id,
+                fields: ["name", "icon", "geometry", "address_components"]
+            };
+            
+            service.getDetails(request2, (place, etat) => {
+                if (etat === google.maps.places.PlacesServiceStatus.OK) {
+                    let address = '';
+                    if (place.address_components) {
+                      address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || ''),
+                        //(place.address_components[3] && place.address_components[3].short_name || '')
+                      ].join(' ');
+                    }
+
+                    infowindowContent.children['place-icon'].src = place.icon;
+                    infowindowContent.children['place-name'].textContent = place.name;
+                    infowindowContent.children['place-address'].textContent = address;
+                    infowindow.open(map, marker);
+                    
+                    //remplissage du formulaire
+                    for(var i = 0; i < place.address_components.length; i += 1) {
+                      var addressObj = place.address_components[i];
+                      for(var j = 0; j < addressObj.types.length; j += 1) {
+                        if (addressObj.types[j] === 'country') {
+                          document.getElementById('pays').value = addressObj.long_name; // Pays
+                        }else if (addressObj.types[j] === 'locality') {
+                          document.getElementById('ville').value = addressObj.long_name; // Ville
+                        }
+                      }
+                    }
+                }
+            }); 
+        }
+    });
   });
 
   //add markers
@@ -186,7 +242,7 @@ function unfade(element) {
 
 // jquery table
 $('.tablemanager').tablemanager({
-  firstSort: [[3,0],[2,0],[1,'asc']],
+  // firstSort: [[3,0],[2,0],[1,'asc']],
   disable: ["last"],
   appendFilterby: true,
   dateFormat: [[4,"mm-dd-yyyy"]],
@@ -214,6 +270,7 @@ $('.pac-pick').click(function () {
 // envoie du formulaire
 $('.pac-form').on('submit', function(e){
   e.preventDefault();
+  $('.controls-btn').prop( "disabled", true );
   $.ajax({
     url : $(this).attr('action'), //A remplacer par la bonne route
     type: "POST",
@@ -221,12 +278,12 @@ $('.pac-form').on('submit', function(e){
     data: $(this).serialize(),
     success: function(data)
     {
-      // console.log(data);
+      console.log(data);
       if(data.Erreur){
         alert(data.Erreur);
       }else{
         let last_site = data;
-        let url = base_url + "/sites/delete/" + last_site.id;
+        let url = base_url + "/sites/" + last_site.id;
   
         // Ajouter à la fin du tableau
         let ligne = "<tr>"+
@@ -238,26 +295,41 @@ $('.pac-form').on('submit', function(e){
             "<td><a href='"+ url +"' class='del-site'>Supprimer</a></td>"+
         "</tr>";
   
-        $('.tablemanager tbody').append(ligne);
+        $('.tablemanager tbody').prepend(ligne);
   
         // reset form
-        $('#pac-input').val('');
-        $('.pac-form').trigger("reset");
+        resetForm();
       }
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
-      alert('Erreur de chargement des sites');
-      console.log("Erreur: impossible de charger les sites ", textStatus);
+      alert("'Erreur d'enregistremet'");
+      // console.log("Erreur: impossible de charger les sites ", textStatus);
     }
   });
 });
 
 // suppression d'une ville
-$('.del-site').on('click', function(e){
+$('html').on('click', '.del-site', function(e){
   e.preventDefault();
+  let data = {
+    _method: "DELETE",
+    _token: csrftoken()
+  };
+  // console.log(data);
   if(confirm('Vous êtes sur de vouloir supprimer ce site?')){
     $(this).parents('tr').remove();
-    $.post($(this).attr('href'));
+    $.post($(this).attr('href'), data);
   }
 });
+
+//get token
+function csrftoken(){
+  return $('meta[name="csrf-token"]').attr('content');
+}
+
+function resetForm(){
+  $('#pac-input').val('');
+  $('.pac-form').trigger("reset");
+  $('.controls-btn').prop( "disabled", false );
+}

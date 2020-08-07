@@ -20,6 +20,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+.btn-bloo-success, .btn-bloo-success:hover, .btn-bloo-success.active, .btn-bloo-success:active, .open > .dropdown-toggle.btn-success {
+    background-color: #8AD2E6 ;
+    border-color: #8AD2E6;
+    color: #fff;
+}
 .btn-bloo-cancel {
     background-color: #fff;
     border : 2px solid #D3D3D3;
@@ -28,6 +33,17 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
 }
+
+.btn {
+    text-transform: none;
+}
+
+.bg-bloo-c1 {
+    background-color: #8AD2E6;
+    border-color: #8AD2E6;
+    color: #fff;
+}
+
 .btn-bloo-w {
     background-color: #fff;
     border : 2px solid #0065A1;
@@ -35,6 +51,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     font-weight: 700;
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
+}
+.btn-bloo-c1 {
+    background-color: #8AD2E6;
+    border : 2px solid #8AD2E6;
+    color : #fff;
 }
 .btn-xs-bloo {
     background-color: #fff;
@@ -207,9 +228,9 @@ input[type=text].form-control.question-option {
 
 /* Operations */
 .btn-bloo-action {
-    background-color: #D3D3D3;
-    border : 2px solid #D3D3D3;
-    color : #fff !important;
+    background-color: #EAF5F8;
+    border : 2px solid #EAF5F8;
+    color : #0080BB !important;
     font-weight: 500 !important;
     text-transform: none;
     font-family: 'Baloo 2', sans-serif, cursive;
@@ -227,7 +248,9 @@ p.label, p.info-value {
 /* Tableau de bords */
 .small-box .icon {
     color: #0065A1;
+    font-size: 70px;
 }
+
 .small-box:hover {
     color: #6F6F6F;
 }

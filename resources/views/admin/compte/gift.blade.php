@@ -16,21 +16,7 @@
             <div class="col-sm-7">
                 <div class="my-content">
                     <h2 class="bloo-primary left-side-bloo border-left-primary">Attribuer un compte !</h2>
-                    <form method="post" action="{{ route('savegift') }}">
-                        @csrf
-                            <select class="form-control" name="user_id">
-                              @foreach($users as $user)
-                                <option  value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
-                              @endforeach
-                             </select>
-                            <select class="form-control" name="entreprise_id">
-                                @foreach($entreprises as $entreprise)
-                                    <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
-                                @endforeach
-                            </select>
-                        <br/>
-                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
-                    </form>
+
                 </div>
             </div>
         </div>
@@ -77,4 +63,5 @@
         });
 
     </script>
+
 @endsection

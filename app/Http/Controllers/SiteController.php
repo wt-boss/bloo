@@ -15,7 +15,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::all();
+        $sites = Site::orderby('id')->get();
         return response()->json($sites);
     }
 
@@ -37,7 +37,7 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $parameters = $request->all();
         //dd($parameters);
         $site = Site::where('lat',$parameters['lat'])->where('lng',$parameters['lng'])->get()->first();
@@ -47,7 +47,7 @@ class SiteController extends Controller
         }
         else{
             $sites = Site::create($request->all());
-            $result = Site::get()->last();
+            $result = Site::orderby('id')->get()->last();
         }
         return response()->json($result);
     }

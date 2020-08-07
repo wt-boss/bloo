@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\Country;
 use App\Entreprise;
+use App\Entreprise_user;
 use App\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Compound;
 
 class CompteController extends Controller
 {
@@ -15,18 +19,39 @@ class CompteController extends Controller
      */
     public function index()
     {
-        $comptes = Entreprise::with('users','operations')->get();
-        return view('admin.compte.index',compact('comptes'));
+
+        $comptes = "";
+        if(auth()->user()->id === 1)
+        {
+            $comptes = Entreprise::with('users','operations')->get();
+        }
+        else
+        {
+            $comptes = auth()->user()->entreprises()->get();
+        }
+
+        $users = User::where('role','4')->get();
+        return view('admin.compte.index',compact('comptes','users'));
     }
 
     public function savegift(Request $request)
     {
-       $parameters = $request->all();
-       $user = User::findOrFail($parameters['user_id']);
-       $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
-       $user->entreprises()->attach($entreprise);
-       return redirect()->route('operation.index');
+        $parameters = $request->all();
+        $comptes  = Entreprise::all();
+        $users = User::where('role','4')->get();
+        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
+        if($user_entreprise == 0)
+        {
+            $user = User::findOrFail($parameters['user_id']);
+            $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
+            $user->entreprises()->attach($entreprise);
+            return view('admin.compte.index',compact('comptes','users'))->withSuccess('Operation attribuer avec success');
+        }
+        else {
+                return view('admin.compte.index',compact('comptes','users'))->withErrors('Cet Acount Manager a deja ce compte');
+            }
     }
+
 
     public function donner()
     {
@@ -42,7 +67,23 @@ class CompteController extends Controller
      */
     public function create()
     {
-        //
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return view('admin.compte.create',compact('countries'));
+    }
+
+    public function getvilles(Request $request)
+    {
+        $country_id = $request->input('country_id');
+        $cities = City::where('country_id',$country_id)->get();
+        return response()->json($cities);
     }
 
     /**
@@ -53,7 +94,10 @@ class CompteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Entreprise::create($request->all());
+         $comptes = Entreprise::all();
+        $users = User::where('role','4')->get();
+        return view('admin.compte.index',compact('comptes','users'))->withSuccess('Compte creer avec success');
     }
 
     /**

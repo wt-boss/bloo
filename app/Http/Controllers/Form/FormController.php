@@ -51,11 +51,12 @@ class FormController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|min:3|max:190',
-            'description' => 'required|string|max:30000'
+            'description' => 'required|string|max:30000',
         ]);
-        $parameters =$request->all();
+
         $date = Carbon::now()->toDateTimeString();
         $mail = $date."user@free.com";
+        
         $user = new User();
         $user->first_name = "free";
         $user->last_name = "user";
@@ -124,18 +125,6 @@ class FormController extends Controller
     public function show_free(Request $request)
     {
         $parameters = $request->all();
-
-        if($request->ajax()){
-            // If request from AJAX
-            return [
-                'success' => true,
-                'redirect' => $this->redirectPath() ?: route('home'),
-            ];
-        } else {
-            // Normal POST do redirect
-            return $this->registered($request, $user)
-                ?: redirect($this->redirectPath());
-        }
 
         $form = Form::where('code',$request['code'])->get()->first();
 
