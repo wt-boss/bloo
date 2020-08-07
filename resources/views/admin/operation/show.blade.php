@@ -27,11 +27,11 @@
                             <div class="col-sm-6 col-lg-3">
                                 <div class="info">
                                     <p class="label">Villes</p>
-                                    <p class="info-value">10</p>
+                                    <p class="info-value">{{$operation->sites()->count()}}</p>
                                 </div>
                                 <div class="info">
                                     <p class="label">Sites</p>
-                                    <p class="info-value">25</p>
+                                    <p class="info-value">{{$operation->sites()->count()}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-3">
