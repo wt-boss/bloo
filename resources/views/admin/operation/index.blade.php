@@ -61,7 +61,7 @@
                                     <td class="text-center">{{ $operation->entreprise->nom }}</td>
                                     <td class="text-center">{{$operation->sites()->count()}}</td>
                                     <td class="text-center">{{$operation->sites()->count()}}</td>
-                                    <td class="text-center">15</td>
+                                    <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                     <td class="text-center" style="position: relative;">
                                         @include('admin.operation.partials.op-action')
                                     </td>
