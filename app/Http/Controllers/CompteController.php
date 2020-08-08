@@ -6,6 +6,7 @@ use App\City;
 use App\Country;
 use App\Entreprise;
 use App\Entreprise_user;
+use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
@@ -79,10 +80,17 @@ class CompteController extends Controller
         return view('admin.compte.create',compact('countries'));
     }
 
-    public function getvilles(Request $request)
+    public function getregions(Request $request)
     {
         $country_id = $request->input('country_id');
-        $cities = City::where('country_id',$country_id)->get();
+        $states = State::where('country_id',$country_id)->get();
+        return response()->json($states);
+    }
+
+    public function getvilles(Request $request)
+    {
+        $state_id = $request->input('states_id');
+        $cities = City::where('states_id',$state_id)->get();
         return response()->json($cities);
     }
 

@@ -8,8 +8,8 @@ class City extends Model
 {
     protected $guarded = [];
 
-    public function country()
+    public function state()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(State::class);
     }
 }
