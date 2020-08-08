@@ -30,11 +30,22 @@ class AuthController extends Controller
         ]);
         if($validator->fails())
         {
-            return response(['errors' => $validator->errors()->all()],422);
+            return response()->json(
+                [
+                    'items' => null,
+                    'states' => $validator->errors()->all()
+                ]
+                ,422
+            );
         }
         $user = User::create($request->toArray());
 
-        return response($user,200);
+        return response()->json(
+            [
+            'items' => $user,
+             'states' => 'success'
+            ],200
+        );
     }
     /**
      * Get a JWT via given credentials.
@@ -45,7 +56,12 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (! $token = auth($this->guard)->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(
+                [
+                    'items' => null,
+                    'states' => 'Unauthorized'
+                ],401
+            );
         }
         return $this->respondWithToken($token);
     }
@@ -57,7 +73,11 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(
+           ['items' => auth()->user(),
+               'states' => 'success'
+           ],200
+        );
     }
 
     /**
@@ -67,7 +87,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth($this->guard)->logout();
+        auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -91,10 +111,14 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
+        return response()->json(
+            ['items' => [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth($this->guard)->factory()->getTTL()*60
-        ]);
+           ],
+                'states' => 'success'
+            ]
+        );
     }
 }
