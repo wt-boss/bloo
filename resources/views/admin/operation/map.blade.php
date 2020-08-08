@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Bloo map</title>
+    <title>Bloo | Ajouter des sites</title>
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/map/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
@@ -12,7 +12,7 @@
     <div id="map"></div>
     <div class="pac-card" id="pac-card">
         <div id="pac-container">
-            <a class="pac-return" href=""></a>
+            <a class="pac-return" href="#"></a>
             <input id="pac-input" class="controls pac-search" type="text" placeholder="Enter a location">
         </div>
         <div id="info-container">
