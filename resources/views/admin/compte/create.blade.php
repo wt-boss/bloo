@@ -42,6 +42,11 @@
                                 <option value="{{$country->id}}">{{$country->name}}</option>
                             @endforeach
                         </select>
+                        <div id="div_region" style="display:none">
+                            <select class="form-control" name="city_id" id="region" required>
+
+                            </select>
+                        </div>
                         <div id="div_ville" style="display:none">
                             <select class="form-control" name="city_id" id="ville" required>
 
@@ -82,24 +87,36 @@
 @section('page-script')
     <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
     <script type="text/javascript">
-
         function affCache(idDiv) {
             var div = document.getElementById(idDiv);
             if (div.style.display === "none"){
                 div.style.display = "";
             }
         }
-
         $('#country').on('change', function(e){
             console.log(e);
             var country_id = e.target.value;
-            affCache('div_ville');
-            $.get('/json-cities?country_id=' + country_id,function(data) {
-                $('#ville').empty();
-                $.each(data, function(index, villeObj){
-                    $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
-                })
+            affCache('div_region');
+            $.get('/json-states?country_id=' + country_id,function(data) {
+                console.log(data);
+                $('#region').empty();
+                $.each(data, function(index, stateObj){
+                    $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
+                });
+                $('#region').on('change', function(e){
+                    console.log(e);
+                    var state_id = e.target.value;
+                    affCache('div_ville');
+                    $.get('/json-cities?state_id=' + state_id,function(data) {
+                        console.log(data);
+                        $('#ville').empty();
+                        $.each(data, function(index, villeObj){
+                            $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                        })
+                    });
+                });
             });
+
         });
     </script>
 @endsection

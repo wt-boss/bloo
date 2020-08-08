@@ -89,8 +89,8 @@ class CompteController extends Controller
 
     public function getvilles(Request $request)
     {
-        $state_id = $request->input('states_id');
-        $cities = City::where('states_id',$state_id)->get();
+        $state_id = $request->input('state_id');
+        $cities = City::where('state_id',$state_id)->get();
         return response()->json($cities);
     }
 

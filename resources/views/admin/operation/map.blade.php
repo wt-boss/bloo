@@ -12,7 +12,7 @@
     <div id="map"></div>
     <div class="pac-card" id="pac-card">
         <div id="pac-container">
-            <a class="pac-return" href="#"></a>
+            <a class="pac-return" href="{{route('operation.show',[$operation->id])}}"></a>
             <input id="pac-input" class="controls pac-search" type="text" placeholder="Enter a location">
         </div>
         <div id="info-container">

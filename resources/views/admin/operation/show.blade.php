@@ -160,6 +160,32 @@
                             </div>
                     </div>
                     <div class="box-body" id="lecteurs">
+                        <table class="datatable table stripe">
+                            <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($operation->users as $user )
+                                    @if ($user->role === 1)
+                                <tr>
+                                    <td>
+                                        <li>
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                    {{ $user->first_name }} {{ $user->last_name }}
+                                                </font></font>
+                                            <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                      <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                    </font></font></span>
+                                        </li>
+                                    </td>
+                                </tr>
+                                    @endif
+                                @endforeach
+                        </table>
+
+
                         <ul class="nav nav-stacked">
                           @foreach ($operation->users as $user )
                              @if ($user->role === 1)
