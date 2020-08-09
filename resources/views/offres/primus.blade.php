@@ -89,21 +89,26 @@
                             <label for="birth-country">Numero SIRET/RCCM de l'entreprise :</label><br>
                             <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
                         </div>
+
                         <div class="form-group col-6">
                             <label for="birth-date">Pays de l'entreprise :</label><br>
-                            <select class="birth-date form-control" name="" id="country" required>
+                            <select class="form-control" name="" id="country" required>
                                 @foreach($countries as $country)
                                     <option value="{{$country->id}}">{{$country->name}}</option>
                                 @endforeach
                             </select>
+
                         </div>
-                        <div id="div_ville" style="display:none">
-                            <div class="form-group col-6">
+                        <div id="div_region" style="display:none" class="form-group col-6">
+                                <label for="birth-date">Region de l'entreprise :</label><br>
+                                <select class="form-control" name="city_id" id="region" required>
+                                </select>
+                        </div>
+
+                        <div id="div_ville" style="display:none" class="form-group col-6">
                                 <label for="birth-date">Ville de l'entreprise :</label><br>
                                 <select class="form-control" name="city_id" id="ville" required>
-
                                 </select>
-                            </div>
                         </div>
 
                         <div class="form-group col-6">
@@ -174,24 +179,36 @@
 
 @section('script')
     <script type="text/javascript">
-
         function affCache(idDiv) {
             var div = document.getElementById(idDiv);
             if (div.style.display === "none"){
                 div.style.display = "";
             }
         }
-
         $('#country').on('change', function(e){
             console.log(e);
             var country_id = e.target.value;
-            affCache('div_ville');
-            $.get('/json-cities?country_id=' + country_id,function(data) {
-                $('#ville').empty();
-                $.each(data, function(index, villeObj){
-                    $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
-                })
+            affCache('div_region');
+            $.get('/json-states?country_id=' + country_id,function(data) {
+                console.log(data);
+                $('#region').empty();
+                $.each(data, function(index, stateObj){
+                    $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
+                });
+                $('#region').on('change', function(e){
+                    console.log(e);
+                    var state_id = e.target.value;
+                    affCache('div_ville');
+                    $.get('/json-cities?state_id=' + state_id,function(data) {
+                        console.log(data);
+                        $('#ville').empty();
+                        $.each(data, function(index, villeObj){
+                            $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                        })
+                    });
+                });
             });
+
         });
     </script>
 <script>

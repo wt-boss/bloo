@@ -63,7 +63,6 @@
                 drawCharts(data_for_chart);
             });
         }
-
         $(function () {
             // Resize chart on sidebar width change and window resize
             $(window).on('resize', function () {

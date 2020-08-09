@@ -269,8 +269,27 @@ class OperationController extends Controller
      */
     public function show($id)
     {
-        $operation = Operation::with('users')->findOrFail($id);
-        return view('admin.operation.show',compact('operation'));
+        $operation = Operation::findOrFail($id);
+        $current_user = Auth::user();
+        $form=$operation->form;
+        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
+        abort_if($not_allowed, 404);
+
+        $valid_request_queries = ['summary', 'individual'];
+        $query = strtolower(request()->query('type', 'summary'));
+
+        abort_if(!in_array($query, $valid_request_queries), 404);
+
+        if ($query === 'summary') {
+            $responses = [];
+            $form->load('fields.responses', 'collaborationUsers', 'availability');
+        } else {
+            $form->load('collaborationUsers');
+
+            $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
+        }
+
+        return view('admin.operation.show',compact('operation','form', 'query', 'responses'));
     }
 
     /**

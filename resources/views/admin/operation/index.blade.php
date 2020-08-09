@@ -146,8 +146,6 @@
     </script>
 @endsection
 
-
-
 @section('laraform_script2')
     <script src="{{ asset('assets/js/core/app.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
