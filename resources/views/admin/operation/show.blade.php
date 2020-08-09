@@ -87,7 +87,7 @@
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="box" style="height: 100%;">
                     <div class="box-header with-border">
                         <ul class="box-title">
@@ -117,7 +117,7 @@
                     <!-- /.box-body -->
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header">
                         <div class="row">
@@ -130,20 +130,27 @@
                     </div>
 
                     <div class="box-body" id="lecteurs">
-                        <ul class="nav nav-stacked">
+                        <table class="datatable table stripe">
+                            <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
                           @foreach ($operation->users as $user )
                              @if ($user->role === 0)
-                             <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                 <tr>
+                                     <td>
                                    {{ $user->first_name }} {{ $user->last_name }}
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                      <span class="pull-right">
                                       <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
+                                        </span>
+                                    </td>
+                                 </tr>
                               @endif
                           @endforeach
-                        </ul>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -159,7 +166,8 @@
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>                    </div>
                             </div>
                     </div>
-                    <div class="box-body" id="lecteurs">
+
+                    <div class="box-body" id="operateurs">
                         <table class="datatable table stripe">
                             <thead>
                             <tr>
@@ -171,35 +179,16 @@
                                     @if ($user->role === 1)
                                 <tr>
                                     <td>
-                                        <li>
-                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                                    {{ $user->first_name }} {{ $user->last_name }}
-                                                </font></font>
-                                            <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                        {{ $user->first_name }} {{ $user->last_name }}
+                                        <span class="pull-right">
                                       <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
-                                    </font></font></span>
-                                        </li>
+                                       </span>
                                     </td>
                                 </tr>
                                     @endif
                                 @endforeach
+                            </tbody>
                         </table>
-
-
-                        <ul class="nav nav-stacked">
-                          @foreach ($operation->users as $user )
-                             @if ($user->role === 1)
-                             <li>
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                   {{ $user->first_name }} {{ $user->last_name }}
-                                </font></font>
-                                <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                      <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
-                                    </font></font></span>
-                            </li>
-                              @endif
-                          @endforeach
-                        </ul>
                         <div class="text-center">
                             <button class="btn btn-xs-bloo disabled"><i class="icon ions ion-chatboxes"></i> Message</button>
                             <button class="btn btn-xs-bloo"><i class="icon ions ion-location"></i> Localisation</button>
@@ -232,9 +221,9 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-default" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                     <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
@@ -245,7 +234,15 @@
                 @csrf
                 <input type="hidden" name="operation" value="{{ $operation->id }}" />
                 <div class="modal-body">
-                    <ul class="nav nav-stacked" id="listlecteur"></ul>
+                    <table class="datatable table stripe">
+                        <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="listlecteur">
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
@@ -270,7 +267,15 @@
                 @csrf
                 <input type="hidden" name="operation" value="{{ $operation->id }}">
                 <div class="modal-body">
-                    <ul class="nav nav-stacked" id="listoperateur"></ul>
+                    <table class="datatable table stripe">
+                        <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="listoperateur">
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
@@ -284,82 +289,126 @@
 </div>
 @endsection
 
+
 @section('laraform_script1')
-<script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
-<script type="text/javascript">
-    function addlecteur() {
-        $('#listlecteur').on('click', function (e) {
-            //console.log(e);
-            var lecteur_id = e.target.id;
-            console.log(lecteur_id);
-        });
-    }
+    <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+    <script type="text/javascript">
+        function addlecteur() {
+            $('#listlecteur').on('click', function (e) {
+                //console.log(e);
+                var lecteur_id = e.target.id;
+                console.log(lecteur_id);
+            });
+        }
 
-    $('#getlecteur').on('click', function (e) {
-        console.log(e);
-        var operation_id = e.target.title;
-        $.get('/listlecteurs/' + operation_id, function (data) {
-            console.log(data);
-            $('#listlecteur').empty();
-            $.each(data, function (index, lecteurObj) {
-                if(lecteurObj.status === true)
-                {
-                    $('#listlecteur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'" disabled></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></li>');
+        $('#getlecteur').on('click', function (e) {
+            console.log(e);
+            var operation_id = e.target.title;
+            $.get('/listlecteurs/' + operation_id, function (data) {
+                console.log(data);
+                $('#listlecteur').empty();
+                $.each(data, function (index, lecteurObj) {
+                    if(lecteurObj.status === true)
+                    {
+                        $('#listlecteur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'" disabled></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></td></tr>');
+                    }
+                    else
+                    {
+                        $('#listlecteur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'"></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></td></tr>');
+                    }
+                })
+            });
+        });
+
+        $('.removelecteur').on('click', function (e) {
+            console.log(e);
+            var operation_id = e.target.lang;
+            var user_id = e.target.title;
+            $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
+                if(data && $.parseJSON('true') == true){
+                    $(e.target).parents('li').remove();
                 }
-                else
-                {
-                    $('#listlecteur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'"></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></li>');
+            });
+        });
+
+        $('.removeoperateur').on('click', function (e) {
+            console.log(e);
+            var operation_id = e.target.lang;
+            var user_id = e.target.title;
+            $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
+                if(data && $.parseJSON('true') == true){
+                    $(e.target).parents('li').remove();
                 }
-            })
+            });
         });
-    });
 
-    $('.removelecteur').on('click', function (e) {
-        console.log(e);
-        var operation_id = e.target.lang;
-        var user_id = e.target.title;
-        $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
-            if(data && $.parseJSON('true') == true){
-                $(e.target).parents('li').remove();
-            }
+        $('#getoperateur').on('click', function (e) {
+            console.log(e);
+            var operation_id = e.target.title;
+            $.get('/listoperateurs/' + operation_id, function (data) {
+                console.log(data);
+                $('#listoperateur').empty();
+                $.each(data, function (index, OperateurObj) {
+                    if(OperateurObj.status === true)
+                    {
+                        $('#listoperateur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"  disabled></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></td></tr>');
+                    }
+                    else
+                    {
+                        $('#listoperateur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></td></tr>');
+                    }
+                })
+            });
         });
-    });
 
-    $('.removeoperateur').on('click', function (e) {
-        console.log(e);
-        var operation_id = e.target.lang;
-        var user_id = e.target.title;
-        $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
-            if(data && $.parseJSON('true') == true){
-                $(e.target).parents('li').remove();
-            }
+
+
+    </script>
+@endsection
+
+@section('page-script')
+    {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
+    <script>
+        $(function() {
+            $('.datatable').DataTable({
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [
+                    {
+                        className: 'control',
+                        orderable: false,
+                        targets:   0
+                    },
+                    {
+                        orderable: false,
+                        targets: [-1]
+                    },
+                    { responsivePriority: 1, targets: 0 },
+                ],
+            });
+
+            // Enable Select2 select for the length option
+            $('.dataTables_length select').select2({
+                minimumResultsForSearch: Infinity,
+                width: 'auto'
+            });
+
+            // Set onclick cbg-colour .btn-success
         });
-    });
+    </script>
+@endsection
 
 
-    $('#getoperateur').on('click', function (e) {
-        console.log(e);
-        var operation_id = e.target.title;
-        $.get('/listoperateurs/' + operation_id, function (data) {
-            console.log(data);
-            $('#listoperateur').empty();
-            $.each(data, function (index, OperateurObj) {
-                if(OperateurObj.status === true)
-                {
-                    $('#listoperateur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"  disabled></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></li>');
-                }
-                else
-                {
-                    $('#listoperateur').append('<li><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></li>');
-                }
-            })
-        });
-    });
-
-
-
-</script>
+@section('plugin-scripts')
+    <script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
 @endsection

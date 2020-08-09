@@ -5,7 +5,7 @@
 @section('page-css')
     <!-- DataTables -->
     {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">--}}
 @endsection
 
 @section('content')
@@ -145,6 +145,9 @@
         });
     </script>
 @endsection
+
+
+
 @section('laraform_script2')
     <script src="{{ asset('assets/js/core/app.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
