@@ -21,6 +21,7 @@
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
 @endsection
 
 @section('page-script')
@@ -46,12 +47,74 @@
                     },
                     { responsivePriority: 1, targets: 0 },
                 ],
-                "bLengthChange" : false, //thought this line could hide the LengthMenu
-                "bInfo":false,
             });
 
-
+            // Enable Select2 select for the length option
+            $('.dataTables_length select').select2({
+                minimumResultsForSearch: Infinity,
+                width: 'auto'
+            });
         });
+
+        // $(function() {
+        //     $('.datatable').DataTable({
+        //         responsive: {
+        //             details: {
+        //                 type: 'column',
+        //                 target: 'tr'
+        //             }
+        //         },
+        //         columnDefs: [
+        //             {
+        //                 className: 'control',
+        //                 orderable: false,
+        //                 targets:   0
+        //             },
+        //             {
+        //                 orderable: false,
+        //                 targets: [-1]
+        //             },
+        //             { responsivePriority: 1, targets: 0 },
+        //         ],
+        //         "bLengthChange" : false, //thought this line could hide the LengthMenu
+        //         "bInfo":false,
+        //     });
+        // });
+    </script>
+    <script>
+        $('#country').on('click', function (e) {
+            console.log(e);
+            $.get('/json-allcountries', function (data) {
+                console.log(data);
+                $('#showall').empty();
+                $.each(data, function (index, countryObj) {
+                        $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
+                })
+            });
+        });
+
+        $('#state').on('click', function (e) {
+            console.log(e);
+            $.get('/json-allstates', function (data) {
+                console.log(data);
+                $('#showall').empty();
+                $.each(data, function (index, countryObj) {
+                    $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
+                })
+            });
+        });
+
+        $('#city').on('click', function (e) {
+            console.log(e);
+            $.get('/json-allcities', function (data) {
+                console.log(data);
+                $('#showall').empty();
+                $.each(data, function (index, countryObj) {
+                    $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
+                })
+            });
+        });
+
     </script>
 @endsection
 
@@ -131,6 +194,7 @@
                     </div>
                     <!-- /.box -->
                 </div>
+
                 <div class="col-lg-3 col-xs-6">
                     <div class="box box-solid">
                         <div class="box-header with-border">
@@ -141,11 +205,9 @@
                                         Dropdown <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="country">Pays</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="state">Regions</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="city">Villes</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -153,42 +215,23 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="datatable table">
-                                <tr>
-                                  <td>NOAH</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
-                                <tr>
-                                    <td>Abong Mbang</td>
-                                </tr>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="showall">
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
                             </table>
                         </div>
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
                 </div>
+
                 <div class="col-lg-3 col-xs-6">
                     <div class="box box-solid">
                         <div class="box-header with-border">
@@ -199,11 +242,16 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="datatable table">
-                                @foreach($lecteurs as $lecteur)
+                                <thead>
                                 <tr>
-                                  <td>{{$lecteur->first_name}} {{$lecteur->last_name}}</td>
+                                    <th></th>
                                 </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.box-body -->
@@ -214,3 +262,6 @@
         </div>
     </div>
 @endsection
+
+
+

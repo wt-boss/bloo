@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\Country;
 use App\Entreprise;
 use App\Operation;
 use App\Questionnaire;
+use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,5 +68,47 @@ class HomeController extends Controller
         where users.id != " . Auth::id() . "
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
         return view('admin.users.profile',compact('users'));
+    }
+
+    public function allcountries()
+    {
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        return response()->json($countries);
+    }
+
+    public function allstates()
+    {
+        $states  = State::where('country_id','38')
+            ->orwhere('country_id','42')
+            ->orwhere('country_id','50')
+            ->orwhere('country_id','79')
+            ->orwhere('country_id','67')
+            ->orwhere('country_id','43')
+            ->orwhere('country_id','161')
+            ->orwhere('country_id','7')
+            ->get();
+        return response()->json($states);
+    }
+
+    public function allcities()
+    {
+        $cities  = City::where('country_id','38')
+            ->orwhere('country_id','42')
+            ->orwhere('country_id','50')
+            ->orwhere('country_id','79')
+            ->orwhere('country_id','67')
+            ->orwhere('country_id','43')
+            ->orwhere('country_id','161')
+            ->orwhere('country_id','7')
+            ->get();
+        return response()->json($cities);
     }
 }

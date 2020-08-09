@@ -104,7 +104,6 @@
                                 <select class="form-control" name="city_id" id="region" required>
                                 </select>
                         </div>
-
                         <div id="div_ville" style="display:none" class="form-group col-6">
                                 <label for="birth-date">Ville de l'entreprise :</label><br>
                                 <select class="form-control" name="city_id" id="ville" required>

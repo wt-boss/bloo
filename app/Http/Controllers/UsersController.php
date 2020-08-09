@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,16 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.users.create');
+    { $countries  = Country::where('name','Cameroon')
+        ->orwhere('name','Central African Republic')
+        ->orwhere('name','Congo')
+        ->orwhere('name','Gabon')
+        ->orwhere('name','Equatorial Guinea')
+        ->orwhere('name','Chad')
+        ->orwhere('name','Nigeria')
+        ->orwhere('name','Angola')
+        ->get();
+        return view('admin.users.create',compact('countries'));
     }
 
     /**

@@ -64,15 +64,45 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
+    <script type="text/javascript">
+        function affCache(idDiv) {
+            var div = document.getElementById(idDiv);
+            if (div.style.display === "none"){
+                div.style.display = "";
+            }
+        }
+        $('#country').on('change', function(e){
+            console.log(e);
+            var country_id = e.target.value;
+            affCache('div_region');
+            $.get('/json-states?country_id=' + country_id,function(data) {
+                console.log(data);
+                $('#region').empty();
+                $.each(data, function(index, stateObj){
+                    $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
+                });
+                $('#region').on('change', function(e){
+                    console.log(e);
+                    var state_id = e.target.value;
+                    affCache('div_ville');
+                    $.get('/json-cities?state_id=' + state_id,function(data) {
+                        console.log(data);
+                        $('#ville').empty();
+                        $.each(data, function(index, villeObj){
+                            $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                        })
+                    });
+                });
+            });
+
+        });
+    </script>
 @endsection
+
+
 @section('laraform_script2')
     <script src="{{ asset('assets/js/core/app.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom/main.js') }}"></script>
 @endsection
 
-@extends('admin.top-nav')
-
-@section('content-header')
-    <!-- Content Header (Page header) -->
-@endsection

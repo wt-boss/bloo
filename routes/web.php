@@ -237,6 +237,9 @@ Route::get('/json-operateurs','OperationController@listOperateurs');
 Route::get('/json-states','CompteController@getregions');
 Route::get('/json-cities','CompteController@getvilles');
 Route::get('/json-user','MessageController@getUser');
+Route::get('/json-allcountries','HomeController@allcountries');
+Route::get('/json-allstates','HomeController@allstates');
+Route::get('/json-allcities','HomeController@allcities');
 
 /**Site operation */
 Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
