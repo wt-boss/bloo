@@ -297,7 +297,6 @@ class OperationController extends Controller
         return redirect()->route('operation.index')->withSuccess('Modification Effectuée');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
