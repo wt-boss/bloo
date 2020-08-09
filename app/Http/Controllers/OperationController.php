@@ -199,6 +199,23 @@ class OperationController extends Controller
         return response()->json($opusers);
     }
 
+    public function getoperationLecteurs(Request $request)
+    {
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::findOrFail($operation_id);
+        $user = $operation->users()->where('role','0')->get();
+        return response()->json($user);
+    }
+
+    public function getoperationOperateurs(Request $request)
+    {
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::findOrFail($operation_id);
+        $user = $operation->users()->where('role','1')->get();
+        return response()->json($user);
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
