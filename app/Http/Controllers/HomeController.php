@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Country;
 use App\Entreprise;
+use App\Helpers\Helper;
 use App\Operation;
 use App\Questionnaire;
 use App\State;
@@ -81,6 +82,10 @@ class HomeController extends Controller
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
             ->get();
+
+
+
+
         return response()->json($countries);
     }
 
@@ -95,7 +100,10 @@ class HomeController extends Controller
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
             ->get();
-        return response()->json($states);
+        // return response()->json($states);
+        $viewData = Helper::buildCities($states);
+
+        return response()->json($viewData);
     }
 
     public function allcities()
@@ -109,6 +117,11 @@ class HomeController extends Controller
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
             ->get();
-        return response()->json($cities);
+
+        $viewData = Helper::buildCities($cities);
+
+        return response()->json($viewData);
+
+        // return response()->json($cities);
     }
 }
