@@ -109,6 +109,6 @@ class HomeController extends Controller
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
             ->get();
-        return response()->json($cities);
+        return response()->view($cities);
     }
 }
