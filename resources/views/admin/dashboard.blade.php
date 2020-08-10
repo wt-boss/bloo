@@ -47,80 +47,207 @@
                     },
                     { responsivePriority: 1, targets: 0 },
                 ],
-            });
-
-            // Enable Select2 select for the length option
-            $('.dataTables_length select').select2({
-                minimumResultsForSearch: Infinity,
-                width: 'auto'
+                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                "bInfo":false,
             });
         });
-
-        // $(function() {
-        //     $('.datatable').DataTable({
-        //         responsive: {
-        //             details: {
-        //                 type: 'column',
-        //                 target: 'tr'
-        //             }
-        //         },
-        //         columnDefs: [
-        //             {
-        //                 className: 'control',
-        //                 orderable: false,
-        //                 targets:   0
-        //             },
-        //             {
-        //                 orderable: false,
-        //                 targets: [-1]
-        //             },
-        //             { responsivePriority: 1, targets: 0 },
-        //         ],
-        //         "bLengthChange" : false, //thought this line could hide the LengthMenu
-        //         "bInfo":false,
-        //     });
-        // });
     </script>
     <script>
+
         $('#country').on('click', function (e) {
             console.log(e);
             $.get('/json-allcountries', function (data) {
                 console.log(data);
-                $('#showall').empty();
-                $.each(data, function (index, countryObj) {
-                        $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
-                })
+                $('#cities').empty();
+                $('#cities').append(data.name);
+                $('#'+data.id).DataTable(
+                    {
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [
+                            {
+                                className: 'control',
+                                orderable: false,
+                                targets:   0
+                            },
+                            {
+                                orderable: false,
+                                targets: [-1]
+                            },
+                            { responsivePriority: 1, targets: 0 },
+                        ],
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    }
+                );
+                $('.operateurcountries').on('click', function(e){
+                    var country_id = e.target.id;
+                    var datas = null;
+                    $.get('/json-operateurcountries?country_id=' + country_id,function(data) {
+                        $('#operateur_select').empty();
+                        $('#operateur_select').append(data.name);
+                        $('#'+data.id).DataTable(
+                            {
+                                responsive: {
+                                    details: {
+                                        type: 'column',
+                                        target: 'tr'
+                                    }
+                                },
+                                columnDefs: [
+                                    {
+                                        className: 'control',
+                                        orderable: false,
+                                        targets:   0
+                                    },
+                                    {
+                                        orderable: false,
+                                        targets: [-1]
+                                    },
+                                    { responsivePriority: 1, targets: 0 },
+                                ],
+                                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                                "bInfo":false,
+                            }
+                        );
+                    });
+                });
             });
+
         });
 
         $('#state').on('click', function (e) {
             console.log(e);
-            // $.get('/json-allstates', function (data) {
-            //     console.log(data);
-            //     $('#showall').empty();
-            //     $.each(data, function (index, countryObj) {
-            //         $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
-            //     })
-            //     $('#region').DataTable();
-            // });
             $.get('/json-allstates', function (data) {
                 console.log(data);
                 $('#cities').empty();
                 $('#cities').append(data.name);
-                $('#'+data.id).DataTable();
+                $('#'+data.id).DataTable(
+                    {
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [
+                            {
+                                className: 'control',
+                                orderable: false,
+                                targets:   0
+                            },
+                            {
+                                orderable: false,
+                                targets: [-1]
+                            },
+                            { responsivePriority: 1, targets: 0 },
+                        ],
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    }
+                );
+                $('.operateurstates').on('click', function(e){
+                    var state_id = e.target.id;
+                    var datas = null;
+                    $.get('/json-operateurstates?state_id=' + state_id,function(data) {
+                        $('#operateur_select').empty();
+                        $('#operateur_select').append(data.name);
+                        $('#'+data.id).DataTable(
+                            {
+                                responsive: {
+                                    details: {
+                                        type: 'column',
+                                        target: 'tr'
+                                    }
+                                },
+                                columnDefs: [
+                                    {
+                                        className: 'control',
+                                        orderable: false,
+                                        targets:   0
+                                    },
+                                    {
+                                        orderable: false,
+                                        targets: [-1]
+                                    },
+                                    { responsivePriority: 1, targets: 0 },
+                                ],
+                                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                                "bInfo":false,
+                            }
+                        );
+                    });
+                });
             });
         });
 
         $('#city').on('click', function (e) {
             console.log(e);
             $.get('/json-allcities', function (data) {
-                console.log(data);
                 $('#cities').empty();
                 $('#cities').append(data.name);
-                $('#'+data.id).DataTable();
+                $('#'+data.id).DataTable(
+                    {
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [
+                            {
+                                className: 'control',
+                                orderable: false,
+                                targets:   0
+                            },
+                            {
+                                orderable: false,
+                                targets: [-1]
+                            },
+                            { responsivePriority: 1, targets: 0 },
+                        ],
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    }
+                );
+                $('.operateurcities').on('click', function(e){
+                    var city_id = e.target.id;
+                    var datas = null;
+                    $.get('/json-operateurcities?city_id=' + city_id,function(data) {
+                        $('#operateur_select').empty();
+                        $('#operateur_select').append(data.name);
+                        $('#'+data.id).DataTable(
+                            {
+                                responsive: {
+                                    details: {
+                                        type: 'column',
+                                        target: 'tr'
+                                    }
+                                },
+                                columnDefs: [
+                                    {
+                                        className: 'control',
+                                        orderable: false,
+                                        targets:   0
+                                    },
+                                    {
+                                        orderable: false,
+                                        targets: [-1]
+                                    },
+                                    { responsivePriority: 1, targets: 0 },
+                                ],
+                                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                                "bInfo":false,
+                            }
+                        );
+                    });
+                });
             });
         });
-
     </script>
 @endsection
 
@@ -246,19 +373,8 @@
                             </ul>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <table class="datatable table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="box-body" id="operateur_select">
+
                         </div>
                         <!-- /.box-body -->
                     </div>

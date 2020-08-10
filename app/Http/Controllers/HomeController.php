@@ -25,7 +25,6 @@ class HomeController extends Controller
      * @return void
      */
 
-
     /**
      * Show the application dashboard.
      *
@@ -33,7 +32,6 @@ class HomeController extends Controller
      */
     public function index2()
     {
-
         $questionnaires = auth()->user()->questionnaires;
         return view('home2',compact('questionnaires'));
     }
@@ -71,6 +69,9 @@ class HomeController extends Controller
         return view('admin.users.profile',compact('users'));
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function allcountries()
     {
         $countries  = Country::where('name','Cameroon')
@@ -82,13 +83,14 @@ class HomeController extends Controller
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
             ->get();
-
-
-
-
-        return response()->json($countries);
+        $class = 'operateurcountries';
+        $viewData = Helper::buildDashboardTable($countries, $class);
+        return response()->json($viewData);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function allstates()
     {
         $states  = State::where('country_id','38')
@@ -100,12 +102,14 @@ class HomeController extends Controller
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
             ->get();
-        // return response()->json($states);
-        $viewData = Helper::buildCities($states);
-
+        $class = 'operateurstates';
+        $viewData = Helper::buildDashboardTable($states,$class);
         return response()->json($viewData);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function allcities()
     {
         $cities  = City::where('country_id','38')
@@ -117,11 +121,33 @@ class HomeController extends Controller
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
             ->get();
-
-        $viewData = Helper::buildCities($cities);
-
+        $class = 'operateurcities';
+        $viewData = Helper::buildDashboardTable($cities,$class);
         return response()->json($viewData);
+    }
 
-        // return response()->json($cities);
+
+    public function operateurcountries(Request $request)
+    {
+        $country_id = $request->input('country_id');
+        $operateurs = User::where('role','1')->where('country_id',$country_id )->get();
+        $viewData = Helper::buildOperateurs($operateurs);
+        return response()->json($viewData);
+    }
+
+    public function operateurstates(Request $request)
+    {
+        $state_id = $request->input('state_id');
+        $operateurs = User::where('role','1')->where('city_id',$state_id )->get();
+        $viewData = Helper::buildOperateurs($operateurs);
+        return response()->json($viewData);
+    }
+
+    public function operateurcities(Request $request)
+    {
+        $city_id = $request->input('city_id');
+        $operateurs = User::where('role','1')->where('city_id',$city_id )->get();
+        $viewData = Helper::buildOperateurs($operateurs);
+        return response()->json($viewData);
     }
 }
