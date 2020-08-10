@@ -95,12 +95,19 @@
 
         $('#state').on('click', function (e) {
             console.log(e);
+            // $.get('/json-allstates', function (data) {
+            //     console.log(data);
+            //     $('#showall').empty();
+            //     $.each(data, function (index, countryObj) {
+            //         $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
+            //     })
+            //     $('#region').DataTable();
+            // });
             $.get('/json-allstates', function (data) {
                 console.log(data);
-                $('#showall').empty();
-                $.each(data, function (index, countryObj) {
-                    $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
-                })
+                $('#cities').empty();
+                $('#cities').append(data.name);
+                $('#'+data.id).DataTable();
             });
         });
 
@@ -108,10 +115,9 @@
             console.log(e);
             $.get('/json-allcities', function (data) {
                 console.log(data);
-                $('#showall').empty();
-                $.each(data, function (index, countryObj) {
-                    $('#showall').append('<tr><td>' + countryObj.name + '</td></tr>');
-                })
+                $('#cities').empty();
+                $('#cities').append(data.name);
+                $('#'+data.id).DataTable();
             });
         });
 
@@ -205,7 +211,7 @@
                                         Dropdown <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="country">Pays</a></li>
+                                        <li role="presentation" class="selected"><a role="menuitem" tabindex="-1" href="#" id="country">Pays</a></li>
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="state">Regions</a></li>
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="city">Villes</a></li>
                                     </ul>
@@ -213,8 +219,8 @@
                             </ul>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <table class="datatable table">
+                        <div class="box-body" id="cities">
+                            <table class="table" id="region">
                                     <thead>
                                     <tr>
                                         <th></th>
