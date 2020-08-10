@@ -19,7 +19,6 @@
                         </div>
                     </div>
                     <div class="box-body" id="lecteurs">
-
                         <ul class="menu-list">
                             @foreach($operations as $operation)
                             <li id="{{$operation->id}}">
@@ -127,7 +126,6 @@
            var receiver_id = '';
            var my_id = "{{ Auth::id() }}";
 
-
            $(document).ready(function () {
                // ajax setup form csrf token
                $.ajaxSetup({
@@ -182,18 +180,15 @@
                        success: function (data) {
                            $('#messages').html(data);
                            scrollToBottomFunc();
-
                        }
                    });
                });
 
                $(document).on('keyup', '.input-text input', function (e) {
                    var message = $(this).val();
-
                    // check if enter key is pressed and message is not null also receiver is selected
                    if (e.keyCode == 13 && message != '' && receiver_id != '') {
                        $(this).val(''); // while pressed enter text box will be empty
-
                        var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
                        $.ajax({
                            type: "post",

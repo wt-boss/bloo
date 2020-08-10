@@ -313,7 +313,7 @@
 
                         </div>
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
+                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -452,9 +452,6 @@
                     })
             });
         });
-
-
-
     </script>
 @endsection
 
