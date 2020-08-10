@@ -120,6 +120,25 @@
                         </span>
                     </div>
                     <div class="box-body">
+                        <form method="POST" action="{{ route('ajoutoperateur') }}">
+                            @csrf
+                            <input type="hidden" name="operation" value="{{ $operation->id }}">
+                            <div class="modal-body">
+                                <table class="datatable table stripe">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="listoperateur">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
+                                <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
+                            </div>
+                        </form>
 {{--                        <canvas id="pieChart" style="height:250px"></canvas>--}}
                         @php
                             $data_for_chart = [];
@@ -278,7 +297,7 @@
 </div>
 
     <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
@@ -286,25 +305,20 @@
                 </button>
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des lecteurs</font></font></h4>
             </div>
-            <form method="POST" action="{{ route('ajoutlecteur') }}">
-                @csrf
-                <input type="hidden" name="operation" value="{{ $operation->id }}" />
                 <div class="modal-body">
-                    <table class="datatable table stripe">
-                        <thead>
-                        <tr>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="listlecteur">
-                        </tbody>
-                    </table>
+                    <form method="POST" action="{{ route('ajoutlecteur') }}">
+                        @csrf
+                        <input type="hidden" name="operation" value="{{ $operation->id }}" />
+                        <div id="datalecteurs">
+
+                        </div>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
+                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
+
                 </div>
-            </form>
         </div>
         <!-- /.modal-content -->
     </div>
@@ -312,32 +326,24 @@
 </div>
 
 <div class="modal fade" id="operateur-default" style="display: none;">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                 <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span></button>
-                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des operateur</font></font></h4>
+                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des operateurs</font></font></h4>
             </div>
-            <form method="POST" action="{{ route('ajoutoperateur') }}">
-                @csrf
-                <input type="hidden" name="operation" value="{{ $operation->id }}">
-                <div class="modal-body">
-                    <table class="datatable table stripe">
-                        <thead>
-                        <tr>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="listoperateur">
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
+            <div class="modal-body">
+                <form method="POST" action="{{ route('ajoutlecteur') }}">
+                    @csrf
+                    <input type="hidden" name="operation" value="{{ $operation->id }}" />
+                    <div id="dataoperateurs">
+
+                    </div>
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
-                </div>
-            </form>
+                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
+                </form>
+            </div>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -358,23 +364,37 @@
                 console.log(lecteur_id);
             });
         }
-
         $('#getlecteur').on('click', function (e) {
             console.log(e);
             var operation_id = e.target.title;
             $.get('/listlecteurs/' + operation_id, function (data) {
                 console.log(data);
-                $('#listlecteur').empty();
-                $.each(data, function (index, lecteurObj) {
-                    if(lecteurObj.status === true)
+                 $('#datalecteurs').empty();
+                 $('#datalecteurs').append(data.name);
+                 $('#'+data.id).DataTable(
                     {
-                        $('#listlecteur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'" disabled></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></td></tr>');
-                    }
-                    else
-                    {
-                        $('#listlecteur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="lecteurs[]" value="'+ lecteurObj.id +'"></span><input type="text" class="form-control"value="'+ lecteurObj.first_name + ' ' +lecteurObj.last_name +' " disabled></div></td></tr>');
-                    }
-                })
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [
+                            {
+                                className: 'control',
+                                orderable: false,
+                                targets:   0
+                            },
+                            {
+                                orderable: false,
+                                targets: [-1]
+                            },
+                            { responsivePriority: 1, targets: 0 },
+                        ],
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    })
+
             });
         });
 
@@ -384,7 +404,7 @@
             var user_id = e.target.title;
             $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
                 if(data && $.parseJSON('true') == true){
-                    $(e.target).parents('li').remove();
+                    $(e.target).parents('tr').remove();
                 }
             });
         });
@@ -395,7 +415,7 @@
             var user_id = e.target.title;
             $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
                 if(data && $.parseJSON('true') == true){
-                    $(e.target).parents('li').remove();
+                    $(e.target).parents('tr').remove();
                 }
             });
         });
@@ -405,17 +425,31 @@
             var operation_id = e.target.title;
             $.get('/listoperateurs/' + operation_id, function (data) {
                 console.log(data);
-                $('#listoperateur').empty();
-                $.each(data, function (index, OperateurObj) {
-                    if(OperateurObj.status === true)
+                $('#dataoperateurs').empty();
+                $('#dataoperateurs').append(data.name);
+                $('#'+data.id).DataTable(
                     {
-                        $('#listoperateur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"  disabled></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></td></tr>');
-                    }
-                    else
-                    {
-                        $('#listoperateur').append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="checkbox" name="operateurs[]" value="'+ OperateurObj.id +'"></span><input type="text" class="form-control"value="'+ OperateurObj.first_name + ' ' +OperateurObj.last_name +' " disabled></div></td></tr>');
-                    }
-                })
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [
+                            {
+                                className: 'control',
+                                orderable: false,
+                                targets:   0
+                            },
+                            {
+                                orderable: false,
+                                targets: [-1]
+                            },
+                            { responsivePriority: 1, targets: 0 },
+                        ],
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    })
             });
         });
 
@@ -428,34 +462,29 @@
     {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
     <script>
         $(function() {
-            $('.datatable').DataTable({
-                responsive: {
-                    details: {
-                        type: 'column',
-                        target: 'tr'
-                    }
-                },
-                columnDefs: [
-                    {
-                        className: 'control',
-                        orderable: false,
-                        targets:   0
+            $('.datatable').DataTable(
+                {
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
                     },
-                    {
-                        orderable: false,
-                        targets: [-1]
-                    },
-                    { responsivePriority: 1, targets: 0 },
-                ],
-            });
-
-            // Enable Select2 select for the length option
-            $('.dataTables_length select').select2({
-                minimumResultsForSearch: Infinity,
-                width: 'auto'
-            });
-
-            // Set onclick cbg-colour .btn-success
+                    columnDefs: [
+                        {
+                            className: 'control',
+                            orderable: false,
+                            targets:   0
+                        },
+                        {
+                            orderable: false,
+                            targets: [-1]
+                        },
+                        { responsivePriority: 1, targets: 0 },
+                    ],
+                    "bLengthChange" : false, //thought this line could hide the LengthMenu
+                    "bInfo":false,
+                })
         });
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

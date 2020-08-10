@@ -15,6 +15,7 @@ use App\Country;
 use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Helper;
 
 class OperationController extends Controller
 {
@@ -154,25 +155,24 @@ class OperationController extends Controller
         $operation = Operation::with('users')->findOrFail($id);
         $selected_lecteurs = $operation->users;
         $lecteurs = User::where('role', '0')->get();
-
         $opusers = [];
-
         foreach($lecteurs as $lecteur)
         {
             $opuser = new OpUsers();
             $opuser = $lecteur;
-            $opuser->status = false;
+
             foreach($selected_lecteurs as $selected)
             {
                 if($selected->id === $lecteur->id )
                 {
-                    $opuser->status = true;
+                    $opuser->status = "disabled";
                     break;
                 }
             }
             $opusers[] = $opuser;
         }
-        return response()->json($opusers);
+        $viewData = Helper::buildUsersTable($opusers);
+        return response()->json($viewData);
     }
 
     public function listOperateurs($id)
@@ -190,13 +190,14 @@ class OperationController extends Controller
             {
                 if($selected->id === $operateur->id )
                 {
-                    $opuser->status = true;
+                    $opuser->status = "disabled";
                     break;
                 }
             }
             $opusers[] = $opuser;
         }
-        return response()->json($opusers);
+        $viewData = Helper::buildUsersTable($opusers);
+        return response()->json($viewData);
     }
 
     public function getoperationLecteurs(Request $request)

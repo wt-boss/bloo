@@ -51,6 +51,30 @@ class Helper
                       return ["name"=>$returnValue, "id" => $id ];
           }
 
+           public static function buildUsersTable($items) {
+                                $data = "";
+                                foreach($items as $item) {
+                                                $data .= "<tr><td id='$item->id'><input type='checkbox' name='lecteurs[]' value='$item->id' $item->status>".
+                                                "$item->first_name $item->last_name".
+                                                 "</td></tr>";
+                                }
+
+                                $id = 'cities-'.rand(1000,9999);
+                                $returnValue = "<table class='table' id='".$id."'>".
+                                                    "<thead>".
+                                                        "<tr>".
+                                                            "<th></th>".
+                                                        "</tr>".
+                                                        "</thead>".
+                                                         "<tbody>".
+                                                            $data.
+                                                        "</tbody>".
+                                                "</table>";
+                                return ["name"=>$returnValue, "id" => $id ];
+                    }
+
+
+
 
 
 

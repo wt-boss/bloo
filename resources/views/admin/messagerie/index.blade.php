@@ -91,7 +91,6 @@
 @endsection
 
 
-
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -123,7 +122,6 @@
             });
 
         });
-
        function showMessages(operation_id)
        {
            var receiver_id = '';
@@ -221,12 +219,8 @@
                 scrollTop: $('.message-wrapper').get(0).scrollHeight
             }, 50);
         }
-
     </script>
-
 @endsection
-
-
 
 @section('laraform_script1')
     <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
@@ -377,7 +371,6 @@
 
     </style>
 @endsection
-
 
 @section('laraform_script2')
     {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
