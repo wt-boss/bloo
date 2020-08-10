@@ -14,54 +14,53 @@
         <div class="row">
             <div class="col-lg-9 col-xs-12">
                 <!-- DONUT CHART -->
-                <div class="box" style="padding-top: 14px;">
-
+                <div class="box">
+                    <div class="box-header with-border">
+                        <span>Informations generales : </span> <span class="bloo-primary-color">{{$operation->nom}}</span>
+                    </div>
                     <div class="box-body">
-                        <div class="col-md-12">
-                            <center><h4>{{$operation->nom}}</h4></center>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="info">
+                                <p class="label">Date debut</p>
+                                <p class="info-value">{{$operation->date_start}}</p>
+                            </div>
+                            <div class="info">
+                                <p class="label">Date debut</p>
+                                <p class="info-value">{{$operation->date_end}}</p>
+                            </div>
                         </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">{{$operation->date_start}}</p>
-                                </div>
-                                <div class="info">
-                                    <p class="label">Date debut</p>
-                                    <p class="info-value">{{$operation->date_end}}</p>
-                                </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="info">
+                                <p class="label">Villes</p>
+                                <p class="info-value">
+                                    {{$operation->sites->count()}}
+                                </p>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="info">
-                                    <p class="label">Villes</p>
-                                    <p class="info-value">
-                                        {{$operation->sites->count()}}
-                                    </p>
-                                </div>
-                                <div class="info">
-                                    <p class="label">Sites</p>
-                                    <p class="info-value">{{$operation->sites()->count()}}</p>
-                                </div>
+                            <div class="info">
+                                <p class="label">Sites</p>
+                                <p class="info-value">{{$operation->sites()->count()}}</p>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="info">
-                                    <p class="label">Lecteurs</p>
-                                    <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
-                                </div>
-                                <div class="info">
-                                    <p class="label">Operateur</p>
-                                    <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
-                                </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="info">
+                                <p class="label">Lecteurs</p>
+                                <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="info">
-                                    <p class="label">Clent</p>
-                                    <p class="info-value">{{$operation->entreprise->nom}}</p>
-                                </div>
-                                <div class="info">
-                                    <p class="label">Fondé</p>
-                                    <p class="info-value">{{$operation->users()->where('role','4')->get()->pluck('last_name')->last()}}</p>
-                                </div>
+                            <div class="info">
+                                <p class="label">Operateur</p>
+                                <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
                             </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="info">
+                                <p class="label">Clent</p>
+                                <p class="info-value">{{$operation->entreprise->nom}}</p>
+                            </div>
+                            <div class="info">
+                                <p class="label">Fondé</p>
+                                <p class="info-value">{{$operation->users()->where('role','4')->get()->pluck('last_name')->last()}}</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -95,7 +94,7 @@
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="box" style="height: 100%;">
                     <div class="box-header with-border">
                         <ul class="box-title">
@@ -192,7 +191,7 @@
                     <!-- /.box-body -->
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="box box-success">
                     <div class="box-header">
                         <div class="row">

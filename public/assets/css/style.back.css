@@ -25,6 +25,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     border-color: #8AD2E6;
     color: #fff;
 }
+
+.bloo-primary-color {
+    color: #0080BB;
+}
+
 .btn-bloo-cancel {
     background-color: #fff;
     border : 2px solid #D3D3D3;
@@ -359,4 +364,14 @@ ul.box-title li {
 
 .create-user .form-control {
     height: 18px;
+}
+
+
+/* Global */
+/* Retrait du signe plus ds les datatable */
+.dtr-column tbody tr td.control::before,
+.dtr-column tbody tr th.control::before,
+.dtr-inline.collapsed tbody tr td:first-child::before,
+.dtr-inline.collapsed tbody tr th:first-child::before {
+    content: '';
 }

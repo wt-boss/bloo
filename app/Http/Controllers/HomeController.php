@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use phpseclib\Crypt\Hash;
 use Illuminate\Support\Facades\Session;
-
+use PHPUnit\TextUI\Help;
 
 class HomeController extends Controller
 {
@@ -53,7 +53,17 @@ class HomeController extends Controller
         $operateurs = User::where('role','1')->get();
         $lecteurs = User::where('role','0')->get();
         $rapports = Operation::where('status','TERMINER')->get();
-        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports'));
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->get();
+        //$htmlCountries = Helper::buildDashboardTable($countries, 'operateurcountries');
+        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries'));
     }
     public function language()
 	{
