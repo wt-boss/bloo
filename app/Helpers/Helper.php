@@ -19,7 +19,7 @@ class Helper
                  $data .= "<tr><td  id='$item->id' class='$class'>". $item->name . "</td></tr>";
              }
              $id = 'cities-'.rand(1000,9999);
-             $returnValue = "<table class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
+             $returnValue = "<table style='width=100%' class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
                                  "<thead>".
                                      "<tr>".
                                          "<th></th>".
@@ -38,7 +38,7 @@ class Helper
                           $data .= "<tr><td  id='$item->id'>".$item->first_name. ' '.$item->last_name."</td></tr>";
                       }
                       $id = 'cities-'.rand(1000,9999);
-                      $returnValue = "<table class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
+                      $returnValue = "<table style='width=100%' class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
                                           "<thead>".
                                               "<tr>".
                                                   "<th></th>".
@@ -60,7 +60,7 @@ class Helper
                                 }
 
                                 $id = 'cities-'.rand(1000,9999);
-                                $returnValue = "<table class='table' id='".$id."'>".
+                                $returnValue = "<table style='width=100%' class='table' id='".$id."'>".
                                                     "<thead>".
                                                         "<tr>".
                                                             "<th></th>".

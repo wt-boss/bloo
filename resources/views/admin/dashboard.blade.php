@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
     <script>
         $(function() {
-            $('.datatable').DataTable({
+            $('#region').DataTable({
                 responsive: {
                     details: {
                         type: 'column',
@@ -51,9 +51,46 @@
                 "bInfo":false,
             });
         });
+
+
     </script>
     <script>
 
+        let operateurCountriesEvent = function() {
+            $('.operateurcountries').on('click', function(e){
+                var country_id = e.target.id;
+                var datas = null;
+                $.get('/json-operateurcountries?country_id=' + country_id,function(data) {
+                    $('#operateur_select').empty();
+                    $('#operateur_select').append(data.name);
+                    $('#'+data.id).DataTable(
+                        {
+                            responsive: {
+                                details: {
+                                    type: 'column',
+                                    target: 'tr'
+                                }
+                            },
+                            columnDefs: [
+                                {
+                                    className: 'control',
+                                    orderable: false,
+                                    targets:   0
+                                },
+                                {
+                                    orderable: false,
+                                    targets: [-1]
+                                },
+                                { responsivePriority: 1, targets: 0 },
+                            ],
+                            "bLengthChange" : false, //thought this line could hide the LengthMenu
+                            "bInfo":false,
+                        }
+                    );
+                });
+            });
+        }
+        operateurCountriesEvent();
         $('#country').on('click', function (e) {
             console.log(e);
             $.get('/json-allcountries', function (data) {
@@ -84,38 +121,7 @@
                         "bInfo":false,
                     }
                 );
-                $('.operateurcountries').on('click', function(e){
-                    var country_id = e.target.id;
-                    var datas = null;
-                    $.get('/json-operateurcountries?country_id=' + country_id,function(data) {
-                        $('#operateur_select').empty();
-                        $('#operateur_select').append(data.name);
-                        $('#'+data.id).DataTable(
-                            {
-                                responsive: {
-                                    details: {
-                                        type: 'column',
-                                        target: 'tr'
-                                    }
-                                },
-                                columnDefs: [
-                                    {
-                                        className: 'control',
-                                        orderable: false,
-                                        targets:   0
-                                    },
-                                    {
-                                        orderable: false,
-                                        targets: [-1]
-                                    },
-                                    { responsivePriority: 1, targets: 0 },
-                                ],
-                                "bLengthChange" : false, //thought this line could hide the LengthMenu
-                                "bInfo":false,
-                            }
-                        );
-                    });
-                });
+                operateurCountriesEvent();
             });
 
         });
@@ -343,20 +349,32 @@
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="city">Villes</a></li>
                                     </ul>
                                 </li>
+                                <div class="row">
+                                    <div class="col-sm-6"><h6>Trier par : </h6></div>
+                                    <div class="col-sm-6" style="position: relative;">
+                                        <select class="custom-select" id="gender2">
+                                            <option selected>Choose...</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="cities">
-                            <table class="table" id="region">
+                            <table class="table" id="region" style="width: auto;">
                                     <thead>
                                     <tr>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody id="showall">
+                                    @foreach ($countries as $item)
                                     <tr>
-                                        <td></td>
+                                        <td id='{{{$item->id}}}' class='operateurcountries'>{{ $item->name }}</td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                             </table>
                         </div>
