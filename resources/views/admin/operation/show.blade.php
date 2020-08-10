@@ -378,18 +378,6 @@
                                 target: 'tr'
                             }
                         },
-                        columnDefs: [
-                            {
-                                className: 'control',
-                                orderable: false,
-                                targets:   0
-                            },
-                            {
-                                orderable: false,
-                                targets: [-1]
-                            },
-                            { responsivePriority: 1, targets: 0 },
-                        ],
                         "bLengthChange" : false, //thought this line could hide the LengthMenu
                         "bInfo":false,
                     })
@@ -434,18 +422,6 @@
                                 target: 'tr'
                             }
                         },
-                        columnDefs: [
-                            {
-                                className: 'control',
-                                orderable: false,
-                                targets:   0
-                            },
-                            {
-                                orderable: false,
-                                targets: [-1]
-                            },
-                            { responsivePriority: 1, targets: 0 },
-                        ],
                         "bLengthChange" : false, //thought this line could hide the LengthMenu
                         "bInfo":false,
                     })
@@ -460,26 +436,8 @@
         $(function() {
             $('.datatable').DataTable(
                 {
-                    responsive: {
-                        details: {
-                            type: 'column',
-                            target: 'tr'
-                        }
-                    },
-                    columnDefs: [
-                        {
-                            className: 'control',
-                            orderable: false,
-                            targets:   0
-                        },
-                        {
-                            orderable: false,
-                            targets: [-1]
-                        },
-                        { responsivePriority: 1, targets: 0 },
-                    ],
                     "bLengthChange" : false, //thought this line could hide the LengthMenu
-                    "bInfo":false,
+                    "searching": false
                 })
         });
     </script>
