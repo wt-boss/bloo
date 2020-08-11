@@ -55,7 +55,7 @@ class OperationController extends Controller
                 }
             }
         }
-        return view('admin.operation.index',compact('operationsgit'));
+        return view('admin.operation.index',compact('operations'));
     }
 
     /**

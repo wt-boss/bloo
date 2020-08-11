@@ -91,10 +91,27 @@ class MessageController extends Controller
     }
     public function index()
     {
-        $user = User::with('operations')->where('id',auth()->user()->id)->get()->first();
-        $operation = $user->operations->first();
-        $operations = Operation::all();
-        return view('admin.messagerie.index',compact('operations','operation'));
+         //$user = User::with('operations')->where('id',auth()->user()->id)->get()->first();
+         //$operation = $user->operations->first();
+        $AuthUser = Auth::user();
+        if($AuthUser->role === 5)
+        {
+            $operations = Operation::all();
+        }
+        else
+        {
+            $comptes = $AuthUser->entreprises()->get();
+            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+            foreach ($comptes as $entreprise)
+            {
+                $Operations = $entreprise->operations()->get();
+                foreach ($Operations as $operation)
+                {
+                    $operations->push($operation);
+                }
+            }
+        }
+        return view('admin.messagerie.index',compact('operations'));
     }
     public function show(Request $request,$id){
         $operations = Operation::all();

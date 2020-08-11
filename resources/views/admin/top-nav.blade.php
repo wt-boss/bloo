@@ -103,7 +103,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->hasRole('Superadmin'))
+
                             <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('messages_index')}}" >
                                     {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
@@ -111,7 +111,7 @@
                                     <span>Messagerie</span>
                                 </a>
                             </li>
-                        @endif
+
 
                         @if (auth()->user()->hasRole('Superadmin'))
                             <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
