@@ -36,17 +36,26 @@ class OperationController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $operations = "";
-        if(auth()->user()->id === 1)
+        if($user->id === 1)
         {
             $operations = Operation::with('form')->get();
         }
         else
         {
-            $operations = auth()->user()->operations()->get();
-
+            $comptes = $user->entreprises()->get();
+            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+            foreach ($comptes as $entreprise)
+            {
+                $Operations = $entreprise->operations()->get();
+                foreach ($Operations as $operation)
+                {
+                    $operations->push($operation);
+                }
+            }
         }
-        return view('admin.operation.index', compact('operations'));
+        return view('admin.operation.index',compact('operationsgit'));
     }
 
     /**
@@ -84,7 +93,6 @@ class OperationController extends Controller
      */
     public function saventreprise(Request $request)
     {
-
         $entreprise = Entreprise::create($request->all());
         $user = User::findOrFail(Auth::user()->id);
         $entreprise->users()->attach($user);
@@ -208,7 +216,6 @@ class OperationController extends Controller
         return response()->json($viewData);
 
     }
-
 
 
     /**
