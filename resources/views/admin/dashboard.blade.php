@@ -29,30 +29,9 @@
     <script>
         $(function() {
             $('#region').DataTable({
-                responsive: {
-                    details: {
-                        type: 'column',
-                        target: 'tr'
-                    }
-                },
-                columnDefs: [
-                    {
-                        className: 'control',
-                        orderable: false,
-                        targets:   0
-                    },
-                    {
-                        orderable: false,
-                        targets: [-1]
-                    },
-                    { responsivePriority: 1, targets: 0 },
-                ],
-                "bLengthChange" : false, //thought this line could hide the LengthMenu
-                "bInfo":false,
+               "bLengthChange" : false, //thought this line could hide the LengthMenu
             });
         });
-
-
     </script>
     <script>
 
@@ -89,7 +68,7 @@
                     );
                 });
             });
-        }
+        };
         operateurCountriesEvent();
         $('#country').on('click', function (e) {
             console.log(e);
@@ -349,6 +328,7 @@
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="city">Villes</a></li>
                                     </ul>
                                 </li>
+                            </ul>
                                 <div class="row">
                                     <div class="col-sm-6"><h6>Trier par : </h6></div>
                                     <div class="col-sm-6" style="position: relative;">
@@ -359,7 +339,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </ul>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="cities">
@@ -392,7 +371,6 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="operateur_select">
-
                         </div>
                         <!-- /.box-body -->
                     </div>

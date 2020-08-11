@@ -45,14 +45,10 @@ class HomeController extends Controller
         ];
         return view('home', compact('widget'));
     }
+
     public function admin()
     {
         $user = auth()->user();
-        $comptes = Entreprise::all();
-        $operations = Operation::all();
-        $operateurs = User::where('role','1')->get();
-        $lecteurs = User::where('role','0')->get();
-        $rapports = Operation::where('status','TERMINER')->get();
         $countries  = Country::where('name','Cameroon')
             ->orwhere('name','Central African Republic')
             ->orwhere('name','Congo')
@@ -62,9 +58,51 @@ class HomeController extends Controller
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
             ->get();
-        //$htmlCountries = Helper::buildDashboardTable($countries, 'operateurcountries');
+        if($user->role === 5)
+        {
+            $comptes = Entreprise::all();
+            $operations = Operation::all();
+            $operateurs = User::where('role','1')->get();
+            $lecteurs = User::where('role','0')->get();
+            $rapports = Operation::where('status','TERMINER')->get();
+        }
+         else{
+             $comptes = $user->entreprises()->get();
+             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+             $operateurs = collect(); //Tout les operateurs des operations.
+             $lecteurs = collect(); //Tous les lecteurs des operations.
+             $rapports = collect();
+             foreach ($comptes as $entreprise)
+             {
+               $Operations = $entreprise->operations()->get();
+               foreach ($Operations as $operation)
+               {
+                   if ($operation->status === "TERMINER")
+                   {
+                       $rapports->push($operation);
+                   }
+                   $operations->push($operation);
+               }
+             }
+             foreach ($operations as $operation)
+             {
+                 $AllUsers = $operation->users()->get();
+                  foreach ($AllUsers as $User)
+                  {
+                      if($User->role === 1)
+                      {
+                          $operateurs->push($User);
+                      }
+                      else if ($User->role === 0)
+                      {
+                          $lecteurs->push($User);
+                      }
+                  }
+             }
+         }
         return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries'));
     }
+
     public function language()
 	{
         Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');

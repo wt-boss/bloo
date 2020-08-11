@@ -84,17 +84,7 @@ class OperationController extends Controller
      */
     public function saventreprise(Request $request)
     {
-        // $parameters = $request->all();
-        // $entreprise = new Entreprise();
-        // $entreprise->nom = $parameters['nom'];
-        // $entreprise->addrese = $parameters['adresse'];
-        // $entreprise->Numero_contribuable =  $parameters['contribuable'];
-        // $entreprise->numero_siret =  $parameters['siret'];
-        // $entreprise->pays =  $parameters['pays'];
-        // $entreprise->ville =  $parameters['ville'];
-        // $entreprise->type =  "Personne Morale";
-        // $entreprise->telephone =  $parameters['telephone'];
-        // $entreprise->save();
+
         $entreprise = Entreprise::create($request->all());
         $user = User::findOrFail(Auth::user()->id);
         $entreprise->users()->attach($user);
@@ -204,16 +194,19 @@ class OperationController extends Controller
     {
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','0')->get();
-        return response()->json($user);
+        $users = $operation->users()->where('role','0')->get();
+        $viewData = Helper::buildUsersList($users);
+        return response()->json($viewData);
     }
 
     public function getoperationOperateurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
-        $user = $operation->users()->where('role','1')->get();
-        return response()->json($user);
+        $users = $operation->users()->where('role','1')->get();
+        $viewData = Helper::buildUsersList($users);
+        return response()->json($viewData);
+
     }
 
 

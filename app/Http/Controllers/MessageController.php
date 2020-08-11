@@ -17,7 +17,6 @@ class MessageController extends Controller
     {
         $this->middleware('auth');
     }
-
     public function getMessage($user_id)
     {
         $my_id = Auth::id();
@@ -34,7 +33,6 @@ class MessageController extends Controller
 
         return view('messages.index', ['messages' => $messages]);
     }
-
     public function getOperationMessage($user_id,$operation_id){
         $my_id = Auth::id();
         // Make read all unread message
@@ -49,7 +47,6 @@ class MessageController extends Controller
 
         return view('messages.index', ['messages' => $messages]);
     }
-
     public function deleteDuplicate($user, $image)
     {
         DB::table('notifications')
@@ -59,7 +56,6 @@ class MessageController extends Controller
             ->where('data->user', $user->id)
             ->delete();
     }
-
     public function sendMessage(Request $request)
     {
         $user = auth()->user();
@@ -87,14 +83,12 @@ class MessageController extends Controller
         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'my-event', $data);
     }
-
     public function getUser(Request $request)
     {
         $user_id = $request->input('user_id');
         $user = User::findOrFail($user_id);
         return response()->json($user);
     }
-
     public function index()
     {
         $user = User::with('operations')->where('id',auth()->user()->id)->get()->first();

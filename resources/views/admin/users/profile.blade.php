@@ -318,7 +318,6 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-
                 </div>
 
                 <div class="col-md-9">

@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-body" id="lecteurs">
+                    <div class="box-body" >
                         <ul class="menu-list">
                             @foreach($operations as $operation)
                             <li id="{{$operation->id}}">
@@ -36,40 +36,22 @@
                 </div>
                 <!-- /.box -->
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="box" style="height: 100%;">
-                            <div class="box-header with-border">
-                                <ul class="box-title">
-                                    <li>Lecteurs</li>
-                                </ul>
-                            </div>
-                            <div class="box-body">
-                                <ul class="nav nav-stacked menu-list" id="lecteur">
-
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="box" style="height: 100%;">
-                            <div class="box-header with-border">
-                                <ul class="box-title"  >
-                                    <li class="user">Operateurs</li>
-                                </ul>
-                            </div>
-                            <div class="box-body">
-                                <ul class="nav nav-stacked menu-list"  id="operateur">
-
-                                </ul>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+                 <div class='col-md-12'>
+                     <div class='user-wrapper'>
+                         <div>
+                             <h6>Lecteurs</h6>
+                             <div id="alllect">
+                             </div>
+                         </div>
+                         <div>
+                             <h6>Operateurs</h6>
+                             <div id="alloperat">
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="box" style="height: 100%;">
                     <div class="box-header with-border">
@@ -99,115 +81,104 @@
             console.log(e);
             var operation_id = e.target.id;
             var datas = null;
-            $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
-                console.log(operation_id);
 
-                $('#lecteur').empty();
-                $.each(data, function(index, lecteurObj){
-                    $('#lecteur').append('<li class="user" id="'+ lecteurObj.id +'">'+ lecteurObj.first_name +' ' +  lecteurObj.last_name +'</li>');
-                });
-                $('#messages').html(datas);
-
-                showMessages(operation_id);
-            });
             $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
-                console.log(operation_id);
-                $('#operateur').empty();
-                $.each(data, function(index, operateurObj){
-                    $('#operateur').append('<li class="user" id="'+ operateurObj.id +'">'+ operateurObj.first_name +' ' +  operateurObj.last_name +'</li>');
-                });
+                $('#alllect').empty();
+                $('#alllect').append(data.name);
                 $('#messages').html(datas);
-                showMessages(operation_id);
+                  $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
+                      $('#alloperat').empty();
+                      $('#alloperat').append(data.name);
+                      $('#messages').html(datas);
+                      showMessages(operation_id);
+                   });
+               });
+        });
+        function showMessages(operation_id)
+        {
+            var receiver_id = '';
+            var my_id = "{{ Auth::id() }}";
+
+            $(document).ready(function () {
+                // ajax setup form csrf token
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                // Enable pusher logging - don't include this in production
+                Pusher.logToConsole = true;
+
+                var pusher = new Pusher('1702f90c00112df631a4', {
+                    cluster: 'ap2'
+                });
+                console.log('show');
+                var channel = pusher.subscribe('my-channel');
+                channel.bind('my-event', function (data) {
+                    //alert(JSON.stringify(data));
+                    if (my_id == data.from) {
+                        $('#' + data.to).click();
+                    } else if (my_id == data.to) {
+                        if (receiver_id == data.from) {
+                            // if receiver is selected, reload the selected user ...
+                            $('#' + data.from).click();
+                        } else {
+                            // if receiver is not seleted, add notification for that user
+                            var pending = parseInt($('#' + data.from).find('.pending').html());
+
+                            if (pending) {
+                                $('#' + data.from).find('.pending').html(pending + 1);
+                            } else {
+                                $('#' + data.from).append('<span class="pending">1</span>');
+                            }
+                        }
+                    }
+                });
+                $('.user').click(function () {
+                    $('.user').removeClass('active');
+                    $(this).addClass('active');
+                    $(this).find('.pending').remove();
+                    receiver_id = $(this).attr('id');
+                    $.get('/json-user?user_id=' + receiver_id,function(data) {
+                        console.log(data);
+                        $('#receiver').empty();
+                        $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
+                    });
+                    $.ajax({
+                        type: "get",
+                        url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                        data: "",
+                        cache: false,
+                        success: function (data) {
+                            $('#messages').html(data);
+                            scrollToBottomFunc();
+                        }
+                    });
+                });
+                $(document).on('keyup', '.input-text input', function (e) {
+                    var message = $(this).val();
+                    // check if enter key is pressed and message is not null also receiver is selected
+                    if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                        $(this).val(''); // while pressed enter text box will be empty
+                        var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                        $.ajax({
+                            type: "post",
+                            url: "message", // need to create this post route
+                            data: datastr,
+                            cache: false,
+                            success: function (data) {
+
+                            },
+                            error: function (jqXHR, status, err) {},
+                            complete: function () {
+                                scrollToBottomFunc();
+                            }
+                        })
+                    }
+                });
             });
 
-        });
-       function showMessages(operation_id)
-       {
-           var receiver_id = '';
-           var my_id = "{{ Auth::id() }}";
-
-           $(document).ready(function () {
-               // ajax setup form csrf token
-               $.ajaxSetup({
-                   headers: {
-                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                   }
-               });
-               // Enable pusher logging - don't include this in production
-               Pusher.logToConsole = true;
-
-               var pusher = new Pusher('1702f90c00112df631a4', {
-                   cluster: 'ap2'
-               });
-               console.log('show');
-               var channel = pusher.subscribe('my-channel');
-               channel.bind('my-event', function (data) {
-                   //alert(JSON.stringify(data));
-                   if (my_id == data.from) {
-                       $('#' + data.to).click();
-                   } else if (my_id == data.to) {
-                       if (receiver_id == data.from) {
-                           // if receiver is selected, reload the selected user ...
-                           $('#' + data.from).click();
-                       } else {
-                           // if receiver is not seleted, add notification for that user
-                           var pending = parseInt($('#' + data.from).find('.pending').html());
-
-                           if (pending) {
-                               $('#' + data.from).find('.pending').html(pending + 1);
-                           } else {
-                               $('#' + data.from).append('<span class="pending">1</span>');
-                           }
-                       }
-                   }
-               });
-
-               $('.user').click(function () {
-                   $('.user').removeClass('active');
-                   $(this).addClass('active');
-                   $(this).find('.pending').remove();
-                   receiver_id = $(this).attr('id');
-                   $.get('/json-user?user_id=' + receiver_id,function(data) {
-                       console.log(data);
-                       $('#receiver').empty();
-                           $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
-                   });
-                   $.ajax({
-                       type: "get",
-                       url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
-                       data: "",
-                       cache: false,
-                       success: function (data) {
-                           $('#messages').html(data);
-                           scrollToBottomFunc();
-                       }
-                   });
-               });
-
-               $(document).on('keyup', '.input-text input', function (e) {
-                   var message = $(this).val();
-                   // check if enter key is pressed and message is not null also receiver is selected
-                   if (e.keyCode == 13 && message != '' && receiver_id != '') {
-                       $(this).val(''); // while pressed enter text box will be empty
-                       var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
-                       $.ajax({
-                           type: "post",
-                           url: "message", // need to create this post route
-                           data: datastr,
-                           cache: false,
-                           success: function (data) {
-
-                           },
-                           error: function (jqXHR, status, err) {},
-                           complete: function () {
-                               scrollToBottomFunc();
-                           }
-                       })
-                   }
-               });
-           });
-
-       }
+        }
         // make a function to scroll down auto
         function scrollToBottomFunc() {
             $('.message-wrapper').animate({
