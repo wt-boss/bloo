@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Form;
 
 use App\Form;
+use App\Operation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -168,6 +169,33 @@ class ResponseController extends Controller
 
         $filename = Str::slug($form->title) . '.xlsx';
         return Excel::download(new FormResponseExport($form), $filename);
+    }
+
+    public function export2($id)
+    {
+        $operation = Operation::findOrFail($id);
+        $current_user = Auth::user();
+        $form=$operation->form;
+        $valid_request_queries = ['summary', 'individual'];
+        $query = strtolower(request()->query('type', 'summary'));
+
+        abort_if(!in_array($query, $valid_request_queries), 404);
+
+        if ($query === 'summary') {
+            $responses = [];
+            $form->load('fields.responses', 'collaborationUsers', 'availability');
+        } else {
+            $form->load('collaborationUsers');
+
+            $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
+        }
+         $pdf = \PDF::loadView('chartjs');
+         //$pdf = \PDF::loadView('admin.operation.show',compact('operation','form', 'query', 'responses'));
+         $pdf->setOption('enable-javascript', true);
+         $pdf->setOption('javascript-delay', 5000);
+         $pdf->setOption('enable-smart-shrinking', true);
+         $pdf->setOption('no-stop-slow-scripts', true);
+         return $pdf->download('chart.pdf');
     }
 
     public function destroy(Form $form, FormResponse $response)

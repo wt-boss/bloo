@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "akibtanjim/currency-converter": "^1.0",
+        "barryvdh/laravel-snappy": "^0.4.7",
         "caouecs/laravel-lang": "^6.0",
         "devmarketer/easynav": "^1.0",
         "doctrine/dbal": "^2.10",
@@ -17,6 +18,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "gocanto/converter": "^1.0",
         "guzzlehttp/guzzle": "^6.5",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "iatstuti/laravel-cascade-soft-deletes": "^3.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
@@ -28,7 +31,8 @@
         "paypal/rest-api-sdk-php": "^1.14",
         "pusher/pusher-php-server": "^4.1",
         "tymon/jwt-auth": "1.0.0-rc.5.1",
-        "vinkla/pusher": "^4.2"
+        "vinkla/pusher": "^4.2",
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

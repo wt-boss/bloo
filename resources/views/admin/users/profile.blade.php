@@ -290,9 +290,7 @@
 @endsection
 
 @section('content')
-
     @include('partials.alert', ['name' => 'index'])
-
     <div class="panel panel-flat panel-wb">
         <div class="panel-body" style="padding: 0;">
             <div class="row">

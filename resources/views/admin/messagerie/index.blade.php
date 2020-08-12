@@ -132,12 +132,12 @@
             var operation_id = e.target.id;
             var datas = null;
             $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
-                $('#alllect').empty();
-                $('#alllect').append(data.name);
+                $('#alloperat').empty();
+                $('#alloperat').append(data.name);
                 $('#messages').html(datas);
                   $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
-                      $('#alloperat').empty();
-                      $('#alloperat').append(data.name);
+                      $('#alllect').empty();
+                      $('#alllect').append(data.name);
                       $('#messages').html(datas);
                       showMessages(operation_id);
                    });

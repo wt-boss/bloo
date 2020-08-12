@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::redirect('/', 'forms')->name('home');
 
 Route::get('/home', function () {
@@ -96,6 +95,7 @@ Route::middleware(['auth', 'verified'])->namespace('Form')->group(function () {
     //Form Response Routes
     Route::get('forms/{form}/responses', 'ResponseController@index')->name('forms.responses.index');
     Route::get('forms/{form}/responses/download', 'ResponseController@export')->name('forms.response.export');
+    Route::get('forms/{id}/responses/download2', 'ResponseController@export2')->name('forms.response.export2');
     Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all');
     Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single');
 
@@ -138,7 +138,6 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 
 Route::get('/home2', 'HomeController@index2')->name('home2');
 Route::get('/stat_survey', 'HomeController@index')->name('stat_survey');
-
 
 Route::get('/administration', 'HomeController@admin')->name('admin');
 
@@ -220,15 +219,6 @@ Route::post('message', 'MessageController@sendMessage');
 //Route Profile
 Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');
 
-Route::get('/testing', function() {
-    $pusher = App::make('pusher');
-
-    $pusher->trigger( 'test-channel',
-        'test-event',
-        array('text' => 'Preparing the Pusher Laracon.eu workshop!'));
-
-    return view('welcome');
-});
 
 Route::get('/json-lecteurs','OperationController@listLecteurs');
 Route::get('/json-lecteursoperations','OperationController@getoperationLecteurs');
@@ -252,3 +242,6 @@ Route::get('operationsite/{id}','OperationController@operationsites')->name('sit
 /**Site routes */
 Route::resource('sites','SiteController');
 Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');
+
+
+Route::get('/chartPdf', 'ChartController@index');

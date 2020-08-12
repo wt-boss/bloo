@@ -114,31 +114,15 @@
                         </ul>
                         <span class="pull-right" style="font-size: 20px;">
                             <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                             <a href="{{ route('forms.response.export2', $operation->id) }}">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                             </a>
+                            <a href="{{ route('forms.response.export', $form->code) }}">
+                                <i class="fa fa-file-excel-o" aria-hidden="true">  </i>
+                            </a>
                         </span>
                     </div>
-                    <div class="box-body">
-                        <form method="POST" action="{{ route('ajoutoperateur') }}">
-                            @csrf
-                            <input type="hidden" name="operation" value="{{ $operation->id }}">
-                            <div class="modal-body">
-                                <table class="datatable table stripe">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="listoperateur">
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                                <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder les modifications</font></font></button>
-                            </div>
-                        </form>
-{{--                        <canvas id="pieChart" style="height:250px"></canvas>--}}
+                    <div class="box-body row">
                         @php
                             $data_for_chart = [];
                             $fields = $form->fields;
@@ -149,8 +133,8 @@
                                 $responses = $field->responses;
                                 $responses_count = $responses->where('answer', '!==', null)->count();
                             @endphp
-                            <div class="row">
-                                <div class="col-md-12">
+
+                                <div class="col-md-6">
                                     <label class="label-xlg">{{ $field->question }}
                                         @if ($field->required) <span class="text-danger">*</span> @endif
                                     </label>
@@ -175,17 +159,12 @@
                                         @php $response_for_chart = $field->getResponseSummaryDataForChart(); @endphp
                                         @if (!empty($response_for_chart))
                                             @php $data_for_chart[] = $response_for_chart; @endphp
-
-                                            <div class="chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">
+                                            <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">
                                                 <div class="{{ ($response_for_chart['chart'] == 'pie_chart') ? 'display-inline-block' : 'chart' }}" id="{{ $response_for_chart['name'] }}"></div>
                                             </div>
                                         @endif
                                     @endif
                                 </div>
-                            </div>
-                            @if (!$loop->last)
-                                <hr>
-                            @endif
                         @endforeach
                     </div>
                     <!-- /.box-body -->
