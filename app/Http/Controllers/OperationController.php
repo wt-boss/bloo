@@ -29,20 +29,22 @@ class OperationController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $user = auth()->user();
-        $operations = "";
-        if($user->id === 1)
+        $operation = null;
+        if($user->role === 5)
         {
             $operations = Operation::with('form')->get();
         }
-        else
+        else if($user->role === 4)
         {
             $comptes = $user->entreprises()->get();
             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
@@ -55,7 +57,12 @@ class OperationController extends Controller
                 }
             }
         }
-        return view('admin.operation.index',compact('operations'));
+        else
+        {
+            $operation = $user->operations()->get()->last();
+        }
+
+        return view('admin.operation.index',compact('operations','operation'));
     }
 
     /**
@@ -273,9 +280,6 @@ class OperationController extends Controller
         $operation = Operation::findOrFail($id);
         $current_user = Auth::user();
         $form=$operation->form;
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
-
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
 

@@ -111,7 +111,33 @@ class MessageController extends Controller
                 }
             }
         }
-        return view('admin.messagerie.index',compact('operations'));
+        /**
+         * On crée l'utilisateur.
+         */
+        $user = "";
+        /**
+         * On recupere l'operations a laquelle il participe.
+         */
+        $operation = $AuthUser->operations()->get()->last();
+        /**
+         * On  recupere l'entreprise a laquelle apartient cette operation.
+         */
+        $entreprise = $operation->entreprise()->get()->last();
+        /**
+         * On  recupere les utililsateurs de cette entreprise.
+         */
+        $AllUsers =  $entreprise->users()->get();
+        foreach ($AllUsers as $User)
+        {
+            /**
+             * On cherche l'Account Manager de cette entreprise
+             */
+            if($User->role === 4 )
+            {
+                $user = $User;
+            }
+        }
+        return view('admin.messagerie.index',compact('operations','user','operation'));
     }
     public function show(Request $request,$id){
         $operations = Operation::all();

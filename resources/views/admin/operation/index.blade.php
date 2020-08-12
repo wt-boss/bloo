@@ -20,24 +20,21 @@
             </div>
                 @endif
         </div>
-        @if ($operations->isEmpty())
-            <div class="panel-body text-center">
-                <div class="mt-30 mb-30">
-                    <h6 class="text-semibold">
-                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                            Creer des maintenant votre premiere operation
-                            @else
-                            Vous N'avez pas d'operation en cours
-                        @endif
-                    </h6>
+        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+            @if ($operations->isEmpty())
+                <div class="panel-body text-center">
+                    <div class="mt-30 mb-30">
+                        <h6 class="text-semibold">
+                                Creer des maintenant votre premiere operation
+                        </h6>
+                    </div>
                 </div>
-            </div>
-        @else
-            <div class="panel panel-flat">
-                <!-- /.box-header -->
-                <div  style="padding: 15px">
-                    <table id="operations-tab" class="table stripe">
-                        <thead>
+            @else
+                <div class="panel panel-flat">
+                    <!-- /.box-header -->
+                    <div  style="padding: 15px">
+                        <table id="operations-tab" class="table stripe">
+                            <thead>
                             <tr>
                                 <th></th>
                                 <th class="text-center">{{ trans('op_name') }}</th>
@@ -48,29 +45,76 @@
                                 <th class="text-center">{{ trans('sites') }}</th>
                                 <th class="text-center">{{ trans('operator') }}</th>
                                 <th class="text-center">{{ trans('actions') }}</th>
-
                             </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($operations as $operation)
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">{{ $operation->nom }}</td>
+                                        <td class="text-center">{{ $operation->date_start }}</td>
+                                        <td class="text-center">{{ $operation->date_end }}</td>
+                                        <td class="text-center">{{ $operation->entreprise->nom }}</td>
+                                        <td class="text-center">{{$operation->sites()->count()}}</td>
+                                        <td class="text-center">{{$operation->sites()->count()}}</td>
+                                        <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
+                                        <td class="text-center" style="position: relative;">
+                                            @include('admin.operation.partials.op-action')
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+        @endif
+        @if (auth()->user()->hasRole('Lecteur|Opérateur'))
+            @if ( $operation === null)
+            <div class="panel-body text-center">
+                <div class="mt-30 mb-30">
+                    <h6 class="text-semibold">
+                            Vous N'avez pas d'operation en cours
+                    </h6>
+                </div>
+            </div>
+        @else
+            <div class="panel panel-flat">
+                <!-- /.box-header -->
+                <div  style="padding: 15px">
+                    <table id="operations-tab" class="table stripe">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center">{{ trans('op_name') }}</th>
+                            <th class="text-center">{{ trans('start_date') }}</th>
+                            <th class="text-center">{{ trans('end_date') }}</th>
+                            <th class="text-center">{{ trans('enterprise') }}</th>
+                            <th class="text-center">{{ trans('city') }}</th>
+                            <th class="text-center">{{ trans('sites') }}</th>
+                            <th class="text-center">{{ trans('operator') }}</th>
+                            <th class="text-center">{{ trans('actions') }}</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($operations as $operation)
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">{{ $operation->nom }}</td>
-                                    <td class="text-center">{{ $operation->date_start }}</td>
-                                    <td class="text-center">{{ $operation->date_end }}</td>
-                                    <td class="text-center">{{ $operation->entreprise->nom }}</td>
-                                    <td class="text-center">{{$operation->sites()->count()}}</td>
-                                    <td class="text-center">{{$operation->sites()->count()}}</td>
-                                    <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
-                                    <td class="text-center" style="position: relative;">
-                                        @include('admin.operation.partials.op-action')
-                                    </td>
-                                </tr>
-                            @endforeach
+                            <tr>
+                                <td></td>
+                                <td class="text-center">{{ $operation->nom }}</td>
+                                <td class="text-center">{{ $operation->date_start }}</td>
+                                <td class="text-center">{{ $operation->date_end }}</td>
+                                <td class="text-center">{{ $operation->entreprise->nom }}</td>
+                                <td class="text-center">{{$operation->sites()->count()}}</td>
+                                <td class="text-center">{{$operation->sites()->count()}}</td>
+                                <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
+                                <td class="text-center" style="position: relative;">
+                                    @include('admin.operation.partials.op-action')
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        @endif
         @endif
     </div>
 
