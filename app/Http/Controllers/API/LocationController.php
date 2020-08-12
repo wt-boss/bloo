@@ -22,14 +22,14 @@ class LocationController extends Controller
             ->orwhere('name','Angola')
             ->get();
         $result = ["items" =>$countries,"state"=>"Success"];
-        return response()->json($result);
+        return response()->json($countries);
     }
 
     public function getstatates($id)
     {
         $states  = State::where('country_id',$id)->get();
         $result = ["items" =>$states,"state"=>"Success"];
-        return response()->json($result);
+        return response()->json($states);
 
     }
 
@@ -37,6 +37,6 @@ class LocationController extends Controller
     {
         $cities  = City::where('state_id',$id)->get();
         $result = ["items" =>$cities,"state"=>"Success"];
-        return response()->json($result);
+        return response()->json($cities);
     }
 }

@@ -30,8 +30,8 @@ Route::middleware('api')->prefix('auth')->namespace('API')->group(function() {
     Route::post('pieces','UsersControlle@pieces');
     Route::get('operationsville/{ville}','OperationController@operationville');
     Route::get('useroperation','UsersController@usersoperation');
-    Route::get('/getcountries','LocationController@getcountries');
-    Route::get('/getstatates/{id}','LocationController@getstatates');
-    Route::get('/getcities/{id}','LocationController@getcities');
-
 });
+
+Route::get('/getcountries','API\LocationController@getcountries');
+Route::get('/getstatates/{id}','API\LocationController@getstatates');
+Route::get('/getcities/{id}','API\LocationController@getcities');
