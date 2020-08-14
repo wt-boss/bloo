@@ -37,19 +37,31 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="operation_name">Titre :</label>
-                            <input type="text" class="form-control" id="operation_name" name="operation_name" placeholder="Entrer le nom de l'operation" required>
+                            <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" placeholder="Entrer le nom de l'operation" required>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="operation_purpose">Objectif :</label>
-                            <input type="text" class="form-control" id="operation_purpose" name="operation_purpose" placeholder="Entrer l'objectif de l'operation" required>
+                            <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" placeholder="Entrer l'objectif de l'operation" required>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="date_start">Date de debut : </label>
-                            <input type="date" class="form-control" id="date_start" name="date_start"  required>
+                            <input type="date" class="form-control form-input-check" id="date_start" name="date_start"  required>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="date_end">Date de fin : </label>
-                            <input type="date" class="form-control" id="date_end" name="date_end"  required>
+                            <input type="date" class="form-control form-input-check" id="date_end" name="date_end"  required>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6 offset-6">
                             <button type="button" data-step-nav="next" data-action="verifyFirstStep" data-continue-with="verifySecondStep" class="btn btn-next col-6 btn-outline-primary float-right">Suivant</button>
@@ -70,24 +82,39 @@
                             <label class="radio-inline">
                                 <input type="radio" name="options"  class="button" value="PARTICULIER"> Particulier
                             </label>
+                            <div class="invalid-feedback">
+                                Vous dévez choisir une catégorie.
+                            </div>
                         </div>
                     </div>
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
                             <label for="name_enterprise">Nom de l'entreprise :</label>
-                            <input type="text" class="form-control"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
+                            <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="address_enterprise">Adresse de l'entreprise :</label>
                             <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">Numero Contribuable de l'entreprise :</label>
                             <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">Numero SIRET/RCCM de l'entreprise :</label><br>
-                            <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
+                            <input type="text" name="siret_enterprise" class="birth-country form-control d-block" id="birth-country"  placeholder="Entrer le numero">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
 
                         <div class="form-group col-6">
@@ -97,63 +124,101 @@
                                     <option value="{{$country->id}}">{{$country->name}}</option>
                                 @endforeach
                             </select>
-
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
-                        <div id="div_region" style="display:none" class="form-group col-6">
-                                <label for="birth-date">Region de l'entreprise :</label><br>
-                                <select class="form-control" name="city_id" id="region" required>
-                                </select>
+                        <div id="div_region" class="form-group col-6">
+                            <label for="birth-date">Region de l'entreprise :</label><br>
+                            <select class="form-control form-input-check" name="" id="region" required>
+                            </select>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
-                        <div id="div_ville" style="display:none" class="form-group col-6">
-                                <label for="birth-date">Ville de l'entreprise :</label><br>
-                                <select class="form-control" name="city_id" id="ville" required>
-                                </select>
+                        <div id="div_ville" class="form-group col-6">
+                            <label for="birth-date">Ville de l'entreprise :</label><br>
+                            <select class="form-control form-input-check" name="city_id" id="ville" required>
+                            </select>
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
 
                         <div class="form-group col-6">
                             <label for="birth-date">Telephone de l'entreprise :</label><br>
                             <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_name">Nom de l'utilisateur:</label><br>
-                            <input type="text" name="user_name_entreprise" class="address form-control" id="particulier_name">
+                            <input type="text" name="user_name_entreprise" class="address form-control form-input-check" id="particulier_name">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'entreprise :</label><br>
                             <input type="email" name="email_entreprise" class="address-city form-control" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                             {!! $errors->first('email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
-                            <input type="email" name="user_email_entreprise" class="address-city form-control" id="particulier_email">
+                            <input type="email" name="user_email_entreprise" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                             {!! $errors->first('user_email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
-                            <input type="password" name="user_password_entreprise" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_password_entreprise" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Confirmez mot de passe :</label><br>
-                            <input type="password" name="user_conf_password_entreprise" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_conf_password_entreprise" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                     </div>
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
                             <label for="particulier_name">Nom:</label><br>
-                            <input type="text" name="user_name" class="address form-control" id="particulier_name">
+                            <input type="text" name="user_name" class="address form-control form-input-check" id="particulier_name">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email :</label><br>
-                            <input type="email" name="user_email" class="address-city form-control" id="particulier_email">
+                            <input type="email" name="user_email" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                             {!! $errors->first('user_email', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
                             <label for="particulier_email">Mot de passe :</label><br>
-                            <input type="password" name="user_password" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_password" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6 ">
                             <label for="confirm_pass">Confirmez mot de passe :</label><br>
-                            <input type="password" name="user_conf_password" class="address-city form-control" id="particulier_email">
+                            <input type="password" name="user_conf_password" class="address-city form-control form-input-check" id="particulier_email">
+                            <div class="invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="form-group col-6">
                             <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
@@ -177,42 +242,55 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        function affCache(idDiv) {
-            var div = document.getElementById(idDiv);
-            if (div.style.display === "none"){
-                div.style.display = "";
-            }
-        }
-        $('#country').on('change', function(e){
-            console.log(e);
-            var country_id = e.target.value;
-            affCache('div_region');
+<script type="text/javascript">
+    $(function($){
+        // reset form onload
+        $("#payment-form").trigger("reset");
+        // initialisation de la localisation
+        let country_id = $('#country').val();
+        $.get('/json-states?country_id=' + country_id,function(data) {
+            $('#region').empty();
+            $.each(data, function(index, stateObj){
+                $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
+            });
+            let state_id = $('#region').val();
+            $.get('/json-cities?state_id=' + state_id,function(data) {
+                $('#ville').empty();
+                $.each(data, function(index, villeObj){
+                    $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                })
+            });
+        });
+        // changement de pays
+        $('#country').change(function(e){
+            let country_id = e.target.value;
             $.get('/json-states?country_id=' + country_id,function(data) {
-                console.log(data);
                 $('#region').empty();
                 $.each(data, function(index, stateObj){
                     $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
                 });
-                $('#region').on('change', function(e){
-                    console.log(e);
-                    var state_id = e.target.value;
-                    affCache('div_ville');
-                    $.get('/json-cities?state_id=' + state_id,function(data) {
-                        console.log(data);
-                        $('#ville').empty();
-                        $.each(data, function(index, villeObj){
-                            $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
-                        })
-                    });
+                
+                let state_id = $('#region').val();
+                $.get('/json-cities?state_id=' + state_id,function(data) {
+                    $('#ville').empty();
+                    $.each(data, function(index, villeObj){
+                        $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                    })
                 });
             });
-
         });
-    </script>
-<script>
+        // changement de régions
+        $('#region').on('change', function(e){
+            let state_id = e.target.value;
+            $.get('/json-cities?state_id=' + state_id,function(data) {
+                $('#ville').empty();
+                $.each(data, function(index, villeObj){
+                    $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                })
+            });
+        });
 
-    $(function($){
+        // switch entreprise - particulier
         $('.button').click(function(e){
             var value = $('input[name=options]:checked').val();
             if (value === "ENTREPRISE") {
@@ -231,61 +309,164 @@
         $('.msf-form form fieldset:first-child').find('input').on('blur', function () {
             verifyFirstStep();
         });
-        $('.msf-form form fieldset:last-child').find('input').on('blur', function () {
-            var canSubmit = verifySecondStep();
-            setTimeout(function () {
-                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
-            }, 100);
+
+        $("#payment-form").on('submit', function(e){
+            let valid = verifySecondStep();
+            if(!valid){
+                e.preventDefault();;
+            }
         });
-        $('input[name="options"]').change(function () {
-            var canSubmit = verifySecondStep();
-            setTimeout(function () {
-                $('.msf-form form').find('button[type=submit]').prop('disabled', !canSubmit);
-            }, 100);
+
+        $('.form-control').focus(function(){
+            $(this).removeClass("is-invalid");
+        });
+        
+        $('.form-input-check').focusout(function(){
+            if (is_null_or_whithe_space($(this).val())){
+                $(this).addClass("is-invalid");
+            }
         });
     });
 
-    function verifyFirstStep() {
-        if (is_null_or_whithe_space($('#operation_name').val())) return false;
 
-        if (is_null_or_whithe_space($('#operation_purpose').val())) return false;
+    function verifyFirstStep() {
+        if (is_null_or_whithe_space($('#operation_name').val())){
+            $('#operation_name').addClass("is-invalid");
+            return false;
+        }
+
+        if (is_null_or_whithe_space($('#operation_purpose').val())){
+            $('#operation_purpose').addClass("is-invalid");
+            return false;
+        }
 
         var date_start = $('#date_start').val();
-        if (is_null_or_whithe_space(date_start)) return false;
+        if (is_null_or_whithe_space(date_start)){
+            $('#date_start').addClass("is-invalid");
+            $('#date_start').next(".invalid-feedback").html("Ce champ ne peut être vide");
+            return false;
+        }
 
         var date_end = $('#date_end').val();
-        if (is_null_or_whithe_space(date_end)) return false;
+        if (is_null_or_whithe_space(date_end)) {
+            $('#date_end').addClass("is-invalid");
+            $('#date_end').next(".invalid-feedback").html("Ce champ ne peut être vide");
+            return false;
+        }
 
         date_start = new Date(date_start);
         date_end = new Date(date_end);
 
-        if (date_start.getTime() < (new Date().datePart().getTime())) return false;
+        if (date_start.getTime() < (new Date().datePart().getTime())) {
+            $('#date_start').addClass("is-invalid");
+            $('#date_start').next(".invalid-feedback").html("Choisir une date supérieure à la date du jour");
+            return false;
+        }
 
-        if (date_start.getTime() > date_end.getTime()) return false;
+        if (date_start.getTime() > date_end.getTime()) {
+            $('#date_end').addClass("is-invalid");
+            $('#date_end').next(".invalid-feedback").html("Choisir une date supérieure à la date de début");
+            return false;
+        }
 
         return true;
     }
-
+    
     function verifySecondStep() {
         const options = $('input[name=options]:checked').val();
         if (is_null_or_whithe_space(options)) return false;
         var email = '';
         switch (options) {
             case 'ENTREPRISE':
-                if (is_null_or_whithe_space($('#name_enterprise').val())) return false;
-                if (is_null_or_whithe_space($('input[name="user_name_entreprise"]').val())) return false;
-                if (is_null_or_whithe_space($('input[name="user_password_entreprise"]').val())) return false;
+                if (is_null_or_whithe_space($('#name_enterprise').val())){
+                    $('#name_enterprise').addClass("is-invalid");
+                    return false;
+                }
+
+                if (is_null_or_whithe_space($('input[name="user_name_entreprise"]').val())){
+                    $('input[name="user_name_entreprise"]').addClass("is-invalid");
+                    return false;
+                }
+                
                 email = $('input[name="user_email_entreprise"]').val();
-                if (is_null_or_whithe_space(email)) return false;
-                if (!is_valid_email(email)) return false;
+                if (is_null_or_whithe_space(email)){
+                    $('input[name="user_email_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_email_entreprise"]').next(".invalid-feedback").html("Ce champ ne peut être vide.");
+                    return false;
+                }
+                if (!is_valid_email(email)){
+                    $('input[name="user_email_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_email_entreprise"]').next(".invalid-feedback").html("Cet email n'est pas valide.");
+                    return false;
+                }
+
+                if (is_null_or_whithe_space($('input[name="user_password_entreprise"]').val())){
+                    $('input[name="user_password_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_password_entreprise"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
+                    return false;
+                }
+
+                if ($('input[name="user_password_entreprise"]').val().length < 8){
+                    $('input[name="user_password_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_password_entreprise"]').next(".invalid-feedback").html("Minimum 8 caractères.");
+                    return false;
+                }
+
+                if (is_null_or_whithe_space($('input[name="user_conf_password_entreprise"]').val())){
+                    $('input[name="user_conf_password_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_conf_password_entreprise"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
+                    return false;
+                }
+
+                if ($('input[name="user_password_entreprise"]').val() != $('input[name="user_conf_password_entreprise"]').val()){
+                    $('input[name="user_conf_password_entreprise"]').addClass("is-invalid");
+                    $('input[name="user_conf_password_entreprise"]').next(".invalid-feedback").html("Les mots de passes ne sont pas identiques.");
+                    return false;
+                }
+
                 break;
             case 'PARTICULIER':
-                if (is_null_or_whithe_space($('input[name="user_name"]').val())) return false;
-                if (is_null_or_whithe_space($('input[name="user_password"]').val())) return false;
+                if (is_null_or_whithe_space($('input[name="user_name"]').val())){
+                    $('input[name="user_name"]').addClass("is-invalid");
+                    return false;
+                }
 
                 email = $('input[name="user_email"]').val();
-                if (is_null_or_whithe_space(email)) return false;
-                if (!is_valid_email(email)) return false;
+                if (is_null_or_whithe_space(email)){
+                    $('input[name="user_email"]').addClass("is-invalid");
+                    $('input[name="user_email"]').next(".invalid-feedback").html("Ce champ ne peut être vide.");
+                    return false;
+                }
+                if (!is_valid_email(email)){
+                    $('input[name="user_email"]').addClass("is-invalid");
+                    $('input[name="user_email"]').next(".invalid-feedback").html("Cet email n'est pas valide.");
+                    return false;
+                }
+                
+                if (is_null_or_whithe_space($('input[name="user_password"]').val())){
+                    $('input[name="user_password"]').addClass("is-invalid");
+                    $('input[name="user_password"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
+                    return false;
+                }
+
+                if ($('input[name="user_password"]').val().length < 8){
+                    $('input[name="user_password"]').addClass("is-invalid");
+                    $('input[name="user_password"]').next(".invalid-feedback").html("Minimum 8 caractères.");
+                    return false;
+                }
+
+                if (is_null_or_whithe_space($('input[name="user_conf_password"]').val())){
+                    $('input[name="user_conf_password"]').addClass("is-invalid");
+                    $('input[name="user_conf_password"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
+                    return false;
+                }
+
+                if ($('input[name="user_password"]').val() != $('input[name="user_conf_password"]').val()){
+                    $('input[name="user_conf_password"]').addClass("is-invalid");
+                    $('input[name="user_conf_password"]').next(".invalid-feedback").html("Les mots de passes ne sont pas identiques.");
+                    return false;
+                }
+                
 
                 break;
             default:
@@ -293,6 +474,13 @@
         }
 
         return true;
+    }
+
+    function affCache(idDiv) {
+        var div = document.getElementById(idDiv);
+        if (div.style.display === "none"){
+            div.style.display = "";
+        }
     }
 </script>
 

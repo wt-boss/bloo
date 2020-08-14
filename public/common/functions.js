@@ -3,7 +3,7 @@ const is_valid_email = function(input){
 };
 
 const is_null_or_whithe_space = function(input) {
-    return !input || !(typeof(input) == 'string') || input.replace(/\s/g, '').length < 1;
+    return !input || !(typeof(input) == 'string') || input.replace(/\s/g, '').length < 3;
 };
 
 const date_part_only = function () {
