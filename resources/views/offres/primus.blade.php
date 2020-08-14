@@ -92,7 +92,7 @@
                             <label for="name_enterprise">Nom de l'entreprise :</label>
                             <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                Ce champ ne peut être vide (Minimum 3 caractères).
                             </div>
                         </div>
                         <div class="form-group col-6">
@@ -156,7 +156,7 @@
                             <label for="particulier_name">Nom de l'utilisateur:</label><br>
                             <input type="text" name="user_name_entreprise" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                Ce champ ne peut être vide (Minimum 3 caractères).
                             </div>
                         </div>
                         <div class="form-group col-6">
@@ -195,7 +195,7 @@
                             <label for="particulier_name">Nom:</label><br>
                             <input type="text" name="user_name" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                Ce champ ne peut être vide (Minimum 3 caractères).
                             </div>
                         </div>
                         <div class="form-group col-6">
