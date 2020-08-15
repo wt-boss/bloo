@@ -16,6 +16,7 @@
 @endsection
 
 @section('plugin-scripts')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="{{ asset('assets/js/plugins/bootbox.min.js') }}"></script>
 	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
@@ -34,7 +35,6 @@
         });
     </script>
     <script>
-
         let operateurCountriesEvent = function() {
             $('.operateurcountries').on('click', function(e){
                 var country_id = e.target.id;
@@ -104,7 +104,6 @@
             });
 
         });
-
         $('#state').on('click', function (e) {
             console.log(e);
             $.get('/json-allstates', function (data) {
@@ -169,7 +168,6 @@
                 });
             });
         });
-
         $('#city').on('click', function (e) {
             console.log(e);
             $.get('/json-allcities', function (data) {
@@ -233,6 +231,18 @@
                 });
             });
         });
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(  {!! $diagram !!});
+            var options = {
+                title:  "{!! trans('client_operations')  !!}"
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
     </script>
 @endsection
 
@@ -301,12 +311,9 @@
                     <!-- DONUT CHART -->
                     <div class="box" style="height: 100%;">
                         <div class="box-header with-border">
-                            <ul class="box-title">
-                                <li>{{ trans('client_operations') }}</li>
-                            </ul>
                         </div>
                         <div class="box-body">
-                        <canvas id="pieChart" style="height:250px"></canvas>
+                        <div id="piechart" style="width: 500px; height: 400px;"></div>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -342,7 +349,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="cities">
-                            <table class="table" id="region" style="width: auto;">
+                            <table class="datatable table stripe dataTable no-footer dtr-column" id="region"  role="grid" style="width: auto;">
                                     <thead>
                                     <tr>
                                         <th></th>

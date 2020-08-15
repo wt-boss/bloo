@@ -10,6 +10,18 @@
       'Currency' => 'AkibTanjim\\Currency\\Facades\\CurrencyConverter',
     ),
   ),
+  'barryvdh/laravel-snappy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\Snappy\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\Snappy\\Facades\\SnappyPdf',
+      'SnappyImage' => 'Barryvdh\\Snappy\\Facades\\SnappyImage',
+    ),
+  ),
   'devmarketer/easynav' => 
   array (
     'providers' => 

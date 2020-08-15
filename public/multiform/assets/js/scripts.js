@@ -64,7 +64,9 @@ jQuery(document).ready(function() {
 
     //Binding nav events
     $('button[data-step-nav="next"]').on('click', function () {
-        msf_next_step($(this).attr("data-action"), $(this).attr("data-continue-with"));
+        msf_next_step($(this).attr("data-action"));
+        // old remove by michael
+        // msf_next_step($(this).attr("data-action"), $(this).attr("data-continue-with"));
     });
 
     $('button[data-step-nav="prev"]').on('click', function () {

@@ -90,6 +90,7 @@ class User extends Authenticatable implements JWTSubject
 
         return url('/') . config('variables.avatar.public') . $value;
     }
+
     public function setAvatarAttribute($photo)
     {
         $this->attributes['avatar'] = (new Http\move)->move_file($photo, 'avatar.image');

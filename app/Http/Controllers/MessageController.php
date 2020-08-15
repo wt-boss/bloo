@@ -78,7 +78,6 @@ class MessageController extends Controller
         // Notification
          $other = User::findOrFail($to);
          $other->notify(new MessageRated($message, $to, $from));
-
         $pusher = App::make('pusher');
         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'my-event', $data);

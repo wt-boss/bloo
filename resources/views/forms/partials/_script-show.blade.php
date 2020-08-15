@@ -24,7 +24,7 @@
             .done(function (response) {
                 if (response.success) {
                     var template = instantiateFormTemplateWithData(form, response);
-                    $questions.append(template);
+                    $questions.prepend(template);
 
                     completeTemplateInterfaceFeatures($questions);
                 } else {

@@ -18,9 +18,9 @@ class FormResponseExport implements FromView
 
     public function view(): View
     {
-        $responses = $this->form->responses()->has('fieldResponses')->get(['id', 'created_at']);
+        $responses = $this->form->responses()->has('fieldResponses')->get(['id', 'created_at','respondent_id']);
         $fields = $this->form->fields()->with('responses')->get();
-
+        $operation = $this->form->operations()->get()->last();
         return view('exports.response', compact('fields', 'responses'));
     }
 }
