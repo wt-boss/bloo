@@ -349,7 +349,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="cities">
-                            <table class="table" id="region" style="width: auto;">
+                            <table class="datatable table stripe dataTable no-footer dtr-column" id="region"  role="grid" style="width: auto;">
                                     <thead>
                                     <tr>
                                         <th></th>

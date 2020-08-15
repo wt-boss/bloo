@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Operation;
+use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -25,18 +26,19 @@ class OperationController extends Controller
         return response()->json($operations);
     }
 
-    public function  operationsville()
+    public function  operationsville($ville)
     {
-//        $operations = Operation::where('ville',$ville)->paginate(10);
-//        if(isset($operations))
-//        {
-//           $result = $operations;
-//        }
-//        else
-//            {
-//                $result = "Aucune operation n'est disponible";
-//
-//            }
+        $site = Site::where('ville',$ville)->get();
+        $operations = Operation::where('ville',$ville)->paginate(10);
+        if(isset($operations))
+        {
+           $result = $operations;
+        }
+        else
+            {
+                $result = "Aucune operation n'est disponible";
+
+            }
         $result ="test";
         return response()->json($result);
     }
