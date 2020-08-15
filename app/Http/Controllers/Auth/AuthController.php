@@ -25,7 +25,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
             'first_name'=>'required|string|max:255',
             'last_name'=>'required|string|max:255',
-            'email' => 'required|string|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
         if($validator->fails())
@@ -35,7 +35,7 @@ class AuthController extends Controller
                     'items' => null,
                     'states' => $validator->errors()->all()
                 ]
-                ,422
+                ,204
             );
         }
         $user = User::create($request->toArray());
@@ -60,7 +60,7 @@ class AuthController extends Controller
                 [
                     'items' => null,
                     'states' => 'Unauthorized'
-                ],401
+                ],204
             );
         }
         return $this->respondWithToken($token);
@@ -74,7 +74,8 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json(
-           ['items' => auth()->user(),
+           [
+               'items' => auth()->user(),
                'states' => 'success'
            ],200
         );

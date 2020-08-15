@@ -27,11 +27,11 @@ Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
 
 Route::middleware('api')->prefix('auth')->namespace('API')->group(function() {
     Route::apiResource('operations','OperationController');
-    Route::post('pieces','UsersControlle@pieces');
+    Route::post('pieces','UsersController@pieces');
     Route::get('operationsville/{ville}','OperationController@operationville');
     Route::get('useroperation','UsersController@usersoperation');
 });
 
 Route::get('/getcountries','API\LocationController@getcountries');
-Route::get('/getstatates/{id}','API\LocationController@getstatates');
+Route::get('/getstates/{id}','API\LocationController@getstates');
 Route::get('/getcities/{id}','API\LocationController@getcities');
