@@ -183,6 +183,16 @@ class OperationController extends Controller
     public function listOperateurs($id)
     {
         $operation = Operation::with('users')->findOrFail($id);
+        $AllOperation = Operation::with('users')->get();
+        $AllOperateur = collect();
+        foreach ($AllOperation as $Operation)
+        {
+            $AllUser = $Operation->users()->where('role','1')->get();
+            foreach ($AllUser as $User)
+            {
+                $AllOperateur->push($User);
+            }
+        }
         $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
         $opusers = [];
@@ -191,7 +201,7 @@ class OperationController extends Controller
             $opuser = new OpUsers();
             $opuser = $operateur;
             $opuser->status = false;
-            foreach($selected_operateur as $selected)
+            foreach($AllOperateur as $selected)
             {
                 if($selected->id === $operateur->id )
                 {
@@ -367,6 +377,11 @@ class OperationController extends Controller
     public function terminer_operation($id)
     {
         $operation = Operation::findOrFail($id);
+        $AllUser = $operation->users()->where('role','1')->get();
+        foreach ($AllUser as $User)
+        {
+            $operation->users()->detach($User);
+        }
         $operation->status = "TERMINER";
         $operation->save();
         return back()->withSuccess('Operation cloturer avec success');

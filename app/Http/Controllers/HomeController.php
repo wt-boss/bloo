@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\DB;
 use phpseclib\Crypt\Hash;
 use Illuminate\Support\Facades\Session;
 use PHPUnit\TextUI\Help;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+
 
 class HomeController extends Controller
 {
@@ -58,9 +61,17 @@ class HomeController extends Controller
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
             ->get();
+        $diagram =  collect();
+        $diagram->push(['Client','Operation']);
         if($user->role === 5)
         {
-            $comptes = Entreprise::all();
+            $comptes = Entreprise::with('operations')->get();
+             foreach ($comptes as $compte)
+             {
+                 $operations = $compte->operations()->count();
+                 $table = [$compte->nom,$operations];
+                 $diagram->push($table);
+             }
             $operations = Operation::all();
             $operateurs = User::where('role','1')->get();
             $lecteurs = User::where('role','0')->get();
@@ -74,7 +85,11 @@ class HomeController extends Controller
              $rapports = collect();
              foreach ($comptes as $entreprise)
              {
-               $Operations = $entreprise->operations()->get();
+                 $countoperations = $entreprise->operations()->count();
+                 $table = [$entreprise->nom,$countoperations];
+                 $diagram->push($table);
+
+                 $Operations = $entreprise->operations()->get();
                foreach ($Operations as $operation)
                {
                    if ($operation->status === "TERMINER")
@@ -100,7 +115,7 @@ class HomeController extends Controller
                   }
              }
          }
-        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries'));
+        return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries','diagram'));
     }
 
     public function language()

@@ -22,8 +22,7 @@ return $full_name;
 }
 
 // Creer l'image
-$image           = Image::make($file->getRealPath());
-
+$image  = Image::make($file->getRealPath());
 if ($width == null || $height == null) {
 $image->resize($width, $height, function ($constraint) {
 $constraint->aspectRatio();
