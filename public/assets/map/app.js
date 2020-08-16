@@ -333,3 +333,68 @@ function resetForm(){
   $('.pac-form').trigger("reset");
   $('.controls-btn').prop( "disabled", false );
 }
+
+
+// autocompletion des villes
+var ville_test = {
+  "0":"TIKO",
+  "1":"MAMFE",
+  "2":"KUMBA",
+  "3":"BUEA",
+  "4":"LIMBE",
+  "5":"KOUSSERI",
+  "6":"NGAOUNDERE",
+  "7":"MAROUA",
+  "8":"GAROUA",
+  "9":"DSCHANG",
+  "10":"BAFANG",
+  "11":"NKONGSAMBA",
+  "12":"BAMENDA",
+  "13":"BAFOUSSAM",
+  "14":"YAOUNDE",
+  "15":"EBOLOWA",
+  "16":"SANGMELIMA",
+  "17":"MBALMAYO",
+  "18":"BERTOUA",
+  "19":"GAROUA-BOULAI",
+  "20":"ABONG-MBANG",
+  "21":"EDEA",
+  "22":"KRIBI",
+  "23":"DOUALA"
+};
+var arr = $.map(ville_test, function(el) { return el });
+$( "#ville" ).autocomplete({
+  source: arr
+});
+// $.ajax({
+//   url : "ville.json",
+//   type: "POST",
+//   dataType: 'JSON',
+//   success: function(data)
+//   {
+//       var arr = $.map(data, function(el) { return el });
+//       $( "#ville" ).autocomplete({
+//           source: arr
+//       });
+//   },
+//   error: function (jqXHR, textStatus, errorThrown)
+//   {
+//      console.log("impossible de joindre le serveur assets/json/ville_bank.json");
+//   }
+// });
+// $.ajax({
+//   url : "pays.json",
+//   type: "POST",
+//   dataType: 'JSON',
+//   success: function(data)
+//   {
+//       var arr = $.map(data, function(el) { return el });
+//       $( "#pays" ).autocomplete({
+//           source: arr
+//       });
+//   },
+//   error: function (jqXHR, textStatus, errorThrown)
+//   {
+//      console.log("impossible de joindre le serveur assets/json/ville_bank.json");
+//   }
+// });

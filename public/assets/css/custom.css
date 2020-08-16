@@ -190,3 +190,16 @@
     opacity: 1;
     z-index: 99;
 }
+
+/* only for operation create */
+.mik-invalid-feedback{
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+    text-align: left;
+}
+.mik-is-invalid{
+    border-color: #dc3545 !important;
+}

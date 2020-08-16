@@ -24,19 +24,25 @@
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
                 </p>
-                <form method="post" action="{{ route('operation.store') }}">
+                <form method="post" action="{{ route('operation.store') }}" id="sondage-form">
                     @csrf
                     <div class="row">
                         @if(isset($entreprise))
                             <select class="form-control" name="entreprise_id">
                                 <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
                             </select>
+                            <div class="mik-invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         @else
-                        <select class="form-control" name="entreprise_id">
-                            @foreach($entreprises as $entreprise)
-                                <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
+                            <select class="form-control" name="entreprise_id">
+                                @foreach($entreprises as $entreprise)
+                                    <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
                                 @endforeach
-                        </select>
+                            </select>
+                            <div class="mik-invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         @endif
                     </div>
 
@@ -44,17 +50,26 @@
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
                             <p class="op-title">Nommer votre operation</p>
-                            <input name="nom_operation" class="form-control" type="text" placeholder="Ex : Municipales 2030">
+                            <input name="nom_operation" class="form-control form-input-check" type="text" placeholder="Ex : Municipales 2030">
+                            <div class="mik-invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="col-md-5 bloo-bloc col-md-offset-1">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <p class="op-title">Debut</p>
-                                    <input name="date_debut" class="form-control" type="date">
+                                    <input name="date_debut" class="form-control form-input-check" type="date">
+                                    <div class="mik-invalid-feedback">
+                                        Ce champ ne peut être vide.
+                                    </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <p class="op-title">Fin</p>
-                                    <input name="date_fin" class="form-control" type="date">
+                                    <input name="date_fin" class="form-control form-input-check" type="date">
+                                    <div class="mik-invalid-feedback">
+                                        Ce champ ne peut être vide.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,11 +79,17 @@
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
                             <p class="op-title">Nom du formulaire</p>
-                            <input class="form-control" name="nom_formulaire" type="text" placeholder="Ex : Municipales 2030">
+                            <input class="form-control form-input-check" name="nom_formulaire" type="text" placeholder="Ex : Municipales 2030">
+                            <div class="mik-invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                         <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
                             <p class="op-title">description du formulaire</p>
-                            <input class="form-control" type="text" name="description_formulaire" placeholder="Ex : Description des objectifs du formulaire">
+                            <input class="form-control form-input-check" type="text" name="description_formulaire" placeholder="Ex : Description des objectifs du formulaire">
+                            <div class="mik-invalid-feedback">
+                                Ce champ ne peut être vide.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,37 +126,102 @@
 <script src="{{asset('common/functions.js')}}"></script>
 
 <script type="text/javascript">
-    // $(document).ready(function () {
-    //     $('.btn-bloo-action').prop('disabled', true);
+    $(document).ready(function () {
+        $('#list').on('click', function (e) {
+            console.log(e);
+            $.get('/listlecteurs', function (data) {
+                console.log(data);
+                $('#listlecteur').empty();
+                $.each(data, function (index, lecteurObj) {
+                    $('#listlecteur').append(
+                        '<input type="button" class="onelecteur" id="onelecteur" value="' +
+                        lecteurObj.first_name + '">');
+                    setTimeout(addlecteur, 400);
+                })
+            });
+        });
 
-    //     $('form input, form select').on('keyup', function () {
-    //         var canSubmit = validateForm();
-    //         setTimeout(function () {
-    //             $('form').find('button[type=submit]').prop('disabled', !canSubmit);
-    //         }, 100);
-    //     });
-    // });
+        //Send form if valid
+        $("#sondage-form").on('submit', function(e){
+            let valid = validateForm();
+            if(!valid){
+                e.preventDefault();;
+            }
+        });
+        
+        //controle form on navigate
+        $('.form-control').focus(function(){
+            $(this).removeClass("mik-is-invalid");
+            $(this).next(".mik-invalid-feedback").hide();
+        });
+        
+        $('.form-input-check').focusout(function(){
+            if (is_null_or_whithe_space($(this).val())){
+                $(this).addClass("mik-is-invalid");
+                $(this).next(".mik-invalid-feedback").show();
+            }
+        });
+
+    });
+    
 
     function validateForm() {
-        if (is_null_or_whithe_space($('input[name="nom_operation"]').val())) return false;
+        if (is_null_or_whithe_space($('input[name="nom_operation"]').val())){
+            $('input[name="nom_operation"]').addClass("mik-is-invalid");
+            $('input[name="nom_operation"]').next(".mik-invalid-feedback").css("display", "block");
+            return false;
+        }
 
-        var date_debut = $('input[name="date_debut"]').val();
-        if (is_null_or_whithe_space(date_debut)) return false;
+        var date_start = $('input[name="date_debut"]').val();
+        if (is_null_or_whithe_space(date_start)){
+            $('input[name="date_debut"]').addClass("mik-is-invalid");
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").show();
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("Ce champ ne peut être vide");
+            return false;
+        }
 
-        var date_fin = $('input[name="date_fin"]').val();
-        if (is_null_or_whithe_space(date_fin)) return false;
+        var date_end = $('input[name="date_fin"]').val();
+        if (is_null_or_whithe_space(date_end)) {
+            $('input[name="date_fin"]').addClass("mik-is-invalid");
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").show();
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("Ce champ ne peut être vide");
+            return false;
+        }
 
-        if (is_null_or_whithe_space($('input[name="nom_formulaire"]').val())) return false;
-        if (is_null_or_whithe_space($('input[name="description_formulaire"]').val())) return false;
-        if (is_null_or_whithe_space($('select[name="entreprise_id"]').val())) return false;
+        date_start = new Date(date_start);
+        date_end = new Date(date_end);
 
-        date_debut = new Date(date_debut);
-        date_fin = new Date(date_fin);
+        if (date_start.getTime() < (new Date().datePart().getTime())) {
+            $('input[name="date_debut"]').addClass("mik-is-invalid");
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").show();
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("Choisir une date supérieure à la date du jour");
+            return false;
+        }
 
-        alert(date_debut + " " + date_fin);
+        if (date_start.getTime() > date_end.getTime()) {
+            $('input[name="date_fin"]').addClass("mik-is-invalid");
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").show();
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("Choisir une date supérieure à la date de début");
+            return false;
+        }
 
-        if (date_debut.getTime() < (new Date().datePart().getTime())) return false;
-        if (date_debut.getTime() > date_fin.getTime()) return false;
+        if (is_null_or_whithe_space($('input[name="nom_formulaire"]').val())) {
+            $('input[name="nom_formulaire"]').addClass("mik-is-invalid");
+            $('input[name="nom_formulaire"]').next(".mik-invalid-feedback").show();
+            return false;
+        }
+        
+        if (is_null_or_whithe_space($('input[name="description_formulaire"]').val())){
+            $('input[name="description_formulaire"]').addClass("mik-is-invalid");
+            $('input[name="description_formulaire"]').next(".mik-invalid-feedback").show();
+            return false;
+        }
+        
+        if (!$('select[name="entreprise_id"]').val()){
+            $('select[name="entreprise_id"]').addClass("mik-is-invalid");
+            $('select[name="entreprise_id"]').next(".mik-invalid-feedback").show();
+            return false;
+        }
 
         return true;
     }
@@ -150,20 +236,6 @@
             console.log(lecteur_id);
         });
     }
-
-    $('#list').on('click', function (e) {
-        console.log(e);
-        $.get('/listlecteurs', function (data) {
-            console.log(data);
-            $('#listlecteur').empty();
-            $.each(data, function (index, lecteurObj) {
-                $('#listlecteur').append(
-                    '<input type="button" class="onelecteur" id="onelecteur" value="' +
-                    lecteurObj.first_name + '">');
-                setTimeout(addlecteur, 400);
-            })
-        });
-    });
 
 </script>
 @endsection
