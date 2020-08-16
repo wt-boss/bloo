@@ -48,7 +48,7 @@ $fields = $form->fields()->filled()->get();
                                 @endforeach
                             @endif
                         </div>
-                            <input type="hidden" name="site" value="<?= $_GET['site']; ?>">
+                            <input type="hidden" name="site" value="<?= isset($_GET['site'])?$_GET['site']:""; ?>">
                         <div class="text-left mt-20">
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="Please Wait..." data-complete-text="Submit Form">Submit Form</button>
                         </div>

@@ -22,15 +22,14 @@ class CompteController extends Controller
     {
 
         $comptes = "";
-        if(auth()->user()->id === 1)
+        if(auth()->user()->role === 5)
         {
             $comptes = Entreprise::with('users','operations')->get();
         }
         else
         {
-            $comptes = auth()->user()->entreprises()->get();
+            $comptes = auth()->user()->entreprises()->with('users','operations')->get();
         }
-
         $users = User::where('role','4')->get();
         return view('admin.compte.index',compact('comptes','users'));
     }
@@ -40,26 +39,29 @@ class CompteController extends Controller
         $parameters = $request->all();
         $comptes  = Entreprise::all();
         $users = User::where('role','4')->get();
+        $entreprise = Entreprise::with('users')->findOrFail($parameters['entreprise_id']);
+        $AcountNow = $entreprise->users()->get()->last();
+
         $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
         if($user_entreprise == 0)
         {
+            $entreprise->users()->detach($AcountNow);
             $user = User::findOrFail($parameters['user_id']);
-            $entreprise = Entreprise::findOrFail($parameters['entreprise_id']);
-            $user->entreprises()->attach($entreprise);
-            return view('admin.compte.index',compact('comptes','users'))->withSuccess('Operation attribuer avec success');
+            $entreprise->users()->attach($user);
+            return redirect(route('compte.index'))->withSuccess('Operation attribuer avec success');
         }
         else {
-                return view('admin.compte.index',compact('comptes','users'))->withErrors('Cet Acount Manager a deja ce compte');
-            }
+            return redirect(route('compte.index'))->withErrors('Cet Acount Manager a deja ce compte');
+        }
     }
 
 
-    public function donner()
-    {
-        $entreprises =  Entreprise::all();
-        $users = User::where('role','4')->get();
-        return view('admin.compte.gift',compact('entreprises','users'));
-    }
+    // public function donner()
+    // {
+    //     $entreprises =  Entreprise::all();
+    //     $users = User::where('role','4')->get();
+    //     return view('admin.compte.gift',compact('entreprises','users'));
+    // }
 
     /**
      * Show the form for creating a new resource.

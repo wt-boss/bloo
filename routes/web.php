@@ -200,8 +200,7 @@ Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
 Route::resource('compte','CompteController')->middleware('Role:Superadmin|Account Manager');
-Route::get('comptes/gift','CompteController@donner')->name('giftoperation')->middleware('Role:Superadmin|Account Manager');
-Route::post('comptes/gift','CompteController@savegift')->name('savegift')->middleware('Role:Superadmin|Account Manager');
+Route::post('compte/gift','CompteController@savegift')->name('savegift')->middleware('Role:Superadmin|Account Manager');
 
 
 //Messagerie Route

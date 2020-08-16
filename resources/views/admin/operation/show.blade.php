@@ -58,7 +58,13 @@
                             </div>
                             <div class="info">
                                 <p class="label">Fondé</p>
-                                <p class="info-value">{{$operation->users()->where('role','4')->get()->pluck('last_name')->last()}}</p>
+                                <p class="info-value">
+                                    @php
+                                        $entreprise = $operation->entreprise()->with('users')->get()->last();
+                                        $user = $entreprise->users()->get()->last();
+                                    @endphp
+                                    {{ $user->first_name }} {{ $user->last_name }}
+                                </p>
                             </div>
                         </div>
                     </div>

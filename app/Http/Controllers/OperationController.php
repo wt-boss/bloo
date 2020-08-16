@@ -287,7 +287,7 @@ class OperationController extends Controller
      */
     public function show($id)
     {
-        $operation = Operation::findOrFail($id);
+        $operation = Operation::with('entreprise')->findOrFail($id);
         $current_user = Auth::user();
         $form=$operation->form;
         $valid_request_queries = ['summary', 'individual'];

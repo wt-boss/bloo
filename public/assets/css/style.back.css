@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     color: #fff;
 }
 
+.table.operations > tbody > tr > td, .table > tbody > tr > th, .table.operations > tfoot > tr > td, .table.operations > tfoot > tr > th, .table.operations > thead > tr > td, .table.operations > thead > tr > th {
+    padding: 0px;
+}
+
 .bloo-primary-color {
     color: #0080BB;
 }
@@ -291,6 +295,12 @@ ul.box-title li {
     border-bottom: 1px solid #D3D3D3;
 }
 .widget-user-image .img-circle {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.operations .widget-user .widget-user-image > img {
     width: 100px;
     height: 100px;
     display: inline-block;
