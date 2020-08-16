@@ -80,6 +80,7 @@ class User extends Authenticatable implements JWTSubject
     public function setPasswordAttribute($value='')
     {
         $this->attributes['password'] = bcrypt($value);
+        // $this->attributes['password'] = Hash::make($value);
     }
     public function getAvatarAttribute($value)
     {

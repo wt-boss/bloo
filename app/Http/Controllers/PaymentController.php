@@ -45,12 +45,12 @@ class PaymentController extends Controller
     {
 
         /** PayPal api context **/
-        $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-                $paypal_conf['client_id'],
-                $paypal_conf['secret'])
-        );
-        $this->_api_context->setConfig($paypal_conf['settings']);
+        // $paypal_conf = \Config::get('paypal');
+        // $this->_api_context = new ApiContext(new OAuthTokenCredential(
+        //         $paypal_conf['client_id'],
+        //         $paypal_conf['secret'])
+        // );
+        // $this->_api_context->setConfig($paypal_conf['settings']);
 
     }
 
@@ -72,109 +72,114 @@ class PaymentController extends Controller
             return back()->withErrors("Veillez confirmer votre mot de passe.");
         }
 
-        $donées = $request->except('_token');
+        $data = $request->except('_token');
 
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
-        $item_1 = new Item();
-        $item_1->setName('Item 1') /** item name **/
-        ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setPrice($request->get('amount')); /** unit price **/
-        $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
-        $amount = new Amount();
-        $amount->setCurrency('USD')
-            ->setTotal($request->get('amount'));
+        // $payer = new Payer();
+        // $payer->setPaymentMethod('paypal');
+        // $item_1 = new Item();
+        // $item_1->setName('Item 1') /** item name **/
+        // ->setCurrency('USD')
+        //     ->setQuantity(1)
+        //     ->setPrice($request->get('amount')); /** unit price **/
+        // $item_list = new ItemList();
+        // $item_list->setItems(array($item_1));
+        // $amount = new Amount();
+        // $amount->setCurrency('USD')
+        //     ->setTotal($request->get('amount'));
 
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription('Your transaction description');
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(route('status' ) ) /** Specify return URL **/
-        ->setCancelUrl(URL::to('status'));
+        // $transaction = new Transaction();
+        // $transaction->setAmount($amount)
+        //     ->setItemList($item_list)
+        //     ->setDescription('Your transaction description');
+        // $redirect_urls = new RedirectUrls();
+        // $redirect_urls->setReturnUrl(route('status' ) ) /** Specify return URL **/
+        // ->setCancelUrl(URL::to('status'));
 
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-        /** dd($payment->create($this->_api_context));exit; **/
-        try {
-            $payment->create($this->_api_context);
-        } catch (\PayPal\Exception\PPConnectionException $ex) {
-            if (\Config::get('app.debug')) {
-                \Session::put('error', 'Connection timeout');
-                return Redirect::to('/');
-            } else {
-                \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::to('/');
-            }
-        }
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-        /** add payment ID to session **/
-        Session::put('paypal_payment_id', $payment->getId());
+        // $payment = new Payment();
+        // $payment->setIntent('Sale')
+        //     ->setPayer($payer)
+        //     ->setRedirectUrls($redirect_urls)
+        //     ->setTransactions(array($transaction));
+        // /** dd($payment->create($this->_api_context));exit; **/
+        // try {
+        //     $payment->create($this->_api_context);
+        // } catch (\PayPal\Exception\PPConnectionException $ex) {
+        //     if (\Config::get('app.debug')) {
+        //         \Session::put('error', 'Connection timeout');
+        //         return Redirect::to('/');
+        //     } else {
+        //         \Session::put('error', 'Some error occur, sorry for inconvenient');
+        //         return Redirect::to('/');
+        //     }
+        // }
+        // foreach ($payment->getLinks() as $link) {
+        //     if ($link->getRel() == 'approval_url') {
+        //         $redirect_url = $link->getHref();
+        //         break;
+        //     }
+        // }
+        // /** add payment ID to session **/
+        // Session::put('paypal_payment_id', $payment->getId());
 
-
+        // Creation du user et entreprise
+        $user = new User();
+        $entreprise = new Entreprise();
         /** Creation de l'utilisateur,de l'entreprise,de l'operation et du paiement **/
-        if (User::where('email', $donées["user_email"])->exists()|| User::where('email', $donées["user_email_entreprise"])->exists()) {
-            return back()->withErrors('Un compte avec cette adressse email exiistes deja');
+        if (User::where('email', $data["user_email"])->exists()|| User::where('email', $data["user_email_entreprise"])->exists()) {
+            return back()->withErrors('Un compte avec cette adressse email existes deja');
         }
         else
         {
-            /** Création de l'utilisateur */
-            $user = new User();
-            if($donées["options"] === "ENTREPRISE")
+            /** Edition de l'utilisateur */
+            if($data["options"] === "ENTREPRISE")
             {
-                $user->first_name = $donées["user_name_entreprise"];
-                $user->last_name = $donées["user_name_entreprise"];
-                $user->email = $donées["user_email_entreprise"];
+                $user->first_name = $data["user_name_entreprise"];
+                $user->last_name = '';
+                $user->email = $data["user_email_entreprise"];
+                $user->password = $data["user_password_entreprise"];
             }
             else{
-                $user->first_name = $donées["user_name"];
-                $user->last_name = $donées["user_name"];
-                $user->email = $donées["user_email"];
+                $user->first_name = $data["user_name"];
+                $user->last_name = '';
+                $user->email = $data["user_email"];
+                $user->password = $data["user_password"];
             }
 
-            $user->password = Hash::make($donées["user_password"]);
             $user->api_token = Str::random(80);
             $user->role = 0;
             $user->active = 1;
-            $user->save();
-            $user_id = $user->id;
+            // $user->save();
+            // $user_id = $user->id;
         }
-        $entreprise = new Entreprise();
-        if($donées["options"] === "ENTREPRISE")
+
+        if($data["options"] === "ENTREPRISE")
         {
-            $entreprise->nom = $donées["name_enterprise"];
-            $entreprise->adresse = $donées["address_enterprise"];
-            $entreprise->contribuable = $donées["contribuanle_enterprise"];
-            $entreprise->siret = $donées["siret_enterprise"];
-            $entreprise->ville = $donées["ville_entreprise"];
+            $entreprise->nom = $data["name_enterprise"];
+            $entreprise->adresse = $data["address_enterprise"];
+            $entreprise->contribuable = $data["contribuanle_enterprise"];
+            $entreprise->siret = $data["siret_enterprise"];
             $entreprise->type = "Personne Morale";
-            $entreprise->city_id = $donées["city_id"];
-            $entreprise->telephone =  $donées["telephone_entreprise"];
+            $entreprise->city_id = $data["city_id"];
+            $entreprise->telephone =  $data["telephone_entreprise"];
+            $entreprise->email =  $data["email_entreprise"];
         }
         else{
-            $entreprise->nom = $donées["user_name"];
+            $entreprise->nom = $data["user_name"];
             $entreprise->type = "Personne Physique";
+            $entreprise->email =   $data["user_email"];
+            $entreprise->city_id = '19169' ;
         }
 
-            $entreprise->save();
-            $entreprise->users()->attach($user);
+        $entreprise->save();
+        $user->save();
+        $entreprise->users()->attach($user);
 
         /** Si l'offre choisi est primus alors, creation d'une operation */
-        if($donées['amount'] == "3466.22" )
+        if($data['amount'] == "3466.22" )
         {
             $form = new Form([
-                'title' => ucfirst($donées["operation_name"]),
-                'description' => ucfirst($donées["operation_purpose"]),
+                'title' => ucfirst($data["operation_name"]),
+                'description' => ucfirst($data["operation_purpose"]),
                 'status' => Form::STATUS_DRAFT,
                 'user_id' => "1",
             ]);
@@ -184,16 +189,16 @@ class PaymentController extends Controller
 
             $formavalide = new FormAvailability();
             $formavalide->form_id = $form_id ;
-            $formavalide->open_form_at  = $donées["date_start"];
-            $formavalide->close_form_at = $donées["date_end"];
+            $formavalide->open_form_at  = $data["date_start"];
+            $formavalide->close_form_at = $data["date_end"];
             $formavalide->closed_form_message = "Formulaire clos";
             $formavalide->save();
 
             $operation = new Operation();
-            $operation->nom = $donées['operation_name'];
+            $operation->nom = $data['operation_name'];
             $operation->form_id = $form_id;
-            $operation->date_start =$donées["date_start"];
-            $operation->date_end = $donées["date_end"];
+            $operation->date_start =$data["date_start"];
+            $operation->date_end = $data["date_end"];
             $operation->entreprise_id = $entreprise->id;
             // $operation->user_id = "1";
             $operation->save();
@@ -206,18 +211,18 @@ class PaymentController extends Controller
 
         }
         /** Recherche de l'offre choisi**/
-       //$offre_id = Offre::where('montant','=',$donées['amount'])->pluck('id')->get()->first();
+       //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();
         /** Création du paiement **/
-        $paiement = new Paiement();
-        $paiement->paiement_id = $payment->getId();
-        $paiement->user_id = $user_id;
-        $paiement->save();
+        // $paiement = new Paiement();
+        // $paiement->paiement_id = $payment->getId();
+        // $paiement->user_id = $user_id;
+        // $paiement->save();
         if (isset($redirect_url)) {
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
         }
         \Session::put('error', 'Unknown error occurred');
-        return Redirect::to('/');
+        return Redirect::to('/')->withSuccess("Compte créé avec succès.");
     }
 
     public function getPaymentStatus()

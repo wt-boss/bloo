@@ -40,28 +40,45 @@ class OperationController extends Controller
     {
         $user = auth()->user();
         $operation = null;
+        // if($user->role === 5)
+        // {
+        //     $operations = Operation::with('form','entreprise')->get();
+        // }
+        // else if($user->role === 4)
+        // {
+        //     $comptes = $user->entreprises()->get();
+        //     $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+        //     foreach ($comptes as $entreprise)
+        //     {
+        //         $Operations = $entreprise->operations()->get();
+        //         foreach ($Operations as $operation)
+        //         {
+        //             $operations->push($operation);
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     $operation = $user->operations()->get()->last();
+        // }
+
+
         if($user->role === 5)
         {
-            $operations = Operation::with('form')->get();
+             $operations = Operation::with('form','entreprise')->get();
         }
-        else if($user->role === 4)
-        {
-            $comptes = $user->entreprises()->get();
-            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-            foreach ($comptes as $entreprise)
-            {
-                $Operations = $entreprise->operations()->get();
-                foreach ($Operations as $operation)
-                {
-                    $operations->push($operation);
-                }
-            }
-        }
-        else
-        {
-            $operation = $user->operations()->get()->last();
-        }
-
+         else{
+             $comptes = $user->entreprises()->get();
+             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+             foreach ($comptes as $entreprise)
+             {
+                 $Operations = $entreprise->operations()->get();
+               foreach ($Operations as $operation)
+               {
+                   $operations->push($operation);
+               }
+             }
+         }
         return view('admin.operation.index',compact('operations','operation'));
     }
 
