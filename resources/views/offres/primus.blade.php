@@ -161,7 +161,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'entreprise :</label><br>
-                            <input type="email" name="email_entreprise" class="address-city form-control" id="particulier_email">
+                            <input type="email" name="email_entreprise" class="address-city form-control form-email-check-perm" id="particulier_email">
                             <div class="invalid-feedback">
                                 Ce champ ne peut être vide.
                             </div>
@@ -169,7 +169,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
-                            <input type="email" name="user_email_entreprise" class="address-city form-control form-input-check" id="particulier_email">
+                            <input type="email" name="user_email_entreprise" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
                                 Ce champ ne peut être vide.
                             </div>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_email">Addresse Email :</label><br>
-                            <input type="email" name="user_email" class="address-city form-control form-input-check" id="particulier_email">
+                            <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
                                 Ce champ ne peut être vide.
                             </div>
@@ -317,6 +317,7 @@
             }
         });
 
+        //controle form on navigate
         $('.form-control').focus(function(){
             $(this).removeClass("is-invalid");
         });
@@ -324,6 +325,25 @@
         $('.form-input-check').focusout(function(){
             if (is_null_or_whithe_space($(this).val())){
                 $(this).addClass("is-invalid");
+            }
+        });
+
+        //controle email form on navigate
+        $('.form-email-check').focusout(function(){
+            if (is_null_or_whithe_space($(this).val())){
+                $(this).addClass("is-invalid");
+                $(this).next(".invalid-feedback").html("Ce champ ne peut être vide.");
+            }else if (!is_valid_email($(this).val())){
+                $(this).addClass("is-invalid");
+                $(this).next(".invalid-feedback").html("Cet email n'est pas valide.");
+            }
+        });
+        $('.form-email-check-perm').focusout(function(){
+            if (is_null_or_whithe_space($(this).val())){
+                // $(this).addClass("is-invalid");
+            }else if (!is_valid_email($(this).val())){
+                $(this).addClass("is-invalid");
+                $(this).next(".invalid-feedback").html("Cet email n'est pas valide.");
             }
         });
     });

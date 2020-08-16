@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bloo | Ajouter des sites</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/map/jquery-ui.css')}}"/>
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/map/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
@@ -67,6 +68,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4bZln12ut506FLipFx-kXh95M-zZdUfc&libraries=places&callback=initMap" defer></script>
     <!-- <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{asset('assets/map/jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/map/tableManager.js')}}"></script>
     <script src="{{asset('assets/map/app.js')}}"></script>
 </body>
