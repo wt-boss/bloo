@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    @include('partials.alert', ['name' => 'index'])
 
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">

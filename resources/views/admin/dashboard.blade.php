@@ -238,7 +238,11 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable(  {!! $diagram !!});
             var options = {
-                title:  "{!! trans('client_operations')  !!}"
+                legend: {
+                    position: 'bottom',
+                    alignment: 'center',
+                    maxLines: 2
+                }
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
@@ -311,6 +315,9 @@
                     <!-- DONUT CHART -->
                     <div class="box" style="height: 100%;">
                         <div class="box-header with-border">
+                            <ul class="box-title">
+                                <li>{{ trans('client_operations') }}</li>
+                            </ul>
                         </div>
                         <div class="box-body">
                         <div id="piechart" style="width: 500px; height: 400px;"></div>
@@ -325,31 +332,18 @@
                         <div class="box-header with-border">
                             <ul class="box-title">
                                 <li>trier par</li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        Dropdown <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation" class="selected"><a role="menuitem" tabindex="-1" href="#" id="country">Pays</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="state">Regions</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="city">Villes</a></li>
-                                    </ul>
+                                <li>
+                                    <select class="form-control bootstrap-select" style="font-size: 12px; height: 20px;">
+                                        <option id="country" selected="selected">Pays</option>
+                                        <option id="state">Regions</option>
+                                        <option id="city">Villes</option>
+                                    </select>
                                 </li>
                             </ul>
-                                <div class="row">
-                                    <div class="col-sm-6"><h6>Trier par : </h6></div>
-                                    <div class="col-sm-6" style="position: relative;">
-                                        <select class="custom-select" id="gender2">
-                                            <option selected>Choose...</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" id="cities">
-                            <table class="datatable table stripe dataTable no-footer dtr-column" id="region"  role="grid" style="width: auto;">
+                            <table class="datatable table stripe dataTable no-footer dtr-column" id="region"  role="grid" style="width: 100%;">
                                     <thead>
                                     <tr>
                                         <th></th>
@@ -373,7 +367,7 @@
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <ul class="box-title">
-                                <li>{{ trans('resources') }}</li>
+                                <li>{{ trans('operators') }}</li>
                             </ul>
                         </div>
                         <!-- /.box-header -->
