@@ -280,33 +280,30 @@
     </div>
 </div>
 
-    <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                    <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
-                </button>
-                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des lecteurs</font></font></h4>
+<div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
+            </button>
+            <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des lecteurs</font></font></h4>
+        </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('ajoutlecteur') }}">
+                    @csrf
+                    <input type="hidden" name="operation" value="{{ $operation->id }}" />
+                    <div id="datalecteurs">
+
+                    </div>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
+                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
+                </form>
             </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('ajoutlecteur') }}">
-                        @csrf
-                        <input type="hidden" name="operation" value="{{ $operation->id }}" />
-                        <div id="datalecteurs">
-
-                        </div>
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-
-                </div>
         </div>
         <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
+<!-- /.modal-dialog -->
 </div>
 
 <div class="modal fade" id="operateur-default" style="display: none;">
@@ -314,7 +311,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span></button>
+                    <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
+                </button>
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des operateurs</font></font></h4>
             </div>
             <div class="modal-body">
@@ -349,24 +347,28 @@
             });
         }
         $('#getlecteur').on('click', function (e) {
-            console.log(e);
             var operation_id = e.target.title;
             $.get('/listlecteurs/' + operation_id, function (data) {
-                console.log(data);
                  $('#datalecteurs').empty();
                  $('#datalecteurs').append(data.name);
                  $('#'+data.id).DataTable(
                     {
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
-                            }
-                        },
                         "bLengthChange" : false, //thought this line could hide the LengthMenu
                         "bInfo":false,
                     })
 
+            });
+        });
+        $('#getoperateur').on('click', function (e) {
+            var operation_id = e.target.title;
+            $.get('/listoperateurs/' + operation_id, function (data) {
+                $('#dataoperateurs').empty();
+                $('#dataoperateurs').append(data.name);
+                $('#'+data.id).DataTable(
+                    {
+                        "bLengthChange" : false, //thought this line could hide the LengthMenu
+                        "bInfo":false,
+                    })
             });
         });
 
@@ -389,27 +391,6 @@
                 if(data && $.parseJSON('true') == true){
                     $(e.target).parents('tr').remove();
                 }
-            });
-        });
-
-        $('#getoperateur').on('click', function (e) {
-            console.log(e);
-            var operation_id = e.target.title;
-            $.get('/listoperateurs/' + operation_id, function (data) {
-                console.log(data);
-                $('#dataoperateurs').empty();
-                $('#dataoperateurs').append(data.name);
-                $('#'+data.id).DataTable(
-                    {
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
-                            }
-                        },
-                        "bLengthChange" : false, //thought this line could hide the LengthMenu
-                        "bInfo":false,
-                    })
             });
         });
     </script>

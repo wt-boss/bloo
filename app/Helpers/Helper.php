@@ -56,12 +56,12 @@ class Helper
     }
 
     public static function buildOperateurs($items) {
-                      $data = "";
-                      foreach($items as $item) {
-                          $data .= "<tr><td  id='$item->id'>".$item->first_name. ' '.$item->last_name."</td></tr>";
-                      }
-                      $id = 'cities-'.rand(1000,9999);
-                      $returnValue = "<table style='width=100%' class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
+        $data = "";
+        foreach($items as $item) {
+            $data .= "<tr><td  id='$item->id'>".$item->first_name. ' '.$item->last_name."</td></tr>";
+        }
+        $id = 'cities-'.rand(1000,9999);
+        $returnValue = "<table style='width=100%' class='datatable table stripe dataTable no-footer dtr-column' id='".$id."'>".
                       "<thead>".
                      "<tr>".
                       "<th></th>".
@@ -71,13 +71,13 @@ class Helper
                       $data.
                       "</tbody>".
                       "</table>";
-    return ["name"=>$returnValue, "id" => $id ];
+        return ["name"=>$returnValue, "id" => $id ];
     }
 
     public static function buildUsersTable($items) {
           $data = "";
           foreach($items as $item) {
-          $data .= "<tr><td id='$item->id'><input type='checkbox' name='lecteurs[]' value='$item->id' $item->status>".
+          $data .= "<tr><td id='$item->id'><input type='checkbox' name='lecteurs[]' value='$item->id' $item->status> ".
           "$item->first_name $item->last_name".
           "</td></tr>";
           }

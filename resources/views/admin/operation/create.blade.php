@@ -72,11 +72,15 @@
                         </div>
                     </div>
                 </div>
-                    <br />
-                    <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>
+                <div class="row">
+                    <div class="col-xs-11 mt-10">
+                        <button type="submit" class="pull-right btn btn-bloo">Enregistrer</button>
+                    </div>
+                </div>
+
                     {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
-                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>
-                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button>
+                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button> --}}
+                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button> --}}
                 </form>
             </div>
         </div>
@@ -101,16 +105,16 @@
 <script src="{{asset('common/functions.js')}}"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.btn-bloo-action').prop('disabled', true);
+    // $(document).ready(function () {
+    //     $('.btn-bloo-action').prop('disabled', true);
 
-        $('form input, form select').on('blur', function () {
-            var canSubmit = validateForm();
-            setTimeout(function () {
-                $('form').find('button[type=submit]').prop('disabled', !canSubmit);
-            }, 100);
-        });
-    });
+    //     $('form input, form select').on('keyup', function () {
+    //         var canSubmit = validateForm();
+    //         setTimeout(function () {
+    //             $('form').find('button[type=submit]').prop('disabled', !canSubmit);
+    //         }, 100);
+    //     });
+    // });
 
     function validateForm() {
         if (is_null_or_whithe_space($('input[name="nom_operation"]').val())) return false;
@@ -127,6 +131,8 @@
 
         date_debut = new Date(date_debut);
         date_fin = new Date(date_fin);
+
+        alert(date_debut + " " + date_fin);
 
         if (date_debut.getTime() < (new Date().datePart().getTime())) return false;
         if (date_debut.getTime() > date_fin.getTime()) return false;
