@@ -49,15 +49,14 @@ class CompteController extends Controller
                 $AcountNow = $Acount;
             }
         }
-        $Number = $AcountNow->count();
+
         $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
         if($user_entreprise == 0 )
         {
-
-            if ( $Number != 0)
-                {
-                    $AcountNow->entreprises()->detach($entreprise);
-                }
+            if (!empty($AcountNow))
+            {
+                $AcountNow->entreprises()->detach($entreprise);
+            }
             $user = User::findOrFail($parameters['user_id']);
             $user->entreprises()->attach($entreprise);
             return redirect(route('compte.index'))->withSuccess('Operation attribuer avec success');
