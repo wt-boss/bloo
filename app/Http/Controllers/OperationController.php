@@ -132,7 +132,6 @@ class OperationController extends Controller
             return redirect()->route('home');
         }
     }
-
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
@@ -254,6 +253,7 @@ class OperationController extends Controller
         return response()->json($viewData);
 
     }
+
     public function getoperationManager(Request $request)
     {
         $users = collect();
@@ -274,7 +274,6 @@ class OperationController extends Controller
         $viewData = Helper::buildUsersList($users);
         return response()->json($viewData);
     }
-
 
     /**
      * Store a newly created resource in storage.
