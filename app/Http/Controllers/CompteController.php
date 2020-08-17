@@ -40,14 +40,28 @@ class CompteController extends Controller
         $comptes  = Entreprise::all();
         $users = User::where('role','4')->get();
         $entreprise = Entreprise::with('users')->findOrFail($parameters['entreprise_id']);
-        $AcountNow = $entreprise->users()->get()->last();
-
-        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
-        if($user_entreprise == 0)
+        $AllAcount = $entreprise->users()->get();
+        $AcountNow = collect();
+        foreach ($AllAcount as $Acount)
         {
-            $entreprise->users()->detach($AcountNow);
+            if ($Acount->role === 4)
+            {
+                $AcountNow->push($AcountNow);
+            }
+        }
+        $Number = $AcountNow->count();
+        $user_entreprise = Entreprise_user::where('user_id',$parameters['user_id'])->where('entreprise_id',$parameters['entreprise_id'])->count();
+        if($user_entreprise == 0 )
+        {
+
+            if ( $Number != 0)
+                {
+                    dd($parameters['user_id']);
+                    $ManagerNow = $AcountNow->get()->last();
+                    $ManagerNow->entreprises()->detach($entreprise);
+                }
             $user = User::findOrFail($parameters['user_id']);
-            $entreprise->users()->attach($user);
+            $user->entreprises()->attach($entreprise);
             return redirect(route('compte.index'))->withSuccess('Operation attribuer avec success');
         }
         else {

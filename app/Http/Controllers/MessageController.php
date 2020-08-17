@@ -129,14 +129,14 @@ class MessageController extends Controller
         {
               $operations = collect();
               $Entreprises = $AuthUser->entreprises()->get();
-             foreach ($Entreprises as $Entreprise)
-             {
+               foreach ($Entreprises as $Entreprise)
+              {
                  $Operations = $Entreprise->operations()->get();
                  foreach ($Operations as $Operation)
                  {
                      $operations->push($Operation);
                  }
-             }
+              }
         }
         return view('admin.messagerie.index',compact('operations','users','operation'));
     }

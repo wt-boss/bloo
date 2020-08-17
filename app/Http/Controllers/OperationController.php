@@ -62,12 +62,11 @@ class OperationController extends Controller
         //     $operation = $user->operations()->get()->last();
         // }
 
-
         if($user->role === 5)
         {
              $operations = Operation::with('form','entreprise')->get();
         }
-         else{
+         else if ($user->role === 4){
              $comptes = $user->entreprises()->get();
              $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
              foreach ($comptes as $entreprise)
@@ -78,6 +77,11 @@ class OperationController extends Controller
                    $operations->push($operation);
                }
              }
+         }
+         else
+         {
+             $User = User::with('operations')->findOrFail($user->id);
+             $operations = $User->operations()->with('form','entreprise')->get();
          }
         return view('admin.operation.index',compact('operations','operation'));
     }

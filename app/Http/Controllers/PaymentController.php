@@ -63,14 +63,19 @@ class PaymentController extends Controller
     {
         $parameters = $request->all();
 
-        if($parameters['user_password'] != $parameters['user_conf_password'])
-        {
-           return back()->withErrors("Veillez confirmer votre mot de passe.");
-        }
-        if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
-        {
-            return back()->withErrors("Veillez confirmer votre mot de passe.");
-        }
+          if($parameters['options'] === "PARTICULIER")
+          {
+              if($parameters['user_password'] != $parameters['user_conf_password'])
+              {
+                  return back()->withErrors("Veillez confirmer votre mot de passe.");
+              }
+          }
+          else{
+              if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
+              {
+                  return back()->withErrors("Veillez confirmer votre mot de passe.");
+              }
+          }
 
         $data = $request->except('_token');
 
@@ -200,15 +205,8 @@ class PaymentController extends Controller
             $operation->date_start =$data["date_start"];
             $operation->date_end = $data["date_end"];
             $operation->entreprise_id = $entreprise->id;
-            // $operation->user_id = "1";
             $operation->save();
-            // $id = "1";
-            // $user = User::findOrFail($id);
-            $user = User::get()->first();
-            // $user_lect =  User::findOrFail($user_id);
             $operation->users()->attach($user);
-            // $operation->users()->attach($user_lect);
-
         }
         /** Recherche de l'offre choisi**/
        //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();
