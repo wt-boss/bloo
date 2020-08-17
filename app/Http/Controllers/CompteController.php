@@ -41,12 +41,12 @@ class CompteController extends Controller
         $users = User::where('role','4')->get();
         $entreprise = Entreprise::with('users')->findOrFail($parameters['entreprise_id']);
         $AllAcount = $entreprise->users()->get();
-        $AcountNow = collect();
+        $AcountNow = "";
         foreach ($AllAcount as $Acount)
         {
             if ($Acount->role === 4)
             {
-                $AcountNow->push($AcountNow);
+                $AcountNow = $Acount;
             }
         }
         $Number = $AcountNow->count();
@@ -56,9 +56,7 @@ class CompteController extends Controller
 
             if ( $Number != 0)
                 {
-                    dd($parameters['user_id']);
-                    $ManagerNow = $AcountNow->get()->last();
-                    $ManagerNow->entreprises()->detach($entreprise);
+                    $AcountNow->entreprises()->detach($entreprise);
                 }
             $user = User::findOrFail($parameters['user_id']);
             $user->entreprises()->attach($entreprise);
