@@ -250,6 +250,26 @@ class OperationController extends Controller
         return response()->json($viewData);
 
     }
+    public function getoperationManager(Request $request)
+    {
+        $users = collect();
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::findOrFail($operation_id);
+        $entreprise = $operation->entreprise()->get()->last();
+        $AllUsers = $entreprise->users()->get();
+        /**
+         * On recherche l'acount Manager de cette operation;
+         */
+        foreach ($AllUsers as $user)
+        {
+            if ($user->role === 4)
+            {
+                $users->push($user);
+            }
+        }
+        $viewData = Helper::buildUsersList($users);
+        return response()->json($viewData);
+    }
 
 
     /**
