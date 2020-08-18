@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
 use Session;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -16,15 +17,11 @@ class ContactsController extends Controller
     {
     return view('pages.contact');
     }
-    public function store(ContactRequest $request)
+    public function store(Request $request)
     {
 
-        $message = Message::create($request->only('name','email', 'subject', 'message'));
-
-        Mail::to(config('krada.admin_support_email'))
-        ->send(new ContactMessageCreated($message));
-        session::flash('success','Nous vous Répondrons Dans Les Plus Brefs Delais!');
+        Mail::to(config('mail.from.address'))
+            ->send(new Contact($request->except('_token')));
         return redirect()->route('home');
-
     }
 }

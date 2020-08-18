@@ -43,7 +43,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="text-right">
                             <button type="submit" id="submit" class="btn mt-20 btn-primary">Update Profile</button>
                         </div>
@@ -61,7 +60,6 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/custom/pages/validation.js') }}"></script>
-
     <script>
         $(function() {
             $('#update-profile-form').validate({

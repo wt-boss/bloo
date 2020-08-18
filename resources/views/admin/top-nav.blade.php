@@ -67,7 +67,13 @@
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
+                    <a href=    @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur')) "{{ route('admin') }}"    @else "#"
+                    @endif class="navbar-brand"><img class="b_logo"  src=
+
+
+                        "{{ asset('assets/images/bloo_logo.png') }}"
+
+                        /></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -80,16 +86,16 @@
                             <li class="<?php echo (  Str::startsWith($route, 'operation.index') || Str::startsWith($route, 'operation.view') || Str::startsWith($route, 'edit')) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('operation.index')}}" >
                                     <i class="fas fa-layer-group"></i>
-                                    <span>Opérations</span>
+                                    <span>{{ trans('Operations') }}</span>
                                 </a>
                             </li>
                         @endif
 
-                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                             <li  class="<?php echo (  Str::startsWith($route, 'admin') || Str::startsWith($route, 'operation.show') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('admin')}}">
                                     <i class="fas fa-th-large"></i>
-                                    <span>Tableau de bord</span>
+                                    <span> {{ trans('Dashboard') }}</span>
                                 </a>
                             </li>
                         @endif
@@ -98,12 +104,12 @@
                             <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('compte.index')}}" >
                                     <i class="fas fa-briefcase"></i>
-                                    <span>Comptes</span>
+                                    <span>{{ trans('Account') }}</span>
                                 </a>
                             </li>
                         @endif
 
-
+                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                             <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('messages_index')}}" >
                                     {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
@@ -111,7 +117,7 @@
                                     <span>Messagerie</span>
                                 </a>
                             </li>
-
+                            @endif
 
                         @if (auth()->user()->hasRole('Superadmin'))
                             <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">

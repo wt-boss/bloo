@@ -12,7 +12,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-body form-content">
                 <div class="text-center">
-                    <h3 class="content-group-lg" style="margin-top: 0;">Prenez le contrôle</h3>
+                    <h3 class="content-group-lg" style="margin-top: 0;">{{ trans('login_title') }}</h3>
                 </div>
 
                 @include('partials.alert', ['name' => 'login', 'forced_alert' => ($errors->has('email')) ? ['status' => 'danger', 'message' => $errors->first('email')] : null])
@@ -25,14 +25,14 @@
                 </div>
 
                 <div class="form-group has-feedback has-feedback-left bloo-fg">
-                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                    <input type="password" class="form-control" name="password" placeholder="{{ trans('password') }}" required>
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block">Connexion</button>
+                    <button type="submit" class="btn btn-block">{{ trans('login_connection_btn') }}</button>
                 </div>
 
                 <div class="form-group login-options">
@@ -40,11 +40,11 @@
                         <div class="col-sm-6">
                             <label class="checkbox-inline">
                                 <input type="checkbox" class="styled" name="remember" checked="checked">
-                                Rester connecté
+                                {{ trans('stay_connected') }}
                             </label>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <a href="{{ route('password.request') }}">Mot de passe oublié?</a>
+                            <a href="{{ route('password.request') }}">{{ trans('forgot_password') }}</a>
                         </div>
                     </div>
                 </div>

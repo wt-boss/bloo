@@ -404,6 +404,9 @@
     "Subject" : "Sujet",
     "Message" : "Message",
     "Send Message" : "Envoyer",
+    "Dashboard" : "Tableau de bord",
+    "Operations" : "Operations",
+    "Account" : "Comptes",
 
     "menu_form_1" :"Partarger",
     "menu_form_2" :"Partarger Formulaire",
@@ -423,6 +426,12 @@
     "Ready to Open" :"Prêt",
     "Closed" :"Fermé",
     "Draft" :"Brouillon",
-    "Open" : "ouvert"
+    "Open" : "ouvert",
+    "login_title" : "Prenez le contrôle",
+    "login_connection_btn" : "Connexion",
+    "stay_connected" : "Rester connecté",
+    "forgot_password" : "Mot de passe oublié?"
+
+
 }
 
