@@ -177,7 +177,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <input type="hidden"  value="3466.22" name="amount" id="amount" class="address-city form-control" >
+                            <input type="hidden"  value="" name="amount" id="amount" class="address-city form-control" >
                         </div>
                     </div>
                     <div class="row">
@@ -229,7 +229,7 @@
                 $.each(data, function(index, stateObj){
                     $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
                 });
-                
+
                 let state_id = $('#region').val();
                 $.get('/json-cities?state_id=' + state_id,function(data) {
                     $('#ville').empty();
@@ -277,7 +277,7 @@
         $('.form-control').focus(function(){
             $(this).removeClass("is-invalid");
         });
-        
+
         $('.form-input-check').focusout(function(){
             if (is_null_or_whithe_space($(this).val())){
                 $(this).addClass("is-invalid");
@@ -318,7 +318,7 @@
                     $('input[name="user_name_entreprise"]').addClass("is-invalid");
                     return false;
                 }
-                
+
                 email = $('input[name="user_email_entreprise"]').val();
                 if (is_null_or_whithe_space(email)){
                     $('input[name="user_email_entreprise"]').addClass("is-invalid");
@@ -373,7 +373,7 @@
                     $('input[name="user_email"]').next(".invalid-feedback").html("Cet email n'est pas valide.");
                     return false;
                 }
-                
+
                 if (is_null_or_whithe_space($('input[name="user_password"]').val())){
                     $('input[name="user_password"]').addClass("is-invalid");
                     $('input[name="user_password"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
@@ -397,7 +397,7 @@
                     $('input[name="user_conf_password"]').next(".invalid-feedback").html("Les mots de passes ne sont pas identiques.");
                     return false;
                 }
-                
+
 
                 break;
             default:

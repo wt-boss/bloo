@@ -16,7 +16,9 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profile');
+        $User = User::with('operations')->findOrFail(auth()->user()->id);
+        $operations = $User->operations()->with('form','entreprise')->get();
+        return view('profile',compact('operations'));
     }
 
     public function update(Request $request)

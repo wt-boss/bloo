@@ -215,35 +215,35 @@ class PaymentController extends Controller
         // $paiement->paiement_id = $payment->getId();
         // $paiement->user_id = $user_id;
         // $paiement->save();
-        if (isset($redirect_url)) {
-            /** redirect to paypal **/
-            return Redirect::away($redirect_url);
-        }
-        \Session::put('error', 'Unknown error occurred');
+//        if (isset($redirect_url)) {
+//            /** redirect to paypal **/
+//            return Redirect::away($redirect_url);
+//        }
+//        \Session::put('error', 'Unknown error occurred');
         return Redirect::to('/')->withSuccess("Compte créé avec succès.");
     }
 
-    public function getPaymentStatus()
-    {
-        /** Get the payment ID before session clear **/
-        $payment_id = Session::get('paypal_payment_id');
-        /** clear the session payment ID **/
-        Session::forget('paypal_payment_id');
-        if (empty((new \Illuminate\Http\Request)->input('PayerID')) || empty((new \Illuminate\Http\Request)->input('token'))) {
-            \Session::put('error', 'Payment failed');
-            return Redirect::to('/');
-        }
-        $payment = Payment::get($payment_id, $this->_api_context);
-        $execution = new PaymentExecution();
-        $execution->setPayerId(Input::get('PayerID'));
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->_api_context);
-        if ($result->getState() == 'approved') {
-
-            \Session::put('success', 'Payment success');
-            return Redirect::to('/');
-        }
-        \Session::put('error', 'Payment failed');
-        return Redirect::to('/');
-    }
+//    public function getPaymentStatus()
+//    {
+//        /** Get the payment ID before session clear **/
+//        $payment_id = Session::get('paypal_payment_id');
+//        /** clear the session payment ID **/
+//        Session::forget('paypal_payment_id');
+//        if (empty((new \Illuminate\Http\Request)->input('PayerID')) || empty((new \Illuminate\Http\Request)->input('token'))) {
+//            \Session::put('error', 'Payment failed');
+//            return Redirect::to('/');
+//        }
+//        $payment = Payment::get($payment_id, $this->_api_context);
+//        $execution = new PaymentExecution();
+//        $execution->setPayerId(Input::get('PayerID'));
+//        /**Execute the payment **/
+//        $result = $payment->execute($execution, $this->_api_context);
+//        if ($result->getState() == 'approved') {
+//
+//            \Session::put('success', 'Payment success');
+//            return Redirect::to('/');
+//        }
+//        \Session::put('error', 'Payment failed');
+//        return Redirect::to('/');
+//    }
 }

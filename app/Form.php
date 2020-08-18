@@ -19,7 +19,6 @@ class Form extends Model
     const STATUS_PENDING = 'pending';
     const STATUS_OPEN = 'open';
     const STATUS_CLOSED = 'closed';
-
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['fields', 'responses'];
