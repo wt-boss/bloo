@@ -88,17 +88,18 @@ class HomeController extends Controller
                  $countoperations = $entreprise->operations()->count();
                  $table = [$entreprise->nom,$countoperations];
                  $diagram->push($table);
-
-                 $Operations = $entreprise->operations()->get();
-               foreach ($Operations as $operation)
-               {
-                   if ($operation->status === "TERMINER")
-                   {
-                       $rapports->push($operation);
-                   }
-                   $operations->push($operation);
-               }
+                 //$Operations = $entreprise->operations()->get();
+//               foreach ($Operations as $operation)
+//               {
+//                   if ($operation->status === "TERMINER")
+//                   {
+//                       $rapports->push($operation);
+//                   }
+//                   $operations->push($operation);
+//               }
              }
+             $User = User::with('operations')->findOrFail($user->id);
+             $operations = $User->operations()->with('form','entreprise')->get();
              foreach ($operations as $operation)
              {
                  $AllUsers = $operation->users()->get();
@@ -130,7 +131,9 @@ class HomeController extends Controller
         from users LEFT  JOIN  messages ON users.id = messages.user_id and is_read = 0 and messages.receiver_id = " . Auth::id() . "
         where users.id != " . Auth::id() . "
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
-        return view('admin.users.profile',compact('users'));
+        $User = User::with('operations')->findOrFail(auth()->user()->id);
+        $operations = $User->operations()->with('form','entreprise')->get();
+        return view('admin.users.profile',compact('users','operations'));
     }
 
     /**

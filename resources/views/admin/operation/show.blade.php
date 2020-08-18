@@ -205,8 +205,10 @@
                                      <td>
                                    {{ $user->first_name }} {{ $user->last_name }}
                                       <span class="pull-right">
+                                          @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                       <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
-                                        </span>
+                                        @endif
+                                      </span>
                                     </td>
                                  </tr>
                               @endif

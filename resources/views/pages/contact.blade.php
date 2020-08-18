@@ -61,21 +61,22 @@
           </div>
           <div class="row block-9">
             <div class="col-md-6 pr-md-5">
-              <form action="#">
+              <form action="{{route('contactus')}}" method="post">
+                  @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="{{ trans('Your Name') }}">
+                  <input name="Nom" type="text" class="form-control" placeholder="{{ trans('Your Name') }}" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="{{ trans('Your EMail') }}">
+                  <input name="Email" type="text" class="form-control" placeholder="{{ trans('Your EMail') }}" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="{{ trans('Subject') }}">
+                  <input name="sujet" type="text" class="form-control" placeholder="{{ trans('Subject') }}" required>
                 </div>
                 <div class="form-group">
-                  <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="{{ trans('Message') }}"></textarea>
+                  <textarea name="Message" id="" cols="30" rows="7" class="form-control" placeholder="{{ trans('Message') }}" required></textarea>
                 </div>
                 <div class="form-group">
-                  <input type="submit" value="{{ trans('Send Message') }}" class="btn btn-primary py-3 px-5">
+                  <input type="submit" value="{{ trans('Send Message') }}" class="btn btn-primary py-3 px-5" >
                 </div>
               </form>
 

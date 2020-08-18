@@ -283,6 +283,7 @@
                       </div>
                     </div>
                 </div>
+                @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-white">
@@ -309,6 +310,7 @@
                       </div>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-lg-6 col-xs-12">
