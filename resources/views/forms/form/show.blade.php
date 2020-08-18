@@ -35,7 +35,7 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         @php $symbol = $form::getStatusSymbols()[$form->status]; @endphp
-        <h5 class="panel-title">{{ $form->title }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ $symbol['label'] }}</span></h5>
+        <h5 class="panel-title">{{ $form->title }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ trans($symbol['label']) }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
                 @if(!auth()->user()->hasRole('Free'))
@@ -52,7 +52,7 @@
                 <button class="btn pull-right" style="top:38px;" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                     <i class="fa fa-clone" aria-hidden="true"></i>
                 </button>
-                <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" />
+                <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" readonly />
                 <small class="form-text text-warning text-capitalize col-xs-12">{{ trans('keep_code') }}</small>
             </div>
         @endif
@@ -203,6 +203,36 @@
 
         clipboard.on('error', function(e) {
             console.log(e);
+        });
+
+        // share link
+        // linkedin
+        $('.linkedin a').on('click', function(e){
+            var url = "{{ route('forms.view', $form->code) }}";
+            var title = "Replace this with a title.";
+            var text = "Replace this with your share copy.";
+            window.open(
+                'http://www.linkedin.com/shareArticle?mini=true&url='+encodeURIComponent(url),
+                '',
+                'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+        });
+        // facebook
+        $('.facebook a').on('click', function(e){
+            var url = "{{ route('forms.view', $form->code) }}";
+            window.open('http://facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),
+                '',
+                'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0'
+            );
+        });
+        // twitter
+        $('.twitter a').on('click', function(e){
+            var url = "{{ route('forms.view', $form->code) }}";
+            var text = "Replace this with your text";
+            window.open(
+                'http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text),
+                '',
+                'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0'
+            );
         });
     </script>
     @include('forms.partials._script-show')

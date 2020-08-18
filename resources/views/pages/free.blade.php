@@ -96,11 +96,11 @@
                                             <div class="row">
                                                 <div class="form-group col-12">
                                                     <label for="title">{{trans('free_form1_label1')}}</label>
-                                                    <input type="text" minlength="3" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                                <input type="text" minlength="3" class="form-control" id="title" name="title" placeholder="{{ trans('free_survey_form_title') }}" required>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                                    <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="Entrer l'objectif" required >
+                                                <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="{{ trans('free_survey_form_target') }}" required >
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <input type="submit" class="btn btn-primary float-right"/>
@@ -147,7 +147,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="token">Code du formulaire</label>
-                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required>
+                                        <input id="code" type="text" class="form-control" name="code" minlength="9" placeholder="{{ trans('free_survey_form_id') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary float-right"/>
@@ -188,7 +188,6 @@
             }
        });
     });
-
 </script>
 
 @endsection
