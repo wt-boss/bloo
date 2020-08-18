@@ -389,3 +389,23 @@ html{
     scroll-behavior: smooth;
 }
 
+/* Gestion de l'imgage de silde du header */
+@media screen and (min-width: 1700px) {
+    .owl-carousel .owl-stage-outer {
+        /* top: 75px; */
+    }
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 85%;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .owl-carousel .owl-stage-outer {
+        /* top: 75px; */
+    }
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 65%;
+    }
+}

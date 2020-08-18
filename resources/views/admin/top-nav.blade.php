@@ -16,7 +16,7 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('admin/bower_components/fontawesome/css/all.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/Ionicons/css/ionicons.min.css')}}">
@@ -86,23 +86,25 @@
                             <li class="<?php echo (  Str::startsWith($route, 'operation.index') || Str::startsWith($route, 'operation.view') || Str::startsWith($route, 'edit')) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('operation.index')}}" >
                                     <i class="fas fa-layer-group"></i>
-                                    <span>Opérations</span>
+                                    <span>{{ trans('Operations') }}</span>
                                 </a>
                             </li>
                         @endif
 
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                             <li  class="<?php echo (  Str::startsWith($route, 'admin') || Str::startsWith($route, 'operation.show') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('admin')}}">
                                     <i class="fas fa-th-large"></i>
-                                    <span>Tableau de bord</span>
+                                    <span> {{ trans('Dashboard') }}</span>
                                 </a>
                             </li>
+                        @endif
 
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                             <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('compte.index')}}" >
                                     <i class="fas fa-briefcase"></i>
-                                    <span>Comptes</span>
+                                    <span>{{ trans('Account') }}</span>
                                 </a>
                             </li>
                         @endif
