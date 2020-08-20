@@ -25,12 +25,11 @@ class LocationController extends Controller
         return response()->json($countries);
     }
 
-    public function getstatates($id)
+    public function getstates($id)
     {
         $states  = State::where('country_id',$id)->get();
         $result = ["items" =>$states,"state"=>"Success"];
         return response()->json($states);
-
     }
 
     public function getcities($id)
