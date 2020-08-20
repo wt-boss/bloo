@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Piece extends Model
 {
-    protected $guarded = [];
+
     protected $fillable = [
-        'front face', 'rear face'
+        'front', 'rear','user_id'
     ];
 
-    public function setAvatarAttribute($photo)
+
+
+    public function setFrontAttribute($photo)
     {
-        $this->attributes['front face'] = (new Http\move)->move_file($photo, 'avatar.image');
-        $this->attributes['rear face'] = (new Http\move)->move_file($photo, 'avatar.image');
+        $this->attributes['front'] = (new Http\move)->move_file($photo, 'avatar.image');
+    }
+
+
+
+    public function setRearAttribute($photo)
+    {
+        $this->attributes['rear'] = (new Http\move)->move_file($photo, 'avatar.image');
     }
 
 
