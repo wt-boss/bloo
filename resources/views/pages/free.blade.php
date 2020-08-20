@@ -139,7 +139,7 @@
                                         {{Session::get('success')}}
                                     </div>
                                 @endif
-                                    <form action="{{ route('forms.show_free') }}" method="post" >
+                                    <form action="{{route('forms.store_free') }}" method="post" id="for2">
                                         <p style="color: transparent;">
                                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non soluta amet accusamus.
                                         </p>
@@ -178,15 +178,17 @@
         e.preventDefault();
         // Obtenir les données du formulaire
         var data = {
-            title: $('[name=title]').val(),
+            title: $('[name=code]').val(),
         };
-        // Envoyer la demande
-        $.post($('this').attr('action'), data, function(response) {
-            if (response.success) {--}}
-                // Si la connexion réussit, redirection
-                window.location.replace(response.redirect);-
-            }
-       });
+        console.log(data);
+
+       // Send the request
+       $.post($('this').attr('action'), data, function(response) {
+                if (response.success) {
+                    // If register success, redirect
+                    window.location.replace(response.redirect);
+                }
+            });
     });
 </script>
 
