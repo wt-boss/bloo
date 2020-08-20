@@ -246,3 +246,6 @@ Route::get('terminer/{id}','OperationController@terminer_operation')->name('lock
 Route::post('contactus','ContactsController@store')->name('contactus');
 
 Route::get('/chartPdf', 'ChartController@index');
+
+Route::get('/testphotoapi','PhotoController@envoi');
+Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');

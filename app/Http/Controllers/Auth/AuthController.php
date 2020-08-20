@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register',]]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
         $this->guard = "api";
     }
     public function register(Request $request){
@@ -59,8 +59,8 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'items' => null,
-                    'states' => 'Unauthorized'
-                ],204
+                    'states' => ['Unauthorized']
+                ],200
             );
         }
         return $this->respondWithToken($token);
@@ -114,10 +114,10 @@ class AuthController extends Controller
     {
         return response()->json(
             ['items' => [
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth($this->guard)->factory()->getTTL()*60
-           ],
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth($this->guard)->factory()->getTTL()*60
+                ],
                 'states' => 'success'
             ]
         );

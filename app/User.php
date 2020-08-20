@@ -58,7 +58,7 @@ class User extends Authenticatable implements JWTSubject
             'password' => 'required|confirmed|min:6',
         ]);
     }
-/**
+    /**
 * Get user role name
 *
 * $return string

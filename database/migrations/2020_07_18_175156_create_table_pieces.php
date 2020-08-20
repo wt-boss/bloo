@@ -16,8 +16,9 @@ class CreateTablePieces extends Migration
         Schema::create('pieces', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('face');
-            $table->string('file');
+            $table->string('front');
+            $table->string('rear');
+            $table->timestamps();
         });
     }
 

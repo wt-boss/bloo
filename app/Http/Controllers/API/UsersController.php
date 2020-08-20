@@ -18,11 +18,12 @@ class UsersController extends Controller
 
     public function  pieces(Request $request)
     {
-        $parameters = $request->all();
-        $parameters['user_id'] = auth()->user()->id;
-        $piece = Piece::create($parameters);
+
+        $piece = Piece::create($request->all());
         return response("Photos enregistrer",200);
     }
+
+
     public function usersoperation()
     {
         $user = auth()->user();
