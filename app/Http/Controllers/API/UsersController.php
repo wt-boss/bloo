@@ -23,19 +23,46 @@ class UsersController extends Controller
         return response("Photos enregistrer",200);
     }
 
+    public function test()
+    {
+        return auth()->user();
+    }
 
-    public function usersoperation()
+    public function useroperation()
     {
         $user = auth()->user();
-        $operations = $user->operations()->where('status','CREER')->count();
-        if($operations === 0)
+        $User = User::with('operations')->findOrFail($user->id);
+        $Operation = collect();
+        if($User->operations()->count() === 0)
         {
-            $operation = new Operation();
-            $result = ["items" => $operation,"state"=>"Error"];
+            $result = ["items" => $User,"operation" => null,"sites" => null,  "state"=>"Success"];
         }
         else{
-            $result = ["items" =>$operations,"state"=>"Success"];
+            $operations = $user->operations()->get();
+            foreach($operations as $operation)
+            {
+                if($operation->status === "EN COUR")
+                {
+
+                    $Operation->push($operation);
+                }
+            }
+
+            $compteur = $Operation->count();
+            if ($compteur === 0)
+            {
+                $result = ["items" => $User,"operation" => null,"form_url" =>null , "states"=>["Success"]];
+            }
+            else
+            {
+                $lastoperation = $Operation->last();
+                $UserOperation = Operation::with('sites','form')->findOrFail($lastoperation->id);
+                $sites = $UserOperation->sites()->get();
+                $form_url = asset('forms/'.$UserOperation->form->code.'/view');
+                $result = ["items" => $User,"operation" => $UserOperation,'sites' => $sites ,'form' =>  $form_url, "states"=>["Success"]];
+            }
         }
-        return response()->json($result);
+        return response()->json($result,200);
+
     }
 }

@@ -137,11 +137,13 @@ class FormController extends Controller
                 // If request from AJAX
                 return [
                     'success' => true,
+                    'redirect' =>  view('forms.form.show', compact('form')),
                 ];
             } else {
                 return view('forms.form.show', compact('form'));
             }
         }
+
         else{
 
             if($request->ajax()){
@@ -197,14 +199,6 @@ class FormController extends Controller
             }
 
             $current_user = Auth::user();
-            $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-            if ($not_allowed) {
-                return response()->json([
-                    'success' => false,
-                    'error_message' => 'not_allowed',
-                    'error' =>  'Form is invalid'
-                ]);
-            }
 
             $inputs = [];
             $is_invalid_request = false;
@@ -302,9 +296,6 @@ class FormController extends Controller
 
     public function openFormForResponse(Form $form)
     {
-        $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 403);
 
         $not_allowed = (!in_array($form->status, [Form::STATUS_PENDING, Form::STATUS_CLOSED]));
         abort_if($not_allowed, 403);
@@ -322,9 +313,6 @@ class FormController extends Controller
 
     public function closeFormToResponse(Form $form)
     {
-        $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 403);
 
         $not_allowed = ($form->status !== Form::STATUS_OPEN);
         abort_if($not_allowed, 403);
@@ -354,13 +342,6 @@ class FormController extends Controller
             $form = Form::where('code', $form)->first();
 
             $current_user = Auth::user();
-            if (!$form || ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id))) {
-                return response()->json([
-                    'success' => false,
-                    'error_message' => 'not_found',
-                    'error' => 'Form is invalid'
-                ]);
-            }
 
             if ($form->status !== Form::STATUS_OPEN) {
                 return response()->json([

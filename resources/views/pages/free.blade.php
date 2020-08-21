@@ -194,26 +194,7 @@
             }
         });
 
-        // Send the request
-
-        {{--$.ajax({--}}
-        {{--    type:'POST',--}}
-        {{--    url:"{{route('forms.show_free') }}",--}}
-        {{--    data:{"title":title,"_token": "{{ csrf_token() }}"},function(response) {--}}
-        {{--        if (response.success) {--}}
-        {{--            // If register success, redirect--}}
-        {{--            window.location.replace(response.redirect);--}}
-        {{--        }--}}
-        {{--    },--}}
-        {{--    success:function(data){--}}
-        {{--        alert(data.success);--}}
-        {{--    }--}}
-        {{--});--}}
     });
-
-
-
-
 </script>
 
 
