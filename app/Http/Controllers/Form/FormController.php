@@ -56,7 +56,7 @@ class FormController extends Controller
 
         $date = Carbon::now()->toDateTimeString();
         $mail = $date."user@free.com";
-        
+
         $user = new User();
         $user->first_name = "free";
         $user->last_name = "user";
@@ -126,9 +126,9 @@ class FormController extends Controller
     {
         $parameters = $request->all();
 
-        $form = Form::where('code',$request['code'])->get()->first();
-
-        if (isset($form)){
+        $formcount = Form::where('code',$request['code'])->get()->count();
+        $form = Form::where('code',$request['code'])->get()->last();
+        if ($formcount !== 0){
             $user_id = $form->user_id;
             $user = User::findOrFail($user_id);
             Auth::login($user, true);
@@ -137,18 +137,17 @@ class FormController extends Controller
                 // If request from AJAX
                 return [
                     'success' => true,
-                    'redirect' => $this->redirectPath() ?: view('forms.form.show', compact('form')),
                 ];
             } else {
                 return view('forms.form.show', compact('form'));
             }
         }
-
         else{
+
             if($request->ajax()){
                 // If request from AJAX
                 return [
-                    'success' => true,
+                    'success' => false,
                     'error' =>  'Form is invalid',
                 ];
             } else {

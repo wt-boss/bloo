@@ -11,11 +11,12 @@
 |
 */
 
+
 Route::redirect('/', 'forms')->name('home');
 
 Route::get('/home', function () {
     return view('pages.home');
-});
+})->middleware('Free');
 
 Route::resource('users','UsersController');
 
@@ -130,6 +131,7 @@ Route::group(['middleware'=>['web']],function(){
         return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour bloo');
     });
 });
+
 Route::get('/questionnaire/create/free','PagesController@free')->name('questionnaire.free');
 
 //Questionnaire get

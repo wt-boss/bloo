@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePieces extends Migration
+class AlterPiecesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTablePieces extends Migration
      */
     public function up()
     {
-        Schema::create('pieces', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('face');
-            $table->string('file');
+        Schema::table('pieces', function (Blueprint $table) {
+            $table->dropColumn('face');
+            $table->dropColumn('file');
+            $table->string('front');
+            $table->string('rear');
+            $table->timestamps();
         });
     }
 
@@ -28,7 +29,7 @@ class CreateTablePieces extends Migration
      */
     public function down()
     {
-        Schema::create('pieces', function (Blueprint $table) {
+        Schema::table('pieces', function (Blueprint $table) {
             //
         });
     }
