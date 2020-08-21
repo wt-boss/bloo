@@ -35,7 +35,7 @@ class UsersController extends Controller
         $Operation = collect();
         if($User->operations()->count() === 0)
         {
-            $result = ["items" => $User,"operation" => null,"sites" => null,  "state"=>"success"];
+            $result = ["items" => $User,"operation" => null,"sites" => null,  "states"=>["success"]];
         }
         else{
             $operations = $user->operations()->get();

@@ -40,7 +40,10 @@ class SiteController extends Controller
 
         $parameters = $request->all();
         //dd($parameters);
-        $site = Site::where('lat',$parameters['lat'])->where('lng',$parameters['lng'])->get()->first();
+        $site = Site::where('lat',$parameters['lat'])
+            ->where('lng',$parameters['lng'])
+            ->where('lng',$parameters['operation_id'])
+            ->get()->first();
         if(isset($site))
         {
           $result = ["Erreur" => "Donnees deja en base"];

@@ -244,6 +244,7 @@ Route::get('operationsite/{id}','OperationController@operationsites')->name('sit
 /**Site routes */
 Route::resource('sites','SiteController');
 Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');
+Route::get('start/{id}','OperationController@terminer_operation')->name('startoperation');
 
 Route::post('contactus','ContactsController@store')->name('contactus');
 
@@ -251,7 +252,7 @@ Route::get('/chartPdf', 'ChartController@index');
 
 Route::get('/testphotoapi','PhotoController@envoi');
 Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');
-Route::get('/vueroute','TestController@usersoperation');
+Route::get('/vueroute/{id}','TestController@searchoperation');
 Route::get('/logoutfree',function () {
     return view('logoutfree');
 });

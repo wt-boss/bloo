@@ -248,6 +248,22 @@
             chart.draw(data, options);
         }
     </script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('1702f90c00112df631a4', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('dashboard-channel');
+        channel.bind('my-event', function(data) {
+            $('#' + data.to).click();
+            alert(JSON.stringify(data));
+        });
+    </script>
 @endsection
 
 @section('content')
