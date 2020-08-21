@@ -128,7 +128,7 @@
                             </a>
                         </span>
                     </div>
-                    <div class="box-body row">
+                    <div class="box-body row" id="responses">
                         @php
                             $data_for_chart = [];
                             $fields = $form->fields;
@@ -453,6 +453,21 @@
             $(window).on('resize', function () {
                 drawCharts(data_for_chart);
             });
+        });
+    </script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('1702f90c00112df631a4', {
+            cluster: 'ap2'
+        });
+        var channel = pusher.subscribe('responce-channel');
+        channel.bind('my-event', function(data) {
+            // alert(JSON.stringify(data));
+            location.reload(true);
         });
     </script>
 @endsection

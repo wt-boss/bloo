@@ -250,7 +250,7 @@ Route::post('contactus','ContactsController@store')->name('contactus');
 
 Route::get('/chartPdf', 'ChartController@index');
 
-Route::get('/testphotoapi','PhotoController@envoi');
+Route::get('/testreal/{id}','OperationController@testresponses');
 Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');
 Route::get('/vueroute/{id}','TestController@searchoperation');
 Route::get('/logoutfree',function () {

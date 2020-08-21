@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
+use Illuminate\Support\Str;
 use App\Operation_user;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
@@ -177,6 +178,18 @@ class OperationController extends Controller
         }
         $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
+    }
+
+    public function testresponses($id)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+        $current_user = Auth::user();
+        $form=$operation->form;
+        $valid_request_queries = ['summary', 'individual'];
+        $query = strtolower(request()->query('type', 'summary'));
+        $viewData = Helper::showformresponse($form);
+
+        return response()->json($operation);
     }
 
     public function listOperateurs($id)

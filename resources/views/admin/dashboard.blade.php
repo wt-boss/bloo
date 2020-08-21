@@ -260,7 +260,6 @@
 
         var channel = pusher.subscribe('dashboard-channel');
         channel.bind('my-event', function(data) {
-            $('#' + data.to).click();
             alert(JSON.stringify(data));
         });
     </script>
