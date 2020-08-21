@@ -11,11 +11,12 @@
 |
 */
 
+
 Route::redirect('/', 'forms')->name('home');
 
 Route::get('/home', function () {
     return view('pages.home');
-});
+})->middleware('Free');
 
 Route::resource('users','UsersController');
 
@@ -99,9 +100,6 @@ Route::middleware(['auth', 'verified'])->namespace('Form')->group(function () {
     Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Account Manager|Free');
     Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single')->middleware('Role:Superadmin|Account Manager|Free');
 
-    //Form Collaborator Routes
-    Route::post('forms/{form}/collaborators', 'CollaboratorController@store')->name('form.collaborators.store')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::delete('forms/{form}/collaborators/{collaborator}', 'CollaboratorController@destroy')->name('form.collaborator.destroy')->middleware('Role:Superadmin|Account Manager|Free');
 });
 
 // pages route
@@ -130,6 +128,7 @@ Route::group(['middleware'=>['web']],function(){
         return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour bloo');
     });
 });
+
 Route::get('/questionnaire/create/free','PagesController@free')->name('questionnaire.free');
 
 //Questionnaire get

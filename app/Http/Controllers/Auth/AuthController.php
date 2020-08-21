@@ -33,9 +33,9 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'items' => null,
-                    'states' => $validator->errors()->all()
+                    'states' => [$validator->errors()->all()]
                 ]
-                ,204
+                ,200
             );
         }
         $user = User::create($request->toArray());
@@ -43,7 +43,7 @@ class AuthController extends Controller
         return response()->json(
             [
             'items' => $user,
-             'states' => 'success'
+             'states' => ['success']
             ],200
         );
     }
@@ -76,7 +76,7 @@ class AuthController extends Controller
         return response()->json(
            [
                'items' => auth()->user(),
-               'states' => 'success'
+               'states' => ['success']
            ],200
         );
     }
@@ -114,11 +114,11 @@ class AuthController extends Controller
     {
         return response()->json(
             ['items' => [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth($this->guard)->factory()->getTTL()*60
-                ],
-                'states' => 'success'
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth($this->guard)->factory()->getTTL()*60
+           ],
+                'states' => ['success']
             ]
         );
     }

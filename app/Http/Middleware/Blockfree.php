@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Auth;
 use Closure;
 
-class Locale
+class Blockfree
 {
-
-    protected $languages = ['en','fr'];
     /**
      * Handle an incoming request.
      *
@@ -17,12 +15,14 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        if(!session()->has('locale'))
-        {
-            session()->put('locale', $request->getPreferredLanguage($this->languages));
-            //session()->put('locale', 'fr');
+        if (Auth::check()) {
+            //$user = $request->user();
+            if($request->user()->hasRole('Free'))
+            {
+                return abort(403);
+            }
+
         }
-        app()->setLocale(session('locale'));
         return $next($request);
     }
 }

@@ -23,7 +23,7 @@ class OperationController extends Controller
     public function index()
     {
         $operations = Operation::paginate(10);
-        return response()->json($operations);
+        return response()->json($operations,200);
     }
 
     public function  operationsville($ville)

@@ -376,6 +376,11 @@ ul.box-title li {
     height: 18px;
 }
 
+.create-user select.form-control {
+    height: 36px;
+}
+
+
 
 /* Global */
 /* Retrait du signe plus ds les datatable */

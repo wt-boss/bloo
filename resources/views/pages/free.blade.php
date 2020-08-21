@@ -139,7 +139,7 @@
                                         {{Session::get('success')}}
                                     </div>
                                 @endif
-                                    <form action="{{route('forms.store_free') }}" method="post" id="for2">
+                                    <form action="{{route('forms.show_free') }}" method="post" name="form2" id="form2">
                                         <p style="color: transparent;">
                                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non soluta amet accusamus.
                                         </p>
@@ -164,33 +164,40 @@
 
 
 <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
 <script type="text/javascript">
-   // Définir l'en-tête CSRF par défaut
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // Interception du Formulaire de connexion
+
     $('#form2').submit(function(e){
 
         // Empêcher la soumission de formulaire normale, nous le faisons bien en JS à la place
         e.preventDefault();
         // Obtenir les données du formulaire
-        var data = {
-            title: $('[name=code]').val(),
-        };
-        console.log(data);
 
-       // Send the request
-       $.post($('this').attr('action'), data, function(response) {
-                if (response.success) {
-                    // If register success, redirect
-                    window.location.replace(response.redirect);
-                }
-            });
+        var data = {
+            code: $('[name=code]').val(),
+            _token:"{{ csrf_token() }}",
+        };
+
+        // Send the request
+        $.post('/form_free', data, function(response) {
+            if (response.success) {
+                document.forms["form2"].submit();
+            }
+            else{
+                console.log(response);
+            }
+        });
+
     });
 </script>
+
+
 
 @endsection
 
