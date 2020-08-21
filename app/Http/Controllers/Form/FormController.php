@@ -119,7 +119,7 @@ class FormController extends Controller
         $form->load('fields', 'collaborationUsers', 'availability');
 
         return view('forms.form.show', compact('form'));
-        //return view('admin.top-nav',compact('form'));
+
     }
 
     public function show_free(Request $request)
@@ -288,9 +288,6 @@ class FormController extends Controller
     public function previewForm(Form $form)
     {
         $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
-
         return view('forms.form.view_form', ['form' => $form, 'view_type' => 'preview']);
     }
 

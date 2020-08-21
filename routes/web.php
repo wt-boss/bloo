@@ -12,32 +12,32 @@
 */
 
 
-Route::redirect('/', 'forms')->name('home');
+Route::redirect('/', 'forms')->name('home')->middleware('Free');
 
 Route::get('/home', function () {
     return view('pages.home');
 })->middleware('Free');
 
-Route::resource('users','UsersController');
+Route::resource('users','UsersController')->middleware('Free');
 
-Route::get('listlecteurs/{id}','OperationController@listLecteurs');
+Route::get('listlecteurs/{id}','OperationController@listLecteurs')->middleware('Free');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');
-Route::post('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur');
-Route::post('/addoperateurs','OperationController@addoperateurs')->name('ajoutoperateur');
-Route::get('/removelecteurs/{id}/{id1}','OperationController@removelecteur');
-Route::get('/removeoperateurs/{id}/{id1}','OperationController@removeoperateur');
+Route::post('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur')->middleware('Free');
+Route::post('/addoperateurs','OperationController@addoperateurs')->name('ajoutoperateur')->middleware('Free');
+Route::get('/removelecteurs/{id}/{id1}','OperationController@removelecteur')->middleware('Free');
+Route::get('/removeoperateurs/{id}/{id1}','OperationController@removeoperateur')->middleware('Free');
 
 Route::namespace('Form')->group(function () {
-    Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view');
-    Route::post('forms/{form}/responses', 'ResponseController@store')->name('forms.responses.store');
+    Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view')->middleware('Free');
+    Route::post('forms/{form}/responses', 'ResponseController@store')->name('forms.responses.store')->middleware('Free');
 });
 
 // Authentication Routes...
 Auth::routes(['verify' => true]);
 
 Route::namespace('Auth')->group(function () {
-    Route::get('register', 'RegisterController@showRegistrationForm')->name('register.show');
-    Route::post('register', 'RegisterController@register')->name('register');
+    Route::get('register', 'RegisterController@showRegistrationForm')->name('register.show')->middleware('Free');
+    Route::post('register', 'RegisterController@register')->name('register')->middleware('Free');
 
     //Login Routes
     Route::get('login', 'LoginController@showLoginForm')->name('login');
@@ -56,10 +56,10 @@ Route::namespace('Auth')->group(function () {
 });
 
 //Dashboard Routes
-Route::get('profile', 'ProfileController@index')->name('profile.index');
-Route::put('profile', 'ProfileController@update')->name('profile.update');
-Route::get('entreprise','OperationController@entreprise')->name('entreprise');
-Route::post('entreprise', 'OperationController@saventreprise')->name('saventreprise');
+Route::get('profile', 'ProfileController@index')->name('profile.index')->middleware('Free');
+Route::put('profile', 'ProfileController@update')->name('profile.update')->middleware('Free');
+Route::get('entreprise','OperationController@entreprise')->name('entreprise')->middleware('Free');
+Route::post('entreprise', 'OperationController@saventreprise')->name('saventreprise')->middleware('Free');
 
 
 Route::namespace('Form')->group(function () {
@@ -100,10 +100,13 @@ Route::middleware(['auth', 'verified'])->namespace('Form')->group(function () {
     Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Account Manager|Free');
     Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single')->middleware('Role:Superadmin|Account Manager|Free');
 
+    //Form Collaborator Routes
+    Route::post('forms/{form}/collaborators', 'CollaboratorController@store')->name('form.collaborators.store')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::delete('forms/{form}/collaborators/{collaborator}', 'CollaboratorController@destroy')->name('form.collaborator.destroy')->middleware('Role:Superadmin|Account Manager|Free');
 });
 
 // pages route
-Route::group(['middleware'=>['web']],function(){
+Route::group(['middleware'=>['web','Free']],function(){
     Route::get('/','PagesController@getHome')->name('home');
     Route::get('services', 'PagesController@getServices')->name('services');
     Route::get('sondages', 'PagesController@getSondage')->name('sondages');
@@ -119,37 +122,37 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/contact', [
         "as"=>'contact_path',
         'uses'=>'ContactsController@create'
-    ])->name('contact');
+    ])->name('contact')->middleware('Free');
     Route::post('/contact', [
         "as"=>'contact_path',
         'uses'=>'ContactsController@store'
-    ]);
+    ])->middleware('Free');
     Route::get('/test-email', function () {
         return new ContactMessageCreated('kirra belloche','kirraridibo@gmail.com','uste un test email', 'Merci pour bloo');
-    });
+    })->middleware('Free');
 });
 
-Route::get('/questionnaire/create/free','PagesController@free')->name('questionnaire.free');
+Route::get('/questionnaire/create/free','PagesController@free')->name('questionnaire.free')->middleware('Free');
 
 //Questionnaire get
 
-Route::get('/home2', 'HomeController@index2')->name('home2');
-Route::get('/stat_survey', 'HomeController@index')->name('stat_survey');
+Route::get('/home2', 'HomeController@index2')->name('home2')->middleware('Free');
+Route::get('/stat_survey', 'HomeController@index')->name('stat_survey')->middleware('Free');
 
-Route::get('/administration', 'HomeController@admin')->name('admin')->middleware('Role:Superadmin|Account Manager|Lecteur|Opérateur');
+Route::get('/administration', 'HomeController@admin')->name('admin')->middleware('Role:Superadmin|Account Manager|Lecteur|Opérateur','Free');
 
 //Questionnaire post
 
 //language
-Route::get('language', 'PagesController@language')->name('language');
+Route::get('language', 'PagesController@language')->name('language')->middleware('Free');
 //Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
+Route::put('/profile', 'ProfileController@update')->name('profile.update')->middleware('Free');
 Route::get('/about', function () {
     return view('about');
-})->name('about');
+})->name('about')->middleware('Free');
 
 // pages route
-Route::group(['middleware'=>['web']],function(){
+Route::group(['middleware'=>['web','Free']],function(){
     Route::get('/','PagesController@getHome')->name('home');
     Route::get('services', 'PagesController@getServices')->name('services');
     //Route::get('sondages', 'PagesController@getSondage')->name('sondages');
@@ -177,26 +180,26 @@ Route::group(['middleware'=>['web']],function(){
 
 });
 //route pour carriere
-Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit');
-Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit');
+Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middleware('Free');
+Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middleware('Free');
 
 // offres
-Route::get('/offres/primus','SurveyController@primus')->name('primus');
-Route::get('/offres/illimité','SurveyController@illimité')->name('illimité');
+Route::get('/offres/primus','SurveyController@primus')->name('primus')->middleware('Free');
+Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')->middleware('Free');
 
 //paypal
 
 // route for processing payment
-Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal');
+Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal')->middleware('Free');
 
 // route for check status of the payment
-Route::get('status/', 'PaymentController@getPaymentStatus')->name('status');
+Route::get('status/', 'PaymentController@getPaymentStatus')->name('status')->middleware('Free');
 Route::get('devise','PaymentController@rates');
-Route::resource('operation', 'OperationController')->middleware('auth');
+Route::resource('operation', 'OperationController')->middleware('auth','Free');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
-Route::resource('compte','CompteController')->middleware('Role:Superadmin|Account Manager');
+Route::resource('compte','CompteController')->middleware('Role:Superadmin|Account Manager','Free');
 Route::post('compte/gift','CompteController@savegift')->name('savegift')->middleware('Role:Superadmin|Account Manager');
 
 
@@ -248,3 +251,7 @@ Route::get('/chartPdf', 'ChartController@index');
 
 Route::get('/testphotoapi','PhotoController@envoi');
 Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');
+Route::get('/vueroute','TestController@usersoperation');
+Route::get('/logoutfree',function () {
+    return view('logoutfree');
+});

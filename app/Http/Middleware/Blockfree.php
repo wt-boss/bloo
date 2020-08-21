@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use App\Providers\RouteServiceProvider;
 use Auth;
 use Closure;
 
@@ -16,12 +17,10 @@ class Blockfree
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            //$user = $request->user();
             if($request->user()->hasRole('Free'))
             {
-                return abort(403);
+                return redirect('/logoutfree');
             }
-
         }
         return $next($request);
     }
