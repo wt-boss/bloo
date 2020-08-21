@@ -28,7 +28,7 @@ Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
 Route::middleware('api')->prefix('auth')->namespace('API')->group(function() {
     Route::apiResource('operations','OperationController');
     Route::post('pieces','UsersController@pieces');
-    Route::get('operationsville/{id}','OperationController@searchoperation');
+    Route::post('operationsville/{id}','OperationController@searchoperation');
     Route::post('/operationsuser','UsersController@useroperation');});
 
 Route::get('/getcountries','API\LocationController@getcountries');
