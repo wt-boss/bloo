@@ -397,7 +397,7 @@ class OperationController extends Controller
      */
     public function operationsites($id)
     {
-        $sites = Site::where('operation_id',$id)->orderby('id','desc')->get();
+        $sites = Site::orderby('id','desc')->get();
         $operation = Operation::findOrFail($id);
         return view('admin.operation.map',compact('sites','operation'));
     }
@@ -415,15 +415,6 @@ class OperationController extends Controller
             $operation->users()->detach($User);
         }
         $operation->status = "TERMINER";
-        $operation->save();
-        return back()->withSuccess('Operation cloturer avec success');
-    }
-
-
-    public function start_operation($id)
-    {
-        $operation = Operation::findOrFail($id);
-        $operation->status = "EN COUR";
         $operation->save();
         return back()->withSuccess('Operation cloturer avec success');
     }

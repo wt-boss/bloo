@@ -13,7 +13,7 @@ class OperationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register',]]);
+        $this->middleware('auth:api', ['except' => ['login','register', 'searchoperation']]);
         $this->guard = "api";
     }
     /**
@@ -31,8 +31,9 @@ class OperationController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function searchoperation($id)
+    public function searchoperation(Request $request)
     {
+        $id = $request['id'];
         $city = City::findOrFail($id);
         $name = $city->name;
         $sites = Site::with('operation')->where('ville',$name)->get();
