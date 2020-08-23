@@ -118,7 +118,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        <span class="pull-right" style="font-size: 20px;">
+                        <span class="pull-right" style="font-size: 40px;">
                             <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
                              <a href="{{ route('forms.response.export2', $operation->id) }}">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>

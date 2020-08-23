@@ -247,6 +247,7 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
+
     </script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>

@@ -137,6 +137,45 @@
                     <ul class="nav navbar-nav">
                     @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <!-- Notifications Menu -->
+                            <li class="dropdown notifications-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
+                                    <li>
+                                        <!-- inner menu: contains the messages -->
+                                        <ul class="menu">
+                                            <li><!-- start message -->
+                                                <a href="#">
+                                                    <div class="pull-left">
+                                                        <!-- User Image -->
+                                                    @foreach (auth()->user()->notifications as $notification)
+
+                                                            <div>
+                                                               <!-- Message title and timestamp -->
+                                                             <h4>
+                                                                <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
+                                                              </h4>
+                                                              <!-- The message -->
+                                                                <div class="row">
+                                                                    <div class="col-sm-10"> {{$notification->data['message']}} </div>
+                                                                    <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>
+                                                                </div>
+                                                           </div>
+                                                        @endforeach
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        </ul>
+                                        <!-- /.menu -->
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
@@ -156,15 +195,11 @@
                                                         @foreach (auth()->user()->notifications as $notification)
                                                             <!-- Message title and timestamp -->
                                                                 <h4>
-                                                                    @php
-                                                                     $user = \App\User::findOrFail($notification->data['receiver_id']);
-                                                                    echo $user->first_name." ".$user->last_name;
-                                                                    @endphp
+
                                                                     <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
                                                                 </h4>
                                                                 <!-- The message -->
-                                                                <p> {{$notification->data['message']}}</p>
-
+                                                                <p> {{$notification->data['message']}}  </p>
                                                         @endforeach
                                                     </div>
                                                 </a>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
+use App\Notifications\EventNotification;
+use App\Notifications\MessageRated;
 use Illuminate\Support\Str;
 use App\Operation_user;
 use Illuminate\Support\Facades\App;
@@ -120,8 +122,10 @@ class OperationController extends Controller
         // dd($parameters);
         foreach($parameters['lecteurs'] as $lecteur)
         {
+            $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
+            $user->notify(new EventNotification($message));
 
         }
         return back();
@@ -152,6 +156,8 @@ class OperationController extends Controller
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
+        $message = "Vous avez été retirer de l'operration : ".$operation->nom;
+        $user->notify(new EventNotification($message));
         return response()->json('true');
     }
 
