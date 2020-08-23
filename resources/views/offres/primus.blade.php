@@ -317,6 +317,7 @@
             }
         });
 
+        //controle form on navigate
         $('.form-control').focus(function(){
             $(this).removeClass("is-invalid");
         });
