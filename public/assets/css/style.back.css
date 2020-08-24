@@ -429,3 +429,12 @@ ul.share-free li {
     margin-bottom: 0px;
     font-size: 1.2em;
 }
+
+.form-control:focus {
+    outline: 0;
+    border-color: transparent;
+        border-bottom-color: transparent;
+    border-bottom-color: #0065A1;
+    -webkit-box-shadow: 0 1px 0 #0065A1;
+    box-shadow: 0 1px 0 #0065A1;
+}

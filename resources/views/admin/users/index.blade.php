@@ -55,9 +55,8 @@
                                         @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5"><i class="fa fa-eye" aria-hidden="true"></i>
-                                    </i></a>
-                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>
                         @endforeach

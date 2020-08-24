@@ -9,12 +9,12 @@
     <div class="panel-body" style="padding: 0;">
         <div class="row">
              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="box box-success">
+                <div class="box box-primary">
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="box-title">
-                                    Operations
+                                    Opérations
                                 </h3>
                             </div>
                         </div>
@@ -37,22 +37,29 @@
                 </div>
                 <!-- /.box -->
             </div>
-             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
-                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+
+
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+                <div class="box box-primary">
+                    
+                    <div class="box-body" style="margin-top: -13px;">
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                  <div class='col-md-12'>
-                     <div class='user-wrapper'>
+                     
                          <div>
-                             <h6>Lecteurs</h6>
+                             <h5>Lecteurs</h5>
                              <div id="alllect">
                              </div>
                          </div>
+                         <hr>
                          <div>
-                             <h6>Operateurs</h6>
+                             <h5>Operateurs</h5>
                              <div id="alloperat">
                              </div>
                          </div>
                      </div>
-                 </div>
+                 
                  @endif
                  @if(auth()->user()->hasRole('Lecteur'))
                          <div class='col-md-12'>
@@ -66,9 +73,13 @@
                              </div>
                          </div>
                      @endif
-             </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="box" style="height: 100%;">
+                <div class="box box-primary" style="height: 100%;">
                     <div class="box-header with-border">
                         <ul class="box-title" id="receiver">
                         </ul>
