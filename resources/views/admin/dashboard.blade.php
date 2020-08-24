@@ -315,7 +315,7 @@
                     <!-- DONUT CHART -->
                     <div class="box" style="height: 100%;">
                         <div class="box-header with-border">
-                            <ul class="box-title">
+                            <ul class="box-title" style="font-size: 15px;;">
                                 <li>{{ trans('client_operations') }}</li>
                             </ul>
                         </div>
@@ -330,8 +330,8 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <ul class="box-title">
-                                <li>trier par</li>
+                            <ul class="box-title" style="font-size: 15px;">
+                                <li>Tri par</li>
                                 <li>
                                     <select class="form-control bootstrap-select" style="font-size: 12px; height: 20px;">
                                         <option id="country" selected="selected">Pays</option>
@@ -366,7 +366,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <ul class="box-title">
+                            <ul class="box-title" style="font-size: 15px;">
                                 <li>{{ trans('operators') }}</li>
                             </ul>
                         </div>

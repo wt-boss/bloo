@@ -117,7 +117,7 @@
                             <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('users.index')}}" >
                                     <i class="nav-icon fas fa-users-cog"></i>
-                                    <span>Users</span>
+                                    <span>Utilisateurs</span>
                                 </a>
                             </li>
                         @endif

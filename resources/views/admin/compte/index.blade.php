@@ -13,7 +13,7 @@
     <div class="panel-body" style="padding: 0;">
         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
         <div class="panel-heading pull-right">
-            <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Creer un compte</a>
+            <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> Créer un compte</a>
         </div>
             @endif
     </div>
@@ -65,19 +65,14 @@
                                             <div class="widget-user-image">
                                                 <img class="img-circle" src="{{asset('assets/images/about.jpg')}}" alt="User Avatar">
                                             </div>
+                                            <br>
                                             <div class="box-footer">
                                                 <div class="row">
                                                     <div class="col-sm-12 border-right">
                                                         <div class="description-block">
-                                                            <span style="color: #0065A1;">
-                                                                @php echo !empty($compte->users()->where('role','4')->get()->pluck('last_name')->last()) ?
-                                                                        $compte->users()->where('role','4')->get()->pluck('last_name')->last() :
-                                                                        trans('no account manager');
-                                                                @endphp
-                                                            </span>
                                                             <h5 class="description-header" title="{{$compte->nom}}">{{$compte->nom}}</h5>
                                                             <span class="description-text">
-                                                                Type Compte (
+                                                                Type de compte (
                                                                 @if($compte->type === "Personne Physique")
                                                                     Particulier
                                                                 @else
@@ -85,11 +80,18 @@
                                                                 @endif
                                                                 )
                                                             </span>
+                                                            <span style="color: #0065A1;">
+                                                                @php echo !empty($compte->users()->where('role','4')->get()->pluck('last_name')->last()) ?
+                                                                        $compte->users()->where('role','4')->get()->pluck('last_name')->last() :
+                                                                        trans('no account manager');
+                                                                @endphp
+                                                            </span>
+                                                            
                                                             <span class="description-text">{{$compte->ville}} {{$compte->pays}}</span>
                                                             <span class="description-text">{{$compte->operations->count()}} operations</span>
                                                             <span class="description-text">{{$compte->email}}</span>
                                                             @if (auth()->user()->hasRole('Superadmin'))
-                                                            <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Parametres</button>
+                                                            <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Paramètres</button>
                                                             @endif
                                                         </div>
                                                         <!-- /.description-block -->

@@ -13,7 +13,7 @@
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
             <div class="panel-heading pull-right">
-                <a href="{{ route('users.create') }}" class="btn btn-bloo"><i class="fas fa-plus-circle"></i> Creer un utilisateur</a>
+                <a href="{{ route('users.create') }}" class="btn btn-bloo"><i class="fas fa-plus-circle"></i> Créer un utilisateur</a>
             </div>
         </div>
         @if ($users->isEmpty())
@@ -32,7 +32,7 @@
                             <th></th>
                             <th>Nom</th>
                             <th class="text-center">Email</th>
-                            <th class="text-center">Role</th>
+                            <th class="text-center">Rôle</th>
                             <th class="text-center">Compte Actif</th>
                             @if(Auth::user()->rolename() == "Superadmin")
                             <th class="text-center">Actions</th>
@@ -55,8 +55,9 @@
                                         @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5">View</a>
-                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right">Edit</a>
+                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5"><i class="fa fa-eye" aria-hidden="true"></i>
+                                    </i></a>
+                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach

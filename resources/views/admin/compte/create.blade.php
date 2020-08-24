@@ -33,7 +33,7 @@
                     </p>
                     <form method="post" action="{{ route('compte.store') }}">
                         @csrf
-                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise" required>
+                        <input class="form-control" type="text" name="nom" placeholder="Nom de l'entreprise" required>
                         <input class="form-control" type="text" name="adresse" placeholder="Adresse" required>
                         <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
@@ -53,8 +53,8 @@
                             </select>
                         </div>
                         <input class="form-control" type="hidden" name="type" value="Personne Morale">
-                        <input class="form-control" type="text" name="telephone" placeholder="Telephoone" required>
-                        <input class="form-control" type="email" name="email" placeholder="Emailphp" required>
+                        <input class="form-control" type="text" name="telephone" placeholder="Téléphone" required>
+                        <input class="form-control" type="email" name="email" placeholder="Email" required>
                         <br>
                         <button type="submit" class="btn btn-bloo">Enregistrer</button>
                     </form>
