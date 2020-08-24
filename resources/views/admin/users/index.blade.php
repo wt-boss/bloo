@@ -92,12 +92,28 @@
     <script>
         $(function() {
             $('.datatable').DataTable({
+
+                "language": {
+                    @if( app()->getLocale() === "fr" )
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                    @endif
+                    @if( app()->getLocale() === "en")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                    @endif
+                    @if( app()->getLocale() === "es")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    @endif
+                    @if( app()->getLocale() === "pt")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                    @endif
+                },
                 responsive: {
                     details: {
                         type: 'column',
                         target: 'tr'
                     }
                 },
+
                 columnDefs: [
                     {
                         className: 'control',
@@ -109,14 +125,15 @@
                         targets: [-1]
                     },
                     { responsivePriority: 1, targets: 0 },
+
                 ],
             });
-
             // Enable Select2 select for the length option
             $('.dataTables_length select').select2({
                 minimumResultsForSearch: Infinity,
                 width: 'auto'
             });
+
         });
     </script>
 @endsection

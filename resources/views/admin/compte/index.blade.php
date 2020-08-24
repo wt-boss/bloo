@@ -86,7 +86,7 @@
                                                                         trans('no account manager');
                                                                 @endphp
                                                             </span>
-                                                            
+
                                                             <span class="description-text">{{$compte->ville}} {{$compte->pays}}</span>
                                                             <span class="description-text">{{$compte->operations->count()}} operations</span>
                                                             <span class="description-text">{{$compte->email}}</span>
@@ -200,6 +200,20 @@
     <script>
         $(function() {
             $('#account-tab').DataTable({
+                "language": {
+                    @if( app()->getLocale() === "fr" )
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                    @endif
+                        @if( app()->getLocale() === "en")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                    @endif
+                        @if( app()->getLocale() === "es")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    @endif
+                        @if( app()->getLocale() === "pt")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                    @endif
+                },
                 responsive: {
                     details: {
                         type: 'column',

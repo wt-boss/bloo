@@ -44,6 +44,20 @@
                     $('#operateur_select').append(data.name);
                     $('#'+data.id).DataTable(
                         {
+                            "language": {
+                                @if( app()->getLocale() === "fr" )
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                                @endif
+                                    @if( app()->getLocale() === "en")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                                @endif
+                                    @if( app()->getLocale() === "es")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                                @endif
+                                    @if( app()->getLocale() === "pt")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                                @endif
+                            },
                             responsive: {
                                 details: {
                                     type: 'column',
@@ -78,6 +92,20 @@
                 $('#cities').append(data.name);
                 $('#'+data.id).DataTable(
                     {
+                        "language": {
+                            @if( app()->getLocale() === "fr" )
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                            @endif
+                                @if( app()->getLocale() === "en")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                            @endif
+                                @if( app()->getLocale() === "es")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                            @endif
+                                @if( app()->getLocale() === "pt")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                            @endif
+                        },
                         responsive: {
                             details: {
                                 type: 'column',
@@ -112,6 +140,20 @@
                 $('#cities').append(data.name);
                 $('#'+data.id).DataTable(
                     {
+                        "language": {
+                            @if( app()->getLocale() === "fr" )
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                            @endif
+                                @if( app()->getLocale() === "en")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                            @endif
+                                @if( app()->getLocale() === "es")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                            @endif
+                                @if( app()->getLocale() === "pt")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                            @endif
+                        },
                         responsive: {
                             details: {
                                 type: 'column',
@@ -175,6 +217,21 @@
                 $('#cities').append(data.name);
                 $('#'+data.id).DataTable(
                     {
+                        "language": {
+                            @if( app()->getLocale() === "fr" )
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                            @endif
+                                @if( app()->getLocale() === "en")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                            @endif
+                                @if( app()->getLocale() === "es")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                            @endif
+                                @if( app()->getLocale() === "pt")
+                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                            @endif
+                        },
+
                         responsive: {
                             details: {
                                 type: 'column',
@@ -205,24 +262,26 @@
                         $('#operateur_select').append(data.name);
                         $('#'+data.id).DataTable(
                             {
+                                "language": {
+                                    @if( app()->getLocale() === "fr" )
+                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                                    @endif
+                                        @if( app()->getLocale() === "en")
+                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                                    @endif
+                                        @if( app()->getLocale() === "es")
+                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                                    @endif
+                                        @if( app()->getLocale() === "pt")
+                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                                    @endif
+                                },
                                 responsive: {
                                     details: {
                                         type: 'column',
                                         target: 'tr'
                                     }
                                 },
-                                columnDefs: [
-                                    {
-                                        className: 'control',
-                                        orderable: false,
-                                        targets:   0
-                                    },
-                                    {
-                                        orderable: false,
-                                        targets: [-1]
-                                    },
-                                    { responsivePriority: 1, targets: 0 },
-                                ],
                                 "bLengthChange" : false, //thought this line could hide the LengthMenu
                                 "bInfo":false,
                             }
@@ -338,7 +397,8 @@
                             </ul>
                         </div>
                         <div class="box-body">
-                        <div id="piechart" style="width: 500px; height: 400px;"></div>
+
+                            <div id="piechart" style="width: 500px; height: 400px;"></div>
                         </div>
                         <!-- /.box-body -->
                     </div>
