@@ -367,7 +367,7 @@
     "between" : "entre",
     "and" : "et",
     "more_info" : "plus de détails dans les réponses individuelles",
-    "edit_op" : "Editer l'opération",
+    "edit_op" : "Editer Opération",
     "view_form" : "Voir Opération",
     "edit_form" : "Editer Questionnaire",
     "view_msg" : "Messages",
@@ -426,9 +426,21 @@
     "Ready to Open" :"Prêt",
     "Closed" :"Fermé",
     "Draft" :"Brouillon",
-    "Open" : "ouvert",
+    "Open" : "Ouvert",
     "login_title" : "Prenez le contrôle",
     "login_connection_btn" : "Connexion",
     "stay_connected" : "Rester connecté",
-    "forgot_password" : "Mot de passe oublié?"
+    "forgot_password" : "Mot de passe oublié?",
+    "field_cant_be_nil" : "Ce champ ne peut être vide.",
+    "form_description" : "Description du formulaire",
+    "form_name" : "Nom du formulaire",
+    "pholder_description" : "Ex : Description des objectifs du formulaire",
+    "pholder_formname" : "Ex : Municipales 2030",
+    "next" : "Suivant",
+    "create_operation" : "Créez un sondage !",
+    "create_operation_title" : "Créez une opération",
+    "Start" : "Debut",
+    "End" : "End",
+    "named_operation" : "Nommer votre operation"
+
 }

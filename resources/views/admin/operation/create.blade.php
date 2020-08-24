@@ -13,14 +13,14 @@
         <div class="d-none d-sm-block col-sm-5 left-side-bloo">
             <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
             {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
-            <h1>Creez une operation</h1>
+            <h1>@lang('create_operation_title')</h1>
         </div>
         <div class="col-sm-7">
             <div class="my-content">
                 <div class="pull-right">
-                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
+                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">@lang('next')</a>
                 </div>
-                <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
+                <h2 class="bloo-primary left-side-bloo border-left-primary">@lang('create_operation')</h2>
                 <p class="text-justify">
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
                 </p>
@@ -32,7 +32,7 @@
                                 <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
                             </select>
                             <div class="mik-invalid-feedback">
-                                Ce champ ne peut être vide.
+                                @lang('field_cant_be_nil')
                             </div>
                         @else
                             <select class="form-control" name="entreprise_id">
@@ -41,7 +41,7 @@
                                 @endforeach
                             </select>
                             <div class="mik-invalid-feedback">
-                                Ce champ ne peut être vide.
+                                @lang('field_cant_be_nil')
                             </div>
                         @endif
                     </div>
@@ -49,26 +49,26 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Nommer votre operation</p>
-                            <input name="nom_operation" class="form-control form-input-check" type="text" placeholder="Ex : Municipales 2030">
+                            <p class="op-title">@lang('named_operation')</p>
+                            <input name="nom_operation" class="form-control form-input-check" type="text" placeholder="@lang('pholder_formname')">
                             <div class="mik-invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('field_cant_be_nil') }}
                             </div>
                         </div>
                         <div class="col-md-5 bloo-bloc col-md-offset-1">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p class="op-title">Debut</p>
+                                    <p class="op-title">@lang('Start')</p>
                                     <input name="date_debut" class="form-control form-input-check" type="date">
                                     <div class="mik-invalid-feedback">
-                                        Ce champ ne peut être vide.
+                                        {{ trans('field_cant_be_nil') }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <p class="op-title">Fin</p>
+                                    <p class="op-title">@lang('End')</p>
                                     <input name="date_fin" class="form-control form-input-check" type="date">
                                     <div class="mik-invalid-feedback">
-                                        Ce champ ne peut être vide.
+                                        {{ trans('field_cant_be_nil') }}
                                     </div>
                                 </div>
                             </div>
@@ -78,24 +78,24 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Nom du formulaire</p>
-                            <input class="form-control form-input-check" name="nom_formulaire" type="text" placeholder="Ex : Municipales 2030">
+                            <p class="op-title">@lang('form_name')</p>
+                            <input class="form-control form-input-check" name="nom_formulaire" type="text" placeholder="@lang('pholder_formname')">
                             <div class="mik-invalid-feedback">
-                                Ce champ ne peut être vide.
+                                @lang('field_cant_be_nil')
                             </div>
                         </div>
                         <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">description du formulaire</p>
-                            <input class="form-control form-input-check" type="text" name="description_formulaire" placeholder="Ex : Description des objectifs du formulaire">
+                            <p class="op-title">@lang('form_description')</p>
+                            <input class="form-control form-input-check" type="text" name="description_formulaire" placeholder="@lang('pholder_description')">
                             <div class="mik-invalid-feedback">
-                                Ce champ ne peut être vide.
+                                @lang('field_cant_be_nil')
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-11 mt-10">
-                        <button type="submit" class="pull-right btn btn-bloo">Enregistrer</button>
+                        <button type="submit" class="pull-right btn btn-bloo">@lang('save')</button>
                     </div>
                 </div>
 
@@ -148,13 +148,13 @@
                 e.preventDefault();;
             }
         });
-        
+
         //controle form on navigate
         $('.form-control').focus(function(){
             $(this).removeClass("mik-is-invalid");
             $(this).next(".mik-invalid-feedback").hide();
         });
-        
+
         $('.form-input-check').focusout(function(){
             if (is_null_or_whithe_space($(this).val())){
                 $(this).addClass("mik-is-invalid");
@@ -163,7 +163,7 @@
         });
 
     });
-    
+
 
     function validateForm() {
         if (is_null_or_whithe_space($('input[name="nom_operation"]').val())){
@@ -210,13 +210,13 @@
             $('input[name="nom_formulaire"]').next(".mik-invalid-feedback").show();
             return false;
         }
-        
+
         if (is_null_or_whithe_space($('input[name="description_formulaire"]').val())){
             $('input[name="description_formulaire"]').addClass("mik-is-invalid");
             $('input[name="description_formulaire"]').next(".mik-invalid-feedback").show();
             return false;
         }
-        
+
         if (!$('select[name="entreprise_id"]').val()){
             $('select[name="entreprise_id"]').addClass("mik-is-invalid");
             $('select[name="entreprise_id"]').next(".mik-invalid-feedback").show();
