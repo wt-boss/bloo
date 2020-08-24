@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
+use App\Notifications\EventNotification;
+use App\Notifications\MessageRated;
+use Illuminate\Support\Str;
 use App\Operation_user;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
@@ -40,28 +43,28 @@ class OperationController extends Controller
     {
         $user = auth()->user();
         $operation = null;
+
         if($user->role === 5)
         {
-            $operations = Operation::with('form')->get();
+             $operations = Operation::with('form','entreprise')->get();
         }
-        else if($user->role === 4)
-        {
-            $comptes = $user->entreprises()->get();
-            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-            foreach ($comptes as $entreprise)
-            {
-                $Operations = $entreprise->operations()->get();
-                foreach ($Operations as $operation)
-                {
-                    $operations->push($operation);
-                }
-            }
-        }
-        else
-        {
-            $operation = $user->operations()->get()->last();
-        }
-
+         else if ($user->role === 4){
+             $comptes = $user->entreprises()->get();
+             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+             foreach ($comptes as $entreprise)
+             {
+                 $Operations = $entreprise->operations()->get();
+               foreach ($Operations as $operation)
+               {
+                   $operations->push($operation);
+               }
+             }
+         }
+         else
+         {
+             $User = User::with('operations')->findOrFail($user->id);
+             $operations = $User->operations()->with('form','entreprise')->get();
+         }
         return view('admin.operation.index',compact('operations','operation'));
     }
 
@@ -111,7 +114,6 @@ class OperationController extends Controller
             return redirect()->route('home');
         }
     }
-
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
@@ -120,8 +122,10 @@ class OperationController extends Controller
         // dd($parameters);
         foreach($parameters['lecteurs'] as $lecteur)
         {
+            $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
+            $user->notify(new EventNotification($message));
 
         }
         return back();
@@ -152,6 +156,8 @@ class OperationController extends Controller
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
+        $message = "Vous avez été retirer de l'operration : ".$operation->nom;
+        $user->notify(new EventNotification($message));
         return response()->json('true');
     }
 
@@ -178,6 +184,18 @@ class OperationController extends Controller
         }
         $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
+    }
+
+    public function testresponses($id)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+        $current_user = Auth::user();
+        $form=$operation->form;
+        $valid_request_queries = ['summary', 'individual'];
+        $query = strtolower(request()->query('type', 'summary'));
+        $viewData = Helper::showformresponse($form);
+
+        return response()->json($operation);
     }
 
     public function listOperateurs($id)
@@ -234,6 +252,26 @@ class OperationController extends Controller
 
     }
 
+    public function getoperationManager(Request $request)
+    {
+        $users = collect();
+        $operation_id = $request->input('operation_id');
+        $operation = Operation::findOrFail($operation_id);
+        $entreprise = $operation->entreprise()->get()->last();
+        $AllUsers = $entreprise->users()->get();
+        /**
+         * On recherche l'acount Manager de cette operation;
+         */
+        foreach ($AllUsers as $user)
+        {
+            if ($user->role === 4)
+            {
+                $users->push($user);
+            }
+        }
+        $viewData = Helper::buildUsersList($users);
+        return response()->json($viewData);
+    }
 
     /**
      * Store a newly created resource in storage.

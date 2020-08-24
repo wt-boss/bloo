@@ -3,7 +3,7 @@
 @section('content-header')
 @endsection
 
-@if (auth()->user()->hasRole('Superadmin|Account Manager'))
+@if (auth()->user()->hasRole('Superadmin|Account Manager|Lecteur'))
 @section('content')
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
@@ -38,6 +38,7 @@
                 <!-- /.box -->
             </div>
              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                  <div class='col-md-12'>
                      <div class='user-wrapper'>
                          <div>
@@ -52,6 +53,19 @@
                          </div>
                      </div>
                  </div>
+                 @endif
+                 @if(auth()->user()->hasRole('Lecteur'))
+                         <div class='col-md-12'>
+                             <div class='user-wrapper'>
+                                 <div>
+                                     <h6>Managers</h6>
+                                     <div id="allmanagers">
+                                     </div>
+                                 </div>
+
+                             </div>
+                         </div>
+                     @endif
              </div>
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="box" style="height: 100%;">
@@ -74,7 +88,7 @@
 @endif
 
 
-@if (auth()->user()->hasRole('Lecteur|Opérateur'))
+@if (auth()->user()->hasRole('Opérateur'))
 @section('content')
     @include('partials.alert', ['name' => 'index'])
     <div class="panel panel-flat panel-wb">
@@ -86,23 +100,35 @@
                             <div class="col-md-4">
                                 <div class="user-wrapper">
                                     <ul class="users">
-                                        <center><i><h4>Account Manager</h4></i></center>
-                                            <li class="user" id="{{ $user->id }}">
-                                                {{--will show unread count notification--}}
-                                                @if($user->unread)
-                                                    <span class="pending">{{ $user->unread }}</span>
-                                                @endif
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <img src="{{ $user->avatar }}" alt="" class="media-object">
-                                                    </div>
-
-                                                    <div class="media-body">
-                                                        <p class="name">{{$user->first_name }} {{$user->last_name}}</p>
-                                                        <p class="email">{{ $user->email }}</p>
-                                                    </div>
+                                        @if ($users->isEmpty())
+                                        <div class="panel-body text-center">
+                                            <div class="mt-30 mb-30">
+                                                <h6 class="text-semibold">
+                                                        Vous n'etes affecter a aucune operation en cours
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <center><i><h4>Accounts Manager</h4></i></center>
+                                         @foreach ($users as $user)
+                                         <li class="user" id="{{ $user->id }}">
+                                            {{--will show unread count notification--}}
+                                            @if($user->unread)
+                                                <span class="pending">{{ $user->unread }}</span>
+                                            @endif
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{{ $user->avatar }}" alt="" class="media-object">
                                                 </div>
-                                            </li>
+
+                                                <div class="media-body">
+                                                    <p class="name">{{$user->first_name }} {{$user->last_name}}</p>
+                                                    <p class="email">{{ $user->email }}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                         @endforeach
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -236,7 +262,10 @@
         }
     </script>
     @endif
-    @if (auth()->user()->hasRole('Lecteur|Opérateur'))
+    @if($operation === null)
+
+    @else
+      @if (auth()->user()->hasRole('Opérateur'))
         <script type="application/javascript">
                 var receiver_id = '';
                 var my_id = "{{ Auth::id() }}";
@@ -327,6 +356,122 @@
                 }, 50);
             }
         </script>
+    @endif
+    @endif
+    @if (auth()->user()->hasRole('Lecteur'))
+            <script type="application/javascript">
+                $('.operation').on('click', function(e){
+                    console.log(e);
+                    var operation_id = e.target.id;
+                    var datas = null;
+                    $.get('/json-manageroperations?operation_id=' + operation_id,function(data) {
+                        console.log(data);
+                        $('#allmanagers').empty();
+                        if (data.name === "")
+                        {
+                            $('#allmanagers').append("<p>Cette Operqtion ne possede pas encore de manager</p>");
+                        }
+                        else
+                            {
+                                $('#allmanagers').append(data.name);
+                            }
+
+                        $('#messages').html(datas);
+                        showMessages(operation_id);
+                    });
+                });
+                function showMessages(operation_id)
+                {
+                    var receiver_id = '';
+                    var my_id = "{{ Auth::id() }}";
+
+                    $(document).ready(function () {
+                        // ajax setup form csrf token
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        // Enable pusher logging - don't include this in production
+                        Pusher.logToConsole = true;
+
+                        var pusher = new Pusher('1702f90c00112df631a4', {
+                            cluster: 'ap2'
+                        });
+                        console.log('show');
+                        var channel = pusher.subscribe('my-channel');
+                        channel.bind('my-event', function (data) {
+                            //alert(JSON.stringify(data));
+                            if (my_id == data.from) {
+                                $('#' + data.to).click();
+                            } else if (my_id == data.to) {
+                                if (receiver_id == data.from) {
+                                    // if receiver is selected, reload the selected user ...
+                                    $('#' + data.from).click();
+                                } else {
+                                    // if receiver is not seleted, add notification for that user
+                                    var pending = parseInt($('#' + data.from).find('.pending').html());
+
+                                    if (pending) {
+                                        $('#' + data.from).find('.pending').html(pending + 1);
+                                    } else {
+                                        $('#' + data.from).append('<span class="pending">1</span>');
+                                    }
+                                }
+                            }
+                        });
+                        $('.user').click(function () {
+                            $('.user').removeClass('active');
+                            $(this).addClass('active');
+                            $(this).find('.pending').remove();
+                            receiver_id = $(this).attr('id');
+                            $.get('/json-user?user_id=' + receiver_id,function(data) {
+                                console.log(data);
+                                $('#receiver').empty();
+                                $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
+                            });
+                            $.ajax({
+                                type: "get",
+                                url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                                data: "",
+                                cache: false,
+                                success: function (data) {
+                                    $('#messages').html(data);
+                                    scrollToBottomFunc();
+                                }
+                            });
+                        });
+                        $(document).on('keyup', '.input-text input', function (e) {
+                            var message = $(this).val();
+                            // check if enter key is pressed and message is not null also receiver is selected
+                            if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                $(this).val(''); // while pressed enter text box will be empty
+                                var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                $.ajax({
+                                    type: "post",
+                                    url: "message", // need to create this post route
+                                    data: datastr,
+                                    cache: false,
+                                    success: function (data) {
+
+                                    },
+                                    error: function (jqXHR, status, err) {},
+                                    complete: function () {
+                                        scrollToBottomFunc();
+                                    }
+                                })
+                            }
+                        });
+                    });
+
+                }
+                // make a function to scroll down auto
+                function scrollToBottomFunc() {
+                    $('.message-wrapper').animate({
+                        scrollTop: $('.message-wrapper').get(0).scrollHeight
+                    }, 50);
+                }
+            </script>
     @endif
 @endsection
 

@@ -309,7 +309,7 @@
                                     <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{auth()->user()->email}}</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Operation</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">543</font></font></a>
+                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Operation</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$operations->count()}}</font></font></a>
                                 </li>
                             </ul>
                         </div>
@@ -317,7 +317,7 @@
                     </div>
                     <!-- /.box -->
                 </div>
-
+                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur'))
                 <div class="col-md-9">
                     <div class="container-fluid">
                         <div class="row">
@@ -352,8 +352,9 @@
                         </div>
                     </div>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>
+
 @endsection

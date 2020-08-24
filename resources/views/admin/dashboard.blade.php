@@ -247,6 +247,22 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
+
+    </script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('1702f90c00112df631a4', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('dashboard-channel');
+        channel.bind('my-event', function(data) {
+            alert(JSON.stringify(data));
+        });
     </script>
 @endsection
 
@@ -283,6 +299,7 @@
                       </div>
                     </div>
                 </div>
+                @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-white">
@@ -309,6 +326,7 @@
                       </div>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-lg-6 col-xs-12">

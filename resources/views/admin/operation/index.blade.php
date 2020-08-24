@@ -50,6 +50,7 @@
                             <tbody>
                                 @foreach($operations as $operation)
                                     <tr>
+                                        {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                         <td></td>
                                         <td class="text-center">{{ $operation->nom }}</td>
                                         <td class="text-center">{{ $operation->date_start }}</td>
@@ -70,34 +71,36 @@
             @endif
         @endif
         @if (auth()->user()->hasRole('Lecteur|Opérateur'))
-            @if ( $operation === null)
-            <div class="panel-body text-center">
-                <div class="mt-30 mb-30">
-                    <h6 class="text-semibold">
-                            Vous N'avez pas d'operation en cours
-                    </h6>
-                </div>
+        @if ($operations->isEmpty())
+        <div class="panel-body text-center">
+            <div class="mt-30 mb-30">
+                <h6 class="text-semibold">
+                        Vous n'avez pas d'operation en cours
+                </h6>
             </div>
-        @else
-            <div class="panel panel-flat">
-                <!-- /.box-header -->
-                <div  style="padding: 15px">
-                    <table id="operations-tab" class="table stripe">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th class="text-center">{{ trans('op_name') }}</th>
-                            <th class="text-center">{{ trans('start_date') }}</th>
-                            <th class="text-center">{{ trans('end_date') }}</th>
-                            <th class="text-center">{{ trans('enterprise') }}</th>
-                            <th class="text-center">{{ trans('city') }}</th>
-                            <th class="text-center">{{ trans('sites') }}</th>
-                            <th class="text-center">{{ trans('operator') }}</th>
-                            <th class="text-center">{{ trans('actions') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+        </div>
+    @else
+        <div class="panel panel-flat">
+            <!-- /.box-header -->
+            <div  style="padding: 15px">
+                <table id="operations-tab" class="table stripe">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center">{{ trans('op_name') }}</th>
+                        <th class="text-center">{{ trans('start_date') }}</th>
+                        <th class="text-center">{{ trans('end_date') }}</th>
+                        <th class="text-center">{{ trans('enterprise') }}</th>
+                        <th class="text-center">{{ trans('city') }}</th>
+                        <th class="text-center">{{ trans('sites') }}</th>
+                        <th class="text-center">{{ trans('operator') }}</th>
+                        <th class="text-center">{{ trans('actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($operations as $operation)
                             <tr>
+                                {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                 <td></td>
                                 <td class="text-center">{{ $operation->nom }}</td>
                                 <td class="text-center">{{ $operation->date_start }}</td>
@@ -110,11 +113,12 @@
                                     @include('admin.operation.partials.op-action')
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        @endif
+        </div>
+    @endif
         @endif
     </div>
 

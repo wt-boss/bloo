@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register',]]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
         $this->guard = "api";
     }
     public function register(Request $request){
@@ -33,9 +33,9 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'items' => null,
-                    'states' => $validator->errors()->all()
+                    'states' => [$validator->errors()->all()]
                 ]
-                ,204
+                ,200
             );
         }
         $user = User::create($request->toArray());
@@ -43,7 +43,7 @@ class AuthController extends Controller
         return response()->json(
             [
             'items' => $user,
-             'states' => 'success'
+             'states' => ['success']
             ],200
         );
     }
@@ -59,8 +59,8 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'items' => null,
-                    'states' => 'Unauthorized'
-                ],204
+                    'states' => ['Unauthorized']
+                ],200
             );
         }
         return $this->respondWithToken($token);
@@ -76,7 +76,7 @@ class AuthController extends Controller
         return response()->json(
            [
                'items' => auth()->user(),
-               'states' => 'success'
+               'states' => ['success']
            ],200
         );
     }
@@ -90,7 +90,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out'],200);
     }
 
     /**
@@ -116,9 +116,9 @@ class AuthController extends Controller
             ['items' => [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth($this->guard)->factory()->getTTL()*60
-           ],
-                'states' => 'success'
+            'expires_in' => auth($this->guard)->factory()->getTTL()*15778800
+            ],
+                'states' => ['success']
             ]
         );
     }

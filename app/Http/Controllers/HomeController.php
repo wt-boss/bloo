@@ -88,17 +88,18 @@ class HomeController extends Controller
                  $countoperations = $entreprise->operations()->count();
                  $table = [$entreprise->nom,$countoperations];
                  $diagram->push($table);
-
-                 $Operations = $entreprise->operations()->get();
-               foreach ($Operations as $operation)
-               {
-                   if ($operation->status === "TERMINER")
-                   {
-                       $rapports->push($operation);
-                   }
-                   $operations->push($operation);
-               }
+                 //$Operations = $entreprise->operations()->get();
+//               foreach ($Operations as $operation)
+//               {
+//                   if ($operation->status === "TERMINER")
+//                   {
+//                       $rapports->push($operation);
+//                   }
+//                   $operations->push($operation);
+//               }
              }
+             $User = User::with('operations')->findOrFail($user->id);
+             $operations = $User->operations()->with('form','entreprise')->get();
              foreach ($operations as $operation)
              {
                  $AllUsers = $operation->users()->get();
@@ -121,15 +122,18 @@ class HomeController extends Controller
     public function language()
 	{
         Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
-        Session::put('fallback_locale', session('fallback_locale') == 'fr' ? 'en' : 'fr');
+        // Session::put('fallback_locale', session('fallback_locale') == 'fr' ? 'en' : 'fr');
 		return redirect()->back();
 	}
+
 	public function profile(){
         $users = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
         from users LEFT  JOIN  messages ON users.id = messages.user_id and is_read = 0 and messages.receiver_id = " . Auth::id() . "
         where users.id != " . Auth::id() . "
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
-        return view('admin.users.profile',compact('users'));
+        $User = User::with('operations')->findOrFail(auth()->user()->id);
+        $operations = $User->operations()->with('form','entreprise')->get();
+        return view('admin.users.profile',compact('users','operations'));
     }
 
     /**
@@ -173,6 +177,7 @@ class HomeController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
+
     public function allcities()
     {
         $cities  = City::where('country_id','38')
@@ -187,6 +192,33 @@ class HomeController extends Controller
         $class = 'operateurcities';
         $viewData = Helper::buildDashboardTable($cities,$class);
         return response()->json($viewData);
+    }
+
+    public function jsonmapcities()
+    {
+        $cities  = City::where('country_id','38')
+            ->orwhere('country_id','42')
+            ->orwhere('country_id','50')
+            ->orwhere('country_id','79')
+            ->orwhere('country_id','67')
+            ->orwhere('country_id','43')
+            ->orwhere('country_id','161')
+            ->orwhere('country_id','7')
+            ->get()->pluck('name','id');
+        return response()->json($cities);
+    }
+
+    public function jsonmapcountries(){
+        $states  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->get()->pluck('name','id');;
+        return response()->json($states);
     }
 
 

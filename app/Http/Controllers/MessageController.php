@@ -17,6 +17,8 @@ class MessageController extends Controller
     {
         $this->middleware('auth');
     }
+
+
     public function getMessage($user_id)
     {
         $my_id = Auth::id();
@@ -33,6 +35,8 @@ class MessageController extends Controller
 
         return view('messages.index', ['messages' => $messages]);
     }
+
+
     public function getOperationMessage($user_id,$operation_id){
         $my_id = Auth::id();
         // Make read all unread message
@@ -47,6 +51,8 @@ class MessageController extends Controller
 
         return view('messages.index', ['messages' => $messages]);
     }
+
+
     public function deleteDuplicate($user, $image)
     {
         DB::table('notifications')
@@ -56,6 +62,8 @@ class MessageController extends Controller
             ->where('data->user', $user->id)
             ->delete();
     }
+
+
     public function sendMessage(Request $request)
     {
         $user = auth()->user();
@@ -75,77 +83,92 @@ class MessageController extends Controller
         }
         $data->save();
 
-        // Notification
+         // Notification
          $other = User::findOrFail($to);
          $other->notify(new MessageRated($message, $to, $from));
-        $pusher = App::make('pusher');
-        $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel', 'my-event', $data);
+
+         $pusher = App::make('pusher');
+         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+         $pusher->trigger('my-channel', 'my-event', $data);
     }
+
+
     public function getUser(Request $request)
     {
         $user_id = $request->input('user_id');
         $user = User::findOrFail($user_id);
         return response()->json($user);
     }
+
+
     public function index()
     {
          //$user = User::with('operations')->where('id',auth()->user()->id)->get()->first();
          //$operation = $user->operations->first();
         $AuthUser = Auth::user();
+        $users = collect();
+        $operation = "";
+        $operations = "";
         if($AuthUser->role === 5)
         {
             $operations = Operation::all();
+
         }
-        else
-        {
-            $comptes = $AuthUser->entreprises()->get();
-            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-            foreach ($comptes as $entreprise)
-            {
-                $Operations = $entreprise->operations()->get();
-                foreach ($Operations as $operation)
-                {
-                    $operations->push($operation);
-                }
-            }
-        }
-        /**
-         * On crée l'utilisateur.
-         */
-        $user = "";
-        /**
-         * On recupere l'operations a laquelle il participe.
-         */
-        $operation = $AuthUser->operations()->get()->last();
-        /**
-         * On  recupere l'entreprise a laquelle apartient cette operation.
-         */
-        $entreprise = $operation->entreprise()->get()->last();
-        /**
-         * On  recupere les utililsateurs de cette entreprise.
-         */
-        $AllUsers =  $entreprise->users()->get();
-        foreach ($AllUsers as $User)
+        else if ($AuthUser->role === 1)
         {
             /**
-             * On cherche l'Account Manager de cette entreprise
+             * On recupere l'operation a laquelle il participe;
              */
-            if($User->role === 4 )
-            {
-                $user = $User;
-            }
+            $operation = $AuthUser->operations()->get()->last();
+            /**
+             * Si il appartient effectivement a une operation on recupere l'entreprise qui gere cette operation;
+             */
+            if($operation !== null)
+                {
+                   $entreprise = $operation->entreprise()->get()->last();
+                   $AllUsers = $entreprise->users()->get();
+                    /**
+                     * On recherche l'acount Manager de cette operation;
+                     */
+                   foreach ($AllUsers as $user)
+                   {
+                       if ($user->role === 4)
+                       {
+                          $users->push($user);
+                       }
+                   }
+                }
+        } else
+        {
+              //$operations = collect();
+              $Entreprises = $AuthUser->entreprises()->get();
+//               foreach ($Entreprises as $Entreprise)
+//              {
+//                 $Operations = $Entreprise->operations()->get();
+//                 foreach ($Operations as $Operation)
+//                 {
+//                     $operations->push($Operation);
+//                 }
+//              }
+            $User = User::with('operations')->findOrFail($AuthUser->id);
+            $operations = $User->operations()->with('form','entreprise')->get();
         }
-        return view('admin.messagerie.index',compact('operations','user','operation'));
+        return view('admin.messagerie.index',compact('operations','users','operation'));
     }
+
+
     public function show(Request $request,$id){
         $operations = Operation::all();
         $operation  =  Operation::findOrFail($id);
         return view('admin.messagerie.index',compact('operation','operations'));
     }
+
+
     public function users(){
         return User::all();
     }
+
+
     public function privateMessages(User $user,$id)
     {
         $operation = Operation::findOrFail($id);
@@ -159,6 +182,8 @@ class MessageController extends Controller
             ->get();
         return $privateCommunication;
     }
+
+
     public function sendPrivateMessage(Request $request,User $user,$id)
     {
         $input = $request->all();
@@ -168,4 +193,5 @@ class MessageController extends Controller
         broadcast(new PrivateMessageSent($message->load('user')))->toOthers();
         return response(['status'=>'Message private send successfuly','message'=>$message]);
     }
+
 }

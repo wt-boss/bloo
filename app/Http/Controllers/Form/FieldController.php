@@ -16,7 +16,6 @@ class FieldController extends Controller
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
 
-
             $templates = get_form_templates();
 
             $validator = Validator::make($request->all(), [

@@ -117,24 +117,24 @@ function initMap() {
   map.addListener('click', function(mapsMouseEvent) {
     //réinitialisationn du formulaire
     resetForm();
-    
+
     // Close the current InfoWindow.
     infowindow.close();
     marker.setVisible(false);
-    
+
     let position = mapsMouseEvent.latLng;
     marker.setPosition(position);
     marker.setVisible(true);
 
     document.getElementById('lat').value = position.lat(); // latitude
     document.getElementById('long').value = position.lng(); // longitude
-    
+
     const request = {
         location: position,
         radius: '1000'
     };
 
-    
+
     const service = new google.maps.places.PlacesService(map);
 
     service.nearbySearch(request, (results, status) => {
@@ -143,7 +143,7 @@ function initMap() {
                 placeId: results[0].place_id,
                 fields: ["name", "icon", "geometry", "address_components"]
             };
-            
+
             service.getDetails(request2, (place, etat) => {
                 if (etat === google.maps.places.PlacesServiceStatus.OK) {
                     let address = '';
@@ -160,7 +160,7 @@ function initMap() {
                     infowindowContent.children['place-name'].textContent = place.name;
                     infowindowContent.children['place-address'].textContent = address;
                     infowindow.open(map, marker);
-                    
+
                     //remplissage du formulaire
                     for(var i = 0; i < place.address_components.length; i += 1) {
                       var addressObj = place.address_components[i];
@@ -173,7 +173,7 @@ function initMap() {
                       }
                     }
                 }
-            }); 
+            });
         }
     });
   });
@@ -284,7 +284,7 @@ $('.pac-form').on('submit', function(e){
       }else{
         let last_site = data;
         let url = base_url + "/sites/" + last_site.id;
-  
+
         // Ajouter à la fin du tableau
         let ligne = "<tr>"+
             "<td>"+ last_site.id +"</td>"+
@@ -294,9 +294,9 @@ $('.pac-form').on('submit', function(e){
             "<td>"+ last_site.ville +"</td>"+
             "<td><a href='"+ url +"' class='del-site'>Supprimer</a></td>"+
         "</tr>";
-  
+
         $('.tablemanager tbody').prepend(ligne);
-  
+
         // reset form
         resetForm();
       }
@@ -333,3 +333,69 @@ function resetForm(){
   $('.pac-form').trigger("reset");
   $('.controls-btn').prop( "disabled", false );
 }
+
+// autocompletion des villes
+
+// var ville_test = {
+//   "0":"TIKO",
+//   "1":"MAMFE",
+//   "2":"KUMBA",
+//   "3":"BUEA",
+//   "4":"LIMBE",
+//   "5":"KOUSSERI",
+//   "6":"NGAOUNDERE",
+//   "7":"MAROUA",
+//   "8":"GAROUA",
+//   "9":"DSCHANG",
+//   "10":"BAFANG",
+//   "11":"NKONGSAMBA",
+//   "12":"BAMENDA",
+//   "13":"BAFOUSSAM",
+//   "14":"YAOUNDE",
+//   "15":"EBOLOWA",
+//   "16":"SANGMELIMA",
+//   "17":"MBALMAYO",
+//   "18":"BERTOUA",
+//   "19":"GAROUA-BOULAI",
+//   "20":"ABONG-MBANG",
+//   "21":"EDEA",
+//   "22":"KRIBI",
+//   "23":"DOUALA"
+// };
+
+// var arr = $.map(ville_test, function(el) { return el });
+// $( "#ville" ).autocomplete({
+//   source: arr
+// });
+$.ajax({
+  url : "/jsonmapcities",
+  type: "GET",
+  dataType: 'JSON',
+  success: function(data)
+  {
+      var arr = $.map(data, function(el) { return el });
+      $( "#ville" ).autocomplete({
+          source: arr
+      });
+  },
+  error: function (jqXHR, textStatus, errorThrown)
+  {
+     console.log("impossible de joindre le serveur assets/json/ville_bank.json");
+  }
+});
+$.ajax({
+  url : "/jsonmapcountries",
+  type: "GET",
+  dataType: 'JSON',
+  success: function(data)
+  {
+      var arr = $.map(data, function(el) { return el });
+      $( "#pays" ).autocomplete({
+          source: arr
+      });
+  },
+  error: function (jqXHR, textStatus, errorThrown)
+  {
+     console.log("impossible de joindre le serveur assets/json/ville_bank.json");
+  }
+});

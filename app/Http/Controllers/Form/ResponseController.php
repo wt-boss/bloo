@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Form;
 use App\Form;
 use App\Operation;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Validator;
@@ -20,8 +21,7 @@ class ResponseController extends Controller
     public function index(Form $form)
     {
         $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
+
 
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
@@ -42,6 +42,9 @@ class ResponseController extends Controller
 
     public function store(Request $request, $form)
     {
+        $pusher = App::make('pusher');
+        $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
+        $pusher->trigger('responce-channel', 'my-event', $data);
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
 

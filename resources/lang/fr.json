@@ -193,7 +193,9 @@
     "Forgot Your Password?": "Mot de passe oublié ?",
     "Confirm Password": "Confirmer Mot de passe",
     "Confirm ": "Confirmer Mot de passe",
-
+    "free_survey_form_title": "Entrer le titre",
+    "free_survey_form_target": "Entrer l'objectif",
+    "free_survey_form_id": "Entrer l'ID du sondage",
 
 
     "t&c":"TERMES ET CONDITIONS",
@@ -402,6 +404,9 @@
     "Subject" : "Sujet",
     "Message" : "Message",
     "Send Message" : "Envoyer",
+    "Dashboard" : "Tableau de bord",
+    "Operations" : "Operations",
+    "Account" : "Comptes",
 
     "menu_form_1" :"Partarger",
     "menu_form_2" :"Partarger Formulaire",
@@ -417,6 +422,13 @@
     "menu_form_12" :"Fermer le formulaire aux reponses",
     "menu_form_13" :"Editer le formulaire",
     "menu_form_14" :"Supprimer le formulaire",
-    "menu_form_15" :"Voir tous les formulaire"
+    "menu_form_15" :"Voir tous les formulaire",
+    "Ready to Open" :"Prêt",
+    "Closed" :"Fermé",
+    "Draft" :"Brouillon",
+    "Open" : "ouvert",
+    "login_title" : "Prenez le contrôle",
+    "login_connection_btn" : "Connexion",
+    "stay_connected" : "Rester connecté",
+    "forgot_password" : "Mot de passe oublié?"
 }
-

@@ -96,11 +96,11 @@
                                             <div class="row">
                                                 <div class="form-group col-12">
                                                     <label for="title">{{trans('free_form1_label1')}}</label>
-                                                    <input type="text" minlength="3" class="form-control" id="title" name="title" placeholder="Entrer le titre" required>
+                                                <input type="text" minlength="3" class="form-control" id="title" name="title" placeholder="{{ trans('free_survey_form_title') }}" required>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <label for="purpose">{{trans('free_form1_label2')}}</label>
-                                                    <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="Entrer l'objectif" required >
+                                                <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="{{ trans('free_survey_form_target') }}" required >
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <input type="submit" class="btn btn-primary float-right"/>
@@ -139,7 +139,7 @@
                                         {{Session::get('success')}}
                                     </div>
                                 @endif
-                                    <form action="{{ route('forms.show_free') }}" method="post" >
+                                    <form action="{{route('forms.show_free') }}" method="post" name="form2" id="form2">
                                         <p style="color: transparent;">
                                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non soluta amet accusamus.
                                         </p>
@@ -147,7 +147,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="token">Code du formulaire</label>
-                                            <input id="code" type="text" class="form-control" name="code" placeholder="Entrer l'ID du sondage" required>
+                                        <input id="code" type="text" class="form-control" name="code" minlength="9" placeholder="{{ trans('free_survey_form_id') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary float-right"/>
@@ -164,32 +164,40 @@
 
 
 <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
 <script type="text/javascript">
-   // Définir l'en-tête CSRF par défaut
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // Interception du Formulaire de connexion
+
     $('#form2').submit(function(e){
 
         // Empêcher la soumission de formulaire normale, nous le faisons bien en JS à la place
         e.preventDefault();
         // Obtenir les données du formulaire
-        var data = {
-            title: $('[name=title]').val(),
-        };
-        // Envoyer la demande
-        $.post($('this').attr('action'), data, function(response) {
-            if (response.success) {--}}
-                // Si la connexion réussit, redirection
-                window.location.replace(response.redirect);-
-            }
-       });
-    });
 
+        var data = {
+            code: $('[name=code]').val(),
+            _token:"{{ csrf_token() }}",
+        };
+
+        // Send the request
+        $.post('/form_free', data, function(response) {
+            if (response.success) {
+                document.forms["form2"].submit();
+            }
+            else{
+                console.log(response);
+            }
+        });
+
+    });
 </script>
+
+
 
 @endsection
 

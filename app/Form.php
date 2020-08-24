@@ -19,7 +19,6 @@ class Form extends Model
     const STATUS_PENDING = 'pending';
     const STATUS_OPEN = 'open';
     const STATUS_CLOSED = 'closed';
-
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['fields', 'responses'];
@@ -84,15 +83,15 @@ class Form extends Model
     public static function getStatusSymbols()
     {
         return [
-            static::STATUS_DRAFT => ['label' => 'Draft', 'color' => 'slate'],
-            static::STATUS_PENDING => ['label' => 'Ready to Open', 'color' => 'primary'],
-            static::STATUS_OPEN => ['label' => 'Open', 'color' => 'success'],
-            static::STATUS_CLOSED => ['label' => 'Closed', 'color' => 'pink'],
+            static::STATUS_DRAFT => ['label' => trans('Draft'), 'color' => 'slate'],
+            static::STATUS_PENDING => ['label' => trans('Ready to Open'), 'color' => 'primary'],
+            static::STATUS_OPEN => ['label' => trans('Open'), 'color' => 'success'],
+            static::STATUS_CLOSED => ['label' => trans('Closed'), 'color' => 'pink'],
         ];
     }
 
-     public function operations()
-     {
-        return $this->hasMany(Operation::class);
-     }
+    public function operations()
+    {
+    return $this->hasMany(Operation::class);
+    }
 }

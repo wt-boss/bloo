@@ -1,39 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\City;
-use App\Http\Controllers\Controller;
-use App\Operation;
 use App\Site;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class OperationController extends Controller
+class TestController extends Controller
 {
-    public function __construct()
+    public function searchoperation($id)
     {
-        $this->middleware('auth:api', ['except' => ['login','register', 'searchoperation']]);
-        $this->guard = "api";
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $operations = Operation::paginate(10);
-        return response()->json($operations,200);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function searchoperation(Request $request)
-    {
-        $id = $request['id'];
         $city = City::findOrFail($id);
         $name = $city->name;
         $sites = Site::with('operation')->where('ville',$name)->get();
@@ -61,11 +37,9 @@ class OperationController extends Controller
             $result = ["items" =>null,"states"=>["error"]];
         }
         else
-        {
-            $result = ["items" =>$CityOperation,"states"=>["success"]];
-        }
+            {
+                $result = ["items" =>$CityOperation,"states"=>["success"]];
+            }
         return response()->json($result,200);
     }
-
-
 }

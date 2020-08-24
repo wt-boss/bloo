@@ -376,6 +376,11 @@ ul.box-title li {
     height: 18px;
 }
 
+.create-user select.form-control {
+    height: 36px;
+}
+
+
 
 /* Global */
 /* Retrait du signe plus ds les datatable */
@@ -384,4 +389,43 @@ ul.box-title li {
 .dtr-inline.collapsed tbody tr td:first-child::before,
 .dtr-inline.collapsed tbody tr th:first-child::before {
     content: '';
+}
+
+/* Share details - free form */
+.facebook, li.facebook a {
+    background: #3B5998;
+    color: white;
+}
+
+.twitter, li.twitter a {
+    background: #55ACEE;
+    color: white;
+}
+
+.google, li.google a {
+    background: #dd4b39;
+    color: white;
+}
+
+.linkedin, li.linkedin a {
+    background: #007bb5;
+    color: white;
+}
+
+.youtube, li.youtube a {
+    background: #bb0000;
+    color: white;
+}
+
+.whatsapp, li.whatsapp a {
+    background: #25D366;
+    color: white;
+}
+ul.share-free {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+ul.share-free li {
+    margin-bottom: 0px;
+    font-size: 1.2em;
 }

@@ -16,7 +16,7 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/font-awesome/css/font-awesome.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('admin/bower_components/fontawesome/css/all.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('admin/bower_components/Ionicons/css/ionicons.min.css')}}">
@@ -67,7 +67,13 @@
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="{{ route('admin') }}" class="navbar-brand"><img class="b_logo" src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
+                    <a href=    @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur')) "{{ route('admin') }}"    @else "#"
+                    @endif class="navbar-brand"><img class="b_logo"  src=
+
+
+                        "{{ asset('assets/images/bloo_logo.png') }}"
+
+                        /></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -80,16 +86,16 @@
                             <li class="<?php echo (  Str::startsWith($route, 'operation.index') || Str::startsWith($route, 'operation.view') || Str::startsWith($route, 'edit')) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('operation.index')}}" >
                                     <i class="fas fa-layer-group"></i>
-                                    <span>Opérations</span>
+                                    <span>{{ trans('Operations') }}</span>
                                 </a>
                             </li>
                         @endif
 
-                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                        @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                             <li  class="<?php echo (  Str::startsWith($route, 'admin') || Str::startsWith($route, 'operation.show') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('admin')}}">
                                     <i class="fas fa-th-large"></i>
-                                    <span>Tableau de bord</span>
+                                    <span> {{ trans('Dashboard') }}</span>
                                 </a>
                             </li>
                         @endif
@@ -98,12 +104,12 @@
                             <li class="<?php echo (  Str::startsWith($route, 'compte') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('compte.index')}}" >
                                     <i class="fas fa-briefcase"></i>
-                                    <span>Comptes</span>
+                                    <span>{{ trans('Account') }}</span>
                                 </a>
                             </li>
                         @endif
 
-
+                            @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                             <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('messages_index')}}" >
                                     {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
@@ -111,7 +117,7 @@
                                     <span>Messagerie</span>
                                 </a>
                             </li>
-
+                            @endif
 
                         @if (auth()->user()->hasRole('Superadmin'))
                             <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
@@ -131,6 +137,45 @@
                     <ul class="nav navbar-nav">
                     @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <!-- Notifications Menu -->
+                            <li class="dropdown notifications-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
+                                    <li>
+                                        <!-- inner menu: contains the messages -->
+                                        <ul class="menu">
+                                            <li><!-- start message -->
+                                                <a href="#">
+                                                    <div class="pull-left">
+                                                        <!-- User Image -->
+                                                    @foreach (auth()->user()->notifications as $notification)
+
+                                                            <div>
+                                                               <!-- Message title and timestamp -->
+                                                             <h4>
+                                                                <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
+                                                              </h4>
+                                                              <!-- The message -->
+                                                                <div class="row">
+                                                                    <div class="col-sm-10"> {{$notification->data['message']}} </div>
+                                                                    <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>
+                                                                </div>
+                                                           </div>
+                                                        @endforeach
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        </ul>
+                                        <!-- /.menu -->
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
@@ -150,15 +195,11 @@
                                                         @foreach (auth()->user()->notifications as $notification)
                                                             <!-- Message title and timestamp -->
                                                                 <h4>
-                                                                    @php
-                                                                     $user = \App\User::findOrFail($notification->data['receiver_id']);
-                                                                    echo $user->first_name." ".$user->last_name;
-                                                                    @endphp
+
                                                                     <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
                                                                 </h4>
                                                                 <!-- The message -->
-                                                                <p> {{$notification->data['message']}}</p>
-
+                                                                <p> {{$notification->data['message']}}  </p>
                                                         @endforeach
                                                     </div>
                                                 </a>
