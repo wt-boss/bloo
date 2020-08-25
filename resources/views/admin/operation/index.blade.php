@@ -2,11 +2,6 @@
 
 @section('title', 'My Forms')
 
-@section('page-css')
-    <!-- DataTables -->
-    {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> --}}
-{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">--}}
-@endsection
 
 @section('content')
 
@@ -124,7 +119,6 @@
 
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
-    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -159,7 +153,6 @@
 @endsection
 
 @section('page-script')
-    {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
     <script>
         $(function() {
             $('#operations-tab').DataTable({

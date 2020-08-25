@@ -10,7 +10,7 @@
 @endsection
 
 @section('laraform_script2')
-    {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
+
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom/main.js') }}"></script>
 @endsection
@@ -26,12 +26,44 @@
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
     <script>
         $(function() {
             $('#region').DataTable({
-               "bLengthChange" : false, //thought this line could hide the LengthMenu
-            });
+                "language": {
+                    @if( app()->getLocale() === "fr" )
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                    @endif
+                        @if( app()->getLocale() === "en")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                    @endif
+                        @if( app()->getLocale() === "es")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    @endif
+                        @if( app()->getLocale() === "pt")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                    @endif
+                },
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [
+                    {
+                        className: 'control',
+                        orderable: false,
+                        targets:   0
+                    },
+                    {
+                        orderable: false,
+                        targets: [-1]
+                    },
+                    { responsivePriority: 1, targets: 0 },
+                ],
+                "bLengthChange" : false, //thought this line could hide the LengthMenu
+                "bInfo":false,
+            })
         });
     </script>
     <script>
