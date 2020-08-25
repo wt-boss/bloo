@@ -95,7 +95,7 @@ class Helper
     }
 
 
-    public static function buildUsersNotification($items,$count) {
+     public static function buildUsersNotification($items,$count) {
      $data = "";
      foreach($items as $item)
      {

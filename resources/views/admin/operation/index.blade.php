@@ -39,6 +39,7 @@
                                 <th class="text-center">{{ trans('city') }}</th>
                                 <th class="text-center">{{ trans('sites') }}</th>
                                 <th class="text-center">{{ trans('operator') }}</th>
+                                <th class="text-center">{{ trans('Status') }}</th>
                                 <th class="text-center">{{ trans('actions') }}</th>
                             </tr>
                             </thead>
@@ -54,6 +55,18 @@
                                         <td class="text-center">{{$operation->sites()->count()}}</td>
                                         <td class="text-center">{{$operation->sites()->count()}}</td>
                                         <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
+                                        <td class="text-center">
+                                                @if($operation->status === "CREER")
+                                                <a href="#" class="badge badge-warning">    </a>
+                                                @endif
+                                                @if($operation->status === "EN COUR")
+                                                        <a href="#" class="badge badge-success">    </a>
+                                                @endif
+                                                @if($operation->status === "TERMINER")
+
+                                                        <a href="#" class="badge badge-danger">    </a>
+                                                @endif
+                                        </td>
                                         <td class="text-center" style="position: relative;">
                                             @include('admin.operation.partials.op-action')
                                         </td>
@@ -89,6 +102,7 @@
                         <th class="text-center">{{ trans('city') }}</th>
                         <th class="text-center">{{ trans('sites') }}</th>
                         <th class="text-center">{{ trans('operator') }}</th>
+                        <th class="text-center">{{ trans('Status') }}</th>
                         <th class="text-center">{{ trans('actions') }}</th>
                     </tr>
                     </thead>
@@ -97,12 +111,13 @@
                             <tr>
                                 {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                 <td></td>
-                                <td class="text-center">{{ $operation->nom }}</td>
-                                <td class="text-center">{{ $operation->date_start }}</td>
-                                <td class="text-center">{{ $operation->date_end }}</td>
-                                <td class="text-center">{{ $operation->entreprise->nom }}</td>
+                                <td class="text-center">{{$operation->nom }}</td>
+                                <td class="text-center">{{$operation->date_start }}</td>
+                                <td class="text-center">{{$operation->date_end }}</td>
+                                <td class="text-center">{{$operation->entreprise->nom }}</td>
                                 <td class="text-center">{{$operation->sites()->count()}}</td>
                                 <td class="text-center">{{$operation->sites()->count()}}</td>
+                                <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                 <td class="text-center" style="position: relative;">
                                     @include('admin.operation.partials.op-action')

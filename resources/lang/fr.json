@@ -441,6 +441,9 @@
     "create_operation_title" : "Créez une opération",
     "Start" : "Debut",
     "End" : "End",
-    "named_operation" : "Nommer votre operation"
+    "named_operation" : "Nommer votre operation",
+    "statut_operation" : "Status",
+    "Debut_operation" : "Operation debuter avec success",
+    "Fin_operation" : "Operation terminer avec success"
 
 }

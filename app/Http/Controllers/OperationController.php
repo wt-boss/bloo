@@ -115,6 +115,10 @@ class OperationController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
@@ -134,6 +138,10 @@ class OperationController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addoperateurs(Request $request)
     {
 
@@ -152,6 +160,11 @@ class OperationController extends Controller
         return back();
     }
 
+    /**
+     * @param $id
+     * @param $id1
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removelecteur($id,$id1){
 
         $user = User::findOrFail($id);
@@ -165,6 +178,11 @@ class OperationController extends Controller
         return response()->json('true');
     }
 
+    /**
+     * @param $id
+     * @param $id1
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removeoperateur($id,$id1){
 
         $user = User::findOrFail($id);
@@ -178,6 +196,10 @@ class OperationController extends Controller
         return response()->json('true');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function listLecteurs($id)
     {
         $operation = Operation::with('users')->findOrFail($id);
@@ -203,6 +225,10 @@ class OperationController extends Controller
         return response()->json($viewData);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function testresponses($id)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -214,6 +240,10 @@ class OperationController extends Controller
         return response()->json($operation);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function listOperateurs($id)
     {
         $operation = Operation::with('users')->findOrFail($id);
@@ -249,6 +279,10 @@ class OperationController extends Controller
         return response()->json($viewData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getoperationLecteurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -258,6 +292,10 @@ class OperationController extends Controller
         return response()->json($viewData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getoperationOperateurs(Request $request)
     {
         $operation_id = $request->input('operation_id');
@@ -268,6 +306,10 @@ class OperationController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getoperationManager(Request $request)
     {
         $users = collect();
@@ -448,6 +490,30 @@ class OperationController extends Controller
         }
         $operation->status = "TERMINER";
         $operation->save();
-        return back()->withSuccess('Operation cloturer avec success');
+        return back()->withSuccess(trans('Fin_operation'));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function debuter_operation($id)
+    {
+        $operation = Operation::with('form')->findOrFail($id);
+        $message = "l'operration : ".$operation->nom." a debuté.";
+        $AllOpUser = $operation->users()->where('role','1')->where('role','0')->get();
+        $form = $operation->form()->get()->last();
+        $form->status = "open";
+        foreach ($AllOpUser as $user)
+        {
+            $user->notify(new EventNotification($message));
+            $pusher = App::make('pusher');
+            $data = ['clossing an operation']; // sending from and to user id when pressed enter
+            $pusher->trigger('my-channel','notification-event', $data);
+        }
+        $operation->status = "EN COUR";
+        $form->save();
+        $operation->save();
+        return back()->withSuccess(trans('Debut_operation'));
     }
 }

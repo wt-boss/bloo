@@ -245,7 +245,7 @@ Route::get('operationsite/{id}','OperationController@operationsites')->name('sit
 /**Site routes */
 Route::resource('sites','SiteController');
 Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');
-Route::get('start/{id}','OperationController@terminer_operation')->name('startoperation');
+Route::get('start/{id}','OperationController@debuter_operation')->name('startoperation');
 
 Route::post('contactus','ContactsController@store')->name('contactus');
 

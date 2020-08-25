@@ -44,7 +44,9 @@ class HomeController extends Controller
         return view('home2',compact('questionnaires'));
     }
 
-
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $users = User::count();
@@ -56,6 +58,9 @@ class HomeController extends Controller
         return view('home', compact('widget'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function admin()
     {
         $user = auth()->user();
@@ -95,15 +100,7 @@ class HomeController extends Controller
                  $countoperations = $entreprise->operations()->count();
                  $table = [$entreprise->nom,$countoperations];
                  $diagram->push($table);
-                 //$Operations = $entreprise->operations()->get();
-//               foreach ($Operations as $operation)
-//               {
-//                   if ($operation->status === "TERMINER")
-//                   {
-//                       $rapports->push($operation);
-//                   }
-//                   $operations->push($operation);
-//               }
+
              }
              $User = User::with('operations')->findOrFail($user->id);
              $operations = $User->operations()->with('form','entreprise')->get();
@@ -235,7 +232,6 @@ class HomeController extends Controller
         return response()->json($states);
     }
 
-
     public function operateurcountries(Request $request)
     {
         $country_id = $request->input('country_id');
@@ -259,4 +255,5 @@ class HomeController extends Controller
         $viewData = Helper::buildOperateurs($operateurs);
         return response()->json($viewData);
     }
+
 }

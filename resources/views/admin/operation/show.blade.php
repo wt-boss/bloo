@@ -128,6 +128,9 @@
                             </a>
                         </span>
                     </div>
+
+
+
                     <div class="box-body row" id="responses">
                         @php
                             $data_for_chart = [];
@@ -174,6 +177,9 @@
                         @endforeach
                     </div>
                     <!-- /.box-body -->
+
+
+
                 </div>
             </div>
             <div class="col-md-3">

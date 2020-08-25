@@ -6,9 +6,11 @@ use App\City;
 use App\Country;
 use App\Entreprise;
 use App\Entreprise_user;
+use App\Notifications\EventNotification;
 use App\State;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use phpDocumentor\Reflection\Types\Compound;
 
 class CompteController extends Controller
@@ -59,6 +61,11 @@ class CompteController extends Controller
             }
             $user = User::findOrFail($parameters['user_id']);
             $user->entreprises()->attach($entreprise);
+            $message = "L'entreprise".$entreprise->nom." vous a été assigné";
+            $user->notify(new EventNotification($message));
+            $pusher = App::make('pusher');
+            $data = ["ajout d'entreprise"]; // sending from and to user id when pressed enter
+            $pusher->trigger('my-channel','notification-event', $data);
             return redirect(route('compte.index'))->withSuccess('Operation attribuer avec success');
         }
         else {
@@ -66,13 +73,6 @@ class CompteController extends Controller
         }
     }
 
-
-    // public function donner()
-    // {
-    //     $entreprises =  Entreprise::all();
-    //     $users = User::where('role','4')->get();
-    //     return view('admin.compte.gift',compact('entreprises','users'));
-    // }
 
     /**
      * Show the form for creating a new resource.
