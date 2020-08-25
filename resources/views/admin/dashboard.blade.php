@@ -406,7 +406,7 @@
                 </div>
 
                 <div class="col-lg-3 col-xs-6">
-                    <div class="box box-solid">
+                    <div class="box ">
                         <div class="box-header with-border">
                             <ul class="box-title" style="font-size: 15px;">
                                 <li>Tri par</li>
@@ -442,7 +442,7 @@
                 </div>
 
                 <div class="col-lg-3 col-xs-6">
-                    <div class="box box-solid">
+                    <div class="box ">
                         <div class="box-header with-border">
                             <ul class="box-title" style="font-size: 15px;">
                                 <li>{{ trans('operators') }}</li>

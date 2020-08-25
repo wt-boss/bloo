@@ -10,11 +10,46 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
+           
           <li class="{{Request::is('/')? "active nav-item": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
           <li class="{{Request::is('services')? "active nav-item": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
           <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{route('questionnaire.free')}}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
           <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
           <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
+          <li>
+            @php $locale = session()->get('locale'); @endphp
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    @switch($locale)
+                               
+                                @case('fr')
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFrançais
+                                @break
+                                @case('en')
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEnglish
+                                @break
+                                @case('es')
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEspagnol
+                                @break
+                                
+                                @default
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFrançais
+                    @endswitch
+                    <span class="caret"></span>
+                           
+                </a>
+               
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='fr')}}">Français</a>
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='en')}} ">English</a>
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='es')}}">Espagnol</a>
+
+                    
+                </div>
+            </li>
+
+          </li>
 
             @if (Auth::check())
                 <li class="nav-item cta"> <div class="dropdown">
