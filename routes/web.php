@@ -233,6 +233,7 @@ Route::get('/json-allcities','HomeController@allcities');
 
 Route::get('/jsonmapcountries','HomeController@jsonmapcountries');
 Route::get('/jsonmapcities','HomeController@jsonmapcities');
+Route::get('/jsonotifications','HomeController@jsonotifications');
 
 Route::get('/json-operateurcountries','HomeController@operateurcountries');
 Route::get('/json-operateurstates','HomeController@operateurstates');

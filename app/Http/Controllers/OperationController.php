@@ -114,18 +114,21 @@ class OperationController extends Controller
             return redirect()->route('home');
         }
     }
+
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
 
         $operation = Operation::findOrFail($parameters['operation']);
-        // dd($parameters);
+        $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
         foreach($parameters['lecteurs'] as $lecteur)
         {
-            $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
             $user->notify(new EventNotification($message));
+            $pusher = App::make('pusher');
+            $data = ['ajout lecteur']; // sending from and to user id when pressed enter
+            $pusher->trigger('my-channel','notification-event', $data);
 
         }
         return back();
@@ -133,12 +136,18 @@ class OperationController extends Controller
 
     public function addoperateurs(Request $request)
     {
+
         $parameters = $request->all();
         $operation = Operation::findOrFail($parameters['operation']);
+        $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
         foreach($parameters['operateurs'] as $operateur)
         {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
+            $user->notify(new EventNotification($message));
+            $pusher = App::make('pusher');
+            $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
+            $pusher->trigger('my-channel','notification-event', $data);
         }
         return back();
     }
@@ -147,7 +156,12 @@ class OperationController extends Controller
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
+        $message = "Vous avez été retier de l'operration : ".$operation->nom;
         $operation->users()->detach($user);
+        $user->notify(new EventNotification($message));
+        $pusher = App::make('pusher');
+        $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
+        $pusher->trigger('my-channel','notification-event', $data);
         return response()->json('true');
     }
 
@@ -158,6 +172,9 @@ class OperationController extends Controller
         $operation->users()->detach($user);
         $message = "Vous avez été retirer de l'operration : ".$operation->nom;
         $user->notify(new EventNotification($message));
+        $pusher = App::make('pusher');
+        $data = ['moving and operator']; // sending from and to user id when pressed enter
+        $pusher->trigger('my-channel','notification-event', $data);
         return response()->json('true');
     }
 
@@ -194,7 +211,6 @@ class OperationController extends Controller
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
         $viewData = Helper::showformresponse($form);
-
         return response()->json($operation);
     }
 
@@ -415,10 +431,20 @@ class OperationController extends Controller
     public function terminer_operation($id)
     {
         $operation = Operation::findOrFail($id);
+        $message = "l'operration : ".$operation->nom." est terminé.";
         $AllUser = $operation->users()->where('role','1')->get();
         foreach ($AllUser as $User)
         {
             $operation->users()->detach($User);
+        }
+
+        $AllOpUser = $operation->users()->where('role','1')->where('role','0')->get();
+        foreach ($AllOpUser as $user)
+        {
+            $user->notify(new EventNotification($message));
+            $pusher = App::make('pusher');
+            $data = ['clossing an operation']; // sending from and to user id when pressed enter
+            $pusher->trigger('my-channel','notification-event', $data);
         }
         $operation->status = "TERMINER";
         $operation->save();

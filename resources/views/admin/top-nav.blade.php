@@ -25,6 +25,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
 @yield('plugin-css')
 @yield('page-css')
 {{-- @yield('laraform_style') --}}
@@ -69,10 +71,7 @@
                 <div class="navbar-header">
                     <a href=    @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur')) "{{ route('admin') }}"    @else "#"
                     @endif class="navbar-brand"><img class="b_logo"  src=
-
-
                         "{{ asset('assets/images/bloo_logo.png') }}"
-
                         /></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
@@ -137,45 +136,48 @@
                     <ul class="nav navbar-nav">
                     @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                         <!-- Notifications Menu -->
-                            <li class="dropdown notifications-menu">
-                                <!-- Menu toggle button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell"></i>
-                                    <span class="label label-warning">10</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
-                                    <li>
-                                        <!-- inner menu: contains the messages -->
-                                        <ul class="menu">
-                                            <li><!-- start message -->
-                                                <a href="#">
-                                                    <div class="pull-left">
-                                                        <!-- User Image -->
-                                                    @foreach (auth()->user()->notifications as $notification)
 
-                                                            <div>
-                                                               <!-- Message title and timestamp -->
-                                                             <h4>
-                                                                <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
-                                                              </h4>
-                                                              <!-- The message -->
-                                                                <div class="row">
-                                                                    <div class="col-sm-10"> {{$notification->data['message']}} </div>
-                                                                    <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>
-                                                                </div>
-                                                           </div>
-                                                        @endforeach
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <!-- end message -->
-                                        </ul>
-                                        <!-- /.menu -->
-                                    </li>
-                                    <li class="footer"><a href="#">View all</a></li>
-                                </ul>
-                            </li>
+
+                               <li class="dropdown notifications-menu" id="notif">
+                                   <!-- Menu toggle button -->
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                       <i class="fa fa-bell"></i>
+                                       <span class="label label-warning">{{auth()->user()->notifications->count()}}</span>
+                                   </a>
+                                   <ul class="dropdown-menu">
+                                       <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
+                                       <li>
+                                           <!-- inner menu: contains the messages -->
+                                           <ul class="menu">
+                                               <li><!-- start message -->
+                                                   <a href="#">
+                                                       <div class="pull-left">
+                                                           <!-- User Image -->
+                                                           @foreach (auth()->user()->notifications as $notification)
+
+                                                               <div>
+                                                                   <!-- Message title and timestamp -->
+                                                                   <h4>
+                                                                       <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>
+                                                                   </h4>
+                                                                   <!-- The message -->
+                                                                   <div class="row">
+                                                                       <div class="col-sm-10"> {{$notification->data['message']}} </div>
+                                                                       <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>
+                                                                   </div>
+                                                               </div>
+                                                           @endforeach
+                                                       </div>
+                                                   </a>
+                                               </li>
+                                               <!-- end message -->
+                                           </ul>
+                                           <!-- /.menu -->
+                                       </li>
+                                       <li class="footer"><a href="#">View all</a></li>
+                                   </ul>
+                               </li>
+
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
@@ -334,7 +336,22 @@
     @yield('plugin-scripts')
     @yield('laraform_script2')
     @yield('page-script')
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('1702f90c00112df631a4', {
+            cluster: 'ap2'
+        });
 
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('notification-event', function(data) {
+            $.get('/jsonotifications',function(data) {
+                console.log(data)
+                $('#notif').empty();
+                $('#notif').append(data.name);
+            });
+        });
+    </script>
 </div>
 <!-- ./wrapper -->
 </body>

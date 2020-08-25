@@ -42,11 +42,11 @@
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
                 <div class="box box-primary">
-                    
+
                     <div class="box-body" style="margin-top: -13px;">
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                  <div class='col-md-12'>
-                     
+
                          <div>
                              <h5>Lecteurs</h5>
                              <div id="alllect">
@@ -59,7 +59,7 @@
                              </div>
                          </div>
                      </div>
-                 
+
                  @endif
                  @if(auth()->user()->hasRole('Lecteur'))
                          <div class='col-md-12'>
@@ -161,7 +161,6 @@
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     @if (auth()->user()->hasRole('Superadmin|Account Manager'))
     <script type="application/javascript">
         $('.operation').on('click', function(e){

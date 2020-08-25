@@ -94,4 +94,36 @@ class Helper
     return ["name"=>$returnValue, "id" => $id ];
     }
 
+
+    public static function buildUsersNotification($items,$count) {
+     $data = "";
+     foreach($items as $item)
+     {
+      $data .="<div><h4><small><i class='fa fa-clock-o'>$item->created_at</i></small></h4>".
+         "<div class='row'><div class='col-sm-10'> $item->data['message'] </div> <div class='col-sm-2'><input type='submit' class='btn btn-success btn-xs btn-block'> </div></div></div>";
+      }
+
+      $returnValue = "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>".
+                     "<i class='fa fa-bell'></i>".
+                     "<span class='label label-warning'>$count</span>".
+                     "</a>".
+                     "<ul class='dropdown-menu'>".
+                     "<li class='header'>You have $count messages</li>".
+                     "<li>".
+                     "<ul class='menu'>".
+                     "<li>".
+                     "<a href='#'>".
+                     "<div class='pull-left'>".
+                     $data.
+                     "</div>".
+                     "</a>".
+                     "</li>".
+                     "</ul>".
+                     "</li>".
+                     "<li class='footer'><a href='#'>View all</a></li>".
+                     "</ul>";
+
+      return ["name"=>$returnValue ];
+      }
+
 }

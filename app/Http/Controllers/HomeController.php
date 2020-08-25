@@ -22,6 +22,11 @@ use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Create a new controller instance.
      *
@@ -38,6 +43,8 @@ class HomeController extends Controller
         $questionnaires = auth()->user()->questionnaires;
         return view('home2',compact('questionnaires'));
     }
+
+
     public function index()
     {
         $users = User::count();
@@ -152,6 +159,13 @@ class HomeController extends Controller
             ->get();
         $class = 'operateurcountries';
         $viewData = Helper::buildDashboardTable($countries, $class);
+        return response()->json($viewData);
+    }
+
+    public function jsonotifications()
+    {
+        $count = auth()->user()->notifications->count();
+        $viewData = Helper::buildUsersNotification(auth()->user()->notifications,$count);
         return response()->json($viewData);
     }
 
