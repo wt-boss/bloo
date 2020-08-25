@@ -177,7 +177,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="box box-success">
+                <div class="box box-success ">
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">

@@ -44,14 +44,14 @@
                                 <td class="text-center">{{ Helper::getRolename($user->role) }}</td>
                                 <td class="text-center">
                                     @if($user->active == 1)
-                                            <i class="fas fa-check-square text-success"></i>
+                                            <i class="fas fa-check-square " style="color: #0065A1;"></i>
                                         @else
                                             <i class="fas fa-times-circle text-danger"></i>
                                         @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>
                         @endforeach
