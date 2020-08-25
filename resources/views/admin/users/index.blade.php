@@ -2,11 +2,6 @@
 
 @section('title', 'Comptes utilisateurs')
 
-@section('page-css')
-    <!-- DataTables -->
-    {{-- <link rel="stylesheet" href="{{asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-@endsection
 
 @section('content')
 
@@ -88,7 +83,7 @@
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script>
+
     <script>
         $(function() {
             $('.datatable').DataTable({
@@ -97,23 +92,23 @@
                     @if( app()->getLocale() === "fr" )
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
                     @endif
-                    @if( app()->getLocale() === "en")
+                        @if( app()->getLocale() === "en")
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
                     @endif
-                    @if( app()->getLocale() === "es")
+                        @if( app()->getLocale() === "es")
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
                     @endif
-                    @if( app()->getLocale() === "pt")
+                        @if( app()->getLocale() === "pt")
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
                     @endif
                 },
+
                 responsive: {
                     details: {
                         type: 'column',
                         target: 'tr'
                     }
                 },
-
                 columnDefs: [
                     {
                         className: 'control',
@@ -125,14 +120,15 @@
                         targets: [-1]
                     },
                     { responsivePriority: 1, targets: 0 },
-
                 ],
             });
+
             // Enable Select2 select for the length option
             $('.dataTables_length select').select2({
                 minimumResultsForSearch: Infinity,
                 width: 'auto'
             });
+
 
         });
     </script>
