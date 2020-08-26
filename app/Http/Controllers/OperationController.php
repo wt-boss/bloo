@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entreprise;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use App\Operation_user;
 use Illuminate\Support\Facades\App;
@@ -381,7 +382,7 @@ class OperationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
         $current_user = Auth::user();
@@ -400,7 +401,25 @@ class OperationController extends Controller
             $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
         }
 
-        return view('admin.operation.show',compact('operation','form', 'query', 'responses'));
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChart();
+            if(!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+        }
+
+        $view = (string)View::make('admin.operation.partials.response',compact('operation','form', 'query', 'responses'));
+
+        if($request->ajax()){
+            return [
+                'response_view' => $view,
+                'data_for_chart' => json_encode($data_for_chart)
+            ];
+        } else {
+            return view('admin.operation.show',compact('view','operation','form', 'query', 'responses', 'data_for_chart'));
+        }
     }
 
     /**
