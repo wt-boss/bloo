@@ -22,7 +22,7 @@
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
                     <h6 class="text-semibold">
-                            Creer des maintenant votre premiere entreprise
+                            {{ trans('Créer_entreprise') }}
                     </h6>
                 </div>
             </div>

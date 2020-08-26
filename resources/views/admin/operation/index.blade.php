@@ -33,14 +33,14 @@
                             <tr>
                                 <th></th>
                                 <th class="text-center">{{ trans('op_name') }}</th>
-                                <th class="text-center">{{ trans('start_date') }}</th>
-                                <th class="text-center">{{ trans('end_date') }}</th>
-                                <th class="text-center">{{ trans('enterprise') }}</th>
-                                <th class="text-center">{{ trans('city') }}</th>
-                                <th class="text-center">{{ trans('sites') }}</th>
-                                <th class="text-center">{{ trans('operator') }}</th>
-                                <th class="text-center">{{ trans('Status') }}</th>
-                                <th class="text-center">{{ trans('actions') }}</th>
+                                <th class="text-center ">{{ trans('start_date') }}</th>
+                                <th class="text-center ">{{ trans('end_date') }}</th>
+                                <th class="text-center ">{{ trans('enterprise') }}</th>
+                                <th class="text-center ">{{ trans('city') }}</th>
+                                <th class="text-center ">{{ trans('sites') }}</th>
+                                <th class="text-center ">{{ trans('operator') }}</th>
+                                <th class="text-center ">{{ trans('Status') }}</th>
+                                <th class="text-center ">{{ trans('actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -24,26 +24,24 @@
                     @switch($locale)
                                
                                 @case('fr')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFrançais
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
                                 @break
                                 @case('en')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEnglish
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEN
                                 @break
                                 @case('es')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEspagnol
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
                                 @break
                                 
                                 @default
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFrançais
+                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
                     @endswitch
-                    <span class="caret"></span>
-                           
                 </a>
                
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='fr')}}">Français</a>
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='en')}} ">English</a>
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='es')}}">Espagnol</a>
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='fr')}}">FR</a>
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='en')}} ">EN</a>
+                    <a class="dropdown-item" href="{{ route('language',session('locale')=='es')}}">PT</a>
 
                     
                 </div>

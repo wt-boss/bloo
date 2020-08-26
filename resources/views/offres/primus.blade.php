@@ -226,7 +226,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
+                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-primary"><i class="fa fa-angle-left"></i> Précedent</button>
                         </div>
                         <div class="form-group col-6">
                             <button type="submit" class="btn btn-success col-6 float-right">Payer avec PayPal</button>
@@ -269,7 +269,7 @@
                 $.each(data, function(index, stateObj){
                     $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
                 });
-                
+
                 let state_id = $('#region').val();
                 $.get('/json-cities?state_id=' + state_id,function(data) {
                     $('#ville').empty();
@@ -321,7 +321,7 @@
         $('.form-control').focus(function(){
             $(this).removeClass("is-invalid");
         });
-        
+
         $('.form-input-check').focusout(function(){
             if (is_null_or_whithe_space($(this).val())){
                 $(this).addClass("is-invalid");
@@ -391,7 +391,7 @@
 
         return true;
     }
-    
+
     function verifySecondStep() {
         const options = $('input[name=options]:checked').val();
         if (is_null_or_whithe_space(options)) return false;
@@ -407,7 +407,7 @@
                     $('input[name="user_name_entreprise"]').addClass("is-invalid");
                     return false;
                 }
-                
+
                 email = $('input[name="user_email_entreprise"]').val();
                 if (is_null_or_whithe_space(email)){
                     $('input[name="user_email_entreprise"]').addClass("is-invalid");
@@ -462,7 +462,7 @@
                     $('input[name="user_email"]').next(".invalid-feedback").html("Cet email n'est pas valide.");
                     return false;
                 }
-                
+
                 if (is_null_or_whithe_space($('input[name="user_password"]').val())){
                     $('input[name="user_password"]').addClass("is-invalid");
                     $('input[name="user_password"]').next(".invalid-feedback").html("Ce champ ne peut être vide (Minimum 8 caractères).");
@@ -486,7 +486,7 @@
                     $('input[name="user_conf_password"]').next(".invalid-feedback").html("Les mots de passes ne sont pas identiques.");
                     return false;
                 }
-                
+
 
                 break;
             default:

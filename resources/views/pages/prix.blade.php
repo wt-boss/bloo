@@ -38,123 +38,123 @@
 
                                   </tr>
                                 </thead>
+                                <style>
+                                    .rg{
+                                        color: #217dff
+                                    }
+                                </style>
                                 <tbody>
                                   <tr>
-                                    <td><a href="#">{{ trans('Prix') }}</a></td>
+                                    <td ><p class="rg">{{ trans('Prix') }}</p></td>
                                     <td>Gratuit</td>
                                     <td>Sur devis</td>
                                     <td>APD 80k&euro;</td>
 
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Validité') }}</a></td>
+                                    <td><p class="rg">{{ trans('Validité') }}</p></td>
                                     <td>Sans engagement</td>
                                     <td>30J </td>
                                     <td>365J</td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Sondage en ligne gratuit') }}</a> </td>
+                                    <td><p class="rg">{{ trans('Sondage en ligne gratuit') }}</p> </td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Export des fichiers') }}</a> </td>
+                                    <td><p class="rg">{{ trans('Export des fichiers') }}</p> </td>
                                     <td> PDF </td>
                                     <td> PDF </td>
                                     <td>PDF, PPT </td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Droit de publication') }}</a></td>
+                                    <td><p class="rg">{{ trans('Droit de publication') }}</p></td>
                                     <td>Droit partagé </td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
 
                                   <tr>
-                                    <td><a href="#">{{ trans('Enquête/sondage terrain ') }}</a></td>
+                                    <td><p class="rg">{{ trans('Enquête/sondage terrain ') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Nombre d’opération max') }}</a> </td>
+                                    <td><p class="rg">{{ trans('Nombre d’opération max') }}</p> </td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>1</td>
                                     <td>Illimité</td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Nombre d’opérateurs max ') }}</a></td>
+                                    <td><p class="rg">{{ trans('Nombre d’opérateurs max ') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>20</td>
                                     <td>120</td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Nombre de sites max') }} </a> </td>
+                                    <td><p class="rg">{{ trans('Nombre de sites max') }} </p> </td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>20</td>
                                     <td>60</td>
                                   </tr>
                                   <tr>
-                                    <td><a href="#">{{ trans('Nombre utilisateur max') }}</a></td>
+                                    <td><p class="rg">{{ trans('Nombre utilisateur max') }}</p></td>
                                     <td>1</td>
                                     <td>4</td>
                                     <td>12</td>
                                   </tr>
                                   <tr>
-                                    <td>  <a href="#">{{ trans('Account manager') }} </a>    </td>
+                                    <td>  <p class="rg">{{ trans('Account manager') }} </p>    </td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td> <a href="">{{ trans('Support technique direct') }} </a></td>
+                                    <td> <p class="rg">{{ trans('Support technique direct') }} </p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td> <a href="">{{ trans('Messagerie') }}</a></td>
+                                    <td> <p class="rg">{{ trans('Messagerie') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
 
                                   <tr>
-                                    <td> <a href="">{{ trans('Paiement d’acompte en ligne') }}  </a></td>
+                                    <td> <p class="rg">{{ trans('Paiement d’acompte en ligne') }}  </p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td> <a href="">{{ trans('Montant') }}</a></td>
+                                    <td> <p class="rg">{{ trans('Montant') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>20&euro;</td>
                                     <td>80&euro;</td>
                                   </tr>
+
                                   <tr>
-                                    <td> <a href="">{{ trans('Remboursable') }} </a></td>
-                                    <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
-                                    <td>Oui</td>
-                                    <td>Oui</td>
-                                  </tr>
-                                  <tr>
-                                    <td> <a href="">{{ trans('Rapport d’étude ') }} </a></td>
+                                    <td> <p class="rg">{{ trans('Rapport d’étude ') }} </p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
                                   <tr>
-                                    <td><a href="">{{ trans('Accès Bloo Market Vue') }}</a></td>
+                                    <td><p class="rg">{{ trans('Accès Bloo Market Vue') }}</p></td>
                                     <td>Payant</td>
                                     <td>Payant</td>
                                     <td>Gratuit</td>
                                   </tr>
                                   <tr>
                                     <td><a href=""></td>
-                                    <td><a href="{{route('questionnaire.free')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
-                                    <td><a href="{{route('primus')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
-                                    <td><a href="{{route('illimité')}}" class="btn d-block">{{ trans('prix_btn') }}</a></td>
+                                    <td><a href="{{route('questionnaire.free')}}"  class="btn btn-primary d-block">{{ trans('prix_btn') }}</a></td>
+                                    <td><a href="{{route('primus')}}" class="btn  btn-primary  d-block">{{ trans('prix_btn') }}</a></td>
+                                    <td><a href="{{route('illimité')}}" class="btn btn-primary d-block">{{ trans('prix_btn') }}</a></td>
                                   </tr>
                                 </tbody>
                               </table>

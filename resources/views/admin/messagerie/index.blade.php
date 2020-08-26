@@ -48,13 +48,13 @@
                  <div class='col-md-12'>
 
                          <div>
-                             <h5>Lecteurs</h5>
+                             <h5>{{ trans('Lecteurs') }}</h5>
                              <div id="alllect">
                              </div>
                          </div>
                          <hr>
                          <div>
-                             <h5>Operateurs</h5>
+                             <h5>{{ trans('Opérateurs') }}</h5>
                              <div id="alloperat">
                              </div>
                          </div>
@@ -102,8 +102,8 @@
 @if (auth()->user()->hasRole('Opérateur'))
 @section('content')
     @include('partials.alert', ['name' => 'index'])
-    <div class="panel panel-flat panel-wb">
-        <div class="panel-body" style="padding: 0;">
+    <div class="panel panel-flat panel-wb" >
+        <div class="panel-body" style="padding: 0; >
             <div class="row">
                 <div class="col-md-12">
                     <div class="container-fluid">
@@ -115,7 +115,7 @@
                                         <div class="panel-body text-center">
                                             <div class="mt-30 mb-30">
                                                 <h6 class="text-semibold">
-                                                        Vous n'etes affecter a aucune operation en cours
+                                                {{ trans('nothing_opération') }}
                                                 </h6>
                                             </div>
                                         </div>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-8" id="messages">
+                            <div class="col-md-8" id="messages" >
 
                             </div>
                         </div>
