@@ -3,7 +3,6 @@
 
 @extends('admin.top-nav')
 
-
 @section('content-header')
 
 @endsection
@@ -131,50 +130,54 @@
 
 
 
+{{--                    <div class="box-body row" id="responses">--}}
+{{--                        @php--}}
+{{--                            $data_for_chart = [];--}}
+{{--                            $fields = $form->fields;--}}
+{{--                            $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();--}}
+{{--                        @endphp--}}
+{{--                        @foreach ($fields as $field)--}}
+{{--                            @php--}}
+{{--                                $responses = $field->responses;--}}
+{{--                                $responses_count = $responses->where('answer', '!==', null)->count();--}}
+{{--                            @endphp--}}
+
+{{--                                <div class="col-md-6">--}}
+{{--                                    <label class="label-xlg">{{ $field->question }}--}}
+{{--                                        @if ($field->required) <span class="text-danger">*</span> @endif--}}
+{{--                                    </label>--}}
+{{--                                    <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>--}}
+
+{{--                                    @if (in_array($field->template, $template_alias_no_options))--}}
+{{--                                        <div class="table-responsive">--}}
+{{--                                            <table class="table table-striped-info table-xxs table-framed-info">--}}
+{{--                                                @foreach ($responses as $response)--}}
+{{--                                                    @if ($loop->index === 10)--}}
+{{--                                                        <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
+{{--                                                        @break--}}
+{{--                                                    @endif--}}
+{{--                                                    <tr>--}}
+{{--                                                        @php $answer = $response->getAnswerForTemplate($field->template); @endphp--}}
+{{--                                                        <td>{!! $answer !!}</td>--}}
+{{--                                                    </tr>--}}
+{{--                                                @endforeach--}}
+{{--                                            </table>--}}
+{{--                                        </div>--}}
+{{--                                    @else--}}
+{{--                                        @php $response_for_chart = $field->getResponseSummaryDataForChart(); @endphp--}}
+{{--                                        @if (!empty($response_for_chart))--}}
+{{--                                            @php $data_for_chart[] = $response_for_chart; @endphp--}}
+{{--                                            <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">--}}
+{{--                                                <div class="{{ ($response_for_chart['chart'] == 'pie_chart') ? 'display-inline-block' : 'chart' }}" id="{{ $response_for_chart['name'] }}"></div>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+
                     <div class="box-body row" id="responses">
-                        @php
-                            $data_for_chart = [];
-                            $fields = $form->fields;
-                            $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();
-                        @endphp
-                        @foreach ($fields as $field)
-                            @php
-                                $responses = $field->responses;
-                                $responses_count = $responses->where('answer', '!==', null)->count();
-                            @endphp
-
-                                <div class="col-md-6">
-                                    <label class="label-xlg">{{ $field->question }}
-                                        @if ($field->required) <span class="text-danger">*</span> @endif
-                                    </label>
-                                    <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>
-
-                                    @if (in_array($field->template, $template_alias_no_options))
-                                        <div class="table-responsive">
-                                            <table class="table table-striped-info table-xxs table-framed-info">
-                                                @foreach ($responses as $response)
-                                                    @if ($loop->index === 10)
-                                                        <tr><strong>{{ trans('more_info') }}</strong></tr>
-                                                        @break
-                                                    @endif
-                                                    <tr>
-                                                        @php $answer = $response->getAnswerForTemplate($field->template); @endphp
-                                                        <td>{!! $answer !!}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
-                                    @else
-                                        @php $response_for_chart = $field->getResponseSummaryDataForChart(); @endphp
-                                        @if (!empty($response_for_chart))
-                                            @php $data_for_chart[] = $response_for_chart; @endphp
-                                            <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">
-                                                <div class="{{ ($response_for_chart['chart'] == 'pie_chart') ? 'display-inline-block' : 'chart' }}" id="{{ $response_for_chart['name'] }}"></div>
-                                            </div>
-                                        @endif
-                                    @endif
-                                </div>
-                        @endforeach
+                        {!! $view !!}
                     </div>
                     <!-- /.box-body -->
 
@@ -447,7 +450,7 @@
     <script>
         google.charts.load('current', {'packages':['corechart']});
 
-        var data_for_chart = {!! json_encode($data_for_chart) !!};
+        let data_for_chart = {!! json_encode($data_for_chart) !!};
 
         if (typeof data_for_chart === 'object' && data_for_chart instanceof Array && data_for_chart.length) {
             google.charts.setOnLoadCallback(function () {
@@ -473,7 +476,23 @@
         var channel = pusher.subscribe('responce-channel');
         channel.bind('my-event', function(data) {
             // alert(JSON.stringify(data));
-            location.reload(true);
+            // location.reload(true);
+            $.get('/operation/2',function(response) {
+                $('#responses').empty()
+                    .append(response.response_view);
+
+                data_for_chart = JSON.parse(response.data_for_chart);
+
+                drawCharts(data_for_chart);
+
+                $(function () {
+                    // Resize chart on sidebar width change and window resize
+                    $(window).on('resize', function () {
+                        drawCharts(data_for_chart);
+                    });
+                });
+            });
+
         });
     </script>
 @endsection
