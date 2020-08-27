@@ -203,3 +203,33 @@
 .mik-is-invalid{
     border-color: #dc3545 !important;
 }
+
+/* operation little map */
+#map_lecteurs{
+    min-height: 300px;
+}
+
+.infowindow-content .title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.infowindow-content {
+    display: none;
+}
+
+.place-address{
+    text-transform: capitalize;
+}
+
+#map_lecteurs .infowindow-content {
+    display: inline;
+}
+
+.m_operateur{
+    cursor: pointer;
+}
+
+.op_active{
+    color: #0065A1;
+}
