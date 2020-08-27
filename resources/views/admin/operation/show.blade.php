@@ -104,12 +104,13 @@
                     <div class="box-header with-border">
                         <ul class="box-title" style="padding-left: 4px;">
                             <li>{{ trans('response_stats') }}</li>
+
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
                                     {{ trans('sort_by') }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                                     <li role="presentation" class="divider"></li>
@@ -117,13 +118,13 @@
                                 </ul>
                             </li>
                         </ul>
-                        <span class="pull-right" style="font-size: 40px;">
-                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
+                        <span class="pull-right">
+                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
                              <a href="{{ route('forms.response.export2', $operation->id) }}">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
                              </a>
                             <a href="{{ route('forms.response.export', $form->code) }}">
-                                <i class="fa fa-file-excel-o" aria-hidden="true">  </i>
+                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
                             </a>
                         </span>
                     </div>
@@ -190,9 +191,9 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
+                                <p class="box-title">
                                     {{ trans('Lecteurs') }}
-                                </h3>
+                                </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
                                 @endif
@@ -233,9 +234,9 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
+                                <p class="box-title">
                                     {{ trans('Opérateurs') }}
-                                </h3>
+                                </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
                                 @endif
@@ -280,9 +281,9 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
+                                <p class="box-title">
                                     Localisation
-                                </h3>
+                                </p>
                             </div>
                         </div>
 
