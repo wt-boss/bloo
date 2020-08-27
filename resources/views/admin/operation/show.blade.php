@@ -15,16 +15,16 @@
                 <!-- DONUT CHART -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <span>Informations generales : </span> <span class="bloo-primary-color">{{$operation->nom}}</span>
+                        <p class="box-title" >{{trans('informations_generales')}} <span style="color: #0065A1; font-size:15px;">{{$operation->nom}}</span></p>
                     </div>
                     <div class="box-body">
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">Date debut</p>
+                                <p class="label">{{ trans('Date_debut') }}</p>
                                 <p class="info-value">{{$operation->date_start}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Date debut</p>
+                                <p class="label">{{ trans('Dat_fin') }}</p>
                                 <p class="info-value">{{$operation->date_end}}</p>
                             </div>
                         </div>
@@ -42,11 +42,11 @@
                         </div>
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">Lecteurs</p>
+                                <p class="label">trans{{trans('Lecteurs')  }}</p>
                                 <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Operateur</p>
+                                <p class="label">{{ trans('Opérateurs') }}</p>
                                 <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <p class="info-value">{{$operation->entreprise->nom}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Fondé</p>
+                                <p class="label">{{ trans('Fondé') }}</p>
                                 <p class="info-value">
                                     @php
                                         $entreprise = $operation->entreprise()->with('users')->get()->last();
@@ -78,12 +78,12 @@
                         <div class="row">
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">Afficher le questionnaire</a>
+                                    <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">{{ trans('Afficher_le_questionnaire') }}</a>
                                 </div>
                             </div>
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a href="{{ route('operation.index') }}"  class="btn form-control">Selectionner une opération</a>
+                                    <a href="{{ route('operation.index') }}"  class="btn form-control">{{ trans('Selectionner_une_opération') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +102,8 @@
             <div class="col-md-9">
                 <div class="box" style="height: 100%;">
                     <div class="box-header with-border">
-                        <ul class="box-title">
-                            <li>{{ trans('statistiques') }}</li>
+                        <ul class="box-title" style="padding-left: 4px;">
+                            <li>{{ trans('response_stats') }}</li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     {{ trans('sort_by') }} <span class="caret"></span>
@@ -191,7 +191,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="box-title">
-                                    Lecteurs
+                                    {{ trans('Lecteurs') }}
                                 </h3>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
@@ -234,7 +234,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="box-title">
-                                    Operateurs
+                                    {{ trans('Opérateurs') }}
                                 </h3>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>

@@ -21,7 +21,7 @@
             <div class="d-none d-sm-block col-sm-5 left-side-bloo">
                 <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
                 {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo_white.png') }}" alt="Bloo"> --}}
-                <h1>Creer un compte utilisateur</h1>
+                <h1>{{ trans('Creer un compte utilisateur') }}</h1>
             </div>
             <div class="col-sm-7">
                 <div class="my-content create-user">
@@ -33,8 +33,10 @@
                         @csrf
                         @include('admin.users.form')
                         <br>
+                      <div style="margin-bottom: 9px;">
                         <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
-                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                        <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
+                      </div>
                     {!! Form::close() !!}
                 </div>
             </div>
