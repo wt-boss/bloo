@@ -28,15 +28,11 @@
                     <div class="pull-right">
                         <a class="btn btn-bloo-w" href="{{ !$entreprises->isEmpty() ? route('operation.create') : '#'}}" {{$entreprises->isEmpty() ? 'disabled' : '' }}>Suivant</a>
                     </div>
-                    <h2 class="bloo-primary left-side-bloo border-left-primary">Prenez le contrôle !</h2>
-                    <p class="text-justify">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                        exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
-                    </p>
+                    <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('Prenez_le_contrôle !') }}</h2>
+
                     <form method="post" action="{{ route('saventreprise') }}">
                         @csrf
-                        <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise" required>
+                        <input class="form-control" type="text" name="nom" placeholder="Nom de l'entreprise" required>
                         <input class="form-control" type="text" name="adresse" placeholder="Adresse" required>
                         <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
@@ -57,9 +53,9 @@
                         </div>
                         <input class="form-control" type="hidden" name="type" value="Personne Morale">
                         <input class="form-control" type="text" name="telephone" placeholder="Telephoone" required>
-                        <input class="form-control" type="email" name="email" placeholder="Emailphp" required>
+                        <input class="form-control" type="email" name="email" placeholder="Email" required>
                         <br>
-                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                        <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
                         {{-- @csrf
                         <input class="form-control" type="text" name="nom" placeholder="nom de l'entreprise">
                         <input class="form-control" type="text" name="adresse" placeholder="Adresse">

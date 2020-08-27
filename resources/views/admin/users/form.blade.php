@@ -36,12 +36,12 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
       </select>
   </div>
 
-{!! Form::myInput('password', 'password', 'Password') !!}
+{!! Form::myInput('password', 'password', trans('password')) !!}
 
-{!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
+{!! Form::myInput('password', 'password_confirmation', trans('password_confirmation')) !!}
 
-{!! Form::mySelect('role', 'Role', $allowedRoles) !!}
+{!! Form::mySelect('role', 'Rôle', $allowedRoles) !!}
 
-{!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
+{!! Form::mySelect('active', trans('compte_active'), config('variables.boolean')) !!}
 
 {!! Form::myFileImage('avatar', 'Avatar', $img_url) !!}
