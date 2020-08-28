@@ -31,149 +31,150 @@
                 <fieldset>
                     @csrf
                     <br>
-                    <h4><span class="step"> INFORMATIONS DU CLIENT ET PAIEMENT </span></h4>
+                    <h4><span class="step"> {{ trans('infoclient') }} </span></h4>
                     <br>
                     <div class="row">
                         <div class="form-group col-8 offset-1 radio-buttons-1">
-                            <h6>Etes vous une entreprise ou un particulier ?</h6>
+                            <h6>{{ trans('choise_entreprise') }}</h6>
                             <label class="radio-inline">
-                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> Entreprise
+                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> {{ trans('Entreprise') }}
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="options"  class="button" value="PARTICULIER"> Particulier
+                                <input type="radio" name="options"  class="button" value="PARTICULIER"> {{ trans('Particulier') }}
                             </label>
                         </div>
                     </div>
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
-                            <label for="name_enterprise">Nom de l'entreprise :</label>
+                            <label for="name_enterprise">{{ trans('Nom_entreprise') }} :</label>
                             <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide (Minimum 3 caractères).
+                               {{ trans('chanp_valide') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="address_enterprise">Adresse de l'entreprise :</label>
+                            <label for="address_enterprise">{{ trans('adress_entreprise') }}</label>
                             <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-country">Numero Contribuable de l'entreprise :</label>
+                            <label for="birth-country">{{ trans('num_contribuable')}}</label>
                             <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-country">Numero SIRET/RCCM de l'entreprise :</label><br>
+                            <label for="birth-country">{{ trans('num_sirect') }}</label><br>
                             <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                               {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-date">Pays de l'entreprise :</label><br>
+                            <label for="birth-date">{{ trans('pays_entreprise') }}</label><br>
                             <select class="birth-date form-control" name="" id="country" required>
                                 @foreach($countries as $country)
                                     <option value="{{$country->id}}">{{$country->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                               {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div id="div_region" class="form-group col-6">
-                            <label for="birth-date">Region de l'entreprise :</label><br>
+                            <label for="birth-date">{{ trans('region_entreprise') }}</label><br>
                             <select class="form-control form-input-check" name="" id="region" required>
                             </select>
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                               {{ trans('adress_entreprise_valid') }}.
                             </div>
                         </div>
                         <div id="div_ville" class="form-group col-6">
-                            <label for="birth-date">Ville de l'entreprise :</label><br>
+                            <label for="birth-date">{{ trans('ville_entreprise') }}</label><br>
                             <select class="form-control form-input-check" name="city_id" id="ville" required>
                             </select>
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                              {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
 
                         <div class="form-group col-6">
-                            <label for="birth-date">Telephone de l'entreprise :</label><br>
+                            <label for="birth-date">{{ trans('telephone_entreprise') }}</label><br>
                             <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_name">Nom de l'utilisateur:</label><br>
+                            <label for="particulier_name"><{{ trans('name_user') }}/label><br>
                             <input type="text" name="user_name_entreprise" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide (Minimum 3 caractères).
+                                {{ trans('message_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_email">Addresse Email de l'entreprise :</label><br>
+                            <label for="particulier_email">{{ trans('adress_entreprise1') }}</label><br>
                             <input type="email" name="email_entreprise" class="address-city form-control form-email-check-perm" id="particulier_email">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                             {!! $errors->first('email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_email">Addresse Email de l'utilisateur :</label><br>
+                            <label for="particulier_email">{{ trans('adress_user') }}</label><br>
                             <input type="email" name="user_email_entreprise" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                             {!! $errors->first('user_email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
-                            <label for="particulier_email">Mot de passe :</label><br>
+                            <label for="particulier_email">{{ trans('pass_word') }}</label><br>
                             <input type="password" name="user_password_entreprise" class="address-city form-control form-input-check" id="particulier_email">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                               {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6 ">
-                            <label for="particulier_email">Confirmez mot de passe :</label><br>
+                            <label for="particulier_email">{{ trans('confim_pass_word') }}</label><br>
                             <input type="password" name="user_conf_password_entreprise" class="address-city form-control form-input-check" id="particulier_email">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                     </div>
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
-                            <label for="particulier_name">Nom:</label><br>
+                            <label for="particulier_name">{{ trans('name') }}:</label><br>
                             <input type="text" name="user_name" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide (Minimum 3 caractères).
+                                {{ trans('message_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_email">Addresse Email :</label><br>
+    "email_adress": "Adress Email",
+                            <label for="particulier_email">{{ trans('email_adress') }}</label><br>
                             <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                             {!! $errors->first('user_email', '<small class="help-block">:message</small>') !!}
                         </div>
                         <div class="form-group col-6 ">
-                            <label for="particulier_email">Mot de passe :</label><br>
+                            <label for="particulier_email">{{ trans('pass_word') }}</label><br>
                             <input type="password" name="user_password" class="address-city form-control form-input-check" id="">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6 ">
-                            <label for="confirm_pass">Confirmez mot de passe :</label><br>
+                            <label for="confirm_pass">{{ trans('confim_pass_word') }}</label><br>
                             <input type="password" name="user_conf_password" class="address-city form-control form-input-check" id="">
                             <div class="invalid-feedback">
-                                Ce champ ne peut être vide.
+                                {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
@@ -182,10 +183,10 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-danger d-none"><i class="fa fa-angle-left"></i> Précedent</button>
+                            <button type="button" data-step-nav="prev" class="btn btn-previous col-6 btn-outline-danger d-none"><i class="fa fa-angle-left"></i> {{ trans('Précedent') }}</button>
                         </div>
                         <div class="form-group col-6">
-                            <button type="submit" class="btn btn-success col-6 float-right">Payer avec PayPal</button>
+                            <button type="submit" class="btn btn-success col-6 float-right">{{ trans('paye_to_paypal') }}</button>
                         </div>
                     </div>
 
