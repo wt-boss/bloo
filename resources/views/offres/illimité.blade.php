@@ -148,14 +148,15 @@
                     </div>
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
-                            <label for="particulier_name">{{ trans('name') }}:</label><br>
+                            <label for="particulier_name">{{ trans('name') }}</label><br>
                             <input type="text" name="user_name" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-    "email_adress": "Adress Email",
+                            
+
                             <label for="particulier_email">{{ trans('email_adress') }}</label><br>
                             <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">

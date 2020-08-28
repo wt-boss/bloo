@@ -39,9 +39,9 @@
                 </a>
                
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='fr')}}">FR</a>
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='en')}} ">EN</a>
-                    <a class="dropdown-item" href="{{ route('language',session('locale')=='es')}}">PT</a>
+                    <a class="dropdown-item" href="http://localhost:8000/localization/fr">FR</a>
+                    <a class="dropdown-item" href="http://localhost:8000/localization/en ">EN</a>
+                    <a class="dropdown-item" href="http://localhost:8000/localization/pt">PT</a>
 
                     
                 </div>

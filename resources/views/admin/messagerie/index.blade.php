@@ -109,7 +109,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class=" box box-primary user-wrapper">
+                                <div class=" box box-primary ">
                                     <ul class="users">
                                         @if ($users->isEmpty())
                                         <div class="panel-body text-center">
@@ -120,7 +120,8 @@
                                             </div>
                                         </div>
                                         @else
-                                        <center><i><h4>Accounts Manager</h4></i></center>
+                                        <center><i><h5>{{ trans('Accounts_Manager') }}</h5></i></center>
+                                    
                                          @foreach ($users as $user)
                                          <li class="user" id="{{ $user->id }}">
                                             {{--will show unread count notification--}}
