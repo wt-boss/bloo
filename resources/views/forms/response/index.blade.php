@@ -36,9 +36,7 @@
         <h5 class="panel-title">{{ $page }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ $symbol['label'] }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
-                @if(!auth()->user()->hasRole('Free'))
                     @include('forms.partials._form-menu')
-                @endif
             </div>
         </div>
     </div>
