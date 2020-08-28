@@ -25,12 +25,12 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Nom</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Rôle</th>
-                            <th class="text-center">Compte Actif</th>
+                            <th>{{ trans('Name') }}</th>
+                            <th class="text-center">{{ trans('Email') }}</th>
+                            <th class="text-center">{{ trans('Rôle') }}</th>
+                            <th class="text-center">{{ trans('Compte Actif') }}</th>
                             @if(Auth::user()->rolename() == "Superadmin")
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">{{ trans('actions') }}</th>
                             @endif
                         </tr>
                     </thead>

@@ -456,9 +456,9 @@
                                 <li>Tri par</li>
                                 <li>
                                     <select class="form-control bootstrap-select" style="font-size: 12px; height: 20px;">
-                                        <option id="country" selected="selected">Pays</option>
-                                        <option id="state">Regions</option>
-                                        <option id="city">Villes</option>
+                                        <option id="country" selected="selected">{{ trans('Pays') }}</option>
+                                        <option id="state">{{ trans('Region') }}</option>
+                                        <option id="city">{{ trans('city') }}</option>
                                     </select>
                                 </li>
                             </ul>

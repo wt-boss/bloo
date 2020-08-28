@@ -34,7 +34,7 @@
                         @include('admin.users.form')
                         <br>
                       <div style="margin-bottom: 9px;">
-                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
+                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">{{ trans('Annuler') }}</a>
                         <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
                       </div>
                     {!! Form::close() !!}

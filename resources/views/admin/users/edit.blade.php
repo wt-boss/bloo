@@ -29,7 +29,7 @@
                         @include('admin.users.form2')
                         <br>
                         <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
-                        <button type="submit" class="btn btn-bloo">Mettre à jour</button>
+                        <button type="submit" class="btn btn-bloo">{{ trans('Mettre_jour') }}</button>
                     {!! Form::close() !!}
                 </div>
             </div>

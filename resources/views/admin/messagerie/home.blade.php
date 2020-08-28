@@ -34,7 +34,7 @@
                             {{$operation->description}}
                             <div class="pull-right">
                               <a href="{{route('messages_show',$operation->id)}}">
-                                  <button type="button" class="btn btn-sm btn-primary" >Voir messages</i>
+                                  <button type="button" class="btn btn-sm btn-primary" >{{ trans('Voir_messages') }}</i>
                                   </button>
                               </a>
                             </div>
