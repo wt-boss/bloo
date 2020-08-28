@@ -33,7 +33,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'items' => null,
-                    'states' => [$validator->errors()->all()]
+                    'states' => $validator->errors()->all()
                 ]
                 ,200
             );

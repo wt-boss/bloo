@@ -36,8 +36,8 @@ class Helper
      $data = "";
         foreach($items as $item) {
 
-              $data .= "<ul class='users'>".
-                                    "<li class='user' id=$item->id>".
+              $data .=
+                                    "<li class='user' data-id=$item->id>".
                                    "<div class='media'>".
                                    "<div class='media-left'>".
                                    "<img src=$item->avatar alt='' class='media-object'>".
@@ -47,8 +47,8 @@ class Helper
                                    "<p class='email'>".substr($item->email, 0, 24)."</p>".
                                    "</div>".
                                    "</div>".
-                                   "</li>".
-                                    "</ul>";
+                                   "</li>" ;
+
 
             }
             $returnValue =$data;

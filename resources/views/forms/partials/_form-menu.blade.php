@@ -1,6 +1,7 @@
 <button class="btn btn-xs btn-success">Menu</button>
 <button class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right">
+    @if(!auth()->user()->hasRole('Free'))
     <li class="dropdown-header highlight"><i class="icon-menu7"></i> <i class="icon-share3 pull-right"></i>{{trans('menu_form_1')}}</li>
     @if ($form->status === $form::STATUS_OPEN)
         <li><a data-toggle="modal" data-target="#share-form" data-backdrop="static" data-keyboard="false">{{trans('menu_form_2')}}</a></li>
@@ -23,7 +24,8 @@
 
     <li class="dropdown-header highlight"><i class="icon-menu7"></i> <i class="icon-gear pull-right"></i>{{trans('menu_form_8')}}</li>
     <li><a data-toggle="modal" data-target="#form-availability" data-backdrop="static" data-keyboard="false">{{trans('menu_form_9')}}</a></li>
-    @if (Route::currentRouteName() !== 'forms.show')
+    @endif
+        @if (Route::currentRouteName() !== 'forms.show')
         <li><a href="{{ route('forms.show', $form->code) }}">{{trans('menu_form_10')}}</a></li>
     @endif
 

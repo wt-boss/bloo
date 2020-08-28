@@ -536,7 +536,6 @@
 
                 drawCharts(data_for_chart);
 
-
                 data_for_chart2 = {!! json_encode($data_for_chart2) !!};
 
                 drawCharts(data_for_chart2);
