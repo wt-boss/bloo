@@ -21,20 +21,18 @@
             <div class="d-none d-sm-block col-sm-5 left-side-bloo">
                 <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
                 {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo_white.png') }}" alt="Bloo"> --}}
-                <h1>Creer un compte client</h1>
+                <h1>{{ trans('creer_compte') }}</h1>
             </div>
             <div class="col-sm-7">
                 <div class="my-content">
-                    <h2 class="bloo-primary left-side-bloo border-left-primary">Prenez le contrôle !</h2>
+                    <h2 class="bloo-primary left-side-bloo border-left-primary">{{trans('Prenez_le_contrôle !') }}</h2>
                     <p class="text-justify">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                        exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+
                     </p>
                     <form method="post" action="{{ route('compte.store') }}">
                         @csrf
-                        <input class="form-control" type="text" name="nom" placeholder="Nom de l'entreprise" required>
-                        <input class="form-control" type="text" name="adresse" placeholder="Adresse" required>
+                        <input class="form-control" type="text" name="nom" placeholder="{{ trans('Nom_entreprise') }}" required>
+                        <input class="form-control" type="text" name="adresse" placeholder="{{ trans('Address') }}" required>
                         <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
                         <select class="form-control" name="" id="country" required>
@@ -53,10 +51,10 @@
                             </select>
                         </div>
                         <input class="form-control" type="hidden" name="type" value="Personne Morale">
-                        <input class="form-control" type="text" name="telephone" placeholder="Téléphone" required>
-                        <input class="form-control" type="email" name="email" placeholder="Email" required>
+                        <input class="form-control" type="text" name="telephone" placeholder="{{ trans('Phone') }}"required>
+                        <input class="form-control" type="email" name="email" placeholder="{{ trans('Email') }}" required>
                         <br>
-                        <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                        <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
                     </form>
                 </div>
             </div>

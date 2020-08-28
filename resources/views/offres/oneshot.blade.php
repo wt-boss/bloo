@@ -102,46 +102,46 @@
                                   <input type="text" class="form-control"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" required>
                               </div>
                               <div class="form-group col-6">
-                                  <label for="address_enterprise">Adresse :</label>
+                                  <label for="address_enterprise">{{ trans('adress_entreprise') }}</label>
                                   <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" required>
                               </div>
                               <div class="form-group col-6">
-                                  <label for="birth-country">Numero Contribuable:</label>
+                                  <label for="birth-country">{{ trans('num_contribu') }}</label>
                                   <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
                               </div>
                               <div class="form-group col-6">
-                                  <label for="birth-country">Numero SIRET/RCCM:</label><br>
+                                  <label for="birth-country">{{ trans('num_serie') }}</label><br>
                                   <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
                               </div>
                               <div class="form-group col-6">
-                                  <label for="birth-date">Ville:</label><br>
+                                  <label for="birth-date">{{ trans('Ville') }}:</label><br>
                                   <input type="text" name="ville_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer la ville">
                               </div>
                               <div class="form-group col-6">
-                                  <label for="birth-date">Pays:</label><br>
+                                  <label for="birth-date">{{ trans('Pays') }}:</label><br>
                                   <input type="text" name="pays_entreprise" class="birth-date form-control" id="birth-date" placeholder="Entrer le pays">
                               </div>
                               <div class="form-group col-6">
-                                  <label for="birth-date">Telephone:</label><br>
+                                  <label for="birth-date">{{ trans('phone') }}:</label><br>
                                   <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le pays">
                               </div>
                                <div class="form-group col-6">
-                                   <label for="particulier_email">Mot de passe :</label><br>
+                                   <label for="particulier_email">{{ trans('pass_word') }}</label><br>
                                    <input type="password" name="address-city" class="address-city form-control" id="particulier_email">
                                </div>
                            </div>
 
                             <div class="row" id="particulier">
                             <div class="form-group col-6">
-                                <label for="particulier_name">Nom:</label><br>
+                                <label for="particulier_name">{{ trans('Name') }}:</label><br>
                                 <input type="text" name="particulier_name" class="address form-control" id="particulier_name">
                             </div>
                             <div class="form-group col-6">
-                                <label for="particulier_email">Addresse Email :</label><br>
+                                <label for="particulier_email">{{ trans('email_adress') }}</label><br>
                                 <input type="email" name="address-city" class="address-city form-control" id="particulier_email">
                             </div>
                                 <div class="form-group col-6 ">
-                                    <label for="particulier_email">Mot de passe :</label><br>
+                                    <label for="particulier_email">{{ trans('pass_word') }}</label><br>
                                     <input type="password" name="address-city" class="address-city form-control" id="particulier_email">
                                 </div>
                                 <div class="form-group col-6">
@@ -150,10 +150,10 @@
                         </div>
                             <div class="row">
                                 <div class="form-group col-6">
-                                    <button type="button" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> Précedent</button>
+                                    <button type="button" class="btn btn-previous col-6 btn-outline-danger"><i class="fa fa-angle-left"></i> {{ trans('Précedent') }}</button>
                                 </div>
                                 <div class="form-group col-6">
-                                    <button type="submit" class="btn btn-outline-success col-6 float-right">Valider</button>
+                                    <button type="submit" class="btn btn-outline-success col-6 float-right">{{ trans('free_button') }}</button>
                                 </div>
                             </div>
 

@@ -43,6 +43,7 @@ class UsersController extends Controller
                 $Operation->push($operation);
             }
         }
+
         $compteur = $Operation->count();
         if ($compteur != 0)
         {

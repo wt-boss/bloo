@@ -49,17 +49,18 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('Recrutement opérateur') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                    <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('Recrutement_op') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
                                 </div>
                                 <div id="menuone" class="collapse show">
                                     <div class="card-body">
-                                    <p>{{ trans('carriere5') }}</p>
+                                    <p>{{ trans('carriere5') }}{{ trans('carriere06') }} <a href="#">{{ trans('carriere07') }}</a>{{ trans('carriere08') }} </p>
                                     <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="custom-file col-12">
                                                 <input type="hidden" name="name_cv" value="cv pour Recrutement opérateur">
-                                                <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px; border-right-style: 6px;" id="customFileOp" >
+                                                <input type="file" name="filename[]" class="custom-file-input jt"  id="customFileOp" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; margin-left: 231px; border-right-width: 0px; border-right-style: 6px;padding-bottom: 26px;">
+
                                                 <label class="custom-file-label" style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileOp"> </label>
                                             </div>
                                             <div class="col-12">
@@ -77,13 +78,14 @@
                             </div>
                             <div id="menutwo" class="collapse">
                                 <div class="card-body">
-                                    <p>{{ trans('Offree') }}</p>
+                                    <p>{{ trans('Offree') }}{{ trans('carriere06') }} <a href="#">{{ trans('carriere07') }}</a>{{ trans('carriere08') }}
+                                    </p>
                                     <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="custom-file col-12">
                                                 <input type="hidden" name="name_cv" value="cv pour demande stage">
-                                                <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px; border-right-style: 6px;" id="customFileIntern" >
+                                                <input type="file" name="filename[]" class="custom-file-input jt"  id="customFileIntern"  style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; margin-left: 231px; border-right-width: 0px; border-right-style: 6px;padding-bottom: 26px;">
                                                 <label class="custom-file-label"  style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileIntern"> </label>
                                             </div>
                                             <div class="col-12">
@@ -109,7 +111,7 @@
                                         <div class="row">
                                             <div class="custom-file col-12">
                                                 <input type="hidden" name="name_cv" value="cv Demande Emplois">
-                                                <input type="file" name="filename[]" class="custom-file-input jt" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; border-right-width: 0px; border-right-style: 6px;" id="customFileJob" >
+                                                <input type="file" name="filename[]" class="custom-file-input jt"  id="customFileJob" style="border-right-width: 0px;border-right-style: 6px;margin-left: 23px; margin-left: 231px; border-right-width: 0px; border-right-style: 6px;padding-bottom: 26px;" >
                                                 <label class="custom-file-label" style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileJob"> </label>
                                             </div>
                                             <div class="col-12">

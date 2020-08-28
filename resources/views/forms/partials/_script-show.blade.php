@@ -44,7 +44,7 @@
         $('#create-form').validate({
             'submitHandler': function (form) {
                 saveForm(form, function ($form) {
-                    notify('success', 'Form template has been saved');
+                    notify('success', '{{ trans('Le_modèle_de_formulaire_enregistré') }}');
                     $form.find('#form-preview').removeClass('hidden').attr('href', '{{ route('forms.preview', $form->code) }}');
                 }, function (error_message) {
                     showError(error_message);

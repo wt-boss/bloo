@@ -321,11 +321,11 @@
         <div class="container">
             <div class="row">
                 <div class="pull-right hidden-xs">
-                    <b>Powered by </b><a href="#" id="infinites">Kolors</a>
+                    <b>Powered by </b><a href="#" id="infinites">Bloo</a>
                 </div>
                 <ul class="col-xs-12 col-sm-10 text-center">
-                    <li><a href="{{ route('Politique_de_confidentialité') }}">Confidentialité</a></li>
-                    <li><a href="{{ route('Termes_&_Conditions') }}">Conditions d'utilisation</a></li>
+                    <li><a href="{{ route('Politique_de_confidentialité') }}">{{ trans('footer_privacy') }}</a></li>
+                    <li><a href="{{ route('Termes_&_Conditions') }}">{{ trans('Conditions_utilisation') }}</a></li>
                 </ul>
             </div>
         </div>

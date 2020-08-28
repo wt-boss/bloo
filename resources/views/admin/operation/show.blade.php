@@ -15,16 +15,16 @@
                 <!-- DONUT CHART -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <span>Informations generales : </span> <span class="bloo-primary-color">{{$operation->nom}}</span>
+                        <p class="box-title" >{{trans('informations_generales')}} <span style="color: #0065A1; font-size:15px;">{{$operation->nom}}</span></p>
                     </div>
                     <div class="box-body">
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">Date debut</p>
+                                <p class="label">{{ trans('Date_debut') }}</p>
                                 <p class="info-value">{{$operation->date_start}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Date debut</p>
+                                <p class="label">{{ trans('Dat_fin') }}</p>
                                 <p class="info-value">{{$operation->date_end}}</p>
                             </div>
                         </div>
@@ -42,11 +42,11 @@
                         </div>
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">Lecteurs</p>
+                                <p class="label">trans{{trans('Lecteurs')  }}</p>
                                 <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Operateur</p>
+                                <p class="label">{{ trans('Opérateurs') }}</p>
                                 <p class="info-value">{{$operation->users()->where('role','1')->count()}}</p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <p class="info-value">{{$operation->entreprise->nom}}</p>
                             </div>
                             <div class="info">
-                                <p class="label">Fondé</p>
+                                <p class="label">{{ trans('Fondé') }}</p>
                                 <p class="info-value">
                                     @php
                                         $entreprise = $operation->entreprise()->with('users')->get()->last();
@@ -78,12 +78,12 @@
                         <div class="row">
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">Afficher le questionnaire</a>
+                                    <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">{{ trans('Afficher_le_questionnaire') }}</a>
                                 </div>
                             </div>
                             <div class="col-xs-12" style="padding: 0">
                                 <div class="small-box bg-white">
-                                    <a href="{{ route('operation.index') }}"  class="btn form-control">Selectionner une opération</a>
+                                    <a href="{{ route('operation.index') }}"  class="btn form-control">{{ trans('Selectionner_une_opération') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -102,14 +102,15 @@
             <div class="col-md-9">
                 <div class="box" style="height: 100%;">
                     <div class="box-header with-border">
-                        <ul class="box-title">
-                            <li>{{ trans('statistiques') }}</li>
+                        <ul class="box-title" style="padding-left: 4px;">
+                            <li>{{ trans('response_stats') }}</li>
+
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
                                     {{ trans('sort_by') }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                                     <li role="presentation" class="divider"></li>
@@ -117,72 +118,28 @@
                                 </ul>
                             </li>
                         </ul>
-                        <span class="pull-right" style="font-size: 40px;">
-                            <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
-                             <a href="{{ route('forms.response.export2', $operation->id) }}">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                        <span class="pull-right">
+                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
+
+                             <a id="download_pdf" href="#">
+                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
                              </a>
+
                             <a href="{{ route('forms.response.export', $form->code) }}">
-                                <i class="fa fa-file-excel-o" aria-hidden="true">  </i>
+                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
                             </a>
                         </span>
                     </div>
 
 
-
-{{--                    <div class="box-body row" id="responses">--}}
-{{--                        @php--}}
-{{--                            $data_for_chart = [];--}}
-{{--                            $fields = $form->fields;--}}
-{{--                            $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();--}}
-{{--                        @endphp--}}
-{{--                        @foreach ($fields as $field)--}}
-{{--                            @php--}}
-{{--                                $responses = $field->responses;--}}
-{{--                                $responses_count = $responses->where('answer', '!==', null)->count();--}}
-{{--                            @endphp--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <label class="label-xlg">{{ $field->question }}--}}
-{{--                                        @if ($field->required) <span class="text-danger">*</span> @endif--}}
-{{--                                    </label>--}}
-{{--                                    <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>--}}
-
-{{--                                    @if (in_array($field->template, $template_alias_no_options))--}}
-{{--                                        <div class="table-responsive">--}}
-{{--                                            <table class="table table-striped-info table-xxs table-framed-info">--}}
-{{--                                                @foreach ($responses as $response)--}}
-{{--                                                    @if ($loop->index === 10)--}}
-{{--                                                        <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
-{{--                                                        @break--}}
-{{--                                                    @endif--}}
-{{--                                                    <tr>--}}
-{{--                                                        @php $answer = $response->getAnswerForTemplate($field->template); @endphp--}}
-{{--                                                        <td>{!! $answer !!}</td>--}}
-{{--                                                    </tr>--}}
-{{--                                                @endforeach--}}
-{{--                                            </table>--}}
-{{--                                        </div>--}}
-{{--                                    @else--}}
-{{--                                        @php $response_for_chart = $field->getResponseSummaryDataForChart(); @endphp--}}
-{{--                                        @if (!empty($response_for_chart))--}}
-{{--                                            @php $data_for_chart[] = $response_for_chart; @endphp--}}
-{{--                                            <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">--}}
-{{--                                                <div class="{{ ($response_for_chart['chart'] == 'pie_chart') ? 'display-inline-block' : 'chart' }}" id="{{ $response_for_chart['name'] }}"></div>--}}
-{{--                                            </div>--}}
-{{--                                        @endif--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-
                     <div class="box-body row" id="responses">
                         {!! $view !!}
                     </div>
+
+                    <div class="box-body row" id="responsesprint" style="display: none" >
+                        {!! $viewprint !!}
+                    </div>
                     <!-- /.box-body -->
-
-
-
                 </div>
             </div>
             <div class="col-md-3">
@@ -190,9 +147,9 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
-                                    Lecteurs
-                                </h3>
+                                <p class="box-title">
+                                    {{ trans('Lecteurs') }}
+                                </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
                                 @endif
@@ -233,9 +190,9 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
-                                    Operateurs
-                                </h3>
+                                <p class="box-title">
+                                    {{ trans('Opérateurs') }}
+                                </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
                                 @endif
@@ -254,8 +211,8 @@
                                 @foreach ($operation->users as $user )
                                     @if ($user->role === 1)
                                 <tr>
-                                    <td>
-                                        {{ $user->first_name }} {{ $user->last_name }}
+                                    <td class="m_operateur" data_lat="4.050000" data_lng="9.700000">
+                                        <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                                         <span class="pull-right">
                                             @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                                 <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
@@ -268,8 +225,8 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <button class="btn btn-xs-bloo disabled"><i class="icon ions ion-chatboxes"></i> Message</button>
-                            <button class="btn btn-xs-bloo"><i class="icon ions ion-location"></i> Localisation</button>
+                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> Message</button>
+                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> Localisation</button>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -280,15 +237,15 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="box-title">
+                                <p class="box-title">
                                     Localisation
-                                </h3>
+                                </p>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="box-body" id="lecteurs">
+                    <div class="box-body" id="map_lecteurs">
 
                     </div>
                     <!-- /.box-body -->
@@ -359,7 +316,61 @@
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4bZln12ut506FLipFx-kXh95M-zZdUfc&libraries=places&callback=initMap" defer></script>
     <script type="text/javascript">
+        function initMap() {
+            let lat = "";
+            let lng = "";
+            let first_name = "";
+            let last_name = "";
+
+            let map = new google.maps.Map(document.getElementById("map_lecteurs"), {
+                center: { lat: 4.050000, lng: 9.700000 },
+                zoom: 15
+            });
+
+            $('.m_operateur').click(function(){
+                if($(this).hasClass('op_active')){
+                    lat = "";
+                    lng = "";
+                    first_name = "";
+                    last_name = "";
+
+                    $(this).removeClass('op_active');
+                    $('.m_btn_op').addClass('disabled');
+                }else{
+                    lat = $(this).attr("data_lat");
+                    lng = $(this).attr("data_lng");
+                    first_name = $(this).find(".op_first_name").html();
+                    last_name = $(this).find(".op_last_name").html();
+
+                    $(this).addClass('op_active');
+                    $('.m_btn_op').removeClass('disabled');
+                }
+            });
+
+            $('.m_btn_location').click(function(){
+                let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                map.setCenter(position);
+                let marker = new google.maps.Marker({
+                    position: position,
+                    map,
+                    animation: google.maps.Animation.DROP
+                });
+                let contentString = "" +
+                    "<div class=\"infowindow-content\">\n" +
+                    "    <span class=\"place-name title\">"+ first_name + "</span><br>" +
+                    "    <span class=\"place-address\">"+ last_name +"</span>\n" +
+                    "</div>";
+
+                let infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                    });
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });
+            });
+        }
         function addlecteur() {
             $('#listlecteur').on('click', function (e) {
                 //console.log(e);
@@ -432,6 +443,37 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-html2pdf@1.1.4/lib/html2pdf.min.js"></script>
+    <script type="text/javascript">
+        $('#download_pdf').click(function () {
+            // Get the element to print
+            var element = document.getElementById('responsesprint');
+                element.style.display = "initial";
+            // Define optional configuration
+            var options = {
+                filename: 'response.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
+                pdfCallback: pdfCallback
+            };
+            function pdfCallback(pdfObject) {
+                var number_of_pages = pdfObject.internal.getNumberOfPages()
+                var pdf_pages = pdfObject.internal.pages
+                var myFooter = "Footer info"
+                for (var i = 1; i < pdf_pages.length; i++) {
+                    // We are telling our pdfObject that we are now working on this page
+                    pdfObject.setPage(i)
+                    // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
+                    pdfObject.text(myFooter, 10, 200)
+                }
+            };
+            options.source = element;
+            options.download = true;
+            html2pdf.getPdf(options);
+            element.style.display = "none";
+        });
+    </script>
 @endsection
 
 @section('page-script')
@@ -457,6 +499,15 @@
                 drawCharts(data_for_chart);
             });
         }
+
+
+        let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+
+        if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+            google.charts.setOnLoadCallback(function () {
+                drawCharts(data_for_chart2);
+            });
+        }
         $(function () {
             // Resize chart on sidebar width change and window resize
             $(window).on('resize', function () {
@@ -477,13 +528,17 @@
         channel.bind('my-event', function(data) {
             // alert(JSON.stringify(data));
             // location.reload(true);
-            $.get('/operation/2',function(response) {
+            $.get('/operation/{!! $operation->id !!}' ,function(response) {
                 $('#responses').empty()
                     .append(response.response_view);
 
                 data_for_chart = JSON.parse(response.data_for_chart);
 
                 drawCharts(data_for_chart);
+
+                data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+
+                drawCharts(data_for_chart2);
 
                 $(function () {
                     // Resize chart on sidebar width change and window resize

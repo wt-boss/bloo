@@ -47,16 +47,16 @@
             </div>
             <div class="w-100"></div>
             <div class="col-md-3">
-              <p><span>{{ trans('Address') }} :</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+              <p><span>{{ trans('Address') }} :</span> Bonamoussadi, <br> Douala - Cameroun</p>
             </div>
             <div class="col-md-3">
               <p><span> {{ trans('Phone') }} :</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
             </div>
             <div class="col-md-3">
-              <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+              <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">hello@blooapp.live</a></p>
             </div>
             <div class="col-md-3">
-              <p><span> {{ trans('Website') }} </span> <a href="#">yoursite.com</a></p>
+              <p><span> {{ trans('Website') }} </span> <a href="#">cmr.desk@blooapp.live</a> </p>
             </div>
           </div>
           <div class="row block-9">

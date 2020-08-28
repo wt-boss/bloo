@@ -8,7 +8,7 @@
                 <p>{{ trans('change_langue') }} </p> --}}
                 {!! link_to('language', session('locale') == 'fr' ? 'English' : 'Français', ['class' => 'btn btn-primary']) !!}
             </div>
-        </div> 
+        </div>
 
         <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -45,7 +45,7 @@
               </div>
 
 
-              
+
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-linkedin"></span></a></li>
@@ -55,10 +55,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 text-center">
-
+        <div class="col-md-12 text-center"> 
           <p>
-            <strong>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bloo.<strong> All rights reserved
+            
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bloo. All rights reserved<strong> 
           </p>
         </div>
       </div>

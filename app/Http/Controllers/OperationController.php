@@ -410,15 +410,27 @@ class OperationController extends Controller
             }
         }
 
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChart2();
+            if(!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
+
         $view = (string)View::make('admin.operation.partials.response',compact('operation','form', 'query', 'responses'));
+        $viewprint = (string)View::make('admin.operation.partials.responseprint',compact('operation','form', 'query', 'responses'));
 
         if($request->ajax()){
             return [
                 'response_view' => $view,
-                'data_for_chart' => json_encode($data_for_chart)
+                'data_for_chart' => json_encode($data_for_chart),
+                'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.show',compact('view','operation','form', 'query', 'responses', 'data_for_chart'));
+            return view('admin.operation.show',compact('view','viewprint','operation','form', 'query', 'responses', 'data_for_chart','data_for_chart2'));
         }
     }
 

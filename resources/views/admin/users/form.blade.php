@@ -18,7 +18,7 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
 {!! Form::myInput('email', 'email', 'Email') !!}
 
   <div class="form-group col-6">
-      <label for="birth-date">Pays:</label><br>
+      <label for="birth-date">{{ trans('Pays') }}:</label><br>
       <select class="form-control" name="country_id" id="country">
           @foreach($countries as $country)
               <option value="{{$country->id}}">{{$country->name}}</option>
@@ -26,22 +26,22 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
       </select>
   </div>
   <div id="div_region" style="display:none" class="form-group col-6">
-      <label for="birth-date">Region :</label><br>
+      <label for="birth-date">{{ trans('Region') }} :</label><br>
       <select class="form-control" name="state_id" id="region" >
       </select>
   </div>
   <div id="div_ville" style="display:none" class="form-group col-6">
-      <label for="birth-date">Ville :</label><br>
+      <label for="birth-date">{{ trans('Ville') }} :</label><br>
       <select class="form-control" name="city_id" id="ville" required>
       </select>
   </div>
 
-{!! Form::myInput('password', 'password', 'Password') !!}
+{!! Form::myInput('password', 'password', trans('password')) !!}
 
-{!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
+{!! Form::myInput('password', 'password_confirmation', trans('password_confirmation')) !!}
 
-{!! Form::mySelect('role', 'Role', $allowedRoles) !!}
+{!! Form::mySelect('role', 'Rôle', $allowedRoles) !!}
 
-{!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
+{!! Form::mySelect('active', trans('compte_active'), config('variables.boolean')) !!}
 
 {!! Form::myFileImage('avatar', 'Avatar', $img_url) !!}

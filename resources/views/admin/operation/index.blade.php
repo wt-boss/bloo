@@ -20,7 +20,7 @@
                 <div class="panel-body text-center">
                     <div class="mt-30 mb-30">
                         <h6 class="text-semibold">
-                                Creer des maintenant votre premiere operation
+                               {{ trans(' Creer_des_maintenant_votre_premiere_operation') }}
                         </h6>
                     </div>
                 </div>
@@ -32,15 +32,15 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th class="text-center">{{ trans('op_name') }}</th>
-                                <th class="text-center">{{ trans('start_date') }}</th>
-                                <th class="text-center">{{ trans('end_date') }}</th>
-                                <th class="text-center">{{ trans('enterprise') }}</th>
-                                <th class="text-center">{{ trans('city') }}</th>
-                                <th class="text-center">{{ trans('sites') }}</th>
-                                <th class="text-center">{{ trans('operator') }}</th>
-                                <th class="text-center">{{ trans('Status') }}</th>
-                                <th class="text-center">{{ trans('actions') }}</th>
+                                <th class="text-center" style="color:#0065A1 !important">{{ trans('op_name') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('start_date') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('end_date') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('enterprise') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('city') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('sites') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('operator') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('Status') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -133,7 +133,7 @@
     </div>
 
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+{{--    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>--}}
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;

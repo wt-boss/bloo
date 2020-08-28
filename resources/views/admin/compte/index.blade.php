@@ -22,7 +22,7 @@
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
                     <h6 class="text-semibold">
-                            Creer des maintenant votre premiere entreprise
+                            {{ trans('Créer_entreprise') }}
                     </h6>
                 </div>
             </div>
@@ -74,9 +74,9 @@
                                                             <span class="description-text">
                                                                 Type de compte (
                                                                 @if($compte->type === "Personne Physique")
-                                                                    Particulier
+                                                                    {{ trans('Particulier') }}
                                                                 @else
-                                                                    Entreprise
+                                                                   {{trans(' Entreprise')}}
                                                                 @endif
                                                                 )
                                                             </span>
@@ -88,7 +88,7 @@
                                                             </span>
 
                                                             <span class="description-text">{{$compte->ville}} {{$compte->pays}}</span>
-                                                            <span class="description-text">{{$compte->operations->count()}} operations</span>
+                                                            <span class="description-text">{{$compte->operations->count()}} {{ trans(Opérations'') }}</span>
                                                             <span class="description-text">{{$compte->email}}</span>
                                                             @if (auth()->user()->hasRole('Superadmin'))
                                                             <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Paramètres</button>
@@ -159,7 +159,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-bloo">Enregistrer</button>
+                <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
             </div>
             </form>
         </div>

@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="box-title">
-                                    Opérations
+                                    {{ trans('Opérations') }}
                                 </h3>
                             </div>
                         </div>
@@ -37,10 +37,7 @@
                 </div>
                 <!-- /.box -->
             </div>
-
-
-
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
                 <div class="box box-primary">
 
                     <div class="box-body" style="margin-top: -13px;">
@@ -48,14 +45,16 @@
                  <div class='col-md-12'>
 
                          <div>
-                             <h5>Lecteurs</h5>
-                             <div id="alllect">
+                             <h5>{{ trans('Lecteurs') }}</h5>
+                             <div>
+                                 <ul id="alllect"></ul>
                              </div>
                          </div>
                          <hr>
                          <div>
-                             <h5>Operateurs</h5>
-                             <div id="alloperat">
+                             <h5>{{ trans('Opérateurs') }}</h5>
+                             <div>
+                                 <ul id="alloperat"></ul>
                              </div>
                          </div>
                      </div>
@@ -102,8 +101,8 @@
 @if (auth()->user()->hasRole('Opérateur'))
 @section('content')
     @include('partials.alert', ['name' => 'index'])
-    <div class="panel panel-flat panel-wb">
-        <div class="panel-body" style="padding: 0;">
+    <div class="panel panel-flat panel-wb" >
+        <div class="panel-body" style="padding: 0; >
             <div class="row">
                 <div class="col-md-12">
                     <div class="container-fluid">
@@ -115,7 +114,7 @@
                                         <div class="panel-body text-center">
                                             <div class="mt-30 mb-30">
                                                 <h6 class="text-semibold">
-                                                        Vous n'etes affecter a aucune operation en cours
+                                                {{ trans('nothing_opération') }}
                                                 </h6>
                                             </div>
                                         </div>
@@ -143,14 +142,11 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            <div class="col-md-8" id="messages">
-
+                            <div class="col-md-8" id="messages" >
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -164,6 +160,7 @@
     @if (auth()->user()->hasRole('Superadmin|Account Manager'))
     <script type="application/javascript">
         $('.operation').on('click', function(e){
+            $('#receiver').empty();
             console.log(e);
             var operation_id = e.target.id;
             var datas = null;
@@ -199,36 +196,34 @@
                 });
                 console.log('show');
                 var channel = pusher.subscribe('my-channel');
-                channel.bind('my-event', function (data) {
+                channel.bind('message-event', function (data) {
                     //alert(JSON.stringify(data));
-                    if (my_id == data.from) {
-                        $('#' + data.to).click();
-                    } else if (my_id == data.to) {
-                        if (receiver_id == data.from) {
-                            // if receiver is selected, reload the selected user ...
-                            $('#' + data.from).click();
-                        } else {
-                            // if receiver is not seleted, add notification for that user
-                            var pending = parseInt($('#' + data.from).find('.pending').html());
-
-                            if (pending) {
-                                $('#' + data.from).find('.pending').html(pending + 1);
-                            } else {
-                                $('#' + data.from).append('<span class="pending">1</span>');
-                            }
+                    receiver_id = data.to;
+                    $.get('/json-user?user_id=' + receiver_id,function(user) {
+                        $('#receiver').empty();
+                        $('#receiver').append('<li >'+ user.first_name +' ' +  user.last_name +'</li>');
+                    });
+                    $.ajax({
+                        type: "get",
+                        url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                        data: "",
+                        cache: false,
+                        success: function (message) {
+                            $('#messages').html(message);
+                            scrollToBottomFunc();
                         }
-                    }
+                    });
                 });
                 $('.user').click(function () {
-                    $('.user').removeClass('active');
-                    $(this).addClass('active');
-                    $(this).find('.pending').remove();
-                    receiver_id = $(this).attr('id');
+                    // $('.user').removeClass('active');
+                    // $(this).addClass('active');
+                    // $(this).find('.pending').remove();
+                    receiver_id =$(this).attr('data-id')
                     $.get('/json-user?user_id=' + receiver_id,function(data) {
-                        console.log(data);
                         $('#receiver').empty();
                         $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
                     });
+
                     $.ajax({
                         type: "get",
                         url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
@@ -240,6 +235,7 @@
                         }
                     });
                 });
+
                 $(document).on('keyup', '.input-text input', function (e) {
                     var message = $(this).val();
                     // check if enter key is pressed and message is not null also receiver is selected
@@ -252,7 +248,6 @@
                             data: datastr,
                             cache: false,
                             success: function (data) {
-
                             },
                             error: function (jqXHR, status, err) {},
                             complete: function () {
@@ -260,6 +255,35 @@
                             }
                         })
                     }
+                });
+
+                $('#send').click(function () {
+                    // Get the element to print
+                    var element = document.getElementById('responsesprint');
+                    element.style.display = "initial";
+                    // Define optional configuration
+                    var options = {
+                        filename: 'response.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
+                        pdfCallback: pdfCallback
+                    };
+                    function pdfCallback(pdfObject) {
+                        var number_of_pages = pdfObject.internal.getNumberOfPages()
+                        var pdf_pages = pdfObject.internal.pages
+                        var myFooter = "Footer info"
+                        for (var i = 1; i < pdf_pages.length; i++) {
+                            // We are telling our pdfObject that we are now working on this page
+                            pdfObject.setPage(i)
+                            // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
+                            pdfObject.text(myFooter, 10, 200)
+                        }
+                    };
+                    options.source = element;
+                    options.download = true;
+                    html2pdf.getPdf(options);
+                    element.style.display = "none";
                 });
             });
 
@@ -626,6 +650,7 @@
             outline: none;
             border: 1px solid #cccccc;
         }
+
 
 
         input[type=text]:focus {
