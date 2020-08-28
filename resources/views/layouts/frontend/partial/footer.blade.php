@@ -38,8 +38,9 @@
               <div class="block-23 mb-3">
                 <ul>
                   <li><span class="icon icon-map-marker"></span><span class="text">Bonamoussadi, Douala - Cameroun</span></li>
+                  <li><span class="icon icon-envelope"></span><span class="text">hello@blooapp.live</span></li>
 
-                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">hello@blooapp.live</span></a></li>
+                  
 
                 </ul>
               </div>
@@ -55,10 +56,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 text-center"> 
+        <div class="col-md-12 text-center">
           <p>
-            
-            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bloo. All rights reserved<strong> 
+
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bloo. All rights reserved<strong>
           </p>
         </div>
       </div>

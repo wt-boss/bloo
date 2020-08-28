@@ -145,6 +145,7 @@ Route::get('/administration', 'HomeController@admin')->name('admin')->middleware
 
 //language
 Route::get('language', 'PagesController@language')->name('language')->middleware('Free');
+Route::get('localization/{locale}','LocalizationController@index')->middleware('Free');
 //Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update')->middleware('Free');
 Route::get('/about', function () {

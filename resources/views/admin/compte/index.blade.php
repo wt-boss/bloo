@@ -88,7 +88,7 @@
                                                             </span>
 
                                                             <span class="description-text">{{$compte->ville}} {{$compte->pays}}</span>
-                                                            <span class="description-text">{{$compte->operations->count()}} {{ trans(Opérations'') }}</span>
+                                                            <span class="description-text">{{$compte->operations->count()}} {{ trans('Opérations') }}</span>
                                                             <span class="description-text">{{$compte->email}}</span>
                                                             @if (auth()->user()->hasRole('Superadmin'))
                                                             <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Paramètres</button>
