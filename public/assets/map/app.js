@@ -6,7 +6,7 @@ var getUrl = window.location;
 var base_url = getUrl.protocol + "//" + getUrl.host ;
 
 $.ajax({
-  url : base_url + "/sitesop/{!! $operation->id !!}", //A remplacer par la bonne route
+  url : base_url + "/sites", //A remplacer par la bonne route
   dataType: 'JSON',
   success: function(data)
   {
