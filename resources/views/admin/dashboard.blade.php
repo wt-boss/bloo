@@ -1,5 +1,6 @@
 @extends('admin.top-nav')
 
+
 @section('title', 'Accueil')
 
 @section('laraform_script1')
@@ -21,7 +22,6 @@
 	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
-{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">--}}
 
 @endsection
 
@@ -338,6 +338,7 @@
             });
         });
     </script>
+
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -353,9 +354,8 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
-
     </script>
-{{--    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>--}}
+
     <script>
 
         var pusher = new Pusher('1702f90c00112df631a4', {
@@ -363,8 +363,23 @@
         });
 
         var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event2', function(data) {
-            alert(JSON.stringify(data));
+        channel.bind('operation-event', function(data) {
+            $.get('/dashreal/' ,function(response) {
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable(response);
+                    var options = {
+                        legend: {
+                            position: 'bottom',
+                            alignment: 'center',
+                            maxLines: 2
+                        }
+                    };
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            });
         });
     </script>
 @endsection
@@ -441,7 +456,6 @@
                             </ul>
                         </div>
                         <div class="box-body">
-
                             <div id="piechart" style="width: 500px; height: 400px;"></div>
                         </div>
                         <!-- /.box-body -->

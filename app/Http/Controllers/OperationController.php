@@ -372,7 +372,7 @@ class OperationController extends Controller
         $operation->users()->attach($user);
         $pusher = App::make('pusher');
         $data = "Une operation a été créer" ;
-        $pusher->trigger('my-channel', 'my-event', $data);
+        $pusher->trigger('my-channel', 'operation-event', $data);
         return redirect()->route('operation.index');
     }
 

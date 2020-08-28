@@ -252,8 +252,12 @@ Route::post('contactus','ContactsController@store')->name('contactus');
 Route::get('/chartPdf', 'ChartController@index');
 
 Route::get('/testreal/{id}','OperationController@testresponses');
+
+Route::get('/dashreal','HomeController@realtimeboard');
+
 Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');
 Route::get('/vueroute/{id}','TestController@searchoperation');
 Route::get('/logoutfree',function () {
     return view('logoutfree');
 });
+//Route::get('notifications/{id}','HomeController@markasread')->name('read');

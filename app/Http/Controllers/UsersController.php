@@ -39,6 +39,7 @@ class UsersController extends Controller
         ->orwhere('name','Chad')
         ->orwhere('name','Nigeria')
         ->orwhere('name','Angola')
+        ->orwhere('name','Congo The Democratic Republic Of The')
         ->get();
         return view('admin.users.create',compact('countries'));
     }
