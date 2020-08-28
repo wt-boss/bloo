@@ -21,20 +21,20 @@ class LocationController extends Controller
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
             ->get();
-        $result = ["items" =>$countries,"states"=>["success"]];
+        $result = ["items" =>$countries,"states"=>"success"];
         return response()->json($countries,200);
     }
     public function getstates($id)
     {
         $states  = State::where('country_id',$id)->get();
-        $result = ["items" =>$states,"states"=>["success"]];
+        $result = ["items" =>$states,"states"=>"success"];
         return response()->json($states,200);
     }
 
     public function getcities($id)
     {
         $cities  = City::where('state_id',$id)->get();
-        $result = ["items" =>$cities,"states"=>["success"]];
+        $result = ["items" =>$cities,"states"=>"success"];
         return response()->json($cities,200);
     }
 }

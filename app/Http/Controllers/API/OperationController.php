@@ -58,11 +58,11 @@ class OperationController extends Controller
         $number = $CityOperation->count();
         if($number === 0)
         {
-            $result = ["items" =>null,"states"=>["error"]];
+            $result = ["items" =>null,"states"=>"error"];
         }
         else
         {
-            $result = ["items" =>$CityOperation,"states"=>["success"]];
+            $result = ["items" =>$CityOperation,"states"=>"success"];
         }
         return response()->json($result,200);
     }

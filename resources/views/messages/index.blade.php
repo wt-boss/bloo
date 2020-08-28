@@ -21,9 +21,8 @@ background: #fff;
             <input type="text" name="message" class="submit"/>
 
         </div>
-
         <div class="col-md-1" style="padding-top: 18px;padding-right: -4px;padding-left: 0px;font-size: 20px;" >
-            <button> <i class="fa fa-paper-plane"></i></button>
+            <button id="send"> <i class="fa fa-paper-plane"></i></button>
            </div>
     </div>
 </div>

@@ -35,7 +35,7 @@ class UsersController extends Controller
         $Operation = collect();
         if($User->operations()->count() === 0)
         {
-            $result = ["items" => $User,"operation" => null,"sites" => null,  "states"=>["success"]];
+            $result = ["items" => $User,"operation" => null,"sites" => null,  "states"=>"success"];
         }
         else{
             $operations = $user->operations()->get();
@@ -51,7 +51,7 @@ class UsersController extends Controller
             $compteur = $Operation->count();
             if ($compteur === 0)
             {
-                $result = ["items" => $User,"operation" => null,"form_url" =>null , "states"=>["success"]];
+                $result = ["items" => $User,"operation" => null,"form_url" =>null , "states"=>"success"];
             }
             else
             {
@@ -59,7 +59,7 @@ class UsersController extends Controller
                 $UserOperation = Operation::with('sites','form')->findOrFail($lastoperation->id);
                 $sites = $UserOperation->sites()->get();
                 $form_url = asset('forms/'.$UserOperation->form->code.'/view');
-                $result = ["items" => $User,"operation" => $UserOperation,'sites' => $sites ,'form' =>  $form_url, "states"=>["success"]];
+                $result = ["items" => $User,"operation" => $UserOperation,'sites' => $sites ,'form' =>  $form_url, "states"=>"success"];
             }
         }
         return response()->json($result,200);
