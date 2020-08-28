@@ -245,6 +245,7 @@ Route::get('/json-operateurcities','HomeController@operateurcities');
 Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
 /**Site routes */
 Route::resource('sites','SiteController');
+Route::get('sitesop/{id}','SiteController@operations')->name('siteop');
 Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');
 Route::get('start/{id}','OperationController@debuter_operation')->name('startoperation');
 

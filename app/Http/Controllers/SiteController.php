@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Operation;
 use Illuminate\Http\Request;
 use App\Site;
 use Illuminate\Validation\Rule;
@@ -13,9 +14,19 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $sites = Site::orderby('id')->get();
+        $operation = Operation::with('sites')->findOrFail($id);
+
+        $sites = $operation->sites();
+        return response()->json($sites);
+    }
+
+
+    public function operations($id)
+    {
+        $operation = Operation::with('sites')->findOrFail($id);
+        $sites= $operation->sites()->get();
         return response()->json($sites);
     }
 
