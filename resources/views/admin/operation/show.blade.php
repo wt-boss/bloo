@@ -120,9 +120,11 @@
                         </ul>
                         <span class="pull-right">
                             <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
-                             <a href="{{ route('forms.response.export2', $operation->id) }}">
+
+                             <a id="download_pdf" href="#">
                                 <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
                              </a>
+
                             <a href="{{ route('forms.response.export', $form->code) }}">
                                 <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
                             </a>
@@ -130,60 +132,14 @@
                     </div>
 
 
-
-{{--                    <div class="box-body row" id="responses">--}}
-{{--                        @php--}}
-{{--                            $data_for_chart = [];--}}
-{{--                            $fields = $form->fields;--}}
-{{--                            $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();--}}
-{{--                        @endphp--}}
-{{--                        @foreach ($fields as $field)--}}
-{{--                            @php--}}
-{{--                                $responses = $field->responses;--}}
-{{--                                $responses_count = $responses->where('answer', '!==', null)->count();--}}
-{{--                            @endphp--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <label class="label-xlg">{{ $field->question }}--}}
-{{--                                        @if ($field->required) <span class="text-danger">*</span> @endif--}}
-{{--                                    </label>--}}
-{{--                                    <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>--}}
-
-{{--                                    @if (in_array($field->template, $template_alias_no_options))--}}
-{{--                                        <div class="table-responsive">--}}
-{{--                                            <table class="table table-striped-info table-xxs table-framed-info">--}}
-{{--                                                @foreach ($responses as $response)--}}
-{{--                                                    @if ($loop->index === 10)--}}
-{{--                                                        <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
-{{--                                                        @break--}}
-{{--                                                    @endif--}}
-{{--                                                    <tr>--}}
-{{--                                                        @php $answer = $response->getAnswerForTemplate($field->template); @endphp--}}
-{{--                                                        <td>{!! $answer !!}</td>--}}
-{{--                                                    </tr>--}}
-{{--                                                @endforeach--}}
-{{--                                            </table>--}}
-{{--                                        </div>--}}
-{{--                                    @else--}}
-{{--                                        @php $response_for_chart = $field->getResponseSummaryDataForChart(); @endphp--}}
-{{--                                        @if (!empty($response_for_chart))--}}
-{{--                                            @php $data_for_chart[] = $response_for_chart; @endphp--}}
-{{--                                            <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">--}}
-{{--                                                <div class="{{ ($response_for_chart['chart'] == 'pie_chart') ? 'display-inline-block' : 'chart' }}" id="{{ $response_for_chart['name'] }}"></div>--}}
-{{--                                            </div>--}}
-{{--                                        @endif--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-
                     <div class="box-body row" id="responses">
                         {!! $view !!}
                     </div>
+
+                    <div class="box-body row" id="responsesprint" style="display: none" >
+                        {!! $viewprint !!}
+                    </div>
                     <!-- /.box-body -->
-
-
-
                 </div>
             </div>
             <div class="col-md-3">
@@ -413,10 +369,8 @@
                 marker.addListener("click", () => {
                     infowindow.open(map, marker);
                 });
-            });            
+            });
         }
-
-
         function addlecteur() {
             $('#listlecteur').on('click', function (e) {
                 //console.log(e);
@@ -489,6 +443,37 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-html2pdf@1.1.4/lib/html2pdf.min.js"></script>
+    <script type="text/javascript">
+        $('#download_pdf').click(function () {
+            // Get the element to print
+            var element = document.getElementById('responsesprint');
+                element.style.display = "initial";
+            // Define optional configuration
+            var options = {
+                filename: 'response.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
+                pdfCallback: pdfCallback
+            };
+            function pdfCallback(pdfObject) {
+                var number_of_pages = pdfObject.internal.getNumberOfPages()
+                var pdf_pages = pdfObject.internal.pages
+                var myFooter = "Footer info"
+                for (var i = 1; i < pdf_pages.length; i++) {
+                    // We are telling our pdfObject that we are now working on this page
+                    pdfObject.setPage(i)
+                    // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
+                    pdfObject.text(myFooter, 10, 200)
+                }
+            };
+            options.source = element;
+            options.download = true;
+            html2pdf.getPdf(options);
+            element.style.display = "none";
+        });
+    </script>
 @endsection
 
 @section('page-script')
@@ -514,6 +499,15 @@
                 drawCharts(data_for_chart);
             });
         }
+
+
+        let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+
+        if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+            google.charts.setOnLoadCallback(function () {
+                drawCharts(data_for_chart2);
+            });
+        }
         $(function () {
             // Resize chart on sidebar width change and window resize
             $(window).on('resize', function () {
@@ -534,13 +528,18 @@
         channel.bind('my-event', function(data) {
             // alert(JSON.stringify(data));
             // location.reload(true);
-            $.get('/operation/2',function(response) {
+            $.get('/operation/{!! $operation->id !!}' ,function(response) {
                 $('#responses').empty()
                     .append(response.response_view);
 
                 data_for_chart = JSON.parse(response.data_for_chart);
 
                 drawCharts(data_for_chart);
+
+
+                data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+
+                drawCharts(data_for_chart2);
 
                 $(function () {
                     // Resize chart on sidebar width change and window resize

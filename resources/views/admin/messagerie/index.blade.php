@@ -143,14 +143,11 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <div class="col-md-8" id="messages" >
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -625,6 +622,17 @@
             box-sizing: border-box;
             outline: none;
             border: 1px solid #cccccc;
+        }
+
+        .send{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 15px 0 0 0;
+        display: inline-block;
+        border-radius: 4px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid #cccccc;
         }
 
 

@@ -21,7 +21,7 @@
 	<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/datatables/extension-responsive.min.js') }}"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">--}}
 
 @endsection
 
@@ -292,33 +292,48 @@
                     $.get('/json-operateurcities?city_id=' + city_id,function(data) {
                         $('#operateur_select').empty();
                         $('#operateur_select').append(data.name);
-                        $('#'+data.id).DataTable(
-                            {
-                                "language": {
-                                    @if( app()->getLocale() === "fr" )
-                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                                    @endif
-                                        @if( app()->getLocale() === "en")
-                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                                    @endif
-                                        @if( app()->getLocale() === "es")
-                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                                    @endif
-                                        @if( app()->getLocale() === "pt")
-                                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                                    @endif
+                        $('#'+data.id).DataTable({
+                            "language": {
+                                @if( app()->getLocale() === "fr" )
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                                @endif
+                                    @if( app()->getLocale() === "en")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                                @endif
+                                    @if( app()->getLocale() === "es")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                                @endif
+                                    @if( app()->getLocale() === "pt")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                                @endif
+                            },
+
+                            responsive: {
+                                details: {
+                                    type: 'column',
+                                    target: 'tr'
+                                }
+                            },
+                            columnDefs: [
+                                {
+                                    className: 'control',
+                                    orderable: false,
+                                    targets:   0
                                 },
-                                responsive: {
-                                    details: {
-                                        type: 'column',
-                                        target: 'tr'
-                                    }
+                                {
+                                    orderable: false,
+                                    targets: [-1]
                                 },
-                                "bLengthChange" : false, //thought this line could hide the LengthMenu
-                                "bInfo":false,
-                            }
-                        );
+                                { responsivePriority: 1, targets: 0 },
+                            ],
+                            });
+                        // Enable Select2 select for the length option
+                        $('.dataTables_length select').select2({
+                            minimumResultsForSearch: Infinity,
+                            width: 'auto'
+                        });
                     });
+
                 });
             });
         });
@@ -449,7 +464,7 @@
                             </ul>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body" id="cities">
+                        <div class="box-body" id="countries">
                             <table class="datatable table stripe dataTable no-footer dtr-column" id="region"  role="grid" style="width: 100%;">
                                     <thead>
                                     <tr>

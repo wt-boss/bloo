@@ -13,5 +13,11 @@
 </div>
 
 <div class="input-text">
-        <input type="text" name="message" class="submit">
+    <div class="row">
+        <div class="col-md-11">
+            <input type="text" name="message" class="submit"/>
+
+        </div>
+        <div class="col-md-1"><i id="send" class="fa fa-paper-plane"></i></div>
+    </div>
 </div>
