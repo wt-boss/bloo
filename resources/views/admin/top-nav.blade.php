@@ -39,7 +39,7 @@
     <link href="{{ asset('assets/css/core.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') ."?".time() }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('assets/css/style.back.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.back.css') ."?".time()}}">
 </head>
 
 @php
