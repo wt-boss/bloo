@@ -109,7 +109,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="user-wrapper">
+                                <div class=" box box-primary user-wrapper">
                                     <ul class="users">
                                         @if ($users->isEmpty())
                                         <div class="panel-body text-center">
