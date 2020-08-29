@@ -10,7 +10,7 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-           
+
           <li class="{{Request::is('/')? "active nav-item": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
           <li class="{{Request::is('services')? "active nav-item": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
           <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{route('questionnaire.free')}}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
@@ -22,7 +22,7 @@
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     @switch($locale)
-                               
+
                                 @case('fr')
                                 <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
                                 @break
@@ -32,18 +32,18 @@
                                 @case('es')
                                 <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
                                 @break
-                                
+
                                 @default
                                 <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
                     @endswitch
                 </a>
-               
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://localhost:8000/localization/fr">FR</a>
-                    <a class="dropdown-item" href="http://localhost:8000/localization/en ">EN</a>
-                    <a class="dropdown-item" href="http://localhost:8000/localization/pt">PT</a>
 
-                    
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
+                    <a class="dropdown-item" href="{{asset('/localization/en')}}">EN</a>
+                    <a class="dropdown-item" href="{{asset('/localization/pt')}}">PT</a>
+
+
                 </div>
             </li>
 

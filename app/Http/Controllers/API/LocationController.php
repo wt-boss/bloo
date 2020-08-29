@@ -7,6 +7,7 @@ use App\Country;
 use App\Http\Controllers\Controller;
 use App\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
@@ -36,5 +37,12 @@ class LocationController extends Controller
         $cities  = City::where('state_id',$id)->get();
         $result = ["items" =>$cities,"states"=>["success"]];
         return response()->json($cities,200);
+    }
+
+    public function getoperationscities()
+    {
+        $userid = auth()->user();
+        dd($userid);
+
     }
 }
