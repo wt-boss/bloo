@@ -492,8 +492,8 @@ class OperationController extends Controller
      */
     public function operationsites($id)
     {
-        $sites = Site::orderby('id','desc')->get();
-        $operation = Operation::findOrFail($id);
+        $operation = Operation::with('sites')->findOrFail($id);
+        $sites = $operation->sites()->get();
         return view('admin.operation.map',compact('sites','operation'));
     }
 
