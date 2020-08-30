@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Operation;
+use App\User;
 use Illuminate\Http\Request;
 use App\Site;
 use Illuminate\Validation\Rule;
@@ -27,7 +28,8 @@ class SiteController extends Controller
 //        return response()->json($sites);
         $userid = auth()->user()->id;
         $User = User::findOrfail($id);
-        dd($User);
+        $country = $User->country_id;
+        dd($country);
     }
 
     /**
