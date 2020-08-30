@@ -37,14 +37,14 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="operation_name">{{ trans('free_form1_label1') }} :</label>
-                            <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" placeholder="Entrer le nom de l'operation" required>
+                            <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" placeholder="{{ trans('Entrer') }}" required>
                             <div class="invalid-feedback">
                                {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="operation_purpose">{{ trans('free_form1_label2') }} :</label>
-                            <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" placeholder="Entrer l'objectif de l'operation" required>
+                            <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" placeholder="{{ trans('Entre2') }}" required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
@@ -90,21 +90,21 @@
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
                             <label for="name_enterprise"> {{ trans('Nom_entreprise') }}</label>
-                            <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
+                            <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="{{ trans('entrer3') }}"  id="name_enterprise" >
                             <div class="invalid-feedback">
                                 {{ trans('chanp_valide') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="address_enterprise">{{ trans('adress_entreprise') }}</label>
-                            <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
+                            <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="{{ trans('entre4') }}" >
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_contribuable') }}</label>
-                            <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
+                            <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="{{ trans('Entrer le numero du contribuable') }}">
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
