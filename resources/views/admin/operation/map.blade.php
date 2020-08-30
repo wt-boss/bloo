@@ -30,6 +30,7 @@
             </form>
         </div>
         <div class="pac-table">
+
             <!-- Table start -->
             <table class="tablemanager table table-striped table-bordered">
                 <thead>
@@ -55,6 +56,7 @@
                 @endforeach
                 </tbody>
             </table>
+
             <div class="pac-pick pac-pick-active"></div>
         </div>
     </div>

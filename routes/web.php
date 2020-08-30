@@ -245,7 +245,10 @@ Route::get('/json-operateurcities','HomeController@operateurcities');
 Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
 /**Site routes */
 Route::resource('sites','SiteController');
+Route::get('sitesop/{id}','SiteController@operations')->name('siteop');
+
 Route::get('terminer/{id}','OperationController@terminer_operation')->name('lockoperation');
+
 Route::get('start/{id}','OperationController@debuter_operation')->name('startoperation');
 
 Route::post('contactus','ContactsController@store')->name('contactus');
@@ -253,8 +256,12 @@ Route::post('contactus','ContactsController@store')->name('contactus');
 Route::get('/chartPdf', 'ChartController@index');
 
 Route::get('/testreal/{id}','OperationController@testresponses');
+
+Route::get('/dashreal','HomeController@realtimeboard');
+
 Route::post('/testphotoapi','PhotoController@envoipost')->name('envoiepost');
 Route::get('/vueroute/{id}','TestController@searchoperation');
 Route::get('/logoutfree',function () {
     return view('logoutfree');
 });
+//Route::get('notifications/{id}','HomeController@markasread')->name('read');

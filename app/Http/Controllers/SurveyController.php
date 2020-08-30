@@ -19,6 +19,7 @@ class SurveyController extends Controller
             ->orwhere('name','Chad')
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
+            ->orwhere('name','Congo The Democratic Republic Of The')
             ->get();
         return view('offres.primus',compact('countries'));
     }
@@ -31,6 +32,7 @@ class SurveyController extends Controller
             ->orwhere('name','Chad')
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
+            ->orwhere('name','Congo The Democratic Republic Of The')
             ->get();
         return view('offres.illimité',compact('countries'));
     }

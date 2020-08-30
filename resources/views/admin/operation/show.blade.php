@@ -371,6 +371,7 @@
                 });
             });
         }
+
         function addlecteur() {
             $('#listlecteur').on('click', function (e) {
                 //console.log(e);
@@ -378,6 +379,7 @@
                 console.log(lecteur_id);
             });
         }
+
         $('#getlecteur').on('click', function (e) {
             console.log(e);
             var operation_id = e.target.title;

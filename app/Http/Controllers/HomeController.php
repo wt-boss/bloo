@@ -6,6 +6,7 @@ use App\City;
 use App\Country;
 use App\Entreprise;
 use App\Helpers\Helper;
+use App\Notification;
 use App\Operation;
 use App\Questionnaire;
 use App\State;
@@ -121,6 +122,61 @@ class HomeController extends Controller
              }
          }
         return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries','diagram'));
+    }
+
+
+    public function realtimeboard()
+    {
+        $user = auth()->user();
+        $diagram =  collect();
+        $diagram->push(['Client','Operation']);
+        if($user->role === 5)
+        {
+            $comptes = Entreprise::with('operations')->get();
+            foreach ($comptes as $compte)
+            {
+                $operations = $compte->operations()->count();
+                $table = [$compte->nom,$operations];
+                $diagram->push($table);
+            }
+            $operations = Operation::all();
+            $operateurs = User::where('role','1')->get();
+            $lecteurs = User::where('role','0')->get();
+            $rapports = Operation::where('status','TERMINER')->get();
+        }
+        else{
+            $comptes = $user->entreprises()->get();
+            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+            $operateurs = collect(); //Tout les operateurs des operations.
+            $lecteurs = collect(); //Tous les lecteurs des operations.
+            $rapports = collect();
+            foreach ($comptes as $entreprise)
+            {
+                $countoperations = $entreprise->operations()->count();
+                $table = [$entreprise->nom,$countoperations];
+                $diagram->push($table);
+
+            }
+            $User = User::with('operations')->findOrFail($user->id);
+            $operations = $User->operations()->with('form','entreprise')->get();
+            foreach ($operations as $operation)
+            {
+                $AllUsers = $operation->users()->get();
+                foreach ($AllUsers as $User)
+                {
+                    if($User->role === 1)
+                    {
+                        $operateurs->push($User);
+                    }
+                    else if ($User->role === 0)
+                    {
+                        $lecteurs->push($User);
+                    }
+                }
+            }
+        }
+        return response()->json($diagram);
+
     }
 
     public function language()
@@ -255,5 +311,12 @@ class HomeController extends Controller
         $viewData = Helper::buildOperateurs($operateurs);
         return response()->json($viewData);
     }
+
+//    public function markasread($id)
+//    {
+//        $notification = Notification::findOrFail($id);
+//        $notification->markAsRead();
+//        return back();
+//    }
 
 }

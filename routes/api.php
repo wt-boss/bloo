@@ -35,4 +35,6 @@ Route::get('/getcountries','API\LocationController@getcountries');
 Route::get('/getstates/{id}','API\LocationController@getstates');
 Route::get('/getcities/{id}','API\LocationController@getcities');
 
+Route::get('/getcitiesoperations','API\LocationController@getoperationscities');
+
 

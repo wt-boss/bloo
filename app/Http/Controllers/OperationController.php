@@ -372,7 +372,7 @@ class OperationController extends Controller
         $operation->users()->attach($user);
         $pusher = App::make('pusher');
         $data = "Une operation a été créer" ;
-        $pusher->trigger('my-channel', 'my-event', $data);
+        $pusher->trigger('my-channel', 'operation-event', $data);
         return redirect()->route('operation.index');
     }
 
@@ -492,8 +492,8 @@ class OperationController extends Controller
      */
     public function operationsites($id)
     {
-        $sites = Site::orderby('id','desc')->get();
-        $operation = Operation::findOrFail($id);
+        $operation = Operation::with('sites')->findOrFail($id);
+        $sites = $operation->sites()->get();
         return view('admin.operation.map',compact('sites','operation'));
     }
 
