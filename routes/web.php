@@ -117,7 +117,9 @@ Route::group(['middleware'=>['web','Free']],function(){
     Route::get('carriere', 'PagesController@getCarriere')->name('carriere');
     Route::get('intimite', 'PagesController@getIntimite')->name('intimite');
     Route::get('tc', 'PagesController@getTc')->name('tc');
-
+    Route::get('mail_lecteur', 'PagesController@mail_lecteur')->name('mail_lecteur');
+    Route::get('mail_operateur', 'PagesController@mail_operateur')->name('mail_operateur');
+    Route::get('mail_client', 'PagesController@mail_client')->name('mail_client');
     //contact
     Route::get('/contact', [
         "as"=>'contact_path',
@@ -265,3 +267,4 @@ Route::get('/logoutfree',function () {
     return view('logoutfree');
 });
 //Route::get('notifications/{id}','HomeController@markasread')->name('read');
+

@@ -40,6 +40,18 @@ class PagesController extends Controller
     public function getTc(){
         return view('pages.tc');
     }
+    public function mail_lecteur(){
+        return view('emails.maillecteur');
+    }
+    public function mail_operateur(){
+        return view('emails.mailoperateur');
+    }
+    public function mail_client(){
+        return view('emails.mailclient');
+    }
+
+
+
     public function language()
 	{
 		Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
