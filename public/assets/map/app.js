@@ -4,9 +4,13 @@ resetForm();
 var sites;
 var getUrl = window.location;
 var base_url = getUrl.protocol + "//" + getUrl.host ;
+// get last uri segment
+var pageUrl = window.location.href;
+var lastUrlSegment = pageUrl.substr(pageUrl.lastIndexOf('/') + 1);
 
 $.ajax({
-  url : base_url + "/sites", //A remplacer par la bonne route
+    // url : base_url + "/sites", //A remplacer par la bonne route
+  url : base_url + "/operationsite2/" + lastUrlSegment, //A remplacer par la bonne route
   dataType: 'JSON',
   success: function(data)
   {

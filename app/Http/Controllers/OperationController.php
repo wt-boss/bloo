@@ -497,6 +497,19 @@ class OperationController extends Controller
         return view('admin.operation.map',compact('sites','operation'));
     }
 
+
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function operationsites2($id)
+    {
+        $operation = Operation::with('sites')->findOrFail($id);
+        $sites = $operation->sites()->get();
+        return response()->json($sites);
+    }
+
     /**
      * @param $id
      * @return mixed
