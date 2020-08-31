@@ -11,6 +11,8 @@
         </div>
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-body form-content">
+                @include('admin.common.flash')
+
                 <div class="text-center">
                     <h3 class="content-group-lg" style="margin-top: 0;">{{ trans('login_title') }}</h3>
                 </div>

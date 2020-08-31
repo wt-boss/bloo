@@ -517,6 +517,7 @@
     "nothing_opération":"Vous n'etes affecter a aucune operation en cours",
     "Chargement des données": "S'il vous plaît, attendez...",
     "Vos reponses on ete soumise": "Vos réponses ont été soumises avec succès",
-    "Recharger la page" : "Recharger la page"
-
+    "Recharger la page" : "Recharger la page",
+    "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistrer",
+    "non active": "Votre compte est inactif ou non véri"
 }
