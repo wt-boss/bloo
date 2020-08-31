@@ -58,13 +58,15 @@
         @endif
     </div>
 </div>
-
+<form id="create-form" action="{{ route('forms.draft', $form->code) }}" method="post" autocomplete="off">
+    @csrf
 <div class="panel panel-body sticky-up">
     <div class="pull-right">
+        <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
         <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
         @include('forms.partials._form-share-free')
-       
+
     </div>
 
 </div>
@@ -103,8 +105,7 @@
 
 <div class="container-detached">
 	<div class="content-detached">
-        <form id="create-form" action="{{ route('forms.draft', $form->code) }}" method="post" autocomplete="off">
-            @csrf
+
             <div class="questions">
                 @php $formatted_fields = []; @endphp
                 @if ($fields->count())
@@ -127,7 +128,7 @@
                     <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
                     @if(auth()->user()->hasRole('Free'))
-                        <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
+                        <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
                     @endif
                     <a href="{{ ($form_is_ready) ? route('forms.preview', $form->code) : 'javascript:void(0)' }}" class="btn btn-primary btn-xs position-right{{ ($form_is_ready) ? '' : ' hidden' }}" target="_blank" id="form-preview"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
                     @if(auth()->user()->hasRole('Free'))
