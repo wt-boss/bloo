@@ -50,7 +50,7 @@ $fields = $form->fields()->filled()->get();
                         </div>
                             <input type="hidden" name="site" value="<?= isset($_GET['site'])?$_GET['site']:""; ?>">
                         <div class="text-left mt-20">
-                        <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="{{ trans('Please Wait...') }}" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
+                            <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>
                     </form>
                 </div>

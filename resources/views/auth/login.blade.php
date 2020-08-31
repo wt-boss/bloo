@@ -11,6 +11,8 @@
         </div>
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-body form-content">
+                @include('admin.common.flash')
+
                 <div class="text-center">
                     <h3 class="content-group-lg" style="margin-top: 0;">{{ trans('login_title') }}</h3>
                 </div>
@@ -54,6 +56,34 @@
     </div>
 </form>
 @endsection
+
+<script type="text/javascript">
+
+    // Intercept login form
+    $('#login-form').submit(function(e){
+
+        // Prevent normal form submission, we well do in JS instead
+        e.preventDefault();
+
+        // Get form data
+        var data = {
+            "_token": $('#token').val(),
+            email: $('[name=email]').val(),
+            password: $('[name=password]').val(),
+            remember: $('[name=remember]').val(),
+        };
+
+        // Send the request
+        $.post($('this').attr('action'), data, function(response) {
+            if (response.success) {
+                // If login success, redirect
+                window.location.replace(response.redirect);
+            }
+        });
+    });
+
+</script>
+
 
 @section('plugin-scripts')
     <script src="{{ asset('assets/js/plugins/validation/validate.min.js') }}"></script>
