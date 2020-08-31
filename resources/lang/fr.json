@@ -356,7 +356,7 @@
     "choix_unique" : "Choix Unique",
     "choix_mult" : "Choix multiple",
     "linear_scale" : "Echèle",
-    "save" : "Enregistrer",
+    "Save" : "Enregistrer",
     "date_question" : "Date",
     "time_question" : "heure",
     "share" : "Partagez",
@@ -514,6 +514,7 @@
      "informations_generales":"Informations générales :",
       " Creer_des_maintenant_votre_premiere_operation":" Creer des maintenant votre premiere operation",
      "Créer_entreprise":"Creer des maintenant votre premiere entreprise",
-    "nothing_opération":"Vous n'etes affecter a aucune operation en cours"
-
+    "nothing_opération":"Vous n'etes affecter a aucune operation en cours",
+    "Please Wait..." : "Patientez ...",
+    "Saving..." : "Enregistrement..."
 }
