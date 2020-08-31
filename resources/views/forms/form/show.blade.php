@@ -64,7 +64,7 @@
         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
         <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
         @include('forms.partials._form-share-free')
-       
+
     </div>
 
 </div>

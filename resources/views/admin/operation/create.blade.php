@@ -22,7 +22,7 @@
                 </div>
                 <h2 class="bloo-primary left-side-bloo border-left-primary">@lang('create_operation')</h2>
                 <p class="text-justify">
-                   
+
                 </p>
                 <form method="post" action="{{ route('operation.store') }}" id="sondage-form">
                     @csrf

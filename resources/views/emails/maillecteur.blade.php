@@ -46,7 +46,7 @@
                         <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" style=" box-sizing: border-box; background-color: #ffffff; margin: 0 auto; padding: 0; width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px;">
                 <!-- Body content -->
 
-                
+
                     <tr>
                         <td class="header" style=" box-sizing: border-box; padding: 25px 0; text-align: left;
                         padding-left: 34px;">

@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            
+
 
                             <label for="particulier_email">{{ trans('email_adress') }}</label><br>
                             <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">

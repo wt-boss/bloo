@@ -120,7 +120,7 @@
                                         </div>
                                         @else
                                         <center><i><h5>{{ trans('Accounts_Manager') }}</h5></i></center>
-                                    
+
                                          @foreach ($users as $user)
                                          <li class="user" id="{{ $user->id }}">
                                             {{--will show unread count notification--}}
