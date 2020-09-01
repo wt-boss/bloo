@@ -50,17 +50,21 @@
             submitHandler: function (form) {
                 saveResponse(form, function () {
                     var $panel = $(form).closest('.panel-body');
-                    var response = 'Your responses have been submitted successfully.';
+                    var response = '{{ trans('vos reponses on ete soumise') }}';
                     var paragraph = $('p').addClass('content-group').text(response);
+                    var button =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>{{ 'Recharger la page' }}</a>";
 
                     $panel.empty();
                     $panel.append(paragraph);
+                    $panel.append(button);
+
                 }, function (error_message) {
                     notify('error', 'Error occured: ' + error_message);
                 });
                 return false;
             }
         });
+
 
         $('.pickatime').each(function (index) {
             var $pickatime = $(this);

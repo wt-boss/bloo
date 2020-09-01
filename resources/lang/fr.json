@@ -358,6 +358,8 @@
     "choix_mult" : "Choix multiple",
     "linear_scale" : "Echèlle",
     "save" : "Enregistrer",
+   
+    "Save" : "Enregistrer",
     "date_question" : "Date",
     "time_question" : "heure",
     "share" : "Partagez",
@@ -527,8 +529,14 @@
       "Selectionner_une_opération":"Selectionner une opération",
      "creer_compte":"Creer un compte client",
      "informations_generales":"Informations générales :",
-      " Creer_des_maintenant_votre_premiere_operation":" Creer des maintenant votre premiere operation",
+      "Creer_des_maintenant_votre_premiere_operation":" Creer des maintenant votre premiere operation",
      "Créer_entreprise":"Creer des maintenant votre premiere entreprise",
-    "nothing_opération":"Vous n'etes affecter a aucune operation en cours"
-
+    "nothing_opération":"Vous n'etes affecter a aucune operation en cours",
+    "Please Wait..." : "Patientez ...",
+    "Saving..." : "Enregistrement...",
+    "Chargement des données": "S'il vous plaît, attendez...",
+    "Vos reponses on ete soumise": "Vos réponses ont été soumises avec succès",
+    "Recharger la page" : "Recharger la page",
+    "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistrer",
+    "non active": "Votre compte est inactif ou non vérifié"
 }

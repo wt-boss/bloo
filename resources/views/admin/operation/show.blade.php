@@ -138,7 +138,7 @@
 
                     <div class="box-body row" id="responsesprint" style="display: none" >
                         {!! $viewprint !!}
-                    </div>
+                        </div>
                     <!-- /.box-body -->
                 </div>
             </div>
@@ -502,7 +502,6 @@
             });
         }
 
-
         let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
 
         if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
@@ -510,6 +509,7 @@
                 drawCharts(data_for_chart2);
             });
         }
+
         $(function () {
             // Resize chart on sidebar width change and window resize
             $(window).on('resize', function () {
@@ -538,7 +538,7 @@
 
                 drawCharts(data_for_chart);
 
-                data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+                data_for_chart2 = JSON.parse(response.data_for_chart2);
 
                 drawCharts(data_for_chart2);
 
