@@ -93,7 +93,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary reset pull-left" data-loading-text="Resetting...">Reset Settings</button>
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn bg-teal submit" data-loading-text="Saving...">{trans('save')}{}</button>
+                    <button type="submit" style="background-color: #0065a1;" class="btn bg-teal submit" data-loading-text="Saving...">{trans('save')}{}</button>
                 </div>
             </form>
         </div>

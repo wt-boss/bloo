@@ -14,7 +14,7 @@
         @if ($users->isEmpty())
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
-                    <h6 class="text-semibold">Aucun utilisateur enregistre</h6>
+                    <h6 class="text-semibold">{{ trans('nothing_users') }}</h6>
                 </div>
             </div>
         @else

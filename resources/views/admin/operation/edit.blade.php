@@ -25,11 +25,10 @@
         <div class="col-sm-7">
             <div class="my-content">
                 <div class="pull-right">
-                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">Suivant</a>
+                    <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">{{ trans('next') }}</a>
                 </div>
-                <h2 class="bloo-primary left-side-bloo border-left-primary">Creez un sondage !</h2>
+                <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('create_sondage') }}</h2>
                 <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
                 </p>
                 <form method="post" action="{{ route('operation.store') }}">
                     @method('PUT')
@@ -51,17 +50,17 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Nommer votre operation</p>
+                            <p class="op-title">{{ trans('name_sondage') }}</p>
                             <input name="nom_operation" class="form-control" type="text" value="{{ $operation->nom }}"" placeholder="Ex : Municipales 2030">
                         </div>
                         <div class="col-md-5 bloo-bloc col-md-offset-1">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p class="op-title">Debut</p>
+                                    <p class="op-title">{{ trans('Date_debut') }}</p>
                                     <input name="date_debut" value="{{ $operation->date_start }}" class="form-control" type="date">
                                 </div>
                                 <div class="col-xs-6">
-                                    <p class="op-title">Fin</p>
+                                    <p class="op-title">{{ trans('Dat_fin') }}</p>
                                     <input name="date_fin" value="{{ $operation->date_end }}" class="form-control" type="date">
                                     <input class="form-control" type="hidden" name="form_id" value="{{$operation->form->id }}" />
                                 </div>
@@ -72,11 +71,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
-                            <p class="op-title">Nom du formulaire</p>
+                            <p class="op-title">{{ trans('form_name') }}</p>
                             <input class="form-control" name="nom_formulaire" type="text" value="{{ $operation->form->title }}" placeholder="Ex : Municipales 2030">
                         </div>
                         <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                            <p class="op-title">description du formulaire</p>
+                            <p class="op-title">{{ trans('form_description') }}</p>
                             <input class="form-control" type="text" value="{{ $operation->form->description }}" name="description_formulaire" placeholder="Ex : Description des objectifs du formulaire">
                         </div>
                     </div>
@@ -85,18 +84,18 @@
                <div class="row">
                    <div class="col-xs-12">
                        <div class="bloo-bloc col-md-5 text-center b-first">
-                           <p class="op-title">Editer le questionnaire</p>
+                           <p class="op-title">{{ trans('edit_question') }}</p>
                            <div>
                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
-                               <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                               <span class="bloo-text">{{ trans('click_to_add_modif') }}r</span>
                             </div>
                        </div>
                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
-                           <p class="op-title">Editer les sites d'enquête</p>
+                           <p class="op-title">{{ trans('edit_site') }}</p>
                            <div>
                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-site-btn.png') }}" alt="">
                                <a href="{{route('sites',[$operation->id])}}">
-                               <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>
+                               <span class="bloo-text">{{ trans('click_to_add_modif') }}</span>
                                </a>
                            </div>
                         </div>
@@ -108,14 +107,14 @@
 {{--                            <p class="op-title">Ajouter les lecteurs</p>--}}
 {{--                            <div id="btn-add-reader" class="btn">--}}
 {{--                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-lect-btn.png') }}" alt="">--}}
-{{--                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>--}}
+{{--                                <span class="bloo-text">{{ trans('click_to_add_modif') }}</span>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">--}}
 {{--                            <p class="op-title">Sélectionner les opérateurs</p>--}}
 {{--                            <div>--}}
 {{--                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-ope-btn.png') }}" alt="">--}}
-{{--                                <span class="bloo-text">Cliquer ici pour ajouter ou modifier</span>--}}
+{{--                                <span class="bloo-text">{{ trans('click_to_add_modif') }}</span>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
