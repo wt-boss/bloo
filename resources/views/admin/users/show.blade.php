@@ -26,7 +26,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">3,200</h5>
-                                <span class="description-text">SALES</span>
+                                <span class="description-text">SALEs</span>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -60,7 +60,7 @@
             <div class="box shadow mb-4">
 
                 <div class="box-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Mon compte</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ trans('compte') }}</h6>
                 </div>
 
                 <div class="box-body">
@@ -70,19 +70,19 @@
 
                         <input type="hidden" name="_method" value="PUT">
 
-                        <h6 class="heading-small text-muted mb-4">Informations de l'utilisateur</h6>
+                        <h6 class="heading-small text-muted mb-4">{{ trans('infos_users') }}</h6>
 
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="name">Nom<span class="small text-danger"></span></label>
-                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" value="{{ old('name', $user->name) }}" disabled>
+                                        <label class="form-control-label" for="name">{{trans('name') }}<span class="small text-danger"></span></label>
+                                        <input type="text" id="name" class="form-control" name="name" placeholder="{{trans('name') }}" value="{{ old('name', $user->name) }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="email">Adress Email<span class="small text-danger"></span></label>
+                                        <label class="form-control-label" for="email">{{ trans('email_adress') }}<span class="small text-danger"></span></label>
                                         <input type="email" id="email" class="form-control" name="email" placeholder="example@example.com" value="{{ old('email', $user->email) }}" disabled>
                                     </div>
                                 </div>

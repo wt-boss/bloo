@@ -186,4 +186,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     {
         return $this->hasMany(Piece::class);
     }
+
+
+    
 }

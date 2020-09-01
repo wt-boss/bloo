@@ -224,10 +224,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-{{--                        <div class="text-center">--}}
-{{--                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> Message</button>--}}
-{{--                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> Localisation</button>--}}
-{{--                        </div>--}}
+                        {{-- <div class="text-center">
+                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
+                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
+                        </div> --}}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -238,7 +238,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="box-title">
-                                    Localisation
+                                    {{ trans('Localisation') }}
                                 </p>
                             </div>
                         </div>
@@ -263,7 +263,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                     <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
                 </button>
-                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des lecteurs</font></font></h4>
+                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_lecteurs1')}}</font></font></h4>
             </div>
                 <div class="modal-body">
                     <form method="POST" action="{{ route('ajoutlecteur') }}">
@@ -273,7 +273,7 @@
 
                         </div>
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
+                        <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -291,7 +291,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                 <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span></button>
-                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajouter des operateurs</font></font></h4>
+                <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_ops') }}</font></font></h4>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('ajoutlecteur') }}">
@@ -300,8 +300,8 @@
                     <div id="dataoperateurs">
 
                     </div>
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fermer</font></font></button>
-                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sauvegarder</font></font></button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('Close') }}</font></font></button>
+                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
                 </form>
             </div>
       </div>

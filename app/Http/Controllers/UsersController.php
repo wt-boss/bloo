@@ -109,4 +109,6 @@ class UsersController extends Controller
         return back()->withSuccess(trans('Utilisateurs suprimé avec success'));
     }
 
+    
+
 }
