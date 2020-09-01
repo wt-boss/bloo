@@ -19,8 +19,8 @@ class ContactsController extends Controller
     }
     public function store(Request $request)
     {
-
-        Mail::to(config('mail.from.address'))
+        $email = $request->except('_token')['Email'];
+        Mail::to($email)
             ->send(new Contact($request->except('_token')));
         return redirect()->route('home');
     }
