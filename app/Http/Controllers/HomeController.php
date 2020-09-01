@@ -20,19 +20,27 @@ use PHPUnit\TextUI\Help;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-
 class HomeController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
+    }
 
     /**
      * Show the application dashboard.
@@ -48,16 +56,16 @@ class HomeController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
-    {
-        $users = User::count();
-
-        $widget = [
-            'users' => $users,
-            //...
-        ];
-        return view('home', compact('widget'));
-    }
+//    public function index()
+//    {
+//        $users = User::count();
+//
+//        $widget = [
+//            'users' => $users,
+//            //...
+//        ];
+//        return view('home', compact('widget'));
+//    }
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -79,48 +87,48 @@ class HomeController extends Controller
         if($user->role === 5)
         {
             $comptes = Entreprise::with('operations')->get();
-             foreach ($comptes as $compte)
-             {
-                 $operations = $compte->operations()->count();
-                 $table = [$compte->nom,$operations];
-                 $diagram->push($table);
-             }
+            foreach ($comptes as $compte)
+            {
+                $operations = $compte->operations()->count();
+                $table = [$compte->nom,$operations];
+                $diagram->push($table);
+            }
             $operations = Operation::all();
             $operateurs = User::where('role','1')->get();
             $lecteurs = User::where('role','0')->get();
             $rapports = Operation::where('status','TERMINER')->get();
         }
-         else{
-             $comptes = $user->entreprises()->get();
-             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-             $operateurs = collect(); //Tout les operateurs des operations.
-             $lecteurs = collect(); //Tous les lecteurs des operations.
-             $rapports = collect();
-             foreach ($comptes as $entreprise)
-             {
-                 $countoperations = $entreprise->operations()->count();
-                 $table = [$entreprise->nom,$countoperations];
-                 $diagram->push($table);
+        else{
+            $comptes = $user->entreprises()->get();
+            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+            $operateurs = collect(); //Tout les operateurs des operations.
+            $lecteurs = collect(); //Tous les lecteurs des operations.
+            $rapports = collect();
+            foreach ($comptes as $entreprise)
+            {
+                $countoperations = $entreprise->operations()->count();
+                $table = [$entreprise->nom,$countoperations];
+                $diagram->push($table);
 
-             }
-             $User = User::with('operations')->findOrFail($user->id);
-             $operations = $User->operations()->with('form','entreprise')->get();
-             foreach ($operations as $operation)
-             {
-                 $AllUsers = $operation->users()->get();
-                  foreach ($AllUsers as $User)
-                  {
-                      if($User->role === 1)
-                      {
-                          $operateurs->push($User);
-                      }
-                      else if ($User->role === 0)
-                      {
-                          $lecteurs->push($User);
-                      }
-                  }
-             }
-         }
+            }
+            $User = User::with('operations')->findOrFail($user->id);
+            $operations = $User->operations()->with('form','entreprise')->get();
+            foreach ($operations as $operation)
+            {
+                $AllUsers = $operation->users()->get();
+                foreach ($AllUsers as $User)
+                {
+                    if($User->role === 1)
+                    {
+                        $operateurs->push($User);
+                    }
+                    else if ($User->role === 0)
+                    {
+                        $lecteurs->push($User);
+                    }
+                }
+            }
+        }
         return view('admin.dashboard',compact('user','comptes','operateurs','operations','lecteurs','rapports', 'countries','diagram'));
     }
 
@@ -180,13 +188,13 @@ class HomeController extends Controller
     }
 
     public function language()
-	{
+    {
         Session::put('locale', session('locale') == 'fr' ? 'en' : 'fr');
         // Session::put('fallback_locale', session('fallback_locale') == 'fr' ? 'en' : 'fr');
-		return redirect()->back();
-	}
+        return redirect()->back();
+    }
 
-	public function profile(){
+    public function profile(){
         $users = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
         from users LEFT  JOIN  messages ON users.id = messages.user_id and is_read = 0 and messages.receiver_id = " . Auth::id() . "
         where users.id != " . Auth::id() . "
@@ -311,12 +319,4 @@ class HomeController extends Controller
         $viewData = Helper::buildOperateurs($operateurs);
         return response()->json($viewData);
     }
-
-//    public function markasread($id)
-//    {
-//        $notification = Notification::findOrFail($id);
-//        $notification->markAsRead();
-//        return back();
-//    }
-
 }

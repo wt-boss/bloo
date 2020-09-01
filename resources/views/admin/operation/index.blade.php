@@ -36,7 +36,7 @@
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('start_date') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('end_date') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('enterprise') }}</th>
-                                <th class="text-center "style="color:#0065A1 !important">{{ trans('city') }}</th>
+{{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('city') }}</th>--}}
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('sites') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('operator') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('Status') }}</th>
@@ -52,7 +52,7 @@
                                         <td class="text-center">{{ $operation->date_start }}</td>
                                         <td class="text-center">{{ $operation->date_end }}</td>
                                         <td class="text-center">{{ $operation->entreprise->nom }}</td>
-                                        <td class="text-center">{{$operation->sites()->count()}}</td>
+{{--                                        <td class="text-center">{{$operation->sites()->count()}}</td>--}}
                                         <td class="text-center">{{$operation->sites()->count()}}</td>
                                         <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                         <td class="text-center">
@@ -63,7 +63,6 @@
                                                         <a href="#" class="badge badge-success">    </a>
                                                 @endif
                                                 @if($operation->status === "TERMINER")
-
                                                         <a href="#" class="badge badge-danger">    </a>
                                                 @endif
                                         </td>
@@ -99,7 +98,7 @@
                         <th class="text-center">{{ trans('start_date') }}</th>
                         <th class="text-center">{{ trans('end_date') }}</th>
                         <th class="text-center">{{ trans('enterprise') }}</th>
-                        <th class="text-center">{{ trans('city') }}</th>
+{{--                        <th class="text-center">{{ trans('city') }}</th>--}}
                         <th class="text-center">{{ trans('sites') }}</th>
                         <th class="text-center">{{ trans('operator') }}</th>
                         <th class="text-center">{{ trans('Status') }}</th>
@@ -115,7 +114,7 @@
                                 <td class="text-center">{{$operation->date_start }}</td>
                                 <td class="text-center">{{$operation->date_end }}</td>
                                 <td class="text-center">{{$operation->entreprise->nom }}</td>
-                                <td class="text-center">{{$operation->sites()->count()}}</td>
+{{--                                <td class="text-center">{{$operation->sites()->count()}}</td>--}}
                                 <td class="text-center">{{$operation->sites()->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
@@ -212,7 +211,6 @@
                 minimumResultsForSearch: Infinity,
                 width: 'auto'
             });
-
             // Set onclick cbg-colour .btn-success
         });
     </script>

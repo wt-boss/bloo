@@ -141,7 +141,7 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 Route::get('/home2', 'HomeController@index2')->name('home2')->middleware('Free');
 Route::get('/stat_survey', 'HomeController@index')->name('stat_survey')->middleware('Free');
 
-Route::get('/administration', 'HomeController@admin')->name('admin')->middleware('Role:Superadmin|Account Manager|Lecteur|Opérateur','Free');
+Route::get('/administration', 'HomeController@admin')->name('admin')->middleware('Role:Superadmin|Account Manager|Lecteur|Opérateur','Free','verified');
 
 //Questionnaire post
 

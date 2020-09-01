@@ -26,7 +26,7 @@
                         <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" >
                 <!-- Body content -->
 
-                
+
                     <tr>
                         <td class="header logo" >
                             <a href="{{ route('home')}}" >
@@ -61,9 +61,6 @@
                                 </tr>
                             </table>
                                     <br>
-                                <p >
-                                      
-                             </p>
                         </td>
                     </tr>
                 </table>

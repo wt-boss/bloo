@@ -53,7 +53,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="{{ route('profile.index') }}"><i class="icon-user-plus"></i> My profile</a></li>
+{{--                        <li><a href="{{ route('profile.index') }}"><i class="icon-user-plus"></i> My profile</a></li>--}}
                         <li><a href="{{ route('logout') }}" data-method="post"><i class="icon-switch2"></i> Logout</a></li>
                     </ul>
                 </li>
