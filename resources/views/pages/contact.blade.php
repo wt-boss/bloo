@@ -46,17 +46,17 @@
               <h2 class="h4">{{ trans('Contact Information') }}</h2>
             </div>
             <div class="w-100"></div>
-            <div class="col-md-3">
+          {{-- <div class="col-md-3">
               <p><span>{{ trans('Address') }} :</span> Bonamoussadi, <br> Douala - Cameroun</p>
-            </div>
-            <div class="col-md-3">
+            </div>--}}
+           {{-- <div class="col-md-3">
               <p><span> {{ trans('Phone') }} :</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
-            </div>
+            </div>--}}
             <div class="col-md-3">
               <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">hello@blooapp.live</a></p>
             </div>
             <div class="col-md-3">
-              <p><span> {{ trans('Website') }} </span> <a href="#">cmr.desk@blooapp.live</a> </p>
+              <p><span> {{ trans('Website') }}: </span> <a href="#"> blooapp.live</a> </p>
             </div>
           </div>
           <div class="row block-9">
@@ -83,8 +83,8 @@
             </div>
 
             <div class="col-md-6" id="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d127354.3058999278!2d9.732095999999999!3d4.0566784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2scm!4v1596678242602!5m2!1sen!2scm" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
+{{--            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d127354.3058999278!2d9.732095999999999!3d4.0566784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2scm!4v1596678242602!5m2!1sen!2scm" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+--}}            </div>
           </div>
         </div>
       </section>

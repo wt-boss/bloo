@@ -35,7 +35,7 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         @php $symbol = $form::getStatusSymbols()[$form->status]; @endphp
-        <h5 class="panel-title">{{ $form->title }} <span class="label bg-{{ $symbol['color'] }} position-left">{{ trans($symbol['label']) }}</span></h5>
+        <h5 class="panel-title">{{ $form->title }} <span style="background-color: #0065A1; border-color: #0065A1;" class="label bg-{{ $symbol['color'] }} position-left">{{ trans($symbol['label']) }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
                 @if(!auth()->user()->hasRole('Free'))
@@ -49,7 +49,7 @@
         @if (auth()->user()->hasRole('Free'))
             <div class="form-group col-xs-12">
                 {{-- <label for="exampleInputEmail1"><b>{{ trans('form_code') }}</b></label> --}}
-                <button class="btn pull-right" style="top:38px;" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
+                <button style="background-color: #0065a1;" class="btn pull-right" style="top:38px;" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                     <i class="fa fa-clone" aria-hidden="true"></i>
                 </button>
                 <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" readonly />
@@ -62,8 +62,8 @@
     @csrf
 <div class="panel panel-body sticky-up">
     <div class="pull-right">
-        <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
-        <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
+        <button type="submit" style="background-color: #0065a1;" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
+        <a  style="background-color: #0065d9;" href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
         <a href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
         @include('forms.partials._form-share-free')
 
@@ -125,7 +125,7 @@
 
             <div class="panel panel-body submit hidden">
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
+                    <button type="submit" style="background-color: #0065a1;" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
                     @if(auth()->user()->hasRole('Free'))
                         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>

@@ -1,5 +1,5 @@
-<button class="btn btn-xs btn-success">Menu</button>
-<button class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+<button style="background-color: #0065a1;" class="btn btn-xs btn-success">Menu</button>
+<button  style="background-color: #0065a1;" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right">
     @if(!auth()->user()->hasRole('Free'))
     <li class="dropdown-header highlight"><i class="icon-menu7"></i> <i class="icon-share3 pull-right"></i>{{trans('menu_form_1')}}</li>
