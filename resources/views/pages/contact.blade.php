@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <span class="subheading">{{ trans('contact_title') }}</span>
+           
             <h2 class="mb-4">{{ trans('contact_content') }}</h2>
             <p>{{ trans('contact_infos') }}</p>
             <p>{{ trans('contact_infos1') }}</p>
@@ -55,9 +55,7 @@
             <div class="col-md-3">
               <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">hello@blooapp.live</a></p>
             </div>
-            <div class="col-md-3">
-              <p><span> {{ trans('Website') }}: </span> <a href="#"> blooapp.live</a> </p>
-            </div>
+            
           </div>
           <div class="row block-9">
             <div class="col-md-6 pr-md-5">
@@ -82,9 +80,10 @@
 
             </div>
 
-            <div class="col-md-6" id="map">
-{{--            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d127354.3058999278!2d9.732095999999999!3d4.0566784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2scm!4v1596678242602!5m2!1sen!2scm" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
---}}            </div>
+            <div class="col-md-6" >
+                <img src="{{ asset('assets/images/hello.jpg') }}" alt="" height=390px
+                width=545px>
+      </div>
           </div>
         </div>
       </section>
