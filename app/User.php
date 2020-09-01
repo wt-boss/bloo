@@ -13,9 +13,11 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements MustVerifyEmail,JWTSubject
 {
-    use Notifiable, SoftDeletes, CascadeSoftDeletes;
+    use Notifiable;
+    use SoftDeletes;
+    use CascadeSoftDeletes;
 
     protected $dates = ['deleted_at'];
 

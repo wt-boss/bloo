@@ -32,21 +32,22 @@
     28 => 'Intervention\\Image\\ImageServiceProvider',
     29 => 'Ixudra\\Curl\\CurlServiceProvider',
     30 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    31 => 'Collective\\Html\\HtmlServiceProvider',
-    32 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    33 => 'Mews\\Purifier\\PurifierServiceProvider',
-    34 => 'Carbon\\Laravel\\ServiceProvider',
-    35 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    36 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
-    37 => 'Pusher\\Laravel\\PusherServiceProvider',
-    38 => 'Barryvdh\\Snappy\\ServiceProvider',
-    39 => 'App\\Providers\\AppServiceProvider',
-    40 => 'App\\Providers\\AuthServiceProvider',
-    41 => 'App\\Providers\\BroadcastServiceProvider',
-    42 => 'App\\Providers\\EventServiceProvider',
-    43 => 'App\\Providers\\RouteServiceProvider',
-    44 => 'App\\Providers\\MacroServiceProvider',
-    45 => 'App\\Providers\\HelperServiceProvider',
+    31 => 'Laravel\\Ui\\UiServiceProvider',
+    32 => 'Collective\\Html\\HtmlServiceProvider',
+    33 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    34 => 'Mews\\Purifier\\PurifierServiceProvider',
+    35 => 'Carbon\\Laravel\\ServiceProvider',
+    36 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    37 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
+    38 => 'Pusher\\Laravel\\PusherServiceProvider',
+    39 => 'Barryvdh\\Snappy\\ServiceProvider',
+    40 => 'App\\Providers\\AppServiceProvider',
+    41 => 'App\\Providers\\AuthServiceProvider',
+    42 => 'App\\Providers\\BroadcastServiceProvider',
+    43 => 'App\\Providers\\EventServiceProvider',
+    44 => 'App\\Providers\\RouteServiceProvider',
+    45 => 'App\\Providers\\MacroServiceProvider',
+    46 => 'App\\Providers\\HelperServiceProvider',
   ),
   'eager' => 
   array (
@@ -190,6 +191,8 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'Laravel\\Ui\\AuthCommand' => 'Laravel\\Ui\\UiServiceProvider',
+    'Laravel\\Ui\\UiCommand' => 'Laravel\\Ui\\UiServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
@@ -234,6 +237,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Ui\\UiServiceProvider' => 
     array (
     ),
     'Collective\\Html\\HtmlServiceProvider' => 

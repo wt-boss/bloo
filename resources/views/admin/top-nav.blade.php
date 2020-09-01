@@ -109,15 +109,13 @@
                         @endif
 
                             @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
-                            <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
-                                <a class="m-link" href="{{route('messages_index')}}" >
-                                    {{-- <i class="nav-icon fas fa-users-cog"></i> --}}
-                                    <i class="fas fa-envelope"></i>
-                                    <span>Messagerie</span>
-                                </a>
+                           <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
+{{--                                <a class="m-link" href="{{route('messages_index')}}" >--}}
+{{--                                    <i class="fas fa-envelope"></i>--}}
+{{--                                    <span>Messagerie</span>--}}
+{{--                                </a>--}}
                             </li>
                             @endif
-
                         @if (auth()->user()->hasRole('Superadmin'))
                             <li class="<?php echo (  Str::startsWith($route, 'user') ) ? "active" : '' ?>">
                                 <a class="m-link" href="{{route('users.index')}}" >
@@ -138,45 +136,45 @@
                         <!-- Notifications Menu -->
 
 
-                               <li class="dropdown notifications-menu" id="notif">
-                                   <!-- Menu toggle button -->
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                       <i class="fa fa-bell"></i>
-                                       <span class="label label-warning">{{auth()->user()->notifications->count()}}</span>
-                                   </a>
-                                   <ul class="dropdown-menu">
-                                       <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>
-                                       <li>
-                                           <!-- inner menu: contains the messages -->
-                                           <ul class="menu">
-                                               <li><!-- start message -->
-                                                   <a href="#">
-                                                       <div class="pull-left">
-                                                           <!-- User Image -->
-                                                           @foreach (auth()->user()->notifications as $notification)
+{{--                               <li class="dropdown notifications-menu" id="notif">--}}
+{{--                                   <!-- Menu toggle button -->--}}
+{{--                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+{{--                                       <i class="fa fa-bell"></i>--}}
+{{--                                       <span class="label label-warning">{{auth()->user()->notifications->count()}}</span>--}}
+{{--                                   </a>--}}
+{{--                                   <ul class="dropdown-menu">--}}
+{{--                                       <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>--}}
+{{--                                       <li>--}}
+{{--                                           <!-- inner menu: contains the messages -->--}}
+{{--                                           <ul class="menu">--}}
+{{--                                               <li><!-- start message -->--}}
+{{--                                                   <a href="#">--}}
+{{--                                                       <div class="pull-left">--}}
+{{--                                                           <!-- User Image -->--}}
+{{--                                                           @foreach (auth()->user()->notifications as $notification)--}}
 
-                                                               <div>
-                                                                   <!-- Message title and timestamp -->
-                                                                   <h4>
-                                                                       <small><button type="button" class="btn btn-success btn-sm">marquer lu</button></small>
-                                                                   </h4>
-                                                                   <!-- The message -->
-                                                                   <div class="row">
-                                                                       <div class="col-sm-10"> {{$notification->data['message']}} </div>
-                                                                       <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>
-                                                                   </div>
-                                                               </div>
-                                                           @endforeach
-                                                       </div>
-                                                   </a>
-                                               </li>
-                                               <!-- end message -->
-                                           </ul>
-                                           <!-- /.menu -->
-                                       </li>
+{{--                                                               <div>--}}
+{{--                                                                   <!-- Message title and timestamp -->--}}
+{{--                                                                   <h4>--}}
+{{--                                                                       <small><button type="button" class="btn btn-success btn-sm">marquer lu</button></small>--}}
+{{--                                                                   </h4>--}}
+{{--                                                                   <!-- The message -->--}}
+{{--                                                                   <div class="row">--}}
+{{--                                                                       <div class="col-sm-10"> {{$notification->data['message']}} </div>--}}
+{{--                                                                       <div class="col-sm-2"> <input type="submit" class="btn btn-success btn-xs btn-block" value="lue"> </div>--}}
+{{--                                                                   </div>--}}
+{{--                                                               </div>--}}
+{{--                                                           @endforeach--}}
+{{--                                                       </div>--}}
+{{--                                                   </a>--}}
+{{--                                               </li>--}}
+{{--                                               <!-- end message -->--}}
+{{--                                           </ul>--}}
+{{--                                           <!-- /.menu -->--}}
+{{--                                       </li>--}}
 
-                                   </ul>
-                               </li>
+{{--                                   </ul>--}}
+{{--                               </li>--}}
 
                             <!-- Messages: style can be found in dropdown.less-->
 

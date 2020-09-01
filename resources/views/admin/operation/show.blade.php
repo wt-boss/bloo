@@ -29,12 +29,12 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-3">
-                            <div class="info">
-                                <p class="label">Villes</p>
-                                <p class="info-value">
-                                    {{$operation->sites->count()}}
-                                </p>
-                            </div>
+{{--                            <div class="info">--}}
+{{--                                <p class="label">Villes</p>--}}
+{{--                                <p class="info-value">--}}
+{{--                                    {{$operation->sites->count()}}--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
                             <div class="info">
                                 <p class="label">Sites</p>
                                 <p class="info-value">{{$operation->sites()->count()}}</p>
@@ -118,17 +118,17 @@
                                 </ul>
                             </li>
                         </ul>
-                        <span class="pull-right">
-                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
+{{--                        <span class="pull-right">--}}
+{{--                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>--}}
 
-                             <a id="download_pdf" href="#">
-                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
-                             </a>
+{{--                             <a id="download_pdf" href="#">--}}
+{{--                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>--}}
+{{--                             </a>--}}
 
-                            <a href="{{ route('forms.response.export', $form->code) }}">
-                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
-                            </a>
-                        </span>
+{{--                            <a href="{{ route('forms.response.export', $form->code) }}">--}}
+{{--                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>--}}
+{{--                            </a>--}}
+{{--                        </span>--}}
                     </div>
 
 
@@ -224,10 +224,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="text-center">
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> Message</button>
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> Localisation</button>
-                        </div>
+{{--                        <div class="text-center">--}}
+{{--                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> Message</button>--}}
+{{--                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> Localisation</button>--}}
+{{--                        </div>--}}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -387,16 +387,40 @@
                 console.log(data);
                  $('#datalecteurs').empty();
                  $('#datalecteurs').append(data.name);
-                 $('#'+data.id).DataTable(
-                    {
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
-                            }
-                        },
-                        "bLengthChange" : false, //thought this line could hide the LengthMenu
-                        "bInfo":false,
+                 $('#'+data.id).DataTable({
+                     "language": {
+                         @if( app()->getLocale() === "fr" )
+                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                         @endif
+                             @if( app()->getLocale() === "en")
+                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                         @endif
+                             @if( app()->getLocale() === "es")
+                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                         @endif
+                             @if( app()->getLocale() === "pt")
+                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                         @endif
+                     },
+
+                     responsive: {
+                         details: {
+                             type: 'column',
+                             target: 'tr'
+                         }
+                     },
+                     columnDefs: [
+                         {
+                             className: 'control',
+                             orderable: false,
+                             targets:   0
+                         },
+                         {
+                             orderable: false,
+                             targets: [-1]
+                         },
+                         { responsivePriority: 1, targets: 0 },
+                     ]
                     })
 
             });
@@ -431,16 +455,40 @@
                 console.log(data);
                 $('#dataoperateurs').empty();
                 $('#dataoperateurs').append(data.name);
-                $('#'+data.id).DataTable(
-                    {
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
-                            }
+                $('#'+data.id).DataTable({
+                    "language": {
+                        @if( app()->getLocale() === "fr" )
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                        @endif
+                            @if( app()->getLocale() === "en")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                        @endif
+                            @if( app()->getLocale() === "es")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                        @endif
+                            @if( app()->getLocale() === "pt")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                        @endif
+                    },
+
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [
+                        {
+                            className: 'control',
+                            orderable: false,
+                            targets:   0
                         },
-                        "bLengthChange" : false, //thought this line could hide the LengthMenu
-                        "bInfo":false,
+                        {
+                            orderable: false,
+                            targets: [-1]
+                        },
+                        { responsivePriority: 1, targets: 0 },
+                    ],
                     })
             });
         });
