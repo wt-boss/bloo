@@ -124,7 +124,7 @@
 
             <div class="panel panel-body submit hidden">
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}">{{ trans('save') }}</button>
+                <button type="submit" class="btn btn-success btn-xs" id="submit" data-loading-text="{{ trans('Saving...') }}" data-complete-text="{{ trans('Save') }}">{{ trans('Save') }}</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
                     @if(auth()->user()->hasRole('Free'))
                         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>
