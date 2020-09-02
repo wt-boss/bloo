@@ -12,6 +12,8 @@
             <tr>
                 <td align="center" >
                     <table class="content" width="100%" cellpadding="0" cellspacing="0" >
+                    </table>
+                </td>
                 <tr>
                     <td class="header" >
 
@@ -23,14 +25,14 @@
                 <!-- Email Body -->
 
                 <td class="body" width="100%" cellpadding="0" cellspacing="0" >
-                        <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" >
+                        <table class="inner-body" width="570" cellpadding="0" cellspacing="0" >
                 <!-- Body content -->
 
 
                     <tr>
                         <td class="header logo" >
                             <a href="{{ route('home')}}" >
-                                <img src="{{asset('assets/images/bloo_logo.png')}}"  alt="Bloo" class="img"  >
+                                <img src="{{asset('assets/images/bloo_logo.png')}}" style="width: 75px; height: auto;"  alt="Bloo" class="img"  >
                             </a>
                         </td>
                     </tr>

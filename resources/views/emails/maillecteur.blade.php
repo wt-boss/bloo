@@ -23,14 +23,14 @@
                 <!-- Email Body -->
 
                 <td class="body" width="100%" cellpadding="0" cellspacing="0" >
-                        <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" >
+                        <table class="inner-body"  width="570" cellpadding="0" cellspacing="0" >
                 <!-- Body content -->
 
 
                     <tr>
-                        <td class="header logo" >
-                            <a href="{{ route('home')}}" ">
-                                <img src="{{asset('assets/images/bloo_logo.png')}}" class="img" alt="Bloo">
+                        <td>
+                            <a href="{{ route('home')}}">
+                                <img src="{{asset('assets/images/bloo_logo2.png')}}" class="img" alt="Bloo">
                             </a>
                         </td>
                     </tr>

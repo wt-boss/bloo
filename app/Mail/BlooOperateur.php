@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AddOperateur extends Mailable
+class BlooOperateur extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class AddOperateur extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.mailoperateur');
+        return $this->markdown('emails.mailoperateur');
     }
 }
