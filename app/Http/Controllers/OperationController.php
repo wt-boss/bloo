@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
+use App\Mail\AddLecteur;
+use App\Mail\AddOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use App\Operation_user;
@@ -130,6 +133,7 @@ class OperationController extends Controller
         {
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
+            Mail::to($user->email)->send(new AddLecteur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['ajout lecteur']; // sending from and to user id when pressed enter
@@ -559,5 +563,14 @@ class OperationController extends Controller
         $form->save();
         $operation->save();
         return back()->withSuccess(trans('Debut_operation'));
+    }
+
+    public function activation($id)
+    {
+        $user = User::findOrFail($id);
+        $user->acive = 1 ;
+        Mail::to($user->email)->send(new AddOperateur());
+        $user->save();
+        return back()->withSuccess('Operateur activer');
     }
 }

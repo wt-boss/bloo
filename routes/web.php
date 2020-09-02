@@ -270,3 +270,6 @@ Route::get('/logoutfree',function () {
 });
 //Route::get('notifications/{id}','HomeController@markasread')->name('read');
 
+/**Activer un operateur */
+Route::get('/OperateurActive/{id}','OperationController@activation')->name('activation');
+
