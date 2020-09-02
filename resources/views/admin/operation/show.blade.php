@@ -62,7 +62,9 @@
                                         $entreprise = $operation->entreprise()->with('users')->get()->last();
                                         $user = $entreprise->users()->get()->last();
                                     @endphp
-                                    {{ $user->first_name }} {{ $user->last_name }}
+                                    @if($user != null)
+                                        {{ $user->first_name }} {{ $user->last_name }}
+                                    @endif
                                 </p>
                             </div>
                         </div>
