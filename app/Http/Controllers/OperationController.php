@@ -568,7 +568,7 @@ class OperationController extends Controller
     public function activation($id)
     {
         $user = User::findOrFail($id);
-        $user->acive = 1 ;
+        $user->active = 1 ;
         Mail::to($user->email)->send(new AddOperateur());
         $user->save();
         return back()->withSuccess('Operateur activer');
