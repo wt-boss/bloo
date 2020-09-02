@@ -37,11 +37,7 @@
           <div class="ftco-footer-widget mb-4">
               <div class="block-23 mb-3">
                 <ul>
-                  <li><span class="icon icon-map-marker"></span><span class="text">Bonamoussadi, Douala - Cameroun</span></li>
                   <li><span class="icon icon-envelope"></span><span class="text">hello@blooapp.live</span></li>
-
-                  
-
                 </ul>
               </div>
 

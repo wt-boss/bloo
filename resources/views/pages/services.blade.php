@@ -104,7 +104,7 @@
                         <div class="tab-pane fade show active" id="v-pills-nextgen" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
                             <div class="d-md-flex">
                                 <div class="one-forth align-self-center">
-                                    <img src="{{asset('assets/images/recherche_consulting.jpg') }}" class="img-fluid border" alt="">
+                                    <img src="{{asset('assets/images/Site_Services_RechercheConsulting.jpg') }}" class="img-fluid border" alt="">
                                 </div>
                                 <div class="one-half ml-md-5 align-self-center">
                                     <p>{{ trans('service_section1_content1') }}</p>
