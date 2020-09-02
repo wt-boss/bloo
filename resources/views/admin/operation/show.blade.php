@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">trans{{trans('Lecteurs')  }}</p>
+                                <p class="label">{{trans('Lecteurs') }}</p>
                                 <p class="info-value">{{$operation->users()->where('role','0')->count()}}</p>
                             </div>
                             <div class="info">
