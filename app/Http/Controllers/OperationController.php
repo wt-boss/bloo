@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entreprise;
-use App\Mail\AddLecteur;
-use App\Mail\AddOperateur;
+use App\Mail\BlooLecteur;
+use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
 use Illuminate\Support\Facades\Mail;
@@ -133,7 +133,7 @@ class OperationController extends Controller
         {
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
-            Mail::to($user->email)->send(new AddLecteur());
+            Mail::to($user->email)->send(new BlooLecteur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['ajout lecteur']; // sending from and to user id when pressed enter
@@ -568,8 +568,8 @@ class OperationController extends Controller
     public function activation($id)
     {
         $user = User::findOrFail($id);
-        $user->acive = 1 ;
-        Mail::to($user->email)->send(new AddOperateur());
+        $user->active = 1 ;
+        Mail::to($user->email)->send(new BlooOperateur());
         $user->save();
         return back()->withSuccess('Operateur activer');
     }

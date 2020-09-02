@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AddLecteur extends Mailable
+class BlooLecteur extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class AddLecteur extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.maillecteur');
+        return $this->markdown('emails.maillecteur');
     }
 }
