@@ -389,6 +389,15 @@ html{
     scroll-behavior: smooth;
 }
 
+/* Gestion de l'affichage dans la page contact */
+#contact-right-side {
+    background: url('../images/hello.jpg');
+    background-repeat: no-repeat;
+    background-repeat: repeat-y;
+    background-size: 100%;
+    overflow-y: hidden;
+}
+
 /* Gestion de l'imgage de silde du header */
 @media screen and (min-width: 1700px) {
     .owl-carousel .owl-stage-outer {
