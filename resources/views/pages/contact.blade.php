@@ -24,20 +24,7 @@
         </div>
       </div>
 
-      <section class="ftco-section bg-light">
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-           
-            <h2 class="mb-4">{{ trans('contact_content') }}</h2>
-            <p>{{ trans('contact_infos') }}</p>
-            <p>{{ trans('contact_infos1') }}</p>
-            {{-- <p>{{ trans('contact_infos3') }}</p> --}}
-          </div>
-        </div>
 
-        </div>
-    </section>
 
       <section class="ftco-section contact-section ftco-degree-bg">
         <div class="container">
@@ -55,7 +42,7 @@
             <div class="col-md-3">
               <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">hello@blooapp.live</a></p>
             </div>
-            
+
           </div>
           <div class="row block-9">
             <div class="col-md-6 pr-md-5">
