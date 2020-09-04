@@ -81,6 +81,7 @@ class HomeController extends Controller
             ->orwhere('name','Chad')
             ->orwhere('name','Nigeria')
             ->orwhere('name','Angola')
+            ->orwhere('name', 'The Democratic Republic Of The Congo')
             ->get();
         $diagram =  collect();
         $diagram->push(['Client','Operation']);

@@ -117,6 +117,7 @@
     "prix_services_title": "Nos Tarifs",
     "prix_plans": "Grille tarifaire",
     "contact_fil": "Contact",
+    "contact_title": "Qui sommes-nous ?",
 
     "contact_content": "Bloo est un acteur de l’information et de la business intelligence. ",
     "contact_infos": "Bloo est né lorsque des professionnels de la finance, de la statistique, de l’analyse de données, du marketing et du design, tous spécialistes dans leur domaine, ont uni leurs compétences pour offrir une solution avec de gros avantages, tout en conservant une mentalité de startup . ",
@@ -431,7 +432,7 @@
     "Dashboard" : "Tableau de bord",
     "Operations" : "Operations",
     "Account" : "Comptes",
-    "contact_title": "",
+
 
     "menu_form_1" :"Partarger",
     "menu_form_2" :"Partarger Formulaire",
@@ -539,6 +540,6 @@
     "Chargement des données": "S'il vous plaît, attendez...",
     "Vos reponses on ete soumise": "Vos réponses ont été soumises avec succès",
     "Recharger la page" : "Recharger la page",
-    "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistrer",
+    "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
     "non active": "Votre compte est inactif ou non vérifié"
 }
