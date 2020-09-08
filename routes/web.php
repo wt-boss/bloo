@@ -150,7 +150,6 @@ Route::middleware(['auth'])->namespace('Form')->group(function () {
     //Form Response Routes
     Route::get('forms/{form}/responses', 'ResponseController@index')->name('forms.responses.index')->middleware('Role:Superadmin|Account Manager|Free');
     Route::get('forms/{form}/responses/download', 'ResponseController@export')->name('forms.response.export')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{id}/responses/download2', 'ResponseController@export2')->name('forms.response.export2')->middleware('Role:Superadmin|Account Manager|Free');
     Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Account Manager|Free');
     Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single')->middleware('Role:Superadmin|Account Manager|Free');
 
