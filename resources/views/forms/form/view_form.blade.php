@@ -53,7 +53,7 @@ $fields = $form->fields()->filled()->get();
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>
                     </form>
-                </div>
+                </div> 
             @endif
     </div>
 </div>

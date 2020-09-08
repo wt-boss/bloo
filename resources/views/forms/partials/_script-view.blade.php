@@ -50,10 +50,10 @@
             submitHandler: function (form) {
                 saveResponse(form, function () {
                     var $panel = $(form).closest('.panel-body');
-                    var response = '{{ trans('vos reponses on ete soumise') }}';
+                    var response = '{{ trans('form_submitted_reponse') }}.';
                     var paragraph = $('p').addClass('content-group').text(response);
-                    var button1 =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>@lang('Recharger la page')</a>";
-                    var button2 =  "<a class='pull-right' href='{{route('questionnaire.free')}}'>@lang('My_form')</a>";
+                    var button1 =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>@lang('send_another_response')</a>";
+                    var button2 =  "<a class='btn btn-primary pull-right' href='{{route('questionnaire.free')}}'>@lang('create_my_own_form')</a>";
 
                     $panel.empty();
                     $panel.append(paragraph);
