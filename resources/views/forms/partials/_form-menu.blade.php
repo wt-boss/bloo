@@ -7,10 +7,6 @@
         <li><a data-toggle="modal" data-target="#share-form" data-backdrop="static" data-keyboard="false">{{trans('menu_form_2')}}</a></li>
     @endif
 
-    @if ($form->user_id === $current_user->id)
-        <li><a data-toggle="modal" data-target="#form-collaborate" data-backdrop="static" data-keyboard="false">{{trans('menu_form_3')}}</a></li>
-    @endif
-
     @if (in_array($form->status, [$form::STATUS_OPEN, $form::STATUS_CLOSED]))
         <li class="dropdown-header highlight"><i class="icon-menu7"></i> <i class="icon-menu6 pull-right"></i>{{trans('menu_form_4')}}</li>
         @if (Route::currentRouteName() !== 'forms.responses.index')
@@ -46,10 +42,8 @@
     <li><a href="{{ route('forms.edit', $form->code) }}">{{trans('menu_form_13')}}</a></li>
     @endif
 
-    @if ($form->status !== $form::STATUS_OPEN)
-        <li><a id="delete-button" data-href="{{ route('forms.destroy', $form->code) }}" data-item="form - {{ $form->title }}">{{trans('menu_form_14')}}</a></li>
-    @endif
-    @if(!auth()->user()->hasRole('Free'))
-    <li><a href="{{ route('forms.index') }}">{{trans('menu_form_15')}}</a></li>
-    @endif
+{{-- --}}
+{{--    @if(!auth()->user()->hasRole('Free'))--}}
+{{--    <li><a href="{{ route('forms.index') }}">{{trans('menu_form_15')}}</a></li>--}}
+{{--    @endif--}}
 </ul>

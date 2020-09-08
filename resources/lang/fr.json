@@ -359,8 +359,6 @@
     "choix_mult" : "Choix multiple",
     "linear_scale" : "Echèlle",
     "save" : "Enregistrer",
-
-    "Save" : "Enregistrer",
     "date_question" : "Date",
     "time_question" : "heure",
     "share" : "Partagez",
@@ -537,8 +535,11 @@
     "Please Wait..." : "Patientez ...",
     "Saving..." : "Enregistrement...",
     "Chargement des données": "S'il vous plaît, attendez...",
-    "Vos reponses on ete soumise": "Vos réponses ont été soumises avec succès",
+    "Vos reponses on ete soumise": "Votre réponse a été envoyée.",
     "Recharger la page" : "Recharger la page",
     "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
-    "non active": "Votre compte est inactif ou non vérifié"
+    "non active": "Votre compte est inactif ou non vérifié",
+    "Update_sondage": "Modifier sondage",
+    "Edit Form": "Edition du formulaire",
+    "Message_send": "Message envoyer avec success"
 }

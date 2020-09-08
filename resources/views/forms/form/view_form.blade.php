@@ -58,6 +58,7 @@ $fields = $form->fields()->filled()->get();
     </div>
 </div>
 @endsection
+
     @section('laraform_script1')
         <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
