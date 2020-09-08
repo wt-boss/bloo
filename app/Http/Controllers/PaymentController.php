@@ -220,8 +220,8 @@ class PaymentController extends Controller
 //            return Redirect::away($redirect_url);
 //        }
 //        \Session::put('error', 'Unknown error occurred');
-        Auth::login($user, true);
-        return Redirect::to('/administration');
+
+        return view('successoffre');
     }
 
 //    public function getPaymentStatus()

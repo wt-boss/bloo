@@ -30,7 +30,7 @@
                 <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('create_sondage') }}</h2>
                 <p class="text-justify">
                 </p>
-                <form method="post" action="{{ route('operation.store') }}">
+                <form method="post" action="{{ route('operation.update',[$operation->id]) }}">
                     @method('PUT')
                     @csrf
                     <div class="row">
@@ -120,8 +120,7 @@
 {{--                    </div>--}}
 {{--                </div>--}}
                     <br />
-                <button type="submit" class="btn btn-bloo">Enregistrer</button>
-
+                <button type="submit" class="btn btn-bloo">{{trans('save')}}</button>
 {{--                    <button type="submit" class="btn btn-bloo btn-bloo-action" disabled>Enregistrer</button>--}}
 {{--                     <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
 {{--                    <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button>--}}

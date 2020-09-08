@@ -28,6 +28,7 @@
 
     <section class="ftco-section contact-section ftco-degree-bg">
         <div class="container">
+            @include('admin.common.flash')
             <div class="row d-flex mb-5 contact-info">
                 <div class="col-md-12 mb-4">
                     <h2 class="h4">{{ trans('Contact Information') }}</h2>
@@ -39,6 +40,7 @@
             </div>
             <div class="row block-9">
                 <div class="col-md-6 pr-md-5">
+
                     <form action="{{ route('contactus') }}" method="post">
                         @csrf
                         <div class="form-group">

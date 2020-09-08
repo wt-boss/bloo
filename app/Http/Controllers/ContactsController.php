@@ -22,6 +22,6 @@ class ContactsController extends Controller
         $email = $request->except('_token')['Email'];
         Mail::to($email)
             ->send(new Contact($request->except('_token')));
-        return redirect()->route('home');
+        return back()->withSuccess(trans('Message_send'));
     }
 }

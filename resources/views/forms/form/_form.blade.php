@@ -25,7 +25,7 @@
     </div>
 
     <div class="text-right">
-        <button type="submit" id="submit" class="btn mt-20 btn-{{ ($type == 'edit') ? 'primary' : 'success' }}">{{ ($type == 'edit') ? 'Update' : 'Créer' }}</button>
+        <button style="background-color: #0065a1;"  type="submit" id="submit" class="btn mt-20 btn-{{ ($type == 'edit') ? 'primary' : 'success' }}">{{ ($type == 'edit') ? trans('Mettre_jour') : 'Créer' }}</button>
     </div>
 </form>
 
