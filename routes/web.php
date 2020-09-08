@@ -254,7 +254,6 @@ Route::get('/vueroute/{id}','TestController@searchoperation');
 Route::get('/logoutfree',function () {
     return view('logoutfree');
 });
-
 /**Activer un operateur */
 Route::get('/OperateurActive/{id}','OperationController@activation')->name('activation');
 

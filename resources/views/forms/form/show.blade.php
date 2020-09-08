@@ -62,9 +62,9 @@
     @csrf
 <div class="panel panel-body sticky-up">
     <div class="pull-right">
-        <button type="submit" style="background-color: #69c6fb;" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('Save') }}"> <i class="fa fa-save"></i> {{ trans('save') }}</button>
+        <a  href="{{ route('forms.edit', $form->code) }}" style="background-color:#95d9ff; margin-left:0px; " class="btn btn-primary btn-xs position-right legitRipple"><i style="font-size:16px" class="fa fa-pen"></i> {{ trans('Edit Form') }}</a>
+        <button type="submit" style="background-color: #69c6fb;" class="btn btn-success btn-xs" id="submit" data-loading-text="Enregistrement..." data-complete-text="{{ trans('save') }}"> <i class="fa fa-save"></i> {{ trans('save') }}</button>
         <a  href="{{ route('forms.responses.index', $form->code) }}" style=" margin-left:0px; " class="btn btn-primary btn-xs position-right legitRipple"><i style="font-size:16px" class="fa">&#xf080;</i> {{ trans('response_stats') }}</a>
-
         <a   style="background-color: #0065d9; margin-left:0px; " href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
         @include('forms.partials._form-share-free')
 
@@ -127,7 +127,7 @@
             <div class="panel panel-body submit hidden">
                 <div class="text-right">
 
-                <button type="submit" style="background-color: #0065a1;" class="btn btn-success btn-xs" id="submit" data-loading-text="{{ trans('Saving...') }}" data-complete-text="{{ trans('Save') }}"> <i class="fa fa-save"></i> {{ trans('Save') }}</button>
+                <button type="submit" style="background-color: #0065a1;" class="btn btn-success btn-xs" id="submit" data-loading-text="{{ trans('Saving...') }}" data-complete-text="{{ trans('save') }}"> <i class="fa fa-save"></i> {{ trans('save') }}</button>
                     @php $form_is_ready = in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_OPEN, $form::STATUS_CLOSED]); @endphp
                     @if(auth()->user()->hasRole('Free'))
                         <a href="{{ route('forms.responses.index', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple"><i class="fa fa-chart" aria-hidden="true"></i> {{ trans('response_stats') }}</a>

@@ -52,11 +52,13 @@
                     var $panel = $(form).closest('.panel-body');
                     var response = '{{ trans('vos reponses on ete soumise') }}';
                     var paragraph = $('p').addClass('content-group').text(response);
-                    var button =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>{{ 'Recharger la page' }}</a>";
+                    var button1 =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>@lang('Recharger la page')</a>";
+                    var button2 =  "<a class='pull-right' href='{{route('questionnaire.free')}}'>@lang('My_form')</a>";
 
                     $panel.empty();
                     $panel.append(paragraph);
-                    $panel.append(button);
+                    $panel.append(button1);
+                    $panel.append(button2);
 
                 }, function (error_message) {
                     notify('error', 'Error occured: ' + error_message);
