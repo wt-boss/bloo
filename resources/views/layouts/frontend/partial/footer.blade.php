@@ -40,9 +40,6 @@
                   <li><span class="icon icon-envelope"></span><span class="text">hello@blooapp.live</span></li>
                 </ul>
               </div>
-
-
-
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-linkedin"></span></a></li>

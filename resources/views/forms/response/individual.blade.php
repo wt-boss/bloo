@@ -9,9 +9,6 @@
         <div class="heading-elements">
             {{ $responses->appends(['type' => 'individual'])->onEachSide(2)->links('vendor.pagination.panel-header', ['pagination_class' => 'pagination-flat pagination-sm position-left']) }}
 
-            @if (!empty($response_data))
-                <a href="javascript:void(0)" id="delete-button" data-href="{{ route('forms.responses.destroy.single', [$form->code, $response->id]) }}" data-item="form response" class="btn btn-sm btn-danger position-right">{{ trans('delete_response') }}</a>
-            @endif
         </div>
     </div>
 

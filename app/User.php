@@ -42,6 +42,16 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     ];
 
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+
     public static function rules($update = false, $id = null)
     {
         $commun = [
@@ -127,11 +137,6 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         Mail::to($this)->send($message);
     }
 
-    public function hasVerifiedEmail()
-    {
-        return is_null($this->email_token);
-    }
-
     public function forms()
     {
         return $this->hasMany(Form::class);
@@ -188,5 +193,5 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     }
 
 
-    
+
 }

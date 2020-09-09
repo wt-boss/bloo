@@ -53,11 +53,12 @@ $fields = $form->fields()->filled()->get();
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>
                     </form>
-                </div>
+                </div> 
             @endif
     </div>
 </div>
 @endsection
+
     @section('laraform_script1')
         <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>

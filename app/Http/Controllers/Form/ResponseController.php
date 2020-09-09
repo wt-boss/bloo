@@ -164,41 +164,8 @@ class ResponseController extends Controller
     public function export(Form $form)
     {
         $current_user = Auth::user();
-        $not_allowed = ($form->user_id !== $current_user->id && !$current_user->isFormCollaborator($form->id));
-        abort_if($not_allowed, 404);
-
-        $not_allowed = $form->responses()->doesntExist();
-        abort_if($not_allowed, 404);
-
         $filename = Str::slug($form->title) . '.xlsx';
         return Excel::download(new FormResponseExport($form), $filename);
-    }
-
-    public function export2($id)
-    {
-        $operation = Operation::findOrFail($id);
-        $current_user = Auth::user();
-        $form=$operation->form;
-        $valid_request_queries = ['summary', 'individual'];
-        $query = strtolower(request()->query('type', 'summary'));
-
-        abort_if(!in_array($query, $valid_request_queries), 404);
-
-        if ($query === 'summary') {
-            $responses = [];
-            $form->load('fields.responses', 'collaborationUsers', 'availability');
-        } else {
-            $form->load('collaborationUsers');
-
-            $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
-        }
-         $pdf = \PDF::loadView('chartjs');
-         //$pdf = \PDF::loadView('admin.operation.show',compact('operation','form', 'query', 'responses'));
-         $pdf->setOption('enable-javascript', true);
-         $pdf->setOption('javascript-delay', 5000);
-         $pdf->setOption('enable-smart-shrinking', true);
-         $pdf->setOption('no-stop-slow-scripts', true);
-         return $pdf->download('chart.pdf');
     }
 
     public function destroy(Form $form, FormResponse $response)

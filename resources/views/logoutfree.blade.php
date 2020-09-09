@@ -2,22 +2,22 @@
 
 @extends('layouts.auth')
 
-
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-flat">
                 <div class="panel-heading">
-                    <h5 class="panel-title">QUITTER LE FORMULAIRE GRATUIT</h5>
+                    <div class="panel-title" >
+                        <h6>@lang('Out_free')</h6>
+                     </div>
                 </div>
-                    <div class="panel-body">
-                        <button id="submit" type="button" class="btn btn-bloo pull-right" data-loading-text="Please Wait..." data-complete-text="Submit Form">
-                            <a href="{{ route('forms.logout_free') }}">
-                                <span class="hidden-xs"><b>ACCUEIL</b></span>
+                <div class="panel-body">
+                        <button  style="background-color: #0065a1;" id="submit" type="button" class="btn btn-bloo pull-right" data-loading-text="Please Wait..." data-complete-text="Submit Form">
+                            <a style="color: #fff;" href="{{ route('forms.logout_free') }}">
+                                @lang('home_fil')
                             </a>
-
                         </button>
-                    </div>
+                </div>
             </div>
         </div>
 @endsection
