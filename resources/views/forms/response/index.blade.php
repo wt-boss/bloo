@@ -38,6 +38,7 @@
             <div class="btn-group heading-btn">
                     @include('forms.partials._form-menu')
             </div>
+
         </div>
     </div>
 
@@ -53,6 +54,11 @@
             <div class="heading-btn">
             <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('summary') }}</a>
                 <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('individual') }}</a>
+                <span class="pull-right">
+         <a id="download_pdf">
+             <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
+         </a>
+     </span>
             </div>
         </div>
     </div>
