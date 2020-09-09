@@ -418,3 +418,33 @@ html{
         width: 65%;
     }
 }
+/* prix et compte */
+
+
+
+@media screen and (min-width: 2000px) {
+    .owl-carousel .owl-stage-outer {
+        /* top: 75px; */
+    }
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 65%;
+    }
+}
+/*btn free tablette*/
+@media screen and (min-width: 768px) {
+.kr{
+    margin-top: 8px;
+}
+}
+/* caché la div de l'image qui laisse juste un trait sur smate*/
+@media screen and (min-width: 360px) {
+    div.cach{
+        visibility: hidden;
+      display:none;
+    }
+    }
+
+
+
+

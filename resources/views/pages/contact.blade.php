@@ -63,7 +63,7 @@
                     </form>
                 </div>
 
-                <div class="col-md-6 d-sm-none d-md-block" id="contact-right-side">
+                <div class="col-md-6 d-sm-none d-md-block cach" id="contact-right-side">
                 </div>
             </div>
         </div>

@@ -19,8 +19,8 @@
 <section class="ftco-section ftco-degree-bg">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 sidebar ftco-animate"  id="header">
-                <div class="sidebar-box ftco-animate carriere-side-img">
+            <div class="col-md-4 sidebar ftco-animate cach"  id="header" >
+                <div class="sidebar-box ftco-animate carriere-side-img ">
 
                 </div>
             </div> <!-- .col-md-4 -->
