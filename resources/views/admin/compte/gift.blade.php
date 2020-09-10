@@ -11,11 +11,11 @@
             <div class="d-none d-sm-block col-sm-5 left-side-bloo">
                 <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
                 {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
-                <h1>Attribuer un compte</h1>
+                <h1>{{ trans('add_accont') }}</h1>
             </div>
             <div class="col-sm-7">
                 <div class="my-content">
-                    <h2 class="bloo-primary left-side-bloo border-left-primary">Attribuer un compte !</h2>
+                    <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('add_accont') }}</h2>
 
                 </div>
             </div>

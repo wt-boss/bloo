@@ -11,11 +11,11 @@ if (Auth::user()->rolename() !== "Superadmin") {
 //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
 $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
 ?>
-{!! Form::myInput('text', 'first_name', 'Name') !!}
+{!! Form::myInput('text', 'first_name', trans('first_name')) !!}
 
-{!! Form::myInput('text', 'last_name', 'Name') !!}
+{!! Form::myInput('text', 'last_name', trans('last_name')) !!}
 
-{!! Form::myInput('email', 'email', 'Email') !!}
+{!! Form::myInput('email', 'email', trans('Email')) !!}
 
 {!! Form::mySelect('role', 'Role', $allowedRoles) !!}
 

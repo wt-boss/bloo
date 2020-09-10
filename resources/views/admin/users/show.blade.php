@@ -26,7 +26,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">3,200</h5>
-                                <span class="description-text">SALEs</span>
+                                <span class="description-text">SALES</span>
                             </div>
                             <!-- /.description-block -->
                         </div>

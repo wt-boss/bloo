@@ -106,19 +106,14 @@
                     <div class="box-header with-border">
                         <ul class="box-title" style="padding-left: 4px;">
                             <li>{{ trans('response_stats') }}</li>
-
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
-                                    {{ trans('sort_by') }} <span class="caret"></span>
+                            <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
+                                    {{ trans('sort_by') }}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
+                             <select class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
+                                <option selected>Pays</option>
+                                <option value="1">Ville</option>
+                                <option value="2">Opérateurs</option>     
+                            </select>
                         </ul>
                         <span class="pull-right">
                             <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>

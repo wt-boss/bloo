@@ -396,7 +396,12 @@
     "actions" : "Actions",
     "accounts" : "Comptes",
     "operations" : "Opérations",
+    "add_accont" : "Attribuer un compte !",
+    "chose_accont" : "Veuillez choisir un Account Manager et une operation",
     "operators" : "Opérateurs",
+    "parameter" : "Paramètres",
+    "paneau_controle" : "Panneau de control",
+    "Users" : "Utilisateurs",
     "reports" : "Rapports",
     "client_operations" : "Opérations par clients",
     "resources" : "ressources",
@@ -430,8 +435,8 @@
     "Dashboard" : "Tableau de bord",
     "Operations" : "Operations",
     "Account" : "Comptes",
-
-
+    "create_users" : "Créer un utilisateur",
+    "update_compte" : "Mise a jour compte",
     "menu_form_1" :"Partarger",
     "menu_form_2" :"Partarger Formulaire",
     "menu_form_3" :"A enlever",
