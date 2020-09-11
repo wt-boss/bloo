@@ -438,6 +438,60 @@ class OperationController extends Controller
         }
     }
 
+
+    public function pdf($id, Request $request)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+        $current_user = Auth::user();
+        $form=$operation->form;
+        $valid_request_queries = ['summary', 'individual'];
+        $query = strtolower(request()->query('type', 'summary'));
+
+        abort_if(!in_array($query, $valid_request_queries), 404);
+
+        if ($query === 'summary') {
+            $responses = [];
+            $form->load('fields.responses', 'collaborationUsers', 'availability');
+        } else {
+            $form->load('collaborationUsers');
+
+            $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
+        }
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChart();
+            if(!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+        }
+
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChart2();
+            if(!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
+
+        $view = (string)View::make('admin.operation.partials.response',compact('operation','form', 'query', 'responses'));
+        $viewprint = (string)View::make('admin.operation.partials.responseprint',compact('operation','form', 'query', 'responses'));
+
+        if($request->ajax()){
+            return [
+                'response_view' => $view,
+                'data_for_chart' => json_encode($data_for_chart),
+                'data_for_chart2' => json_encode($data_for_chart2)
+            ];
+        } else {
+            return view('admin.operation.pdf',compact('view','viewprint','operation','form', 'query', 'responses', 'data_for_chart','data_for_chart2'));
+        }
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -539,8 +539,14 @@
     "Chargement des données": "S'il vous plaît, attendez...",
     "form_submitted_reponse": "Votre réponse a été envoyée",
     "send_another_response": "Envoyer une autre réponse",
-    "create_my_own_form" : "Create my own form",
     "Recharger la page" : "Recharger la page",
     "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
-    "non active": "Votre compte est inactif ou non vérifié"
+    "non active": "Votre compte est inactif ou non vérifié",
+    "Update_sondage": "Modifier sondage",
+    "Edit Form": "Edition du formulaire",
+    "create_my_own_form" : "Créer mon propre sondage",
+    "Message_send": "Message envoyer avec success",
+    "My_form": "Créer mon propre formulaire",
+    "Out_free" : "QUITTER LE FORMULAIRE GRATUIT",
+    "Sucess_create": "Votre compte a été crée avec success"
 }

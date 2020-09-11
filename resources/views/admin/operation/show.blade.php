@@ -499,6 +499,7 @@
 
     <script type="text/javascript">
         document.getElementById('download_pdf').onclick = function () {
+            
             var now = new Date();
             var annee   = now.getFullYear();
             var mois    = now.getMonth() + 1;
@@ -523,10 +524,13 @@
                 for (i = 1; i <= totalPages; i++) {
                     console.log('here', i);
                     pdf.setPage(i);
-                    pdf.text('Page ' + i + '/' + totalPages, 250, 210);
+                    pdf.setFont("helvetica");
+                    pdf.setFontSize(10);
+                    pdf.text('Page ' + i + '/' + totalPages, 260, 210);
                     pdf.text('Imprimer le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
-                    pdf.addImage(imgData, "PNG",  05, 0);
-                    pdf.text('{{$operation->nom}}',39,12);
+                    pdf.addImage(imgData, "PNG",  240, 0);
+                    pdf.setFontType("bolditalic");
+                    pdf.text('{{$operation->nom}} ({{ $user->first_name }} {{ $user->last_name }})',05,12);
                 }
             }).save();
         };

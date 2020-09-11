@@ -18,6 +18,12 @@ Route::get('/home', function () {
     return view('pages.home');
 })->middleware('Free');
 
+Route::get('/test', function (){
+    return view('successoffre');
+});
+
+Route::get('/testpdf/{id}', 'OperationController@pdf');
+
 // pages route
 Route::group(['middleware'=>['web','Free']],function(){
     Route::get('/','PagesController@getHome')->name('home');
