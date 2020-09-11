@@ -53,7 +53,7 @@
                     var response = '{{ trans('form_submitted_reponse') }}.';
                     var paragraph = $('p').addClass('content-group').text(response);
                     var button1 =  "<a class='btn btn-primary' href='javascript:window.location.reload()'>@lang('send_another_response')</a>";
-                    var button2 =  "<a class='btn btn-primary pull-right' href='{{route('questionnaire.free')}}'>@lang('create_my_own_form')</a>";
+                    var button2 =  "<br><br><a href='{{route('questionnaire.free')}}'>@lang('create_my_own_form')</a>";
 
                     $panel.empty();
                     $panel.append(paragraph);

@@ -16,7 +16,7 @@
                 <ul class="list-unstyled">
                     <li class="{{Request::is('home')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('home') }}">{{  trans('home_fil')  }}</a></li>
                     <li class="{{Request::is('services')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('services') }}">{{  trans('service_fil')  }}</a></li>
-                    <li class="{{Request::is('sondages')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('sondages') }}">{{  trans('sondage_fil')  }}</a></li>
+                    <li class="{{Request::is('sondages')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{route('questionnaire.free')}}">{{  trans('sondage_fil')  }}</a></li>
                     <li class="{{Request::is('prix')? "active": "nav-item"}}"><a class="py-2 d-block" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
                 </ul>
            </div>

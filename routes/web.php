@@ -264,4 +264,3 @@ Route::get('/logoutfree',function () {
 });
 /**Activer un operateur */
 Route::get('/OperateurActive/{id}','OperationController@activation')->name('activation');
-
