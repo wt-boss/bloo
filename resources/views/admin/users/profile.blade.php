@@ -309,7 +309,7 @@
                                     <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{auth()->user()->email}}</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Operation</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$operations->count()}}</font></font></a>
+                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">   {{ trans('operations') }}     </font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$operations->count()}}</font></font></a>
                                 </li>
                             </ul>
                         </div>

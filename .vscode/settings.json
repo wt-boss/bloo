@@ -1,2 +1,8 @@
 {
+    "editor.accessibilityPageSize": 14,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderIndicators": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.minimap.enabled": false,
+    "editor.minimap.renderCharacters": false
 }

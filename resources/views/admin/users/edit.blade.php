@@ -15,7 +15,7 @@
             <div class="d-none d-sm-block col-sm-5 left-side-bloo">
                 <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="">
                 {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo_white.png') }}" alt="Bloo"> --}}
-                <h1>Mise a jour compte</h1>
+                <h1>{{ trans('update_compte') }}</h1>
             </div>
             <div class="col-sm-7">
                 <div class="my-content create-user">
@@ -28,7 +28,7 @@
                         @csrf
                         @include('admin.users.form2')
                         <br>
-                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">Annuler</a>
+                        <a class="btn btn-bloo-cancel" href="{{ route('users.index') }}">{{ trans('Annuler') }}</a>
                         <button type="submit" class="btn btn-bloo">{{ trans('Mettre_jour') }}</button>
                     {!! Form::close() !!}
                 </div>

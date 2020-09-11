@@ -440,9 +440,17 @@ html{
 /* caché la div de l'image qui laisse juste un trait sur smate*/
 @media screen and (min-width: 360px) {
     div.cach{
-        visibility: hidden;
+
       display:none;
     }
+     .jt {
+         
+         margin-left: 23px !important;
+         /*! margin-left: 231px; */
+        
+         
+         }
+    
     }
 
 

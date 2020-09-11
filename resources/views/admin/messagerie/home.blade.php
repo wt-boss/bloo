@@ -9,12 +9,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Users
-            <small>Panneau de control</small>
+            {{ trans('Users') }}
+            <small>{{ trans('paneau_controle') }}</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"> <i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-            <li class="active">Users</li>
+            <li><a href="#"> <i class="fas fa-tachometer-alt"></i> {{ trans('Dashboard') }}</a></li>
+            <li class="active">{{ trans('Users') }}</li>
         </ol>
     </section>
 @endsection

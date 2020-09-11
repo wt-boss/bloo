@@ -91,7 +91,7 @@
                                                             <span class="description-text">{{$compte->operations->count()}} {{ trans('Opérations') }}</span>
                                                             <span class="description-text">{{$compte->email}}</span>
                                                             @if (auth()->user()->hasRole('Superadmin'))
-                                                            <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> Paramètres</button>
+                                                            <button class=" btn btn-xs-bloo"  data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-cog"></i> {{ trans('parameter') }}</button>
                                                             @endif
                                                         </div>
                                                         <!-- /.description-block -->
@@ -137,7 +137,7 @@
         <div class="modal-content">
             <form method="post" action="{{ route('savegift') }}">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Veuillez choisir un Account Manager et une operation</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">{{ trans('chose_accont') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
