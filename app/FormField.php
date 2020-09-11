@@ -112,7 +112,6 @@ class FormField extends Model
             case 'multiple-choices':
             case 'checkboxes':
                 $use_chart = ($this->template == 'checkboxes') ? 'h_bar_chart' : 'pie_chart';
-
                 $data[] = ($this->template == 'drop-down')
                     ? ['Option', 'No. of option selected']
                     : ['Choice', 'No. of choice selected'];

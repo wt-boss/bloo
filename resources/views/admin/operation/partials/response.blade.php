@@ -6,6 +6,7 @@
 @foreach ($fields as $field)
     @php
         $responses = $field->responses;
+
         $responses_count = $responses->where('answer', '!==', null)->count();
     @endphp
         <div class="col-md-6">
@@ -19,7 +20,7 @@
                     <table class="table table-striped-info table-xxs table-framed-info">
                         @foreach ($responses as $response)
                             @if ($loop->index === 5)
-                                <tr><strong>{{ trans('more_info') }}</strong></tr>
+{{--                                <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
                                 @break
                             @endif
                             <tr>
@@ -39,4 +40,6 @@
                 @endif
             @endif
         </div>
+    <div class="html2pdf__page-break"></div>
+    <p style="font-size:0.25mm" >test</p>
 @endforeach

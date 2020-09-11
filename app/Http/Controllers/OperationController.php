@@ -399,21 +399,21 @@ class OperationController extends Controller
         if ($query === 'summary') {
             $responses = [];
             $form->load('fields.responses', 'collaborationUsers', 'availability');
+
         } else {
             $form->load('collaborationUsers');
-
             $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
         }
 
         $data_for_chart = [];
         $fields = $form->fields;
+
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart();
             if(!empty($response_for_chart)) {
                 $data_for_chart[] = $response_for_chart;
             }
         }
-
 
         $data_for_chart2 = [];
         $fields = $form->fields;

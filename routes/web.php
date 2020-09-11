@@ -226,12 +226,15 @@ Route::get('/json-allstates','HomeController@allstates');
 Route::get('/json-allcities','HomeController@allcities');
 
 Route::get('/jsonmapcountries','HomeController@jsonmapcountries');
+Route::get('/jsonmapcountries2','HomeController@jsonmapcountries2');
 Route::get('/jsonmapcities','HomeController@jsonmapcities');
 Route::get('/jsonotifications','HomeController@jsonotifications');
 
 Route::get('/json-operateurcountries','HomeController@operateurcountries');
 Route::get('/json-operateurstates','HomeController@operateurstates');
 Route::get('/json-operateurcities','HomeController@operateurcities');
+
+Route::get('/responses_for_country/{id}','OperationController@responses_for_country');
 
 
 /**Site operation */

@@ -284,6 +284,8 @@ class HomeController extends Controller
         return response()->json($cities);
     }
 
+
+
     public function jsonmapcountries(){
         $states  = Country::where('id','38')
             ->orwhere('id','42')
@@ -294,6 +296,19 @@ class HomeController extends Controller
             ->orwhere('id','161')
             ->orwhere('id','7')
             ->get()->pluck('name','id');;
+        return response()->json($states);
+    }
+
+    public function jsonmapcountries2(){
+        $states  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->get();
         return response()->json($states);
     }
 
