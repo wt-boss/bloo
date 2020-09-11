@@ -32,7 +32,6 @@
                                 @case('es')
                                 <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
                                 @break
-
                                 @default
                                 <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
                     @endswitch
