@@ -547,11 +547,18 @@
     "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
     "non active": "Votre compte est inactif ou non vérifié",
     "Update_sondage": "Modifier sondage",
+    "Confirmation_msg" : "Un mail de confirmation vous a été envoyé.",
     "Edit Form": "Edition du formulaire",
     "create_my_own_form" : "Créer mon propre sondage",
     "Message_send": "Message envoyer avec success",
     "My_form": "Créer mon propre formulaire",
     "Out_free" : "QUITTER LE FORMULAIRE GRATUIT",
     "Sucess_create": "Votre compte a été crée avec success",
-    "quitter": "Quitter"
+    "quitter": "Quitter",
+
+    "Verify Your Email Address" : "Confirmez votre adresse email.",
+    "A fresh verification link has been sent to your email address." : "Un nouveau lien de vérification vous a été envoyé.",
+    "Before proceeding, please check your email for a verification link." : "Validez votre compte via le mail qui vous a été envoyé.",
+    "If you did not receive the email" : "Si vous ne recevez pas d'email.",
+    "click here to request another" : "Cliquez ici pour renvoyer un autre"
 }

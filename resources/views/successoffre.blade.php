@@ -10,6 +10,7 @@
                     <img src="{{asset('assets/images/bloo_logo.png')}}" style="width: 130px;">
                     <div class="panel-title" >
                         <h5>@lang('Sucess_create')</h5>
+                        <p>@lang('Confirmation_msg')</p>
                     </div>
                 </div>
                 <div class="panel-body">

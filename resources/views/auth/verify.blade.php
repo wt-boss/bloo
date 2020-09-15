@@ -7,13 +7,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-flat">
                 <div class="panel-heading">
-                    <img src="{{asset('assets/images/bloo_logo.png')}}" style="width: 130px;">
+                    <a href="{{route('home') }}" class=""><img src="{{asset('assets/images/bloo_logo.png')}}" style="width: 130px;"></a>
                     <div class="panel-title" >
                         <h5>{{ __('Verify Your Email Address') }}</h5>
                     </div>
                 </div>
                 <div class="panel-body">
-                    
+
                      @if (session('resent'))
                         <div class="alert alert-success" role="alert"  >
                             {{ __('A fresh verification link has been sent to your email address.') }}

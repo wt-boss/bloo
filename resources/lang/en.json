@@ -539,6 +539,7 @@
     "Chargement des données": "S'il vous plaît, attendez...",
     "form_submitted_reponse": "Votre réponse a été envoyée",
     "send_another_response": "Envoyer une autre réponse",
+    "Confirmation_msg" : "Un mail de confirmation vous a été envoyé.",
     "Recharger la page" : "Recharger la page",
     "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
     "non active": "Votre compte est inactif ou non vérifié",
