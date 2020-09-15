@@ -59,7 +59,7 @@ class LoginController extends Controller
             // The user is doesnt exist
             return redirect("/login")
                 ->withInput($request->only('email', 'remember'))
-                ->withWarning(trans('Votre compte non pas enregistrer'));
+                ->withWarning(trans('Votre compte non pas enregistré'));
         }
 
         $user = \App\User::where('email', '=', $request->email)

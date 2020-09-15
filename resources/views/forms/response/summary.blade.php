@@ -46,6 +46,8 @@
         </div>
         @if (!$loop->last)
             <hr>
+            <div class="html2pdf__page-break"></div>
+            <p style="font-size:0.25mm" >test</p>
         @endif
     @endforeach
 </div>
@@ -71,6 +73,23 @@
         });
     </script>
     <script type="text/javascript">
+        setInterval(function(){
+            google.charts.load('current', {'packages':['corechart']});
+
+            var data_for_chart = {!! json_encode($data_for_chart) !!};
+
+            if (typeof data_for_chart === 'object' && data_for_chart instanceof Array && data_for_chart.length) {
+                google.charts.setOnLoadCallback(function () {
+                    drawCharts(data_for_chart);
+                });
+            }
+            $(function () {
+                // Resize chart on sidebar width change and window resize
+                $(window).on('resize', function () {
+                    drawCharts(data_for_chart);
+                });
+            });
+        }, 3000);
         document.getElementById('download_pdf').onclick = function () {
             var now = new Date();
             var annee   = now.getFullYear();
@@ -85,7 +104,7 @@
             var opt = {
                 margin:      [20, 20, 20, 20] ,
                 enableLinks: true,
-                filename:     'myfile.pdf',
+                filename:     '{{$form->title}}.pdf',
                 image:        { type: 'jpeg', quality: .95 },
                 html2canvas:  {scale: 1},
                 jsPDF:        { unit: 'mm', format: 'letter', orientation: 'landscape' }
@@ -99,7 +118,7 @@
                     pdf.text('Page ' + i + '/' + totalPages, 250, 210);
                     pdf.text('Imprimer le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
                     pdf.addImage(imgData, "PNG",  05, 0);
-                    pdf.text('{{$form->nom}}',39,12);
+                    pdf.text('{{$form->title}}',40,12);
                 }
             }).save();
         };

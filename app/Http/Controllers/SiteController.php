@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Operation;
 use App\User;
 use Illuminate\Http\Request;
@@ -52,7 +53,11 @@ class SiteController extends Controller
     {
 
         $parameters = $request->all();
-        //dd($parameters);
+
+//        $country = Country::where('name','like','%'.$parameters['pays'].'%')->get();
+        $country = Country::where('name','like','%Camerou%')->get();
+
+        dd($country);
         $site = Site::where('lat',$parameters['lat'])
             ->where('lng',$parameters['lng'])
             ->where('lng',$parameters['operation_id'])

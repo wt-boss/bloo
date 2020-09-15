@@ -52,9 +52,9 @@
         <h5 class="panel-title">{{ $response_count . ' ' . Str::plural(trans('response'), $response_count) }}</h5>
         <div class="heading-elements">
             <div class="heading-btn">
-                {{-- <a id="download_pdf">
+                <a id="download_pdf">
                     <img src=" {{ asset('assets/images/PDF_24.png') }}" />
-                </a> --}}
+                </a>
                 <a href="{{ route('forms.responses.index', $form->code) }}" class="btn {{ ($response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('summary') }}</a>
                 <a href="{{ route('forms.responses.index', [$form->code, 'type' => 'individual']) }}" class="btn {{ (!$response_type_shown_is_summary) ? 'bg-bloo-c1' : 'btn-default' }}">{{ trans('individual') }}</a>
             </div>

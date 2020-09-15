@@ -511,7 +511,7 @@
             var opt = {
                 margin:      [20, 20, 20, 20] ,
                 enableLinks: true,
-                filename:     'myfile.pdf',
+                filename:     '{{$operation->nom}}.pdf',
                 image:        { type: 'jpeg', quality: .95 },
                 html2canvas:  {scale: 1},
                 jsPDF:        { unit: 'mm', format: 'letter', orientation: 'landscape' }
