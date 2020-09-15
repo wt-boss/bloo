@@ -45,7 +45,7 @@ class RegisterController extends Controller
             $user_data = ['code' => $request->code, 'email' => $user->email];
         }
 
-        return view('auth.register', compact('user_data'));
+        return view('auth.login', compact('user_data'));
     }
 
     public function register(Request $request)

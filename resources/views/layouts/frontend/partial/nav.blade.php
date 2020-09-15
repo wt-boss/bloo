@@ -16,40 +16,39 @@
           <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{route('questionnaire.free')}}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
           <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
           <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
-          <li>
-            @php $locale = session()->get('locale'); @endphp
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    @switch($locale)
+          <li class="nav-item cta>
+                @php $locale = session()->get('locale'); @endphp
+                <li class="nav-item cta" style="margin-top: px;margin-top: 7px; padding-right: 13px;">
+                        <div class="dropdown">
+                        <a  style=" color:#fff;" class="btn btn-default nav-link   dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @switch($locale)
 
-                                @case('fr')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
-                                @break
-                                @case('en')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEN
-                                @break
-                                @case('es')
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
-                                @break
-                                @default
-                                <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
-                    @endswitch
-                </a>
+                                    @case('fr')
+                                    <i class="icon-globe " style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
+                                    @break
+                                    @case('en')
+                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEN
+                                    @break
+                                    @case('es')
+                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
+                                    @break
+                                    @default
+                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
+                                @endswitch
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
+                                <a class="dropdown-item" href="{{asset('/localization/en')}}">EN</a>
+                                <a class="dropdown-item" href="{{asset('/localization/pt')}}">PT</a>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
-                    <a class="dropdown-item" href="{{asset('/localization/en')}}">EN</a>
-                    <a class="dropdown-item" href="{{asset('/localization/pt')}}">PT</a>
-
-
-                </div>
+                            </div>
+                        </div>
+                </li>
             </li>
 
-          </li>
-
             @if (Auth::check())
-                <li class="nav-item cta"> <div class="dropdown">
+                <li class="nav-item cta"> 
+                    <div class="dropdown">
                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           {{Auth::user()->first_name}}   {{Auth::user()->last_name}}
                         </button>
@@ -66,7 +65,8 @@
                                 @csrf
                             </form>
                         </div>
-                    </div></li>
+                    </div>
+                </li>
             @else
                 <li class="nav-item cta">
                     <a href="{{ route('login') }}" class="nav-link"><span>Connexion</span></a>
