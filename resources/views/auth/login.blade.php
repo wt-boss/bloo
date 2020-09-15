@@ -17,8 +17,6 @@
                     <h3 class="content-group-lg" style="margin-top: 0;">{{ trans('login_title') }}</h3>
                 </div>
 
-                @include('partials.alert', ['name' => 'login', 'forced_alert' => ($errors->has('email')) ? ['status' => 'danger', 'message' => $errors->first('email')] : null])
-
                 <div class="form-group has-feedback has-feedback-left bloo-fg">
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
                     <div class="form-control-feedback">

@@ -552,5 +552,6 @@
     "Message_send": "Message envoyer avec success",
     "My_form": "Créer mon propre formulaire",
     "Out_free" : "QUITTER LE FORMULAIRE GRATUIT",
-    "Sucess_create": "Votre compte a été crée avec success"
+    "Sucess_create": "Votre compte a été crée avec success",
+    "quitter": "Quitter"
 }
