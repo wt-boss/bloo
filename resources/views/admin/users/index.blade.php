@@ -1,4 +1,5 @@
 @extends('admin.top-nav')
+@section('page_title', trans('Users'))
 
 @section('title', 'Comptes utilisateurs')
 

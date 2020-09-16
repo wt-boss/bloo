@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-
+@section('title', 'BLOO|Illimité')
 @section('page_title')
     {{ trans('privacy_title') }}
 @endsection

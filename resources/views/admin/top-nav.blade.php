@@ -5,10 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') - {{ config('app.name') }}</title>
-
     <link rel="icon" type="image/png" href="{{asset('assets/images/bloo_favicon.png')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title> Bloo | @yield('page_title')</title>
+    <link rel="icon" type="image/png" href="{{asset('assets/images/bloo_favicon.png')}}">
+
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 

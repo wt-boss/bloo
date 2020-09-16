@@ -18,9 +18,9 @@
           <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
           <li class="nav-item cta>
                 @php $locale = session()->get('locale'); @endphp
-                <li class="nav-item cta" style="margin-top: px;margin-top: 7px; padding-right: 13px;">
+                <li class="nav-item cta" style="margin-top: px;margin-top: 7px; padding-right: 13px; width: 90px;">
                         <div class="dropdown">
-                        <a  style=" color:#fff;" class="btn btn-default nav-link   dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a  style=" color:#fff; " class="btn btn-default nav-link   ct dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @switch($locale)
 
                                     @case('fr')
@@ -47,7 +47,7 @@
             </li>
 
             @if (Auth::check())
-                <li class="nav-item cta"> 
+                <li class="nav-item cta">
                     <div class="dropdown">
                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           {{Auth::user()->first_name}}   {{Auth::user()->last_name}}

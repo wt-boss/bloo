@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
+@section('page_title', trans('footer_apropos'))
 
 @section('content')
-
 
     <!-- <div class="js-fullheight"> -->
         <div class="hero-wrap other-p">

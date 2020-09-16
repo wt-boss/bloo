@@ -377,7 +377,7 @@ a.navbar-brand img {
 }
 
 /* Carriere */
-.carriere-side-img {
+#hiddenImg {
     background-image: url('../images/careers_02.jpg');
     background-repeat: no-repeat;
     height: 100%;
@@ -443,16 +443,18 @@ html{
 
       display:none;
     }
+
+
      .jt {
-         
          margin-left: 23px !important;
          /*! margin-left: 231px; */
-        
-         
          }
-    
+
     }
-    
+
+
+
+
 
 
 
