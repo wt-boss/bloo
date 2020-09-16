@@ -295,6 +295,7 @@ class HomeController extends Controller
             ->orwhere('id','43')
             ->orwhere('id','161')
             ->orwhere('id','7')
+            ->orwhere('name', 'The Democratic Republic Of The Congo')
             ->get()->pluck('name','id');;
         return response()->json($states);
     }

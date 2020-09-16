@@ -109,7 +109,7 @@
                             <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
                                     {{ trans('sort_by') }}
                                 </a>
-                             <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
+                             {{-- <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option>...</option>
                                  <option   value="1">Pays</option>
                                  <option value="2">Ville</option>
@@ -120,17 +120,15 @@
                                 <option> Pays </option>
                                 <option value="1">Ville</option>
                                 <option value="2">Opérateurs</option>
-                            </select>
+                            </select> --}}
                         </ul>
                         <span class="pull-right">
-                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
-
-                             <a id="download_pdf">
-                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
+                            {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
+                            <a id="download_pdf" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-
                             <a href="{{ route('forms.response.export', $form->code) }}">
-                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
                         </span>
                     </div>

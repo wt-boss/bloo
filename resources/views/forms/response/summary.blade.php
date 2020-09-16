@@ -115,10 +115,13 @@
                 for (i = 1; i <= totalPages; i++) {
                     console.log('here', i);
                     pdf.setPage(i);
-                    pdf.text('Page ' + i + '/' + totalPages, 250, 210);
+                    pdf.setFont("helvetica");
+                    pdf.setFontSize(10);
+                    pdf.text('Page ' + i + '/' + totalPages, 260, 210);
                     pdf.text('Imprimer le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
-                    pdf.addImage(imgData, "PNG",  05, 0);
-                    pdf.text('{{$form->title}}',40,12);
+                    pdf.addImage(imgData, "PNG",  240, 0);
+                    pdf.setFontType("bolditalic");
+                    pdf.text('{{$form->title}}',05,12);
                 }
             }).save();
         };

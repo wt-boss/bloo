@@ -107,7 +107,7 @@
                     return 'label bg-bloo-c1';
                 },
             });
-
+            
             function notify(type, message) {
                 noty({
                     width: 200,

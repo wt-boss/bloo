@@ -164,7 +164,7 @@ class ResponseController extends Controller
     public function export(Form $form)
     {
         $current_user = Auth::user();
-        $filename = Str::slug($form->title) . '.xlsx';
+        $filename = Str::slug($form->title) . '.Xlsx';
         return Excel::download(new FormResponseExport($form), $filename);
     }
 
