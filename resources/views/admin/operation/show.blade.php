@@ -123,14 +123,12 @@
                             </select> --}}
                         </ul>
                         <span class="pull-right">
-                            <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i>
-
-                             <a id="download_pdf">
-                                <i class="fa fa-file-pdf"  style="font-size: 20px" aria-hidden="true" ></i>
+                            {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
+                            <a id="download_pdf" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-
                             <a href="{{ route('forms.response.export', $form->code) }}">
-                                <i class="fa fa-file-excel"  style="font-size: 20px" aria-hidden="true">  </i>
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
                         </span>
                     </div>
