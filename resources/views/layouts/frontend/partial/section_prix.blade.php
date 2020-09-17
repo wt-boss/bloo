@@ -35,8 +35,6 @@
               <li><strong>{{ trans('prix_offre_free3') }}</strong></li>
               <hr>
               <li><strong>{{ trans('prix_offre_free4') }}</strong></li>
-
-
             </ul>
 
 
