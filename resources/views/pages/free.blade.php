@@ -1,5 +1,6 @@
 
 @extends('layouts.frontend.app')
+@section('page_title', trans('prix_free'))
 
 @section('content')
 <div class="hero-wrap other-p">

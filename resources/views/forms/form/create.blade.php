@@ -1,4 +1,4 @@
-@section('title', "My Forms | Create a Form")
+@section('title', " BLOO|My Forms | Create a Form")
 
 @extends('admin.top-nav')
 

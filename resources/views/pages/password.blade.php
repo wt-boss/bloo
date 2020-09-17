@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-
+@section('page_title', trans('password'))
 @section('content')
 <div class="hero-wrap">
     <div class="overlay"></div>

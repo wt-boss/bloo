@@ -1,6 +1,7 @@
 @extends('admin.top-nav')
+@section('page_title', trans('operations'))
 
-@section('title', 'My Forms')
+
 
 
 @section('content')

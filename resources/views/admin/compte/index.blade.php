@@ -1,5 +1,5 @@
 @extends('admin.top-nav')
-
+@section('page_title', trans('accounts'))
 @section('title', 'Manage Account')
 
 @section('page-css')

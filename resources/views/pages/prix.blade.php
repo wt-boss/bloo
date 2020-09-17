@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-
+@section('page_title', trans('prix_fil'))
 @section('content')
 
 

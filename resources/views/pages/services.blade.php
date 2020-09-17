@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-
+@section('page_title', trans('service_fil'))
 @section('content')
     <div class="hero-wrap other-p">
         <div class="overlay"></div>

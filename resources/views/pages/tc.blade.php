@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-
+@section('page_title', trans('footer_tc'))
 @section('content')
 
 

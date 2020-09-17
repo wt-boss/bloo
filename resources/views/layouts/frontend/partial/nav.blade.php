@@ -8,42 +8,37 @@
         <span class="oi oi-menu"></span> Menu
       </button>
 
-      <div class="collapse navbar-collapse" id="ftco-nav">
+    <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-
-          <li class="{{Request::is('/')? "active nav-item": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
-          <li class="{{Request::is('services')? "active nav-item": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
-          <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{route('questionnaire.free')}}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
-          <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
-          <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
-          <li class="nav-item cta>
-                @php $locale = session()->get('locale'); @endphp
-                <li class="nav-item cta" style="margin-top: px;margin-top: 7px; padding-right: 13px;">
-                        <div class="dropdown">
-                        <a  style=" color:#fff;" class="btn btn-default nav-link   dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @switch($locale)
-
-                                    @case('fr')
-                                    <i class="icon-globe " style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
-                                    @break
-                                    @case('en')
-                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspEN
-                                    @break
-                                    @case('es')
-                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbsPT
-                                    @break
-                                    @default
-                                    <i class="icon-globe" style="font-size:19px; color:rgb(255, 255, 255)"></i>&nbspFR
-                                @endswitch
-                        </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
-                                <a class="dropdown-item" href="{{asset('/localization/en')}}">EN</a>
-                                <a class="dropdown-item" href="{{asset('/localization/pt')}}">PT</a>
-
-                            </div>
-                        </div>
-                </li>
+            <li class="{{Request::is('/')? "active nav-item": "nav-item"}}"><a href="{{ route('home') }}" class="nav-link">{{  trans('home_fil')  }}</a></li>
+            <li class="{{Request::is('services')? "active nav-item": "nav-item"}}"><a href="{{ route('services') }}" class="nav-link">{{  trans('service_fil')  }}</a></li>
+            <li class="{{Request::is('sondages')? "active nav-item": "nav-item"}}"><a href="{{route('questionnaire.free')}}" class="nav-link">{{  trans('sondage_fil')  }}</a></li>
+            <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
+            <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
+            @php $locale = session()->get('locale'); @endphp
+            <li class="nav-item">
+                <div class="dropdown nav-link">
+                    <a class="btn btn-default dropdown-toggle" type="button" id="dropdownLocalization" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @switch($locale)
+                                @case('fr')
+                                <i class="icon-globe"></i>&nbspFR
+                                @break
+                                @case('en')
+                                <i class="icon-globe"></i>&nbspEN
+                                @break
+                                @case('es')
+                                <i class="icon-globe"></i>&nbsPT
+                                @break
+                                @default
+                                <i class="icon-globe"></i>&nbspFR
+                            @endswitch
+                    </a>
+                    <div class="dropdown-menu nav-item" aria-labelledby="dropdownLocalization">
+                        <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
+                        <a class="dropdown-item" href="{{asset('/localization/en')}}">EN</a>
+                        <a class="dropdown-item" href="{{asset('/localization/pt')}}">PT</a>
+                    </div>
+                </div>
             </li>
 
             @if (Auth::check())

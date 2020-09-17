@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
-
+@section('page_title', trans('contact_fil'))
 @section('content')
-@section('title', 'BLOO')
+
 
     @push('css')
 
@@ -35,7 +35,7 @@
                 </div>
                 <div class="w-100"></div>
                 <div class="col-md-3">
-                    <p><span>{{ trans('Email') }} :</span> <a href="mailto:info@yoursite.com">hello@blooapp.live</a></p>
+                    <p><span>{{ trans('Email') }} :</span> <a href="mailto:hello@blooapp.live">hello@blooapp.live</a></p>
                 </div>
             </div>
             <div class="row block-9">
