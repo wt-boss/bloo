@@ -46,7 +46,7 @@
 		});
 
 	};
-	fullHeight();
+	// fullHeight();
 
 	// loader
 	var loader = function() {
@@ -173,7 +173,7 @@
 			}
 		});
 	};
-	// scrollWindow();
+	scrollWindow();
 
 	var isMobile = {
 		Android: function() {
