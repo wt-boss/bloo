@@ -37,6 +37,15 @@
         scrollProperty: 'scroll'
     });
 
+    $(window).stellar({
+        responsive: true,
+        parallaxBackgrounds: true,
+        parallaxElements: true,
+        horizontalScrolling: false,
+        hideDistantElements: false,
+        scrollProperty: 'scroll'
+    });
+
 	// loader
 	var loader = function() {
 		setTimeout(function() {
