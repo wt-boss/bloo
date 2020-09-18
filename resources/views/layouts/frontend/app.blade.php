@@ -106,7 +106,7 @@
   <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
   <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-  <script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="{{asset('assets/js/main.js') . '?' . time()}}"></script>
     <script src="{{asset('js/dist/clipboard.js')}}"></script>
     <script src="{{asset('assets/js/myscript.js')}}"></script>
     @yield('script')
