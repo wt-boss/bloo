@@ -173,7 +173,7 @@
 			}
 		});
 	};
-	scrollWindow();
+	// scrollWindow();
 
 	var isMobile = {
 		Android: function() {
