@@ -549,5 +549,7 @@
     "Message_send": "Message envoyer avec success",
     "My_form": "Créer mon propre formulaire",
     "Out_free" : "QUITTER LE FORMULAIRE GRATUIT",
-    "Sucess_create": "Votre compte a été crée avec success"
+    "Sucess_create": "Votre compte a été crée avec success",
+    "The user email has already been taken" : "Cet email d'utilisateur a déjà été pris.",
+    "The entreprise email has already been taken" : "Cet email d'entreprise a déjà été pris."
 }

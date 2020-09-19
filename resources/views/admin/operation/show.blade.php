@@ -127,9 +127,9 @@
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-                            <a href="{{ route('forms.response.export', $form->code) }}">
+                            {{-- <a href="{{ route('forms.response.export', $form->code) }}">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
-                            </a>
+                            </a> --}}
                         </span>
                     </div>
 
