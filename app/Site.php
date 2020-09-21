@@ -12,4 +12,9 @@ class Site extends Model
     {
         return $this->belongsTo(Operation::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

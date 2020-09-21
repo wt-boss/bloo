@@ -264,3 +264,8 @@ Route::get('/logoutfree',function () {
 });
 /**Activer un operateur */
 Route::get('/OperateurActive/{id}','OperationController@activation')->name('activation');
+
+
+/** Routes pour le tri*/
+Route::get('/operation/{id}/{paysid}','OperationController@TryPays')->name('TryPays');
+

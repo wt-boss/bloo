@@ -54,7 +54,6 @@ class SiteController extends Controller
 
         $parameters = $request->all();
 
-
         $countries  = Country::where('name','Cameroon')
             ->orwhere('name','Central African Republic')
             ->orwhere('name','Congo')
@@ -68,13 +67,13 @@ class SiteController extends Controller
 
         foreach ($countries as $country)
         {
-            similar_text($country->name,$parameters['pays'], $perc);
+            similar_text($parameters['pays'],$country->name, $perc);
             if($perc > 50)
             {
                 $parameters['country_id'] = $country->id;
             }
-
         }
+
         $site = Site::where('lat',$parameters['lat'])
             ->where('lng',$parameters['lng'])
             ->where('lng',$parameters['operation_id'])

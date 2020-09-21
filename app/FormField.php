@@ -96,9 +96,9 @@ class FormField extends Model
         ];
     }
 
-    public function getResponseSummaryDataForChart2()
+    public function getResponseSummaryDataForChartPays($paysid)
     {
-        $responses = $this->responses;
+        $responses = $this->responses->where('country_id',$paysid);
 
         if ($responses->isEmpty()) {
             return [];
