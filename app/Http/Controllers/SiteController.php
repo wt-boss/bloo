@@ -54,20 +54,38 @@ class SiteController extends Controller
 
         $parameters = $request->all();
 
-//        $country = Country::where('name','like','%'.$parameters['pays'].'%')->get();
-        $country = Country::where('name','like','%Camerou%')->get();
 
-        dd($country);
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->orwhere('name', 'The Democratic Republic Of The Congo')
+            ->get();
+
+        foreach ($countries as $country)
+        {
+            similar_text($country->name,$parameters['pays'], $perc);
+            if($perc > 50)
+            {
+                $parameters['country_id'] = $country->id;
+            }
+
+        }
         $site = Site::where('lat',$parameters['lat'])
             ->where('lng',$parameters['lng'])
             ->where('lng',$parameters['operation_id'])
             ->get()->first();
+
         if(isset($site))
         {
           $result = ["Erreur" => "Donnees deja en base"];
         }
         else{
-            $sites = Site::create($request->all());
+            $sites = Site::create($parameters);
             $result = Site::orderby('id')->get()->last();
         }
         return response()->json($result);
