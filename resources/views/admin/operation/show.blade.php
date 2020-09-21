@@ -639,10 +639,6 @@
 
                     drawCharts(data_for_chart);
 
-                    // data_for_chart2 = JSON.parse(response.data_for_chart2);
-                    //
-                    // drawCharts(data_for_chart2);
-
                     $(function () {
                         // Resize chart on sidebar width change and window resize
                         $(window).on('resize', function () {

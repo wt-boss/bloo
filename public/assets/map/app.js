@@ -272,46 +272,46 @@ $('.pac-pick').click(function () {
 });
 
 // envoie du formulaire
-// $('.pac-form').on('submit', function(e){
-//   e.preventDefault();
-//   $('.controls-btn').prop( "disabled", true );
-//   $.ajax({
-//     url : $(this).attr('action'), //A remplacer par la bonne route
-//     type: "POST",
-//     dataType: 'JSON',
-//     data: $(this).serialize(),
-//     success: function(data)
-//     {
-//       console.log(data);
-//       if(data.Erreur){
-//         alert(data.Erreur);
-//       }else{
-//         let last_site = data;
-//         let url = base_url + "/sites/" + last_site.id;
-//
-//         // Ajouter à la fin du tableau
-//         let ligne = "<tr>"+
-//             "<td>"+ last_site.id +"</td>"+
-//             "<td>"+ last_site.nom +"</td>"+
-//             "<td>"+ last_site.rayon +"</td>"+
-//             "<td>"+ last_site.pays +"</td>"+
-//             "<td>"+ last_site.ville +"</td>"+
-//             "<td><a href='"+ url +"' class='del-site'>Supprimer</a></td>"+
-//         "</tr>";
-//
-//         $('.tablemanager tbody').prepend(ligne);
-//
-//         // reset form
-//         resetForm();
-//       }
-//     },
-//     error: function (jqXHR, textStatus, errorThrown)
-//     {
-//       alert("'Erreur d'enregistremet'");
-//       // console.log("Erreur: impossible de charger les sites ", textStatus);
-//     }
-//   });
-// });
+$('.pac-form').on('submit', function(e){
+  e.preventDefault();
+  $('.controls-btn').prop( "disabled", true );
+  $.ajax({
+    url : $(this).attr('action'), //A remplacer par la bonne route
+    type: "POST",
+    dataType: 'JSON',
+    data: $(this).serialize(),
+    success: function(data)
+    {
+      console.log(data);
+      if(data.Erreur){
+        alert(data.Erreur);
+      }else{
+        let last_site = data;
+        let url = base_url + "/sites/" + last_site.id;
+
+        // Ajouter à la fin du tableau
+        let ligne = "<tr>"+
+            "<td>"+ last_site.id +"</td>"+
+            "<td>"+ last_site.nom +"</td>"+
+            "<td>"+ last_site.rayon +"</td>"+
+            "<td>"+ last_site.pays +"</td>"+
+            "<td>"+ last_site.ville +"</td>"+
+            "<td><a href='"+ url +"' class='del-site'>Supprimer</a></td>"+
+        "</tr>";
+
+        $('.tablemanager tbody').prepend(ligne);
+
+        // reset form
+        resetForm();
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      alert("'Erreur d'enregistremet'");
+      // console.log("Erreur: impossible de charger les sites ", textStatus);
+    }
+  });
+});
 
 // suppression d'une ville
 $('html').on('click', '.del-site', function(e){
