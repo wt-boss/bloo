@@ -112,14 +112,18 @@
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option>...</option>
                                  <option   value="1">Pays</option>
-                                 <option value="2">Ville</option>
+                                 <option value="2">Sites</option>
                                  <option value="3">Opérateurs</option>
                             </select>
 
+                            <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
+                            </select>
                             <select id="select2" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
-                                <option> Pays </option>
-                                <option value="1">Ville</option>
-                                <option value="2">Opérateurs</option>
+
+                            </select>
+                            <select id="select3" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
                             </select>
                         </ul>
                         <span class="pull-right">
@@ -610,28 +614,64 @@
     <script>
         $('#countries').on('change', function(e){
             console.log(e);
-            var region_id = e.target.value;
-            if(region_id == 1)
+            var sortoption  = e.target.value;
+            if(sortoption == 1)
             {
                 $.get('/jsonmapcountries2',function(data) {
                     console.log(data);
-                    $('#select2').empty();
+                    $('#select1').empty();
                     var element = document.getElementById('select2');
                     element.style.display = "initial";
-                    $('#select2').append('<option value="Selectionnez un pays">Selectionnez un pays</option>');
+                    $('#select1').append('<option value="Selectionnez un pays">Selectionnez un pays</option>');
                     $.each(data, function(index, countriesObj){
-                        $('#select2').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
+                        $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
                     })
                 });
 
             }
+            if(sortoption == 2)
+            {
+                $.get('/operationsites/'+{{$operation->id}},function(data) {
+                    console.log(data);
+                    $('#select2').empty();
+                    var element = document.getElementById('select2');
+                    element.style.display = "initial";
+                    $('#select2').append('<option value="Selectionnez un site">Selectionnez un site</option>');
+                    $.each(data, function(index, sitesObj){
+                        $('#select2').append('<option value="'+ sitesObj.id +'">'+ sitesObj.nom +'</option>');
+                    })
+                });
+            }
         });
 
-        $('#select2').on('change', function(e){
+        $('#select1').on('change', function(e){
             var pays_id = e.target.value;
             {
                 $.get('/operation/'+'{{$operation->id}}'+'/'+ pays_id,function(response) {
                     console.log(response);
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+                });
+            }
+        });
+
+        $('#select2').on('change', function(e){
+            var site_id = e.target.value;
+            {
+                $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
+                    console.log(response);
+
                     $('#responses').empty()
                         .append(response.response_view);
 

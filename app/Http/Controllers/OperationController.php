@@ -606,6 +606,11 @@ class OperationController extends Controller
         return back()->withSuccess('Operateur activer');
     }
 
+    /**
+     * @param $id
+     * @param $paysid
+     * @return array
+     */
     public function TryPays($id, $paysid)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -629,6 +634,45 @@ class OperationController extends Controller
             'response_view' => $view,
             'data_for_chart' => json_encode($data_for_chart)
         ];
+    }
+
+    /**
+     * @param $id
+     * @param $siteid
+     * @return array
+     */
+    public function TrySites($id, $siteid)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartSite($siteid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+        }
+        $view = (string)View::make('admin.operation.partials.responsesite', compact('operation', 'form', 'responses','siteid'));
+        return [
+            'response_view' => $view,
+            'data_for_chart' => json_encode($data_for_chart)
+        ];
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getSites($id)
+    {
+        $operation = Operation::with('sites')->findOrFail($id);
+         return response()->json($operation->sites()->get());
     }
 
 
