@@ -48,28 +48,22 @@ class OperationController extends Controller
         $user = auth()->user();
         $operation = null;
 
-        if($user->role === 5)
-        {
-             $operations = Operation::with('form','entreprise')->get();
+        if ($user->role === 5) {
+            $operations = Operation::with('form', 'entreprise')->get();
+        } else if ($user->role === 4) {
+            $comptes = $user->entreprises()->get();
+            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
+            foreach ($comptes as $entreprise) {
+                $Operations = $entreprise->operations()->get();
+                foreach ($Operations as $operation) {
+                    $operations->push($operation);
+                }
+            }
+        } else {
+            $User = User::with('operations')->findOrFail($user->id);
+            $operations = $User->operations()->with('form', 'entreprise')->get();
         }
-         else if ($user->role === 4){
-             $comptes = $user->entreprises()->get();
-             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-             foreach ($comptes as $entreprise)
-             {
-                 $Operations = $entreprise->operations()->get();
-               foreach ($Operations as $operation)
-               {
-                   $operations->push($operation);
-               }
-             }
-         }
-         else
-         {
-             $User = User::with('operations')->findOrFail($user->id);
-             $operations = $User->operations()->with('form','entreprise')->get();
-         }
-        return view('admin.operation.index',compact('operations','operation'));
+        return view('admin.operation.index', compact('operations', 'operation'));
     }
 
     /**
@@ -80,7 +74,7 @@ class OperationController extends Controller
     public function create()
     {
         $entreprises = Entreprise::all();
-        return view('admin.operation.create',compact('entreprises'));
+        return view('admin.operation.create', compact('entreprises'));
     }
 
     /**
@@ -89,16 +83,16 @@ class OperationController extends Controller
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        $countries  = Country::where('name','Cameroon')
-            ->orwhere('name','Central African Republic')
-            ->orwhere('name','Congo')
-            ->orwhere('name','Gabon')
-            ->orwhere('name','Equatorial Guinea')
-            ->orwhere('name','Chad')
-            ->orwhere('name','Nigeria')
-            ->orwhere('name','Angola')
+        $countries = Country::where('name', 'Cameroon')
+            ->orwhere('name', 'Central African Republic')
+            ->orwhere('name', 'Congo')
+            ->orwhere('name', 'Gabon')
+            ->orwhere('name', 'Equatorial Guinea')
+            ->orwhere('name', 'Chad')
+            ->orwhere('name', 'Nigeria')
+            ->orwhere('name', 'Angola')
             ->get();
-        return view('admin.operation.entreprise',compact('entreprises', 'countries'));
+        return view('admin.operation.entreprise', compact('entreprises', 'countries'));
     }
 
     /**
@@ -111,10 +105,8 @@ class OperationController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $entreprise->users()->attach($user);
         if (Auth::check()) {
-            return view('admin.operation.create',compact('entreprise'));
-        }
-        else
-        {
+            return view('admin.operation.create', compact('entreprise'));
+        } else {
             return redirect()->route('home');
         }
     }
@@ -128,16 +120,15 @@ class OperationController extends Controller
         $parameters = $request->all();
 
         $operation = Operation::findOrFail($parameters['operation']);
-        $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
-        foreach($parameters['lecteurs'] as $lecteur)
-        {
+        $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
+        foreach ($parameters['lecteurs'] as $lecteur) {
             $user = User::findOrFail($lecteur);
             $user->operations()->attach($operation);
             Mail::to($user->email)->send(new BlooLecteur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['ajout lecteur']; // sending from and to user id when pressed enter
-            $pusher->trigger('my-channel','notification-event', $data);
+            $pusher->trigger('my-channel', 'notification-event', $data);
 
         }
         return back();
@@ -152,15 +143,14 @@ class OperationController extends Controller
 
         $parameters = $request->all();
         $operation = Operation::findOrFail($parameters['operation']);
-        $message = "Vous avez été ajouter à l'operration : ".$operation->nom;
-        foreach($parameters['operateurs'] as $operateur)
-        {
+        $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
+        foreach ($parameters['operateurs'] as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
-            $pusher->trigger('my-channel','notification-event', $data);
+            $pusher->trigger('my-channel', 'notification-event', $data);
         }
         return back();
     }
@@ -170,16 +160,17 @@ class OperationController extends Controller
      * @param $id1
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removelecteur($id,$id1){
+    public function removelecteur($id, $id1)
+    {
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
-        $message = "Vous avez été retier de l'operration : ".$operation->nom;
+        $message = "Vous avez été retier de l'operration : " . $operation->nom;
         $operation->users()->detach($user);
         $user->notify(new EventNotification($message));
         $pusher = App::make('pusher');
         $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel','notification-event', $data);
+        $pusher->trigger('my-channel', 'notification-event', $data);
         return response()->json('true');
     }
 
@@ -188,16 +179,17 @@ class OperationController extends Controller
      * @param $id1
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeoperateur($id,$id1){
+    public function removeoperateur($id, $id1)
+    {
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
-        $message = "Vous avez été retirer de l'operration : ".$operation->nom;
+        $message = "Vous avez été retirer de l'operration : " . $operation->nom;
         $user->notify(new EventNotification($message));
         $pusher = App::make('pusher');
         $data = ['moving and operator']; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel','notification-event', $data);
+        $pusher->trigger('my-channel', 'notification-event', $data);
         return response()->json('true');
     }
 
@@ -211,15 +203,12 @@ class OperationController extends Controller
         $selected_lecteurs = $operation->users;
         $lecteurs = User::where('role', '0')->get();
         $opusers = [];
-        foreach($lecteurs as $lecteur)
-        {
+        foreach ($lecteurs as $lecteur) {
             $opuser = new OpUsers();
             $opuser = $lecteur;
 
-            foreach($selected_lecteurs as $selected)
-            {
-                if($selected->id === $lecteur->id )
-                {
+            foreach ($selected_lecteurs as $selected) {
+                if ($selected->id === $lecteur->id) {
                     $opuser->status = "disabled";
                     break;
                 }
@@ -238,7 +227,7 @@ class OperationController extends Controller
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
         $current_user = Auth::user();
-        $form=$operation->form;
+        $form = $operation->form;
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
         $viewData = Helper::showformresponse($form);
@@ -254,26 +243,21 @@ class OperationController extends Controller
         $operation = Operation::with('users')->findOrFail($id);
         $AllOperation = Operation::with('users')->get();
         $AllOperateur = collect();
-        foreach ($AllOperation as $Operation)
-        {
-            $AllUser = $Operation->users()->where('role','1')->get();
-            foreach ($AllUser as $User)
-            {
+        foreach ($AllOperation as $Operation) {
+            $AllUser = $Operation->users()->where('role', '1')->get();
+            foreach ($AllUser as $User) {
                 $AllOperateur->push($User);
             }
         }
         $selected_operateur = $operation->users;
         $operateurs = User::where('role', '1')->get();
         $opusers = [];
-        foreach($operateurs as $operateur)
-        {
+        foreach ($operateurs as $operateur) {
             $opuser = new OpUsers();
             $opuser = $operateur;
             $opuser->status = false;
-            foreach($AllOperateur as $selected)
-            {
-                if($selected->id === $operateur->id )
-                {
+            foreach ($AllOperateur as $selected) {
+                if ($selected->id === $operateur->id) {
                     $opuser->status = "disabled";
                     break;
                 }
@@ -292,7 +276,7 @@ class OperationController extends Controller
     {
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
-        $users = $operation->users()->where('role','0')->get();
+        $users = $operation->users()->where('role', '0')->get();
         $viewData = Helper::buildUsersList($users);
         return response()->json($viewData);
     }
@@ -305,7 +289,7 @@ class OperationController extends Controller
     {
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
-        $users = $operation->users()->where('role','1')->get();
+        $users = $operation->users()->where('role', '1')->get();
         $viewData = Helper::buildUsersList($users);
         return response()->json($viewData);
 
@@ -325,10 +309,8 @@ class OperationController extends Controller
         /**
          * On recherche l'acount Manager de cette operation;
          */
-        foreach ($AllUsers as $user)
-        {
-            if ($user->role === 4)
-            {
+        foreach ($AllUsers as $user) {
+            if ($user->role === 4) {
                 $users->push($user);
             }
         }
@@ -339,7 +321,7 @@ class OperationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -358,8 +340,8 @@ class OperationController extends Controller
         $form_id = $form->id;
 
         $formavalide = new FormAvailability();
-        $formavalide->form_id = $form_id ;
-        $formavalide->open_form_at  = $parameters['date_debut'];
+        $formavalide->form_id = $form_id;
+        $formavalide->open_form_at = $parameters['date_debut'];
         $formavalide->close_form_at = $parameters['date_fin'];
         $formavalide->closed_form_message = "Formulaire clos";
         $formavalide->save();
@@ -375,7 +357,7 @@ class OperationController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $operation->users()->attach($user);
         $pusher = App::make('pusher');
-        $data = "Une operation a été créer" ;
+        $data = "Une operation a été créer";
         $pusher->trigger('my-channel', 'operation-event', $data);
         return redirect()->route('operation.index');
     }
@@ -383,14 +365,14 @@ class OperationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
         $current_user = Auth::user();
-        $form=$operation->form;
+        $form = $operation->form;
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
 
@@ -410,31 +392,31 @@ class OperationController extends Controller
 
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart();
-            if(!empty($response_for_chart)) {
+            if (!empty($response_for_chart)) {
                 $data_for_chart[] = $response_for_chart;
             }
         }
 
-        $data_for_chart2 = [];
-        $fields = $form->fields;
-        foreach ($fields as $field) {
-            $response_for_chart = $field->getResponseSummaryDataForChart2();
-            if(!empty($response_for_chart)) {
-                $data_for_chart2[] = $response_for_chart;
-            }
-        }
+//        $data_for_chart2 = [];
+//        $fields = $form->fields;
+//        foreach ($fields as $field) {
+//            $response_for_chart = $field->getResponseSummaryDataForChart2();
+//            if (!empty($response_for_chart)) {
+//                $data_for_chart2[] = $response_for_chart;
+//            }
+//        }
 
-        $view = (string)View::make('admin.operation.partials.response',compact('operation','form', 'query', 'responses'));
-        $viewprint = (string)View::make('admin.operation.partials.responseprint',compact('operation','form', 'query', 'responses'));
+        $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'query', 'responses'));
+//        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form', 'query', 'responses'));
 
-        if($request->ajax()){
+        if ($request->ajax()) {
             return [
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
-                'data_for_chart2' => json_encode($data_for_chart2)
+//                'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.show',compact('view','viewprint','operation','form', 'query', 'responses', 'data_for_chart','data_for_chart2'));
+            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart'));
         }
     }
 
@@ -443,7 +425,7 @@ class OperationController extends Controller
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
         $current_user = Auth::user();
-        $form=$operation->form;
+        $form = $operation->form;
         $valid_request_queries = ['summary', 'individual'];
         $query = strtolower(request()->query('type', 'summary'));
 
@@ -462,7 +444,7 @@ class OperationController extends Controller
         $fields = $form->fields;
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart();
-            if(!empty($response_for_chart)) {
+            if (!empty($response_for_chart)) {
                 $data_for_chart[] = $response_for_chart;
             }
         }
@@ -472,22 +454,22 @@ class OperationController extends Controller
         $fields = $form->fields;
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart2();
-            if(!empty($response_for_chart)) {
+            if (!empty($response_for_chart)) {
                 $data_for_chart2[] = $response_for_chart;
             }
         }
 
-        $view = (string)View::make('admin.operation.partials.response',compact('operation','form', 'query', 'responses'));
-        $viewprint = (string)View::make('admin.operation.partials.responseprint',compact('operation','form', 'query', 'responses'));
+        $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'query', 'responses'));
+        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form', 'query', 'responses'));
 
-        if($request->ajax()){
+        if ($request->ajax()) {
             return [
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
                 'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.pdf',compact('view','viewprint','operation','form', 'query', 'responses', 'data_for_chart','data_for_chart2'));
+            return view('admin.operation.pdf', compact('view', 'viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart', 'data_for_chart2'));
         }
     }
 
@@ -495,7 +477,7 @@ class OperationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -503,14 +485,14 @@ class OperationController extends Controller
         $operation = Operation::findOrFail($id);
         $entreprise_id = $operation->entreprise_id;
         $entreprise = Entreprise::findOrFail($entreprise_id);
-        return view('admin.operation.edit',compact('operation','entreprise'));
+        return view('admin.operation.edit', compact('operation', 'entreprise'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -519,7 +501,7 @@ class OperationController extends Controller
         $parameters = $request->all();
         $operation = Operation::findOrFail($id);
         $operation->nom = $parameters['nom_operation'];
-        $operation->form_id =  $parameters['form_id'];
+        $operation->form_id = $parameters['form_id'];
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
         $operation->entreprise_id = $parameters['entreprise_id'];
@@ -536,7 +518,7 @@ class OperationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -552,9 +534,8 @@ class OperationController extends Controller
     {
         $operation = Operation::with('sites')->findOrFail($id);
         $sites = $operation->sites()->get();
-        return view('admin.operation.map',compact('sites','operation'));
+        return view('admin.operation.map', compact('sites', 'operation'));
     }
-
 
 
     /**
@@ -575,20 +556,18 @@ class OperationController extends Controller
     public function terminer_operation($id)
     {
         $operation = Operation::findOrFail($id);
-        $message = "l'operration : ".$operation->nom." est terminé.";
-        $AllUser = $operation->users()->where('role','1')->get();
-        foreach ($AllUser as $User)
-        {
+        $message = "l'operration : " . $operation->nom . " est terminé.";
+        $AllUser = $operation->users()->where('role', '1')->get();
+        foreach ($AllUser as $User) {
             $operation->users()->detach($User);
         }
 
-        $AllOpUser = $operation->users()->where('role','1')->where('role','0')->get();
-        foreach ($AllOpUser as $user)
-        {
+        $AllOpUser = $operation->users()->where('role', '1')->where('role', '0')->get();
+        foreach ($AllOpUser as $user) {
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['clossing an operation']; // sending from and to user id when pressed enter
-            $pusher->trigger('my-channel','notification-event', $data);
+            $pusher->trigger('my-channel', 'notification-event', $data);
         }
         $operation->status = "TERMINER";
         $operation->save();
@@ -602,16 +581,15 @@ class OperationController extends Controller
     public function debuter_operation($id)
     {
         $operation = Operation::with('form')->findOrFail($id);
-        $message = "l'operration : ".$operation->nom." a debuté.";
-        $AllOpUser = $operation->users()->where('role','1')->where('role','0')->get();
+        $message = "l'operration : " . $operation->nom . " a debuté.";
+        $AllOpUser = $operation->users()->where('role', '1')->where('role', '0')->get();
         $form = $operation->form()->get()->last();
         $form->status = "open";
-        foreach ($AllOpUser as $user)
-        {
+        foreach ($AllOpUser as $user) {
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['clossing an operation']; // sending from and to user id when pressed enter
-            $pusher->trigger('my-channel','notification-event', $data);
+            $pusher->trigger('my-channel', 'notification-event', $data);
         }
         $operation->status = "EN COUR";
         $form->save();
@@ -622,9 +600,81 @@ class OperationController extends Controller
     public function activation($id)
     {
         $user = User::findOrFail($id);
-        $user->active = 1 ;
+        $user->active = 1;
         Mail::to($user->email)->send(new BlooOperateur());
         $user->save();
         return back()->withSuccess('Operateur activer');
     }
+
+    /**
+     * @param $id
+     * @param $paysid
+     * @return array
+     */
+    public function TryPays($id, $paysid)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+        $country = Country::findOrFail($paysid);
+        $current_user = Auth::user();
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartPays($paysid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+        }
+        $view = (string)View::make('admin.operation.partials.responsescountry', compact('operation', 'form', 'responses','paysid'));
+        return [
+            'response_view' => $view,
+            'data_for_chart' => json_encode($data_for_chart)
+        ];
+    }
+
+    /**
+     * @param $id
+     * @param $siteid
+     * @return array
+     */
+    public function TrySites($id, $siteid)
+    {
+        $operation = Operation::with('entreprise')->findOrFail($id);
+
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartSite($siteid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+        }
+        $view = (string)View::make('admin.operation.partials.responsesite', compact('operation', 'form', 'responses','siteid'));
+        return [
+            'response_view' => $view,
+            'data_for_chart' => json_encode($data_for_chart)
+        ];
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getSites($id)
+    {
+        $operation = Operation::with('sites')->findOrFail($id);
+         return response()->json($operation->sites()->get());
+    }
+
+
+
 }

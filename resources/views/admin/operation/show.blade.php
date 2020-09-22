@@ -109,27 +109,31 @@
                             <a class="dropdown-toggle" style="color:#0065A1; font-size:16px;" data-toggle="dropdown" href="#">
                                     {{ trans('sort_by') }}
                                 </a>
-                             {{-- <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
+                              <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option>...</option>
                                  <option   value="1">Pays</option>
-                                 <option value="2">Ville</option>
+                                 <option value="2">Sites</option>
                                  <option value="3">Opérateurs</option>
                             </select>
 
+                            <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
+                            </select>
                             <select id="select2" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
-                                <option> Pays </option>
-                                <option value="1">Ville</option>
-                                <option value="2">Opérateurs</option>
-                            </select> --}}
+
+                            </select>
+                            <select id="select3" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
+                            </select>
                         </ul>
                         <span class="pull-right">
                             {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-                            <a href="{{ route('forms.response.export', $form->code) }}">
+                            {{-- <a href="{{ route('forms.response.export', $form->code) }}">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
-                            </a>
+                            </a> --}}
                         </span>
                     </div>
 
@@ -138,9 +142,9 @@
                         {!! $view !!}
                     </div>
 
-                    <div class="box-body row" id="responsesprint" style="display: none" >
-                        {!! $viewprint !!}
-                        </div>
+{{--                    <div class="box-body row" id="responsesprint" style="display: none" >--}}
+{{--                        {!! $viewprint !!}--}}
+{{--                        </div>--}}
                     <!-- /.box-body -->
                 </div>
             </div>
@@ -523,7 +527,7 @@
                     pdf.setFont("helvetica");
                     pdf.setFontSize(10);
                     pdf.text('Page ' + i + '/' + totalPages, 260, 210);
-                    pdf.text('Imprimer le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
+                    pdf.text('Imprimé le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
                     pdf.addImage(imgData, "PNG",  240, 0);
                     pdf.setFontType("bolditalic");
                     pdf.text('{{$operation->nom}} ({{ $user->first_name }} {{ $user->last_name }})',05,12);
@@ -558,13 +562,13 @@
             });
         }
 
-        let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+        {{--let data_for_chart2 = {!! json_encode($data_for_chart2) !!};--}}
 
-        if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
-            google.charts.setOnLoadCallback(function () {
-                drawCharts(data_for_chart2);
-            });
-        }
+        // if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+        //     google.charts.setOnLoadCallback(function () {
+        //         drawCharts(data_for_chart2);
+        //     });
+        // }
 
         $(function () {
             // Resize chart on sidebar width change and window resize
@@ -593,9 +597,9 @@
 
                 drawCharts(data_for_chart);
 
-                data_for_chart2 = JSON.parse(response.data_for_chart2);
-
-                drawCharts(data_for_chart2);
+                // data_for_chart2 = JSON.parse(response.data_for_chart2);
+                //
+                // drawCharts(data_for_chart2);
 
                 $(function () {
                     // Resize chart on sidebar width change and window resize
@@ -610,17 +614,77 @@
     <script>
         $('#countries').on('change', function(e){
             console.log(e);
-            var region_id = e.target.value;
-            if(region_id == 1)
+            var sortoption  = e.target.value;
+            if(sortoption == 1)
             {
                 $.get('/jsonmapcountries2',function(data) {
+                    console.log(data);
+                    $('#select1').empty();
+                    var element = document.getElementById('select2');
+                    element.style.display = "initial";
+                    $('#select1').append('<option value="Selectionnez un pays">Selectionnez un pays</option>');
+                    $.each(data, function(index, countriesObj){
+                        $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
+                    })
+                });
+
+            }
+            if(sortoption == 2)
+            {
+                $.get('/operationsites/'+{{$operation->id}},function(data) {
                     console.log(data);
                     $('#select2').empty();
                     var element = document.getElementById('select2');
                     element.style.display = "initial";
-                    $.each(data, function(index, countriesObj){
-                        $('#select2').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
+                    $('#select2').append('<option value="Selectionnez un site">Selectionnez un site</option>');
+                    $.each(data, function(index, sitesObj){
+                        $('#select2').append('<option value="'+ sitesObj.id +'">'+ sitesObj.nom +'</option>');
                     })
+                });
+            }
+        });
+
+        $('#select1').on('change', function(e){
+            var pays_id = e.target.value;
+            {
+                $.get('/operation/'+'{{$operation->id}}'+'/'+ pays_id,function(response) {
+                    console.log(response);
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+                });
+            }
+        });
+
+        $('#select2').on('change', function(e){
+            var site_id = e.target.value;
+            {
+                $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
+                    console.log(response);
+
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
                 });
             }
         });
