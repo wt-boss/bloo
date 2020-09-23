@@ -26,7 +26,7 @@
                                 @case('en')
                                 <i class="icon-globe"></i>&nbspEN
                                 @break
-                                @case('es')
+                                @case('pt')
                                 <i class="icon-globe"></i>&nbsPT
                                 @break
                                 @default

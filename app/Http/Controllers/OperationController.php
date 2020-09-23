@@ -250,7 +250,7 @@ class OperationController extends Controller
             }
         }
         $selected_operateur = $operation->users;
-        $operateurs = User::where('role', '1')->get();
+        $operateurs = User::with('country','state')->where('role', '1')->get();
         $opusers = [];
         foreach ($operateurs as $operateur) {
             $opuser = new OpUsers();
@@ -264,7 +264,8 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = Helper::buildUsersTable($opusers);
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers'));
+//        $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
     }
 

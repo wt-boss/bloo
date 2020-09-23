@@ -7,7 +7,7 @@ use Closure;
 class Locale
 {
 
-    protected $languages = ['en','fr'];
+    protected $languages = ['en','fr','pt'];
     /**
      * Handle an incoming request.
      *
@@ -21,8 +21,8 @@ class Locale
          $actu = config('app.locale');
         if(!session()->has('locale'))
         {
-            // session()->put('locale', $request->getPreferredLanguage($this->languages));
-            session()->put('locale','fr');
+             session()->put('locale', $request->getPreferredLanguage($this->languages));
+             //session()->put('locale','fr');
         }
         app()->setLocale(session('locale'));
         return $next($request);
