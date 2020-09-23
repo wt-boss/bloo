@@ -12,7 +12,7 @@
 @extends('admin.top-nav', $page_data)
 
 
-@section('title', "My Forms | {$form->title}")
+@section('page_title',  " {$form->title}")
 
 @section('laraform_style')
     <!-- Laraform Link Style -->

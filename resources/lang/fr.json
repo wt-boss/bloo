@@ -555,10 +555,26 @@
     "Out_free" : "QUITTER LE FORMULAIRE GRATUIT",
     "Sucess_create": "Votre compte a été crée avec success",
     "quitter": "Quitter",
+    "my_Forms": "Mon formulaire",
 
     "Verify Your Email Address" : "Confirmez votre adresse email.",
     "A fresh verification link has been sent to your email address." : "Un nouveau lien de vérification vous a été envoyé.",
     "Before proceeding, please check your email for a verification link." : "Validez votre compte via le mail qui vous a été envoyé.",
     "If you did not receive the email" : "Si vous ne recevez pas d'email.",
-    "click here to request another" : "Cliquez ici pour renvoyer un autre"
+    "click here to request another" : "Cliquez ici pour renvoyer un autre",
+
+    "Form Availabilty Settings": "Paramètres de disponibilité des formulaires",
+    "Open the form on": "Ouvrez le formulaire",
+    "Close the form on": "Fermez le formulaire",
+    "Or turn off after":" éteignez après",
+    "responses": "Réponses(c'est-à-dire la limite de réponse)",
+    "Open form on a recurring schedule. The form remains closed outside the specified schedule.": "Ouvrez le formulaire selon un calendrier récurrent. Le formulaire reste fermé en dehors du calendrier spécifié.",
+    "Enable form every": "Activer le formulaire ",
+    "Choose Days": "Choisissez le jour",
+    "betweens": "entre",
+    "Closed form message": "message ferture du formulaire",
+    "Cancel": "Annule",
+    "edit": "Editer Opération",
+    "Reset Settings": "Réinitialiser les options"
+
 }

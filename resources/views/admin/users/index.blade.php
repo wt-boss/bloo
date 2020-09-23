@@ -1,5 +1,5 @@
 @extends('admin.top-nav')
-@section('page_title', trans('Users'))
+@section('page_title', trans('Utilisateurs'))
 
 @section('title', 'Comptes utilisateurs')
 
@@ -9,7 +9,7 @@
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
             <div class="panel-heading pull-right">
-                <a href="{{ route('users.create') }}" class="btn btn-bloo"><i class="fas fa-plus-circle"></i> {{ trans('create_users') }}</a>
+                <a href="{{ route('users.create') }}" class="btn btn-bloo"><i class="fas fa-plus-circle"></i> {{ trans('create_user') }}</a>
             </div>
         </div>
         @if ($users->isEmpty())

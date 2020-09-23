@@ -1,5 +1,5 @@
 @extends('admin.top-nav')
-
+@section('page_title', trans('Profile'))
 @section('title', 'Accueil')
 
 @section('laraform_script1')
