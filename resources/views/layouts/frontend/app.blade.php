@@ -37,7 +37,7 @@
     @include('layouts.frontend.partial.footer')
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#0065A1"/></svg></div>
   <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script type="text/javascript">
 
@@ -106,7 +106,7 @@
   <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
   <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-  <script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="{{asset('assets/js/main.js') . '?' . time()}}"></script>
     <script src="{{asset('js/dist/clipboard.js')}}"></script>
     <script src="{{asset('assets/js/myscript.js')}}"></script>
     @yield('script')

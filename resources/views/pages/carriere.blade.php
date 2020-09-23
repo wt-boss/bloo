@@ -2,7 +2,7 @@
 @section('page_title', trans('footer_career'))
 @section('content')
     <!-- <div class="js-fullheight"> -->
-<div class="hero-wrap other-p col-sm-hidden">
+<div class="hero-wrap other-p">
     <div class="overlay"></div>
     <div class="circle-bg"></div>
     <div class="circle-bg-2"></div>
@@ -19,7 +19,7 @@
 <section class="ftco-section ftco-degree-bg">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 sidebar ftco-animate "  id="header" >
+            <div class="col-md-4 sidebar ftco-animate d-none d-md-block"  id="header" >
                 <div id="hiddenImg" class="sidebar-box ftco-animate carriere-side-img  ">
 
                 </div>

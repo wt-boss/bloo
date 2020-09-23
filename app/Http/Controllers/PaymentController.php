@@ -6,6 +6,7 @@ use AkibTanjim\Currency\Currency;
 use App\Entreprise;
 use App\Form;
 use App\FormAvailability;
+use App\Http\Requests\OffreRequest;
 use App\Offre;
 use App\Operation;
 use App\Operation_user;
@@ -59,9 +60,10 @@ class PaymentController extends Controller
         return response()->json($response);
     }
 
-    public function payWithpaypal(Request $request)
+    public function payWithpaypal(OffreRequest $request)
     {
         $parameters = $request->all();
+
 
           if($parameters['options'] === "PARTICULIER")
           {

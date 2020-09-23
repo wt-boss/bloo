@@ -168,6 +168,16 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         return $this->belongsToMany(Entreprise::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

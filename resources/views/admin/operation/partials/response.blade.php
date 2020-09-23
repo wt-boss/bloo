@@ -19,10 +19,6 @@
                 <div class="table-responsive">
                     <table class="table table-striped-info table-xxs table-framed-info">
                         @foreach ($responses as $response)
-                            @if ($loop->index === 5)
-{{--                                <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
-                                @break
-                            @endif
                             <tr>
                                 @php $answer = $response->getAnswerForTemplate($field->template); @endphp
                                 <td>{!! $answer !!}</td>
@@ -41,8 +37,6 @@
             @endif
         </div>
     @if (!$loop->last)
-        <hr>
         <div class="html2pdf__page-break"></div>
-        <p style="font-size:0.25mm" >test</p>
     @endif
 @endforeach

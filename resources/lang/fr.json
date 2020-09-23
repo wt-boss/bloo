@@ -575,6 +575,17 @@
     "Closed form message": "message ferture du formulaire",
     "Cancel": "Annule",
     "edit": "Editer Opération",
-    "Reset Settings": "Réinitialiser les options"
+    "Reset Settings": "Réinitialiser les options",
 
+    "The user email has already been taken" : "Cet email d'utilisateur a déjà été pris.",
+    "The entreprise email has already been taken" : "Cet email d'entreprise a déjà été pris.",
+    "Cameroon" : "Cameroun",
+    "Angola" : "Angola",
+    "Central African Republic" : "République centrafricaine",
+    "Chad" : "Tchad",
+    "Congo":"Congo",
+    "Equatorial Guinea": "Guinée Équatoriale",
+    "Gabon" : "Gabon",
+    "Nigeria" : "Nigeria",
+    "Congo The Democratic Republic Of The": "La République démocratique du Congo"
 }

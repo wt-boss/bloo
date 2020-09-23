@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use phpseclib\Crypt\Hash;
 use Illuminate\Support\Facades\Session;
 use PHPUnit\TextUI\Help;
@@ -73,15 +74,15 @@ class HomeController extends Controller
     public function admin()
     {
         $user = auth()->user();
-        $countries  = Country::where('name','Cameroon')
-            ->orwhere('name','Central African Republic')
-            ->orwhere('name','Congo')
-            ->orwhere('name','Gabon')
-            ->orwhere('name','Equatorial Guinea')
-            ->orwhere('name','Chad')
-            ->orwhere('name','Nigeria')
-            ->orwhere('name','Angola')
-            ->orwhere('name', 'The Democratic Republic Of The Congo')
+        $countries  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->orwhere('id','51')
             ->get();
         $diagram =  collect();
         $diagram->push(['Client','Operation']);
@@ -210,17 +211,19 @@ class HomeController extends Controller
      */
     public function allcountries()
     {
-        $countries  = Country::where('name','Cameroon')
-            ->orwhere('name','Central African Republic')
-            ->orwhere('name','Congo')
-            ->orwhere('name','Gabon')
-            ->orwhere('name','Equatorial Guinea')
-            ->orwhere('name','Chad')
-            ->orwhere('name','Nigeria')
-            ->orwhere('name','Angola')
+        $countries  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->orwhere('id','51')
             ->get();
         $class = 'operateurcountries';
-        $viewData = Helper::buildDashboardTable($countries, $class);
+//        $viewData = Helper::buildDashboardTable($countries, $class);
+        $viewData = (string)View::make('Helpers.BuildDashboardTable', compact('countries', 'class'));
         return response()->json($viewData);
     }
 
@@ -244,6 +247,7 @@ class HomeController extends Controller
             ->orwhere('country_id','43')
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
+            ->orwhere('country_id','51')
             ->get();
         $class = 'operateurstates';
         $viewData = Helper::buildDashboardTable($states,$class);
@@ -264,6 +268,7 @@ class HomeController extends Controller
             ->orwhere('country_id','43')
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
+            ->orwhere('country_id','51')
             ->get();
         $class = 'operateurcities';
         $viewData = Helper::buildDashboardTable($cities,$class);
@@ -280,6 +285,7 @@ class HomeController extends Controller
             ->orwhere('country_id','43')
             ->orwhere('country_id','161')
             ->orwhere('country_id','7')
+            ->orwhere('country_id','51')
             ->get()->pluck('name','id');
         return response()->json($cities);
     }
@@ -295,7 +301,7 @@ class HomeController extends Controller
             ->orwhere('id','43')
             ->orwhere('id','161')
             ->orwhere('id','7')
-            ->orwhere('name', 'The Democratic Republic Of The Congo')
+            ->orwhere('id', '51')
             ->get()->pluck('name','id');;
         return response()->json($states);
     }
@@ -309,6 +315,7 @@ class HomeController extends Controller
             ->orwhere('id','43')
             ->orwhere('id','161')
             ->orwhere('id','7')
+            ->orwhere('id', '51')
             ->get();
         return response()->json($states);
     }
