@@ -23,9 +23,11 @@ class Locale
             $lang = array('fr', 'en');
             if(in_array($value, $lang)) {
                 session()->put('locale', $value);
+                app()->setLocale(session('locale'));
             }
+        } else {
+            App::setlocale(session()->get('locale'));
         }
-        app()->setLocale(session('locale'));
         return $next($request);
     }
 }
