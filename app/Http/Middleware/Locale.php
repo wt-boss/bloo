@@ -20,7 +20,7 @@ class Locale
         if(!session()->has('locale'))
         {
             $value = $request->cookie('lang_blooapp');
-            $lang = array('fr', 'en', 'pt');
+            $lang = array('fr', 'en');
             if(in_array($value, $lang)) {
                 session()->put('locale', $value);
             }
