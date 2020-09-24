@@ -24,7 +24,7 @@
                                 @switch($locale)
 
                                         @case('fr')
-                                        <i class="icon-globe " style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbsp <P>FR</P>
+                                        <i class="icon-globe " style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspFR
                                         @break
                                         @case('en')
                                         <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspEN
