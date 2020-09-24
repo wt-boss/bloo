@@ -529,5 +529,14 @@
      "informations_generales":"General informations:",
       " Creer_des_maintenant_votre_premiere_operation":"Create your first operation now",
      "Créer_entreprise":"Create your first client now",
-    "nothing_opération":"You are not assigned to any current operation"
+    "nothing_opération":"You are not assigned to any current operation",
+    "Reset your password" : "Reset your password",
+    "Go ahead to reset your password" : "Go ahead to reset your password",
+    "Password recovery": "Password recovery",
+    "We will send you instructions by email": "We will send you instructions by email",
+    "Send reset link": "Send reset link",
+    "We have e-mailed your password reset link!": "We have e-mailed your password reset link!",
+    "Select a city" : "Select a city",
+    "Select a country" : "Select a country",
+    "Select a site" : "Select a site"
 }

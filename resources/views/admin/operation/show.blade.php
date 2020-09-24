@@ -110,7 +110,7 @@
                                     {{ trans('sort_by') }}
                                 </a>
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
-                                 <option>...</option>
+                                 <option selected>...</option>
                                  <option   value="1">Pays</option>
                                  <option value="2">Sites</option>
                                  <option value="3">Opérateurs</option>
@@ -487,11 +487,13 @@
             };
             html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
                 var totalPages = pdf.internal.getNumberOfPages();
-                console.log(totalPages)
+
                 for (i = 1; i <= totalPages; i++) {
                     console.log('here', i);
                     pdf.setPage(i);
-                    pdf.setFont("Baloo");
+                    pdf.addFont('Baloo-Regular.ttf', 'custom', 'normal');
+
+                    pdf.setFont('custom');
                     pdf.setFontSize(10);
                     pdf.setFontType("bolditalic");
                     @if( app()->getLocale() === "fr" )
@@ -597,9 +599,13 @@
                 $.get('/jsonmapcountries2',function(data) {
                     console.log(data);
                     $('#select1').empty();
-                    var element = document.getElementById('select2');
-                    element.style.display = "initial";
-                    $('#select1').append('<option value="Selectionnez un pays">Selectionnez un pays</option>');
+                    var element1 = document.getElementById('select1');
+                    var element2 = document.getElementById('select2');
+                    var element3 = document.getElementById('select3');
+                    element1.style.display = "initial";
+                    element2.style.display = "none";
+                    element2.style.display = "none";
+                    $('#select1').append('<option value="Selectionnez un pays">@lang('Select a country')</option>');
                     $.each(data, function(index, countriesObj){
                         $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
                     })
@@ -611,11 +617,33 @@
                 $.get('/operationsites/'+{{$operation->id}},function(data) {
                     console.log(data);
                     $('#select2').empty();
-                    var element = document.getElementById('select2');
-                    element.style.display = "initial";
-                    $('#select2').append('<option value="Selectionnez un site">Selectionnez un site</option>');
+                    var element1 = document.getElementById('select1');
+                    var element2 = document.getElementById('select2');
+                    var element3 = document.getElementById('select3');
+                    element1.style.display = "none";
+                    element2.style.display = "initial";
+                    element3.style.display = "none";
+                  ;
+                    $('#select2').append('<option value="Selectionnez un site">@lang('Select a site')</option>');
                     $.each(data, function(index, sitesObj){
                         $('#select2').append('<option value="'+ sitesObj.id +'">'+ sitesObj.nom +'</option>');
+                    })
+                });
+            }
+            if(sortoption == 3)
+            {
+                $.get('/operationvilles/'+{{$operation->id}},function(data) {
+                    console.log(data);
+                    $('#select3').empty();
+                    var element1 = document.getElementById('select1');
+                    var element2 = document.getElementById('select2');
+                    var element3 = document.getElementById('select3');
+                    element1.style.display = "none";
+                    element2.style.display = "none";
+                    element3.style.display = "initial";
+                    $('#select3').append('<option value="Selectionnez une ville">@lang('Select a city')</option>');
+                    $.each(data, function(index, sitesObj){
+                        $('#select3').append('<option value="'+ sitesObj +'">'+ sitesObj +'</option>');
                     })
                 });
             }
@@ -649,6 +677,29 @@
                 $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
                     console.log(response);
 
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+                });
+            }
+        });
+
+        $('#select3').on('change', function(e){
+            var ville = e.target.value;
+            {
+
+                $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
+                    console.log(response);
                     $('#responses').empty()
                         .append(response.response_view);
 

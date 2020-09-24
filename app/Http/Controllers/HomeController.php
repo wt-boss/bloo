@@ -239,7 +239,7 @@ class HomeController extends Controller
      */
     public function allstates()
     {
-        $states  = State::where('country_id','38')
+        $countries  = State::where('country_id','38')
             ->orwhere('country_id','42')
             ->orwhere('country_id','50')
             ->orwhere('country_id','79')
@@ -250,7 +250,7 @@ class HomeController extends Controller
             ->orwhere('country_id','51')
             ->get();
         $class = 'operateurstates';
-        $viewData = Helper::buildDashboardTable($states,$class);
+        $viewData = (string)View::make('Helpers.BuildDashboardTable', compact('countries', 'class'));
         return response()->json($viewData);
     }
 
@@ -260,7 +260,7 @@ class HomeController extends Controller
 
     public function allcities()
     {
-        $cities  = City::where('country_id','38')
+        $countries  = City::where('country_id','38')
             ->orwhere('country_id','42')
             ->orwhere('country_id','50')
             ->orwhere('country_id','79')
@@ -271,7 +271,7 @@ class HomeController extends Controller
             ->orwhere('country_id','51')
             ->get();
         $class = 'operateurcities';
-        $viewData = Helper::buildDashboardTable($cities,$class);
+        $viewData = (string)View::make('Helpers.BuildDashboardTable', compact('countries', 'class'));
         return response()->json($viewData);
     }
 
