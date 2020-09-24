@@ -8,8 +8,8 @@ class LocalizationController extends Controller
 {
     public function index($locale){
         App::setlocale($locale);
+        $cookie = cookie('lang_blooapp', $locale, 525600);
         session()->put('locale', $locale);
-        $actu = config('app.locale');
-        return redirect()->back();
+        return redirect()->back()->cookie($cookie );
     }
 }

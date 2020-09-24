@@ -17,12 +17,11 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        /** Sauvegarder la valeur de actuelle */
-         $actu = config('app.locale');
         if(!session()->has('locale'))
         {
-             session()->put('locale', $request->getPreferredLanguage($this->languages));
-             //session()->put('locale','fr');
+            $value = $request->cookie('lang_blooapp');
+//             session()->put('locale', $request->getPreferredLanguage($this->languages));
+             session()->put('locale', $value);
         }
         app()->setLocale(session('locale'));
         return $next($request);

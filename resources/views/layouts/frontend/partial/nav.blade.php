@@ -17,27 +17,19 @@
           <li class="{{Request::is('prix')? "active nav-item": "nav-item"}}"><a class="nav-link" href="{{ route('prix') }}">{{  trans('prix_fil')  }}</a></li>
           <li class="{{Request::is('contact')? "active nav-item": "nav-item"}}"><a href="{{ route('contact_path') }}" class="nav-link">{{  trans('contact_fil')  }}</a></li>
 
-                @php $locale = session()->get('locale'); @endphp
                 <li class="nav-item " >
                         <div class="dropdown">
                             <button  style=" color:#fff; " class="btn btn-default dropdown-toggle nav-link    langue ct " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @switch($locale)
-
-                                        @case('fr')
-                                        <i class="icon-globe " style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspFR
-                                        @break
-                                        @case('en')
+                                @if( app()->getLocale() === "fr" )
+                                    <i class="icon-globe " style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspFR
+                                @endif
+                                @if( app()->getLocale() === "en")
                                         <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspEN
-                                        @break
-                                        @default
-                                        <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspFR
-                                    @endswitch
+                                @endif
                             </button>
                             <div class="dropdown-menu drop" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
                                 <a class="dropdown-item " href="{{asset('/localization/en')}}">EN</a>
-                               
-
                             </div>
                         </div>
 
