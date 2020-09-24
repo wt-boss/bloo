@@ -515,7 +515,7 @@
     "adress_user":"Addresse Email de l'utilisateur :",
      "adress_entreprise1":"Addresse Email de l'entreprise :",
      "message_valid":" Ce champ ne peut être vide (Minimum 3 caractères).",
-     "name_user":"Nom de l'utilisateur:",
+     "name_user":"Nom de l'utilisateur",
      "telephone_entreprise":"Telephone de l'entreprise :",
     "ville_entreprise":"Ville de l'entreprise :",
       "region_entreprise":"Region de l'entreprise :",
@@ -587,5 +587,24 @@
     "Equatorial Guinea": "Guinée Équatoriale",
     "Gabon" : "Gabon",
     "Nigeria" : "Nigeria",
-    "Congo The Democratic Republic Of The": "La République démocratique du Congo"
+    "Congo The Democratic Republic Of The": "La République démocratique du Congo",
+
+    "Sondage en ligne gratuit": "Sondage en ligne gratuit",
+    "Enquête sondage terrain": "Enquête sondage terrain",
+    "Nombres d’opérateurs max": "Nombres d’opérateurs max",
+    "Rapports d’étude": "Rapport d’étude",
+    "Compte Free": "Compte Free",
+    "Compte Silver": "Compte Silver",
+    "Compte Platinum": " Compte Platinum",
+    "Gratuit": "Gratuit",
+    "Sur devis": "Sur devis",
+    "APD 80k€": "APD 80k€",
+    "Sans engagement": "Sans engagement",
+    "Droits partagés": "Droits partagés",
+    "Payant": "Payant",
+     "Sondage gratuit": "Sondage gratuit",
+     "envoyer": "envoyer",
+     "Register": "Enregistrement"
+    
+
 }

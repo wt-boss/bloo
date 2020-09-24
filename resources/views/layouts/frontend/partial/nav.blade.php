@@ -29,9 +29,6 @@
                                         @case('en')
                                         <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspEN
                                         @break
-                                        @case('es')
-                                        <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbsPT
-                                        @break
                                         @default
                                         <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspFR
                                     @endswitch
@@ -39,7 +36,7 @@
                             <div class="dropdown-menu drop" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
                                 <a class="dropdown-item " href="{{asset('/localization/en')}}">EN</a>
-                                <a class="dropdown-item " href="{{asset('/localization/pt')}}">PT</a>
+                               
 
                             </div>
                         </div>

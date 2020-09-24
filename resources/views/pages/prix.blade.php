@@ -32,9 +32,9 @@
                                 <thead class="thead-primary">
                                   <tr class="tab">
                                     <th></th>
-                                    <th>Compte Free</th>
-                                    <th>Compte Silver </th>
-                                    <th>Compte Platinum</th>
+                                    <th>{{ trans('Compte Free')}}</th>
+                                    <th>{{ trans('Compte Silver') }}</th>
+                                    <th>{{ trans('Compte Platinum') }}</th>
 
                                   </tr>
                                 </thead>
@@ -46,14 +46,14 @@
                                 <tbody>
                                   <tr>
                                     <td ><p class="rg">{{ trans('Prix') }}</p></td>
-                                    <td>Gratuit</td>
-                                    <td>Sur devis</td>
-                                    <td>APD 80k&euro;</td>
+                                    <td>{{ trans('Gratuit') }}</td>
+                                    <td>{{ trans('Sur devis') }}</td>
+                                    <td>{{ trans('APD 80k€') }}</td>
 
                                   </tr>
                                   <tr>
                                     <td><p class="rg">{{ trans('Validité') }}</p></td>
-                                    <td>Sans engagement</td>
+                                    <td>{{ trans('Sans engagement') }}</td>
                                     <td>30J </td>
                                     <td>365J</td>
                                   </tr>
@@ -71,13 +71,13 @@
                                   </tr>
                                   <tr>
                                     <td><p class="rg">{{ trans('Droit de publication') }}</p></td>
-                                    <td>Droit partagé </td>
+                                    <td>{{ trans('Droits partagés') }}</td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                   </tr>
 
                                   <tr>
-                                    <td><p class="rg">{{ trans('Enquête/sondage terrain ') }}</p></td>
+                                    <td><p class="rg">{{ trans('Enquête sondage terrain') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
@@ -146,9 +146,9 @@
                                   </tr>
                                   <tr>
                                     <td><p class="rg">{{ trans('Accès Bloo Market Vue') }}</p></td>
-                                    <td>Payant</td>
-                                    <td>Payant</td>
-                                    <td>Gratuit</td>
+                                    <td>{{ trans('Payant') }}</td>
+                                    <td>{{ trans('Payant') }}</td>
+                                    <td>{{ trans('Gratuit') }}</td>
                                   </tr>
                                   <tr>
                                     <td><a href=""></td>
