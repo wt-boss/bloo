@@ -30,6 +30,7 @@
                             <th class="text-center">{{ trans('Email') }}</th>
                             <th class="text-center">{{ trans('Rôle') }}</th>
                             <th class="text-center">{{ trans('Compte Actif') }}</th>
+                            <th class="text-center">Status</th>
                             @if(Auth::user()->rolename() == "Superadmin")
                             <th class="text-center">{{ trans('actions') }}</th>
                             @endif
@@ -49,6 +50,20 @@
                                         @else
                                             <i class="fas fa-times-circle text-danger"></i>
                                         @endif
+                                </td>
+
+                                <td>
+                                    @if($user->isOnline())
+                                        <li class= "text-success">
+                                            Online
+                                        </li>
+                                    
+                                        @else($user->isOnline())
+                                        <li class= "text-muted">
+                                            ofline
+                                        </li>
+                                    @endif
+
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
