@@ -21,9 +21,6 @@
                     <div class="table-responsive">
                         <table class="table table-striped-info table-xxs table-framed-info">
                             @foreach ($responses as $response)
-
-                                    <tr><strong>{{ trans('more_info') }}</strong></tr>
-
                                 <tr>
                                     @php $answer = $response->getAnswerForTemplate($field->template); @endphp
                                     <td>{!! $answer !!}</td>
@@ -115,21 +112,21 @@
                     console.log('here', i);
                     pdf.setPage(i);
                     pdf.setFont("helvetica");
+                    pdf.setFontType("bolditalic");
                     pdf.setFontSize(10);
                     @if( app()->getLocale() === "fr" )
-                    pdf.text('Page ' + i + '/' + totalPages, 198, 275);
+                    pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     pdf.text('Imprimé le : '+jour+"/"+mois+"/"+annee ,05, 275);
                     @endif
                     @if( app()->getLocale() === "en")
-                    pdf.text('Page ' + i + '/' + totalPages, 198, 275);
-                    pdf.text('Print it : '+jour+"/"+mois+"/"+annee ,05, 275);
+                    pdf.text('Page ' + i + '/' + totalPages,  260, 210);
+                    pdf.text('Print : '+jour+"/"+mois+"/"+annee, 05, 210);
                     @endif
                     @if( app()->getLocale() === "pt")
-                    pdf.text('Página ' + i + '/' + totalPages, 198, 275);
-                    pdf.text('Imprima : '+jour+"/"+mois+"/"+annee ,05, 275);
+                    pdf.text('Página ' + i + '/' + totalPages,  260, 210);
+                    pdf.text('Imprima : '+jour+"/"+mois+"/"+annee ,05, 210);
                     @endif
                     pdf.addImage(imgData, "PNG",  240, 0);
-                    pdf.setFontType("bolditalic");
                     pdf.text('{{$form->title}}',05,12);
                 }
             }).save();

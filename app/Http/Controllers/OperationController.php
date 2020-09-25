@@ -65,7 +65,7 @@ class OperationController extends Controller
         }
         return view('admin.operation.index', compact('operations', 'operation'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -372,7 +372,13 @@ class OperationController extends Controller
      */
     public function show($id, Request $request)
     {
-        $operation = Operation::with('entreprise')->findOrFail($id);
+        $Villes = collect();
+        $operation = Operation::with('entreprise','sites')->findOrFail($id);
+        $sites = $operation->sites()->get()->GroupBy('ville');
+        foreach ($sites as $site => $value)
+        {
+            $Villes->push($site);
+        }
         $current_user = Auth::user();
         $form = $operation->form;
         $valid_request_queries = ['summary', 'individual'];
@@ -418,7 +424,7 @@ class OperationController extends Controller
 //                'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart'));
+            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart','Villes'));
         }
     }
 
@@ -706,6 +712,10 @@ class OperationController extends Controller
          return response()->json($operation->sites()->get());
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getVilles($id)
     {
         $Villes = collect();
@@ -717,10 +727,5 @@ class OperationController extends Controller
         }
         return response()->json($Villes);
     }
-
-
-
-
-
 
 }

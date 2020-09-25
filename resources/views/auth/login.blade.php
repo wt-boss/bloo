@@ -7,7 +7,9 @@
     @csrf
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center login-logo-header">
-            <img alt="Bloo" src="{{ asset('assets/images/bloo_logo.png') }}">
+           <a href="{{route('home')}}">
+               <img alt="Bloo" src="{{ asset('assets/images/bloo_logo.png') }}">
+           </a>
         </div>
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-body form-content">

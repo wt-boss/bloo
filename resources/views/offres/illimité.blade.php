@@ -47,28 +47,28 @@
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
                             <label for="name_enterprise">{{ trans('Nom_entreprise') }} :</label>
-                            <input type="text" class="form-control form-input-check"  name="name_enterprise" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
+                            <input type="text" class="form-control form-input-check"  name="name_enterprise" value="{{old('name_enterprise')}}" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
                             <div class="invalid-feedback">
                                {{ trans('chanp_valide') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="address_enterprise">{{ trans('adress_entreprise') }}</label>
-                            <input type="text" name="address_enterprise" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
+                            <input type="text" name="address_enterprise" value="{{old('address_enterprise')}}" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_contribuable')}}</label>
-                            <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
+                            <input type="text" name="contribuanle_enterprise" value="{{old('contribuanle_enterprise')}}" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_sirect') }}</label><br>
-                            <input type="text" name="siret_enterprise" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
+                            <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
                             <div class="invalid-feedback">
                                {{ trans('adress_entreprise_valid') }}
                             </div>
@@ -103,14 +103,14 @@
 
                         <div class="form-group col-6">
                             <label for="birth-date">{{ trans('telephone_entreprise') }}</label><br>
-                            <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
+                            <input type="text" name="telephone_entreprise" value="{{old('telephone_entreprise')}}" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
                             <div class="invalid-feedback">
                                 {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="particulier_name"><{{ trans('name_user') }}/label><br>
-                            <input type="text" name="user_name_entreprise" class="address form-control form-input-check" id="particulier_name">
+                            <input type="text" name="user_name_entreprise" value="{{old('user_name_entreprise')}}" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
                             </div>
