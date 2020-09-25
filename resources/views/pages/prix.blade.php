@@ -86,10 +86,10 @@
                                     <td><p class="rg">{{ trans('Nombre d’opération max') }}</p> </td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>1</td>
-                                    <td>Illimité</td>
+                                    <td>{{ trans('Unlimited') }} </td>
                                   </tr>
                                   <tr>
-                                    <td><p class="rg">{{ trans('Nombre d’opérateurs max ') }}</p></td>
+                                    <td><p class="rg">{{ trans('Nombre d’opérateurs max') }}</p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td>20</td>
                                     <td>120</td>
@@ -139,7 +139,7 @@
                                   </tr>
 
                                   <tr>
-                                    <td> <p class="rg">{{ trans('Rapport d’étude ') }} </p></td>
+                                    <td> <p class="rg">{{ trans('Rapport d’étude') }} </p></td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
