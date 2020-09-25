@@ -530,6 +530,14 @@
       " Creer_des_maintenant_votre_premiere_operation":"Create your first operation now",
      "Créer_entreprise":"Create your first client now",
     "nothing_opération":"You are not assigned to any current operation",
+    "Please Wait..." : "Patientez ...",
+    "Saving..." : "Enregistrement...",
+
+    "Recharger la page" : "Recharger la page",
+    "Votre compte non pas enregistrer" : "Votre compte n'est pas enregistré",
+    "non active": "Votre compte est inactif ou non vérifié",
+
+
     "Reset your password" : "Reset your password",
     "Go ahead to reset your password" : "Go ahead to reset your password",
     "Password recovery": "Password recovery",
@@ -557,14 +565,11 @@
     "envoyer": "Send",
     "Register": "Register",
 
-   "Entrer le numéro du contribuable": "Enter taxpayer ID",
-  "Entrer le numéro" :"Enter the registration number",
-    "failed" : "These credentials do not match our records."
-
-
-
-
-
-
-
+    "Entrer le numéro du contribuable": "Enter taxpayer ID",
+    "Entrer le numéro" :"Enter the registration number",
+    "failed" : "These credentials do not match our records.",
+    "Chargement des données" : "Data loadind",
+    "form_submitted_reponse": "Your response has been sent",
+    "send_another_response": "send another reply",
+    "create_my_own_form" : "Create my own form"
 }
