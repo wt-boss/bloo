@@ -12,7 +12,7 @@ use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use Cache;
 class User extends Authenticatable implements MustVerifyEmail,JWTSubject
 {
     use Notifiable;
@@ -200,6 +200,10 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     public function pieces()
     {
         return $this->hasMany(Piece::class);
+    }
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 
 

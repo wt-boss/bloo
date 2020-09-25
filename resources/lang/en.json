@@ -507,13 +507,13 @@
     "adress_user":"User Email Address:",
      "adress_entreprise1":"Company Email Address:",
      "message_valid":" This field cannot be empty (Minimum 3 characters).",
-     "name_user":"Username:",
-     "telephone_entreprise":"Company phone:",
+     "name_user":"Username",
+     "telephone_entreprise":"Company phone",
     "ville_entreprise":"Company city:",
       "region_entreprise":"Company region:",
      "pays_entreprise":"Company country:",
       "num_sirect_valid":"This field cannot be empty.",
-     "num_sirect":"Company registration number:",
+     "num_sirect":"Company registration number",
       "num_contribuable_valid":"This field cannot be empty.",
      "num_contribuable":"Company taxpayer ID:",
      "adress_entreprise":"Company address:",
@@ -538,5 +538,31 @@
     "We have e-mailed your password reset link!": "We have e-mailed your password reset link!",
     "Select a city" : "Select a city",
     "Select a country" : "Select a country",
-    "Select a site" : "Select a site"
+    "Select a site" : "Select a site",
+     "Sondage en ligne gratuit": "Free online survey",
+     "Enquête sondage terrain": "Field operation",
+     "Nombres d’opérateurs max": "Max number of operators",
+     "Rapports d’étude": "Analysis report",
+     "Compte Free": "Free Account",
+     "Compte Silver": "Silver Account",
+     "Compte Platinum": " Platinum Account",
+     "Gratuit": "Free",
+     "Sur devis": "Quotation",
+     "APD 80k€": "From 80k€",
+     "Sans engagement": "Without engagement",
+     "Droits partagés": "Shared rights",
+     "Payant": "Chargeable",
+
+     "Sondage gratuit":"Bloo Online",
+    "envoyer": "Send",
+    "Register": "Register",
+
+   "Entrer le numéro du contribuable": "Enter taxpayer ID",
+  "Entrer le numéro" :"Enter the registration number"
+
+
+
+
+
+
 }

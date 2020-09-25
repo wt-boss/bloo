@@ -11,7 +11,7 @@
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                 <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{trans('free__home')}}</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Sondage gratuit</h1>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('Sondage gratuit') }}</h1>
             </div>
         </div>
     </div>
@@ -104,7 +104,8 @@
                                                 <input type="text" class="form-control" id="description" minlength="3" name="description" placeholder="{{ trans('free_survey_form_target') }}" required >
                                                 </div>
                                                 <div class="form-group col-12">
-                                                    <input type="submit" class="btn btn-primary float-right"/>
+                                                    <button type="submit" class="btn btn-primary float-right">{{ trans('envoyer') }}</button>
+                                                    
                                                 </div>
                                             </div>
                                         </form>
@@ -151,7 +152,7 @@
                                         <input id="code" type="text" class="form-control" name="code" minlength="9" placeholder="{{ trans('free_survey_form_id') }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-primary float-right"/>
+                                             <button type="submit" class="btn btn-primary float-right">{{ trans('envoyer') }}</button>
                                         </div>
                                     </form>
                             </div>

@@ -450,9 +450,40 @@ html{
          /*! margin-left: 231px; */
          }
 
+
+
     }
+    .langue{
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    color: #fff;
+    font-weight: 400;
+    opacity: 1 !important;
+    }
+.drop{
+    min-width: 0px !important;
+}
+@media (max-width: 767.98px) {
+  .about-image {
+    height: 400px;
+    margin-bottom: 30px;
+    display: none;
+} }
 
 
+@media (max-width: 767.98px) {
+    .carriere-side-img {
+        height: 400px;
+        margin-bottom: 30px;
+        display: none;
+    }
+}
 
 
 

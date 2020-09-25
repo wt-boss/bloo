@@ -1,4 +1,4 @@
-@section('title', 'My Forms')
+@section('page_title', trans('Create'))
 
 @extends('admin.top-nav')
 

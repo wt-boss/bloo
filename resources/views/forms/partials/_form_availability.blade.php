@@ -14,7 +14,7 @@
         <div class="modal-content">
             <div class="modal-header bg-teal">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h6 class="modal-title">Form Availabilty Settings</h6>
+                <h6 class="modal-title">{{ trans('Form Availabilty Settings') }}</h6>
             </div>
 
             <form id="form-availability-form" method="post" action="{{ route('form.availability.save', $form->code) }}" autocomplete="off">
@@ -22,7 +22,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-3">
-                            <label for="open_form_date" class="mt-15">Open the form on</label>
+                            <label for="open_form_date" class="mt-15">{{ trans('Open the form on') }}</label>
                         </div>
                         <div class="col-sm-5">
                             <input type="text" id="open_form_date" name="open_form_date" class="form-control pickadate" data-value="{{ isset($availability) ? optional($availability->open_form_at)->toDateString() : null }}">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3">
-                            <label for="close_form_date" class="mt-15">Close the form on</label>
+                            <label for="close_form_date" class="mt-15">{{ trans('Close the form on') }}</label>
                         </div>
                         <div class="col-sm-5">
                             <input type="text" id="close_form_date" name="close_form_date" class="form-control pickadate" data-value="{{ isset($availability) ? optional($availability->close_form_at)->toDateString() : null }}">
@@ -44,25 +44,25 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3">
-                            <label for="response_limit" class="mt-15">Or turn off after</label>
+                            <label for="response_limit" class="mt-15">{{ trans('Or turn off after') }}</label>
                         </div>
                         <div class="col-sm-4">
                             <input type="number" min="1" max="999999999" id="response_limit" name="response_limit" class="form-control" value="{{ $availability ? $availability->response_count_limit : null }}">
                         </div>
                         <div class="col-sm-5">
-                            <label for="end_time" class="mt-15">responses (i.e. the response limit)</label>
+                            <label for="end_time" class="mt-15">{{ trans('responses') }}</label>
                         </div>
                     </div>
 
                     <div class="mt-30">
-                        <p>Open form on a recurring schedule. The form remains closed outside the specified schedule.</p>
+                        <p>{{ trans('Open form on a recurring schedule. The form remains closed outside the specified schedule.') }}</p>
                         <div class="row">
                             <div class="col-sm-3">
-                                <label for="weekday" class="mt-15">Enable form every</label>
+                                <label for="weekday" class="mt-15">{{ trans('Enable form every') }}</label>
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-control" name="weekday">
-                                    <option value="">Choose Days</option>
+                                    <option value="">{{ trans('Choose Days') }}</option>
                                     @foreach(App\FormAvailability::weekDays() as $index => $day)
                                         <option value="{{ $index }}"{{ (optional($availability)->available_weekday === $index) ? ' selected' : '' }}>{{ $day }}</option>
                                     @endforeach
@@ -71,13 +71,13 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2">
-                                <label for="start_time" class="mt-15">between</label>
+                                <label for="start_time" class="mt-15">{{ trans('betweens') }}</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="start_time" name="start_time" class="form-control pickatime" data-value="{{ optional($availability)->available_start_time }}">
                             </div>
                             <div class="col-sm-1">
-                                <label for="end_time" class="mt-15">and</label>
+                                <label for="end_time" class="mt-15">{{ trans('and') }}</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" id="end_time" name="end_time" class="form-control pickatime" data-value="{{ optional($availability)->available_end_time }}">
@@ -91,9 +91,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary reset pull-left" data-loading-text="Resetting...">Reset Settings</button>
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="submit" style="background-color: #0065a1;" class="btn bg-teal submit" data-loading-text="Saving...">{trans('save')}{}</button>
+                    <button type="button" class="btn btn-primary reset pull-left" data-loading-text="Resetting...">{{ trans('Reset Settings') }}</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('Cancel') }}</button>
+                    <button type="submit" style="background-color: #0065a1;" class="btn bg-teal submit" data-loading-text="Saving...">{{trans('save')}}</button>
                 </div>
             </form>
         </div>

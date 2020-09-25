@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App;
 use Closure;
 
 class Locale
@@ -17,14 +18,17 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        /** Sauvegarder la valeur de actuelle */
-         $actu = config('app.locale');
         if(!session()->has('locale'))
         {
-             session()->put('locale', $request->getPreferredLanguage($this->languages));
-             //session()->put('locale','fr');
+            $value = $request->cookie('lang_blooapp');
+            $lang = array('fr', 'en');
+            if(in_array($value, $lang)) {
+                session()->put('locale', $value);
+                app()->setLocale(session('locale'));
+            }
+        } else {
+            App::setlocale(session()->get('locale'));
         }
-        app()->setLocale(session('locale'));
         return $next($request);
     }
 }

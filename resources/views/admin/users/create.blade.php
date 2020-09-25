@@ -1,6 +1,6 @@
 @extends('admin.top-nav')
 
-@section('title', trans('create_user'))
+@section('page_title', trans('create_user'))
 
 @section('laraform_style')
     <!-- Laraform Link Style -->

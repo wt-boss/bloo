@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{ trans('Register') }}</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
                 <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('offre_silver') }}</h1>
             </div>
         </div>
@@ -50,14 +50,14 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="date_start">{{ trans('free_form1_label3') }} : </label>
+                            <label for="date_start">{{ trans('free_form1_label3') }}: </label>
                             <input type="date" class="form-control form-input-check" id="date_start" name="date_start"  required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="date_end">{{ trans('free_form1_label4') }} : </label>
+                            <label for="date_end">{{ trans('free_form1_label4') }}: </label>
                             <input type="date" class="form-control form-input-check" id="date_end" name="date_end"  required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
@@ -104,14 +104,14 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_contribuable') }}</label>
-                            <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="{{ trans('Entrer le numero du contribuable') }}">
+                            <input type="text" name="contribuanle_enterprise" class="birth-country form-control" id="birth-country" placeholder="{{ trans('Entrer le numéro du contribuable') }}">
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_sirect') }}:</label><br>
-                            <input type="text" name="siret_enterprise" class="birth-country form-control d-block" id="birth-country"  placeholder="Entrer le numero">
+                            <input type="text" name="siret_enterprise" class="birth-country form-control d-block" id="birth-country"  placeholder="{{ trans('Entrer le numéro') }}">
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
@@ -147,7 +147,7 @@
 
                         <div class="form-group col-6">
                             <label for="birth-date">{{ trans('telephone_entreprise') }}:</label><br>
-                            <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
+                            <input type="text" name="telephone_entreprise" class="birth-date form-control" id="birth-date" >
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
@@ -199,7 +199,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_email">{{ trans('E-Mail Address') }} :</label><br>
+                            <label for="particulier_email">{{ trans('E-Mail Address') }}:</label><br>
                             <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
                                 {{ trans('num_sirect_valid') }}

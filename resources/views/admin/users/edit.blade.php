@@ -1,7 +1,7 @@
 @extends('admin.top-nav')
 
 @section('page-css')
-
+@section('page_title', 'Utilisateurs|Edit')
 @endsection
 
 @section('content-header')

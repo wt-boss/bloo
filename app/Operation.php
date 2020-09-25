@@ -25,5 +25,9 @@ class Operation extends Model
     {
         return $this->hasMany(Site::class);
     }
+      public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 
 }

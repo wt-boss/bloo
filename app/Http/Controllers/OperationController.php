@@ -65,6 +65,7 @@ class OperationController extends Controller
         }
         return view('admin.operation.index', compact('operations', 'operation'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
