@@ -68,6 +68,12 @@
             });
         });
     </script>
+    <script>
+        function reload(){
+            window.location.reload();
+        }
+        setInterval(reload, 45000)
+    </script>
     <script type="text/javascript">
         setInterval(function(){
             google.charts.load('current', {'packages':['corechart']});
@@ -120,7 +126,7 @@
                     @endif
                     @if( app()->getLocale() === "en")
                     pdf.text('Page ' + i + '/' + totalPages,  260, 210);
-                    pdf.text('Print : '+jour+"/"+mois+"/"+annee, 05, 210);
+                    pdf.text('Printed on : '+jour+"/"+mois+"/"+annee, 05, 210);
                     @endif
                     @if( app()->getLocale() === "pt")
                     pdf.text('Página ' + i + '/' + totalPages,  260, 210);
