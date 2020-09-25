@@ -272,5 +272,11 @@ Route::get('/operation/{id}/{paysid}','OperationController@TryPays')->name('TryP
 /** Route pour le tri par site*/
 Route::get('/siteoperation/{id}/{siteid}','OperationController@TrySites')->name('TrySites');
 
+/** Route pour le tri par ville*/
+Route::get('/villeoperation/{id}/{ville}','OperationController@TryVilles')->name('TrySites');
+
 /** Route pour avoir les sites d'une operations */
 Route::get('/operationsites/{id}','OperationController@getSites')->name('getsites');
+
+/** Route pour avoir les villes d'une operations */
+Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvilles');

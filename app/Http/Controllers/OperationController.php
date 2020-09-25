@@ -65,7 +65,7 @@ class OperationController extends Controller
         }
         return view('admin.operation.index', compact('operations', 'operation'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -372,7 +372,13 @@ class OperationController extends Controller
      */
     public function show($id, Request $request)
     {
-        $operation = Operation::with('entreprise')->findOrFail($id);
+        $Villes = collect();
+        $operation = Operation::with('entreprise','sites')->findOrFail($id);
+        $sites = $operation->sites()->get()->GroupBy('ville');
+        foreach ($sites as $site => $value)
+        {
+            $Villes->push($site);
+        }
         $current_user = Auth::user();
         $form = $operation->form;
         $valid_request_queries = ['summary', 'individual'];
@@ -418,7 +424,7 @@ class OperationController extends Controller
 //                'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart'));
+            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart','Villes'));
         }
     }
 
@@ -643,6 +649,8 @@ class OperationController extends Controller
      * @param $siteid
      * @return array
      */
+
+
     public function TrySites($id, $siteid)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -667,6 +675,33 @@ class OperationController extends Controller
         ];
     }
 
+    public function TryVilles($id, $ville)
+    {
+
+        $operation = Operation::with('entreprise')->findOrFail($id);
+
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartVille($ville);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+
+        }
+
+        $view = (string)View::make('admin.operation.partials.responseville', compact('operation', 'form', 'responses','ville'));
+        return [
+            'response_view' => $view,
+            'data_for_chart' => json_encode($data_for_chart)
+        ];
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -677,6 +712,20 @@ class OperationController extends Controller
          return response()->json($operation->sites()->get());
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getVilles($id)
+    {
+        $Villes = collect();
+        $operation = Operation::with('sites')->findOrFail($id);
+        $sites = $operation->sites()->get()->GroupBy('ville');
+        foreach ($sites as $site => $value)
+        {
+            $Villes->push($site);
+        }
+        return response()->json($Villes);
+    }
 
 }

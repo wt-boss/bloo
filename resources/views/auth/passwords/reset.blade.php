@@ -15,11 +15,11 @@
             <div class="panel panel-body form-content">
                 <div class="text-center">
                     <div class="icon-object border-warning text-warning"><i class="icon-reset"></i></div>
-                    <h5 class="content-group">Reinitialiser votre mot de passe <small class="display-block">Go ahead to reset your password</small></h5>
+                    <h5 class="content-group">@lang('Reset your password') <small class="display-block">@lang('Go ahead to reset your password')</small></h5>
                 </div>
 
                 <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $email || old('email') }}" placeholder="Email Address" required>
+                    <input type="email" class="form-control" id="email" name="email"  placeholder="Email Address" required>
                     <div class="form-control-feedback">
                         <i class="icon-mail5 text-muted"></i>
                     </div>
@@ -48,7 +48,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn bg-success btn-block">Reinialiser mot de passe<i class="icon-arrow-right14 position-right"></i></button>
+                <button type="submit" class="btn bg-success btn-block">@lang('Reset your password')<i class="icon-arrow-right14 position-right"></i></button>
             </div>
         </div>
     </div>

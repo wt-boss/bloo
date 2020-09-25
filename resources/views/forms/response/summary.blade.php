@@ -21,10 +21,6 @@
                     <div class="table-responsive">
                         <table class="table table-striped-info table-xxs table-framed-info">
                             @foreach ($responses as $response)
-                                @if ($loop->index === 10)
-                                    <tr><strong>{{ trans('more_info') }}</strong></tr>
-                                    @break
-                                @endif
                                 <tr>
                                     @php $answer = $response->getAnswerForTemplate($field->template); @endphp
                                     <td>{!! $answer !!}</td>
@@ -72,6 +68,12 @@
             });
         });
     </script>
+    <script>
+        function reload(){
+            window.location.reload();
+        }
+        setInterval(reload, 45000)
+    </script>
     <script type="text/javascript">
         setInterval(function(){
             google.charts.load('current', {'packages':['corechart']});
@@ -116,11 +118,21 @@
                     console.log('here', i);
                     pdf.setPage(i);
                     pdf.setFont("helvetica");
-                    pdf.setFontSize(10);
-                    pdf.text('Page ' + i + '/' + totalPages, 260, 210);
-                    pdf.text('Imprimer le : '+jour+"/"+mois+"/"+annee+" à "+heure+":"+minute+":"+seconde,05, 210);
-                    pdf.addImage(imgData, "PNG",  240, 0);
                     pdf.setFontType("bolditalic");
+                    pdf.setFontSize(10);
+                    @if( app()->getLocale() === "fr" )
+                    pdf.text('Page ' + i + '/' + totalPages,  260, 210);
+                    pdf.text('Imprimé le : '+jour+"/"+mois+"/"+annee ,05, 275);
+                    @endif
+                    @if( app()->getLocale() === "en")
+                    pdf.text('Page ' + i + '/' + totalPages,  260, 210);
+                    pdf.text('Printed on : '+jour+"/"+mois+"/"+annee, 05, 210);
+                    @endif
+                    @if( app()->getLocale() === "pt")
+                    pdf.text('Página ' + i + '/' + totalPages,  260, 210);
+                    pdf.text('Imprima : '+jour+"/"+mois+"/"+annee ,05, 210);
+                    @endif
+                    pdf.addImage(imgData, "PNG",  240, 0);
                     pdf.text('{{$form->title}}',05,12);
                 }
             }).save();

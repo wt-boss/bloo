@@ -530,7 +530,15 @@
       " Creer_des_maintenant_votre_premiere_operation":"Create your first operation now",
      "Créer_entreprise":"Create your first client now",
     "nothing_opération":"You are not assigned to any current operation",
-
+    "Reset your password" : "Reset your password",
+    "Go ahead to reset your password" : "Go ahead to reset your password",
+    "Password recovery": "Password recovery",
+    "We will send you instructions by email": "We will send you instructions by email",
+    "Send reset link": "Send reset link",
+    "We have e-mailed your password reset link!": "We have e-mailed your password reset link!",
+    "Select a city" : "Select a city",
+    "Select a country" : "Select a country",
+    "Select a site" : "Select a site",
      "Sondage en ligne gratuit": "Free online survey",
      "Enquête sondage terrain": "Field operation",
      "Nombres d’opérateurs max": "Max number of operators",
@@ -550,11 +558,13 @@
     "Register": "Register",
 
    "Entrer le numéro du contribuable": "Enter taxpayer ID",
-  "Entrer le numéro" :"Enter the registration number"
-  
-
-  
+  "Entrer le numéro" :"Enter the registration number",
+    "failed" : "These credentials do not match our records."
 
 
-    
+
+
+
+
+
 }

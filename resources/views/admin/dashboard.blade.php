@@ -127,44 +127,7 @@
                     console.log(data);
                     $('#countries').empty();
                     $('#countries').append(data);
-                    $('#'+data.id).DataTable(
-                        {
-                            "language": {
-                                @if( app()->getLocale() === "fr" )
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                                @endif
-                                    @if( app()->getLocale() === "en")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                                @endif
-                                    @if( app()->getLocale() === "es")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                                @endif
-                                    @if( app()->getLocale() === "pt")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                                @endif
-                            },
-                            responsive: {
-                                details: {
-                                    type: 'column',
-                                    target: 'tr'
-                                }
-                            },
-                            columnDefs: [
-                                {
-                                    className: 'control',
-                                    orderable: false,
-                                    targets:   0
-                                },
-                                {
-                                    orderable: false,
-                                    targets: [-1]
-                                },
-                                { responsivePriority: 1, targets: 0 },
-                            ],
-                            "bLengthChange" : false, //thought this line could hide the LengthMenu
-                            "bInfo":false,
-                        }
-                    );
+
                     operateurCountriesEvent();
                 });
             }
@@ -173,45 +136,8 @@
                 $.get('/json-allstates', function (data) {
                     console.log(data);
                     $('#countries').empty();
-                    $('#countries').append(data.name);
-                    $('#'+data.id).DataTable(
-                        {
-                            "language": {
-                                @if( app()->getLocale() === "fr" )
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                                @endif
-                                    @if( app()->getLocale() === "en")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                                @endif
-                                    @if( app()->getLocale() === "es")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                                @endif
-                                    @if( app()->getLocale() === "pt")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                                @endif
-                            },
-                            responsive: {
-                                details: {
-                                    type: 'column',
-                                    target: 'tr'
-                                }
-                            },
-                            columnDefs: [
-                                {
-                                    className: 'control',
-                                    orderable: false,
-                                    targets:   0
-                                },
-                                {
-                                    orderable: false,
-                                    targets: [-1]
-                                },
-                                { responsivePriority: 1, targets: 0 },
-                            ],
-                            "bLengthChange" : false, //thought this line could hide the LengthMenu
-                            "bInfo":false,
-                        }
-                    );
+                    $('#countries').append(data);
+
                     $('.operateurstates').on('click', function(e){
                         var state_id = e.target.id;
                         var datas = null;
@@ -251,46 +177,7 @@
                 console.log(e);
                 $.get('/json-allcities', function (data) {
                     $('#countries').empty();
-                    $('#countries').append(data.name);
-                    $('#'+data.id).DataTable(
-                        {
-                            "language": {
-                                @if( app()->getLocale() === "fr" )
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                                @endif
-                                    @if( app()->getLocale() === "en")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                                @endif
-                                    @if( app()->getLocale() === "es")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                                @endif
-                                    @if( app()->getLocale() === "pt")
-                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                                @endif
-                            },
-
-                            responsive: {
-                                details: {
-                                    type: 'column',
-                                    target: 'tr'
-                                }
-                            },
-                            columnDefs: [
-                                {
-                                    className: 'control',
-                                    orderable: false,
-                                    targets:   0
-                                },
-                                {
-                                    orderable: false,
-                                    targets: [-1]
-                                },
-                                { responsivePriority: 1, targets: 0 },
-                            ],
-                            "bLengthChange" : false, //thought this line could hide the LengthMenu
-                            "bInfo":false,
-                        }
-                    );
+                    $('#countries').append(data);
                     $('.operateurcities').on('click', function(e){
                         var city_id = e.target.id;
                         var datas = null;

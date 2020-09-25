@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <form id="login" method="post" action="{{ route('password.email') }}" autocomplete="off">
     @csrf
     <div class="row">
@@ -14,7 +15,13 @@
             <div class="panel panel-body form-content">
                 <div class="text-center">
                     <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
-                    <h5 class="content-group">Récupération de mot de passe <small class="display-block">Nous vous enverrons des instructions par e-mail</small></h5>
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ trans(session('status')) }}
+                        </div>
+                    @endif
+                    <h5 class="content-group">
+                        @lang('Password recovery') <small class="display-block">@lang('We will send you instructions by email')</small></h5>
                 </div>
 
                 @php $status = $status ?? null; @endphp
@@ -30,7 +37,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn  btn-block">Envoyer le lien de réinitialisation<i class="icon-arrow-right14 position-right"></i></button>
+                    <button type="submit" class="btn  btn-block">@lang('Send reset link')<i class="icon-arrow-right14 position-right"></i></button>
                 </div>
             </div>
         </div>

@@ -588,6 +588,15 @@
     "Gabon" : "Gabon",
     "Nigeria" : "Nigeria",
     "Congo The Democratic Republic Of The": "La République démocratique du Congo",
+    "Reset your password" : "Réinitialiser votre mot de passe",
+    "Go ahead to reset your password" : "Allez-y pour réinitialiser votre mot de passe",
+    "Password recovery": "Récupération de mot de passe",
+    "We will send you instructions by email": "Nous vous enverrons des instructions par é-mail",
+    "Send reset link": "Envoyer le lien de réinitialisation",
+    "We have e-mailed your password reset link!": "Nous avons envoyé votre lien de réinitialisation de mot de passe par e-mail!",
+    "Select a city" : "Sélectionnez une ville",
+    "Select a site" : "Sélectionnez un site",
+    "Select a country" : "Sélectionnez un pays",
 
     "Sondage en ligne gratuit": "Sondage en ligne gratuit",
     "Enquête sondage terrain": "Enquête sondage terrain",
@@ -605,5 +614,8 @@
      "Sondage gratuit": "Sondage gratuit",
      "envoyer": "envoyer",
      "Register": "Enregistrement",
-     "Unlimited" : "Illimité"
+     "Unlimited" : "Illimité",
+    "failed": "Vérifiez vos identifiants"
+
+
 }
