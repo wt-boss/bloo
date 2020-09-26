@@ -37,7 +37,7 @@
                         <div class="form-group col-8 offset-1 radio-buttons-1">
                             <h6>{{ trans('choise_entreprise') }}</h6>
                             <label class="radio-inline">
-                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> {{ trans('Entreprise') }}
+                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> {{ trans('enterprise') }}
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="options"  class="button" value="PARTICULIER"> {{ trans('Particulier') }}

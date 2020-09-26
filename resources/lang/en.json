@@ -571,5 +571,8 @@
     "Chargement des données" : "Data loadind",
     "form_submitted_reponse": "Your response has been sent",
     "send_another_response": "send another reply",
-    "create_my_own_form" : "Create my own form"
+    "create_my_own_form" : "Create my own form",
+    "Out_free" : "EXIT THE FREE FORM"
+
+
 }
