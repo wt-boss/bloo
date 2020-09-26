@@ -289,7 +289,7 @@
                         @if (auth()->user()->hasRole('Free'))
                             <li class="dropdown user user-menu">
                                 <a href="{{ route('forms.logout_free') }}">
-                                    <span class="hidden-xs"><b>{{ trans('Quitter') }}</b></span>
+                                    <span class="hidden-xs"><b>{{ trans('quitter') }}</b></span>
                                 </a>
                             </li>
                         @endif

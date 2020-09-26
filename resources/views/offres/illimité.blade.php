@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">Accuiel</a></span> <span>{{ trans('sondage_fil') }}</span></p>{{ trans('') }}
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><span class="mr-2"><a href="{{ route('home') }}">{{ trans('Register') }}</a></span> <span>{{ trans('bloo live') }}</span></p>{{ trans('') }}
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('offre_platinum') }}</h1>
             </div>
         </div>
@@ -37,7 +37,7 @@
                         <div class="form-group col-8 offset-1 radio-buttons-1">
                             <h6>{{ trans('choise_entreprise') }}</h6>
                             <label class="radio-inline">
-                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> {{ trans('Entreprise') }}
+                                <input type="radio" id="test" class="button"  name="options" value="ENTREPRISE"> {{ trans('enterprise') }}
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="options"  class="button" value="PARTICULIER"> {{ trans('Particulier') }}
@@ -47,28 +47,28 @@
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
                             <label for="name_enterprise">{{ trans('Nom_entreprise') }} :</label>
-                            <input type="text" class="form-control form-input-check"  name="name_enterprise" value="{{old('name_enterprise')}}" placeholder="Entrer le nom de l'entreprise"  id="name_enterprise" >
+                            <input type="text" class="form-control form-input-check"  name="name_enterprise" value="{{old('name_enterprise')}}" placeholder=""  id="name_enterprise" >
                             <div class="invalid-feedback">
                                {{ trans('chanp_valide') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="address_enterprise">{{ trans('adress_entreprise') }}</label>
-                            <input type="text" name="address_enterprise" value="{{old('address_enterprise')}}" class="form-control" id="address_enterprise" placeholder="Entrer l'addresse de l'entreprise" >
+                            <input type="text" name="address_enterprise" value="{{old('address_enterprise')}}" class="form-control" id="address_enterprise" placeholder="" >
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_contribuable')}}</label>
-                            <input type="text" name="contribuanle_enterprise" value="{{old('contribuanle_enterprise')}}" class="birth-country form-control" id="birth-country" placeholder="Entrer le numero du contribuable">
+                            <input type="text" name="contribuanle_enterprise" value="{{old('contribuanle_enterprise')}}" class="birth-country form-control" id="birth-country" placeholder="">
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
                             <label for="birth-country">{{ trans('num_sirect') }}</label><br>
-                            <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control" id="birth-country"  placeholder="Entrer le numero">
+                            <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control" id="birth-country"  placeholder="">
                             <div class="invalid-feedback">
                                {{ trans('adress_entreprise_valid') }}
                             </div>
@@ -103,13 +103,13 @@
 
                         <div class="form-group col-6">
                             <label for="birth-date">{{ trans('telephone_entreprise') }}</label><br>
-                            <input type="text" name="telephone_entreprise" value="{{old('telephone_entreprise')}}" class="birth-date form-control" id="birth-date"  placeholder="Entrer le numero">
+                            <input type="text" name="telephone_entreprise" value="{{old('telephone_entreprise')}}" class="birth-date form-control" id="birth-date"  placeholder="">
                             <div class="invalid-feedback">
                                 {{ trans('num_sirect_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_name"><{{ trans('name_user') }}/label><br>
+                            <label for="particulier_name">{{ trans('name_user') }}:</label><br>
                             <input type="text" name="user_name_entreprise" value="{{old('user_name_entreprise')}}" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
