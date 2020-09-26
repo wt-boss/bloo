@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-sm-6 col-lg-3">
                             <div class="info">
-                                <p class="label">Clent</p>
+                                <p class="label">{{ trans('Client') }}</p>
                                 <p class="info-value">{{$operation->entreprise->nom}}</p>
                             </div>
                             <div class="info">
@@ -142,8 +142,8 @@
                         {!! $view !!}
                     </div>
 
-                        <div id="print" >
-                            <div class="box-body row" id="responsesprint"  >
+                        <div id="print" style="display: none;">
+                            <div class="box-body row" id="responsesprint">
                                 {!! $viewprint !!}
                                </div>
                         </div>
@@ -469,10 +469,7 @@
         });
     </script>
     <script type="text/javascript">
-        document.getElementById('download_pdf').onclick = function () {
-            var impresion =  document.getElementById('print');
-
-
+        let printpdf = () => {
             var now = new Date();
             var annee   = now.getFullYear();
             var mois    = now.getMonth() + 1;
@@ -533,6 +530,23 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 }
             }).save();
 
+            impresion.style.display = 'none';
+        };
+
+        document.getElementById('download_pdf').onclick = function () {
+            var impresion =  document.getElementById('print');
+            impresion.style.display = 'block';
+
+            let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+
+            if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+                google.charts.setOnLoadCallback(function () {
+                    drawCharts(data_for_chart2);
+                    printpdf();
+                });
+            }
+
+
         };
     </script>
 @endsection
@@ -561,13 +575,13 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
             });
         }
 
-        let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+        // let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
 
-            if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
-                     google.charts.setOnLoadCallback(function () {
-                   drawCharts(data_for_chart2);
-                    });
-                 }
+        // if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+        //     google.charts.setOnLoadCallback(function () {
+        //         drawCharts(data_for_chart2);
+        //     });
+        // }
 
 
 
@@ -594,18 +608,20 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 $('#responses').empty()
                     .append(response.response_view);
 
-                data_for_chart = JSON.parse(response.data_for_chart);
+                $('#responsesprint').empty()
+                    .append(response.response_view2);
 
+                data_for_chart = JSON.parse(response.data_for_chart);
                 drawCharts(data_for_chart);
 
-                data_for_chart2 = JSON.parse(response.data_for_chart2);
-
-                drawCharts(data_for_chart2);
+                // data_for_chart2 = JSON.parse(response.data_for_chart2);
+                // drawCharts(data_for_chart2);
 
                 $(function () {
                     // Resize chart on sidebar width change and window resize
                     $(window).on('resize', function () {
                         drawCharts(data_for_chart);
+                        // drawCharts(data_for_chart2);
                     });
                 });
             });

@@ -421,6 +421,7 @@ class OperationController extends Controller
             return [
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
+                'response_view2' => $viewprint,
                'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
