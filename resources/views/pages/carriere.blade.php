@@ -49,12 +49,16 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone">{{ trans('Recrutement_op') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                    <a class="card-link" data-toggle="collapse"  href="#menuone" aria-expanded="true" aria-controls="menuone"> {{ trans('Recrutement_op') }} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
                                 </div>
                                 <div id="menuone" class="collapse show">
                                     <div class="card-body">
-                                    <p>{{ trans('carriere5') }}{{ trans('carriere06') }} <a href="#">{{ trans('carriere07') }}</a>{{ trans('carriere08') }} </p>
-                                    <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
+                                    <p>{{ trans('carriere5') }} {{ trans('carriere06') }} <a href="#"> {{ trans('carriere07') }} </a> {{ trans('carriere08') }} </p>
+                                    <a href="#"> <img src="https://www.freepnglogos.com/images/app-store-png-logo-33115.html" alt=""></a>
+                                    <a href="#" title="Image from freepnglogos.com"><img src="https://www.freepnglogos.com/uploads/app-store-logo-png/google-play-and-apple-app-store-logos-22.png" width="200" alt="google play and apple app store logos" /></a>
+                                    {{-- 
+                                        
+                                         <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="custom-file col-12">
@@ -64,10 +68,12 @@
                                                 <label class="custom-file-label" style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileOp"> </label>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" id="btn-btn" class="btn-info float-right">Envoyer</button>
+                                                <button type="submit" id="btn-btn" class="btn-info float-right">{{ trans('envoyer') }}</button>
                                             </div>
                                         </div>
                                     </form>
+                                        --}}
+                                   
                                 </div>
                             </div>
                         </div>
@@ -78,7 +84,7 @@
                             </div>
                             <div id="menutwo" class="collapse">
                                 <div class="card-body">
-                                    <p>{{ trans('Offree') }}{{ trans('carriere06') }} <a href="#">{{ trans('carriere07') }}</a>{{ trans('carriere08') }}
+                                    <p>{{ trans('Offree') }}
                                     </p>
                                     <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -89,7 +95,7 @@
                                                 <label class="custom-file-label"  style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileIntern"> </label>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" id="btn-btn" class="btn-info float-right">Envoyer</button>
+                                                <button type="submit" id="btn-btn" class="btn-info float-right">{{ trans('envoyer') }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -101,7 +107,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <a class="card-link" data-toggle="collapse"  href="#menu3" aria-expanded="false" aria-controls="menu3">{{ trans('Offre d’emploi') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                <a class="card-link" data-toggle="collapse"  href="#menu3" aria-expanded="false" aria-controls="menu3">{{ trans('Offre emploi') }}<span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
                             </div>
                             <div id="menu3" class="collapse">
                                 <div class="card-body">
@@ -115,7 +121,7 @@
                                                 <label class="custom-file-label" style="margin-left: 18px;padding-right: 4.75rem;margin-right:15px;" for="customFileJob"> </label>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" id="btn-btn" class="btn-info float-right">Envoyer</button>
+                                                <button type="submit" id="btn-btn" class="btn-info float-right">{{ trans('envoyer') }}</button>
                                             </div>
                                         </div>
                                     </form>
