@@ -144,7 +144,7 @@
                         {!! $view !!}
                     </div>
 
-                        <div id="print" style="display: none;">
+                        <div id="print" >
                             <div class="box-body row" id="responsesprint">
                                 {!! $viewprint !!}
                                </div>
