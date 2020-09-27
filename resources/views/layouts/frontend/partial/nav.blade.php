@@ -27,7 +27,7 @@
                                         <i class="icon-globe" style="font-size:16px"; color:rgb(255, 255, 255)"></i>&nbspEN
                                 @endif
                             </button>
-                            <div class="dropdown-menu drop" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu drop" aria-labelledby="dropdownMenuButton" style="font-size: 13px; ">
                                 <a class="dropdown-item" href="{{asset('/localization/fr')}}">FR</a>
                                 <a class="dropdown-item " href="{{asset('/localization/en')}}">EN</a>
                             </div>
@@ -58,7 +58,7 @@
                 </li>
             @else
                 <li class="nav-item cta">
-                    <a href="{{ route('login') }}" class="nav-link"><span>Connexion</span></a>
+                    <a href="{{ route('login') }}" class="nav-link"><span>{{ trans('Connexion')}}</span></a>
                 </li>
             @endif
 
