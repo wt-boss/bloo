@@ -111,7 +111,7 @@
                                 </a>
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option selected>...</option>
-                                 <option   value="1">Pays</option>
+                                 <option value="1">Pays</option>
                                  <option value="2">Sites</option>
                                  <option value="3">Opérateurs</option>
                             </select>
@@ -127,6 +127,8 @@
                             </select>
                         </ul>
                         <span class="pull-right">
+
+
                             {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
@@ -525,7 +527,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     pdf.text('Página ' + i + '/' + totalPages,  260, 210);
                     pdf.text('Imprima : '+jour+"/"+mois+"/"+annee ,05, 210);
                     @endif
-                    pdf.addImage(imgData, "PNG",  260, 0);
+                    pdf.addImage(imgData, "PNG",  258, 05);
                     pdf.text('{{$operation->nom}}',05,12);
                 }
             }).save();
@@ -534,6 +536,9 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         };
 
         document.getElementById('download_pdf').onclick = function () {
+            // Simple Slide
+
+
             var impresion =  document.getElementById('print');
             impresion.style.display = 'block';
 

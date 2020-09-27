@@ -573,17 +573,10 @@
     "form_submitted_reponse": "Your response has been sent",
     "send_another_response": "send another reply",
     "create_my_own_form" : "Create my own form",
-<<<<<<< HEAD
-    "Out_free" : "EXIT THE FREE FORM"
-
-
-=======
+    "Out_free" : "EXIT THE FREE FORM",
     "Langue": "Language",
     "Connexion":"Login",
     " bloo live": "bloo live",
     "quitter": "Exit"
-   
-     
-    
->>>>>>> f2a567cdb6879a4b81a63944cf47513923e1f43a
+
 }
