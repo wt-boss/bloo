@@ -7,6 +7,7 @@ use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\State;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -724,9 +725,11 @@ class OperationController extends Controller
         $sites = $operation->sites()->get()->GroupBy('ville');
         foreach ($sites as $site => $value)
         {
-            $Villes->push($site);
+
         }
         return response()->json($Villes);
     }
+
+
 
 }
