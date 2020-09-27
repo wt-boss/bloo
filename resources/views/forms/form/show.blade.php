@@ -35,7 +35,7 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         @php $symbol = $form::getStatusSymbols()[$form->status]; @endphp
-    <h5 class="panel-title">{{ $form->title }} <a  href="{{ route('forms.edit', $form->code) }}" style="color:#0065a1; margin-left:0px; " class="position-right legitRipple" title="{{ trans('Edit Form') }}"><i class="fa fa-pen"></i></a> <span style="background-color: #0065A1; border-color: #0065A1;" class="label bg-{{ $symbol['color'] }} position-left">{{ trans($symbol['label']) }}</span></h5>
+    <h5 class="panel-title">{{ $form->title }} <a  href="{{ route('forms.edit', $form->code) }}" style="color:#0065a1; margin-left:0px; " class="position-right legitRipple" title="{{ trans('Edit Form') }}"> <button style="font-size:15px; background-color: #fff; border-color: #0065A1;border-top-width: 0px;border-top-style: solid;border-bottom-width: 0px;border-bottom-style: solid;border-right-width: 0px;border-right-style: solid;border-left-width: 0px;border-left-style: solid;"<i class="fa fa-pen" style="font-size:12px"></i></button></a> <span style="background-color: #0065A1; border-color: #0065A1;" class="label bg-{{ $symbol['color'] }} position-left">{{ trans($symbol['label']) }}</span></h5>
         <div class="heading-elements">
             <div class="btn-group heading-btn">
                 @if(!auth()->user()->hasRole('Free'))

@@ -68,7 +68,7 @@
     "service_section2_title": "Customer perception insights, instantly. ",
     "service_sectio11_content": "To manage your brand health and reputation effectively, you need the tracking and monitoring to know how it's perceived. To create better customer experiences, you need to know how customers feel. And to gain the edge on your competition, you need to know how your company stacks up. ",
     "service_sectio11_content1": "With Bloo MarketVue, you can have all this information about your market at your fingertips, visualize multiple cross-data, and compare how it has changed from one period to another. ",
-    "service_sectio11_content2": "This is the monthly weather forecast for your market. Based on an ongoing survey of thousands of consumers in your target market and covering all major competitors, Bloo MarketVue reports represent a reliable and user-friendly window into how customers and consumers perceive brands and businesses in your industry, and evaluate their experiences with them.",
+    "service_sectio11_content2": "Based on an ongoing survey of thousands of consumers in your target market and covering all major competitors, Bloo MarketVue reports represent a reliable and user-friendly window into how customers and consumers perceive brands and businesses in your industry, and evaluate their experiences with them.",
     "service_sectio11_content3": "With a simple and ergonomic tool, save time reading long and tedious reports, and take the temperature of your industry in a second. All the details are put together and put together to provide an instant and efficient interpretation of the aggregated data.",
 
 
@@ -345,8 +345,9 @@
     "carriere07":" Bloo Survey ",
     "carriere08":" on your mobile phone.",
     "Offres de stages":"Internship opportunities",
-    "Offree":"Do you want to apply your knowledge or develop your professional skills with us? Then send us your application and your CV in one document",
-    "Offre d’emploi ":"Job opportunities",
+    "Offree":"Do you want to apply your knowledge or develop your professional skills with us? Then send us your application and your CV in one document.",
+    "Offremploi": "Job opportunities",
+    "Offre emploi": "Job opportunities",
     "carriere6":"You are a professional with skills to share with us, your profile is likely to interest us. Send your files in a single document.",
     "privacy_title" : "Privacy policy",
 
@@ -382,7 +383,7 @@
     "op_name" : " Operation",
     "start_date" : "Start date",
     "end_date" : "End date",
-    "enterprise" : "Enterprise",
+    "enterprise": "Company",
     "city" : "City",
     "sites" : "Zones",
     "Close" : "Close",
@@ -421,7 +422,7 @@
     "Website" : "Website",
     "Your Name" : "Your Name",
     "Your EMail" : "Your Email",
-    "Subject" : "Subjet",
+    "Subject" : "Subject",
     "Message" : "Message",
     "add_lecteurs1" : "Add readers",
     "Localisation" : "Localisation",
@@ -502,10 +503,10 @@
     "num_contribu":"Taxpayer ID",
      "Précedent":"Previous",
      "paye_to_paypal":"Pay with PayPal",
-      "confim_pass_word":"Confirm password :",
-     "pass_word":"Password :",
-    "adress_user":"User Email Address:",
-     "adress_entreprise1":"Company Email Address:",
+      "confim_pass_word":"Confirm password:",
+     "pass_word":"Password:",
+    "adress_user":"User email address:",
+     "adress_entreprise1":"Company email address:",
      "message_valid":" This field cannot be empty (Minimum 3 characters).",
      "name_user":"Username",
      "telephone_entreprise":"Company phone",
@@ -516,7 +517,7 @@
      "num_sirect":"Company registration number",
       "num_contribuable_valid":"This field cannot be empty.",
      "num_contribuable":"Company taxpayer ID:",
-     "adress_entreprise":"Company address:",
+     "adress_entreprise": "Company  address:",
      "adress_entreprise_valid":"This field cannot be empty.",
      "infoclient":"CUSTOMER INFORMATION AND PAYMENT",
      "choise_entreprise":"Are you a business or an individual?",
@@ -571,5 +572,13 @@
     "Chargement des données" : "Data loadind",
     "form_submitted_reponse": "Your response has been sent",
     "send_another_response": "send another reply",
-    "create_my_own_form" : "Create my own form"
+    "create_my_own_form" : "Create my own form",
+    "Out_free" : "EXIT THE FREE FORM",
+    "Langue": "Language",
+    "Connexion":"Login",
+    "bloo live": "bloo live",
+    "quitter": "Exit"
+
+
+
 }
