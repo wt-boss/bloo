@@ -24,6 +24,7 @@ class ResponseController extends Controller
 
 
         $valid_request_queries = ['summary', 'individual'];
+
         $query = strtolower(request()->query('type', 'summary'));
 
         abort_if(!in_array($query, $valid_request_queries), 404);

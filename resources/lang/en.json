@@ -374,7 +374,7 @@
     "rating_of" : " ",
     "between" : "between",
     "and" : "and",
-    "more_info" : "more details in individual responses",
+    "more_info" : "for more details download the pdf",
     "edit_op" : "Edit operation",
     "view_form" : "View form",
     "edit_form" : "Edit form",
@@ -579,7 +579,5 @@
     " bloo live": "bloo live",
     "quitter": "Exit",
      "adress_entreprise_vali":"This field cannot be empty."
-
-
 
 }
