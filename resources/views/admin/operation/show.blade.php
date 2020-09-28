@@ -110,7 +110,7 @@
                                     {{ trans('sort_by') }}
                                 </a>
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
-                                 <option selected>...</option>
+                                 <option selected value="0">...</option>
                                  <option value="1">Pays</option>
                                  <option value="2">Sites</option>
                                  <option value="3">Opérateurs</option>
@@ -133,18 +133,24 @@
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
+                            <a id="download_country_pdf" style="display: none" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
+                             </a>
+                            <a id="download_site_pdf" style="display: none" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
+                             </a>
+                            <a id="download_ville_pdf" style="display: none" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
+                             </a>
                             {{-- <a href="{{ route('forms.response.export', $form->code) }}">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a> --}}
                         </span>
                     </div>
 
-
                     <div class="box-body row" id="responses">
                         {!! $view !!}
                     </div>
-
-
 
                     <!-- /.box-body -->
                 </div>
@@ -263,12 +269,12 @@
         </div>
     </div>
 </div>
-
-<div id="print" style="display: none" >
-    <div class="box-body row" id="responsesprint">
+<div id="print" style="display: none"  >
+    <div class="box-body row" id="responsesprint" >
         {!! $viewprint !!}
     </div>
 </div>
+
 
     <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -487,6 +493,7 @@
             var element = document.getElementById('responsesprint');
             var opt = {
                 margin:      [20, 20, 20, 20] ,
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
                 enableLinks: true,
                 filename:     '{{$operation->nom}}.pdf',
                 image:        { type: 'jpeg', quality: .95 },
@@ -577,21 +584,19 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         google.charts.load('current', {'packages':['corechart']});
 
         let data_for_chart = {!! json_encode($data_for_chart) !!};
-
         if (typeof data_for_chart === 'object' && data_for_chart instanceof Array && data_for_chart.length) {
             google.charts.setOnLoadCallback(function () {
-                drawCharts(data_for_chart);
+                 drawCharts(data_for_chart);
             });
         }
 
-        // let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
 
-        // if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
-        //     google.charts.setOnLoadCallback(function () {
-        //         drawCharts(data_for_chart2);
-        //     });
-        // }
-
+        let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
+        if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
+            google.charts.setOnLoadCallback(function () {
+                drawCharts(data_for_chart2);
+             });
+        }
 
 
         $(function () {
@@ -641,6 +646,66 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         $('#countries').on('change', function(e){
             console.log(e);
             var sortoption  = e.target.value;
+
+            if(sortoption == 0)
+            {
+                $.get('/operation/'+'{{$operation->id}}',function(response) {
+                    console.log(response);
+
+                    var element1 = document.getElementById('select1');
+                    var element2 = document.getElementById('select2');
+                    var element3 = document.getElementById('select3');
+                    element1.style.display = "none";
+                    element2.style.display = "none";
+                    element3.style.display = "none";
+
+                    var button1 = document.getElementById('download_pdf');
+                    var button2 = document.getElementById('download_country_pdf');
+                    var button3 = document.getElementById('download_site_pdf');
+                    var button4 = document.getElementById('download_ville_pdf');
+
+                    button1.style.display = "initial";
+                    button2.style.display = "none";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+
+
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
+
+
+                    // data_for_chart2 = JSON.parse(response.data_for_chart2);
+                    //
+                    // drawCharts(data_for_chart2);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+
+                    document.getElementById('download_country_pdf').onclick = function () {
+                        var impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
+
+                });
+
+            }
             if(sortoption == 1)
             {
                 $.get('/jsonmapcountries2',function(data) {
@@ -651,7 +716,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     var element3 = document.getElementById('select3');
                     element1.style.display = "initial";
                     element2.style.display = "none";
-                    element2.style.display = "none";
+                    element3.style.display = "none";
                     $('#select1').append('<option value="Selectionnez un pays">@lang('Select a country')</option>');
                     $.each(data, function(index, countriesObj){
                         $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
@@ -696,34 +761,33 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
             }
         });
 
+
         $('#select1').on('change', function(e){
             var pays_id = e.target.value;
             {
                 $.get('/operation/'+'{{$operation->id}}'+'/'+ pays_id,function(response) {
                     console.log(response);
+
+                    var button1 = document.getElementById('download_pdf');
+                    var button2 = document.getElementById('download_country_pdf');
+                    button1.style.display = "none";
+                    button2.style.display = "initial";
+
                     $('#responses').empty()
                         .append(response.response_view);
 
-                    $('#responsesprint').empty()
-                        .append(response.response_view2);
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
                     drawCharts(data_for_chart);
 
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
 
-                    data_for_chart2 = JSON.parse(response.$data_for_chart2);
 
-                    drawCharts(data_for_chart2);
-
-                    {{--let data_for_chart2 = {!! json_encode($data_for_chart2) !!};--}}
-
-                    {{--if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {--}}
-                    {{--    google.charts.setOnLoadCallback(function () {--}}
-                    {{--        drawCharts(data_for_chart2);--}}
-                    {{--        printpdf();--}}
-                    {{--    });--}}
-                    {{--}--}}
+                    // data_for_chart2 = JSON.parse(response.data_for_chart2);
+                    //
+                    // drawCharts(data_for_chart2);
 
                     $(function () {
                         // Resize chart on sidebar width change and window resize
@@ -731,6 +795,17 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                             drawCharts(data_for_chart);
                         });
                     });
+
+                    document.getElementById('download_country_pdf').onclick = function () {
+                        var impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
+
                 });
             }
         });
@@ -741,13 +816,20 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
                     console.log(response);
 
+                    var button1 = document.getElementById('download_pdf');
+                    var button2 = document.getElementById('download_site_pdf');
+                    button1.style.display = "none";
+                    button2.style.display = "initial";
+
                     $('#responses').empty()
                         .append(response.response_view);
-
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
                     drawCharts(data_for_chart);
+
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
 
                     $(function () {
                         // Resize chart on sidebar width change and window resize
@@ -755,6 +837,16 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                             drawCharts(data_for_chart);
                         });
                     });
+
+                    document.getElementById('download_site_pdf').onclick = function () {
+                        var impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
                 });
             }
         });
@@ -765,6 +857,11 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
 
                 $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
                     console.log(response);
+                    var button1 = document.getElementById('download_pdf');
+                    var button2 = document.getElementById('download_ville_pdf');
+                    button1.style.display = "none";
+                    button2.style.display = "initial";
+
                     $('#responses').empty()
                         .append(response.response_view);
 
@@ -772,12 +869,25 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
 
                     drawCharts(data_for_chart);
 
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
+
                     $(function () {
                         // Resize chart on sidebar width change and window resize
                         $(window).on('resize', function () {
                             drawCharts(data_for_chart);
                         });
                     });
+
+                    document.getElementById('download_ville_pdf').onclick = function () {
+                        var impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
                 });
             }
         });

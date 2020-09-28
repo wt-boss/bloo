@@ -3,6 +3,7 @@
     $fields = $form->fields;
     $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();
 @endphp
+<p><center><h1> @lang('try_pays') {{trans($pays->name)}} </h1></center></p>
 @foreach ($fields as $field)
     @php
         $responses = $field->responses->where('country_id',$paysid);
@@ -19,6 +20,10 @@
             <div class="table-responsive">
                 <table class="table table-striped-info table-xxs table-framed-info">
                     @foreach ($responses as $response)
+                        @if ($loop->index === 5)
+                            {{--                                <tr><strong>{{ trans('more_info') }}</strong></tr>--}}
+                            @break
+                        @endif
                         <tr>
                             @php $answer = $response->getAnswerForTemplate($field->template); @endphp
                             <td>{!! $answer !!}</td>
@@ -38,5 +43,6 @@
     </div>
     @if (!$loop->last)
         <div class="html2pdf__page-break"></div>
+        <p style="font-size:0.25mm" >test</p>
     @endif
 @endforeach

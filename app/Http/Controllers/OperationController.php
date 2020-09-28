@@ -396,6 +396,7 @@ class OperationController extends Controller
             $responses = $form->responses()->has('fieldResponses')->with('fieldResponses.formField')->paginate(1, ['*'], 'response');
         }
 
+
         $data_for_chart = [];
         $fields = $form->fields;
         foreach ($fields as $field) {
@@ -405,17 +406,19 @@ class OperationController extends Controller
             }
         }
 
-       $data_for_chart2 = [];
-       $fields = $form->fields;
-       foreach ($fields as $field) {
-           $response_for_chart = $field->getResponseSummaryDataForChart2();
-           if (!empty($response_for_chart)) {
-               $data_for_chart2[] = $response_for_chart;
-           }
-       }
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChart2();
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
 
-        $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'query', 'responses'));
-        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form', 'query', 'responses'));
+        $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'responses'));
+        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form','responses'));
+
+
 
         if ($request->ajax()) {
             return [
@@ -630,6 +633,8 @@ class OperationController extends Controller
         $responses = [];
         $form->load('fields.responses', 'collaborationUsers', 'availability');
 
+        $pays = Country::findOrFail($paysid);
+
         $data_for_chart = [];
         $fields = $form->fields;
         foreach ($fields as $field) {
@@ -648,8 +653,11 @@ class OperationController extends Controller
             }
         }
 
+
+
+
         $view = (string)View::make('admin.operation.partials.responsescountry', compact('operation', 'form', 'responses','paysid'));
-        $viewprint = (string)View::make('admin.operation.partials.responsescountryprint', compact('operation', 'form','responses','paysid'));
+        $viewprint = (string)View::make('admin.operation.partials.responsescountryprint', compact('operation', 'form','responses','paysid','pays'));
 
         return [
             'response_view' => $view,
@@ -672,6 +680,8 @@ class OperationController extends Controller
 
         $form = $operation->form;
 
+        $site = Site::findOrFail($siteid);
+
         $responses = [];
         $form->load('fields.responses', 'collaborationUsers', 'availability');
 
@@ -683,12 +693,27 @@ class OperationController extends Controller
                 $data_for_chart[] = $response_for_chart;
             }
         }
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartSite2($siteid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
+
         $view = (string)View::make('admin.operation.partials.responsesite', compact('operation', 'form', 'responses','siteid'));
+        $viewprint = (string)View::make('admin.operation.partials.responsesiteprint', compact('operation', 'form', 'responses','siteid','site'));
+
         return [
             'response_view' => $view,
-            'data_for_chart' => json_encode($data_for_chart)
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
         ];
     }
+
 
     public function TryVilles($id, $ville)
     {
@@ -710,10 +735,24 @@ class OperationController extends Controller
 
         }
 
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartVille2($ville);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+
+        }
+
         $view = (string)View::make('admin.operation.partials.responseville', compact('operation', 'form', 'responses','ville'));
+        $viewprint = (string)View::make('admin.operation.partials.responsevilleprint', compact('operation', 'form', 'responses','ville'));
+
         return [
             'response_view' => $view,
-            'data_for_chart' => json_encode($data_for_chart)
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
         ];
     }
 
@@ -738,7 +777,7 @@ class OperationController extends Controller
         $sites = $operation->sites()->get()->GroupBy('ville');
         foreach ($sites as $site => $value)
         {
-
+            $Villes->push($site);
         }
         return response()->json($Villes);
     }

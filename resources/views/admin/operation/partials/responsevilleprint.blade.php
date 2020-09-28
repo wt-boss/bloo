@@ -3,6 +3,8 @@
     $fields = $form->fields;
     $template_alias_no_options = get_form_templates()->where('attribute_type', 'string')->pluck('alias')->all();
 @endphp
+<p><center><h1>@lang('try_ville') {{trans($ville)}} </h1></center></p>
+
 @foreach ($fields as $field)
     @php
         $responses = $field->responses->where('ville',$ville);
@@ -27,7 +29,7 @@
                 </table>
             </div>
         @else
-            @php $response_for_chart = $field->getResponseSummaryDataForChartVille($ville); @endphp
+            @php $response_for_chart = $field->getResponseSummaryDataForChartVille2($ville); @endphp
             @if (!empty($response_for_chart))
                 @php $data_for_chart[] = $response_for_chart; @endphp
                 <div class="col-6 chart-container{{ ($response_for_chart['chart'] == 'pie_chart') ? ' text-center' : '' }}">
@@ -37,7 +39,6 @@
         @endif
     </div>
     @if (!$loop->last)
-        <hr>
         <div class="html2pdf__page-break"></div>
         <p style="font-size:0.25mm" >test</p>
     @endif
