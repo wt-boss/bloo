@@ -398,7 +398,6 @@ class OperationController extends Controller
 
         $data_for_chart = [];
         $fields = $form->fields;
-
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart();
             if (!empty($response_for_chart)) {
@@ -639,10 +638,24 @@ class OperationController extends Controller
                 $data_for_chart[] = $response_for_chart;
             }
         }
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartPays2($paysid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
+
         $view = (string)View::make('admin.operation.partials.responsescountry', compact('operation', 'form', 'responses','paysid'));
+        $viewprint = (string)View::make('admin.operation.partials.responsescountryprint', compact('operation', 'form','responses','paysid'));
+
         return [
             'response_view' => $view,
-            'data_for_chart' => json_encode($data_for_chart)
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
         ];
     }
 

@@ -144,11 +144,7 @@
                         {!! $view !!}
                     </div>
 
-                        <div id="print" >
-                            <div class="box-body row" id="responsesprint">
-                                {!! $viewprint !!}
-                               </div>
-                        </div>
+
 
                     <!-- /.box-body -->
                 </div>
@@ -265,6 +261,12 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div id="print" style="display: none" >
+    <div class="box-body row" id="responsesprint">
+        {!! $viewprint !!}
     </div>
 </div>
 
@@ -471,6 +473,8 @@
         });
     </script>
     <script type="text/javascript">
+
+
         let printpdf = () => {
             var now = new Date();
             var annee   = now.getFullYear();
@@ -531,26 +535,26 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     pdf.text('{{$operation->nom}}',05,12);
                 }
             }).save();
-
-            impresion.style.display = 'none';
         };
+        function reload(){
+            window.location.reload();
+        }
 
         document.getElementById('download_pdf').onclick = function () {
             // Simple Slide
 
-
             var impresion =  document.getElementById('print');
             impresion.style.display = 'block';
-
+            impresion.style.visibility = 'hidden';
             let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
 
             if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {
                 google.charts.setOnLoadCallback(function () {
                     drawCharts(data_for_chart2);
                     printpdf();
+                    setInterval(reload, 3000)
                 });
             }
-
 
         };
     </script>
@@ -700,9 +704,26 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     $('#responses').empty()
                         .append(response.response_view);
 
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
+
                     data_for_chart = JSON.parse(response.data_for_chart);
 
                     drawCharts(data_for_chart);
+
+
+                    data_for_chart2 = JSON.parse(response.$data_for_chart2);
+
+                    drawCharts(data_for_chart2);
+
+                    {{--let data_for_chart2 = {!! json_encode($data_for_chart2) !!};--}}
+
+                    {{--if (typeof data_for_chart2 === 'object' && data_for_chart2 instanceof Array && data_for_chart2.length) {--}}
+                    {{--    google.charts.setOnLoadCallback(function () {--}}
+                    {{--        drawCharts(data_for_chart2);--}}
+                    {{--        printpdf();--}}
+                    {{--    });--}}
+                    {{--}--}}
 
                     $(function () {
                         // Resize chart on sidebar width change and window resize
@@ -722,6 +743,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
 
                     $('#responses').empty()
                         .append(response.response_view);
+
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
