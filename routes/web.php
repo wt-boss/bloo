@@ -280,3 +280,5 @@ Route::get('/operationsites/{id}','OperationController@getSites')->name('getsite
 
 /** Route pour avoir les villes d'une operations */
 Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvilles');
+
+

@@ -7,6 +7,7 @@ use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\State;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -397,7 +398,6 @@ class OperationController extends Controller
 
         $data_for_chart = [];
         $fields = $form->fields;
-
         foreach ($fields as $field) {
             $response_for_chart = $field->getResponseSummaryDataForChart();
             if (!empty($response_for_chart)) {
@@ -405,26 +405,27 @@ class OperationController extends Controller
             }
         }
 
-//        $data_for_chart2 = [];
-//        $fields = $form->fields;
-//        foreach ($fields as $field) {
-//            $response_for_chart = $field->getResponseSummaryDataForChart2();
-//            if (!empty($response_for_chart)) {
-//                $data_for_chart2[] = $response_for_chart;
-//            }
-//        }
+       $data_for_chart2 = [];
+       $fields = $form->fields;
+       foreach ($fields as $field) {
+           $response_for_chart = $field->getResponseSummaryDataForChart2();
+           if (!empty($response_for_chart)) {
+               $data_for_chart2[] = $response_for_chart;
+           }
+       }
 
         $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'query', 'responses'));
-//        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form', 'query', 'responses'));
+        $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form', 'query', 'responses'));
 
         if ($request->ajax()) {
             return [
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
-//                'data_for_chart2' => json_encode($data_for_chart2)
+                'response_view2' => $viewprint,
+               'data_for_chart2' => json_encode($data_for_chart2)
             ];
         } else {
-            return view('admin.operation.show', compact('view', 'operation', 'form', 'query', 'responses', 'data_for_chart','Villes'));
+            return view('admin.operation.show', compact('view','viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart','data_for_chart2','Villes'));
         }
     }
 
@@ -637,10 +638,24 @@ class OperationController extends Controller
                 $data_for_chart[] = $response_for_chart;
             }
         }
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartPays2($paysid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+        }
+
         $view = (string)View::make('admin.operation.partials.responsescountry', compact('operation', 'form', 'responses','paysid'));
+        $viewprint = (string)View::make('admin.operation.partials.responsescountryprint', compact('operation', 'form','responses','paysid'));
+
         return [
             'response_view' => $view,
-            'data_for_chart' => json_encode($data_for_chart)
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
         ];
     }
 
@@ -723,9 +738,11 @@ class OperationController extends Controller
         $sites = $operation->sites()->get()->GroupBy('ville');
         foreach ($sites as $site => $value)
         {
-            $Villes->push($site);
+
         }
         return response()->json($Villes);
     }
+
+
 
 }

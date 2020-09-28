@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\Operation;
 use App\Piece;
+use App\Site;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => 'pieces']);
         $this->guard = "api";
     }
 
@@ -55,5 +57,22 @@ class UsersController extends Controller
         }
 
         return response()->json($result,200);
+    }
+
+    public function cityoperation($id)
+    {
+        $Villes = collect();
+        $user = User::findOrFail($id);
+        $country = Country::findOrFail($user->country_id);
+        $sites = Site::where('country_id',$country->id)->get()->GroupBy('ville');
+        foreach ($sites as $site => $value)
+        {
+            $operation = Operation::findOrFail($value[0]->operation_id);
+            if($operation->status == "CREER")
+            {
+                $Villes->push($site);
+            }
+        }
+        return response()->json($Villes,200);
     }
 }
