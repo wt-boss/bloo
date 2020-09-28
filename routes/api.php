@@ -27,10 +27,12 @@ Route::middleware('api')->prefix('auth')->namespace('Auth')->group(function() {
 
 Route::middleware('api')->prefix('auth')->namespace('API')->group(function() {
     Route::apiResource('operations','OperationController');
-    Route::post('pieces','UsersController@pieces');
+
     Route::post('operationsville','OperationController@searchoperation');
     Route::post('/operationsuser','UsersController@useroperation');});
 
+
+Route::post('pieces','API\UsersController@pieces');
 Route::get('/getcountries','API\LocationController@getcountries');
 Route::get('/getstates/{id}','API\LocationController@getstates');
 Route::get('/getcities/{id}','API\LocationController@getcities');
