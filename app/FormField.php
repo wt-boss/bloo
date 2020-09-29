@@ -208,7 +208,7 @@ class FormField extends Model
 
         return [
             'chart' => $use_chart,
-            'name' => str_replace('.', '-', $this->attribute),
+            'name' => str_replace('.', '_', $this->attribute),
             'data' => $data
         ];
     }
@@ -324,7 +324,7 @@ class FormField extends Model
 
         return [
             'chart' => $use_chart,
-            'name' => str_replace('.', '-', $this->attribute),
+            'name' => str_replace('.', '_', $this->attribute),
             'data' => $data
         ];
     }
@@ -439,7 +439,7 @@ class FormField extends Model
 
         return [
             'chart' => $use_chart,
-            'name' => str_replace('.', '-', $this->attribute),
+            'name' => str_replace('.', '_', $this->attribute),
             'data' => $data
         ];
     }

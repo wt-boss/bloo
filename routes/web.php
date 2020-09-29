@@ -117,7 +117,7 @@ Route::namespace('Auth')->group(function () {
 });
 
 //Dashboard Routes
-Route::get('profile', 'ProfileController@index')->name('profile.index');
+//Route::get('profile', 'ProfileController@index')->name('profile.index');
 Route::put('profile', 'ProfileController@update')->name('profile.update');
 Route::get('entreprise','OperationController@entreprise')->name('entreprise');
 Route::post('entreprise', 'OperationController@saventreprise')->name('saventreprise');
@@ -178,7 +178,7 @@ Route::get('/administration', 'HomeController@admin')->name('admin')->middleware
 Route::get('language', 'PagesController@language')->name('language');
 Route::get('localization/{locale}','LocalizationController@index');
 //Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
+//Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
 
 //paypal

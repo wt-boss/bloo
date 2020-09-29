@@ -127,7 +127,7 @@
                             <label for="particulier_email">{{ trans('adress_user') }}</label><br>
                             <input type="email" name="user_email_entreprise" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
-                                {{ trans('num_sirect_valid') }}
+                              {{ trans('num_sirect_valid') }}
                             </div>
                             {!! $errors->first('user_email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
