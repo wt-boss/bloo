@@ -634,6 +634,8 @@
     "Current password incorrect" : "Mot de passe actuelle incorrect",
     "Personal information successfully updated" : "Informations personnelles mise à jour avec succes",
     "Send" : "Envoyer",
+     "Respondent" : "Opérateur",
+     "Date Submitted": "Date de soumission",
     "Share Form": "Partager le formulaire",
     "Share via Link": "Partager via un lien",
     "Copy": "Copie ",
@@ -641,6 +643,6 @@
     "Subjects": "Sujet",
     "Messages": "Message",
     "invite": "Je vous ai invité à remplir un formulaire ",
-    "Send": "Send",
     "To": "à"
+
 }

@@ -142,9 +142,11 @@
                             <a id="download_ville_pdf" style="display: none" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-                            {{-- <a href="{{ route('forms.response.export', $form->code) }}">
+                             @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                            <a href="{{ route('forms.response.export', $form->code) }}">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
-                            </a> --}}
+                            </a>
+                            @endif
                         </span>
                     </div>
 

@@ -4,9 +4,9 @@
         @foreach ($fields as $field)
             <th>{{ $field->question }}</th>
         @endforeach
-            <th>Operateur</th>
-            <th>Site</th>
-        <th>Date Submitted</th>
+            <th>@lang('Respondent')</th>
+            <th>@lang('Site')</th>
+        <th>@lang('Date Submitted')</th>
     </tr>
     </thead>
     <tbody>
@@ -21,11 +21,26 @@
              @endforeach
                 <td>
                     @php
-                      $user = \App\User::findOrFail($response->respondent_id);
+                     if(isset($response->respondent_id))
+                       {
+                            $user = \App\User::findOrFail($response->respondent_id);
+                       }
                     @endphp
-                    {{ $user->first_name }} {{$user->last_name}}
+                      @if(isset($user))
+                     {{ $user->first_name }} {{$user->last_name}}
+                    @endif
                 </td>
-                <td>Violetta</td>
+                <td>
+                    @php
+                        if(isset($response->site_id))
+                          {
+                               $site = \App\Site::findOrFail($response->site_id);
+                          }
+                    @endphp
+                    @if(isset($site))
+                        {{ $site->nom }}
+                    @endif
+                </td>
                 <td>{{ $response->created_at->format('Y-m-d H:i:s') }}</td>
         </tr>
     @endforeach
