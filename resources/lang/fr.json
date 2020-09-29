@@ -620,9 +620,8 @@
     "Connexion": "Connexion",
     "bloo live":"bloo live",
     "Offre emploi":"Offre d’ emploi ",
-     "adress_entreprise_vali":"Ce champ ne peut être vide."
-
-
-
-
+    "try_pays": "Resultat du try dans le pays",
+    "try_site": "Resultat du try dans le site",
+    "try_ville":"Resultat du try dans la ville",
+    "adress_entreprise_vali":"Ce champ ne peut être vide."
 }
