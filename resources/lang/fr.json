@@ -623,5 +623,16 @@
     "try_pays": "Resultat du try dans le pays",
     "try_site": "Resultat du try dans le site",
     "try_ville":"Resultat du try dans la ville",
-    "adress_entreprise_vali":"Ce champ ne peut être vide."
+    "adress_entreprise_vali":"Ce champ ne peut être vide.",
+    "Payment number": "Numéro de paiement",
+    "Current Password" : "Mot de passe actuel",
+    "New Password" : "Nouveau mot de passe",
+    "Password Confirmation" : "Confirmation mot de passe",
+    "Country": "Pays",
+    "State" : "Etat",
+    "City" : "Ville",
+    "Current password incorrect" : "Mot de passe actuelle incorrect",
+    "Personal information successfully updated" : "Informations personnelles mise à jour avec succes",
+    "Send" : "Envoyer"
+
 }

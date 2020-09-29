@@ -85,14 +85,15 @@ class OperationController extends Controller
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        $countries = Country::where('name', 'Cameroon')
-            ->orwhere('name', 'Central African Republic')
-            ->orwhere('name', 'Congo')
-            ->orwhere('name', 'Gabon')
-            ->orwhere('name', 'Equatorial Guinea')
-            ->orwhere('name', 'Chad')
-            ->orwhere('name', 'Nigeria')
-            ->orwhere('name', 'Angola')
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->orwhere('name', 'The Democratic Republic Of The Congo')
             ->get();
         return view('admin.operation.entreprise', compact('entreprises', 'countries'));
     }

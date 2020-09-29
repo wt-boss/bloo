@@ -1,4 +1,5 @@
 @extends('admin.top-nav')
+
 @section('page_title', trans('Profile'))
 @section('title', 'Accueil')
 
@@ -7,148 +8,148 @@
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
-    <style>
-        /* width */
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
+{{--    <style>--}}
+{{--        /* width */--}}
+{{--        ::-webkit-scrollbar {--}}
+{{--            width: 7px;--}}
+{{--        }--}}
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+{{--        /* Track */--}}
+{{--        ::-webkit-scrollbar-track {--}}
+{{--            background: #f1f1f1;--}}
+{{--        }--}}
 
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #a7a7a7;
-        }
+{{--        /* Handle */--}}
+{{--        ::-webkit-scrollbar-thumb {--}}
+{{--            background: #a7a7a7;--}}
+{{--        }--}}
 
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #929292;
-        }
+{{--        /* Handle on hover */--}}
+{{--        ::-webkit-scrollbar-thumb:hover {--}}
+{{--            background: #929292;--}}
+{{--        }--}}
 
-        ul {
-            margin: 0;
-            padding: 0;
-        }
+{{--        ul {--}}
+{{--            margin: 0;--}}
+{{--            padding: 0;--}}
+{{--        }--}}
 
-        li {
-            list-style: none;
-        }
+{{--        li {--}}
+{{--            list-style: none;--}}
+{{--        }--}}
 
-        .user-wrapper,
-        .message-wrapper {
-            border: 1px solid #dddddd;
-            overflow-y: auto;
-        }
+{{--        .user-wrapper,--}}
+{{--        .message-wrapper {--}}
+{{--            border: 1px solid #dddddd;--}}
+{{--            overflow-y: auto;--}}
+{{--        }--}}
 
-        .user-wrapper {
-            height: 600px;
-        }
+{{--        .user-wrapper {--}}
+{{--            height: 600px;--}}
+{{--        }--}}
 
-        .user {
-            cursor: pointer;
-            padding: 5px 0;
-            position: relative;
-        }
+{{--        .user {--}}
+{{--            cursor: pointer;--}}
+{{--            padding: 5px 0;--}}
+{{--            position: relative;--}}
+{{--        }--}}
 
-        .user:hover {
-            background: #eeeeee;
-        }
+{{--        .user:hover {--}}
+{{--            background: #eeeeee;--}}
+{{--        }--}}
 
-        .user:last-child {
-            margin-bottom: 0;
-        }
+{{--        .user:last-child {--}}
+{{--            margin-bottom: 0;--}}
+{{--        }--}}
 
-        .pending {
-            position: absolute;
-            left: 13px;
-            top: 9px;
-            background: #b600ff;
-            margin: 0;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            padding-left: 5px;
-            color: #ffffff;
-            font-size: 12px;
-        }
+{{--        .pending {--}}
+{{--            position: absolute;--}}
+{{--            left: 13px;--}}
+{{--            top: 9px;--}}
+{{--            background: #b600ff;--}}
+{{--            margin: 0;--}}
+{{--            border-radius: 50%;--}}
+{{--            width: 18px;--}}
+{{--            height: 18px;--}}
+{{--            line-height: 18px;--}}
+{{--            padding-left: 5px;--}}
+{{--            color: #ffffff;--}}
+{{--            font-size: 12px;--}}
+{{--        }--}}
 
-        .media-left {
-            margin: 0 10px;
-        }
+{{--        .media-left {--}}
+{{--            margin: 0 10px;--}}
+{{--        }--}}
 
-        .media-left img {
-            width: 64px;
-            border-radius: 64px;
-        }
+{{--        .media-left img {--}}
+{{--            width: 64px;--}}
+{{--            border-radius: 64px;--}}
+{{--        }--}}
 
-        .media-body p {
-            margin: 6px 0;
-        }
+{{--        .media-body p {--}}
+{{--            margin: 6px 0;--}}
+{{--        }--}}
 
-        .message-wrapper {
-            padding: 10px;
-            height: 536px;
-            background: #eeeeee;
-        }
+{{--        .message-wrapper {--}}
+{{--            padding: 10px;--}}
+{{--            height: 536px;--}}
+{{--            background: #eeeeee;--}}
+{{--        }--}}
 
-        .messages .message {
-            margin-bottom: 15px;
-        }
+{{--        .messages .message {--}}
+{{--            margin-bottom: 15px;--}}
+{{--        }--}}
 
-        .messages .message:last-child {
-            margin-bottom: 0;
-        }
+{{--        .messages .message:last-child {--}}
+{{--            margin-bottom: 0;--}}
+{{--        }--}}
 
-        .received,
-        .sent {
-            width: 45%;
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
+{{--        .received,--}}
+{{--        .sent {--}}
+{{--            width: 45%;--}}
+{{--            padding: 3px 10px;--}}
+{{--            border-radius: 10px;--}}
+{{--        }--}}
 
-        .received {
-            background: #ffffff;
-        }
+{{--        .received {--}}
+{{--            background: #ffffff;--}}
+{{--        }--}}
 
-        .sent {
-            background: #3bebff;
-            float: right;
-            text-align: right;
-        }
+{{--        .sent {--}}
+{{--            background: #3bebff;--}}
+{{--            float: right;--}}
+{{--            text-align: right;--}}
+{{--        }--}}
 
-        .message p {
-            margin: 5px 0;
-        }
+{{--        .message p {--}}
+{{--            margin: 5px 0;--}}
+{{--        }--}}
 
-        .date {
-            color: #777777;
-            font-size: 12px;
-        }
+{{--        .date {--}}
+{{--            color: #777777;--}}
+{{--            font-size: 12px;--}}
+{{--        }--}}
 
-        .active {
-            background: #eeeeee;
-        }
+{{--        .active {--}}
+{{--            background: #eeeeee;--}}
+{{--        }--}}
 
-        input[type=text] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 15px 0 0 0;
-            display: inline-block;
-            border-radius: 4px;
-            box-sizing: border-box;
-            outline: none;
-            border: 1px solid #cccccc;
-        }
+{{--        input[type=text] {--}}
+{{--            width: 100%;--}}
+{{--            padding: 12px 20px;--}}
+{{--            margin: 15px 0 0 0;--}}
+{{--            display: inline-block;--}}
+{{--            border-radius: 4px;--}}
+{{--            box-sizing: border-box;--}}
+{{--            outline: none;--}}
+{{--            border: 1px solid #cccccc;--}}
+{{--        }--}}
 
-        input[type=text]:focus {
-            border: 1px solid #aaaaaa;
-        }
+{{--        input[type=text]:focus {--}}
+{{--            border: 1px solid #aaaaaa;--}}
+{{--        }--}}
 
-    </style>
+{{--    </style>--}}
 @endsection
 
 @section('laraform_script2')
@@ -287,6 +288,39 @@
         }
 
     </script>
+    <script type="text/javascript">
+        function affCache(idDiv) {
+            var div = document.getElementById(idDiv);
+            if (div.style.display === "none"){
+                div.style.display = "";
+            }
+        }
+        $('#country').on('change', function(e){
+            console.log(e);
+            var country_id = e.target.value;
+            affCache('div_region');
+            $.get('/json-states?country_id=' + country_id,function(data) {
+                console.log(data);
+                $('#region').empty();
+                $.each(data, function(index, stateObj){
+                    $('#region').append('<option value="'+ stateObj.id +'">'+ stateObj.name +'</option>');
+                });
+                $('#region').on('change', function(e){
+                    console.log(e);
+                    var state_id = e.target.value;
+                    affCache('div_ville');
+                    $.get('/json-cities?state_id=' + state_id,function(data) {
+                        console.log(data);
+                        $('#ville').empty();
+                        $.each(data, function(index, villeObj){
+                            $('#ville').append('<option value="'+ villeObj.id +'">'+ villeObj.name +'</option>');
+                        })
+                    });
+                });
+            });
+
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -309,7 +343,7 @@
                                     <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{auth()->user()->email}}</font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">   {{ trans('operations') }}     </font></font></b> <a class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$operations->count()}}</font></font></a>
+                                    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">   {{ trans('operations') }}     </font></font> </b> <span class="badge badge-info">{{$operations->count()}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -317,42 +351,126 @@
                     </div>
                     <!-- /.box -->
                 </div>
-                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur'))
+{{--                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur'))--}}
+{{--                <div class="col-md-6">--}}
+{{--                    <div class="container-fluid">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-4">--}}
+{{--                                <div class="user-wrapper">--}}
+{{--                                    <ul class="users">--}}
+{{--                                        @foreach($users as $user)--}}
+{{--                                            <li class="user" id="{{ $user->id }}">--}}
+{{--                                                --}}{{--will show unread count notification--}}
+{{--                                                @if($user->unread)--}}
+{{--                                                    <span class="pending">{{ $user->unread }}</span>--}}
+{{--                                                @endif--}}
+{{--                                                <div class="media">--}}
+{{--                                                    <div class="media-left">--}}
+{{--                                                        <img src="/files/avatar/{{ $user->avatar }}" alt="" class="media-object">--}}
+{{--                                                    </div>--}}
+
+{{--                                                    <div class="media-body">--}}
+{{--                                                        <p class="name">{{$user->first_name }} {{$user->last_name}}</p>--}}
+{{--                                                        <p class="email">{{ $user->email }}</p>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </li>--}}
+{{--                                        @endforeach--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            <div class="col-md-8" id="messages">--}}
+
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                @endif--}}
+
                 <div class="col-md-9">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="user-wrapper">
-                                    <ul class="users">
-                                        @foreach($users as $user)
-                                            <li class="user" id="{{ $user->id }}">
-                                                {{--will show unread count notification--}}
-                                                @if($user->unread)
-                                                    <span class="pending">{{ $user->unread }}</span>
-                                                @endif
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <img src="/files/avatar/{{ $user->avatar }}" alt="" class="media-object">
-                                                    </div>
-
-                                                    <div class="media-body">
-                                                        <p class="name">{{$user->first_name }} {{$user->last_name}}</p>
-                                                        <p class="email">{{ $user->email }}</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <form id="update-profile-form" action="{{ route('profile.update') }}" method="post">
+                                @csrf @method('PUT')
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@lang('first_name')</label>
+                                    <input type="text" class="form-control" name="first_name" value="{{  auth()->user()->first_name }}">
                                 </div>
-                            </div>
 
-                            <div class="col-md-8" id="messages">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@lang('last_name')</label>
+                                    <input type="text" class="form-control" name="last_name" value="{{  auth()->user()->last_name }}">
+                                </div>
 
-                            </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@lang('Payment number')</label>
+                                    <input type="number" class="form-control" name="phonepaiement" value="{{  auth()->user()->phonepaiement }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <input type="email" class="form-control" name="email" value="{{  auth()->user()->email }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('Current Password')</label>
+                                    <input type="password" name="current_password" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('New Password')</label>
+                                    <input type="password" name="new_password" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('Password Confirmation')</label>
+                                    <input type="password" name="password_confirmation" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('Country')</label>
+                                <select class="form-control" name="country_id" id="country" required>
+                                    @foreach($countries as $country)
+                                        <option value="{{$country->id}}">{{trans($country->name)}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+
+                                <div class="form-group">
+                                <label for="exampleInputPassword1">@lang('State')</label>
+                                <div id="div_region" style="display:none">
+                                    <select class="form-control" name="state_id" id="region" required>
+
+                                    </select>
+                                </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('City')</label>
+                                <div id="div_ville" style="display:none">
+                                    <select class="form-control" name="city_id" id="ville" required>
+
+                                    </select>
+                                </div>
+                                </div>
+
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">@lang('Avatar')</label>
+                                    <img src="{{ auth()->user()->avatar }}" style='width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;'>
+                                    <input type="file" class="form-control" name="avatar" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">@lang('Send')</button>
+                            </form>
                         </div>
+                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box -->
                 </div>
-                @endif
             </div>
         </div>
     </div>
