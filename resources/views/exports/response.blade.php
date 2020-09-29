@@ -21,7 +21,7 @@
              @endforeach
                 <td>
                     @php
-                     if(isset($response->respondent_id))
+                     if(!empty($response->respondent_id))
                        {
                             $user = \App\User::findOrFail($response->respondent_id);
                        }
@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     @php
-                        if(isset($response->site_id))
+                        if(!empty($response->site_id))
                           {
                                $site = \App\Site::findOrFail($response->site_id);
                           }
