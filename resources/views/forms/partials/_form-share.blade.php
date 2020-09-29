@@ -3,45 +3,45 @@
         <div class="modal-content">
             <div class="modal-header bg-teal">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h6 class="modal-title">Share Form</h6>
+                <h6 class="modal-title">{{ trans('Share Form') }}</h6>
             </div>
 
             <form id="share-form-via-email" method="post" action="{{ route('form.share.email', $form->code) }}" autocomplete="off">
                 @csrf
                 <div class="modal-body">
-                    <h6 class="text-semibold">Share via Link</h6>
+                    <h6 class="text-semibold">{{ trans('Share via Link') }}</h6>
                     <div class="row mb-20">
                         <div class="col-sm-12">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="form-url" value="{{ route('forms.view', $form->code) }}" readonly>
                                 <span class="input-group-btn">
-                                    <button id="copy" class="btn bg-teal btn-icon btn-xs" type="button" data-popup="tooltip-copy" title="Copy to Clipboard">Copy</button>
+                                    <button id="copy" class="btn bg-teal btn-icon btn-xs" type="button" data-popup="tooltip-copy" title="Copy to Clipboard">{{ trans('Copy') }}</button>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <h6 class="text-semibold">Share via Email</h6>
+                    <h6 class="text-semibold">{{ trans('Share via Email') }}</h6>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" name="emails" class="form-control tags-input" placeholder="To" required="required">
+                                <input type="text" name="emails" class="form-control tags-input" placeholder="{{ trans('To') }}" required="required">
                             </div>
                             <div class="form-group">
-                                <label for="email_subject" class="mb-0"><small class="text-muted">Subject</small></label>
+                                <label for="email_subject" class="mb-0"><small class="text-muted">{{ trans('Subjects') }}</small></label>
                                 <input type="text" id="email_subject" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ $form->title }}" required="required">
                             </div>
                             <div class="form-group">
-                                <label for="email_message" class="mb-0"><small class="text-muted">Message</small></label>
-                                <textarea name="email_message" id="email_message" class="form-control elastic" rows="1" required="required">I've invited you to fill in a form: </textarea>
+                                <label for="email_message" class="mb-0"><small class="text-muted">{{ trans('Messages') }}</small></label>
+                                <textarea name="email_message" id="email_message" class="form-control elastic" rows="1" required="required">{{ trans('invite') }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn bg-teal submit" data-loading-text="Sending...">Send</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">{{ trans('Cancel') }}</button>
+                    <button type="submit" class="btn bg-teal submit" data-loading-text="Sending...">{{ trans('Send') }}</button>
                 </div>
             </form>
         </div>

@@ -18,10 +18,10 @@ function drawPieChart(chart_data) {
 
     var options_pie = {
         fontName: 'Roboto',
-        height: 250,
-        width: 350,
+        height: 400,
+        width: 500,
         chartArea: {
-            left: 50,
+            left: 30,
             width: '90%',
             height: '90%'
         }
@@ -38,7 +38,7 @@ function drawColumnChart(chart_data) {
 
     var options_column = {
         fontName: 'Roboto',
-        height: 400,
+        height: 380,
         fontSize: 12,
         tooltip: {
             textStyle: {

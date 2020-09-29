@@ -203,7 +203,18 @@ class HomeController extends Controller
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
         $User = User::with('operations')->findOrFail(auth()->user()->id);
         $operations = $User->operations()->with('form','entreprise')->get();
-        return view('admin.users.profile',compact('users','operations'));
+        $countries  = Country::where('name','Cameroon')
+            ->orwhere('name','Central African Republic')
+            ->orwhere('name','Congo')
+            ->orwhere('name','Gabon')
+            ->orwhere('name','Equatorial Guinea')
+            ->orwhere('name','Chad')
+            ->orwhere('name','Nigeria')
+            ->orwhere('name','Angola')
+            ->orwhere('name', 'The Democratic Republic Of The Congo')
+            ->get();
+        $current_user = Auth::user();
+        return view('admin.users.profile',compact('users','operations','countries'));
     }
 
     /**
@@ -289,8 +300,6 @@ class HomeController extends Controller
             ->get()->pluck('name','id');
         return response()->json($cities);
     }
-
-
 
     public function jsonmapcountries(){
         $states  = Country::where('id','38')
