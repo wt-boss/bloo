@@ -642,5 +642,7 @@
      "Messages": "Message",
      "invite": "Je vous ai invité à remplir un formulaire ",
      "Send": "Send",
-     "To": "à"
+     "To": "à",
+     "Respondent" : "Opérateur",
+     "Date Submitted": "Date de soumission"
 }
