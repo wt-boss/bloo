@@ -622,5 +622,6 @@
     "Offre emploi":"Offre d’ emploi ",
     "try_pays": "Resultat du try dans le pays",
     "try_site": "Resultat du try dans le site",
-    "try_ville":"Resultat du try dans la ville"
+    "try_ville":"Resultat du try dans la ville",
+    "adress_entreprise_vali":"Ce champ ne peut être vide."
 }

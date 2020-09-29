@@ -12,9 +12,9 @@
         $responses_count = $responses->where('answer', '!==', null)->count();
     @endphp
     <div class="col-md-12">
-        <label class="label-xlg">{{ $field->question }}
+        <h4>Question : {{ $field->question }}
             @if ($field->required) <span class="text-danger">*</span> @endif
-        </label>
+        </h4>
         <p>{{ $responses_count }} {{ Str::plural(trans('response'), $responses_count) }}</p>
 
         @if (in_array($field->template, $template_alias_no_options))
