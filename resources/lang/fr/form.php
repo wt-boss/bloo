@@ -346,7 +346,7 @@ $linear_scale_sub_template = <<<SUB_TEMPLATE
 		</div>
 		<div class="panel-footer panel-footer-bordered">
 			<div class="heading-elements">
-				<span class="heading-text text-semibold">Question de type echele</span>
+				<span class="heading-text text-semibold">Question de type échelle</span>
 				<div class="pull-right">
 					<div class="heading-form">
 						<div class="form-group">
@@ -367,7 +367,7 @@ $linear_scale_main_template = <<<MAIN_TEMPLATE
 	<div class="row template linear-scale">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="" class="label-xlg field-label"><span class="question">Question de type echele</span></label>
+				<label for="" class="label-xlg field-label"><span class="question">Question de type échelle</span></label>
 				<div class="options scale">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2">
