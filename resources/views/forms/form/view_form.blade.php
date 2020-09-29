@@ -48,10 +48,9 @@ $fields = $form->fields()->filled()->get();
                                 @endforeach
                             @endif
                         </div>
-                            <input type="hidden" name="site_id" value="<?= isset($_GET['site_id'])?$_GET['site_id']:""; ?>">
+                            <input type="hidden" name="site_id" value="<?= isset($_GET['site'])?$_GET['site']:""; ?>">
                             <input type="hidden" name="country_id" value="<?= isset($_GET['country_id'])?$_GET['country_id']:""; ?>">
                             <input type="hidden" name="ville" value="<?= isset($_GET['ville'])?$_GET['ville']:""; ?>">
-
                         <div class="text-left mt-20">
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>
