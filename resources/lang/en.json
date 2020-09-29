@@ -581,6 +581,16 @@
     "try_pays": "Result of the try in the country",
     "try_site": "Result of the try in the site",
     "try_ville":"Result of the try in the city",
-    "adress_entreprise_vali":"This field cannot be empty."
+     "adress_entreprise_vali":"This field cannot be empty.",
+     "Share Form": "Share Form",
+     "Share via Link": "Share via Link",
+      "Copy": "Copy",
+       "Share via Email": "Share via Email",
+        "Subjects": "Subject",
+         "Messages": "Message",
+          "invite": "I've invited you to fill in a form:",
+          "Cancel": "Cancel",
+            "Send": "Send",
+              "To": "To"
 
 }

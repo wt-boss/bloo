@@ -87,7 +87,7 @@
                            <p class="op-title">{{ trans('edit_question') }}</p>
                            <div>
                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
-                               <span class="bloo-text">{{ trans('click_to_add_modif') }}r</span>
+                               <span class="bloo-text">{{ trans('click_to_add_modif') }}</span>
                             </div>
                        </div>
                        <div class="col-md-5 bloo-bloc text-center col-md-offset-1">
