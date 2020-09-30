@@ -20,7 +20,7 @@
         <div class="d-none d-sm-block col-sm-5 left-side-bloo">
             <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
             {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
-            <h1>Creez une operation</h1>
+            <h1>@lang('Edit an operation')</h1>
         </div>
         <div class="col-sm-7">
             <div class="my-content">
@@ -87,6 +87,7 @@
                            <p class="op-title">{{ trans('edit_question') }}</p>
                            <div>
                                <img class="bloo-bloc-img" src="{{ asset('assets/images/edit-form-btn.png') }}" alt="">
+                               <a href="{{route('forms.show', [$operation->form->code]) }}">
                                <span class="bloo-text">{{ trans('click_to_add_modif') }}</span>
                             </div>
                        </div>

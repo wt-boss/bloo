@@ -19,7 +19,7 @@ function drawPieChart(chart_data) {
     var options_pie = {
         fontName: 'Roboto',
         height: 400,
-        width: 500,
+        width: 400,
         chartArea: {
             left: 30,
             width: '90%',

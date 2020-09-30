@@ -397,14 +397,14 @@
         function addlecteur() {
             $('#listlecteur').on('click', function (e) {
                 //console.log(e);
-                var lecteur_id = e.target.id;
+                let lecteur_id = e.target.id;
                 console.log(lecteur_id);
             });
         }
 
         $('#getlecteur').on('click', function (e) {
             console.log(e);
-            var operation_id = e.target.title;
+            let operation_id = e.target.title;
             $.get('/listlecteurs/' + operation_id, function (data) {
                 console.log(data);
                  $('#datalecteurs').empty();
@@ -450,8 +450,8 @@
 
         $('.removelecteur').on('click', function (e) {
             console.log(e);
-            var operation_id = e.target.lang;
-            var user_id = e.target.title;
+            let operation_id = e.target.lang;
+            let user_id = e.target.title;
             $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
                 if(data && $.parseJSON('true') == true){
                     $(e.target).parents('tr').remove();
@@ -461,8 +461,8 @@
 
         $('.removeoperateur').on('click', function (e) {
             console.log(e);
-            var operation_id = e.target.lang;
-            var user_id = e.target.title;
+            let operation_id = e.target.lang;
+            let user_id = e.target.title;
             $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
                 if(data && $.parseJSON('true') == true){
                     $(e.target).parents('tr').remove();
@@ -472,7 +472,7 @@
 
         $('#getoperateur').on('click', function (e) {
             console.log(e);
-            var operation_id = e.target.title;
+            let operation_id = e.target.title;
             $.get('/listoperateurs/' + operation_id, function (data) {
                 console.log(data);
                 $('#dataoperateurs').empty();
@@ -484,16 +484,16 @@
 
 
         let printpdf = () => {
-            var now = new Date();
-            var annee   = now.getFullYear();
-            var mois    = now.getMonth() + 1;
-            var jour    = now.getDate();
-            var heure   = now.getHours();
-            var minute  = now.getMinutes();
-            var seconde = now.getSeconds();
-            var imgData = 'data:image/png;base64,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'
-            var element = document.getElementById('responsesprint');
-            var opt = {
+            let now = new Date();
+            let annee   = now.getFullYear();
+            let mois    = now.getMonth() + 1;
+            let jour    = now.getDate();
+            let heure   = now.getHours();
+            let minute  = now.getMinutes();
+            let seconde = now.getSeconds();
+            let imgData = 'data:image/png;base64,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'
+            let element = document.getElementById('responsesprint');
+            let opt = {
                 margin:      [20, 20, 20, 20] ,
                 pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
                 enableLinks: true,
@@ -504,7 +504,7 @@
             };
 
             html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
-                var totalPages = pdf.internal.getNumberOfPages();
+                let totalPages = pdf.internal.getNumberOfPages();
 
                 for (i = 1; i <= totalPages; i++) {
                     console.log('here', i);
@@ -552,7 +552,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         document.getElementById('download_pdf').onclick = function () {
             // Simple Slide
 
-            var impresion =  document.getElementById('print');
+            let impresion =  document.getElementById('print');
             impresion.style.display = 'block';
             impresion.style.visibility = 'hidden';
             let data_for_chart2 = {!! json_encode($data_for_chart2) !!};
@@ -613,10 +613,10 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('1702f90c00112df631a4', {
+        let pusher = new Pusher('1702f90c00112df631a4', {
             cluster: 'ap2'
         });
-        var channel = pusher.subscribe('responce-channel');
+        let channel = pusher.subscribe('responce-channel');
         channel.bind('my-event', function(data) {
             // alert(JSON.stringify(data));
             // location.reload(true);
@@ -647,24 +647,24 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
     <script>
         $('#countries').on('change', function(e){
             console.log(e);
-            var sortoption  = e.target.value;
+            let sortoption  = e.target.value;
 
             if(sortoption == 0)
             {
                 $.get('/operation/'+'{{$operation->id}}',function(response) {
                     console.log(response);
 
-                    var element1 = document.getElementById('select1');
-                    var element2 = document.getElementById('select2');
-                    var element3 = document.getElementById('select3');
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "none";
 
-                    var button1 = document.getElementById('download_pdf');
-                    var button2 = document.getElementById('download_country_pdf');
-                    var button3 = document.getElementById('download_site_pdf');
-                    var button4 = document.getElementById('download_ville_pdf');
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
 
                     button1.style.display = "initial";
                     button2.style.display = "none";
@@ -696,7 +696,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     });
 
                     document.getElementById('download_country_pdf').onclick = function () {
-                        var impresion =  document.getElementById('print');
+                        let impresion =  document.getElementById('print');
                         impresion.style.display = 'initial';
                         impresion.style.visibility = 'hidden';
                         data_for_chart2 = JSON.parse(response.data_for_chart2);
@@ -713,9 +713,9 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 $.get('/jsonmapcountries2',function(data) {
                     console.log(data);
                     $('#select1').empty();
-                    var element1 = document.getElementById('select1');
-                    var element2 = document.getElementById('select2');
-                    var element3 = document.getElementById('select3');
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
                     element1.style.display = "initial";
                     element2.style.display = "none";
                     element3.style.display = "none";
@@ -731,9 +731,9 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 $.get('/operationsites/'+{{$operation->id}},function(data) {
                     console.log(data);
                     $('#select2').empty();
-                    var element1 = document.getElementById('select1');
-                    var element2 = document.getElementById('select2');
-                    var element3 = document.getElementById('select3');
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
                     element1.style.display = "none";
                     element2.style.display = "initial";
                     element3.style.display = "none";
@@ -749,9 +749,9 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 $.get('/operationvilles/'+{{$operation->id}},function(data) {
                     console.log(data);
                     $('#select3').empty();
-                    var element1 = document.getElementById('select1');
-                    var element2 = document.getElementById('select2');
-                    var element3 = document.getElementById('select3');
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "initial";
@@ -765,15 +765,21 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
 
 
         $('#select1').on('change', function(e){
-            var pays_id = e.target.value;
+            let pays_id = e.target.value;
             {
                 $.get('/operation/'+'{{$operation->id}}'+'/'+ pays_id,function(response) {
                     console.log(response);
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
 
-                    var button1 = document.getElementById('download_pdf');
-                    var button2 = document.getElementById('download_country_pdf');
                     button1.style.display = "none";
                     button2.style.display = "initial";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+
+
 
                     $('#responses').empty()
                         .append(response.response_view);
@@ -799,7 +805,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     });
 
                     document.getElementById('download_country_pdf').onclick = function () {
-                        var impresion =  document.getElementById('print');
+                        let impresion =  document.getElementById('print');
                         impresion.style.display = 'initial';
                         impresion.style.visibility = 'hidden';
                         data_for_chart2 = JSON.parse(response.data_for_chart2);
@@ -813,15 +819,21 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         });
 
         $('#select2').on('change', function(e){
-            var site_id = e.target.value;
+            let site_id = e.target.value;
             {
                 $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
                     console.log(response);
 
-                    var button1 = document.getElementById('download_pdf');
-                    var button2 = document.getElementById('download_site_pdf');
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
+
                     button1.style.display = "none";
-                    button2.style.display = "initial";
+                    button2.style.display = "none";
+                    button3.style.display = "initial";
+                    button4.style.display = "none";
+
 
                     $('#responses').empty()
                         .append(response.response_view);
@@ -841,7 +853,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     });
 
                     document.getElementById('download_site_pdf').onclick = function () {
-                        var impresion =  document.getElementById('print');
+                        let impresion =  document.getElementById('print');
                         impresion.style.display = 'initial';
                         impresion.style.visibility = 'hidden';
                         data_for_chart2 = JSON.parse(response.data_for_chart2);
@@ -854,15 +866,20 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         });
 
         $('#select3').on('change', function(e){
-            var ville = e.target.value;
+            let ville = e.target.value;
             {
 
                 $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
                     console.log(response);
-                    var button1 = document.getElementById('download_pdf');
-                    var button2 = document.getElementById('download_ville_pdf');
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
+
                     button1.style.display = "none";
-                    button2.style.display = "initial";
+                    button2.style.display = "none";
+                    button3.style.display = "none";
+                    button4.style.display = "initial";
 
                     $('#responses').empty()
                         .append(response.response_view);
@@ -882,7 +899,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     });
 
                     document.getElementById('download_ville_pdf').onclick = function () {
-                        var impresion =  document.getElementById('print');
+                        let impresion =  document.getElementById('print');
                         impresion.style.display = 'initial';
                         impresion.style.visibility = 'hidden';
                         data_for_chart2 = JSON.parse(response.data_for_chart2);

@@ -28,31 +28,33 @@ class ProfileController extends Controller
     {
 
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'first_name' => 'string|max:255',
+            'last_name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . Auth::user()->id,
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:8|max:12|required_with:current_password',
-            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password',
-            'country_id' => 'required',
-            'state_id' => 'required',
-            'city_id' => 'required',
+            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
         ]);
 
 
         $user = User::findOrFail(Auth::user()->id);
+
 
         $update = [
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'password' => $request->input('new_password'),
-            'avatar' => $request->input('avatar'),
             'phonepaiement' => $request->input('phonepaiement'),
             'country_id' => $request->input('country_id'),
             'state_id' => $request->input('state_id') ,
             'city_id' => $request->input('city_id')
         ];
+
+        if (!is_null($request->all('avatar')['avatar'])) {
+            $update['avatar'] = $request->all('avatar')['avatar'];
+
+        }
 
 
         if (!is_null($request->input('current_password'))) {
@@ -62,6 +64,9 @@ class ProfileController extends Controller
                 return redirect()->back()->withErrors(trans('Current password incorrect'));
             }
         }
+        else{
+                $user->update($update);
+            }
 
         return redirect()->route('profile')->withSuccess(trans('Personal information successfully updated'));
     }

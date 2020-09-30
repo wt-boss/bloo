@@ -115,10 +115,10 @@
 
                             @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
                            <li class="<?php echo (  Str::startsWith($route, 'messages') ) ? "active" : '' ?>">
-{{--                                <a class="m-link" href="{{route('messages_index')}}" >--}}
-{{--                                    <i class="fas fa-envelope"></i>--}}
-{{--                                    <span>Messagerie</span>--}}
-{{--                                </a>--}}
+                                <a class="m-link" href="{{route('messages_index')}}" >
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Messagerie</span>
+                                </a>
                             </li>
                             @endif
                         @if (auth()->user()->hasRole('Superadmin'))

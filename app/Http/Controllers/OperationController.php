@@ -50,7 +50,7 @@ class OperationController extends Controller
         $operation = null;
 
         if ($user->role === 5) {
-            $operations = Operation::with('form', 'entreprise')->get();
+            $operations = Operation::with('form', 'entreprise')->orderBy('id','DESC')->get();
         } else if ($user->role === 4) {
             $comptes = $user->entreprises()->get();
             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
@@ -62,7 +62,7 @@ class OperationController extends Controller
             }
         } else {
             $User = User::with('operations')->findOrFail($user->id);
-            $operations = $User->operations()->with('form', 'entreprise')->get();
+            $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
         }
         return view('admin.operation.index', compact('operations', 'operation'));
     }

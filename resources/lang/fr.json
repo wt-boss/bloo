@@ -643,6 +643,11 @@
     "Subjects": "Sujet",
     "Messages": "Message",
     "invite": "Je vous ai invité à remplir un formulaire ",
-    "To": "à"
+    "To": "à",
+    "Personal informations": "Informations personnelles",
+    "Access management": "Gestion des accès",
+    "Edit an operation" : "Editer une opération"
+
+
 
 }
