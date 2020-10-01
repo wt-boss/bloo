@@ -1,5 +1,5 @@
 @extends('admin.top-nav')
-@section('page_title', trans('edit'))
+@section('page_title', trans('edit_op'))
 @section('content-header')
 <!-- Content Header (Page header) -->
 @endsection

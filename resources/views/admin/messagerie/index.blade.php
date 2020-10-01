@@ -1,3 +1,4 @@
+@section('page_title', trans('Messagerie'))
 @extends('admin.top-nav')php artisan seve
 
 
@@ -65,7 +66,7 @@
                          <div class='col-md-12'>
                              <div class='user-wrapper'>
                                  <div>
-                                     <h6>Managers</h6>
+                                     <h6>{{ trans('prix_offre_llimite2') }}</h6>
                                      <div id="allmanagers">
                                      </div>
                                  </div>

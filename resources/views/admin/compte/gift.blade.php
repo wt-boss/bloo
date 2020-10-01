@@ -1,8 +1,5 @@
+@section('page_title', trans('image du compte'))
 @extends('admin.top-nav')
-
-@section('content-header')
-    <!-- Content Header (Page header) -->
-@endsection
 
 @section('content')
     @include('partials.alert', ['name' => 'index'])
