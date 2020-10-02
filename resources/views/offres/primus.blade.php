@@ -195,7 +195,7 @@
                     </div>
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
-                            <label for="particulier_name">{{ trans('Name') }}</label><br>
+                            <label for="particulier_name">{{ trans('name') }}</label><br>
                             <input type="text" name="user_name" value="{{old('user_name')}}"  class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
