@@ -1,6 +1,7 @@
 @extends('layouts.frontend.app')
 @section('page_title', trans('offre_silver'))
-
+@section('page_title')
+    {{ trans('privacy_title') }}
 @endsection
 
 @section('css')
