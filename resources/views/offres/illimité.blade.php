@@ -1,7 +1,6 @@
 @extends('layouts.frontend.app')
-@section('title', 'BLOO|Illimité')
 @section('page_title')
-    {{ trans('privacy_title') }}
+    {{ trans('offre_platinum') }}
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('multiform/assets/css/form-elements.css')}}">
