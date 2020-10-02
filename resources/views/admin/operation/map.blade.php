@@ -14,7 +14,7 @@
     <div class="pac-card" id="pac-card">
         <div id="pac-container">
             <a class="pac-return" href="{{route('operation.show',[$operation->id])}}"></a>
-            <input id="pac-input" class="controls pac-search" type="text" placeholder="Enter a location">
+            <input id="pac-input" class="controls pac-search" type="text" placeholder="{{ trans('Enter a location') }}">
         </div>
         <div id="info-container">
             <form class="pac-form" method="post" action={{route('sites.store')}}>
@@ -36,11 +36,11 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Site</th>
-                    <th>Rayon</th>
-                    <th>Pays</th>
-                    <th>Ville</th>
-                    <th class="disableFilterBy">Actions</th>
+                    <th>{{ trans('Site') }}</th>
+                    <th>{{ ('Rayon') }}</th>
+                    <th>{{ trans('Pays') }}</th>
+                    <th>{{ trans('Ville') }}</th>
+                    <th class="disableFilterBy">{{ trans('Actions') }}</th>
                 </tr>
                 </thead>
                 <tbody>

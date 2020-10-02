@@ -421,7 +421,7 @@
     "Contact Information" : "Laissez nous un message",
     "Address" : "Adresse",
     "Phone" : "Téléphone",
-    "Nom_entreprise" : "Nom de l'entreprise :",
+    "Nom_entreprise" : "Nom de l'entreprise ",
     "chanp_valide":"Ce champ ne peut être vide (Minimum 3 caractères).",
     "Email" : "Email",
     "Website" : "Adresse web",
@@ -647,7 +647,15 @@
     "Personal informations": "Informations personnelles",
     "Access management": "Gestion des accès",
     "Edit an operation" : "Editer une opération",
-    "auth.verification_required":"Veuillez confirmer votre adresse e-mail"
+    "auth.verification_required":"Veuillez confirmer votre adresse e-mail",
+    "image du compte": "Image du compte",
+    "test": "tester",
+    "title_ntreprisee": "Créer|Entrepries",
+    "pasoperation": " Vous n'avez pas d'operation en cours",
+    "Site": "Site",
+    "Rayon": "Rayon",
+    "Actions": "Actions",
+    "Enter a location": "Enter a location"
 
 
 

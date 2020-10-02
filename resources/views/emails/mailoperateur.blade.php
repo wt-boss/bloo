@@ -18,7 +18,7 @@
                     <td class="header" >
 
                         <a href="{{ route('home') }}" >
-                            Bienvenue sur  bloo App
+{{--                            Bienvenue sur  bloo App--}}
                         </a>
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
                 <td class="content-cell" >
                     <h1 >Bienvenue sur Bloo,</h1>
                 <p>
-                    Votre profil a été validé.<br>
+                    Ton profil a été validé.<br>
                     Ci-dessous tes accès de connexion
                 </p>
 

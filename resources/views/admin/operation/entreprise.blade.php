@@ -1,4 +1,4 @@
-@section('page_title', trans('Create'))
+@section('page_title', trans('title_ntreprisee'))
 
 @extends('admin.top-nav')
 
