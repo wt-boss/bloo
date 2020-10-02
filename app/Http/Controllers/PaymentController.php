@@ -179,6 +179,7 @@ class PaymentController extends Controller
 
         $entreprise->save();
         $user->save();
+        $user->sendEmailVerificationNotification();
         $entreprise->users()->attach($user);
 
         /** Si l'offre choisi est primus alors, creation d'une operation */
