@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app')
-@section('title', 'BLOO|Primus')
+@section('page_title', 'Primus')
 @section('page_title')
     {{ trans('privacy_title') }}
 @endsection
@@ -36,28 +36,28 @@
                     <h4><span class="step">{{ trans('infos') }}</span></h4>
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="operation_name">{{ trans('free_form1_label1') }} :</label>
+                            <label for="operation_name">{{ trans('free_form1_label1') }}</label>
                             <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" value="{{old('operation_name')}}" placeholder="{{ trans('Entrer') }}" required>
                             <div class="invalid-feedback">
                                {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="operation_purpose">{{ trans('free_form1_label2') }} :</label>
+                            <label for="operation_purpose">{{ trans('free_form1_label2') }}</label>
                             <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" value="{{old('operation_purpose')}}" placeholder="{{ trans('Entre2') }}" required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="date_start">{{ trans('free_form1_label3') }}: </label>
+                            <label for="date_start">{{ trans('free_form1_label3') }} </label>
                             <input type="date" class="form-control form-input-check" value="{{old('date_start')}}" id="date_start" name="date_start"  required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="date_end">{{ trans('free_form1_label4') }}: </label>
+                            <label for="date_end">{{ trans('free_form1_label4') }} </label>
                             <input type="date" class="form-control form-input-check" value="{{old('date_end')}}" id="date_end" name="date_end"  required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="birth-country">{{ trans('num_sirect') }}:</label><br>
+                            <label for="birth-country">{{ trans('num_sirect') }}</label><br>
                             <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control d-block" id="birth-country"  placeholder="">
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
@@ -146,20 +146,20 @@
                         </div>
 
                         <div class="form-group col-6">
-                            <label for="birth-date">{{ trans('telephone_entreprise') }}:</label><br>
+                            <label for="birth-date">{{ trans('telephone_entreprise') }}</label><br>
                             <input type="text" name="telephone_entreprise" value="{{old('telephone_entreprise')}}" class="birth-date form-control" id="birth-date" >
                             <div class="invalid-feedback">
                                 {{ trans('adress_entreprise_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_name">{{ trans('name_user') }}:</label><br>
+                            <label for="particulier_name">{{ trans('name_user') }}</label><br>
                             <input type="text" name="user_name_entreprise" value="{{old('user_name_entreprise')}}"  class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
                             </div>
                         </div>
-                        
+
                         <div class="form-group col-6">
                             <label for="particulier_email">{{ trans('adress_entreprise1') }}</label><br>
                             <input type="email" name="email_entreprise" value="{{old('email_entreprise')}}" class="address-city form-control form-email-check-perm" id="particulier_email">
@@ -168,8 +168,8 @@
                             </div>
                             {!! $errors->first('email_entreprise', '<small class="help-block">:message</small>') !!}
                         </div>
-                          
-                           
+
+
                         <div class="form-group col-6">
                             <label for="particulier_email"> {{ trans('adress_user') }}</label><br>
                             <input type="email" name="user_email_entreprise" value="{{old('user_email_entreprise')}}" class="address-city form-control form-email-check" id="particulier_email">
@@ -195,14 +195,14 @@
                     </div>
                     <div class="row" id="particulier">
                         <div class="form-group col-6">
-                            <label for="particulier_name">{{ trans('Name') }}:</label><br>
+                            <label for="particulier_name">{{ trans('Name') }}</label><br>
                             <input type="text" name="user_name" value="{{old('user_name')}}"  class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_email">{{ trans('E-Mail Address') }}:</label><br>
+                            <label for="particulier_email">{{ trans('E-Mail Address') }}</label><br>
                             <input type="email" name="user_email" class="address-city form-control form-email-check" id="particulier_email">
                             <div class="invalid-feedback">
                                 {{ trans('num_sirect_valid') }}

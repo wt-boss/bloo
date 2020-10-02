@@ -46,7 +46,7 @@
                     </div>
                     <div class="row" id="entreprise">
                         <div class="form-group col-6">
-                            <label for="name_enterprise">{{ trans('Nom_entreprise') }} :</label>
+                            <label for="name_enterprise">{{ trans('Nom_entreprise') }}</label>
                             <input type="text" class="form-control form-input-check"  name="name_enterprise" value="{{old('name_enterprise')}}" placeholder=""  id="name_enterprise" >
                             <div class="invalid-feedback">
                                {{ trans('chanp_valide') }}
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <label for="particulier_name">{{ trans('name_user') }}:</label><br>
+                            <label for="particulier_name">{{ trans('name_user') }}</label><br>
                             <input type="text" name="user_name_entreprise" value="{{old('user_name_entreprise')}}" class="address form-control form-input-check" id="particulier_name">
                             <div class="invalid-feedback">
                                 {{ trans('message_valid') }}
