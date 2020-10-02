@@ -392,79 +392,85 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body">
-                            <form id="update-profile-form" action="{{ route('profile.update') }}" method="post">
+                            <form id="update-profile-form" action="{{ route('profile.update') }}" enctype="multipart/form-data" method="post">
                                 @csrf @method('PUT')
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">@lang('first_name')</label>
-                                    <input type="text" class="form-control" name="first_name" value="{{  auth()->user()->first_name }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">@lang('last_name')</label>
-                                    <input type="text" class="form-control" name="last_name" value="{{  auth()->user()->last_name }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">@lang('Payment number')</label>
-                                    <input type="number" class="form-control" name="phonepaiement" value="{{  auth()->user()->phonepaiement }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{  auth()->user()->email }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('Current Password')</label>
-                                    <input type="password" name="current_password" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('New Password')</label>
-                                    <input type="password" name="new_password" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('Password Confirmation')</label>
-                                    <input type="password" name="password_confirmation" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('Country')</label>
-                                <select class="form-control" name="country_id" id="country" required>
-                                    @foreach($countries as $country)
-                                        <option value="{{$country->id}}">{{trans($country->name)}}</option>
-                                    @endforeach
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                <label for="exampleInputPassword1">@lang('State')</label>
-                                <div id="div_region" style="display:none">
-                                    <select class="form-control" name="state_id" id="region" required>
-
-                                    </select>
-                                </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('City')</label>
-                                <div id="div_ville" style="display:none">
-                                    <select class="form-control" name="city_id" id="ville" required>
-
-                                    </select>
-                                </div>
-                                </div>
-
+                                <center><h1>@lang('Personal informations')</h1></center>
                                 <br><br>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">@lang('Avatar')</label>
-                                    <img src="{{ auth()->user()->avatar }}" style='width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;'>
-                                    <input type="file" class="form-control" name="avatar" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                </div>
+                                <ul class="list-group list-group">
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputEmail1">@lang('first_name')</label>
+                                        <input type="text" class="form-control" name="first_name" value="{{  auth()->user()->first_name }}">
+                                    </div>
 
-                                <button type="submit" class="btn btn-primary">@lang('Send')</button>
+                                    <div  class="form-group list-group-item">
+                                        <label for="exampleInputEmail1">@lang('last_name')</label>
+                                        <input type="text" class="form-control" name="last_name" value="{{  auth()->user()->last_name }}">
+                                    </div>
+
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputEmail1">@lang('Payment number')</label>
+                                        <input type="number" class="form-control" name="phonepaiement" value="{{  auth()->user()->phonepaiement }}">
+                                    </div>
+
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="email" class="form-control" name="email" value="{{  auth()->user()->email }}">
+                                    </div>
+
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('Country')</label>
+                                        <select class="form-control" name="country_id" id="country" >
+                                            @foreach($countries as $country)
+                                                <option value="{{$country->id}}">{{trans($country->name)}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('State')</label>
+                                        <div id="div_region" style="display:none">
+                                            <select class="form-control" name="state_id" id="region" >
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('City')</label>
+                                        <div id="div_ville" style="display:none">
+                                            <select class="form-control" name="city_id" id="ville" >
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <br><br>
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('Avatar')</label>
+                                        <img src="{{ auth()->user()->avatar }}" style='width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;'>
+                                        <input type="file" class="form-control" name="avatar">
+                                    </div>
+                                </ul>
+                                <br>
+                                <center><h1>@lang('Access management')</h1></center>
+                                <br>
+                                <ul class="list-group list-group">
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('Current Password')</label>
+                                        <input type="password" name="current_password" class="form-control">
+                                    </div>
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('New Password')</label>
+                                        <input type="password" name="new_password" class="form-control">
+                                    </div>
+                                    <div class="form-group list-group-item">
+                                        <label for="exampleInputPassword1">@lang('Password Confirmation')</label>
+                                        <input type="password" name="password_confirmation" class="form-control">
+                                    </div>
+                                </ul>
+                                <br><br>
+                                <button type="submit" class="btn btn-primary pull-right">@lang('Send')</button>
                             </form>
                         </div>
                         <!-- /.box-body -->

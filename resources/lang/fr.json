@@ -643,6 +643,19 @@
     "Subjects": "Sujet",
     "Messages": "Message",
     "invite": "Je vous ai invité à remplir un formulaire ",
-    "To": "à"
+    "To": "à",
+    "Personal informations": "Informations personnelles",
+    "Access management": "Gestion des accès",
+    "Edit an operation" : "Editer une opération",
+    "image du compte": "Image du compte",
+    "test": "tester",
+    "title_ntreprisee": "Créer|Entrepries",
+    "pasoperation": " Vous n'avez pas d'operation en cours",
+    "Site": "Site",
+    "Rayon": "Rayon",
+    "Actions": "Actions",
+    "Enter a location": "Enter a location"
+
+
 
 }

@@ -591,5 +591,13 @@
     "invite": "I've invited you to fill in a form:",
     "Cancel": "Cancel",
     "Send": "Send",
-    "To": "To"
+    "To": "To",
+    "image du compte": "Account image",
+    "chose_accont": "Please choose an Account Manager and a transaction",
+    "test": "test",
+    "title_ntreprisee": "Create |Entreprise",
+    "pasoperation": "You have no operation in progress",
+    "Site": "Site",
+    "Rayon": "Ray",
+    "Actions": "Actions"
 }

@@ -188,6 +188,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     {
         return $this->getKey();
     }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -197,10 +198,12 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     {
         return [];
     }
+
     public function pieces()
     {
         return $this->hasMany(Piece::class);
     }
+
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);

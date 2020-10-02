@@ -1,4 +1,5 @@
 @extends('admin.top-nav')
+
 @section('page_title', trans('Utilisateurs'))
 
 @section('title', 'Comptes utilisateurs')
@@ -57,7 +58,7 @@
                                         <li class= "text-success">
                                             Online
                                         </li>
-                                    
+
                                         @else($user->isOnline())
                                         <li class= "text-muted">
                                             ofline

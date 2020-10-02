@@ -93,7 +93,9 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+
         $user->update($request->all());
+
         return redirect()->route('users.index')->withSuccess('Modification Effectuée');
     }
 
@@ -109,6 +111,6 @@ class UsersController extends Controller
         return back()->withSuccess(trans('Utilisateurs suprimé avec success'));
     }
 
-    
+
 
 }

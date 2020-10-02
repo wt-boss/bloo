@@ -83,7 +83,8 @@
         <div class="panel-body text-center">
             <div class="mt-30 mb-30">
                 <h6 class="text-semibold">
-                        Vous n'avez pas d'operation en cours
+                    {{ trans('pasoperation') }}
+                   
                 </h6>
             </div>
         </div>

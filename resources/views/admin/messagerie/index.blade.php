@@ -1,3 +1,4 @@
+@section('page_title', trans('Messagerie'))
 @extends('admin.top-nav')php artisan seve
 
 
@@ -65,7 +66,7 @@
                          <div class='col-md-12'>
                              <div class='user-wrapper'>
                                  <div>
-                                     <h6>Managers</h6>
+                                     <h6>{{ trans('prix_offre_llimite2') }}</h6>
                                      <div id="allmanagers">
                                      </div>
                                  </div>
@@ -161,6 +162,9 @@
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     @if (auth()->user()->hasRole('Superadmin|Account Manager'))
     <script type="application/javascript">
+
+
+
         $('.operation').on('click', function(e){
             $('#receiver').empty();
             console.log(e);
@@ -178,8 +182,11 @@
                    });
                });
         });
-        function showMessages(operation_id)
-        {
+
+
+        let showMessages = (operation_id) => {
+        //function showMessages(operation_id)
+        //{
             var receiver_id = '';
             var my_id = "{{ Auth::id() }}";
 
@@ -221,6 +228,7 @@
                     // $(this).addClass('active');
                     // $(this).find('.pending').remove();
                     receiver_id =$(this).attr('data-id')
+                    alert(receiver_id);
                     $.get('/json-user?user_id=' + receiver_id,function(data) {
                         $('#receiver').empty();
                         $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
@@ -239,6 +247,7 @@
                 });
 
                 $(document).on('keyup', '.input-text input', function (e) {
+                    console.log(operation_id);
                     var message = $(this).val();
                     // check if enter key is pressed and message is not null also receiver is selected
                     if (e.keyCode == 13 && message != '' && receiver_id != '') {
@@ -257,35 +266,6 @@
                             }
                         })
                     }
-                });
-
-                $('#send').click(function () {
-                    // Get the element to print
-                    var element = document.getElementById('responsesprint');
-                    element.style.display = "initial";
-                    // Define optional configuration
-                    var options = {
-                        filename: 'response.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
-                        pdfCallback: pdfCallback
-                    };
-                    function pdfCallback(pdfObject) {
-                        var number_of_pages = pdfObject.internal.getNumberOfPages()
-                        var pdf_pages = pdfObject.internal.pages
-                        var myFooter = "Footer info"
-                        for (var i = 1; i < pdf_pages.length; i++) {
-                            // We are telling our pdfObject that we are now working on this page
-                            pdfObject.setPage(i)
-                            // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
-                            pdfObject.text(myFooter, 10, 200)
-                        }
-                    };
-                    options.source = element;
-                    options.download = true;
-                    html2pdf.getPdf(options);
-                    element.style.display = "none";
                 });
             });
 

@@ -142,7 +142,7 @@
                                     <p>{{ trans('service_sectio11_content3') }}</p>
                                 </div>
                                 <div class="one-forth align-self-center">
-                                    <img src="{{asset('assets/images/donnees_marche2.jpg') }}" class="img-fluid border" alt="">
+                                    <img src="{{asset('assets/images/donnees_marche2.jpg') }}" class="img-fluid border marche" alt="">
                                 </div>
                             </div>
                         </div>

@@ -42,6 +42,6 @@
     </div>
     @if (!$loop->last)
         <div class="html2pdf__page-break"></div>
-        <p style="font-size:0.25mm" >test</p>
+        <p style="font-size:0.25mm" >{{ trans('test') }}</p>
     @endif
 @endforeach
