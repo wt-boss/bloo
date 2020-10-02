@@ -647,6 +647,7 @@
     "Personal informations": "Informations personnelles",
     "Access management": "Gestion des accès",
     "Edit an operation" : "Editer une opération",
+    "auth.verification_required":"Veuillez confirmer votre adresse e-mail",
     "image du compte": "Image du compte",
     "test": "tester",
     "title_ntreprisee": "Créer|Entrepries",

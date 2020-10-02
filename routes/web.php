@@ -114,6 +114,9 @@ Route::namespace('Auth')->group(function () {
     //Login Routes
     Route::post('login', 'LoginController@login');
     Route::post('logout', 'LoginController@logout')->name('logout');
+
+    //User Email Verification Route
+    Route::get('email/verify/{token}', 'VerificationController@verify');
 });
 
 //Dashboard Routes
@@ -130,7 +133,7 @@ Route::namespace('Form')->group(function () {
     Route::get('logout_free', 'FormController@logout_free')->name('forms.logout_free');
 });
 
-Route::middleware(['auth'])->namespace('Form')->group(function () {
+Route::middleware(['auth','verified'])->namespace('Form')->group(function () {
     //Form Routes
     Route::get('forms', 'FormController@index')->name('forms.index');
     Route::get('forms/create', 'FormController@create')->name('forms.create');
@@ -170,7 +173,8 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 
 //Questionnaire get
 
-Route::get('/administration', 'HomeController@admin')->name('admin')->middleware('Role:Superadmin|Account Manager|Lecteur|Opérateur','Free','verified');
+Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Account Manager|Lecteur|Opérateur','Free','verification']);
+
 
 //Questionnaire post
 

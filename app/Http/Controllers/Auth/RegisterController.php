@@ -69,7 +69,6 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
         $user->sendEmailVerificationNotification();
-
         return view('auth.register-complete', compact('user'));
     }
 

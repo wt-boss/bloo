@@ -592,6 +592,7 @@
     "Cancel": "Cancel",
     "Send": "Send",
     "To": "To",
+    "auth.verification_required":"Please confirm your email address",
     "image du compte": "Account image",
     "chose_accont": "Please choose an Account Manager and a transaction",
     "test": "test",

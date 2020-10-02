@@ -13,7 +13,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Cache;
-class User extends Authenticatable implements MustVerifyEmail,JWTSubject
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use SoftDeletes;
@@ -29,7 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'role', 'active', 'api_token','avatar','password','country_id','state_id','city_id', 'phone', 'phonepaiement'
+        'first_name', 'last_name', 'email', 'role', 'active', 'api_token','avatar','password','country_id','state_id','city_id', 'phone', 'phonepaiement','email_token'
     ];
 
     /**
@@ -135,6 +135,11 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     {
         $message = new EmailVerificationMail($this);
         Mail::to($this)->send($message);
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return is_null($this->email_token);
     }
 
     public function forms()
