@@ -591,5 +591,6 @@
     "invite": "I've invited you to fill in a form:",
     "Cancel": "Cancel",
     "Send": "Send",
-    "To": "To"
+    "To": "To",
+    "auth.verification_required":"Please confirm your email address"
 }

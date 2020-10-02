@@ -646,7 +646,8 @@
     "To": "à",
     "Personal informations": "Informations personnelles",
     "Access management": "Gestion des accès",
-    "Edit an operation" : "Editer une opération"
+    "Edit an operation" : "Editer une opération",
+    "auth.verification_required":"Veuillez confirmer votre adresse e-mail"
 
 
 

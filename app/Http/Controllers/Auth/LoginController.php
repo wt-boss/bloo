@@ -39,50 +39,50 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
-    {
-        $this->validateLogin($request);
+    // public function login(Request $request)
+    // {
+    //     $this->validateLogin($request);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
+    //     // If the class is using the ThrottlesLogins trait, we can automatically throttle
+    //     // the login attempts for this application. We'll key this by the username and
+    //     // the IP address of the client making these requests into this application.
+    //     if ($this->hasTooManyLoginAttempts($request)) {
+    //         $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
-        }
+    //         return $this->sendLockoutResponse($request);
+    //     }
 
-        $user = \App\User::where('email', '=', $request->email)
-            ->get();
+    //     $user = \App\User::where('email', '=', $request->email)
+    //         ->get();
 
-        if ($user->isEmpty()) {
-            // The user is doesnt exist
-            return redirect("/login")
-                ->withInput($request->only('email', 'remember'))
-                ->withErrors(trans('failed'));
-        }
+    //     if ($user->isEmpty()) {
+    //         // The user is doesnt exist
+    //         return redirect("/login")
+    //             ->withInput($request->only('email', 'remember'))
+    //             ->withErrors(trans('failed'));
+    //     }
 
-        $user = \App\User::where('email', '=', $request->email)
-            ->where('active', '=', 1)
-            ->get();
+    //     $user = \App\User::where('email', '=', $request->email)
+    //         ->where('active', '=', 1)
+    //         ->get();
 
-        if ($user->isEmpty()) {
-            // The user is exist but inactive
-            return redirect("/login")
-                ->withInput($request->only('email', 'remember'))
-                ->withWarning(trans('non active'));
-        }
+    //     if ($user->isEmpty()) {
+    //         // The user is exist but inactive
+    //         return redirect("/login")
+    //             ->withInput($request->only('email', 'remember'))
+    //             ->withWarning(trans('non active'));
+    //     }
 
-        //try login with password
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
-        }
+    //     //try login with password
+    //     if ($this->attemptLogin($request)) {
+    //         return $this->sendLoginResponse($request);
+    //     }
 
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
+    //     // If the login attempt was unsuccessful we will increment the number of attempts
+    //     // to login and redirect the user back to the login form. Of course, when this
+    //     // user surpasses their maximum number of attempts they will get locked out.
+    //     $this->incrementLoginAttempts($request);
 
-        return $this->sendFailedLoginResponse($request);
-    }
+    //     return $this->sendFailedLoginResponse($request);
+    // }
 }

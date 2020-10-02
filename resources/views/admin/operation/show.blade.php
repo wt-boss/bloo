@@ -177,6 +177,7 @@
                             <thead>
                             <tr>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -184,13 +185,20 @@
                              @if ($user->role === 0)
                                  <tr>
                                      <td>
-                                   {{ $user->first_name }} {{ $user->last_name }}
+                                       {{ $user->first_name }} {{ $user->last_name }}
                                       <span class="pull-right">
                                           @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                       <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                                         @endif
                                       </span>
                                     </td>
+                                     <td>
+                                         @if($user->isOnline())
+                                             <li class= "text-success">Online</li>
+                                         @else($user->isOnline())
+                                             <li class= "text-muted">ofline</li>
+                                         @endif
+                                     </td>
                                  </tr>
                               @endif
                           @endforeach
@@ -220,6 +228,7 @@
                             <thead>
                             <tr>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -233,6 +242,18 @@
                                                 <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                                             @endif
                                        </span>
+                                    </td>
+                                    <td>
+                                        @if($user->isOnline())
+                                            <li class= "text-success">
+                                                Online
+                                            </li>
+
+                                        @else($user->isOnline())
+                                            <li class= "text-muted">
+                                                ofline
+                                            </li>
+                                        @endif
                                     </td>
                                 </tr>
                                     @endif
@@ -271,11 +292,13 @@
         </div>
     </div>
 </div>
-<div id="print" style="display: none"  >
-    <div class="box-body row" id="responsesprint" >
-        {!! $viewprint !!}
-    </div>
-</div>
+
+
+    <div id="print" style="display: none"  >
+         <div class="box-body row" id="responsesprint" >
+             {!! $viewprint !!}
+         </div>
+     </div>
 
 
     <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -307,7 +330,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="operateur-default" style="display: none;">
+    <div class="modal fade" id="operateur-default" style="display: none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -331,14 +354,20 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
 @endsection
 
 @section('laraform_script1')
     <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4bZln12ut506FLipFx-kXh95M-zZdUfc&libraries=places&callback=initMap" defer></script>
+
     <script type="text/javascript">
         function initMap() {
             let lat = "";
@@ -480,17 +509,16 @@
             });
         });
     </script>
+
     <script type="text/javascript">
 
 
         let printpdf = () => {
+
             let now = new Date();
             let annee   = now.getFullYear();
             let mois    = now.getMonth() + 1;
             let jour    = now.getDate();
-            let heure   = now.getHours();
-            let minute  = now.getMinutes();
-            let seconde = now.getSeconds();
             let imgData = 'data:image/png;base64,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'
             let element = document.getElementById('responsesprint');
             let opt = {
@@ -515,21 +543,9 @@
                     pdf.setFont("helvetica");
                     pdf.setFontSize(10);
                     pdf.setFontType("bolditalic");
-{{--                    @if( app()->getLocale() === "fr" )--}}
-{{--                        pdf.text('Page ' + i + '/' + totalPages, 198, 275);--}}
-{{--                        pdf.text('Imprimé le : '+jour+"/"+mois+"/"+annee ,00, 275);--}}
-{{--                    @endif--}}
-{{--                        @if( app()->getLocale() === "en")--}}
-{{--                    pdf.text('Page ' + i + '/' + totalPages, 198, 275);--}}
-{{--                    pdf.text('Print it : '+jour+"/"+mois+"/"+annee ,00, 275);--}}
-{{--                    @endif--}}
-{{--                        @if( app()->getLocale() === "pt")--}}
-{{--                    pdf.text('Página ' + i + '/' + totalPages, 198, 275);--}}
-{{--                    pdf.text('Imprima : '+jour+"/"+mois+"/"+annee ,00, 275);--}}
-{{--                    @endif--}}
-{{--                    pdf.addImage(imgData, "PNG",  195, 05);--}}
-@if( app()->getLocale() === "fr" )
-pdf.text('Page ' + i + '/' + totalPages,  260, 210);
+
+                    @if( app()->getLocale() === "fr" )
+                    pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     pdf.text('Imprimé le : '+jour+"/"+mois+"/"+annee ,05, 275);
                     @endif
                     @if( app()->getLocale() === "en")
@@ -545,6 +561,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                 }
             }).save();
         };
+
         function reload(){
             window.location.reload();
         }
@@ -581,7 +598,9 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
         });
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script src="{{ asset('assets/js/custom/pages/response-summary.js') }}"></script>
+
     <script>
         google.charts.load('current', {'packages':['corechart']});
 
@@ -646,7 +665,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
     </script>
     <script>
         $('#countries').on('change', function(e){
-            console.log(e);
+
             let sortoption  = e.target.value;
 
             if(sortoption == 0)
@@ -761,6 +780,7 @@ pdf.text('Page ' + i + '/' + totalPages,  260, 210);
                     })
                 });
             }
+
         });
 
 
