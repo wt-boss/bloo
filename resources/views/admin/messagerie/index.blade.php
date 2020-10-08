@@ -1,5 +1,5 @@
 @section('page_title', trans('Messagerie'))
-@extends('admin.top-nav')php artisan seve
+@extends('admin.top-nav')
 
 
 @section('content-header')
@@ -163,9 +163,7 @@
     @if (auth()->user()->hasRole('Superadmin|Account Manager'))
     <script type="application/javascript">
 
-
-
-        $('.operation').on('click', function(e){
+        $('.operation').click(function(e){
             $('#receiver').empty();
             console.log(e);
             var operation_id = e.target.id;
@@ -189,8 +187,6 @@
         //{
             var receiver_id = '';
             var my_id = "{{ Auth::id() }}";
-
-            $(document).ready(function () {
                 // ajax setup form csrf token
                 $.ajaxSetup({
                     headers: {
@@ -199,7 +195,6 @@
                 });
                 // Enable pusher logging - don't include this in production
                 Pusher.logToConsole = true;
-
                 var pusher = new Pusher('1702f90c00112df631a4', {
                     cluster: 'ap2'
                 });
@@ -219,21 +214,42 @@
                         cache: false,
                         success: function (message) {
                             $('#messages').html(message);
+                            console.log(message);
+                            console.log("Trop");
+                            $('.input-text input').on('keyup', function (e) {
+                                console.log(operation_id);
+                                var message = $(this).val();
+                                // check if enter key is pressed and message is not null also receiver is selected
+                                if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                    $(this).val(''); // while pressed enter text box will be empty
+                                    var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "message", // need to create this post route
+                                        data: datastr,
+                                        cache: false,
+                                        success: function (data) {
+                                        },
+                                        error: function (jqXHR, status, err) {},
+                                        complete: function () {
+                                            scrollToBottomFunc();
+                                        }
+                                    })
+                                }
+                            });
                             scrollToBottomFunc();
                         }
                     });
                 });
+
                 $('.user').click(function () {
-                    // $('.user').removeClass('active');
-                    // $(this).addClass('active');
-                    // $(this).find('.pending').remove();
-                    receiver_id =$(this).attr('data-id')
-                    alert(receiver_id);
+                    $('.user').removeClass('active');
+                    $(this).addClass('active');
+                    $(this).find('.pending').remove();s
                     $.get('/json-user?user_id=' + receiver_id,function(data) {
                         $('#receiver').empty();
                         $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
                     });
-
                     $.ajax({
                         type: "get",
                         url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
@@ -241,33 +257,31 @@
                         cache: false,
                         success: function (data) {
                             $('#messages').html(data);
+                            $('.input-text input').on('keyup', function (e) {
+                                console.log(operation_id);
+                                var message = $(this).val();
+                                // check if enter key is pressed and message is not null also receiver is selected
+                                if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                    $(this).val(''); // while pressed enter text box will be empty
+                                    var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "message", // need to create this post route
+                                        data: datastr,
+                                        cache: false,
+                                        success: function (data) {
+                                        },
+                                        error: function (jqXHR, status, err) {},
+                                        complete: function () {
+                                            scrollToBottomFunc();
+                                        }
+                                    })
+                                }
+                            });
                             scrollToBottomFunc();
                         }
                     });
                 });
-
-                $(document).on('keyup', '.input-text input', function (e) {
-                    console.log(operation_id);
-                    var message = $(this).val();
-                    // check if enter key is pressed and message is not null also receiver is selected
-                    if (e.keyCode == 13 && message != '' && receiver_id != '') {
-                        $(this).val(''); // while pressed enter text box will be empty
-                        var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
-                        $.ajax({
-                            type: "post",
-                            url: "message", // need to create this post route
-                            data: datastr,
-                            cache: false,
-                            success: function (data) {
-                            },
-                            error: function (jqXHR, status, err) {},
-                            complete: function () {
-                                scrollToBottomFunc();
-                            }
-                        })
-                    }
-                });
-            });
 
         }
         // make a function to scroll down auto
