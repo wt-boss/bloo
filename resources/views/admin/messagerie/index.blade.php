@@ -104,7 +104,7 @@
 @section('content')
     @include('partials.alert', ['name' => 'index'])
     <div class="panel panel-flat panel-wb" >
-        <div class="panel-body" style="padding: 0; >
+        <div class="panel-body" style="padding: 0;" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="container-fluid">
@@ -163,6 +163,9 @@
     @if (auth()->user()->hasRole('Superadmin|Account Manager'))
     <script type="application/javascript">
 
+        let receiver_id = '';
+        let my_id = "{{ Auth::id() }}";
+
         $('.operation').click(function(e){
             $('#receiver').empty();
             console.log(e);
@@ -180,110 +183,111 @@
                    });
                });
         });
-
-
         let showMessages = (operation_id) => {
-        //function showMessages(operation_id)
-        //{
-            var receiver_id = '';
-            var my_id = "{{ Auth::id() }}";
-                // ajax setup form csrf token
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            let my_id = "{{ Auth::id() }}";
+            $('.user').click(function(e){
+                $('.user').removeClass('active');
+                $(this).addClass('active');
+                $(this).find('.pending').remove();
+                let receiver_id = e.target.id
+               // var receiver_id = e.target.id;
+                $.get('/json-user?user_id=' + receiver_id,function(data) {
+                    $('#receiver').empty();
+                    $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
+                });
+                $.ajax({
+                    type: "get",
+                    url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                    data: "",
+                    cache: false,
+                    success: function (data) {
+                        $('#messages').html(data);
+                        $('.input-text input').on('keyup', function (e) {
+                            console.log(operation_id);
+                            var message = $(this).val();
+                            // check if enter key is pressed and message is not null also receiver is selected
+                            if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                $(this).val(''); // while pressed enter text box will be empty
+                                var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                $.ajax({
+                                    type: "post",
+                                    url: "message", // need to create this post route
+                                    data: datastr,
+                                    cache: false,
+                                    success: function (data) {
+                                    },
+                                    error: function (jqXHR, status, err) {},
+                                    complete: function () {
+                                        scrollToBottomFunc();
+                                    }
+                                })
+                            }
+                        });
+                        scrollToBottomFunc();
                     }
                 });
-                // Enable pusher logging - don't include this in production
-                Pusher.logToConsole = true;
-                var pusher = new Pusher('1702f90c00112df631a4', {
-                    cluster: 'ap2'
-                });
-                console.log('show');
-                var channel = pusher.subscribe('my-channel');
-                channel.bind('message-event', function (data) {
-                    //alert(JSON.stringify(data));
-                    receiver_id = data.to;
-                    $.get('/json-user?user_id=' + receiver_id,function(user) {
-                        $('#receiver').empty();
-                        $('#receiver').append('<li >'+ user.first_name +' ' +  user.last_name +'</li>');
-                    });
-                    $.ajax({
-                        type: "get",
-                        url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
-                        data: "",
-                        cache: false,
-                        success: function (message) {
-                            $('#messages').html(message);
-                            console.log(message);
-                            console.log("Trop");
-                            $('.input-text input').on('keyup', function (e) {
-                                console.log(operation_id);
-                                var message = $(this).val();
-                                // check if enter key is pressed and message is not null also receiver is selected
-                                if (e.keyCode == 13 && message != '' && receiver_id != '') {
-                                    $(this).val(''); // while pressed enter text box will be empty
-                                    var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
-                                    $.ajax({
-                                        type: "post",
-                                        url: "message", // need to create this post route
-                                        data: datastr,
-                                        cache: false,
-                                        success: function (data) {
-                                        },
-                                        error: function (jqXHR, status, err) {},
-                                        complete: function () {
-                                            scrollToBottomFunc();
-                                        }
-                                    })
-                                }
-                            });
-                            scrollToBottomFunc();
-                        }
-                    });
-                });
+            });
+        };
 
-                $('.user').click(function () {
-                    $('.user').removeClass('active');
-                    $(this).addClass('active');
-                    $(this).find('.pending').remove();s
-                    $.get('/json-user?user_id=' + receiver_id,function(data) {
-                        $('#receiver').empty();
-                        $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
-                    });
-                    $.ajax({
-                        type: "get",
-                        url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
-                        data: "",
-                        cache: false,
-                        success: function (data) {
-                            $('#messages').html(data);
-                            $('.input-text input').on('keyup', function (e) {
-                                console.log(operation_id);
-                                var message = $(this).val();
-                                // check if enter key is pressed and message is not null also receiver is selected
-                                if (e.keyCode == 13 && message != '' && receiver_id != '') {
-                                    $(this).val(''); // while pressed enter text box will be empty
-                                    var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
-                                    $.ajax({
-                                        type: "post",
-                                        url: "message", // need to create this post route
-                                        data: datastr,
-                                        cache: false,
-                                        success: function (data) {
-                                        },
-                                        error: function (jqXHR, status, err) {},
-                                        complete: function () {
-                                            scrollToBottomFunc();
-                                        }
-                                    })
-                                }
-                            });
-                            scrollToBottomFunc();
-                        }
-                    });
-                });
 
-        }
+
+        $(document).ready(function () {
+            // ajax setup form csrf token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+            var pusher = new Pusher('1702f90c00112df631a4', {
+                cluster: 'ap2'
+            });
+            console.log('show');
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('message-event', function (data) {
+                //alert(JSON.stringify(data));
+                receiver_id = data.to;
+                operation_id = data.id;
+                $.get('/json-user?user_id=' + receiver_id,function(user) {
+                    $('#receiver').empty();
+                    $('#receiver').append('<li >'+ user.first_name +' ' +  user.last_name +'</li>');
+                });
+                $.ajax({
+                    type: "get",
+                    url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                    data: "",
+                    cache: false,
+                    success: function (message) {
+                        $('#messages').html(message);
+                        console.log(message);
+                        console.log("Trop");
+                        $('.input-text input').on('keyup', function (e) {
+                            console.log(operation_id);
+                            var message = $(this).val();
+                            // check if enter key is pressed and message is not null also receiver is selected
+                            if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                $(this).val(''); // while pressed enter text box will be empty
+                                var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                $.ajax({
+                                    type: "post",
+                                    url: "message", // need to create this post route
+                                    data: datastr,
+                                    cache: false,
+                                    success: function (data) {
+                                    },
+                                    error: function (jqXHR, status, err) {},
+                                    complete: function () {
+                                        scrollToBottomFunc();
+                                    }
+                                })
+                            }
+                        });
+                        scrollToBottomFunc();
+                    }
+                });
+            });
+        })
         // make a function to scroll down auto
         function scrollToBottomFunc() {
             $('.message-wrapper').animate({
@@ -405,12 +409,12 @@
                             {
                                 $('#allmanagers').append(data.name);
                             }
-
                         $('#messages').html(datas);
                         showMessages(operation_id);
                     });
                 });
-                function showMessages(operation_id)
+
+                function reloadmsg()
                 {
                     var receiver_id = '';
                     var my_id = "{{ Auth::id() }}";
@@ -471,6 +475,93 @@
                                 }
                             });
                         });
+                        $(document).on('keyup', '.input-text input', function (e) {
+                            var message = $(this).val();
+                            // check if enter key is pressed and message is not null also receiver is selected
+                            if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                                $(this).val(''); // while pressed enter text box will be empty
+                                var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                $.ajax({
+                                    type: "post",
+                                    url: "message", // need to create this post route
+                                    data: datastr,
+                                    cache: false,
+                                    success: function (data) {
+
+                                    },
+                                    error: function (jqXHR, status, err) {},
+                                    complete: function () {
+                                        scrollToBottomFunc();
+                                    }
+                                })
+                            }
+                        });
+                    });
+                }
+                function showMessages(operation_id)
+                {
+                    var receiver_id = '';
+                    var my_id = "{{ Auth::id() }}";
+
+                    $(document).ready(function () {
+                        // ajax setup form csrf token
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        // Enable pusher logging - don't include this in production
+                        Pusher.logToConsole = true;
+
+                        var pusher = new Pusher('1702f90c00112df631a4', {
+                            cluster: 'ap2'
+                        });
+
+                        var channel = pusher.subscribe('my-channel');
+                        channel.bind('my-event', function (data) {
+                            //alert(JSON.stringify(data));
+                            if (my_id == data.from) {
+                                $('#' + data.to).click();
+                            } else if (my_id == data.to) {
+                                if (receiver_id == data.from) {
+                                    // if receiver is selected, reload the selected user ...
+                                    $('#' + data.from).click();
+                                } else {
+                                    // if receiver is not seleted, add notification for that user
+                                    var pending = parseInt($('#' + data.from).find('.pending').html());
+
+                                    if (pending) {
+                                        $('#' + data.from).find('.pending').html(pending + 1);
+                                    } else {
+                                        $('#' + data.from).append('<span class="pending">1</span>');
+                                    }
+                                }
+                            }
+                        });
+
+
+                        $('.user').click(function () {
+                            $('.user').removeClass('active');
+                            $(this).addClass('active');
+                            $(this).find('.pending').remove();
+                            receiver_id = $(this).attr('id');
+                            $.get('/json-user?user_id=' + receiver_id,function(data) {
+                                console.log(data);
+                                $('#receiver').empty();
+                                $('#receiver').append('<li >'+ data.first_name +' ' +  data.last_name +'</li>');
+                            });
+                            $.ajax({
+                                type: "get",
+                                url: "operation_messages/" + receiver_id + '/' + operation_id, // need to create this route
+                                data: "",
+                                cache: false,
+                                success: function (data) {
+                                    $('#messages').html(data);
+                                    scrollToBottomFunc();
+                                }
+                            });
+                        });
+
                         $(document).on('keyup', '.input-text input', function (e) {
                             var message = $(this).val();
                             // check if enter key is pressed and message is not null also receiver is selected
