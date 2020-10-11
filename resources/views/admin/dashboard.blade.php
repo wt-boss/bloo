@@ -119,12 +119,12 @@
         operateurCountriesEvent();
 
         $('#short').on('change', function(e){
-            console.log(e);
+
             var option  = e.target.value;
             if( option == 1)
             {
                 $.get('/json-allcountries', function (data) {
-                    console.log(data);
+
                     $('#countries').empty();
                     $('#countries').append(data);
 
@@ -134,7 +134,6 @@
             if( option == 2)
             {
                 $.get('/json-allstates', function (data) {
-                    console.log(data);
                     $('#countries').empty();
                     $('#countries').append(data);
 
@@ -174,7 +173,6 @@
             }
             if( option == 3)
             {
-                console.log(e);
                 $.get('/json-allcities', function (data) {
                     $('#countries').empty();
                     $('#countries').append(data);
@@ -199,7 +197,6 @@
                                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
                                     @endif
                                 },
-
                                 responsive: {
                                     details: {
                                         type: 'column',
@@ -232,7 +229,6 @@
         });
 
         $('#country').on('click', function (e) {
-            console.log(e);
             $.get('/json-allcountries', function (data) {
                 console.log(data);
                 $('#cities').empty();
@@ -280,7 +276,6 @@
 
         });
         $('#state').on('click', function (e) {
-            console.log(e);
             $.get('/json-allstates', function (data) {
                 console.log(data);
                 $('#cities').empty();
@@ -358,7 +353,6 @@
             });
         });
         $('#city').on('click', function (e) {
-            console.log(e);
             $.get('/json-allcities', function (data) {
                 $('#cities').empty();
                 $('#cities').append(data.name);
@@ -582,7 +576,7 @@
                     <div class="box ">
                         <div class="box-header with-border">
                             <ul class="box-title" style="font-size: 15px;">
-                                <li>Tri par</li>
+                                <li>@lang("Short By")</li>
                                 <li>
                                     <select id="short" class="form-control bootstrap-select" style="font-size: 12px; height: 20px;">
                                         <option value="1" selected="selected">{{ trans('Pays') }}</option>
