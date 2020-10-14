@@ -36,9 +36,9 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
       </select>
   </div>
 
-{!! Form::myInput('password', 'password', trans('password')) !!}
+{!! Form::myInput('text', 'password', trans('password')) !!}
 
-{!! Form::myInput('password', 'password_confirmation', trans('password_confirmation')) !!}
+{!! Form::myInput('text', 'password_confirmation', trans('password_confirmation')) !!}
 
 {!! Form::mySelect('role', 'Rôle', $allowedRoles) !!}
 

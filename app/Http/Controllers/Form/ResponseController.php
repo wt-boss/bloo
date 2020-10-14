@@ -22,7 +22,6 @@ class ResponseController extends Controller
     {
         $current_user = Auth::user();
 
-
         $valid_request_queries = ['summary', 'individual'];
 
         $query = strtolower(request()->query('type', 'summary'));

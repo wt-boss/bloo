@@ -616,7 +616,7 @@ class OperationController extends Controller
         $user->active = 1;
         Mail::to($user->email)->send(new BlooOperateur());
         $user->save();
-        return back()->withSuccess('Operateur activer');
+        return back()->withSuccess('Operateur activé');
     }
 
     /**

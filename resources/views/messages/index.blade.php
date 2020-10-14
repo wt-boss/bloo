@@ -18,7 +18,7 @@ background: #fff;
 <div class="input-text">
     <div class="row">
         <div class="col-md-11">
-            <input type="text" name="message" class="submit"/>
+            <input type="text" id="msginput" name="message" class="submit"/>
 
         </div>
         <div class="col-md-1" style="padding-top: 18px;padding-right: -4px;padding-left: 0px;font-size: 20px;" >

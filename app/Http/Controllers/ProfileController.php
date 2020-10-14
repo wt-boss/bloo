@@ -68,6 +68,6 @@ class ProfileController extends Controller
                 $user->update($update);
             }
 
-        return redirect()->route('profile')->withSuccess(trans('Personal information successfully updated'));
+        return redirect()->route('profile')->withErrors(trans('Personal information successfully updated'));
     }
 }

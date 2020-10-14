@@ -427,6 +427,7 @@
                         if (my_id == data.from) {
                             //alert(JSON.stringify(data));
                             $('#' + data.to).click();
+
                         }
                         else if (my_id == data.to) {
                             if (receiver_id == data.from) {
@@ -442,6 +443,7 @@
                                 }
                             }
                         }
+                        $('#msginput').focus();
                     });
                 })
 

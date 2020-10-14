@@ -40,7 +40,6 @@
                     <h1 >Bienvenue sur Bloo,</h1>
                 <p>
                     Ton profil a été validé.<br>
-                    Ci-dessous tes accès de connexion
                 </p>
 
                 <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" >
@@ -52,7 +51,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td >
-                                                    <a href="#" class="button button-blue" target="_blank" >Accéder à Bloo App
+                                                    <a href="https://blooapp.live/login" class="button button-blue" target="_blank" >Accéder à Bloo App
                                                     </a>
                                                 </td>
 

@@ -458,15 +458,15 @@
                                 <ul class="list-group list-group">
                                     <div class="form-group list-group-item">
                                         <label for="exampleInputPassword1">@lang('Current Password')</label>
-                                        <input type="password" name="current_password" class="form-control">
+                                        <input type="text" name="current_password" class="form-control">
                                     </div>
                                     <div class="form-group list-group-item">
                                         <label for="exampleInputPassword1">@lang('New Password')</label>
-                                        <input type="password" name="new_password" class="form-control">
+                                        <input type="text" name="new_password" class="form-control">
                                     </div>
                                     <div class="form-group list-group-item">
                                         <label for="exampleInputPassword1">@lang('Password Confirmation')</label>
-                                        <input type="password" name="password_confirmation" class="form-control">
+                                        <input type="text" name="password_confirmation" class="form-control">
                                     </div>
                                 </ul>
                                 <br><br>
