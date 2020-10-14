@@ -138,9 +138,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                     @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
-                        <!-- Notifications Menu -->
-
-
+{{--                        <!-- Notifications Menu -->--}}
 {{--                               <li class="dropdown notifications-menu" id="notif">--}}
 {{--                                   <!-- Menu toggle button -->--}}
 {{--                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
@@ -156,13 +154,13 @@
 {{--                                                   <a href="#">--}}
 {{--                                                       <div class="pull-left">--}}
 {{--                                                           <!-- User Image -->--}}
+{{--                                                           <h4>--}}
+{{--                                                               <small><button type="button" class="btn btn-success btn-sm">marquer lu</button></small>--}}
+{{--                                                           </h4>--}}
 {{--                                                           @foreach (auth()->user()->notifications as $notification)--}}
-
 {{--                                                               <div>--}}
 {{--                                                                   <!-- Message title and timestamp -->--}}
-{{--                                                                   <h4>--}}
-{{--                                                                       <small><button type="button" class="btn btn-success btn-sm">marquer lu</button></small>--}}
-{{--                                                                   </h4>--}}
+
 {{--                                                                   <!-- The message -->--}}
 {{--                                                                   <div class="row">--}}
 {{--                                                                       <div class="col-sm-10"> {{$notification->data['message']}} </div>--}}
@@ -183,42 +181,51 @@
 
                             <!-- Messages: style can be found in dropdown.less-->
 
-{{--                            <li class="dropdown messages-menu">--}}
-{{--                                <!-- Menu toggle button -->--}}
-{{--                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">--}}
-{{--                                    <i class="fas fa-comment-alt"></i>--}}
-{{--                                    <span class="label label-danger">{{auth()->user()->notifications->count()}}</span>--}}
-{{--                                </a>--}}
-{{--                                <ul class="dropdown-menu">--}}
-{{--                                    <li class="header">You have {{auth()->user()->notifications->count()}} messages</li>--}}
-{{--                                    <li>--}}
-{{--                                        <!-- inner menu: contains the messages -->--}}
-{{--                                        <ul class="menu">--}}
-{{--                                            <li><!-- start message -->--}}
-{{--                                                <a href="#">--}}
-{{--                                                    <div class="pull-left">--}}
-{{--                                                        <!-- User Image -->--}}
-{{--                                                        @foreach (auth()->user()->notifications as $notification)--}}
-{{--                                                            <!-- Message title and timestamp -->--}}
-{{--                                                                <h4>--}}
+                            <li class="dropdown messages-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="label label-danger">{{auth()->user()->unreadNotifications->count()}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">@lang("You have")
+                                        @php
+                                            $count = auth()->user()->unreadNotifications->count();
+                                            @endphp
+                                        @if($count === 0)
+                                            notification
+                                        @else
+                                            notifications
+                                        @endif
+                                        </li>
+                                    <li>
+                                        <!-- inner menu: contains the messages -->
+                                        <ul class="menu">
+                                            <li><!-- start message -->
+                                                <a href="#">
+                                                    <div class="pull-left">
+                                                        <!-- User Image -->
+                                                        @foreach (auth()->user()->unreadNotifications as $notification)
+                                                            <!-- Message title and timestamp -->
+                                                                <h4 class="pull-right">
+                                                                    <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small> <br>
+                                                                </h4>
 
-{{--                                                                    <small><i class="fa fa-clock-o"></i>{{$notification->created_at}}</small>--}}
-{{--                                                                </h4>--}}
-{{--                                                                <!-- The message -->--}}
-{{--                                                                <p> {{$notification->data['message']}}  </p>--}}
-{{--                                                        @endforeach--}}
-{{--                                                    </div>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                            <!-- end message -->--}}
-{{--                                        </ul>--}}
-{{--                                        <!-- /.menu -->--}}
-{{--                                    </li>--}}
-{{--                                    <li class="footer"><a href="#">See All Messages</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
+                                                                <!-- The message -->
+                                                                <p> {{$notification->data['message']}}  </p>
+                                                        @endforeach
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        </ul>
+                                        <!-- /.menu -->
+                                    </li>
+                                    <li><a class="btn btn-success" href="{{route("markasread")}}">@lang("Mark as read")</a></li>
+                                </ul>
+                            </li>
 
-                            <!-- Tasks Menu -->
+{{--                            <!-- Tasks Menu -->--}}
 {{--                            <li class="dropdown tasks-menu">--}}
 {{--                                <!-- Menu Toggle Button -->--}}
 {{--                                <a href="#" class="dropdown-toggle h-notif" data-toggle="dropdown">--}}
@@ -253,6 +260,8 @@
 {{--                                    </li>--}}
 {{--                                </ul>--}}
 {{--                            </li>--}}
+
+
                             <!-- User Account Menu -->
                             <li class="dropdown user user-menu">
                                 <!-- Menu Toggle Button -->

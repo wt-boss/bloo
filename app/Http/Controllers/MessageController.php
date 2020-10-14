@@ -88,7 +88,7 @@ class MessageController extends Controller
          $other->notify(new MessageRated($message, $to, $from));
 
          $pusher = App::make('pusher');
-         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+         $data = ['from' => $from, 'to' => $to , 'id' => $operation_id ]; // sending from and to user id when pressed enter
          $pusher->trigger('my-channel', 'message-event', $data);
     }
 

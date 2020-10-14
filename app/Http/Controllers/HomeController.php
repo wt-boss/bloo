@@ -352,4 +352,13 @@ class HomeController extends Controller
         $viewData = Helper::buildOperateurs($operateurs);
         return response()->json($viewData);
     }
+
+    public function readnotification()
+    {
+        foreach (auth()->user()->unreadNotifications as $notification)
+        {
+            $notification->markAsRead();
+        }
+        return back();
+    }
 }

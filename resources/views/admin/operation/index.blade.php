@@ -21,7 +21,7 @@
                 <div class="panel-body text-center">
                     <div class="mt-30 mb-30">
                         <h6 class="text-semibold">
-                               {{ trans(' Creer_des_maintenant_votre_premiere_operation') }}
+                               {{ trans('Creer_des_maintenant_votre_premiere_operation') }}
                         </h6>
                     </div>
                 </div>
@@ -84,7 +84,6 @@
             <div class="mt-30 mb-30">
                 <h6 class="text-semibold">
                     {{ trans('pasoperation') }}
-                   
                 </h6>
             </div>
         </div>

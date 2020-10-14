@@ -104,6 +104,9 @@ Route::namespace('Form')->group(function () {
     Route::post('forms/{form}/responses', 'ResponseController@store')->name('forms.responses.store');
 });
 
+//Notications Route
+
+Route::get('readnotification',"HomeController@readnotification")->name("markasread");
 
 // Authentication Routes...
 Auth::routes(['verify' => true]);
