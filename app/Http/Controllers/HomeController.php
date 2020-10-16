@@ -203,15 +203,15 @@ class HomeController extends Controller
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
         $User = User::with('operations')->findOrFail(auth()->user()->id);
         $operations = $User->operations()->with('form','entreprise')->get();
-        $countries  = Country::where('name','Cameroon')
-            ->orwhere('name','Central African Republic')
-            ->orwhere('name','Congo')
-            ->orwhere('name','Gabon')
-            ->orwhere('name','Equatorial Guinea')
-            ->orwhere('name','Chad')
-            ->orwhere('name','Nigeria')
-            ->orwhere('name','Angola')
-            ->orwhere('name', 'The Democratic Republic Of The Congo')
+        $countries  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->orwhere('id','51')
             ->get();
         $current_user = Auth::user();
         return view('admin.users.profile',compact('users','operations','countries'));

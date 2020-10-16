@@ -85,15 +85,15 @@ class OperationController extends Controller
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        $countries  = Country::where('name','Cameroon')
-            ->orwhere('name','Central African Republic')
-            ->orwhere('name','Congo')
-            ->orwhere('name','Gabon')
-            ->orwhere('name','Equatorial Guinea')
-            ->orwhere('name','Chad')
-            ->orwhere('name','Nigeria')
-            ->orwhere('name','Angola')
-            ->orwhere('name', 'The Democratic Republic Of The Congo')
+        $countries  = Country::where('id','38')
+            ->orwhere('id','42')
+            ->orwhere('id','50')
+            ->orwhere('id','79')
+            ->orwhere('id','67')
+            ->orwhere('id','43')
+            ->orwhere('id','161')
+            ->orwhere('id','7')
+            ->orwhere('id','51')
             ->get();
         return view('admin.operation.entreprise', compact('entreprises', 'countries'));
     }
@@ -616,7 +616,7 @@ class OperationController extends Controller
         $user->active = 1;
         Mail::to($user->email)->send(new BlooOperateur());
         $user->save();
-        return back()->withSuccess('Operateur activé');
+        return back()->withSuccess('Opérateur activé');
     }
 
     /**

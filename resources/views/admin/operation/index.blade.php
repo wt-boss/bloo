@@ -164,7 +164,7 @@
 @section('laraform_script2')
     {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/main.js') }}"></script>
+{{--    <script src="{{ asset('assets/js/custom/main.js') }}"></script>--}}
     <script>
         $(function() {
             window.csrf_token = csrfToken();
@@ -176,7 +176,7 @@
             $(document).on("click", "#delete-button", function() {
                 var $link = $('<a>');
                 var href = $(this).data('href');
-                var	item = $(this).data('item');
+                var item = $(this).data('item');
                 var message = $(this).data('message');
 
                 message = (message && message.length) ? message : 'Are you sure you want to delete the ' + item + '?';
@@ -191,7 +191,7 @@
                             label: 'No',
                         }
                     },
-                    callback: function (result) {
+                    callback: function(result) {
                         if (result) {
                             $link.attr({
                                 href: href,
@@ -221,7 +221,7 @@
             // 	});
             // });
 
-            $(document).on('click', 'a[href]', function (e) {
+            $(document).on('click', 'a[href]', function(e) {
                 var method = $(this).data('method');
 
                 if (method) {
@@ -242,14 +242,14 @@
                     }
 
                     if (!method.match(/(get|post)/i)) {
-                        $form.append($('<input>', {type: 'hidden', name: '_method', value: method.toUpperCase()}));
+                        $form.append($('<input>', { type: 'hidden', name: '_method', value: method.toUpperCase() }));
                         method = 'POST';
                     }
 
                     if (!method.match(/(get|head|option)/i)) {
                         var csrf_token = csrfToken();
                         if (csrf_token) {
-                            $form.append($('<input>', {type: 'hidden', name: '_token', value: csrf_token}));
+                            $form.append($('<input>', { type: 'hidden', name: '_token', value: csrf_token }));
                         }
                     }
                     $form.attr('method', method);
@@ -272,16 +272,16 @@
                 parent_row = $initiator.closest('tr');
 
                 bootbox.confirm({
-                    message: @lang('Are you sure you want to delete this') + $('form.action-by-ajax').attr('id') + '?',
+                    message: "{{trans('Are you sure you want to delete this')}}",
                     buttons: {
                         confirm: {
-                            label: 'Yes',
+                            label: '{{trans("Yes")}}',
                         },
                         cancel: {
-                            label: 'No',
+                            label: '{{trans("No")}}',
                         }
                     },
-                    callback: function (result) {
+                    callback: function(result) {
                         if (result) {
                             $.ajax({
                                 url: route,
@@ -289,7 +289,7 @@
                                 dataType: 'json',
                                 data: data_serialized,
                             })
-                                .done(function (response) {
+                                .done(function(response) {
                                     if (response.success) {
                                         parent_row.fadeOut('slow');
 

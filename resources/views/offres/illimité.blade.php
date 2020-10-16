@@ -76,7 +76,7 @@
                             <label for="birth-date">{{ trans('pays_entreprise') }}</label><br>
                             <select class="birth-date form-control" name="" id="country" required>
                                 @foreach($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->native}}</option>
+                                    <option value="{{$country->id}}">{{$country->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">

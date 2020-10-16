@@ -193,9 +193,9 @@
                                             $count = auth()->user()->unreadNotifications->count();
                                             @endphp
                                         @if($count === 0)
-                                            notification
+                                            {{$count}} notification
                                         @else
-                                            notifications
+                                           {{$count}}  notifications
                                         @endif
                                         </li>
                                     <li>

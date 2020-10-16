@@ -21,7 +21,7 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
       <label for="birth-date">{{ trans('Pays') }}:</label><br>
       <select class="form-control" name="country_id" id="country">
           @foreach($countries as $country)
-              <option value="{{$country->id}}">{{$country->native}}</option>
+              <option value="{{$country->id}}">{{$country->name}}</option>
           @endforeach
       </select>
   </div>

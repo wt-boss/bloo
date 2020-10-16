@@ -37,7 +37,7 @@
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
                         <select class="form-control" name="" id="country" required>
                             @foreach($countries as $country)
-                                <option value="{{$country->id}}">{{$country->native}}</option>
+                                <option value="{{$country->id}}">{{$country->name}}</option>
                             @endforeach
                         </select>
                         <div id="div_region" style="display:none">

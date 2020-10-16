@@ -324,7 +324,7 @@
 @endsection
 
 @section('content')
-    @include('partials.alert', ['name' => 'index'])
+{{--    @include('admin.common.flash')--}}
     <div class="panel panel-flat panel-wb">
         <div class="panel-body" style="padding: 0;">
             <div class="row">
@@ -456,18 +456,33 @@
                                 <center><h1>@lang('Access management')</h1></center>
                                 <br>
                                 <ul class="list-group list-group">
-                                    <div class="form-group list-group-item">
-                                        <label for="exampleInputPassword1">@lang('Current Password')</label>
-                                        <input type="text" name="current_password" class="form-control">
-                                    </div>
-                                    <div class="form-group list-group-item">
+                                            <div class="form-group list-group-item row">
+                                                <div class="col-lg-11">
+                                                    <label for="exampleInputPassword1">@lang('Current Password')</label>
+                                                    <input type="password" name="current_password" class="form-control">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="unmask" type="button" title="Mask/Unmask password to check content"><i class="fas fa-eye"></i></button>
+                                                </div>
+                                            </div>
+                                    <div class="form-group list-group-item row">
+                                        <div class="col-lg-11">
                                         <label for="exampleInputPassword1">@lang('New Password')</label>
-                                        <input type="text" name="new_password" class="form-control">
+                                        <input type="password" name="new_password" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="unmask" type="button" title="Mask/Unmask password to check content"><i class="fas fa-eye"></i></button>
+                                        </div>
+
                                     </div>
-                                    <div class="form-group list-group-item">
+                                    <div class="form-group list-group-item row">
+                                        <div class="col-lg-11">
                                         <label for="exampleInputPassword1">@lang('Password Confirmation')</label>
-                                        <input type="text" name="password_confirmation" class="form-control">
-                                    </div>
+                                        <input type="password" name="password_confirmation" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="unmask" type="button" title="Mask/Unmask password to check content"><i class="fas fa-eye"></i></button>
+                                        </div>                                    </div>
                                 </ul>
                                 <br><br>
                                 <button type="submit" class="btn btn-primary pull-right">@lang('Send')</button>

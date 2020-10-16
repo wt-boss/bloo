@@ -31,15 +31,15 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { $countries  = Country::where('name','Cameroon')
-        ->orwhere('name','Central African Republic')
-        ->orwhere('name','Congo')
-        ->orwhere('name','Gabon')
-        ->orwhere('name','Equatorial Guinea')
-        ->orwhere('name','Chad')
-        ->orwhere('name','Nigeria')
-        ->orwhere('name','Angola')
-        ->orwhere('name','Congo The Democratic Republic Of The')
+    { $countries  = Country::where('id','38')
+        ->orwhere('id','42')
+        ->orwhere('id','50')
+        ->orwhere('id','79')
+        ->orwhere('id','67')
+        ->orwhere('id','43')
+        ->orwhere('id','161')
+        ->orwhere('id','7')
+        ->orwhere('id','51')
         ->get();
         return view('admin.users.create',compact('countries'));
     }
