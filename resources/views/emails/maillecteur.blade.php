@@ -34,10 +34,13 @@
                             </a>
                         </td>
                     </tr>
-                <td class="content-cell" >
-                    <h1 >Bonjour,</h1>
-                <p>Vous venez d'être ajouté comme lecteur de l'opération en cours. En vous connectant sur la plateforme<a href="https://blooapp.live/login">Bloo</a>, vous pourrez alors visualiser en temps réel les opérations de collecte ainsi que la géolocalisation des opérateurs.
-                        <br>Vous recevrez vos accès à la plateforme.
+
+                <td class="content-cell">
+                <h1 >Bonjour,</h1>
+                <p>
+                    Vous venez d'être ajouté comme lecteur de l'opération en cours. En vous connectant sur la plateforme <a href="#">Bloo</a>,
+                    vous pourrez alors visualiser en temps réel les opérations de collecte ainsi que la géolocalisation des opérateurs.<br>
+                    Vous recevrez vos accès à la plateforme.
                 </p>
 
                 <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" >
@@ -49,7 +52,8 @@
                                         <table border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td >
-                                                    <a href="https://blooapp.live/login" class="button button-blue" target="_blank" >Accéder à Bloo App
+
+                                                    <a href="{{ route('home') }}" class="button button-blue" target="_blank" >Accéder à Bloo App
                                                     </a>
                                                 </td>
 

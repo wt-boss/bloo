@@ -51,7 +51,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td >
-                                                    <a href="https://blooapp.live/login" class="button button-blue" target="_blank" >Accéder à Bloo App
+                                                    <a href="{{ route('home') }}" class="button button-blue" target="_blank" >Accéder à Bloo App
                                                     </a>
                                                 </td>
 
