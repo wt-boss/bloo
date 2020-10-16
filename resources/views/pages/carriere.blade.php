@@ -54,10 +54,10 @@
                                 <div id="menuone" class="collapse show">
                                     <div class="card-body">
                                     <p>{{ trans('carriere5') }} {{ trans('carriere06') }} <a href="#"> {{ trans('carriere07') }} </a> {{ trans('carriere08') }} </p>
-                                    <a href="#"> <img src="https://www.freepnglogos.com/images/app-store-png-logo-33115.html" alt=""></a>
-                                    <a href="#" title="Image from freepnglogos.com"><img src="https://www.freepnglogos.com/uploads/app-store-logo-png/google-play-and-apple-app-store-logos-22.png" width="200" alt="google play and apple app store logos" /></a>
-                                    {{-- 
-                                        
+                                    <a href="https://play.google.com/store/apps/details?id=com.infinitesolutions.bloosurvey"> <img src="https://www.freepnglogos.com/images/app-store-png-logo-33115.html" alt=""></a>
+                                    <a href="https://play.google.com/store/apps/details?id=com.infinitesolutions.bloosurvey" title="Image from freepnglogos.com"><img src="https://www.freepnglogos.com/uploads/app-store-logo-png/google-play-and-apple-app-store-logos-22.png" width="200" alt="google play and apple app store logos" /></a>
+                                    {{--
+
                                          <form action="{{ route('cv_submit') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
@@ -73,7 +73,7 @@
                                         </div>
                                     </form>
                                         --}}
-                                   
+
                                 </div>
                             </div>
                         </div>

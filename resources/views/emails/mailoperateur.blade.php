@@ -51,7 +51,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td >
-                                                    <a href="https://blooapp.live/login" class="button button-blue" target="_blank" >Accéder à Bloo App
+                                                    <a href="https://play.google.com/store/apps/details?id=com.infinitesolutions.bloosurvey" class="button button-blue" target="_blank" >Accéder à Bloo App
                                                     </a>
                                                 </td>
 

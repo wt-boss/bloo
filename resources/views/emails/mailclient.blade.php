@@ -25,7 +25,7 @@
                 <td class="body" width="100%" cellpadding="0" cellspacing="0" >
                         <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" >
                 <!-- Body content -->
-                
+
 
                 <i></i>
                     <tr>
@@ -38,7 +38,7 @@
                 <td class="content-cell" >
                     <h1 >Bienvenue sur Bloo,</h1>
                 <p>
-                    Votre paiement d'acompte a bien été réceptionné. Un <i>Account Manager</i>  vous contacte 
+                    Votre paiement d'acompte a bien été réceptionné. Un <i>Account Manager</i>  vous contacte
                     au plus vite et vous accompagnera pour toutes vos opérations.
                 </p>
 
@@ -51,7 +51,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" >
                                             <tr>
                                                 <td >
-                                                    <a href="#" class="button button-blue" target="_blank" >Accéder à Bloo App
+                                                    <a href="{{ route('home') }}" class="button button-blue" target="_blank" >Accéder à Bloo App
                                                     </a>
                                                 </td>
 
