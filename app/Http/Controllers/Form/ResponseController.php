@@ -54,11 +54,12 @@ class ResponseController extends Controller
 
             $location = new Location([
                 'user_id' => (string) Auth::check() ? Auth::user()->id : '',
-                'site_id' => $data['user-agent'],
+                'site_id' => $data['site_id'],
                 'operation_id' => $operation->id,
                 'lat' => $data['lat'],
                 'lng'=> $data['lng'],
             ]);
+            $location->save();
 
             if (!$form || $form->status !== Form::STATUS_OPEN) {
                 return response()->json([

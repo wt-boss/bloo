@@ -235,7 +235,15 @@
                                 @foreach ($operation->users as $user )
                                     @if ($user->role === 1)
                                 <tr>
-                                    <td class="m_operateur" data_lat="4.050000" data_lng="9.700000">
+                                    @php
+                                      $location = \App\Location::where('user_id',$user->id)->get()->last();
+                                    @endphp
+                                    <td class="m_operateur"
+                                    @if(!is_null($location))
+                                        data_lat="{{$location->lat}}" data_lng="{{$location->lng}}"
+                                    @endif
+                                    >
+
                                         <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                                         <span class="pull-right">
                                             @if (auth()->user()->hasRole('Superadmin|Account Manager'))

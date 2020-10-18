@@ -52,7 +52,7 @@ $fields = $form->fields()->filled()->get();
                             <input type="hidden" name="country_id" value="<?= isset($_GET['country_id'])?$_GET['country_id']:""; ?>">
                             <input type="hidden" name="ville" value="<?= isset($_GET['ville'])?$_GET['ville']:""; ?>">
                             <input type="hidden" name="lat" value="<?= isset($_GET['lat'])?$_GET['lat']:""; ?>">
-                            <input type="hidden" name="lng" value="<?= isset($_GET['lng'])?$_GET['country_id']:""; ?>">
+                            <input type="hidden" name="lng" value="<?= isset($_GET['lng'])?$_GET['lng']:""; ?>">
                         <div class="text-left mt-20">
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>
