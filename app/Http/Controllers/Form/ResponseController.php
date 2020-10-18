@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Form;
 
 use App\Form;
+use App\Location;
 use App\Operation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -47,6 +48,17 @@ class ResponseController extends Controller
         $pusher->trigger('responce-channel', 'my-event', $data);
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
+            $data = $request->all();
+            $operation = Operation::where('form_id',$form->id)->get()->first();
+            //Ssuvegarde de la position de l'operateur
+
+            $location = new Location([
+                'user_id' => (string) Auth::check() ? Auth::user()->id : '',
+                'site_id' => $data['user-agent'],
+                'operation_id' => $operation->id,
+                'lat' => $data['lat'],
+                'lng'=> $data['lng'],
+            ]);
 
             if (!$form || $form->status !== Form::STATUS_OPEN) {
                 return response()->json([
