@@ -59,8 +59,8 @@ class ResponseController extends Controller
                     'user_id' =>  Auth::check() ? Auth::user()->id : 0,
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
                     'operation_id' => $operation->id ,
-                    'lat' => $data['lat'],
-                    'lng'=> $data['lng']
+                    'lat' => str_replace(',', '.', $data['lat']),
+                    'lng'=> str_replace(',', '.', $data['lng'])
                 ]);
 
                 $location->save();
