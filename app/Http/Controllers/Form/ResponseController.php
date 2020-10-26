@@ -54,16 +54,16 @@ class ResponseController extends Controller
             //On verfie si c'est un sondage gratuit ou payant
             if(!empty($operation))
             {
-            //Sauvegarde de la position de l'operateur
-            $location = new Location([
-                'user_id' =>  Auth::check() ? Auth::user()->id : 0,
-                'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
-                'operation_id' => $operation->id ,
-                'lat' => $data['lat'],
-                'lng'=> $data['lng'],
-            ]);
-            
-            $location->save();
+                //Sauvegarde de la position de l'operateur
+                $location = new Location([
+                    'user_id' =>  Auth::check() ? Auth::user()->id : 0,
+                    'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
+                    'operation_id' => $operation->id ,
+                    'lat' => $data['lat'],
+                    'lng'=> $data['lng'],
+                ]);
+
+                $location->save();
             }
 
 
