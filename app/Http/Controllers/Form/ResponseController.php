@@ -60,7 +60,7 @@ class ResponseController extends Controller
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
                     'operation_id' => $operation->id ,
                     'lat' => $data['lat'],
-                    'lng'=> $data['lng'],
+                    'lng'=> $data['lng']
                 ]);
 
                 $location->save();

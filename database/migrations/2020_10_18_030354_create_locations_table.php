@@ -18,8 +18,8 @@ class CreateLocationsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("operation_id");
             $table->unsignedBigInteger("site_id")->nullable();
-            $table->double("lng")->nullable();
-            $table->double("lat")->nullable();
+            $table->float('lat', 60, 25)->nullable();
+            $table->float('lng', 60, 25)->nullable();
             $table->timestamps();
         });
     }
