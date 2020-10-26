@@ -50,12 +50,12 @@ class ResponseController extends Controller
             $form = Form::where('code', $form)->first();
             $data = $request->all();
             $operation = Operation::where('form_id',$form->id)->get()->first();
-            //Ssuvegarde de la position de l'operateur
 
+            //Sauvegarde de la position de l'operateur
             $location = new Location([
-                'user_id' => (string) Auth::check() ? Auth::user()->id : '',
-                'site_id' => $data['site_id'],
-                'operation_id' => $operation->id,
+                'user_id' =>  Auth::check() ? Auth::user()->id : 0,
+                'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
+                'operation_id' => !empty($operation) ? $operation->id : 0,
                 'lat' => $data['lat'],
                 'lng'=> $data['lng'],
             ]);

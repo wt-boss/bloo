@@ -196,9 +196,9 @@
     "Forgot Your Password?": "Mot de passe oublié ?",
     "Confirm Password": "Confirmer Mot de passe : ",
     "Confirm ": "Confirmer Mot de passe : ",
-    "free_survey_form_title": "Entrer le titre : ",
-    "free_survey_form_target": "Entrer l'objectif : ",
-    "free_survey_form_id": "Entrer l'ID du sondage : ",
+    "free_survey_form_title": "Entrer le titre ",
+    "free_survey_form_target": "Entrer l'objectif ",
+    "free_survey_form_id": "Entrer l'ID du sondage ",
 
 
     "t&c": "TERMES ET CONDITIONS",
