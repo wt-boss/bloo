@@ -48,7 +48,7 @@ $fields = $form->fields()->filled()->get();
                                 @endforeach
                             @endif
                         </div>
-                            <input type="hidden" name="site_id" value="<?= isset($_GET['site'])?$_GET['site']:""; ?>">
+                            <input type="hidden" name="site_id" value="<?= isset($_GET['site_id'])?$_GET['site']:""; ?>">
                             <input type="hidden" name="country_id" value="<?= isset($_GET['country_id'])?$_GET['country_id']:""; ?>">
                             <input type="hidden" name="ville" value="<?= isset($_GET['ville'])?$_GET['ville']:""; ?>">
                             <input type="hidden" name="lat" value="<?= isset($_GET['lat'])?$_GET['lat']:""; ?>">
