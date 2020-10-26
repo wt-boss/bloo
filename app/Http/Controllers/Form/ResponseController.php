@@ -51,15 +51,21 @@ class ResponseController extends Controller
             $data = $request->all();
             $operation = Operation::where('form_id',$form->id)->get()->first();
 
+            //On verfie si c'est un sondage gratuit ou payant
+            if(!empty($operation))
+            {
             //Sauvegarde de la position de l'operateur
             $location = new Location([
                 'user_id' =>  Auth::check() ? Auth::user()->id : 0,
                 'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
-                'operation_id' => !empty($operation) ? $operation->id : 0,
+                'operation_id' => $operation->id ,
                 'lat' => $data['lat'],
                 'lng'=> $data['lng'],
             ]);
+            
             $location->save();
+            }
+
 
             if (!$form || $form->status !== Form::STATUS_OPEN) {
                 return response()->json([
