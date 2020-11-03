@@ -73,7 +73,9 @@ class FormController extends Controller
                 'user_id' => auth()->user()->id
         ]);
         $form->generateCode();
+        $form->generatePassword();
         $form->save();
+
         return redirect()->route('forms.show', $form->code);
     }
 
@@ -107,6 +109,9 @@ class FormController extends Controller
         ]);
 
         $form->generateCode();
+
+        $form->generatePassword();
+
         $current_user->forms()->save($form);
 
         return redirect()->route('forms.show', $form->code);
@@ -126,8 +131,8 @@ class FormController extends Controller
     {
         $parameters = $request->all();
 
-        $formcount = Form::where('code',$request['code'])->get()->count();
-        $form = Form::where('code',$request['code'])->get()->last();
+        $formcount = Form::where('password',$request['code'])->get()->count();
+        $form = Form::where('password',$request['code'])->get()->last();
         if ($formcount !== 0){
             $user_id = $form->user_id;
             $user = User::findOrFail($user_id);

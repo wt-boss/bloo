@@ -178,9 +178,6 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 
 Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Account Manager|Lecteur|Opérateur','Free','verification']);
 
-
-//Questionnaire post
-
 //language
 Route::get('language', 'PagesController@language')->name('language');
 Route::get('localization/{locale}','LocalizationController@index');

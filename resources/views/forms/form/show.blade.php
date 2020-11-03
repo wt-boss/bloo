@@ -52,7 +52,7 @@
                 <button style="background-color: #0065a1; color:#fff; top:38px;" class="btn pull-right" type="button"  data-clipboard-action="copy" data-clipboard-target="#token">
                     <i class="fa fa-clone" aria-hidden="true"></i>
                 </button>
-                <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->code}}" readonly />
+                <input class="form-control" style="font-size: 16px"  id="token" value="{{$form->password}}" readonly />
                 <small class="form-text text-warning  col-xs-12">{{ trans('keep_code') }}</small>
             </div>
         @endif

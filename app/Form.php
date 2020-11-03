@@ -24,7 +24,7 @@ class Form extends Model
     protected $cascadeDeletes = ['fields', 'responses'];
 
     protected $fillable = [
-        'user_id',  'operation_id', 'title', 'description', 'code', 'status',
+        'user_id',  'operation_id', 'title', 'description', 'code', 'status','password'
     ];
 
 
@@ -62,8 +62,15 @@ class Form extends Model
     public function generateCode()
     {
         do {
-            $this->code = Str::random(9);
+            $this->code = Str::random(32);
         } while (static::where('code', $this->code)->exists());
+    }
+
+    public function generatePassword()
+    {
+        do {
+            $this->password = Str::random(9);
+        } while (static::where('password', $this->password)->exists());
     }
 
     public function shareFormViaMail($email, $data)
