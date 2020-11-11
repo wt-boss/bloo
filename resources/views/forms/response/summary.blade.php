@@ -127,6 +127,7 @@
     </script>
 
     <script type="text/javascript">
+
         setInterval(function(){
             google.charts.load('current', {'packages':['corechart']});
 
@@ -209,9 +210,7 @@
             }).save();
 
 
-        };
-
-
+        }
         document.getElementById('download_pdf').onclick = function () {
             // Simple Slide
 
@@ -219,14 +218,13 @@
             impresion.style.display = 'block';
             impresion.style.visibility = 'hidden';
             let data_for_chart = {!! json_encode($data_for_chart) !!};
-
             if (typeof data_for_chart === 'object' && data_for_chart instanceof Array && data_for_chart.length) {
                 google.charts.setOnLoadCallback(function () {
                     drawCharts(data_for_chart);
-                    printpdf();
                     setInterval(reload, 3000)
                 });
             }
+            printpdf();
 
 
         };
