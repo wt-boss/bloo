@@ -197,7 +197,6 @@
             }).save();
         }
 
-
         // document.getElementById('download_pdf').onclick = function () {
         //     let impresion =  document.getElementById('print');
         //     impresion.style.display = 'initial';
