@@ -47,7 +47,7 @@
         @if (!$loop->last)
             <hr>
             <div class="html2pdf__page-break"></div>
-            <p style="font-size:0.25mm" >test</p>
+            <p style="font-size:0.025mm" >test</p>
         @endif
     @endforeach
 </div>
@@ -160,12 +160,14 @@
             var element = document.getElementById('responsesprint');
             var opt = {
                 margin:      [20, 20, 20, 20] ,
+                pagebreak: { mode: ['avoid-all','legacy'] },
                 enableLinks: true,
                 filename:     '{{$form->title}}.pdf',
                 image:        { type: 'jpeg', quality: .95 },
                 html2canvas:  {scale: 1},
                 jsPDF:        { unit: 'mm', format: 'letter', orientation: 'landscape' }
             };
+            
 
             html2pdf().from(element).set(opt).toPdf().get('pdf').then(function (pdf) {
                 var totalPages = pdf.internal.getNumberOfPages();
