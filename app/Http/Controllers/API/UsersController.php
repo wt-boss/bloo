@@ -59,10 +59,10 @@ class UsersController extends Controller
         return response()->json($result,200);
     }
 
-    public function cityoperation($id)
+    public function cityoperation()
     {
         $Villes = collect();
-        $user = User::findOrFail($id);
+        $user = auth()->user();
         $country = Country::findOrFail($user->country_id);
         $sites = Site::where('country_id',$country->id)->get()->GroupBy('ville');
         foreach ($sites as $site => $value)

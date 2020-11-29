@@ -40,6 +40,6 @@ Route::get('/getcities/{id}','API\LocationController@getcities');
 Route::get('/getcitiesoperations','API\LocationController@getoperationscities');
 
 /** Villes dans lesquelles il y'a eu une operation */
-Route::get('/usercityoperation/{id}','API\UsersController@cityoperation');
+Route::get('/usercityoperation','API\UsersController@cityoperation');
 
 
