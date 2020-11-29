@@ -42,4 +42,8 @@ Route::get('/getcitiesoperations','API\LocationController@getoperationscities');
 /** Villes dans lesquelles il y'a eu une operation */
 Route::get('/usercityoperation','API\UsersController@cityoperation');
 
+/**Recuperer une ville grace a son id */
+Route::get('/getcity/{id}','API\UsersController@getcity');
+
+
 

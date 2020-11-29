@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\City;
 use App\Country;
 use App\Http\Controllers\Controller;
 use App\Operation;
@@ -74,5 +75,11 @@ class UsersController extends Controller
             }
         }
         return response()->json($Villes,200);
+    }
+
+    public function getcity($id)
+    {
+        $city = City::findOrFail($id);
+        return response()->json($city,200);
     }
 }
