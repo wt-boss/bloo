@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => 'pieces']);
+        $this->middleware('auth:api', ['except' => 'pieces', 'getcity']);
         $this->guard = "api";
     }
 
