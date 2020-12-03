@@ -54,15 +54,10 @@
                                 </td>
 
                                 <td>
-                                    @if($user->isOnline())
-                                        <li class= "text-success">
-                                            Online
-                                        </li>
-
-                                        @else($user->isOnline())
-                                        <li class= "text-muted">
-                                            ofline
-                                        </li>
+                                    @if(Cache::has('user-is-online-' . $user->id))
+                                        <span class="text-success">Online</span>
+                                        @else
+                                        <span class="text-secondary">Offline</span>
                                     @endif
 
                                 </td>
