@@ -193,11 +193,11 @@
                                       </span>
                                     </td>
                                      <td>
-                                         @if($user->isOnline())
-                                             <li class= "text-success">Online</li>
-                                         @else($user->isOnline())
-                                             <li class= "text-muted">ofline</li>
-                                         @endif
+                                          @if(Cache::has('user-is-online-' . $user->id))
+                                                <li class="text-success">Online</li>
+                                            @else
+                                                <li class="text-secondary">Offline</li>
+                                        @endif
                                      </td>
                                  </tr>
                               @endif
@@ -253,9 +253,9 @@
                                     </td>
                                     <td>
                                          @if(Cache::has('user-is-online-' . $user->id))
-                                                <span class="text-success">Online</span>
+                                                <li class="text-success">Online</li>
                                             @else
-                                                <span class="text-secondary">Offline</span>
+                                                <li class="text-secondary">Offline</li>
                                         @endif
                                     </td>
                                 </tr>
