@@ -33,7 +33,15 @@ $fields = $form->fields()->filled()->get();
                 </div>
 
                 <div class="panel-body">
+                    @php
+                        $mobile = isset($_GET['mobile'])?$_GET['mobile']:"";
+                    @endphp
+
+                    @if($mobile == "true")
+                    <form id="user-form" action="{{ ($view_type === 'form') ? route('forms.responses.store.mobile', $form->code) : "#" }}" method="{{ ($view_type === 'form') ? "post" : "get" }}" autocomplete="off">
+                    @else
                     <form id="user-form" action="{{ ($view_type === 'form') ? route('forms.responses.store', $form->code) : "#" }}" method="{{ ($view_type === 'form') ? "post" : "get" }}" autocomplete="off">
+                    @endif
                         @if ($view_type === 'form') @csrf @endif
                         <div id="form-fields" class="mt-15 mb-15">
                             @php $formatted_fields = []; @endphp
@@ -56,6 +64,7 @@ $fields = $form->fields()->filled()->get();
                             <input type="hidden" name="ville" value="<?= isset($_GET['ville'])?$_GET['ville']:""; ?>">
                             <input type="hidden" name="lat" value="<?= isset($_GET['lat'])?$_GET['lat']:""; ?>">
                             <input type="hidden" name="lng" value="<?= isset($_GET['lng'])?$_GET['lng']:""; ?>">
+                            <input type="hidden" name="token" value="<?= isset($_GET['token'])?$_GET['token']:""; ?>">
                         <div class="text-left mt-20">
                             <button id="submit" type="{{ ($view_type === 'form') ? 'submit' : 'button' }}" class="btn btn-primary" data-loading-text="@lang('Chargement des données')" data-complete-text="Submit Form">{{ trans('Soumettre_le_formulaire') }}</button>
                         </div>

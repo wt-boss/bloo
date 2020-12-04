@@ -102,6 +102,8 @@ Route::get('/removeoperateurs/{id}/{id1}','OperationController@removeoperateur')
 Route::namespace('Form')->group(function () {
     Route::get('forms/{form}/view', 'FormController@viewForm')->name('forms.view');
     Route::post('forms/{form}/responses', 'ResponseController@store')->name('forms.responses.store');
+    // Route::post('forms/{form}/responses', 'API\ResponseController@store')->name('forms.responses.store.mobile');
+
 });
 
 //Notications Route
