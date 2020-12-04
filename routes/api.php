@@ -48,7 +48,6 @@ Route::get('/getcity/{id}','API\UsersController@getcity');
 
 Route::post('forms/{form}/responses', 'API\ResponceController@store')->name('forms.responses.store.mobile');
 
-// Route::get('giren', 'API\ResponceController@store')->name('forms.responses.store.mobile');
 
 
 
