@@ -193,11 +193,11 @@
                                       </span>
                                     </td>
                                      <td>
-                                         @if($user->isOnline())
-                                             <li class= "text-success">Online</li>
-                                         @else($user->isOnline())
-                                             <li class= "text-muted">ofline</li>
-                                         @endif
+                                          @if(Cache::has('user-is-online-' . $user->id))
+                                                <li class="text-success">Online</li>
+                                            @else
+                                                <li class="text-secondary">Offline</li>
+                                        @endif
                                      </td>
                                  </tr>
                               @endif
@@ -252,15 +252,10 @@
                                        </span>
                                     </td>
                                     <td>
-                                        @if($user->isOnline())
-                                            <li class= "text-success">
-                                                Online
-                                            </li>
-
-                                        @else($user->isOnline())
-                                            <li class= "text-muted">
-                                                ofline
-                                            </li>
+                                         @if(Cache::has('user-is-online-' . $user->id))
+                                                <li class="text-success">Online</li>
+                                            @else
+                                                <li class="text-secondary">Offline</li>
                                         @endif
                                     </td>
                                 </tr>
