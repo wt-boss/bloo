@@ -2,16 +2,16 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Hash;
 use Mail;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Mail\EmailVerificationMail;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Cache;
 class User extends Authenticatable implements JWTSubject
 {
