@@ -346,18 +346,23 @@
         <!-- /.container -->
     </footer>
     @yield('admin_lte_script')
+
     @yield('laraform_script1')
+
     @yield('plugin-scripts')
+
     @yield('laraform_script2')
+
     @yield('page-script')
+
     <script>
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-        var pusher = new Pusher('1702f90c00112df631a4', {
-            cluster: 'ap2'
-        });
+        // Pusher.logToConsole = true;
+        // var pusher = new Pusher('1702f90c00112df631a4', {
+        //     cluster: 'ap2'
+        // });
 
-        var channel = pusher.subscribe('my-channel');
+        // var channel = pusher.subscribe('my-channel');
         channel.bind('notification-event', function(data) {
             $.get('/jsonotifications',function(data) {
                 console.log(data)

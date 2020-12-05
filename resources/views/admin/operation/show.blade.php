@@ -268,10 +268,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="text-center">
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
+                        <div class="text-center">
+                            {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
-                        </div> --}}
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -307,7 +307,6 @@
              {!! $viewprint !!}
          </div>
      </div>
-
 
     <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -400,9 +399,10 @@
                 }else{
                     lat = $(this).attr("data_lat");
                     lng = $(this).attr("data_lng");
+                    console.log(lat);
+                    console.log(lng);
                     first_name = $(this).find(".op_first_name").html();
                     last_name = $(this).find(".op_last_name").html();
-
                     $(this).addClass('op_active');
                     $('.m_btn_op').removeClass('disabled');
                 }
@@ -410,6 +410,7 @@
 
             $('.m_btn_location').click(function(){
                 let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                console.log(position);
                 map.setCenter(position);
                 let marker = new google.maps.Marker({
                     position: position,
@@ -635,6 +636,7 @@
             });
         });
     </script>
+
     <script>
 
         // Enable pusher logging - don't include this in production
@@ -671,6 +673,7 @@
 
         });
     </script>
+
     <script>
         $('#countries').on('change', function(e){
 
