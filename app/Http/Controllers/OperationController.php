@@ -150,6 +150,8 @@ class OperationController extends Controller
         foreach ($parameters['operateurs'] as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
+            /** Mail aux operateurs **/
+            Mail::to($user->email)->send(new BlooOperateur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
