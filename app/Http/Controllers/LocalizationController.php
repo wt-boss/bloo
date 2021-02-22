@@ -10,6 +10,6 @@ class LocalizationController extends Controller
         App::setlocale($locale);
         $cookie = cookie('lang_blooapp', $locale, 525600);
         session()->put('locale', $locale);
-        return redirect()->back()->cookie($cookie );
+        return redirect()->back()->cookie($cookie);
     }
 }
