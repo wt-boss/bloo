@@ -163,6 +163,9 @@ class ResponceController extends Controller
                 $field_response = new FieldResponse([
                     'form_response_id' => $response->id,
                     'answer' => is_array($value) ? json_encode($value) : $value,
+                    'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
+                    'ville' => isset($data['site_id']) ? $data['site_id'] : 0,
+                    'country_id' => isset($data['site_id']) ? $data['site_id'] : 0
                 ]);
 
                 $field->responses()->save($field_response);

@@ -168,7 +168,7 @@ class ResponseController extends Controller
 
                 $field_response = new FieldResponse([
                     'form_response_id' => $response->id,
-                    'answer' => is_array($value) ? json_encode($value) : $value,
+                    'answer' => is_array($value) ? json_encode($value) : $value
                 ]);
 
                 $field->responses()->save($field_response);
