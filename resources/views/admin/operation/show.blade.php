@@ -113,7 +113,7 @@
                                  <option selected value="0">...</option>
                                  <option value="1">Pays</option>
                                  <option value="2">Sites</option>
-                                 <option value="3">Opérateurs</option>
+                                 {{-- <option value="3">Opérateurs</option> --}}
                              </select>
 
                             <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">

@@ -15,6 +15,7 @@ use Validator;
 use App\FormResponse;
 use App\FieldResponse;
 use App\Exports\FormResponseExport;
+use App\Site;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ResponceController extends Controller
@@ -160,12 +161,19 @@ class ResponceController extends Controller
                 $attribute = str_replace('.', '_', $field->attribute);
                 $value = $request->input($attribute);
 
+
+                 if(isset($data['site_id']))
+                 {
+                    $site = Site::findOrFail($data['site_id']);
+                    $country_id = $site->country_id;
+                 }
+
                 $field_response = new FieldResponse([
                     'form_response_id' => $response->id,
                     'answer' => is_array($value) ? json_encode($value) : $value,
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
-                    'ville' => isset($data['site_id']) ? $data['site_id'] : 0,
-                    'country_id' => isset($data['site_id']) ? $data['site_id'] : 0
+                    'ville' => isset($data['ville']) ? $data['ville'] : 0,
+                    'country_id' => $country_id
                 ]);
 
                 $field->responses()->save($field_response);
