@@ -341,7 +341,7 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_ops') }}</font></font></h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('ajoutlecteur') }}">
+                <form method="POST" action="{{ route('ajoutoperateur') }}">
                     @csrf
                     <input type="hidden" name="operation" value="{{ $operation->id }}" />
                     <div id="dataoperateurs">
