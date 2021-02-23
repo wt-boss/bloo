@@ -152,7 +152,7 @@ class OperationController extends Controller
             $user->operations()->attach($operation);
             /** Mail aux operateurs **/
             Mail::to($user->email)->send(new BlooOperateur());
-            Mail::to($user->email)->send(new BlooLecteur());
+            //Mail::to($user->email)->send(new BlooLecteur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
