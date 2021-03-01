@@ -594,10 +594,26 @@
     {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
     <script>
         $(function() {
+
             $('.datatable').DataTable(
                 {
                     "bLengthChange" : false, //thought this line could hide the LengthMenu
-                    "searching": false
+                    "searching": false,
+                    "language": {
+                        @if( app()->getLocale() === "fr" )
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                        @endif
+                            @if( app()->getLocale() === "en")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                        @endif
+                            @if( app()->getLocale() === "es")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                        @endif
+                            @if( app()->getLocale() === "pt")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                        @endif
+                    }
+
                 })
         });
     </script>
