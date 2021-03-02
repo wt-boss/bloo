@@ -166,13 +166,13 @@ class ResponceController extends Controller
                  {
                     $site = Site::findOrFail($data['site_id']);
                     $country_id = $site->country_id;
-                 }
+                    $ville = $site->city_id;                 }
 
                 $field_response = new FieldResponse([
                     'form_response_id' => $response->id,
                     'answer' => is_array($value) ? json_encode($value) : $value,
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
-                    'ville' => isset($data['ville']) ? $data['ville'] : 0,
+                    'ville' => $ville ,
                     'country_id' => $country_id
                 ]);
 

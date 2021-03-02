@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Country;
 use App\Operation;
 use App\User;
@@ -71,6 +72,18 @@ class SiteController extends Controller
             if($perc > 50)
             {
                 $parameters['country_id'] = $country->id;
+
+                $cities = City::where('country_id', $parameters['country_id'])->get();
+
+                foreach ($cities as $city)
+                {
+                    similar_text($parameters['ville'],$city->name, $perc);
+                    if($perc > 50)
+                    {
+                        $parameters['city_id'] = $city->id;
+                    }
+                }
+
             }
         }
 

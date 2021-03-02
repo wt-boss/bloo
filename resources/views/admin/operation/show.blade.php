@@ -113,7 +113,8 @@
                                  <option selected value="0">...</option>
                                  <option value="1">Pays</option>
                                  <option value="2">Sites</option>
-                                 {{-- <option value="3">Opérateurs</option> --}}
+                                  <option value="3">Villes</option>
+                                  <option value="4">Opérateurs</option>
                              </select>
 
                             <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
@@ -127,8 +128,6 @@
                             </select>
                         </ul>
                         <span class="pull-right">
-
-
                             {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
