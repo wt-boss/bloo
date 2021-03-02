@@ -231,6 +231,8 @@ Route::get('/json-allcountries','HomeController@allcountries');
 Route::get('/json-allstates','HomeController@allstates');
 Route::get('/json-allcities','HomeController@allcities');
 
+
+
 Route::get('/jsonmapcountries','HomeController@jsonmapcountries');
 Route::get('/jsonmapcountries2','HomeController@jsonmapcountries2');
 Route::get('/jsonmapcities','HomeController@jsonmapcities');
@@ -279,12 +281,19 @@ Route::get('/operation/{id}/{paysid}','OperationController@TryPays')->name('TryP
 Route::get('/siteoperation/{id}/{siteid}','OperationController@TrySites')->name('TrySites');
 
 /** Route pour le tri par ville*/
-Route::get('/villeoperation/{id}/{ville}','OperationController@TryVilles')->name('TrySites');
+Route::get('/villeoperation/{id}/{ville}','OperationController@TryVilles')->name('TryVilles');
+
+/** Route pour le tri par Operateur*/
+Route::get('/useroperation/{id}/{userid}','OperationController@TryUsers')->name('TryUsers');
 
 /** Route pour avoir les sites d'une operations */
 Route::get('/operationsites/{id}','OperationController@getSites')->name('getsites');
 
 /** Route pour avoir les villes d'une operations */
 Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvilles');
+
+
+/** Liste des operateurs pour le tri*/
+Route::get('/tryoperateurs/{id}','OperationController@tryOperateurs');
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Entreprise;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
@@ -143,13 +144,14 @@ class OperationController extends Controller
      */
     public function addoperateurs(Request $request)
     {
-
         $parameters = $request->all();
+
         $operation = Operation::findOrFail($parameters['operation']);
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
-        foreach ($parameters['operateurs'] as $operateur) {
+        foreach ($parameters['lecteurs']as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
+            /** Mail aux operateurs **/
             Mail::to($user->email)->send(new BlooOperateur());
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
@@ -434,7 +436,6 @@ class OperationController extends Controller
         }
     }
 
-
     public function pdf($id, Request $request)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -486,7 +487,6 @@ class OperationController extends Controller
             return view('admin.operation.pdf', compact('view', 'viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart', 'data_for_chart2'));
         }
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -675,7 +675,6 @@ class OperationController extends Controller
      * @return array
      */
 
-
     public function TrySites($id, $siteid)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -758,13 +757,55 @@ class OperationController extends Controller
         ];
     }
 
+    public function TryUsers($id, $userid)
+    {
+
+        $operation = Operation::with('entreprise')->findOrFail($id);
+
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartUser($userid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+
+        }
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartUser2($userid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+
+        }
+
+        $view = (string)View::make('admin.operation.partials.responseuser', compact('operation', 'form', 'responses','userid'));
+        $viewprint = (string)View::make('admin.operation.partials.responseuserprint', compact('operation', 'form', 'responses','userid'));
+
+        return [
+            'response_view' => $view,
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
+        ];
+    }
+
+
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function getSites($id)
     {
-        $operation = Operation::with('sites')->findOrFail($id);
+         $operation = Operation::with('sites')->findOrFail($id);
          return response()->json($operation->sites()->get());
     }
 
@@ -774,16 +815,18 @@ class OperationController extends Controller
      */
     public function getVilles($id)
     {
-        $Villes = collect();
-        $operation = Operation::with('sites')->findOrFail($id);
-        $sites = $operation->sites()->get()->GroupBy('ville');
-        foreach ($sites as $site => $value)
-        {
-            $Villes->push($site);
-        }
-        return response()->json($Villes);
+
+        $operation = Operation::with('cities')->findOrFail($id);
+        return response()->json($operation->cities);
     }
 
+
+    public function tryOperateurs($id)
+    {
+        $operation = Operation::findOrFail($id);
+        $users = $operation->users()->where('role', '1')->get();
+        return response()->json($users);
+    }
 
 
 }

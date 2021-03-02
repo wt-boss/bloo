@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Country;
 use App\Operation;
 use App\User;
@@ -68,9 +69,21 @@ class SiteController extends Controller
         foreach ($countries as $country)
         {
             similar_text($parameters['pays'],$country->name, $perc);
-            if($perc > 50)
+            if($perc > 60)
             {
                 $parameters['country_id'] = $country->id;
+
+                $cities = City::where('country_id', $parameters['country_id'])->get();
+
+                foreach ($cities as $city)
+                {
+                    similar_text($parameters['ville'],$city->name, $perc);
+                    if($perc > 80)
+                    {
+                        $parameters['city_id'] = $city->id;
+                    }
+                }
+
             }
         }
 
@@ -85,6 +98,11 @@ class SiteController extends Controller
         }
         else{
             $sites = Site::create($parameters);
+            $city = City::findOrFail($parameters['city_id']);
+            $operation = Operation::findOrFail($parameters['operation_id']);
+            //$city->operations()->attach($operation);
+            //$city->operations()->attach($operation);
+            $operation->cities()->attach($city);
             $result = Site::orderby('id')->get()->last();
         }
         return response()->json($result);

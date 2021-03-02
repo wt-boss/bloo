@@ -113,7 +113,8 @@
                                  <option selected value="0">...</option>
                                  <option value="1">Pays</option>
                                  <option value="2">Sites</option>
-                                 <option value="3">Opérateurs</option>
+                                  <option value="3">Villes</option>
+                                  <option value="4">Opérateurs</option>
                              </select>
 
                             <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
@@ -125,10 +126,11 @@
                             <select id="select3" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
 
                             </select>
+                            <select id="select4" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
+                            </select>
                         </ul>
                         <span class="pull-right">
-
-
                             {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
                             <a id="download_pdf" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
@@ -140,6 +142,9 @@
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
                             <a id="download_ville_pdf" style="display: none" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
+                             </a>
+                            <a id="download_user_pdf" style="display: none" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
                              @if (auth()->user()->hasRole('Superadmin|Account Manager'))
@@ -263,10 +268,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="text-center">
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
+                        <div class="text-center">
+                            {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
-                        </div> --}}
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -302,7 +307,6 @@
              {!! $viewprint !!}
          </div>
      </div>
-
 
     <div class="modal fade bd-example-modal-lg"  id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -342,7 +346,7 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_ops') }}</font></font></h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('ajoutlecteur') }}">
+                <form method="POST" action="{{ route('ajoutoperateur') }}">
                     @csrf
                     <input type="hidden" name="operation" value="{{ $operation->id }}" />
                     <div id="dataoperateurs">
@@ -395,9 +399,10 @@
                 }else{
                     lat = $(this).attr("data_lat");
                     lng = $(this).attr("data_lng");
+                    console.log(lat);
+                    console.log(lng);
                     first_name = $(this).find(".op_first_name").html();
                     last_name = $(this).find(".op_last_name").html();
-
                     $(this).addClass('op_active');
                     $('.m_btn_op').removeClass('disabled');
                 }
@@ -405,6 +410,7 @@
 
             $('.m_btn_location').click(function(){
                 let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                console.log(position);
                 map.setCenter(position);
                 let marker = new google.maps.Marker({
                     position: position,
@@ -593,10 +599,26 @@
     {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
     <script>
         $(function() {
+
             $('.datatable').DataTable(
                 {
                     "bLengthChange" : false, //thought this line could hide the LengthMenu
-                    "searching": false
+                    "searching": false,
+                    "language": {
+                        @if( app()->getLocale() === "fr" )
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                        @endif
+                            @if( app()->getLocale() === "en")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                        @endif
+                            @if( app()->getLocale() === "es")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                        @endif
+                            @if( app()->getLocale() === "pt")
+                        "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                        @endif
+                    }
+
                 })
         });
     </script>
@@ -630,6 +652,7 @@
             });
         });
     </script>
+
     <script>
 
         // Enable pusher logging - don't include this in production
@@ -666,6 +689,7 @@
 
         });
     </script>
+
     <script>
         $('#countries').on('change', function(e){
 
@@ -679,19 +703,23 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "none";
+                    element4.style.display = "none";
 
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "initial";
                     button2.style.display = "none";
                     button3.style.display = "none";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
                     $('#responses').empty()
@@ -738,9 +766,12 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "initial";
                     element2.style.display = "none";
                     element3.style.display = "none";
+                    element4.style.display = "none";
+
                     $('#select1').append('<option value="Selectionnez un pays">@lang('Select a country')</option>');
                     $.each(data, function(index, countriesObj){
                         $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
@@ -756,9 +787,11 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "initial";
                     element3.style.display = "none";
+                    element4.style.display = "none";
                   ;
                     $('#select2').append('<option value="Selectionnez un site">@lang('Select a site')</option>');
                     $.each(data, function(index, sitesObj){
@@ -774,12 +807,35 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "initial";
+                    element4.style.display = "none";
                     $('#select3').append('<option value="Selectionnez une ville">@lang('Select a city')</option>');
                     $.each(data, function(index, sitesObj){
-                        $('#select3').append('<option value="'+ sitesObj +'">'+ sitesObj +'</option>');
+                        $('#select3').append('<option value="'+ sitesObj.id +'">'+ sitesObj.name +'</option>');
+                    })
+                });
+            }
+
+            if(sortoption == 4)
+            {
+                $.get('/tryoperateurs/'+{{$operation->id}},function(data) {
+                    console.log(data);
+                    $('#select4').empty();
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
+                    element1.style.display = "none";
+                    element2.style.display = "none";
+                    element3.style.display = "none";
+                    element4.style.display = "initial";
+
+                    $('#select4').append('<option value="Selectionnez une ville">@lang('Select an operator')</option>');
+                    $.each(data, function(index, sitesObj){
+                        $('#select4').append('<option value="'+ sitesObj.id +'">'+ sitesObj.first_name + ' ' + sitesObj.last_name +' </option>');
                     })
                 });
             }
@@ -796,11 +852,13 @@
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "initial";
                     button3.style.display = "none";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
 
@@ -851,11 +909,13 @@
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "initial";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
                     $('#responses').empty()
@@ -891,18 +951,67 @@
         $('#select3').on('change', function(e){
             let ville = e.target.value;
             {
-
                 $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
                     console.log(response);
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "none";
+                    button5.style.display = "none";
                     button4.style.display = "initial";
+
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+
+                    document.getElementById('download_ville_pdf').onclick = function () {
+                        let impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
+                });
+            }
+        });
+
+        $('#select4').on('change', function(e){
+            let userid = e.target.value;
+            {
+                $.get('/useroperation/'+'{{$operation->id}}'+'/'+ userid,function(response) {
+                    console.log(response);
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
+
+                    button1.style.display = "none";
+                    button2.style.display = "none";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                    button5.style.display = "initial";
+
 
                     $('#responses').empty()
                         .append(response.response_view);
