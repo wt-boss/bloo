@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Entreprise;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
@@ -435,7 +436,6 @@ class OperationController extends Controller
         }
     }
 
-
     public function pdf($id, Request $request)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -487,7 +487,6 @@ class OperationController extends Controller
             return view('admin.operation.pdf', compact('view', 'viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart', 'data_for_chart2'));
         }
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -676,7 +675,6 @@ class OperationController extends Controller
      * @return array
      */
 
-
     public function TrySites($id, $siteid)
     {
         $operation = Operation::with('entreprise')->findOrFail($id);
@@ -716,7 +714,6 @@ class OperationController extends Controller
             'data_for_chart2' => json_encode($data_for_chart2)
         ];
     }
-
 
     public function TryVilles($id, $ville)
     {
@@ -765,7 +762,7 @@ class OperationController extends Controller
      */
     public function getSites($id)
     {
-        $operation = Operation::with('sites')->findOrFail($id);
+         $operation = Operation::with('sites')->findOrFail($id);
          return response()->json($operation->sites()->get());
     }
 
@@ -775,14 +772,9 @@ class OperationController extends Controller
      */
     public function getVilles($id)
     {
-        $Villes = collect();
-        $operation = Operation::with('sites')->findOrFail($id);
-        $sites = $operation->sites()->get()->GroupBy('ville');
-        foreach ($sites as $site => $value)
-        {
-            $Villes->push($site);
-        }
-        return response()->json($Villes);
+
+        $operation = Operation::with('cities')->findOrFail($id);
+        return response()->json($operation->cities);
     }
 
 

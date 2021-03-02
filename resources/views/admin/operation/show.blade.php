@@ -797,7 +797,7 @@
                     element3.style.display = "initial";
                     $('#select3').append('<option value="Selectionnez une ville">@lang('Select a city')</option>');
                     $.each(data, function(index, sitesObj){
-                        $('#select3').append('<option value="'+ sitesObj +'">'+ sitesObj +'</option>');
+                        $('#select3').append('<option value="'+ sitesObj.id +'">'+ sitesObj.name +'</option>');
                     })
                 });
             }
