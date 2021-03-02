@@ -173,7 +173,8 @@ class ResponceController extends Controller
                     'answer' => is_array($value) ? json_encode($value) : $value,
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
                     'ville' => $ville ,
-                    'country_id' => $country_id
+                    'country_id' => $country_id,
+                    'user_id' => $user->id
                 ]);
 
                 $field->responses()->save($field_response);

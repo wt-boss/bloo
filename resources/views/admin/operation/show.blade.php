@@ -126,6 +126,9 @@
                             <select id="select3" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
 
                             </select>
+                            <select id="select4" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
+
+                            </select>
                         </ul>
                         <span class="pull-right">
                             {{-- <i class="fa fa-file-powerpoint" style="font-size: 20px" aria-hidden="true"></i> --}}
@@ -139,6 +142,9 @@
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
                             <a id="download_ville_pdf" style="display: none" >
+                               <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
+                             </a>
+                            <a id="download_user_pdf" style="display: none" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
                              @if (auth()->user()->hasRole('Superadmin|Account Manager'))
@@ -697,19 +703,23 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "none";
+                    element4.style.display = "none";
 
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "initial";
                     button2.style.display = "none";
                     button3.style.display = "none";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
                     $('#responses').empty()
@@ -756,9 +766,12 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "initial";
                     element2.style.display = "none";
                     element3.style.display = "none";
+                    element4.style.display = "none";
+
                     $('#select1').append('<option value="Selectionnez un pays">@lang('Select a country')</option>');
                     $.each(data, function(index, countriesObj){
                         $('#select1').append('<option value="'+ countriesObj.id +'">'+ countriesObj.name +'</option>');
@@ -774,9 +787,11 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "initial";
                     element3.style.display = "none";
+                    element4.style.display = "none";
                   ;
                     $('#select2').append('<option value="Selectionnez un site">@lang('Select a site')</option>');
                     $.each(data, function(index, sitesObj){
@@ -792,12 +807,35 @@
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
                     element1.style.display = "none";
                     element2.style.display = "none";
                     element3.style.display = "initial";
+                    element4.style.display = "none";
                     $('#select3').append('<option value="Selectionnez une ville">@lang('Select a city')</option>');
                     $.each(data, function(index, sitesObj){
                         $('#select3').append('<option value="'+ sitesObj.id +'">'+ sitesObj.name +'</option>');
+                    })
+                });
+            }
+
+            if(sortoption == 4)
+            {
+                $.get('/tryoperateurs/'+{{$operation->id}},function(data) {
+                    console.log(data);
+                    $('#select4').empty();
+                    let element1 = document.getElementById('select1');
+                    let element2 = document.getElementById('select2');
+                    let element3 = document.getElementById('select3');
+                    let element4 = document.getElementById('select4');
+                    element1.style.display = "none";
+                    element2.style.display = "none";
+                    element3.style.display = "none";
+                    element4.style.display = "initial";
+
+                    $('#select4').append('<option value="Selectionnez une ville">@lang('Select an operator')</option>');
+                    $.each(data, function(index, sitesObj){
+                        $('#select4').append('<option value="'+ sitesObj.id +'">'+ sitesObj.first_name + ' ' + sitesObj.last_name +' </option>');
                     })
                 });
             }
@@ -814,11 +852,13 @@
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "initial";
                     button3.style.display = "none";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
 
@@ -869,11 +909,13 @@
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "initial";
                     button4.style.display = "none";
+                    button5.style.display = "none";
 
 
                     $('#responses').empty()
@@ -909,18 +951,67 @@
         $('#select3').on('change', function(e){
             let ville = e.target.value;
             {
-
                 $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
                     console.log(response);
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
                     let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
 
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "none";
+                    button5.style.display = "none";
                     button4.style.display = "initial";
+
+                    $('#responses').empty()
+                        .append(response.response_view);
+
+                    data_for_chart = JSON.parse(response.data_for_chart);
+
+                    drawCharts(data_for_chart);
+
+                    $('#responsesprint').empty()
+                        .append(response.response_view2);
+
+                    $(function () {
+                        // Resize chart on sidebar width change and window resize
+                        $(window).on('resize', function () {
+                            drawCharts(data_for_chart);
+                        });
+                    });
+
+                    document.getElementById('download_ville_pdf').onclick = function () {
+                        let impresion =  document.getElementById('print');
+                        impresion.style.display = 'initial';
+                        impresion.style.visibility = 'hidden';
+                        data_for_chart2 = JSON.parse(response.data_for_chart2);
+                        drawCharts(data_for_chart2);
+                        printpdf();
+                        setInterval(reload, 3000);
+                    };
+                });
+            }
+        });
+
+        $('#select4').on('change', function(e){
+            let userid = e.target.value;
+            {
+                $.get('/useroperation/'+'{{$operation->id}}'+'/'+ userid,function(response) {
+                    console.log(response);
+                    let button1 = document.getElementById('download_pdf');
+                    let button2 = document.getElementById('download_country_pdf');
+                    let button3 = document.getElementById('download_site_pdf');
+                    let button4 = document.getElementById('download_ville_pdf');
+                    let button5 = document.getElementById('download_user_pdf');
+
+                    button1.style.display = "none";
+                    button2.style.display = "none";
+                    button3.style.display = "none";
+                    button4.style.display = "none";
+                    button5.style.display = "initial";
+
 
                     $('#responses').empty()
                         .append(response.response_view);

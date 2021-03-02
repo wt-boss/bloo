@@ -715,6 +715,7 @@ class OperationController extends Controller
         ];
     }
 
+
     public function TryVilles($id, $ville)
     {
 
@@ -756,6 +757,48 @@ class OperationController extends Controller
         ];
     }
 
+    public function TryUsers($id, $userid)
+    {
+
+        $operation = Operation::with('entreprise')->findOrFail($id);
+
+        $form = $operation->form;
+
+        $responses = [];
+        $form->load('fields.responses', 'collaborationUsers', 'availability');
+
+        $data_for_chart = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartUser($userid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart[] = $response_for_chart;
+            }
+
+        }
+
+        $data_for_chart2 = [];
+        $fields = $form->fields;
+        foreach ($fields as $field) {
+            $response_for_chart = $field->getResponseSummaryDataForChartUser2($userid);
+            if (!empty($response_for_chart)) {
+                $data_for_chart2[] = $response_for_chart;
+            }
+
+        }
+
+        $view = (string)View::make('admin.operation.partials.responseuser', compact('operation', 'form', 'responses','userid'));
+        $viewprint = (string)View::make('admin.operation.partials.responseuserprint', compact('operation', 'form', 'responses','userid'));
+
+        return [
+            'response_view' => $view,
+            'response_view2' => $viewprint,
+            'data_for_chart' => json_encode($data_for_chart),
+            'data_for_chart2' => json_encode($data_for_chart2)
+        ];
+    }
+
+
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -777,6 +820,13 @@ class OperationController extends Controller
         return response()->json($operation->cities);
     }
 
+
+    public function tryOperateurs($id)
+    {
+        $operation = Operation::findOrFail($id);
+        $users = $operation->users()->where('role', '1')->get();
+        return response()->json($users);
+    }
 
 
 }
