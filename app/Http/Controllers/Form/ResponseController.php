@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Form;
 
+use App\Exports\FormResponseCountryExport;
 use App\Form;
 use App\Location;
 use App\Operation;
@@ -185,6 +186,13 @@ class ResponseController extends Controller
         $current_user = Auth::user();
         $filename = Str::slug($form->title) . '.Xlsx';
         return Excel::download(new FormResponseExport($form), $filename);
+    }
+
+    public function exportcountry(Form $form,$country_id)
+    {
+        $current_user = Auth::user();
+        $filename = Str::slug($form->title) . '.Xlsx';
+        return Excel::download(new FormResponseCountryExport($form,$country_id), $filename);
     }
 
     public function destroy(Form $form, FormResponse $response)

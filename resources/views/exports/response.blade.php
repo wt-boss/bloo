@@ -11,6 +11,7 @@
     </thead>
     <tbody>
     @foreach($responses as $response)
+
         <tr>
             @foreach ($fields as $field)
                 @php

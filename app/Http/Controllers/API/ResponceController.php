@@ -148,10 +148,20 @@ class ResponceController extends Controller
                 ]);
             }
 
+            if(isset($data['site_id']))
+            {
+                $site = Site::findOrFail($data['site_id']);
+                $country_id = $site->country_id;
+                $ville = $site->city_id;
+            }
+
             $response = new FormResponse([
                 'respondent_ip' => (string) $request->ip(),
                 'respondent_user_agent' => (string) $request->header('user-agent'),
-                'respondent_id' => $user->id
+                'respondent_id' => $user->id,
+                'respondent_site' => isset($data['site_id']) ? $data['site_id'] : 0,
+                'respondent_country' => $country_id ,
+                'respondent_city' => $ville
             ]);
 
             $response->generateResponseCode();
@@ -160,13 +170,6 @@ class ResponceController extends Controller
             foreach ($form_fields as $field) {
                 $attribute = str_replace('.', '_', $field->attribute);
                 $value = $request->input($attribute);
-
-
-                 if(isset($data['site_id']))
-                 {
-                    $site = Site::findOrFail($data['site_id']);
-                    $country_id = $site->country_id;
-                    $ville = $site->city_id;                 }
 
                 $field_response = new FieldResponse([
                     'form_response_id' => $response->id,

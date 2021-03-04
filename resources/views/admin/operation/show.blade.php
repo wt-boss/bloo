@@ -151,6 +151,9 @@
                             <a href="{{ route('forms.response.export', $form->code) }}">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
+                                <a id="download_country_exel">
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
+                               </a>
                             @endif
                         </span>
                     </div>
@@ -860,11 +863,8 @@
                     button4.style.display = "none";
                     button5.style.display = "none";
 
-
-
                     $('#responses').empty()
                         .append(response.response_view);
-
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
@@ -894,7 +894,11 @@
                         printpdf();
                         setInterval(reload, 3000);
                     };
-
+                    document.getElementById('download_country_exel').onclick = function () {
+                        $.get('forms/'+'{{$form->code}}'+'/responses/download/'+pays_id,function(response) {
+                            console.log(response);
+                        });
+                    };
                 });
             }
         });
