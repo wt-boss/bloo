@@ -166,6 +166,10 @@ Route::middleware(['auth','verified'])->namespace('Form')->group(function () {
 
     Route::get('forms/{form}/responses/download', 'ResponseController@export')->name('forms.response.export')->middleware('Role:Superadmin|Account Manager|Free');
     Route::get('forms/{form}/responses/download/{country_id}', 'ResponseController@exportcountry')->name('forms.response.exportcountry')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::get('forms/{form}/responses/downloadsite/{site_id}', 'ResponseController@exportsite')->name('forms.response.exportsite')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::get('forms/{form}/responses/downloadville/{ville}', 'ResponseController@exportville')->name('forms.response.exportville')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::get('forms/{form}/responses/downloaduser/{user_id}', 'ResponseController@exportuser')->name('forms.response.exportuser')->middleware('Role:Superadmin|Account Manager|Free');
+
 
 
     Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Account Manager|Free');
