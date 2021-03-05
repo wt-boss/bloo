@@ -145,7 +145,6 @@ class OperationController extends Controller
     public function addoperateurs(Request $request)
     {
         $parameters = $request->all();
-        dd($parameters);
         $operation = Operation::findOrFail($parameters['operation']);
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs']as $operateur) {
