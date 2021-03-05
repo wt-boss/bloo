@@ -895,7 +895,7 @@
                         setInterval(reload, 3000);
                     };
                     document.getElementById('download_country_exel').onclick = function () {
-                        $.get('forms/'+'{{$form->code}}'+'/responses/download/'+pays_id,function(response) {
+                        $.get('/forms/'+'{{$form->code}}'+'/responses/download/'+pays_id,function(response) {
                             console.log(response);
                         });
                     };

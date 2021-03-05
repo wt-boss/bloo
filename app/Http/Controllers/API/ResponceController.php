@@ -160,8 +160,8 @@ class ResponceController extends Controller
                 'respondent_user_agent' => (string) $request->header('user-agent'),
                 'respondent_id' => $user->id,
                 'respondent_site' => isset($data['site_id']) ? $data['site_id'] : 0,
-                'respondent_country' => $country_id ,
-                'respondent_city' => $ville
+                'respondent_country' => isset($country_id) ?  $country_id : 0,
+                'respondent_city' =>isset($ville) ?  $ville : 0,
             ]);
 
             $response->generateResponseCode();
@@ -175,8 +175,8 @@ class ResponceController extends Controller
                     'form_response_id' => $response->id,
                     'answer' => is_array($value) ? json_encode($value) : $value,
                     'site_id' => isset($data['site_id']) ? $data['site_id'] : 0,
-                    'ville' => $ville ,
-                    'country_id' => $country_id,
+                    'ville' => isset($ville) ?  $ville : 0, ,
+                    'country_id' => isset($country_id) ?  $country_id : 0,
                     'user_id' => $user->id
                 ]);
 

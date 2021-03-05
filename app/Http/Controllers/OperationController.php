@@ -815,7 +815,7 @@ class OperationController extends Controller
     {
 
         $operation = Operation::with('cities')->findOrFail($id);
-        return response()->json($operation->cities);
+        return response()->json($operation->cities->unique('id'));
     }
 
     public function tryOperateurs($id)

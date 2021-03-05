@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     @foreach($responses as $response)
-        @if($response->respondent_country == $country)
+
         <tr>
             @foreach ($fields as $field)
                 @php
@@ -51,7 +51,7 @@
 
             <td>{{ $response->created_at->format('Y-m-d H:i:s') }}</td>
         </tr>
-        @endif
+
     @endforeach
     </tbody>
 </table>
