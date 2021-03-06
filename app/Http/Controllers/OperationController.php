@@ -269,7 +269,7 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers'));
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
 //        $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
     }
@@ -714,7 +714,6 @@ class OperationController extends Controller
         ];
     }
 
-
     public function TryVilles($id, $ville)
     {
 
@@ -825,5 +824,9 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
-
+    public function loveme(Request $request)
+    {
+         $parameters = $request->all();
+         return response()->json($parameters);
+    }
 }

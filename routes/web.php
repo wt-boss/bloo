@@ -95,8 +95,8 @@ Route::resource('users','UsersController')->middleware('Free');
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');
-Route::post('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur');
-Route::post('/addoperateurs','OperationController@addoperateurs')->name('ajoutoperateur');
+Route::get('/addlecteurs','OperationController@addlecteurs')->name('ajoutlecteur');
+Route::get('/addoperateurs','OperationController@addoperateurs')->name('ajoutoperateur');
 Route::get('/removelecteurs/{id}/{id1}','OperationController@removelecteur');
 Route::get('/removeoperateurs/{id}/{id1}','OperationController@removeoperateur');
 Route::namespace('Form')->group(function () {
@@ -240,7 +240,6 @@ Route::get('/json-allstates','HomeController@allstates');
 Route::get('/json-allcities','HomeController@allcities');
 
 
-
 Route::get('/jsonmapcountries','HomeController@jsonmapcountries');
 Route::get('/jsonmapcountries2','HomeController@jsonmapcountries2');
 Route::get('/jsonmapcities','HomeController@jsonmapcities');
@@ -251,7 +250,6 @@ Route::get('/json-operateurstates','HomeController@operateurstates');
 Route::get('/json-operateurcities','HomeController@operateurcities');
 
 Route::get('/responses_for_country/{id}','OperationController@responses_for_country');
-
 
 /**Site operation */
 Route::get('operationsite/{id}','OperationController@operationsites')->name('sites');
@@ -300,8 +298,14 @@ Route::get('/operationsites/{id}','OperationController@getSites')->name('getsite
 /** Route pour avoir les villes d'une operations */
 Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvilles');
 
-
 /** Liste des operateurs pour le tri*/
 Route::get('/tryoperateurs/{id}','OperationController@tryOperateurs');
+
+
+Route::get('/formulaire',function() {
+    return view('admin.users.formtest');
+} );
+
+Route::get('/echo/jsonp/','OperationController@loveme');
 
 
