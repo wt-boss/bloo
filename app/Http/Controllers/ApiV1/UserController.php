@@ -16,9 +16,9 @@ class UserController extends Controller
 {
     /**
      * Store new User resource
-     * 
+     *
      * @param Illuminate\Http\Request $request
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function store(StoreUserRequest $request)
@@ -35,8 +35,8 @@ class UserController extends Controller
             [
                 'status' => true,
                 'success' => 'New Account has been Successfuly created',
-            ], 
-                200, 
+            ],
+            200,
             [
                 'token' => $token,
             ]
@@ -45,24 +45,24 @@ class UserController extends Controller
 
     /**
      * Display user's details
-     * 
+     *
      * @param User $user
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function show(User $user)
     {
         return (!$user) ? response()->json(
-                [
+            [
                 'status' => false,
                 'error' => 'User doesn\'t exists',
-                ],
-                200
-            ) : response()->json(
+            ],
+            200
+        ) : response()->json(
             [
                 'status' => true,
                 'content' => $user,
-            ], 
+            ],
             200,
             [
                 'token' => $user->api_token,
@@ -72,10 +72,10 @@ class UserController extends Controller
 
     /**
      * Update user's details
-     * 
+     *
      */
     public function update(User $user, Request $request, AuthRepository $authRepository)
-    {  
+    {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -93,15 +93,15 @@ class UserController extends Controller
                 'error' => $validator->errors()
             ]);
         }
-        
+
         $user->save($authRepository->updating($request));
 
         return response()->json(
             [
                 'status' => true,
                 'success' => $user,
-            ], 
-                200, 
+            ],
+                200,
             [
                 'token' => $user->token,
             ]
