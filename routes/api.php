@@ -57,16 +57,16 @@ Route::post('forms/{form}/responses', 'API\ResponceController@store')->name('for
 Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function(){
     
     // Authentication routes
-    Route::prefix('auth')->middleware(['auth'])->group(function(){
-        Route::post('login', 'AuthController@login');
-        Route::post('logout', 'AuthController@logout');
-        Route::patch('refresh', 'AuthController@refreshToken');
-    });
-
-    Route::prefix('user')->group(function(){
-        Route::post('/', 'UserController@store');
-        Route::get('/{user}', 'UserController@show')->middleware('auth');
-        Route::patch('/{user}', 'UserController@update');
+    // Route::prefix('auth')->middleware(['auth'])->group(function(){
+    //     Route::post('login', 'AuthController@login');
+    //     Route::post('logout', 'AuthController@logout');
+    //     Route::patch('refresh', 'AuthController@refreshToken');
+    // });
+    
+    Route::post('/user', 'UserController@store');
+    Route::prefix('user')->middleware('auth')->group(function(){
+        Route::get('/', 'UserController@show');
+        Route::patch('/', 'UserController@update');
     });
 
 });

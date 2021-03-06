@@ -46,19 +46,13 @@ class UserController extends Controller
     /**
      * Display user's details
      *
-     * @param User $user
-     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function show(User $user)
+    public function show()
     {
-        return (!$user) ? response()->json(
-            [
-                'status' => false,
-                'error' => 'User doesn\'t exists',
-            ],
-            200
-        ) : response()->json(
+        $user = auth()->user();
+        // dd($user);
+        return response()->json(
             [
                 'status' => true,
                 'content' => $user,
@@ -73,8 +67,10 @@ class UserController extends Controller
     /**
      * Update user's details
      *
+     * @return Illuminate\Http\JsonResponse
+     *
      */
-    public function update(User $user, Request $request, AuthRepository $authRepository)
+    public function update(Request $request, AuthRepository $authRepository)
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
@@ -94,6 +90,7 @@ class UserController extends Controller
             ]);
         }
 
+        $user = Auth::user();
         $user->save($authRepository->updating($request));
 
         return response()->json(
