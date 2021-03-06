@@ -111,10 +111,10 @@
                                 </a>
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option selected value="0">...</option>
-                                 <option value="1">Pays</option>
-                                 <option value="2">Sites</option>
-                                  <option value="3">Villes</option>
-                                  <option value="4">Opérateurs</option>
+                                 <option value="1">{{ trans('Country') }}</option>
+                                 <option value="2"> {{ trans('Sites') }}</option>
+                                  <option value="3">{{ trans('Cities') }}</option>
+                                  <option value="4">{{ trans('Operators') }}</option>
                              </select>
 
                             <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
@@ -285,7 +285,7 @@
                         </table>
                         <div class="text-center">
                             {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
+                            <button id="loc_btn" class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -296,7 +296,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="box-title">
+                                <p class="box-title" id="mapTitle">
                                     {{ trans('Localisation') }}
                                 </p>
                             </div>
@@ -391,6 +391,17 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4bZln12ut506FLipFx-kXh95M-zZdUfc&libraries=places&callback=initMap" defer></script>
 
     <script type="text/javascript">
+    </script>
+
+    <script type="text/javascript">
+        function scrollToAnchor(hash) {
+            console.log(hash);
+            tag = $(hash);
+            console.log(tag);
+            $('html,body').animate({scrollTop: tag.offset().top}, 'slow', function() {
+                window.location.hash = hash
+            });
+        }
         function initMap() {
             let lat = "";
             let lng = "";
@@ -423,7 +434,13 @@
                 }
             });
 
-            $('.m_btn_location').click(function(){
+            $('.m_btn_location').click(function(e){
+                if($(e.target).hasClass('disabled'))
+                    return
+
+                let tagId = e.target.id;
+                scrollToAnchor('#'+tagId);
+
                 let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
                 console.log(position);
                 map.setCenter(position);
