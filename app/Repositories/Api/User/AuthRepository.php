@@ -4,6 +4,7 @@ namespace App\Repositories\Api\User;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthRepository{
@@ -15,7 +16,7 @@ class AuthRepository{
      */
     public function updating(Request $request)
     {
-        return [
+        $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -25,5 +26,8 @@ class AuthRepository{
             'state_id' => $request->state_id,
             'city_id' => $request->city_id,
         ];
+
+        $user = User::findOrFail(Auth::id());
+        $user->save($data);
     }
 }
