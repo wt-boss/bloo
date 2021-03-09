@@ -15,43 +15,14 @@ use App\Repositories\Api\User\AuthRepository;
 class UserController extends Controller
 {
     /**
-     * Store new User resource
-     *
-     * @param Illuminate\Http\Request $request
-     *
-     * @return Illuminate\Http\JsonResponse
-     */
-    public function store(StoreUserRequest $request)
-    {
-        $validatedData = $request->validated();
-        $token = Str::random(80);
-
-        $user = new User($validatedData);
-        $user->id = User::all()->last()->id + 1;
-        $user->api_token = Hash::make($token);
-        $user->save();
-
-        return response()->json(
-            [
-                'status' => true,
-                'success' => 'New Account has been Successfuly created',
-            ],
-            200,
-            [
-                'token' => $token,
-            ]
-        );
-    }
-
-    /**
      * Display user's details
      *
      * @return Illuminate\Http\JsonResponse
      */
     public function show()
     {
-        $user = auth()->user();
-        // dd($user);
+        $user = Auth::user();
+
         return response()->json(
             [
                 'status' => true,
@@ -70,37 +41,20 @@ class UserController extends Controller
      * @return Illuminate\Http\JsonResponse
      *
      */
-    public function update(Request $request, AuthRepository $authRepository)
+    public function update(StoreUserRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users|max:255',
-            'phone' => 'numeric|size:9',
-            'phonepaiement' => 'numeric|size:9',
-            'country_id' => 'exists:countries,id',
-            'state_id' => 'exists:states,id',
-            'city_id' => 'exists:cities,id',
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'error' => $validator->errors()
-            ]);
-        }
-
-        $user = Auth::user();
-        $user->save($authRepository->updating($request));
+        $data = $request->validated();
+        $user = User::findOrFail(Auth::id());
+        $user->save($data);
 
         return response()->json(
             [
                 'status' => true,
-                'success' => $user,
+                'content' => $user,
             ],
                 200,
             [
-                'token' => $user->token,
+                'token' => $user->api_token,
             ]
         );
     }
