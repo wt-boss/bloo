@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\User;
-use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\JWTAuth as JWTAuthJWTAuth;
 
 class AuthController extends Controller
 {
@@ -21,12 +18,13 @@ class AuthController extends Controller
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function store(StoreUserRequest $request)
+    public function register(StoreUserRequest $request)
     {
         // Create user by validated rules
         $validatedData = $request->validated();
         $user = new User($validatedData);
         $user->role = 1;
+        $user->active = 1;
         $user->save();
 
         return response()->json([
@@ -46,7 +44,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|string',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -74,21 +72,25 @@ class AuthController extends Controller
     /**
      * Refresh the authenticated user's token
      * 
+     * @param  \Illuminate\Http\Request $request
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refreshToken()
+    public function refreshToken(Request $request)
     {
         try{
             $new_token = JWTAuth::refresh(true, true);
 
             return response()->json([
-                'status' => 'Token has been successfully refreshed',
+                'status' => true,
+                'message' => 'Token has been successfully refreshed',
                 'content' => $new_token,
             ]);
         }catch(JWTException $e){
             return response()->json([
                 'status' => false,
-                'content' => 'Cannot refresh token now!',
+                'message' => 'Cannot refresh token now!',
+                'content' => $e->getMessage(),
             ]);
         }
     }
@@ -102,21 +104,18 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
+        $token = $request->header('Authorization');
 
         try {
-            JWTAuth::invalidate($request->token);
-
+            JWTAuth::invalidate($token);
             return response()->json([
                 'status' => true,
-                'content' => 'Successfully logged out',
+                'message' => 'Successfully logged out',
             ]);
         } catch (JWTException $e) {
             return response()->json([
                 'status' => false,
-                'content' => 'Something went wrong!',
+                'message' => $e->getMessage(),
             ]);
         }
     }

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
-use Illuminate\Support\Facades\Validator;
-use App\Repositories\Api\User\AuthRepository;
 
 class UserController extends Controller
 {
@@ -19,43 +16,37 @@ class UserController extends Controller
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function show()
+    public function show(Request $request)
     {
-        $user = Auth::user();
+        $token = $request->header('Authorization');
+        $user = JWTAuth::user();
 
-        return response()->json(
-            [
-                'status' => true,
-                'content' => $user,
-            ], 
-            200,
-            [
-                'token' => $user->api_token,
-            ]
-        );
+        return response()->json([
+            'status' => true,
+            'content' => $user,
+            'token' => $token,
+        ]);
     }
 
     /**
      * Update user's details
      * 
-     * @return Illuminate\Http\JsonResponse
+     * @param App\Http\Requests\StoreUserRequest $request
      * 
+     * @return Illuminate\Http\JsonResponse 
      */
-    public function update(StoreUserRequest $request)
+    public function update(StoreUserRequest $user_request, Request $request)
     {
-        $data = $request->validated();
-        $user = User::findOrFail(Auth::id());
+        $token = $request->header('Authorization');
+
+        $data = $user_request->validated();
+        $user = JWTAuth::user();
         $user->save($data);
 
-        return response()->json(
-            [
-                'status' => true,
-                'content' => $user,
-            ], 
-                200, 
-            [
-                'token' => $user->api_token,
-            ]
-        );
+        return response()->json([
+            'status' => true,
+            'content' => $user,
+            'token' => $token,
+        ]);
     }
 }
