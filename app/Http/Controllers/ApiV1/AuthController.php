@@ -29,9 +29,9 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => true,
-            'success' => 'New Account has been Successfuly created',
+            'message' => 'New Account has been Successfuly created',
             'content' => $user,
-        ]);
+        ], 201);
     }
 
     /**
@@ -55,7 +55,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'status' => false,
-                    'content' => 'Your credentials don\'t match with our records',
+                    'message' => 'Your credentials don\'t match with our records',
                 ]
             );
         }
@@ -63,7 +63,7 @@ class AuthController extends Controller
         return response()->json(
             [
                 'status' => true,
-                'content' => 'Successfully authenticated',
+                'message' => 'Successfully authenticated',
                 'token' => $token,
             ]
         );      

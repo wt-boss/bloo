@@ -70,7 +70,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
         Route::post('/', 'AuthController@register');
         
         Route::middleware('auth.jwt')->group(function(){
-            Route::get('/', 'UserController@show');
+            Route::get('/', 'UserController@me');
             Route::patch('/', 'UserController@update');
         });
     });
