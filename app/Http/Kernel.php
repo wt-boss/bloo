@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'Role' => \App\Http\Middleware\Role::class,
         'Free' => \App\Http\Middleware\Blockfree::class,
         'verification' =>  \App\Http\Middleware\verification::class,
+        'auth.jwt'  =>  \Tymon\JWTAuth\Http\Middleware\Authenticate::class, // JWT middleware
     ];
 
     /**
