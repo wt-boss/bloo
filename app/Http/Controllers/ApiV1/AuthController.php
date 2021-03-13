@@ -13,9 +13,9 @@ class AuthController extends Controller
 {
     /**
      * Store new User resource
-     * 
+     *
      * @param Illuminate\Http\Request $request
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function register(StoreUserRequest $request)
@@ -46,33 +46,57 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        $credentials = $request->only('email', 'password');
-        $token = JWTAuth::attempt($credentials);
-        // Authentication failed
-        if(!$token){
+        $user = User::where('email',$request['email'])->get()->first();
+        if(isset($user))
+        {
+            if($user->active == 0)
+            {
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => 'Your account was desactiveted',
+                    ]
+                );
+            }
+            else
+            {
+                $credentials = $request->only('email', 'password');
+                $token = JWTAuth::attempt($credentials);
+                // Authentication failed
+                if(!$token){
+                    return response()->json(
+                        [
+                            'status' => false,
+                            'message' => 'Your credentials don\'t match with our records',
+                        ]
+                    );
+                }
+                // Authentication passed
+                return response()->json(
+                    [
+                        'status' => true,
+                        'message' => 'Successfully authenticated',
+                        'token' => $token,
+                    ]
+                );
+            }
+        }
+        else
+        {
             return response()->json(
                 [
                     'status' => false,
-                    'message' => 'Your credentials don\'t match with our records',
+                    'message' => 'Your  don\'t have an account',
                 ]
             );
         }
-        // Authentication passed
-        return response()->json(
-            [
-                'status' => true,
-                'message' => 'Successfully authenticated',
-                'token' => $token,
-            ]
-        );      
     }
 
     /**
      * Refresh the authenticated user's token
-     * 
+     *
      * @param  \Illuminate\Http\Request $request
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function refreshToken(Request $request)
@@ -96,9 +120,9 @@ class AuthController extends Controller
 
     /**
      * Log the authenticated user out
-     * 
+     *
      * @param  \Illuminate\Http\Request $request
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout(Request $request)
