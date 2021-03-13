@@ -21,8 +21,7 @@ class AuthController extends Controller
     public function register(StoreUserRequest $request)
     {
         // Create user by validated rules
-        $validatedData = $request->validated();
-        $user = new User($validatedData);
+        $user = new User($request->validated());
         $user->role = 1;
         $user->active = 1;
         $user->save();

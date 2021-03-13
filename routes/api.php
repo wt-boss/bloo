@@ -65,14 +65,21 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
             Route::patch('refresh', 'AuthController@refreshToken');
         });
     });
-        
-    Route::prefix('user')->group(function(){
-        Route::post('/', 'AuthController@register');
-        
-        Route::middleware('auth.jwt')->group(function(){
-            Route::get('/', 'UserController@me');
-            Route::patch('/', 'UserController@update');
-        });
-    });
+    Route::post('/user', 'AuthController@register');
     
+    // User's routes
+    Route::prefix('user')->middleware('auth.jwt')->group(function(){
+        Route::get('', 'UserController@me');
+        Route::patch('', 'UserController@update');
+        
+        // User's pictures
+        Route::prefix('piece')->group(function(){
+            Route::post('', 'PieceController@uploadPiece');
+            Route::get('', 'PieceController@getPiece');
+            Route::patch('', 'PieceController@UpdatePiece');
+        });
+        
+        // User's current operation
+        Route::get('/operation', 'UserController@operation');
+    });
 });

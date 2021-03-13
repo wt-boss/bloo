@@ -2,62 +2,60 @@
 
 namespace App\Http\Controllers\ApiV1;
 
-use App\User;
+use App\Piece;
+use Exception;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\Api\ApiRepository;
 
 class UserController extends Controller
 {
+    protected $token, $user;
+
+    public function __construct(Request $request)
+    {
+        $this->token = $request->header('Authorization');
+    }
     /**
      * Display user's details
      * 
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function me(Request $request)
+    public function me(ApiRepository $apiRepository)
     {
-        $token = $request->header('Authorization');
-        $user = JWTAuth::user();
-
-        return response()->json([
-            'status' => true,
-            'content' => $user,
-            'token' => $token,
-        ]);
+        try {
+            return $apiRepository->successReponse('', JWTAuth::user(), $this->token);
+        } catch (Exception $e) {
+            return $apiRepository->failResponse($e);
+        }
     }
 
     /**
      * Update user's details
      * 
-     * @param App\Http\Requests\StoreUserRequest $request
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     * 
+     * @param App\Http\Requests\UpdateUserRequest $request
      * 
      * @return Illuminate\Http\JsonResponse 
      */
-    public function update(UpdateUserRequest $user_request, Request $request)
+    public function update(UpdateUserRequest $request, ApiRepository $apiRepository)
     {
-        $token = $request->header('Authorization');
-        
         $user = JWTAuth::user();
-        // if ($user->isDirty()) {
-        //     return response()->json([
-        //         'status' => true,
-        //         'message' => 'Nothing has been changed',
-        //         'content' => $user,
-        //         'token' => $token,
-        //     ]);
-        // }
+        try{
+            $data = $request->validated();
+            $user->save($data);
 
-        $data = $user_request->validated();
-        $user->save($data);
+            $message = 'Changes have been successfully updated';
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Changes have been successfully updated',
-            'content' => $user,
-            'token' => $token,
-        ]);
+            return $apiRepository->successReponse($message, $user, $this->token);
+        }catch(Exception $e){
+            return $apiRepository->failResponse($e);
+        }
+        
     }
 }
