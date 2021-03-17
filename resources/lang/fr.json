@@ -652,5 +652,18 @@
     "Short By": "Tri par",
     "Are you sure you want to delete this": "Êtes-vous sûr de vouloir supprimer cette opération ?",
     "Yes": "Oui",
-    "No": "Non"
+    "No": "Non",
+
+    "general_error": "Une erreur s'est produite",
+    "new_account": "Nouveau compte créé avec succès",
+    "disabled_account": "Votre compte a été désactivé",
+    "credentials_not_found": "Vos paramètres ne correspondent pas avec nos données",
+    "auth_success": "Authentifié avec succès",
+    "refreshed_token": "Token rafraîchi avec succès",
+    "cant_refresh_token": "Token ne peut être rafraîchi maintenant",
+    "logout_success": "Déconnecté avec succès",
+    "update_success": "Changements enregistrés avec succès",
+    "piece_upload_success": "Pièce chargée avec succès",
+    "no_piece": "Aucune pièce trouvée"
+
 }

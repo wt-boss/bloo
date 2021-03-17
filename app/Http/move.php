@@ -14,7 +14,7 @@ $path = explode('.', $type)[0];
 $destinationPath = config('variables.'.$path.'.folder');
 $width           = config('variables.' . $type . '.width');
 $height          = config('variables.' . $type . '.height');
-$full_name       = Str::random(16) . '.' . $file->getClientOriginalExtension();
+$full_name       = Str::random(16) . '_' . auth()->id() . '.' . $file->getClientOriginalExtension();
 
 if ($width == null && $height == null) { // Deplacer l'image
 $file->storeAs($destinationPath, $full_name);

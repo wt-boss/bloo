@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Handle a failed validation attempt.
@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
           ], 200)
         ); 
       }
-      
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -46,12 +46,11 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|string|min:7|confirmed',
-            'phone' => 'required|string|size:9',
-            'phonepaiement' => 'required|string|size:9',
-            'country_id' => 'required|exists:countries,id',
-            'state_id' => 'required|exists:states,id',
-            'city_id' => 'required|exists:cities,id',
+            // 'phone' => 'required|string|size:9',
+            // 'phonepaiement' => 'required|string|size:9',
+            // 'country_id' => 'required|exists:countries,id',
+            // 'state_id' => 'required|exists:states,id',
+            // 'city_id' => 'required|exists:cities,id',
         ];
     }
 }

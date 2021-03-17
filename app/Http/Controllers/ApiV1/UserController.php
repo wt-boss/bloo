@@ -2,60 +2,58 @@
 
 namespace App\Http\Controllers\ApiV1;
 
-use App\User;
-use Illuminate\Support\Str;
+use App\Piece;
+use Exception;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\StoreUserRequest;
-use Illuminate\Support\Facades\Validator;
-use App\Repositories\Api\User\AuthRepository;
+use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\Api\ApiRepository;
 
 class UserController extends Controller
 {
+    protected $token, $user;
+
+    public function __construct(Request $request)
+    {
+        $this->token = $request->header('Authorization');
+    }
     /**
      * Display user's details
-     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function show()
-    {
-        $user = Auth::user();
+    public function me(ApiRepository $apiRepository)
+        try {
 
-        return response()->json(
-            [
-                'status' => true,
-                'content' => $user,
-            ],
-            200,
-            [
-                'token' => $user->api_token,
-            ]
-        );
+            return $apiRepository->successResponse(null, JWTAuth::user(), $this->token);
+
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e);
+        }
     }
 
     /**
      * Update user's details
      *
-     * @return Illuminate\Http\JsonResponse
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     * @param App\Http\Requests\UpdateUserRequest $request
      *
+     * @return Illuminate\Http\JsonResponse
      */
-    public function update(StoreUserRequest $request)
+    public function update(UpdateUserRequest $request, ApiRepository $apiRepository)
     {
-        $data = $request->validated();
-        $user = User::findOrFail(Auth::id());
-        $user->save($data);
+        $user = JWTAuth::user();
+        try{
+            $data = $request->validated();
+            $user->save($data);
 
-        return response()->json(
-            [
-                'status' => true,
-                'content' => $user,
-            ],
-                200,
-            [
-                'token' => $user->api_token,
-            ]
-        );
+            $message = trans('update_success');
+
+            return $apiRepository->successResponse($message, $user, $this->token);
+
+        }catch(Exception $e){
+            return $apiRepository->failedResponse($e);
+        }
+
     }
 }
