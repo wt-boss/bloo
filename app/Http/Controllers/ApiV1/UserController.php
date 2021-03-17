@@ -28,9 +28,11 @@ class UserController extends Controller
     public function me(ApiRepository $apiRepository)
     {
         try {
-            return $apiRepository->successReponse('', JWTAuth::user(), $this->token);
+
+            return $apiRepository->successResponse(null, JWTAuth::user(), $this->token);
+
         } catch (Exception $e) {
-            return $apiRepository->failResponse($e);
+            return $apiRepository->failedResponse($e);
         }
     }
 
@@ -38,7 +40,6 @@ class UserController extends Controller
      * Update user's details
      * 
      * @param App\Repositories\Api\ApiRepository $apiRepository
-     * 
      * @param App\Http\Requests\UpdateUserRequest $request
      * 
      * @return Illuminate\Http\JsonResponse 
@@ -50,11 +51,12 @@ class UserController extends Controller
             $data = $request->validated();
             $user->save($data);
 
-            $message = 'Changes have been successfully updated';
+            $message = trans('update_success');
 
-            return $apiRepository->successReponse($message, $user, $this->token);
+            return $apiRepository->successResponse($message, $user, $this->token);
+
         }catch(Exception $e){
-            return $apiRepository->failResponse($e);
+            return $apiRepository->failedResponse($e);
         }
         
     }

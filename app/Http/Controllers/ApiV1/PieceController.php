@@ -29,28 +29,19 @@ class PieceController extends Controller
      */
     public function uploadPiece(ApiRepository $apiRepository, UploadPieceRequest $request)
     {
-        $user = JWTAuth::user();
-
         try {
-            $piece = $user->pieces()->create($request->validated());
+            $piece = JWTAuth::user()->pieces()->create($request->validated());
             $front_url = env('APP_URL') . '/files/avatar/' . $piece->front;
             $rear_url = env('APP_URL') . '/files/avatar/' . $piece->rear;
-            // $urls = [
-            //     'front_url' => $front_url, 
-            //     'rear_url' => $rear_url
-            // ];
+            $urls = [
+                'front_url' => $front_url, 
+                'rear_url' => $rear_url
+            ];
 
-            return response()->json([
-                'status' => true,
-                'message' => 'Piece has been successfully uploaded',
-                'front_url' => $front_url,
-                'rear_url' => $rear_url,
-                // 'urls' => json_encode($urls),
-                'token' => $this->token,
-            ]);
+            return $apiRepository->successResponse(trans('piece_upload_success'), $urls, $this->token);
 
-        } catch (Exception $e) {
-            return $apiRepository->failResponse($e);
+        } catch (JWTException $e) {
+            return $apiRepository->failedResponse($e);
         }
     }
 
@@ -64,46 +55,20 @@ class PieceController extends Controller
     public function getPiece(ApiRepository $apiRepository)
     {
         try {
-            $piece = JWTAuth::user()->pieces->last();
-            $message = ($piece) ? $piece->count() . ' piece(s)' : 'No piece has been uploaded';
+            $pieces = JWTAuth::user()->pieces;
+            $message = ($pieces) ? $pieces->count() . ' piece(s)' : trans('no_piece');
             
-            $front_url = env('APP_URL') . '/files/avatar/' . $piece->front;
-            $rear_url = env('APP_URL') . '/files/avatar/' . $piece->rear;
+            $front_url = env('APP_URL') . '/files/avatar/' . $pieces->last()->front;
+            $rear_url = env('APP_URL') . '/files/avatar/' . $pieces->last()->rear;
+            $urls = [
+                'front_url' => $front_url, 
+                'rear_url' => $rear_url
+            ];
 
-            return response()->json([
-                'status' => true,
-                'message' => $message,
-                'front_url' => $front_url,
-                'rear_url' => $rear_url,
-                'token' => $this->token,
-            ]);
-        } catch (Exception $e) {
-            return $apiRepository->failResponse($e);
-        }
-    }
+            return $apiRepository->successResponse($message, $urls, $this->token);
 
-    /**
-     * Update user's piece
-     * 
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     * 
-     * @return Illuminate\Http\JsonResponse
-     */
-    public function updatePiece(ApiRepository $apiRepository)
-    {
-        $user = JWTAuth::user();
-
-        if($user->pieces){
-            return response()->json([
-                'status' => true,
-                'message' => 'No piece found',
-                'token' => $this->token,
-            ]);
-        }
-        try {
-            //code...
-        } catch (\Throwable $th) {
-            $apiRepository->failResponse($th);
+        } catch (JWTException $e) {
+            return $apiRepository->failedResponse($e);
         }
     }
 }
