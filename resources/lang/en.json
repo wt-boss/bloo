@@ -620,5 +620,8 @@
     "unauthorized": "Unauthorized",
     "wrong_method": "Method not allowed",
     "model_not_found": "Model not found",
-    "item_not_found": "Item not found"
+    "not_found": "Not Found",
+    "no_country_found": "No country found",
+    "no_state_found": "No state found",
+    "no_city_found": "No city found",
 }

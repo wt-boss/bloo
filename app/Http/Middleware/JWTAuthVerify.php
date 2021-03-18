@@ -7,7 +7,7 @@ use JWTAuth;
 use Exception;
 use App\Repositories\Api\ApiRepository;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class JWTAuthVerify extends BaseMiddleware
 {

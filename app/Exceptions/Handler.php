@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
@@ -53,26 +54,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
-            return response()->json([
-                'status' => 404,
-                'message' => trans('item_nor_found'),
-            ], 404);
-        }
-    
-        if ($exception instanceof NotFoundHttpException && $request->wantsJson()) {
+        if ($exception instanceof ModelNotFoundException) {
             return response()->json([
                 'status' => 404,
                 'message' => trans('model_not_found'),
             ], 404);
-        }
-    
-        if ($exception instanceof MethodNotAllowedHttpException && $request->wantsJson()) {
+        }else if ($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'status' => 404,
+                'message' => trans('not_found'),
+            ], 404);
+        }else if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json([
                 'status' => 405,
-                'message' => trans('wrong_method'),
+                'message' => trans('wrong_method')
             ], 405);
+        }else if ($exception instanceof UnauthorizedHttpException) {
+            return response()->json([
+                'status' => 401,
+                'message' => trans('unauthorized')
+            ], 401);
         }
+
         return parent::render($request, $exception);
     }
 }

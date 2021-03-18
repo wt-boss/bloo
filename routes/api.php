@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Repositories\Api\ApiRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,4 +83,9 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
         // User's current operation
         Route::get('/operation', 'UserController@operation');
     });
+
+    // Localizations routes
+    Route::get('countries', 'LocalizationController@countries');
+    Route::get('country/{id}/states', 'LocalizationController@states');
+    Route::get('state/{id}/cities', 'LocalizationController@cities');
 });
