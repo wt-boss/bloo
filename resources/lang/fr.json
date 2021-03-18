@@ -671,6 +671,9 @@
     "unauthorized": "Accès non autorisé",
     "wrong_method": "Méthode non allouée",
     "model_not_found": "Modèle introuvable",
-    "item_not_found": "Donnée introuvable"
+    "not_found": "Introuvable",
+    "no_country_found": "Aucun pays trouvé",
+    "no_state_found": "Aucune ville trouvée",
+    "no_city_found": "Aucun quartier trouvé",
 
 }

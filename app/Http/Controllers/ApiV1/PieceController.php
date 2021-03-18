@@ -27,7 +27,7 @@ class PieceController extends Controller
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function uploadPiece(ApiRepository $apiRepository, UploadPieceRequest $request)
+    public function uploadPiece(UploadPieceRequest $request, ApiRepository $apiRepository)
     {
         try {
             $piece = JWTAuth::user()->pieces()->create($request->validated());
