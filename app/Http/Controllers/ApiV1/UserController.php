@@ -7,8 +7,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Repositories\Api\ApiRepository;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -24,11 +25,9 @@ class UserController extends Controller
      */
     public function me(ApiRepository $apiRepository)
         try {
-
-            return $apiRepository->successResponse(null, JWTAuth::user(), $this->token);
-
+            return $apiRepository->successResponse(null, JWTAuth::user());
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'));
         }
     }
 
@@ -42,17 +41,14 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, ApiRepository $apiRepository)
     {
-        $user = JWTAuth::user();
         try{
+            $user = JWTAuth::user();
             $data = $request->validated();
-            $user->save($data);
+            $user->update($data);
 
-            $message = trans('update_success');
-
-            return $apiRepository->successResponse($message, $user, $this->token);
-
+            return $apiRepository->successResponse(trans('update_success'), $user, null, 202);
         }catch(Exception $e){
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'));
         }
 
     }

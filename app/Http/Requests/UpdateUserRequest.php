@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Requests\StoreUserRequest;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -19,9 +20,9 @@ class UpdateUserRequest extends FormRequest
     protected function failedValidation(Validator $validator) { 
         throw new HttpResponseException(
           response()->json([
-            'status' => false,
-            'messages' => $validator->errors()
-          ], 200)
+            'status' => 422,
+            'message' => $validator->errors()->first()
+          ], 422)
         ); 
       }
 
@@ -43,14 +44,13 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users|max:255',
-            // 'phone' => 'required|string|size:9',
-            // 'phonepaiement' => 'required|string|size:9',
-            // 'country_id' => 'required|exists:countries,id',
-            // 'state_id' => 'required|exists:states,id',
-            // 'city_id' => 'required|exists:cities,id',
+            'first_name' => 'required|string|max:255|min:5',
+            'last_name' => 'required|string|max:255|min:5',
+            'phone' => 'required|string|size:9',
+            'phonepaiement' => 'required|string|size:9',
+            'country_id' => 'required|exists:countries,id',
+            'state_id' => 'required|exists:states,id',
+            'city_id' => 'required|exists:cities,id',
         ];
     }
 }

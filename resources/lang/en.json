@@ -603,15 +603,22 @@
     "Actions": "Actions",
     "siver": "Silver",
 
-    "general_error": "Something went wrong",
+    "general_error": "An error occured",
     "new_account": "New Account Successfuly created",
     "disabled_account": "Your account has been disabled",
     "credentials_not_found": "Your credentials don't match with our records",
+    "user_not_found": "User doesn't exists",
     "auth_success": "Successfully authenticated",
     "refreshed_token": "Token has been successfully refreshed",
     "cant_refresh_token": "Cannot refresh token now",
     "logout_success": "Successfully logged out",
     "update_success": "Changes have been successfully updated",
     "piece_upload_success": "Piece successfully uploaded",
-    "no_piece": "No piece found"
+    "no_piece": "No piece found",
+    "token_invalid": "Invalid token",
+    "token_expired": "Expired token",
+    "unauthorized": "Unauthorized",
+    "wrong_method": "Method not allowed",
+    "model_not_found": "Model not found",
+    "item_not_found": "Item not found"
 }

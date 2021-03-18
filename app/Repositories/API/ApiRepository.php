@@ -7,16 +7,17 @@ class ApiRepository
     /**
      * Return fail response 
      * 
-     * @param mixed $e
+     * @param mixed $message
+     * @param int $code
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function failedResponse($e)
+    public function failedResponse($message = null, $code = 500)
     {
         return response()->json([
-            'status' => false,
-            'message' => $e->getMessage(),
-        ]);
+            'status' => $code,
+            'message' => $message,
+        ], $code);
     }
 
     /**
@@ -25,16 +26,17 @@ class ApiRepository
      * @param string $message
      * @param mixed $content
      * @param string $token
+     * @param int $code
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function successResponse($message = null, $content = null, $token = null)
+    public function successResponse($message = null, $content = null, $token = null, $code = 200)
     {
         return response()->json([
-            'status' => true,
+            'status' => $code,
             'message' => $message,
             'content' => $content,
             'token' => $token,
-        ]);
+        ], $code);
     }
 }

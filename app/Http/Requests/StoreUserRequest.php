@@ -19,9 +19,9 @@ class StoreUserRequest extends FormRequest
     protected function failedValidation(Validator $validator) { 
         throw new HttpResponseException(
           response()->json([
-            'status' => false,
-            'messages' => $validator->errors()
-          ], 200)
+            'status' => 422,
+            'message' => $validator->errors(),
+          ], 422)
         ); 
       }
       
@@ -43,8 +43,8 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255|min:5',
+            'last_name' => 'required|string|max:255|min:5',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|string|min:7|confirmed',
             'phone' => 'required|string|size:9',

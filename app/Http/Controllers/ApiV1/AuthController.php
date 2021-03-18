@@ -9,6 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Repositories\Api\ApiRepository;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -23,18 +24,13 @@ class AuthController extends Controller
      */
     public function register(StoreUserRequest $request, ApiRepository $apiRepository)
     {
-        try {
-            // Create user by validated rules
-            $user = new User($request->validated());
-            $user->role = 1;
-            $user->active = 1;
-            $user->save();
+        // Create user by validated rules
+        $user = new User($request->validated());
+        $user->role = 1;
+        $user->active = 1;
+        $user->save();
 
-            return $apiRepository->successResponse(trans('new_account'), $user);
-        } catch (Exception $e) {
-            return $apiRepository->failedResponse($e);
-        }
-        
+        return $apiRepository->successResponse(trans('new_account'), $user, null, 201);
     }
 
     /**
@@ -52,26 +48,25 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         
-        $user = User::where('email', $request['email'])->first();
-        
-        try {
+        $user = User::where('email', $request->email)->first();
+
+        if($user){
+            $password = Hash::check($request->password, $user->password);
+            if(!$password){
+                return $apiRepository->failedResponse(trans('credentials_not_found'));
+            }else if ($user->active === 0) {
+                return $apiRepository->failedResponse(trans('disabled_account'));
+            }
+            
             $token = JWTAuth::attempt([
                 'email' => $request->email,
                 'password' => $request->password,
                 'active' => 1,
             ]);
-            // Authentication failed by account disabled or user not found
-            if(!$token){
-                $message = (($user) && $user->active === 0) ? trans('disabled_account') : trans('credentials_not_found');
-                return $apiRepository->successResponse($message);
-            }
-            // Authentication success
-            return $apiRepository->successResponse(trans('auth_success'), null, $token);
 
-            // Authentication failed globally
-        } catch (JWTException $e) {
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->successResponse(trans('auth_success'), null, $token);
         }
+        return $apiRepository->failedResponse(trans('user_not_found'), 404);
     }
 
     /**
@@ -86,10 +81,10 @@ class AuthController extends Controller
         try{
             $new_token = JWTAuth::refresh(true, true);
 
-            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token);
+            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, 202);
 
         }catch(JWTException $e){
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'), 500);
         }
     }
 
@@ -108,10 +103,10 @@ class AuthController extends Controller
         try {
             JWTAuth::invalidate($token);
 
-            return $apiRepository->successResponse(trans('logout_success'));
+            return $apiRepository->successResponse(trans('logout_success'), null, null);
 
         } catch (JWTException $e) {
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'));
         }
     }
 }
