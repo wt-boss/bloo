@@ -38,10 +38,10 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->successResponse(trans('piece_upload_success'), $urls, $this->token);
+            return $apiRepository->successResponse(trans('piece_upload_success'), $urls, null, 201);
 
         } catch (JWTException $e) {
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'));
         }
     }
 
@@ -65,10 +65,10 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->successResponse($message, $urls, $this->token);
+            return $apiRepository->successResponse($message, $urls, null, 200);
 
         } catch (JWTException $e) {
-            return $apiRepository->failedResponse($e);
+            return $apiRepository->failedResponse(trans('general_error'));
         }
     }
 }

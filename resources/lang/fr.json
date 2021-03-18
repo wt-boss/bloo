@@ -658,12 +658,19 @@
     "new_account": "Nouveau compte créé avec succès",
     "disabled_account": "Votre compte a été désactivé",
     "credentials_not_found": "Vos paramètres ne correspondent pas avec nos données",
+    "user_not_found": "Utilisateur inexistant",
     "auth_success": "Authentifié avec succès",
     "refreshed_token": "Token rafraîchi avec succès",
     "cant_refresh_token": "Token ne peut être rafraîchi maintenant",
     "logout_success": "Déconnecté avec succès",
     "update_success": "Changements enregistrés avec succès",
     "piece_upload_success": "Pièce chargée avec succès",
-    "no_piece": "Aucune pièce trouvée"
+    "no_piece": "Aucune pièce trouvée",
+    "token_invalid": "Token invalide",
+    "token_expired": "Token expiré",
+    "unauthorized": "Accès non autorisé",
+    "wrong_method": "Méthode non allouée",
+    "model_not_found": "Modèle introuvable",
+    "item_not_found": "Donnée introuvable"
 
 }

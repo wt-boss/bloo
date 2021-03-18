@@ -60,7 +60,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
     Route::prefix('auth')->group(function(){
         Route::post('login', 'AuthController@login');
 
-        Route::middleware('auth.jwt')->group(function(){
+        Route::middleware('jwt.verify')->group(function(){
             Route::post('logout', 'AuthController@logout');
             Route::patch('refresh', 'AuthController@refreshToken');
         });
@@ -68,7 +68,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
     Route::post('/user', 'AuthController@register');
     
     // User's routes
-    Route::prefix('user')->middleware('auth.jwt')->group(function(){
+    Route::prefix('user')->middleware('jwt.verify')->group(function(){
         Route::get('', 'UserController@me');
         Route::patch('', 'UserController@update');
         
