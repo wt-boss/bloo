@@ -17,13 +17,13 @@ class UpdateUserRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function failedValidation(Validator $validator) { 
+    protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(
           response()->json([
             'status' => 422,
             'message' => $validator->errors()->first()
           ], 422)
-        ); 
+        );
       }
 
     /**
@@ -44,8 +44,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255|min:5',
-            'last_name' => 'required|string|max:255|min:5',
+            'first_name' => 'required|string|max:255|min:2',
+            'last_name' => 'string|min:0',
             'phone' => 'required|string|size:9',
             'phonepaiement' => 'required|string|size:9',
             'country_id' => 'required|exists:countries,id',

@@ -23,7 +23,7 @@ class UserController extends Controller
      * Display user's details
      * @return Illuminate\Http\JsonResponse
      */
-    public function me(ApiRepository $apiRepository)
+    public function me(ApiRepository $apiRepository) {
         try {
             return $apiRepository->successResponse(null, JWTAuth::user());
         } catch (Exception $e) {
@@ -48,7 +48,7 @@ class UserController extends Controller
 
             return $apiRepository->successResponse(trans('update_success'), $user, null, 202);
         }catch(Exception $e){
-            return $apiRepository->failedResponse(trans('general_error'));
+            return $apiRepository->failedResponse($e->getMessage());
         }
 
     }

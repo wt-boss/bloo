@@ -669,11 +669,10 @@
     "token_invalid": "Token invalide",
     "token_expired": "Token expiré",
     "unauthorized": "Accès non autorisé",
-    "wrong_method": "Méthode non allouée",
+    "wrong_method": "Méthode non supportée",
     "model_not_found": "Modèle introuvable",
     "not_found": "Introuvable",
     "no_country_found": "Aucun pays trouvé",
-    "no_state_found": "Aucune ville trouvée",
-    "no_city_found": "Aucun quartier trouvé",
-
+    "no_state_found": "Aucune région trouvée",
+    "no_city_found": "Aucune ville trouvé"
 }
