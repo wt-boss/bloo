@@ -27,7 +27,7 @@ class UserController extends Controller
         try {
             return $apiRepository->successResponse(null, JWTAuth::user());
         } catch (Exception $e) {
-            return $apiRepository->failedResponse(trans('general_error'));
+            return $apiRepository->failedResponse($e->getMessage());
         }
     }
 
@@ -46,10 +46,11 @@ class UserController extends Controller
             $data = $request->validated();
             $user->update($data);
 
-            return $apiRepository->successResponse(trans('update_success'), $user, null, 202);
+            return $apiRepository->successResponse(trans('update_success'), $user, null, 200);
         }catch(Exception $e){
             return $apiRepository->failedResponse($e->getMessage());
         }
+        
 
     }
 }

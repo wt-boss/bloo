@@ -45,9 +45,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'first_name' => 'required|string|max:255|min:2',
-            'last_name' => 'string|min:0',
-            'phone' => 'required|string|size:9',
-            'phonepaiement' => 'required|string|size:9',
+            'last_name' => 'nullable|max:255|min:5',
+            'phone' => 'required|digits:9',
+            'phonepaiement' => 'required|digits:9',
             'country_id' => 'required|exists:countries,id',
             'state_id' => 'required|exists:states,id',
             'city_id' => 'required|exists:cities,id',

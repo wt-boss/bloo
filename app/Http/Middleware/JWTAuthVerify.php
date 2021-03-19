@@ -7,7 +7,8 @@ use JWTAuth;
 use Exception;
 use App\Repositories\Api\ApiRepository;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class JWTAuthVerify extends BaseMiddleware
 {
@@ -24,9 +25,9 @@ class JWTAuthVerify extends BaseMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
-            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+            if ($e instanceof TokenInvalidException){
                 return $apiRepository->failedResponse(trans('token_invalid'));
-            }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+            }else if ($e instanceof TokenExpiredException){
                 return $apiRepository->failedResponse(trans('token_expired'));
             }else{
                 return $apiRepository->failedResponse(trans('unauthorized'), 401);

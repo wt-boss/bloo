@@ -40,8 +40,8 @@ class PieceController extends Controller
 
             return $apiRepository->successResponse(trans('piece_upload_success'), $urls, null, 201);
 
-        } catch (JWTException $e) {
-            return $apiRepository->failedResponse(trans('general_error'));
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e->getMessage());
         }
     }
 
@@ -67,8 +67,8 @@ class PieceController extends Controller
 
             return $apiRepository->successResponse($message, $urls, null, 200);
 
-        } catch (JWTException $e) {
-            return $apiRepository->failedResponse(trans('general_error'));
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e->getMessage());
         }
     }
 }

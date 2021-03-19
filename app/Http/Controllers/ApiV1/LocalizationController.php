@@ -22,7 +22,7 @@ class LocalizationController extends Controller
         $data = [7, 38, 42, 43, 50, 51, 67, 79, 161];
         $countries = Country::whereIn('id', $data)->get();
 
-        return ($countries->count() > 0) ? $apiRepository->successResponse($countries->count(), $countries, null, 200) : $apiRepository->failedResponse(trans('no_country_found'), 404);
+        return (!$countries->isEmpty()) ? $apiRepository->successResponse($countries->count(), $countries, null, 200) : $apiRepository->failedResponse(trans('no_country_found'), 404);
     }
 
     /**
@@ -37,7 +37,7 @@ class LocalizationController extends Controller
     {
         $states = State::where('country_id', $id)->get();
         
-        return ($states->count() > 0) ? $apiRepository->successResponse($states->count(), $states, null, 200) : $apiRepository->failedResponse(trans('no_state_found'), 404);
+        return (!$states->isEmpty()) ? $apiRepository->successResponse($states->count(), $states, null, 200) : $apiRepository->failedResponse(trans('no_state_found'), 404);
     }
 
     /**
@@ -52,6 +52,6 @@ class LocalizationController extends Controller
     {
         $cities = City::where('state_id', $id)->get();
 
-        return ($cities->count() > 0) ? $apiRepository->successResponse($cities->count(), $cities, null, 200) : $apiRepository->failedResponse(trans('no_city_found'), 404);
+        return (!$cities->isEmpty()) ? $apiRepository->successResponse($cities->count(), $cities, null, 200) : $apiRepository->failedResponse(trans('no_city_found'), 404);
     }
 }

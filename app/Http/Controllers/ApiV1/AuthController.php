@@ -24,13 +24,22 @@ class AuthController extends Controller
      */
     public function register(StoreUserRequest $request, ApiRepository $apiRepository)
     {
-        // Create user by validated rules
-        $user = new User($request->validated());
-        $user->role = 1;
-        $user->active = 1;
-        $user->save();
-
-        return $apiRepository->successResponse(trans('new_account'), $user, null, 201);
+        try {
+            // Create user by validated rules
+            $user = new User($request->validated());
+            $user->role = 1;
+            $user->active = 1;
+            $user->save();
+            // Generate token from the created user
+            $token = JWTAuth::attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+                'active' => 1,
+            ]);
+            return $apiRepository->successResponse(trans('new_account'), $user, $token, 201);
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e->getMessage());
+        }
     }
 
     /**
@@ -81,10 +90,10 @@ class AuthController extends Controller
         try{
             $new_token = JWTAuth::refresh(true, true);
 
-            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, 202);
+            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, 200);
 
-        }catch(JWTException $e){
-            return $apiRepository->failedResponse(trans('general_error'), 500);
+        }catch(Exception $e){
+            return $apiRepository->failedResponse($e->getMessage());
         }
     }
 
@@ -105,8 +114,8 @@ class AuthController extends Controller
 
             return $apiRepository->successResponse(trans('logout_success'), null, null);
 
-        } catch (JWTException $e) {
-            return $apiRepository->failedResponse(trans('general_error'));
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e->getMessage());
         }
     }
 }

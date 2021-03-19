@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Api;
 
+
 class ApiRepository
 {
     /**
@@ -36,7 +37,7 @@ class ApiRepository
             'status' => $code,
             'message' => $message,
             'content' => $content,
-            'token' => $token,
+            'token' => 'Bearer ' . $token,
         ], $code);
     }
 }

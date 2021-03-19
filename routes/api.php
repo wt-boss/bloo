@@ -2,7 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Repositories\Api\ApiRepository;
+// use Exception;
+// use Illuminate\Database\Eloquent\ModelNotFoundException;
+// use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+// use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+// use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +59,7 @@ Route::post('forms/{form}/responses', 'API\ResponceController@store')->name('for
 
 
 // API V1.1
-Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function(){
+Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     
     // Authentication routes
     Route::prefix('auth')->group(function(){
@@ -88,4 +92,34 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware(['api'])->group(function()
     Route::get('countries', 'LocalizationController@countries');
     Route::get('country/{id}/states', 'LocalizationController@states');
     Route::get('state/{id}/cities', 'LocalizationController@cities');
+    
+    // Route::fallback(function(){
+    //     // $exception = new Exception;
+    //     // if ($exception instanceof ModelNotFoundException) {
+    //     //     return response()->json([
+    //     //         'status' => 404,
+    //     //         'message' => trans('model_not_found'),
+    //     //     ], 404);
+    //     // }else if ($exception instanceof NotFoundHttpException) {
+    //     //     return response()->json([
+    //     //         'status' => 404,
+    //     //         'message' => trans('not_found'),
+    //     //     ], 404);
+    //     // }else if ($exception instanceof MethodNotAllowedHttpException) {
+    //     //     return response()->json([
+    //     //         'status' => 405,
+    //     //         'message' => trans('wrong_method')
+    //     //     ], 405);
+    //     // }else if ($exception instanceof UnauthorizedHttpException) {
+    //     //     return response()->json([
+    //     //         'status' => 401,
+    //     //         'message' => trans('unauthorized')
+    //     //     ], 401);
+    //     // }else{
+    //         return response()->json([
+    //             'status' => 500,
+    //             'message' => trans('general_error')
+    //         ], 500);
+    //     // }
+    // });
 });
