@@ -5,11 +5,12 @@ namespace App\Http\Controllers\ApiV1;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Repositories\Api\ApiRepository;
-use App\Http\Requests\UploadPieceRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UploadPieceRequest;
 
 class PieceController extends Controller
 {
@@ -38,7 +39,7 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->successResponse(trans('piece_upload_success'), $urls, null, 201);
+            return $apiRepository->successResponse(trans('piece_upload_success'), $urls, null, Response::HTTP_CREATED);
 
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());
@@ -65,7 +66,7 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->successResponse($message, $urls, null, 200);
+            return $apiRepository->successResponse($message, $urls, null, Response::HTTP_FOUND);
 
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Repositories\Api\ApiRepository;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'password' => $request->password,
                 'active' => 1,
             ]);
-            return $apiRepository->successResponse(trans('new_account'), $user, $token, 201);
+            return $apiRepository->successResponse(trans('new_account'), $user, $token, Response::HTTP_CREATED);
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());
         }
@@ -75,7 +75,7 @@ class AuthController extends Controller
 
             return $apiRepository->successResponse(trans('auth_success'), null, $token);
         }
-        return $apiRepository->failedResponse(trans('user_not_found'), 404);
+        return $apiRepository->failedResponse(trans('user_not_found'), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -90,7 +90,7 @@ class AuthController extends Controller
         try{
             $new_token = JWTAuth::refresh(true, true);
 
-            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, 200);
+            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, Response::HTTP_FOUND);
 
         }catch(Exception $e){
             return $apiRepository->failedResponse($e->getMessage());
@@ -112,7 +112,7 @@ class AuthController extends Controller
         try {
             JWTAuth::invalidate($token);
 
-            return $apiRepository->successResponse(trans('logout_success'), null, null);
+            return $apiRepository->successResponse(trans('logout_success'), null, Response::HTTP_OK);
 
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());

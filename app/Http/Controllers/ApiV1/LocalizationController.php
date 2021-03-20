@@ -7,6 +7,7 @@ use App\State;
 use App\Country;
 use App\Repositories\Api\APiRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class LocalizationController extends Controller
 {
@@ -22,7 +23,7 @@ class LocalizationController extends Controller
         $data = [7, 38, 42, 43, 50, 51, 67, 79, 161];
         $countries = Country::whereIn('id', $data)->get();
 
-        return (!$countries->isEmpty()) ? $apiRepository->successResponse($countries->count(), $countries, null, 200) : $apiRepository->failedResponse(trans('no_country_found'), 404);
+        return (!$countries->isEmpty()) ? $apiRepository->successResponse($countries->count(), $countries, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_country_found'), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -37,7 +38,7 @@ class LocalizationController extends Controller
     {
         $states = State::where('country_id', $id)->get();
         
-        return (!$states->isEmpty()) ? $apiRepository->successResponse($states->count(), $states, null, 200) : $apiRepository->failedResponse(trans('no_state_found'), 404);
+        return (!$states->isEmpty()) ? $apiRepository->successResponse($states->count(), $states, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_state_found'), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -52,6 +53,7 @@ class LocalizationController extends Controller
     {
         $cities = City::where('state_id', $id)->get();
 
-        return (!$cities->isEmpty()) ? $apiRepository->successResponse($cities->count(), $cities, null, 200) : $apiRepository->failedResponse(trans('no_city_found'), 404);
+        return (!$cities->isEmpty()) ? $apiRepository->successResponse($cities->count(), $cities, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
     }
 }
+

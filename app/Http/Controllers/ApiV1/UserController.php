@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ApiV1;
 use App\Piece;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
@@ -45,8 +46,8 @@ class UserController extends Controller
             $user = JWTAuth::user();
             $data = $request->validated();
             $user->update($data);
-
-            return $apiRepository->successResponse(trans('update_success'), $user, null, 200);
+            return $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_OK);
+            // return ($user->wasChanged()) ? $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_OK) : $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_NOT_MODIFIED);
         }catch(Exception $e){
             return $apiRepository->failedResponse($e->getMessage());
         }
