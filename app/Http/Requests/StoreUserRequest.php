@@ -47,11 +47,11 @@ class StoreUserRequest extends FormRequest
             'last_name' => 'nullable|string|max:255|min:5',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|string|min:7|confirmed',
-            'phone' => 'required|digits:9',
-            'phonepaiement' => 'required|digits:9',
-            'country_id' => 'required|exists:countries,id',
-            'state_id' => 'required|exists:states,id',
-            'city_id' => 'required|exists:cities,id',
+            // 'phone' => 'required|digits:9',
+            // 'phonepaiement' => 'required|digits:9',
+            // 'country_id' => 'required|exists:countries,id',
+            // 'state_id' => 'required|exists:states,id',
+            // 'city_id' => 'required|exists:cities,id',
         ];
     }
 }

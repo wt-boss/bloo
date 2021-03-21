@@ -23,7 +23,7 @@ class JWTAuthVerify extends BaseMiddleware
     {
         $apiRepository = new ApiRepository;
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+            JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
             if ($e instanceof TokenInvalidException){
                 return $apiRepository->failedResponse(trans('token_invalid'));
@@ -33,6 +33,6 @@ class JWTAuthVerify extends BaseMiddleware
                 return $apiRepository->failedResponse(trans('unauthorized'), 401);
             }
         }
-            return $next($request);
+        return $next($request);
     }
 }

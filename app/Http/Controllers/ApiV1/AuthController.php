@@ -31,11 +31,8 @@ class AuthController extends Controller
             $user->active = 1;
             $user->save();
             // Generate token from the created user
-            $token = JWTAuth::attempt([
-                'email' => $request->email,
-                'password' => $request->password,
-                'active' => 1,
-            ]);
+            $token = JWTAuth::fromUser($user);
+
             return $apiRepository->successResponse(trans('new_account'), $user, $token, Response::HTTP_CREATED);
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());
@@ -88,10 +85,9 @@ class AuthController extends Controller
     public function refreshToken(ApiRepository $apiRepository)
     {
         try{
-            $new_token = JWTAuth::refresh(true, true);
+            $new_token = JWTAuth::parseToken()->refresh(true, true);
 
             return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, Response::HTTP_FOUND);
-
         }catch(Exception $e){
             return $apiRepository->failedResponse($e->getMessage());
         }
@@ -112,7 +108,7 @@ class AuthController extends Controller
         try {
             JWTAuth::invalidate($token);
 
-            return $apiRepository->successResponse(trans('logout_success'), null, Response::HTTP_OK);
+            return $apiRepository->successResponse(trans('logout_success'), null, null, Response::HTTP_OK);
 
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());

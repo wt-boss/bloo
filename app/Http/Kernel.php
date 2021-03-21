@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'verification' =>  \App\Http\Middleware\verification::class,
         'auth.jwt'  =>  \Tymon\JWTAuth\Http\Middleware\Authenticate::class, // JWT middleware
         'jwt.verify' => \App\Http\Middleware\JWTAuthVerify::class,
+        'operator' => \App\Http\Middleware\CheckIfUserIsOperator::class,
     ];
 
     /**

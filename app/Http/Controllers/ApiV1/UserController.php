@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\ApiV1;
 
-use App\Piece;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
 use App\Repositories\Api\ApiRepository;
 use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    protected $token, $user;
+    protected $token;
 
     public function __construct(Request $request)
     {
@@ -22,6 +20,7 @@ class UserController extends Controller
     }
     /**
      * Display user's details
+     * 
      * @return Illuminate\Http\JsonResponse
      */
     public function me(ApiRepository $apiRepository) {
