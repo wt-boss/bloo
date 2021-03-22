@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\Api\ApiRepository;
 use Closure;
+use App\Operation_User;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Repositories\Api\ApiRepository;
 
 
 class CheckIfUserIsOperator
@@ -21,9 +22,12 @@ class CheckIfUserIsOperator
     {
         $apiRepository = new ApiRepository;
         $user_role = JWTAuth::getClaim('role');
+        $users_operations_id = Operation_User::all()->pluck('user_id')->toArray();
 
         if ($user_role !== 1) {
             return $apiRepository->failedResponse(trans('required_to_be_operator'), Response::HTTP_FORBIDDEN);
+        }else if(!in_array(JWTAuth::user()->id, $users_operations_id)){
+            return $apiRepository->successResponse(trans('no_operation'), null, null, Response::HTTP_OK);
         }
 
         return $next($request);

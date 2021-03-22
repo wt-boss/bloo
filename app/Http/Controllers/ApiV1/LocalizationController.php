@@ -5,18 +5,26 @@ namespace App\Http\Controllers\APIV1;
 use App\City;
 use App\State;
 use App\Country;
-use App\Repositories\Api\APiRepository;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
+use App\Repositories\Api\APiRepository;
 
 class LocalizationController extends Controller
 {
+    protected $token;
+
+    public function __construct(Request $request)
+    {
+        $this->token = $request->header('Authorization');
+    }
+    
     /**
      * Get countries
      * 
      * @param App\Repositories\Api\ApiRepository $apiRepository
      *
-     * @return @return Illuminate\Http\JsonResponse
+     * @return Illuminate\Http\JsonResponse
      */
     public function countries(ApiRepository $apiRepository)
     {

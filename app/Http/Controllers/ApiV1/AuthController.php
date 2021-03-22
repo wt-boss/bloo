@@ -29,6 +29,7 @@ class AuthController extends Controller
             $user = new User($request->validated());
             $user->role = 1;
             $user->active = 1;
+            // $user->id = 90;
             $user->save();
             // Generate token from the created user
             $token = JWTAuth::fromUser($user);

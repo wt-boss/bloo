@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers\ApiV1;
 
+use App\City;
 use Exception;
 use App\Operation_User;
-use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Operation;
 use App\Repositories\Api\ApiRepository;
+use App\Site;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class OperationsController extends Controller
 {
-    protected $token;
-
-    public function __construct(Request $request)
-    {
-        $this->token = $request->header('Authorization');
-    }
-
     /**
      * Display user's current operation
      * 
@@ -31,23 +27,14 @@ class OperationsController extends Controller
     {
         try {
             $user = JWTAuth::user();
-            // $user_role = JWTAuth::getClaim('role');
-            $users_operations_id = Operation_User::all()->pluck('user_id')->toArray();
-            // Check if user has an operation
-            if(!in_array($user->id, $users_operations_id)){
-                return $apiRepository->successResponse(trans('no_operation'), null, null, Response::HTTP_OK);
-            }
+            // Retrieve user's operations
+            $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
+            // Current operation
+            $operation = Operation::whereIn('id', $user_operations_ids)
+                                            ->whereStatus('EN COURS')
+                                            ->get();
 
-            $operations_user = Operation_User::whereUserId($user->id)->pluck('operation_id');
-            $operations = Operation::whereIn('id', $operations_user)->get();
-
-            $current_operation = collect();
-            foreach($operations as $operation){
-                if ($operation->whereDate('date_start', '>=', date('d'))->whereDate('date_end', '<=', date('d'))) {
-                    $current_operation->push($operation);
-                }
-            }
-            return ($current_operation->isEmpty()) ? $apiRepository->successResponse(trans('no_current_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse(trans('operation'), $current_operation, null, Response::HTTP_FOUND);
+            return ($operation->isEmpty()) ? $apiRepository->successResponse(trans('no_current_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse(trans('operation'), $operation, null, Response::HTTP_FOUND);
         } catch (Exception $e) {
             return $apiRepository->failedResponse($e->getMessage());
         }
@@ -62,11 +49,26 @@ class OperationsController extends Controller
      */
     public function passedOperations(ApiRepository $apiRepository)
     {
-
+        try {
+            $user = JWTAuth::user();
+            // Retrieve user's operations
+            $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
+            $current_date = Carbon::now()->toDateString();
+            // Passed operations
+            $operations = Operation::whereIn('id', $user_operations_ids)
+                                    ->whereDate('date_end', '<', $current_date)
+                                    ->where('status', '!=', 'EN COURS')
+                                    ->get();
+            
+            return ($operations->isEmpty()) ? $apiRepository->successResponse(trans('no_current_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($operations->count(), $operations, null, Response::HTTP_FOUND);
+        } catch (Exception $e) {
+            return $apiRepository->failedResponse($e->getMessage());
+        }
+        
     }
 
     /**
-     * Operations for specified city
+     * Retrieve operations for specified city
      * 
      * @param int $city_id
      * @param App\Repositories\Api\ApiRepository $apiRepository
@@ -75,7 +77,18 @@ class OperationsController extends Controller
      */
     public function cityOperations($city_id, ApiRepository $apiRepository)
     {
-        
+        try {
+            $city = City::findOrFail($city_id)->ville;
+            $city_operations_ids = DB::table('city_operation')
+                                  ->whereCityId($city_id)
+                                  ->pluck('operation_id');
+
+            $operations = Operation::whereIn('id', $city_operations_ids)->get();
+            
+            return ($operations->isEmpty()) ? $apiRepository->successResponse(trans('no_site_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($operations->count(), $operations, null, Response::HTTP_FOUND);                         
+        } catch (Exception  $e) {
+            return $apiRepository->failedResponse($e->getMessage());
+        }
     }
 
     /**
@@ -89,6 +102,16 @@ class OperationsController extends Controller
      */
     public function operationSites($operation_id, $city_id, ApiRepository $apiRepository)
     {
-        
+        try {
+            $operation = Operation::findOrFail($operation_id);
+            $city = City::findOrFail($city_id)->ville;
+            $sites = Site::whereOperationId($operation)
+                         ->whereVille($city)
+                         ->get();
+
+        return ($sites->isEmpty()) ? $apiRepository->successResponse(trans('no_site_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($sites->count(), $sites, null, Response::HTTP_FOUND);                         
+        } catch (Exception  $e) {
+            return $apiRepository->failedResponse($e->getMessage());
+        }
     }
 }
