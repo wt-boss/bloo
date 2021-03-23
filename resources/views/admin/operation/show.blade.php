@@ -257,11 +257,18 @@
                                        </span>
                                     </td>
                                     <td>
-                                         @if(Cache::has('user-is-online-' . $user->id))
+                                         {{-- @if(Cache::has('user-is-online-' . $user->id))
                                                 <li class="text-success">Online</li>
                                             @else
                                                 <li class="text-secondary">Offline</li>
-                                        @endif
+                                        @endif --}}
+
+
+                                        @foreach ( Illuminate\Support\Facades\Redis::keys('online-user-*') as $keys)
+                                                    {{
+                                                        $keys
+                                                    }}
+                                        @endforeach
                                     </td>
                                 </tr>
                                     @endif
