@@ -624,5 +624,6 @@
     "no_country_found": "No country found",
     "no_state_found": "No state found",
     "no_city_found": "No city found",
-    "required_to_be_operator": "Required to be an operator"
+    "required_to_be_operator": "Required to be an operator",
+    "no_operation": "No operation found"
 }

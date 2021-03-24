@@ -79,6 +79,9 @@ class OperationsController extends Controller
     {
         try {
             $city = City::findOrFail($city_id)->ville;
+            if(!($city)){
+                return $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_NOT_FOUND);
+            }
             $city_operations_ids = DB::table('city_operation')
                                   ->whereCityId($city->id)
                                   ->pluck('operation_id');
@@ -105,6 +108,10 @@ class OperationsController extends Controller
         try {
             $operation = Operation::findOrFail($operation_id);
             $city = City::findOrFail($city_id)->ville;
+            if (!$operation || !$city) {
+                return $apiRepository->jsonResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
+            }
+            
             $sites = Site::whereOperationId($operation)
                          ->whereVille($city)
                          ->get();

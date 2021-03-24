@@ -21,12 +21,13 @@ class CheckIfUserIsOperator
     public function handle($request, Closure $next)
     {
         $apiRepository = new ApiRepository;
-        $user_role = JWTAuth::getClaim('role');
+        $payload = JWTAuth::parseToken()->getPayload();
+        $user_role = $payload->get('role');
         $users_operations_id = Operation_User::all()->pluck('user_id')->toArray();
 
         if ($user_role !== 1) {
             return $apiRepository->jsonResponse(trans('required_to_be_operator'), Response::HTTP_FORBIDDEN);
-        }else if(!in_array(JWTAuth::user()->id, $users_operations_id)){
+        }else if(!in_array($payload->get('sub'), $users_operations_id)){
             return $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_OK);
         }
         return $next($request);
