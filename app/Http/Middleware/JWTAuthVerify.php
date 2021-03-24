@@ -26,11 +26,11 @@ class JWTAuthVerify extends BaseMiddleware
             JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
             if ($e instanceof TokenInvalidException){
-                return $apiRepository->failedResponse(trans('token_invalid'));
+                return $apiRepository->jsonResponse(trans('token_invalid'));
             }else if ($e instanceof TokenExpiredException){
-                return $apiRepository->failedResponse(trans('token_expired'));
+                return $apiRepository->jsonResponse(trans('token_expired'));
             }else{
-                return $apiRepository->failedResponse(trans('unauthorized'), 401);
+                return $apiRepository->jsonResponse(trans('unauthorized'), 401);
             }
         }
         return $next($request);
