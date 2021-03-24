@@ -73,31 +73,30 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     Route::post('/user', 'AuthController@register');
     
     // User's routes
-    Route::prefix('user')->middleware(['jwt.verify', 'operator'])->group(function(){
+    Route::prefix('user')->middleware(['jwt.verify'])->group(function(){
         Route::get('', 'UserController@me');
         Route::patch('', 'UserController@update');
         
-        // User's pictures
-        Route::prefix('piece')->group(function(){
-            Route::post('', 'PieceController@uploadPiece');
-            Route::get('', 'PieceController@getPiece');
-            Route::patch('', 'PieceController@UpdatePiece');
+        // User's pieces
+        Route::apiResource('piece', 'PieceController')->except('show', 'destroy', 'update');
+        
+        Route::middleware('operator')->group(function(){
+            // User's current operation
+            Route::get('/operation', 'OperationsController@operation');
+            // User's passed operations
+            Route::get('/operations', 'OperationsController@passedOperations');
         });
         
-        // User's current operation
-        Route::get('/operation', 'OperationsController@operation');
-        // User's passed operations
-        Route::get('/operations', 'OperationsController@passedOperations');
     });
 
     // Operations routes
-    // Route::middleware('operator')->group(function(){
+    Route::middleware('operator')->group(function(){
         Route::get('city/{city_id}/operations', 'OperationsController@cityOperations');
         Route::get('operations/{operation_id}/city/{city_id}/sites', 'OperationsController@operationSites');
+    });
     
-        // Localizations routes
-        Route::get('countries', 'LocalizationController@countries');
-        Route::get('country/{country_id}/states', 'LocalizationController@states');
-        Route::get('state/{state_id}/cities', 'LocalizationController@cities');
-    // });
+    // Localizations routes
+    Route::get('countries', 'LocalizationController@countries');
+    Route::get('country/{country_id}/states', 'LocalizationController@states');
+    Route::get('state/{state_id}/cities', 'LocalizationController@cities');
 });

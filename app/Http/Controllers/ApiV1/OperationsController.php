@@ -33,10 +33,10 @@ class OperationsController extends Controller
             $operation = Operation::whereIn('id', $user_operations_ids)
                                             ->whereStatus('EN COURS')
                                             ->get();
-
-            return ($operation->isEmpty()) ? $apiRepository->successResponse(trans('no_current_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse(trans('operation'), $operation, null, Response::HTTP_FOUND);
+            
+            return ($operation->isEmpty()) ? $apiRepository->jsonResponse(trans('no_current_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operation->count(), Response::HTTP_FOUND, $operation);
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 
@@ -59,10 +59,10 @@ class OperationsController extends Controller
                                     ->whereDate('date_end', '<', $current_date)
                                     ->where('status', '!=', 'EN COURS')
                                     ->get();
-            
-            return ($operations->isEmpty()) ? $apiRepository->successResponse(trans('no_current_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($operations->count(), $operations, null, Response::HTTP_FOUND);
+            $collect = collect();
+            return ($operations->isEmpty()) ? $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operations->count(), Response::HTTP_FOUND, $operations);
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
         
     }
@@ -80,14 +80,14 @@ class OperationsController extends Controller
         try {
             $city = City::findOrFail($city_id)->ville;
             $city_operations_ids = DB::table('city_operation')
-                                  ->whereCityId($city_id)
+                                  ->whereCityId($city->id)
                                   ->pluck('operation_id');
 
             $operations = Operation::whereIn('id', $city_operations_ids)->get();
             
-            return ($operations->isEmpty()) ? $apiRepository->successResponse(trans('no_site_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($operations->count(), $operations, null, Response::HTTP_FOUND);                         
+            return ($operations->isEmpty()) ? $apiRepository->jsonResponse(trans('no_site_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operations->count(), Response::HTTP_FOUND, $operations);                         
         } catch (Exception  $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 

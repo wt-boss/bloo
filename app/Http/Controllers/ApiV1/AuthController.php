@@ -29,14 +29,13 @@ class AuthController extends Controller
             $user = new User($request->validated());
             $user->role = 1;
             $user->active = 1;
-            // $user->id = 90;
             $user->save();
             // Generate token from the created user
             $token = JWTAuth::fromUser($user);
 
-            return $apiRepository->successResponse(trans('new_account'), $user, $token, Response::HTTP_CREATED);
+            return $apiRepository->jsonResponse(trans('new_account'), Response::HTTP_CREATED, $user, $token);
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 
@@ -60,9 +59,9 @@ class AuthController extends Controller
         if($user){
             $password = Hash::check($request->password, $user->password);
             if(!$password){
-                return $apiRepository->failedResponse(trans('credentials_not_found'));
+                return $apiRepository->jsonResponse(trans('credentials_not_found'));
             }else if ($user->active === 0) {
-                return $apiRepository->failedResponse(trans('disabled_account'));
+                return $apiRepository->jsonResponse(trans('disabled_account'));
             }
             
             $token = JWTAuth::attempt([
@@ -71,9 +70,9 @@ class AuthController extends Controller
                 'active' => 1,
             ]);
 
-            return $apiRepository->successResponse(trans('auth_success'), null, $token);
+            return $apiRepository->jsonResponse(trans('auth_success'), Response::HTTP_OK, null, $token);
         }
-        return $apiRepository->failedResponse(trans('user_not_found'), Response::HTTP_NOT_FOUND);
+        return $apiRepository->jsonResponse(trans('user_not_found'), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -88,9 +87,9 @@ class AuthController extends Controller
         try{
             $new_token = JWTAuth::parseToken()->refresh(true, true);
 
-            return $apiRepository->successResponse(trans('refreshed_token'), null, $new_token, Response::HTTP_FOUND);
+            return $apiRepository->jsonResponse(trans('refreshed_token'), Response::HTTP_FOUND, null, $new_token);
         }catch(Exception $e){
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 
@@ -109,10 +108,10 @@ class AuthController extends Controller
         try {
             JWTAuth::invalidate($token);
 
-            return $apiRepository->successResponse(trans('logout_success'), null, null, Response::HTTP_OK);
+            return $apiRepository->jsonResponse(trans('logout_success'), Response::HTTP_OK);
 
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 }

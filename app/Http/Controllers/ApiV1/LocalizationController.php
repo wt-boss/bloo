@@ -5,20 +5,13 @@ namespace App\Http\Controllers\APIV1;
 use App\City;
 use App\State;
 use App\Country;
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Repositories\Api\APiRepository;
 
 class LocalizationController extends Controller
-{
-    protected $token;
-
-    public function __construct(Request $request)
-    {
-        $this->token = $request->header('Authorization');
-    }
-    
+{    
     /**
      * Get countries
      * 
@@ -28,10 +21,14 @@ class LocalizationController extends Controller
      */
     public function countries(ApiRepository $apiRepository)
     {
-        $data = [7, 38, 42, 43, 50, 51, 67, 79, 161];
-        $countries = Country::whereIn('id', $data)->get();
+        try {
+            $data = [7, 38, 42, 43, 50, 51, 67, 79, 161];
+            $countries = Country::whereIn('id', $data)->get();
 
-        return (!$countries->isEmpty()) ? $apiRepository->successResponse($countries->count(), $countries, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_country_found'), Response::HTTP_NOT_FOUND);
+            return (!$countries->isEmpty()) ? $apiRepository->jsonResponse($countries->count(), Response::HTTP_FOUND, $countries) : $apiRepository->jsonResponse(trans('no_country_found'), Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $apiRepository->jsonResponse($e->getMessage());
+        }
     }
 
     /**
@@ -44,9 +41,13 @@ class LocalizationController extends Controller
      */
     public function states($id, ApiRepository $apiRepository)
     {
-        $states = State::where('country_id', $id)->get();
+        try {
+            $states = State::where('country_id', $id)->get();
         
-        return (!$states->isEmpty()) ? $apiRepository->successResponse($states->count(), $states, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_state_found'), Response::HTTP_NOT_FOUND);
+            return (!$states->isEmpty()) ? $apiRepository->jsonResponse($states->count(), Response::HTTP_FOUND, $states) : $apiRepository->jsonResponse(trans('no_state_found'), Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $apiRepository->jsonResponse($e->getMessage());
+        }
     }
 
     /**
@@ -59,9 +60,13 @@ class LocalizationController extends Controller
      */
     public function cities($id, ApiRepository $apiRepository)
     {
-        $cities = City::where('state_id', $id)->get();
+        try {
+            $cities = City::where('state_id', $id)->get();
 
-        return (!$cities->isEmpty()) ? $apiRepository->successResponse($cities->count(), $cities, null, Response::HTTP_FOUND) : $apiRepository->failedResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
+        return (!$cities->isEmpty()) ? $apiRepository->jsonResponse($cities->count(), Response::HTTP_FOUND, $cities) : $apiRepository->jsonResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $apiRepository->jsonResponse($e->getMessage());
+        }
     }
 }
 

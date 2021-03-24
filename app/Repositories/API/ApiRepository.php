@@ -2,25 +2,8 @@
 
 namespace App\Repositories\Api;
 
-
 class ApiRepository
 {
-    /**
-     * Return fail response 
-     * 
-     * @param mixed $message
-     * @param int $code
-     * 
-     * @return Illuminate\Http\JsonResponse
-     */
-    public function failedResponse($message = null, $code = 500)
-    {
-        return response()->json([
-            'status' => $code,
-            'message' => $message,
-        ], $code);
-    }
-
     /**
      * Return success response
      * 
@@ -28,16 +11,19 @@ class ApiRepository
      * @param mixed $content
      * @param string $token
      * @param int $code
+     * @param int $extra
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function successResponse($message = null, $content = null, $token = null, $code = 200)
+    public function jsonResponse($message = null, $code = 500, $content = null, $token = null, $extra = null)
     {
+        $collection = collect();
         return response()->json([
             'status' => $code,
             'message' => $message,
             'content' => $content,
-            'token' => ($token) ? 'Bearer ' . $token : '',
+            'token' => ($token) ? 'Bearer ' . $token : null,
+            'extra' => $extra
         ], $code);
     }
 }

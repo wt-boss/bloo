@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\ApiV1;
 
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
@@ -12,12 +11,6 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    protected $token;
-
-    public function __construct(Request $request)
-    {
-        $this->token = $request->header('Authorization');
-    }
     /**
      * Display user's details
      * 
@@ -25,9 +18,10 @@ class UserController extends Controller
      */
     public function me(ApiRepository $apiRepository) {
         try {
-            return $apiRepository->successResponse(null, JWTAuth::user());
+            $collect = collect();
+            return $apiRepository->jsonResponse(null, Response::HTTP_OK, $collect->push(JWTAuth::user()));
         } catch (Exception $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
     }
 
@@ -45,12 +39,9 @@ class UserController extends Controller
             $user = JWTAuth::user();
             $data = $request->validated();
             $user->update($data);
-            return $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_OK);
-            // return ($user->wasChanged()) ? $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_OK) : $apiRepository->successResponse(trans('update_success'), $user, null, Response::HTTP_NOT_MODIFIED);
+            return $apiRepository->jsonResponse(trans('update_success'), Response::HTTP_OK, $user);
         }catch(Exception $e){
-            return $apiRepository->failedResponse($e->getMessage());
+            return $apiRepository->jsonResponse($e->getMessage());
         }
-        
-
     }
 }
