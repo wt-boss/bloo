@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\LastUserActivity;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -38,11 +39,13 @@ class Kernel extends HttpKernel
 //            \App\Http\Middleware\Localization::class,
             \App\Http\Middleware\Locale::class,
             \App\Http\Middleware\UserActivity::class,
+            \App\Http\Middleware\LastUserActivity::class,
         ],
 
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LastUserActivity::class,
         ],
     ];
 

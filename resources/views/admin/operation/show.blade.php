@@ -257,11 +257,12 @@
                                        </span>
                                     </td>
                                     <td>
-                                         @if(Cache::has('user-is-online-' . $user->id))
+                                          @if(Cache::has('user-is-online-' . $user->id))
                                                 <li class="text-success">Online</li>
                                             @else
                                                 <li class="text-secondary">Offline</li>
                                         @endif
+
                                     </td>
                                 </tr>
                                     @endif
