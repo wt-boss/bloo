@@ -76,8 +76,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        $expireAt = Carbon::now()->addMinutes(1);
-        Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
+
         return response()->json(
            [
                'items' => auth()->user(),

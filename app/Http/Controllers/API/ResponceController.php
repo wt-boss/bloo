@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Form;
 use App\Location;
@@ -10,6 +11,7 @@ use App\Operation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Validator;
 use App\FormResponse;
@@ -42,6 +44,8 @@ class ResponceController extends Controller
         $pusher = App::make('pusher');
         $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
         $pusher->trigger('responce-channel', 'my-event', $data);
+        $expireAt = Carbon::now()->addMinutes(2);
+        Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
         if ($request->ajax()) {
             $form = Form::where('code', $form)->first();
             $data = $request->all();
