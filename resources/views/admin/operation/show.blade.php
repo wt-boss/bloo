@@ -234,6 +234,7 @@
                             <tr>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -263,6 +264,9 @@
                                                 <li class="text-secondary">Offline</li>
                                         @endif
 
+                                    </td>
+                                    <td>
+                                        <a href="{{route('AllPoints',[$operation->id,$user->id])}}" target="_blank">Locations</a>
                                     </td>
                                 </tr>
                                     @endif

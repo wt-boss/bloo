@@ -845,8 +845,14 @@ class OperationController extends Controller
 
     public function AllLocation($operationid,$userid)
     {
-        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get(['lat','lng']);
+        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
         return response()->json($locations);
+    }
+
+
+    public function VueAllLocation($userid,$operationid)
+    {
+        return view('admin.operation.localisation',compact('userid','operationid'));
     }
 
 }
