@@ -299,3 +299,7 @@ Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvi
 Route::get('/tryoperateurs/{id}','OperationController@tryOperateurs');
 
 
+/** Liste des localisations par user et operation*/
+Route::get('/getAllLocationUser/{userid}/{operationid}','OperationController@AllLocation');
+
+
