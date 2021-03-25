@@ -21,7 +21,8 @@ class UpdateUserRequest extends FormRequest
       throw new HttpResponseException(
         response()->json([
           'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'messages' => $validator->errors()
+          'message' => $validator->errors()->first(),
+          'content' => $validator->errors()
         ], Response::HTTP_UNPROCESSABLE_ENTITY)
       ); 
     }

@@ -93,6 +93,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     Route::middleware('operator')->group(function(){
         Route::get('city/{city_id}/operations', 'OperationsController@cityOperations');
         Route::get('operations/{operation_id}/city/{city_id}/sites', 'OperationsController@operationSites');
+        Route::get('country/operations/cities', 'OperationsController@operationsCities');
     });
     
     // Localizations routes
