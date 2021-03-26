@@ -625,5 +625,6 @@
     "no_state_found": "No state found",
     "no_city_found": "No city found",
     "required_to_be_operator": "Required to be an operator",
-    "no_operation": "No operation found"
+    "no_operation": "No operation found",
+    "no_site_operation": "No site for this operation"
 }

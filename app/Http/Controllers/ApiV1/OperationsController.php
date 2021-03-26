@@ -14,6 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use App\Operation_user_save;
 use App\Repositories\Api\ApiRepository;
 
 class OperationsController extends Controller
@@ -27,8 +28,6 @@ class OperationsController extends Controller
     /**
      * Display user's current operation
      * 
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     * 
      * @return Illuminate\Http\JsonResponse
      */
     public function operation()
@@ -39,8 +38,8 @@ class OperationsController extends Controller
             $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
             // Current operation
             $operation = Operation::whereIn('id', $user_operations_ids)
-                                            ->whereStatus('EN COURS')
-                                            ->get();
+                                   ->whereStatus('EN COURS')
+                                   ->get();
             return $this->api->conditionnalResponse($operation ,'no_current_operation');
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
@@ -50,18 +49,16 @@ class OperationsController extends Controller
     /**
      * User's operations history (passed operations)
      * 
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function passedOperations(ApiRepository $apiRepository)
+    public function passedOperations()
     {
         try {
             $user = JWTAuth::user();
             // Retrieve user's operations
-            $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
-            $current_date = Carbon::now()->toDateString();
+            $user_operations_ids = Operation_user_save::whereUserId($user->id)->pluck('operation_id');
             // Passed operations
+            $current_date = Carbon::now()->toDateString();
             $operations = Operation::whereIn('id', $user_operations_ids)
                                     ->whereDate('date_end', '<', $current_date)
                                     ->where('status', '!=', 'EN COURS')
@@ -74,29 +71,29 @@ class OperationsController extends Controller
     }
 
     /**
-     * Retrieve operations for specified city
+     * Retrieve not begin's operations for specified city
      * 
      * @param int $city_id
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function cityOperations($city_id, ApiRepository $apiRepository)
+    public function cityOperations($city_id)
     {
         try {
-            $city = City::findOrFail($city_id)->ville;
+            $city = City::findOrFail($city_id);
             if(!$city){
-                return $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_NOT_FOUND);
+                return $this->api->jsonResponse(trans('no_city_found'), Response::HTTP_OK);
             }
             $city_operations_ids = DB::table('city_operation')
-                                  ->whereCityId($city->id)
-                                  ->pluck('operation_id');
-
-            $operations = Operation::whereIn('id', $city_operations_ids)->get();
-            
-            return $apiRepository->conditionnalResponse($operations, 'no_site_operation');                         
+                                      ->whereCityId($city->id)
+                                      ->pluck('operation_id');
+            $current_date = Carbon::now()->toDateString();
+            $operations = Operation::whereIn('id', $city_operations_ids)
+                                    ->whereDate('date_start', '>', $current_date)
+                                    ->get();
+            return $this->api->conditionnalResponse($operations, 'no_operation');                         
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 
@@ -105,57 +102,49 @@ class OperationsController extends Controller
      * 
      * @param int $operation_id
      * @param int $city_id
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function operationSites($operation_id, $city_id, ApiRepository $apiRepository)
+    public function operationSites($operation_id, $city_id)
     {
         try {
             $operation = Operation::findOrFail($operation_id);
-            $city = City::findOrFail($city_id)->ville;
-            if (!$operation || !$city) {
-                return $apiRepository->jsonResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
+            $city = City::findOrFail($city_id);
+            if (!$operation) {
+                return $this->api->jsonResponse(trans('no_operation'), Response::HTTP_OK);
+            }else if(!$city){
+                return $this->api->jsonResponse(trans('no_city_found'), Response::HTTP_OK);
             }
-            
-            $sites = Site::whereOperationId($operation)
-                         ->whereVille($city)
+            $sites = Site::whereOperationId($operation->id)
+                         ->whereCityId($city->id)
                          ->get();
-
-            return $apiRepository->conditionnalResponse($sites, 'no_site_operation');                         
+            return $this->api->conditionnalResponse($sites, 'no_site_operation');                         
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 
     /**
-     * City's country for not begin's operations
-     * 
-     * @param App\Repositories\Api\ApiRepository $apiRepository
+     * Cities' country (current user's country) for not begin's operations
      * 
      * @return Illuminate\Http\JsonResponse
      */
-    public function operationsCities(ApiRepository $apiRepository)
+    public function operationsCities()
     {
         try {
             $auth_id = JWTAuth::parseToken()->getPayload()->get('sub');
             $user = User::findOrFail($auth_id);
-            $country = $user->country_id;
-            if(!$country){
-                return $apiRepository->jsonResponse(trans('no_country_found'), Response::HTTP_NOT_FOUND);
-            }
-            
             $current_date = Carbon::now()->toDateString();
             $operations_ids = Operation::where('status', '!=', 'EN COURS')
-                                        ->whereDate('date_start', '>', $current_date)
-                                        ->pluck('id');
-            $sites = Site::whereIn('operation_id', $operations_ids)->pluck('ville');
-            $cities = City::whereIn('name', $sites)
-                            ->whereCountryId($country)
-                            ->get();
-            return $apiRepository->conditionnalResponse($cities, 'no_city_found');                         
+                                       ->whereDate('date_start', '>', $current_date)
+                                       ->pluck('id');
+            $sites = Site::whereIn('operation_id', $operations_ids)
+                          ->whereCountryId($user->country_id)
+                          ->pluck('city_id');
+            $cities = City::whereIn('id', $sites)->get();
+            return $this->api->conditionnalResponse($cities, 'no_city_found');                         
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 }
