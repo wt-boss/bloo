@@ -100,6 +100,9 @@
 @endif
 
 
+
+
+
 @if (auth()->user()->hasRole('Opérateur'))
 @section('content')
     @include('partials.alert', ['name' => 'index'])
