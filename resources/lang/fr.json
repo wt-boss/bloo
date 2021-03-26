@@ -677,5 +677,6 @@
     "no_city_found": "Aucune ville trouvée",
     "required_to_be_operator": "Il est requis d'être opérateur",
     "no_operation": "Aucune opération trouvée",
-    "no_site_operation": "Aucun site pour cette opération"
+    "no_site_operation": "Aucun site pour cette opération",
+    "no_current_operation": "Aucune opération en cours"
 }
