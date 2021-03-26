@@ -13,13 +13,15 @@ class UserController extends Controller
 {
     /**
      * Display user's details
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function me(ApiRepository $apiRepository) {
         try {
             $user = JWTAuth::user();
-            return $apiRepository->jsonResponse(null, Response::HTTP_OK, [$user], null, $user->pieces->isNotEmpty());
+            $user->pieces->isNotEmpty();
+            $operations = $user->operations;
+            return $apiRepository->jsonResponse(null, Response::HTTP_OK, $user, null, null);
         } catch (Exception $e) {
             return $apiRepository->jsonResponse($e->getMessage());
         }
