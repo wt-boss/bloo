@@ -38,7 +38,7 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->jsonResponse($pieces->count() . ' piece(s)', Response::HTTP_FOUND, [$urls]);
+            return $apiRepository->jsonResponse($pieces->count() . ' piece(s)', Response::HTTP_OK, [$urls]);
 
         } catch (Exception $e) {
             return $apiRepository->jsonResponse($e->getMessage());

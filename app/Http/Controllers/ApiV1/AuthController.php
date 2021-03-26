@@ -6,14 +6,15 @@ use App\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Repositories\Api\ApiRepository;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -52,10 +53,14 @@ class AuthController extends Controller
      */
     public function login(Request $request, ApiRepository $apiRepository)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        if($validator->fails()){
+            return $apiRepository->jsonResponse($validator->errors()->first(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
+        }
 
         $user = User::where('email', $request->email)->first();
 
@@ -75,7 +80,7 @@ class AuthController extends Controller
 
             return $apiRepository->jsonResponse(trans('auth_success'), Response::HTTP_OK, null, $token);
         }
-        return $apiRepository->jsonResponse(trans('user_not_found'), Response::HTTP_NOT_FOUND);
+        return $apiRepository->jsonResponse(trans('user_not_found'), Response::HTTP_OK);
     }
 
     /**

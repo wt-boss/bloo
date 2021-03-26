@@ -6,6 +6,7 @@ use Closure;
 use JWTAuth;
 use Exception;
 use App\Repositories\Api\ApiRepository;
+use Illuminate\Http\Response;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -26,11 +27,11 @@ class JWTAuthVerify extends BaseMiddleware
             JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
             if ($e instanceof TokenInvalidException){
-                return $apiRepository->jsonResponse(trans('token_invalid'));
+                return $apiRepository->jsonResponse(trans('token_invalid'), Response::HTTP_UNAUTHORIZED);
             }else if ($e instanceof TokenExpiredException){
-                return $apiRepository->jsonResponse(trans('token_expired'));
+                return $apiRepository->jsonResponse(trans('token_expired'), Response::HTTP_UNAUTHORIZED);
             }else{
-                return $apiRepository->jsonResponse(trans('unauthorized'), 401);
+                return $apiRepository->jsonResponse(trans('unauthorized'), Response::HTTP_UNAUTHORIZED);
             }
         }
         return $next($request);

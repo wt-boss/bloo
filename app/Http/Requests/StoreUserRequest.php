@@ -21,7 +21,8 @@ class StoreUserRequest extends FormRequest
       throw new HttpResponseException(
         response()->json([
           'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'messages' => $validator->errors()
+          'message' => $validator->errors()->first(),
+          'content' => $validator->errors()
         ], Response::HTTP_UNPROCESSABLE_ENTITY)
       );  
     }
@@ -47,7 +48,7 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string|max:255|min:2',
             'last_name' => 'nullable|string|max:255|min:5',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|string|min:7|confirmed',
+            'password' => 'required|string|min:6|confirmed',
             'phone' => 'required|digits:9',
             'phonepaiement' => 'required|digits:9',
             'country_id' => 'required|exists:countries,id',

@@ -222,6 +222,4 @@ class User extends Authenticatable implements JWTSubject
         return Cache::has('user-is-online-' . $this->id);
     }
 
-
-
 }

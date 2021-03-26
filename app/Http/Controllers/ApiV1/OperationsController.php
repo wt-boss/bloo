@@ -3,29 +3,32 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\City;
+use App\Site;
 use Exception;
-use App\Operation_User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Controllers\Controller;
 use App\Operation;
-use App\Repositories\Api\ApiRepository;
-use App\Site;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use App\Operation_user_save;
+use App\Repositories\Api\ApiRepository;
 
 class OperationsController extends Controller
 {
+    public $api;
+
+    public function __construct()
+    {
+        $this->api = new ApiRepository();
+    }
     /**
      * Display user's current operation
      *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function operation(ApiRepository $apiRepository)
+    public function operation()
     {
         try {
             $user = JWTAuth::user();
@@ -35,68 +38,61 @@ class OperationsController extends Controller
             $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
             // Current operation
             $operation = Operation::whereIn('id', $user_operations_ids)
-                                            ->whereStatus('EN COURS')
-                                            ->get();
-
-            return ($operation->isEmpty()) ? $apiRepository->jsonResponse(trans('no_current_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operation->count(), Response::HTTP_FOUND, $operation);
+                                   ->whereStatus('EN COUR')
+                                   ->get();
+            return $this->api->conditionnalResponse($operation ,'no_current_operation');
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 
     /**
      * User's operations history (passed operations)
      *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function passedOperations(ApiRepository $apiRepository)
+    public function passedOperations()
     {
         try {
             $user = JWTAuth::user();
             $expireAt = Carbon::now()->addMinutes(2);
             Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
             // Retrieve user's operations
-            $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
-            $current_date = Carbon::now()->toDateString();
+            $user_operations_ids = Operation_user_save::whereUserId($user->id)->pluck('operation_id');
             // Passed operations
             $operations = Operation::whereIn('id', $user_operations_ids)
-                                    ->whereDate('date_end', '<', $current_date)
-                                    ->where('status', '!=', 'EN COURS')
+                                    ->whereStatus('TERMINER')
                                     ->get();
-            $collect = collect();
-            return ($operations->isEmpty()) ? $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operations->count(), Response::HTTP_FOUND, $operations);
+            return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse($e->getMessage());
         }
 
     }
 
     /**
-     * Retrieve operations for specified city
+     * Retrieve not begin's operations for specified city
      *
      * @param int $city_id
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function cityOperations($city_id, ApiRepository $apiRepository)
+    public function cityOperations($city_id)
     {
         try {
-            $city = City::findOrFail($city_id)->ville;
-            if(!($city)){
-                return $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_NOT_FOUND);
+            $city = City::findOrFail($city_id);
+            if(!$city){
+                return $this->api->jsonResponse(trans('no_city_found'), Response::HTTP_OK);
             }
             $city_operations_ids = DB::table('city_operation')
-                                  ->whereCityId($city->id)
-                                  ->pluck('operation_id');
-
-            $operations = Operation::whereIn('id', $city_operations_ids)->get();
-
-            return ($operations->isEmpty()) ? $apiRepository->jsonResponse(trans('no_site_operation'), Response::HTTP_OK) : $apiRepository->jsonResponse($operations->count(), Response::HTTP_FOUND, $operations);
-        } catch (Exception  $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+                                      ->whereCityId($city->id)
+                                      ->pluck('operation_id');
+            $operations = Operation::whereIn('id', $city_operations_ids)
+                                    ->whereStatus('CREER')
+                                    ->get();
+            return $this->api->conditionnalResponse($operations, 'no_operation');
+        } catch (Exception $e) {
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 
@@ -105,26 +101,46 @@ class OperationsController extends Controller
      *
      * @param int $operation_id
      * @param int $city_id
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function operationSites($operation_id, $city_id, ApiRepository $apiRepository)
+    public function operationSites($operation_id, $city_id)
     {
         try {
             $operation = Operation::findOrFail($operation_id);
-            $city = City::findOrFail($city_id)->ville;
-            if (!$operation || !$city) {
-                return $apiRepository->jsonResponse(trans('no_city_found'), Response::HTTP_NOT_FOUND);
+            $city = City::findOrFail($city_id);
+            if (!$operation) {
+                return $this->api->jsonResponse(trans('no_operation'), Response::HTTP_OK);
+            }else if(!$city){
+                return $this->api->jsonResponse(trans('no_city_found'), Response::HTTP_OK);
             }
-
-            $sites = Site::whereOperationId($operation)
-                         ->whereVille($city)
+            $sites = Site::whereOperationId($operation->id)
+                         ->whereCityId($city->id)
                          ->get();
+            return $this->api->conditionnalResponse($sites, 'no_site_operation');
+        } catch (Exception $e) {
+            return $this->api->jsonResponse($e->getMessage());
+        }
+    }
 
-        return ($sites->isEmpty()) ? $apiRepository->successResponse(trans('no_site_operation'), null, null, Response::HTTP_OK) : $apiRepository->successResponse($sites->count(), $sites, null, Response::HTTP_FOUND);
-        } catch (Exception  $e) {
-            return $apiRepository->failedResponse($e->getMessage());
+    /**
+     * Cities' country (current user's country) for not begin's operations
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function operationsCities()
+    {
+        try {
+            $auth_id = JWTAuth::parseToken()->getPayload()->get('sub');
+            $user = User::findOrFail($auth_id);
+            $operations_ids = Operation::whereStatus('TERMINER')->pluck('id');
+            $sites = Site::whereIn('operation_id', $operations_ids)
+                          ->whereCountryId($user->country_id)
+                          ->pluck('city_id');
+            $cities = City::whereIn('id', $sites)->get();
+            return $this->api->conditionnalResponse($cities, 'no_city_found');
+        } catch (Exception $e) {
+            return $this->api->jsonResponse($e->getMessage());
         }
     }
 }

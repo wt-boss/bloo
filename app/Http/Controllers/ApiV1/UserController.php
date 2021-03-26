@@ -21,10 +21,13 @@ class UserController extends Controller
      */
     public function me(ApiRepository $apiRepository) {
         try {
-            $collect = collect();
+            $user = JWTAuth::user();
+            $user->pieces->isNotEmpty();
+            $operations = $user->operations;
+
             $expireAt = Carbon::now()->addMinutes(2);
             Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
-            return $apiRepository->jsonResponse(null, Response::HTTP_OK, $collect->push(JWTAuth::user()));
+            return $apiRepository->jsonResponse(null, Response::HTTP_OK, $user, null, null);
         } catch (Exception $e) {
             return $apiRepository->jsonResponse($e->getMessage());
         }
