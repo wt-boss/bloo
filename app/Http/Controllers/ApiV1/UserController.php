@@ -19,7 +19,7 @@ class UserController extends Controller
     public function me(ApiRepository $apiRepository) {
         try {
             $user = JWTAuth::user();
-            return $apiRepository->jsonResponse(null, Response::HTTP_OK, [$user], null, $user->pieces->isNotEmpty());
+            return $apiRepository->jsonResponse(null, Response::HTTP_OK, $user, null, $user->pieces->isNotEmpty());
         } catch (Exception $e) {
             return $apiRepository->jsonResponse($e->getMessage());
         }

@@ -674,7 +674,8 @@
     "not_found": "Introuvable",
     "no_country_found": "Aucun pays trouvé",
     "no_state_found": "Aucune région trouvée",
-    "no_city_found": "Aucune ville trouvé",
+    "no_city_found": "Aucune ville trouvée",
     "required_to_be_operator": "Il est requis d'être opérateur",
-    "no_operation": "Aucune opération trouvée"
+    "no_operation": "Aucune opération trouvée",
+    "no_site_operation": "Aucun site pour cette opération"
 }

@@ -91,13 +91,13 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
 
     // Operations routes
     Route::middleware('operator')->group(function(){
-        Route::get('city/{city_id}/operations', 'OperationsController@cityOperations');
-        Route::get('operations/{operation_id}/city/{city_id}/sites', 'OperationsController@operationSites');
+        Route::get('cities/{city_id}/operations', 'OperationsController@cityOperations');
+        Route::get('operations/{operation_id}/cities/{city_id}/sites', 'OperationsController@operationSites');
         Route::get('country/operations/cities', 'OperationsController@operationsCities');
     });
     
     // Localizations routes
     Route::get('countries', 'LocalizationController@countries');
-    Route::get('country/{country_id}/states', 'LocalizationController@states');
-    Route::get('state/{state_id}/cities', 'LocalizationController@cities');
+    Route::get('countries/{country_id}/states', 'LocalizationController@states');
+    Route::get('states/{state_id}/cities', 'LocalizationController@cities');
 });
