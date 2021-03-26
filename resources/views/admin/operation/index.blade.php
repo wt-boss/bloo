@@ -58,7 +58,7 @@
                                         <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                         <td class="text-center">
                                                 @if($operation->status === "CREER")
-                                                <a href="#" class="badge badge-warning">    </a>
+                                                <a href="#" class="badge badge-primary">    </a>
                                                 @endif
                                                 @if($operation->status === "EN COUR")
                                                         <a href="#" class="badge badge-success">    </a>
