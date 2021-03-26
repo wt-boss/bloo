@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +48,7 @@ class AuthController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param App\Repositories\Api\ApiRepository $apiRepository
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request, ApiRepository $apiRepository)
@@ -58,7 +61,7 @@ class AuthController extends Controller
         if($validator->fails()){
             return $apiRepository->jsonResponse($validator->errors()->first(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
         }
-        
+
         $user = User::where('email', $request->email)->first();
 
         if($user){
@@ -68,7 +71,7 @@ class AuthController extends Controller
             }else if ($user->active === 0) {
                 return $apiRepository->jsonResponse(trans('disabled_account'));
             }
-            
+
             $token = JWTAuth::attempt([
                 'email' => $request->email,
                 'password' => $request->password,
@@ -82,7 +85,7 @@ class AuthController extends Controller
 
     /**
      * Refresh the authenticated user's token
-     * 
+     *
      * @param App\Repositories\Api\ApiRepository $apiRepository
      *
      * @return \Illuminate\Http\JsonResponse
@@ -91,8 +94,9 @@ class AuthController extends Controller
     {
         try{
             $new_token = JWTAuth::parseToken()->refresh(true, true);
-
-            return $apiRepository->jsonResponse(trans('refreshed_token'), Response::HTTP_OK, null, $new_token);
+            $expireAt = Carbon::now()->addMinutes(2);
+            Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
+            return $apiRepository->jsonResponse(trans('refreshed_token'), Response::HTTP_FOUND, null, $new_token);
         }catch(Exception $e){
             return $apiRepository->jsonResponse($e->getMessage());
         }

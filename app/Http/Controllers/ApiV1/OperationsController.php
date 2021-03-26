@@ -6,6 +6,11 @@ use App\City;
 use App\Site;
 use Exception;
 use App\Country;
+use App\Operation_User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
 use App\Operation;
 use App\User;
 use Carbon\Carbon;
@@ -27,13 +32,17 @@ class OperationsController extends Controller
     }
     /**
      * Display user's current operation
-     * 
+     *
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function operation()
     {
         try {
             $user = JWTAuth::user();
+            $expireAt = Carbon::now()->addMinutes(2);
+            Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
             // Retrieve user's operations
             $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
             // Current operation
@@ -48,13 +57,18 @@ class OperationsController extends Controller
 
     /**
      * User's operations history (passed operations)
-     * 
+     *
+     *
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function passedOperations()
     {
         try {
             $user = JWTAuth::user();
+            $expireAt = Carbon::now()->addMinutes(2);
+            Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
             // Retrieve user's operations
             $user_operations_ids = Operation_user_save::whereUserId($user->id)->pluck('operation_id');
             // Passed operations
@@ -67,14 +81,19 @@ class OperationsController extends Controller
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
         }
-        
+
     }
 
     /**
      * Retrieve not begin's operations for specified city
-     * 
+     *
      * @param int $city_id
-     * 
+     *
+     * Retrieve operations for specified city
+     *
+     * @param int $city_id
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function cityOperations($city_id)
@@ -91,7 +110,7 @@ class OperationsController extends Controller
             $operations = Operation::whereIn('id', $city_operations_ids)
                                     ->whereDate('date_start', '>', $current_date)
                                     ->get();
-            return $this->api->conditionnalResponse($operations, 'no_operation');                         
+            return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
         }
@@ -99,10 +118,12 @@ class OperationsController extends Controller
 
     /**
      * City's sites for specified operation
-     * 
+     *
      * @param int $operation_id
      * @param int $city_id
-     * 
+     *
+     * @param App\Repositories\Api\ApiRepository $apiRepository
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function operationSites($operation_id, $city_id)
@@ -118,7 +139,7 @@ class OperationsController extends Controller
             $sites = Site::whereOperationId($operation->id)
                          ->whereCityId($city->id)
                          ->get();
-            return $this->api->conditionnalResponse($sites, 'no_site_operation');                         
+            return $this->api->conditionnalResponse($sites, 'no_site_operation');
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
         }
@@ -126,7 +147,7 @@ class OperationsController extends Controller
 
     /**
      * Cities' country (current user's country) for not begin's operations
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function operationsCities()
@@ -142,7 +163,7 @@ class OperationsController extends Controller
                           ->whereCountryId($user->country_id)
                           ->pluck('city_id');
             $cities = City::whereIn('id', $sites)->get();
-            return $this->api->conditionnalResponse($cities, 'no_city_found');                         
+            return $this->api->conditionnalResponse($cities, 'no_city_found');
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
         }
