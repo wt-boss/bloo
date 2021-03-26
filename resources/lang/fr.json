@@ -676,5 +676,12 @@
     "no_state_found": "Aucune région trouvée",
     "no_city_found": "Aucune ville trouvé",
     "required_to_be_operator": "Il est requis d'être opérateur",
-    "no_operation": "Aucune opération trouvée"
+    "no_operation": "Aucune opération trouvée",
+
+    "Page not found":"Page introuvable",
+    "forbidden":"Page interdite",
+    "method not allowed":"Méthode non supportée",
+    "unauthorized1":"Accès non autorisé",
+    "internal server error":"Erreur Interne du Serveur",
+    "return back":"Revenir en arrière"
 }
