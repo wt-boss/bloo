@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Entreprise;
+use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
@@ -841,5 +842,17 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
+
+    public function AllLocation($operationid,$userid)
+    {
+        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
+        return response()->json($locations);
+    }
+
+
+    public function VueAllLocation($userid,$operationid)
+    {
+        return view('admin.operation.localisation',compact('userid','operationid'));
+    }
 
 }
