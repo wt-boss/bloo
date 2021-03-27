@@ -1,4 +1,4 @@
-@section('title', '404 Error')
+@section('title', trans('method not allowed'))
 
 @extends('layouts.error')
 

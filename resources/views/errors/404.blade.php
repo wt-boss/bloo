@@ -1,4 +1,4 @@
-@section('title', '404 Error')
+@section('title', trans('Page not found'))
 
 @extends('layouts.error')
 
