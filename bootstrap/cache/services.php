@@ -48,6 +48,7 @@
     44 => 'App\\Providers\\RouteServiceProvider',
     45 => 'App\\Providers\\MacroServiceProvider',
     46 => 'App\\Providers\\HelperServiceProvider',
+    47 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
   ),
   'eager' => 
   array (
@@ -83,6 +84,7 @@
     29 => 'App\\Providers\\RouteServiceProvider',
     30 => 'App\\Providers\\MacroServiceProvider',
     31 => 'App\\Providers\\HelperServiceProvider',
+    32 => 'Tymon\\JWTAuth\\Providers\\LaravelServiceProvider',
   ),
   'deferred' => 
   array (

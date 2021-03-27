@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Entreprise;
+use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\Operation_user_save;
 use App\State;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -150,6 +153,13 @@ class OperationController extends Controller
         foreach ($parameters['lecteurs']as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
+
+            $savedata =  new Operation_user_save();
+            $savedata->user_id = $user->id;
+            $savedata->operation_id = $operation->id;
+            $savedata->save();
+
+
             /** Mail aux operateurs **/
             Mail::to($user->email)->send(new BlooOperateur());
             $user->notify(new EventNotification($message));
@@ -582,8 +592,12 @@ class OperationController extends Controller
             $data = ['clossing an operation']; // sending from and to user id when pressed enter
             $pusher->trigger('my-channel', 'notification-event', $data);
         }
+        $form = Form::findOrFail($operation->form_id);
+        $form->status = Form::STATUS_CLOSED ;
+        $form->save();
         $operation->status = "TERMINER";
         $operation->save();
+
         return back()->withSuccess(trans('Fin_operation'));
     }
 
@@ -825,5 +839,17 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
+
+    public function AllLocation($operationid,$userid)
+    {
+        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
+        return response()->json($locations);
+    }
+
+
+    public function VueAllLocation($userid,$operationid)
+    {
+        return view('admin.operation.localisation',compact('userid','operationid'));
+    }
 
 }

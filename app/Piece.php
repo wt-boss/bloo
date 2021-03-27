@@ -30,5 +30,4 @@ class Piece extends Model
     {
         $this->belongsTo(User::class);
     }
-
 }
