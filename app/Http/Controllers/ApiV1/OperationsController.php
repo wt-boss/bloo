@@ -3,22 +3,16 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\City;
+use App\Http\Controllers\Controller;
 use App\Site;
 use Exception;
-use App\Country;
-use App\Operation_User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Controllers\Controller;
 use App\Operation;
 use App\User;
 use Carbon\Carbon;
-use App\Operation_User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Controllers\Controller;
 use App\Operation_user_save;
 use App\Repositories\Api\ApiRepository;
 
@@ -33,8 +27,6 @@ class OperationsController extends Controller
     /**
      * Display user's current operation
      *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     *
      * @return Illuminate\Http\JsonResponse
      */
     public function operation()
@@ -47,7 +39,7 @@ class OperationsController extends Controller
             $user_operations_ids = Operation_User::whereUserId($user->id)->pluck('operation_id');
             // Current operation
             $operation = Operation::whereIn('id', $user_operations_ids)
-                                   ->whereStatus('EN COURS')
+                                   ->whereStatus('EN COUR')
                                    ->get();
             return $this->api->conditionnalResponse($operation ,'no_current_operation');
         } catch (Exception $e) {
@@ -57,9 +49,6 @@ class OperationsController extends Controller
 
     /**
      * User's operations history (passed operations)
-     *
-     *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      *
      * @return Illuminate\Http\JsonResponse
      */
@@ -72,10 +61,8 @@ class OperationsController extends Controller
             // Retrieve user's operations
             $user_operations_ids = Operation_user_save::whereUserId($user->id)->pluck('operation_id');
             // Passed operations
-            $current_date = Carbon::now()->toDateString();
             $operations = Operation::whereIn('id', $user_operations_ids)
-                                    ->whereDate('date_end', '<', $current_date)
-                                    ->where('status', '!=', 'EN COURS')
+                                    ->whereStatus('TERMINER')
                                     ->get();
             return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
@@ -89,11 +76,6 @@ class OperationsController extends Controller
      *
      * @param int $city_id
      *
-     * Retrieve operations for specified city
-     *
-     * @param int $city_id
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     *
      * @return Illuminate\Http\JsonResponse
      */
     public function cityOperations($city_id)
@@ -106,9 +88,8 @@ class OperationsController extends Controller
             $city_operations_ids = DB::table('city_operation')
                                       ->whereCityId($city->id)
                                       ->pluck('operation_id');
-            $current_date = Carbon::now()->toDateString();
             $operations = Operation::whereIn('id', $city_operations_ids)
-                                    ->whereDate('date_start', '>', $current_date)
+                                    ->whereStatus('CREER')
                                     ->get();
             return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
@@ -121,8 +102,6 @@ class OperationsController extends Controller
      *
      * @param int $operation_id
      * @param int $city_id
-     *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      *
      * @return Illuminate\Http\JsonResponse
      */
@@ -155,10 +134,7 @@ class OperationsController extends Controller
         try {
             $auth_id = JWTAuth::parseToken()->getPayload()->get('sub');
             $user = User::findOrFail($auth_id);
-            $current_date = Carbon::now()->toDateString();
-            $operations_ids = Operation::where('status', '!=', 'EN COURS')
-                                       ->whereDate('date_start', '>', $current_date)
-                                       ->pluck('id');
+            $operations_ids = Operation::whereStatus('TERMINER')->pluck('id');
             $sites = Site::whereIn('operation_id', $operations_ids)
                           ->whereCountryId($user->country_id)
                           ->pluck('city_id');
