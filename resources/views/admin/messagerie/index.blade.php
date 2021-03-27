@@ -226,6 +226,30 @@
                                 })
                             }
                         });
+
+                        $('#send').on('click', function (e) {
+                            console.log(operation_id);
+                            var message = $('.input-text input').val();
+                            console.log(message);
+                            // check if enter key is pressed and message is not null also receiver is selected
+                            if (message != '' && receiver_id != '') {
+                                $('.input-text input').val(''); // while pressed enter text box will be empty
+                                var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                $.ajax({
+                                    type: "post",
+                                    url: "message", // need to create this post route
+                                    data: datastr,
+                                    cache: false,
+                                    success: function (data) {
+                                    },
+                                    error: function (jqXHR, status, err) {},
+                                    complete: function () {
+                                        scrollToBottomFunc();
+                                    }
+                                })
+                            }
+                        });
+
                         scrollToBottomFunc();
                     }
                 });
@@ -303,6 +327,7 @@
                         cache: false,
                         success: function (data) {
                             $('#messages').html(data);
+
                             $('.input-text input').on('keyup', function (e) {
                                 console.log(operation_id);
                                 var message = $(this).val();
@@ -324,6 +349,31 @@
                                     })
                                 }
                             });
+
+                            $('#send').on('click', function (e) {
+                                console.log(operation_id);
+                                var message = $('.input-text input').val();
+                                console.log(message);
+                                // check if enter key is pressed and message is not null also receiver is selected
+                                if (message != '' && receiver_id != '') {
+                                    $('.input-text input').val(''); // while pressed enter text box will be empty
+                                    var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "message", // need to create this post route
+                                        data: datastr,
+                                        cache: false,
+                                        success: function (data) {
+                                        },
+                                        error: function (jqXHR, status, err) {},
+                                        complete: function () {
+                                            scrollToBottomFunc();
+                                        }
+                                    })
+                                }
+                            });
+
+
                             scrollToBottomFunc();
                         }
                     });
@@ -503,6 +553,7 @@
                             cache: false,
                             success: function (data) {
                                 $('#messages').html(data);
+
                                 $('.input-text input').on('keyup', function (e) {
                                     console.log(operation_id);
                                     var message = $(this).val();
@@ -524,6 +575,30 @@
                                         })
                                     }
                                 });
+
+                                $('#send').on('click', function (e) {
+                                    console.log(operation_id);
+                                    var message = $('.input-text input').val();
+                                    console.log(message);
+                                    // check if enter key is pressed and message is not null also receiver is selected
+                                    if (message != '' && receiver_id != '') {
+                                        $('.input-text input').val(''); // while pressed enter text box will be empty
+                                        var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
+                                        $.ajax({
+                                            type: "post",
+                                            url: "message", // need to create this post route
+                                            data: datastr,
+                                            cache: false,
+                                            success: function (data) {
+                                            },
+                                            error: function (jqXHR, status, err) {},
+                                            complete: function () {
+                                                scrollToBottomFunc();
+                                            }
+                                        })
+                                    }
+                                });
+
                                 scrollToBottomFunc();
                             }
                         });
