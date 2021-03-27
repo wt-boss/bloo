@@ -4,15 +4,18 @@ namespace App\Http\Controllers\ApiV1;
 
 use App\City;
 use App\Site;
-use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use App\Operation;
 use App\User;
+use Exception;
+use App\Operation;
 use Carbon\Carbon;
+use App\Operation_User;
+use App\Operation_user_save;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use App\Operation_user_save;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Repositories\Api\ApiRepository;
 
 class OperationsController extends Controller
@@ -40,7 +43,11 @@ class OperationsController extends Controller
             $operation = Operation::whereIn('id', $user_operations_ids)
                                    ->whereStatus('EN COUR')
                                    ->get();
-            return $this->api->conditionnalResponse($operation ,'no_current_operation');
+            if($operation->isEmpty()){
+                return $this->api->jsonResponse(trans('no_current_operation'), Response::HTTP_OK);
+            }
+            
+            return $this->api->jsonResponse($operation->count(), Response::HTTP_OK, $operation, null, $operation->first()->form->code);
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());
         }
