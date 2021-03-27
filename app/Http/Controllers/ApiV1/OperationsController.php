@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\City;
+use App\Http\Controllers\Controller;
 use App\Site;
 use Exception;
 use Illuminate\Support\Facades\Auth;
