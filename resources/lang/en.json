@@ -629,10 +629,11 @@
     "no_site_operation": "No site for this operation",
     "no_current_operation": "No current operation",
     "Page not found":"Page not found",
-    "forbidden":"forbidden",
-    "method not allowed":"method not allowed",
-    "unauthorized1":"unauthorized",
-    "internal server error":"internal server error",
-    "return back":"return back"
+    "forbidden":"Forbidden",
+    "method not allowed":"¨Method not allowed",
+    "unauthorized1":"Unauthorized",
+    "internal server error":"Internal server error",
+    "return back":"Return back",
+    "page expired":"Page Expired"
 
 }
