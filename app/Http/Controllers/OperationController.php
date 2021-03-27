@@ -148,7 +148,6 @@ class OperationController extends Controller
     public function addoperateurs(Request $request)
     {
         $parameters = $request->all();
-
         $operation = Operation::findOrFail($parameters['operation']);
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs']as $operateur) {
@@ -280,7 +279,7 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers'));
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
 //        $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
     }
@@ -729,7 +728,6 @@ class OperationController extends Controller
         ];
     }
 
-
     public function TryVilles($id, $ville)
     {
 
@@ -812,7 +810,6 @@ class OperationController extends Controller
         ];
     }
 
-
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -831,9 +828,8 @@ class OperationController extends Controller
     {
 
         $operation = Operation::with('cities')->findOrFail($id);
-        return response()->json($operation->cities);
+        return response()->json($operation->cities->unique('id'));
     }
-
 
     public function tryOperateurs($id)
     {
@@ -842,17 +838,9 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
-
-    public function AllLocation($operationid,$userid)
+    public function loveme(Request $request)
     {
-        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
-        return response()->json($locations);
+         $parameters = $request->all();
+         return response()->json($parameters);
     }
-
-
-    public function VueAllLocation($userid,$operationid)
-    {
-        return view('admin.operation.localisation',compact('userid','operationid'));
-    }
-
 }

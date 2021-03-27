@@ -78,7 +78,7 @@ class SiteController extends Controller
                 foreach ($cities as $city)
                 {
                     similar_text($parameters['ville'],$city->name, $perc);
-                    if($perc > 80)
+                    if($perc > 79)
                     {
                         $parameters['city_id'] = $city->id;
                     }
