@@ -1,4 +1,4 @@
-@section('title', '404 Error')
+@section('title', trans('internal server error'))
 
 @extends('layouts.error')
 

@@ -685,5 +685,6 @@
     "method not allowed":"Méthode non supportée",
     "unauthorized1":"Accès non autorisé",
     "internal server error":"Erreur Interne du Serveur",
-    "return back":"Revenir en arrière"
+    "return back":"Revenir en arrière",
+    "page expired":"Page Expirée"
 }

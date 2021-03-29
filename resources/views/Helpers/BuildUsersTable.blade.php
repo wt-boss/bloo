@@ -10,7 +10,7 @@
     <tbody>
     @foreach($opusers as $item)
         <tr>
-            <td></td>
+            <td> <input type="hidden" name="operation" value="{{ $operation->id }}" /></td>
             <td id='{{$item->id}}'><input type='checkbox' name='lecteurs[]' value='{{$item->id}}' {{$item->status}}>
                 {{$item->first_name }} {{$item->last_name}}
             </td>
@@ -29,36 +29,87 @@
     </tbody>
 </table>
 <script>
-    $('#table').DataTable({
-        "language": {
-            @if( app()->getLocale() === "fr" )
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-            @endif
-                @if( app()->getLocale() === "en")
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-            @endif
-                @if( app()->getLocale() === "pt")
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-            @endif
-        },
+    $(document).ready(function (){
+        var table =  $('#table').DataTable({
+            "language": {
+                @if( app()->getLocale() === "fr" )
+                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                @endif
+                    @if( app()->getLocale() === "en")
+                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                @endif
+                    @if( app()->getLocale() === "pt")
+                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                @endif
+            },
 
-        responsive: {
-            details: {
-                type: 'column',
-                target: 'tr'
-            }
-        },
-        columnDefs: [
-            {
-                className: 'control',
-                orderable: false,
-                targets:   0
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
             },
-            {
-                orderable: false,
-                targets: [-1]
-            },
-            { responsivePriority: 1, targets: 0 },
-        ],
-    })
+            columnDefs: [
+                {
+                    className: 'control',
+                    orderable: false,
+                    targets:   0
+                },
+                {
+                    orderable: false,
+                    targets: [-1]
+                },
+                { responsivePriority: 1, targets: 0 },
+            ],
+        });
+
+        // Handle form submission event
+        $('#lecteur').on('submit', function(e){
+            // Prevent actual form submission
+            e.preventDefault();
+
+            // Serialize form data
+            var data = table.$('input').serialize();
+
+            // Submit form data via Ajax
+            $.ajax({
+                url: '/addlecteurs',
+                data: data,
+                success: function(data){
+                    console.log('Server response', data);
+                }
+            });
+            setInterval(reload, 3000);
+
+            // FOR DEMONSTRATION ONLY
+            // The code below is not needed in production
+
+            // Output form data to a console
+            $('#example-console-form').text(data);
+        });
+
+        $('#operateur').on('submit', function(e){
+            // Prevent actual form submission
+            e.preventDefault();
+
+            // Serialize form data
+            var data = table.$('input').serialize();
+
+            // Submit form data via Ajax
+            $.ajax({
+                url: '/addoperateurs',
+                data: data,
+                success: function(data){
+                    console.log('Server response', data);
+                }
+            });
+            setInterval(reload, 3000);
+
+            // FOR DEMONSTRATION ONLY
+            // The code below is not needed in production
+
+            // Output form data to a console
+            $('#example-console-form').text(data);
+        });
+    });
 </script>

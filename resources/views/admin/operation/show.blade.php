@@ -338,9 +338,9 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_lecteurs1')}}</font></font></h4>
             </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('ajoutlecteur') }}">
+                    <form method="POST" action="{{ route('ajoutlecteur') }}" name="lecteur" id="lecteur">
                         @csrf
-                        <input type="hidden" name="operation" value="{{ $operation->id }}" />
+
                         <div id="datalecteurs">
 
                         </div>
@@ -366,14 +366,14 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_ops') }}</font></font></h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('ajoutoperateur') }}">
+                <form method="POST" action="{{ route('ajoutoperateur') }}" name="operateur" id="operateur">
                     @csrf
                     <input type="hidden" name="operation" value="{{ $operation->id }}" />
                     <div id="dataoperateurs">
 
                     </div>
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('Close') }}</font></font></button>
-                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
+                    <button type="submit" class="btn btn-primary" id="send" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
                 </form>
             </div>
       </div>

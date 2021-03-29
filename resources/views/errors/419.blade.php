@@ -1,4 +1,4 @@
-@section('title', trans('unauthorized1'))
+@section('title', trans('page expired'))
 
 @extends('layouts.error')
 
@@ -12,7 +12,7 @@
     </div>
 
     <h1 class="Main Description">
-        {{  trans('unauthorized1')  }}
+        {{  trans('page expired')  }}
     </h1>
     <hr style="margin-left: 8px;">
     <a " class="log" href="{{ url()->previous() }}" style="font-size: 18px">{{  trans('return back')  }}</a>

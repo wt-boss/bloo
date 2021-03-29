@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>An Error Has Occured</title>
+  <title>@yield('title')</title>
   <link rel="stylesheet/less" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/381212/ceaser.less">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Rubik:wght@300&display=swap" rel="stylesheet">
