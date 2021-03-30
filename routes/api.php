@@ -96,6 +96,18 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     Route::post('/user', 'UserController@register');
     // User's routes
     Route::prefix('user')->middleware(['jwt.verify'])->group(function(){
+        /* Save user's token
+            1. 200 if saving successfull
+            2. 500 if an exception occured
+        */
+        Route::get('token', 'AuthController@saveToken');
+
+        /* Update user's availability
+            1. 200 if availabilty has been successfully updated
+            2. 500 if an exception occured
+        */
+        Route::get('available', 'AuthController@available');
+
         /* Display current user's informations
             Returns:
             1. 200 with "true" status if no problem

@@ -627,5 +627,7 @@
     "required_to_be_operator": "Required to be an operator",
     "no_operation": "No operation found",
     "no_site_operation": "No site for this operation",
-    "no_current_operation": "No current operation"
+    "no_current_operation": "No current operation",
+    "availability_updated": "Availability has been updated",
+    "token_saved": "Token has been saved"
 }

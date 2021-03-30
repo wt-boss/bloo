@@ -678,5 +678,7 @@
     "required_to_be_operator": "Il est requis d'être opérateur",
     "no_operation": "Aucune opération trouvée",
     "no_site_operation": "Aucun site pour cette opération",
-    "no_current_operation": "Aucune opération en cours"
+    "no_current_operation": "Aucune opération en cours",
+    "availability_updated": "Disponibilité mise à jour",
+    "token_saved": "Token enregistré"
 }

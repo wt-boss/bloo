@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public $api;
-    public function __construct(ApiRepository $apiRepository)
+    public $api, $token;
+
+    public function __construct(ApiRepository $apiRepository, Request $request)
     {
         $this->api = $apiRepository;
+        $this->token = $request->header('Authorization');
     }
 
     /**
@@ -88,14 +90,45 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $token = $request->header('Authorization');
-
         try {
-            JWTAuth::invalidate($token);
-
+            JWTAuth::invalidate($this->token);
             return $this->api->jsonResponse(true, trans('logout_success'), Response::HTTP_OK);
 
         } catch (Exception $e) {
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+
+    /**
+     * Save the authenticated user's token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveToken()
+    {
+        try{
+            JWTAuth::user()->update([
+                'api_token' => $this->token
+            ]);
+            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK, $this->token);
+        }catch(Exception $e){
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+
+    /**
+     * Update authenticated user's availabity
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function available()
+    {
+        try{
+            $user = JWTAuth::user();
+            $user->available = $user->available ? 0 : 1;
+            $user->save();
+            return $this->api->jsonResponse(true, trans('availability_updated'), Response::HTTP_OK);
+        }catch(Exception $e){
             return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
