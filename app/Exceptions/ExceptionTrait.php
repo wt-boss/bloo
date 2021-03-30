@@ -40,16 +40,16 @@ trait ExceptionTrait
     /**
      * Return status and message error
      * 
-     * @param int $status
+     * @param int $code
      * @param string $message
      * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiExceptionResponse($status, $message)
+    public function apiExceptionResponse($code, $message)
     {
         return response()->json([
-            'status' => $status,
+            'status' => false,
             'message' => $message,
-        ], $status);
+        ], $code);
     }
 }

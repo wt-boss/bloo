@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
     protected function failedValidation(Validator $validator) { 
       throw new HttpResponseException(
         response()->json([
-          'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
+          'status' => false,
           'message' => $validator->errors()->first(),
           'content' => $validator->errors()
         ], Response::HTTP_UNPROCESSABLE_ENTITY)

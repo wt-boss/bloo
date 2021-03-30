@@ -26,7 +26,7 @@ class CheckIfUserIsOperator
         // $users_operations_id = Operation_User::all()->pluck('user_id')->toArray();
 
         if ($user_role !== 1) {
-            return $apiRepository->jsonResponse(trans('required_to_be_operator'), Response::HTTP_FORBIDDEN);
+            return $apiRepository->jsonResponse(false, trans('required_to_be_operator'), Response::HTTP_FORBIDDEN);
         }
         // else if(!in_array($payload->get('sub'), $users_operations_id)){
         //     return $apiRepository->jsonResponse(trans('no_operation'), Response::HTTP_OK);
