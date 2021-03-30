@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\City;
-use App\Http\Controllers\Controller;
 use App\Site;
 use App\User;
 use Exception;
@@ -47,7 +46,7 @@ class OperationsController extends Controller
             if($operation->isEmpty()){
                 return $this->api->jsonResponse(trans('no_current_operation'), Response::HTTP_OK);
             }
-            
+
             return $this->api->jsonResponse($operation->count(), Response::HTTP_OK, $operation, null, $operation->first()->form->code);
         } catch (Exception $e) {
             return $this->api->jsonResponse($e->getMessage());

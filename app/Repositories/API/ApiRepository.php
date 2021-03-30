@@ -10,13 +10,13 @@ class ApiRepository
 {
     /**
      * Return success response
-     * 
+     *
      * @param string $message
      * @param mixed $content
      * @param string $token
      * @param int $code
      * @param bool $extra
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function jsonResponse($message = null, $code = 500, $content = null, $token = null, $extra = null)
@@ -32,10 +32,10 @@ class ApiRepository
 
     /**
      * Return conditionnal response
-     * 
+     *
      * @param collection $locale
      * @param string $message
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
      */
     public function conditionnalResponse($locale, $message)
