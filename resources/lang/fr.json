@@ -686,5 +686,6 @@
     "unauthorized1":"Accès non autorisé",
     "internal server error":"Erreur Interne du Serveur",
     "return back":"Revenir en arrière",
-    "page expired":"Page Expirée"
+    "page expired":"Page Expirée",
+    "Select an operator": "Selectionnez un operateur"
 }

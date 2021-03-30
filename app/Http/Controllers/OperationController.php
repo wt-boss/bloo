@@ -125,8 +125,9 @@ class OperationController extends Controller
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
-
+        dd($parameters);
         $operation = Operation::findOrFail($parameters['operation']);
+
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs'] as $lecteur) {
             $user = User::findOrFail($lecteur);
@@ -230,7 +231,8 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = Helper::buildUsersTable($opusers);
+        //$viewData = Helper::buildUsersTable($opusers);
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
         return response()->json($viewData);
     }
 
