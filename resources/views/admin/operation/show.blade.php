@@ -289,7 +289,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
+                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
                         </div>
                     </div>
@@ -340,7 +340,7 @@
                 <div class="modal-body">
                     <form method="POST" action="{{ route('ajoutlecteur') }}" name="lecteur" id="lecteur">
                         @csrf
-
+                        <input type="hidden" name="operation" value="{{ $operation->id }}" />
                         <div id="datalecteurs">
 
                         </div>
@@ -466,43 +466,7 @@
             $.get('/listlecteurs/' + operation_id, function (data) {
                 console.log(data);
                  $('#datalecteurs').empty();
-                 $('#datalecteurs').append(data.name);
-                 $('#'+data.id).DataTable({
-                     "language": {
-                         @if( app()->getLocale() === "fr" )
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                         @endif
-                             @if( app()->getLocale() === "en")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                         @endif
-                             @if( app()->getLocale() === "es")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                         @endif
-                             @if( app()->getLocale() === "pt")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                         @endif
-                     },
-
-                     responsive: {
-                         details: {
-                             type: 'column',
-                             target: 'tr'
-                         }
-                     },
-                     columnDefs: [
-                         {
-                             className: 'control',
-                             orderable: false,
-                             targets:   0
-                         },
-                         {
-                             orderable: false,
-                             targets: [-1]
-                         },
-                         { responsivePriority: 1, targets: 0 },
-                     ]
-                    })
-
+                 $('#datalecteurs').append(data);
             });
         });
 
