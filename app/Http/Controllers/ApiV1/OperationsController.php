@@ -44,12 +44,12 @@ class OperationsController extends Controller
                                    ->whereStatus('EN COUR')
                                    ->get();
             if($operation->isEmpty()){
-                return $this->api->jsonResponse(trans('no_current_operation'), Response::HTTP_OK);
+                return $this->api->jsonResponse(false, trans('no_current_operation'), Response::HTTP_OK);
             }
             
-            return $this->api->jsonResponse($operation->count(), Response::HTTP_OK, $operation, null, $operation->first()->form->code);
+            return $this->api->jsonResponse(true, $operation->count(), Response::HTTP_OK, $operation, null, $operation->first()->form->code);
         } catch (Exception $e) {
-            return $this->api->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ class OperationsController extends Controller
                                     ->get();
             return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
-            return $this->api->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
 
     }
@@ -99,7 +99,7 @@ class OperationsController extends Controller
                                     ->get();
             return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
-            return $this->api->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 
@@ -117,16 +117,16 @@ class OperationsController extends Controller
             $operation = Operation::findOrFail($operation_id);
             $city = City::findOrFail($city_id);
             if (!$operation) {
-                return $this->api->jsonResponse(trans('no_operation'), Response::HTTP_OK);
+                return $this->api->jsonResponse(false, trans('no_operation'), Response::HTTP_OK);
             }else if(!$city){
-                return $this->api->jsonResponse(trans('no_city_found'), Response::HTTP_OK);
+                return $this->api->jsonResponse(false, trans('no_city_found'), Response::HTTP_OK);
             }
             $sites = Site::whereOperationId($operation->id)
                          ->whereCityId($city->id)
                          ->get();
             return $this->api->conditionnalResponse($sites, 'no_site_operation');
         } catch (Exception $e) {
-            return $this->api->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 
@@ -140,14 +140,14 @@ class OperationsController extends Controller
         try {
             $auth_id = JWTAuth::parseToken()->getPayload()->get('sub');
             $user = User::findOrFail($auth_id);
-            $operations_ids = Operation::whereStatus('TERMINER')->pluck('id');
+            $operations_ids = Operation::whereStatus('CREER')->pluck('id');
             $sites = Site::whereIn('operation_id', $operations_ids)
                           ->whereCountryId($user->country_id)
                           ->pluck('city_id');
             $cities = City::whereIn('id', $sites)->get();
             return $this->api->conditionnalResponse($cities, 'no_city_found');
         } catch (Exception $e) {
-            return $this->api->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 }

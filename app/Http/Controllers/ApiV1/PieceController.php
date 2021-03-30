@@ -14,21 +14,24 @@ use App\Http\Requests\UploadPieceRequest;
 
 class PieceController extends Controller
 {
+    public $api;
+    public function __construct(ApiRepository $apiRepository)
+    {
+        $this->api = $apiRepository;
+    }
     /**
      * Display user's piece
      *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
-     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function index(ApiRepository $apiRepository)
+    public function index()
     {
         try {
             $pieces = JWTAuth::user()->pieces;
             $expireAt = Carbon::now()->addMinutes(2);
             Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
-            if(!($pieces->count() > 0)){
-                return $apiRepository->jsonResponse(trans('no_piece'), Response::HTTP_OK);
+            if($pieces->isEmpty()){
+                return $this->api->jsonResponse(false, trans('no_piece'), Response::HTTP_OK);
             }
 
             $front_url = env('APP_URL') . '/files/avatar/' . $pieces->last()->front;
@@ -38,22 +41,21 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->jsonResponse($pieces->count() . ' piece(s)', Response::HTTP_OK, [$urls]);
+            return $this->api->jsonResponse(true, $pieces->count() . ' piece(s)', Response::HTTP_OK, [$urls]);
 
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 
     /**
      * Upload user's piece
      *
-     * @param App\Repositories\Api\ApiRepository $apiRepository
      * @param App\Http\Requests\UploadPieceRequest $request
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function store(UploadPieceRequest $request, ApiRepository $apiRepository)
+    public function store(UploadPieceRequest $request)
     {
         try {
             $piece = JWTAuth::user()->pieces()->create($request->validated());
@@ -66,9 +68,9 @@ class PieceController extends Controller
                 'rear_url' => $rear_url
             ];
 
-            return $apiRepository->jsonResponse(trans('piece_upload_success'), Response::HTTP_CREATED, [$urls]);
+            return $this->api->jsonResponse(true, trans('piece_upload_success'), Response::HTTP_CREATED, [$urls]);
         } catch (Exception $e) {
-            return $apiRepository->jsonResponse($e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
 }
