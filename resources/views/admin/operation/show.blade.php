@@ -73,17 +73,17 @@
                 </div>
                 <!-- /.box -->
             </div>
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-3 col-xs-12">
                 <div class="box box-solid panel-wb">
                     <!-- /.box-header -->
                     <div class="box-body" style="padding: 0 10px;">
                         <div class="row">
-                            <div class="col-xs-12" style="padding: 0">
+                            <div class="col-lg-12 col-xs-6">
                                 <div class="small-box bg-white">
                                     <a href="{{ route('forms.show', [$operation->form->code]) }}" class="btn form-control">{{ trans('Afficher_le_questionnaire') }}</a>
                                 </div>
                             </div>
-                            <div class="col-xs-12" style="padding: 0">
+                            <div class="col-lg-12 col-xs-6">
                                 <div class="small-box bg-white">
                                     <a href="{{ route('operation.index') }}"  class="btn form-control">{{ trans('Selectionner_une_opération') }}</a>
                                 </div>
