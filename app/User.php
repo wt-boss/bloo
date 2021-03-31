@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\UserNotification;
 use Mail;
 use App\Mail\EmailVerificationMail;
 use Illuminate\Support\Facades\Hash;
@@ -219,6 +220,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return Cache::has('user-is-online-' . $this->id);
     }
+
+
+
 
 
 

@@ -570,17 +570,18 @@ class OperationController extends Controller
     {
         $operation = Operation::findOrFail($id);
         $message = "l'operration : " . $operation->nom . " est terminé.";
-        $AllUser = $operation->users()->where('role', '1')->get();
-        foreach ($AllUser as $User) {
-            $operation->users()->detach($User);
-        }
 
-        $AllOpUser = $operation->users()->where('role', '1')->where('role', '0')->get();
+        $AllOpUser = $operation->users()->get();
         foreach ($AllOpUser as $user) {
             $user->notify(new EventNotification($message));
             $pusher = App::make('pusher');
             $data = ['clossing an operation']; // sending from and to user id when pressed enter
             $pusher->trigger('my-channel', 'notification-event', $data);
+        }
+
+        $AllUser = $operation->users()->where('role', '1')->get();
+        foreach ($AllUser as $User) {
+            $operation->users()->detach($User);
         }
         $operation->status = "TERMINER";
         $operation->save();

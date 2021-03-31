@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Echo from "laravel-echo";
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -30,3 +32,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+

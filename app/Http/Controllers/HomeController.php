@@ -241,7 +241,8 @@ class HomeController extends Controller
     public function jsonotifications()
     {
         $count = auth()->user()->notifications->count();
-        $viewData = Helper::buildUsersNotification(auth()->user()->notifications,$count);
+        $notifications = auth()->user()->notifications;
+        $viewData  = (string)View::make('Helpers.BuildUsersNotification', compact('notifications','count'));
         return response()->json($viewData);
     }
 
