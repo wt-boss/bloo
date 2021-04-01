@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\LastUserActivity;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -38,11 +39,13 @@ class Kernel extends HttpKernel
 //            \App\Http\Middleware\Localization::class,
             \App\Http\Middleware\Locale::class,
             \App\Http\Middleware\UserActivity::class,
+            \App\Http\Middleware\LastUserActivity::class,
         ],
 
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LastUserActivity::class,
         ],
     ];
 
@@ -67,6 +70,9 @@ class Kernel extends HttpKernel
         'Role' => \App\Http\Middleware\Role::class,
         'Free' => \App\Http\Middleware\Blockfree::class,
         'verification' =>  \App\Http\Middleware\verification::class,
+        'auth.jwt'  =>  \Tymon\JWTAuth\Http\Middleware\Authenticate::class, // JWT middleware
+        'jwt.verify' => \App\Http\Middleware\JWTAuthVerify::class,
+        'operator' => \App\Http\Middleware\CheckIfUserIsOperator::class,
     ];
 
     /**

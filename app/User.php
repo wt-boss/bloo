@@ -208,7 +208,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'role' => $this->role,
+        ];
     }
 
     public function pieces()
@@ -220,10 +222,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return Cache::has('user-is-online-' . $this->id);
     }
-
-
-
-
-
 
 }

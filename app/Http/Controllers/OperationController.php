@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Entreprise;
+use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\Operation_user_save;
 use App\State;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -122,8 +125,9 @@ class OperationController extends Controller
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
-
+        dd($parameters);
         $operation = Operation::findOrFail($parameters['operation']);
+
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs'] as $lecteur) {
             $user = User::findOrFail($lecteur);
@@ -150,6 +154,13 @@ class OperationController extends Controller
         foreach ($parameters['lecteurs']as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
+
+            $savedata =  new Operation_user_save();
+            $savedata->user_id = $user->id;
+            $savedata->operation_id = $operation->id;
+            $savedata->save();
+
+
             /** Mail aux operateurs **/
             Mail::to($user->email)->send(new BlooOperateur());
             $user->notify(new EventNotification($message));
@@ -220,7 +231,8 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = Helper::buildUsersTable($opusers);
+        //$viewData = Helper::buildUsersTable($opusers);
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
         return response()->json($viewData);
     }
 
@@ -585,6 +597,7 @@ class OperationController extends Controller
         }
         $operation->status = "TERMINER";
         $operation->save();
+
         return back()->withSuccess(trans('Fin_operation'));
     }
 
@@ -829,5 +842,17 @@ class OperationController extends Controller
     {
          $parameters = $request->all();
          return response()->json($parameters);
+    }
+
+    public function AllLocation($operationid,$userid)
+    {
+        $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
+        return response()->json($locations);
+    }
+
+
+    public function VueAllLocation($userid,$operationid)
+    {
+        return view('admin.operation.localisation',compact('userid','operationid'));
     }
 }

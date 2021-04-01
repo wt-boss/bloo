@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -17,13 +18,15 @@ class StoreUserRequest extends FormRequest
      * @throws \Illuminate\Validation\ValidationException
      */
     protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(
-          response()->json([
-            'status' => false,
-            'messages' => $validator->errors()
-          ], 200)
-        ); 
-      }
+      throw new HttpResponseException(
+        response()->json([
+          'status' => false,
+          'message' => $validator->errors()->first(),
+          'content' => $validator->errors()
+        ], Response::HTTP_UNPROCESSABLE_ENTITY)
+      );  
+    }
+      
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -42,15 +45,15 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255|min:2',
+            'last_name' => 'nullable|string|max:255|min:5',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|string|confirmed|min:7',
-            'phone' => 'numeric|size:9',
-            'phonepaiement' => 'numeric|size:9',
-            'country_id' => 'exists:countries,id',
-            'state_id' => 'exists:states,id',
-            'city_id' => 'exists:cities,id',
+            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|digits:9',
+            'phonepaiement' => 'required|digits:9',
+            'country_id' => 'required|exists:countries,id',
+            'state_id' => 'required|exists:states,id',
+            'city_id' => 'required|exists:cities,id',
         ];
     }
 }

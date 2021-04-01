@@ -3,108 +3,86 @@
 namespace App\Http\Controllers\ApiV1;
 
 use App\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use Exception;
+use Carbon\Carbon;
+use Illuminate\Http\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\StoreUserRequest;
-use Illuminate\Support\Facades\Validator;
-use App\Repositories\Api\User\AuthRepository;
+use App\Repositories\Api\ApiRepository;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Store new User resource
-     * 
-     * @param Illuminate\Http\Request $request
-     * 
-     * @return Illuminate\Http\JsonResponse
-     */
-    public function store(StoreUserRequest $request)
+    public $api;
+    public function __construct(ApiRepository $apiRepository)
     {
-        $validatedData = $request->validated();
-        $token = Str::random(80);
-
-        $user = new User($validatedData);
-        $user->id = User::all()->last()->id + 1;
-        $user->api_token = Hash::make($token);
-        $user->save();
-
-        return response()->json(
-            [
-                'status' => true,
-                'success' => 'New Account has been Successfuly created',
-            ], 
-                200, 
-            [
-                'token' => $token,
-            ]
-        );
+        $this->api = $apiRepository;
     }
 
     /**
-     * Display user's details
-     * 
-     * @param User $user
-     * 
+     * Store new User resource
+     *
+     * @param Illuminate\Http\Request $request
+     *
      * @return Illuminate\Http\JsonResponse
      */
-    public function show(User $user)
+    public function register(StoreUserRequest $request)
     {
-        return (!$user) ? response()->json(
-                [
-                'status' => false,
-                'error' => 'User doesn\'t exists',
-                ],
-                200
-            ) : response()->json(
-            [
-                'status' => true,
-                'content' => $user,
-            ], 
-            200,
-            [
-                'token' => $user->api_token,
-            ]
-        );
+        try {
+            // Create user by validated rules
+            $user = new User($request->validated());
+            $user->role = 1;
+            $user->active = 1;
+            $user->save();
+            // Generate token from the created user
+            $token = JWTAuth::fromUser($user);
+
+            return $this->api->jsonResponse(true, trans('new_account'), Response::HTTP_CREATED, $user, $token);
+        } catch (Exception $e) {
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+    
+    /**
+     * Display user's details
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function me() {
+        try {
+            $user = JWTAuth::user();
+            $user->pieces->isNotEmpty();
+            $user->operations;
+
+            $expireAt = Carbon::now()->addMinutes(2);
+            Cache::put('user-is-online-'.Auth::id(), true, $expireAt);
+            return $this->api->jsonResponse(true, null, Response::HTTP_OK, $user);
+        } catch (Exception $e) {
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
     }
 
     /**
      * Update user's details
      * 
+     * @param App\Http\Requests\UpdateUserRequest $request
+     *
+     * @return Illuminate\Http\JsonResponse
      */
-    public function update(User $user, Request $request, AuthRepository $authRepository)
-    {  
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users|max:255',
-            'phone' => 'numeric|size:9',
-            'phonepaiement' => 'numeric|size:9',
-            'country_id' => 'exists:countries,id',
-            'state_id' => 'exists:states,id',
-            'city_id' => 'exists:cities,id',
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'error' => $validator->errors()
-            ]);
+    public function update(UpdateUserRequest $request)
+    {
+        try{
+            $user = JWTAuth::user();
+            $data = $request->validated();
+            $user->update($data);
+            $expireAt = Carbon::now()->addMinutes(2);
+            Cache::put('user-is-online-'.Auth::id() , true , $expireAt);
+            return $this->api->jsonResponse(true, trans('update_success'), Response::HTTP_OK, $user);
+        }catch(Exception $e){
+            return $this->api->jsonResponse(false, $e->getMessage());
         }
-        
-        $user->save($authRepository->updating($request));
-
-        return response()->json(
-            [
-                'status' => true,
-                'success' => $user,
-            ], 
-                200, 
-            [
-                'token' => $user->token,
-            ]
-        );
     }
 }

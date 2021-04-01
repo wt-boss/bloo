@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 259200), //6 months
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'refresh_ttl' => env('JWT_REFRESH_TTL', 20160),
+    'refresh_ttl' => env('JWT_REFRESH_TTL', 259260),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,6 +154,7 @@ return [
         'nbf',
         'sub',
         'jti',
+        'role',
     ],
 
     /*
@@ -172,6 +173,7 @@ return [
     'persistent_claims' => [
         // 'foo',
         // 'bar',
+        'role',
     ],
 
     /*
@@ -275,7 +277,7 @@ return [
         |
         */
 
-        'jwt' => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
+        'jwt' => Tymon\JWTAuth\Providers\JWT\Namshi::class,
 
         /*
         |--------------------------------------------------------------------------

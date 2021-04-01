@@ -93,7 +93,7 @@ Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')-
 /**Back End */
 
 
-Route::resource('users','UsersController')->middleware('Free');
+Route::resource('users','UsersController')->middleware(['Role:Superadmin','Free']);
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');
@@ -302,6 +302,16 @@ Route::get('/operationvilles/{id}','OperationController@getVilles')->name('getvi
 
 /** Liste des operateurs pour le tri*/
 Route::get('/tryoperateurs/{id}','OperationController@tryOperateurs');
+
+
+/** Liste des localisations par user et operation*/
+Route::get('/getAllLocationUser/{userid}/{operationid}','OperationController@AllLocation');
+
+Route::get('/ReturnAllLocation', function () {
+   return view('admin.operation.localisation');
+});
+
+Route::get('/VueAllLocation/{userid}/{operationid}','OperationController@VueAllLocation')->name('AllPoints');
 
 
 Route::get('/formulaire',function() {

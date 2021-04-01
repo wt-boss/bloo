@@ -63,30 +63,30 @@
             ],
         });
 
-        // Handle form submission event
-        $('#lecteur').on('submit', function(e){
-            // Prevent actual form submission
-            e.preventDefault();
-
-            // Serialize form data
-            var data = table.$('input').serialize();
-
-            // Submit form data via Ajax
-            $.ajax({
-                url: '/addlecteurs',
-                data: data,
-                success: function(data){
-                    console.log('Server response', data);
-                }
-            });
-            setInterval(reload, 3000);
-
-            // FOR DEMONSTRATION ONLY
-            // The code below is not needed in production
-
-            // Output form data to a console
-            $('#example-console-form').text(data);
-        });
+        // // Handle form submission event
+        // $('#lecteur').on('submit', function(e){
+        //     // Prevent actual form submission
+        //     e.preventDefault();
+        //
+        //     // Serialize form data
+        //     var data = table.$('input').serialize();
+        //
+        //     // Submit form data via Ajax
+        //     $.ajax({
+        //         url: '/addlecteurs',
+        //         data: data,
+        //         success: function(data){
+        //             console.log('Server response', data);
+        //         }
+        //     });
+        //     //setInterval(reload, 3000);
+        //
+        //     // FOR DEMONSTRATION ONLY
+        //     // The code below is not needed in production
+        //
+        //     // Output form data to a console
+        //     $('#example-console-form').text(data);
+        // });
 
         $('#operateur').on('submit', function(e){
             // Prevent actual form submission

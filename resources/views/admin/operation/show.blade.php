@@ -111,10 +111,10 @@
                                 </a>
                               <select id="countries"  class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px;">
                                  <option selected value="0">...</option>
-                                 <option value="1">Pays</option>
-                                 <option value="2">Sites</option>
-                                  <option value="3">Villes</option>
-                                  <option value="4">Opérateurs</option>
+                                 <option value="1">{{ trans('Country') }}</option>
+                                 <option value="2"> {{ trans('Sites') }}</option>
+                                  <option value="3">{{ trans('Cities') }}</option>
+                                  <option value="4">{{ trans('Operators') }}</option>
                              </select>
 
                             <select id="select1" class="browser-default custom-select custom-select-lg mb-3" style="font-size: 12px; display:none;">
@@ -249,6 +249,7 @@
                             <tr>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -272,11 +273,15 @@
                                        </span>
                                     </td>
                                     <td>
-                                         @if(Cache::has('user-is-online-' . $user->id))
+                                          @if(Cache::has('user-is-online-' . $user->id))
                                                 <li class="text-success">Online</li>
                                             @else
                                                 <li class="text-secondary">Offline</li>
                                         @endif
+
+                                    </td>
+                                    <td>
+                                        <a href="{{route('AllPoints',[$operation->id,$user->id])}}" target="_blank">Locations</a>
                                     </td>
                                 </tr>
                                     @endif
@@ -284,7 +289,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
+                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
                         </div>
                     </div>
@@ -296,7 +301,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="box-title">
+                                <p class="box-title" id="mapTitle">
                                     {{ trans('Localisation') }}
                                 </p>
                             </div>
@@ -335,7 +340,7 @@
                 <div class="modal-body">
                     <form method="POST" action="{{ route('ajoutlecteur') }}" name="lecteur" id="lecteur">
                         @csrf
-
+                        <input type="hidden" name="operation" value="{{ $operation->id }}" />
                         <div id="datalecteurs">
 
                         </div>
@@ -391,6 +396,17 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4bZln12ut506FLipFx-kXh95M-zZdUfc&libraries=places&callback=initMap" defer></script>
 
     <script type="text/javascript">
+    </script>
+
+    <script type="text/javascript">
+        function scrollToAnchor(hash) {
+            console.log(hash);
+            tag = $(hash);
+            console.log(tag);
+            $('html,body').animate({scrollTop: tag.offset().top}, 'slow', function() {
+                window.location.hash = hash
+            });
+        }
         function initMap() {
             let lat = "";
             let lng = "";
@@ -423,7 +439,13 @@
                 }
             });
 
-            $('.m_btn_location').click(function(){
+            $('.m_btn_location').click(function(e){
+                if($(e.target).hasClass('disabled'))
+                    return
+
+                let tagId = e.target.id;
+                scrollToAnchor('#'+tagId);
+
                 let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
                 console.log(position);
                 map.setCenter(position);
@@ -461,43 +483,7 @@
             $.get('/listlecteurs/' + operation_id, function (data) {
                 console.log(data);
                  $('#datalecteurs').empty();
-                 $('#datalecteurs').append(data.name);
-                 $('#'+data.id).DataTable({
-                     "language": {
-                         @if( app()->getLocale() === "fr" )
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                         @endif
-                             @if( app()->getLocale() === "en")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                         @endif
-                             @if( app()->getLocale() === "es")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                         @endif
-                             @if( app()->getLocale() === "pt")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                         @endif
-                     },
-
-                     responsive: {
-                         details: {
-                             type: 'column',
-                             target: 'tr'
-                         }
-                     },
-                     columnDefs: [
-                         {
-                             className: 'control',
-                             orderable: false,
-                             targets:   0
-                         },
-                         {
-                             orderable: false,
-                             targets: [-1]
-                         },
-                         { responsivePriority: 1, targets: 0 },
-                     ]
-                    })
-
+                 $('#datalecteurs').append(data);
             });
         });
 
