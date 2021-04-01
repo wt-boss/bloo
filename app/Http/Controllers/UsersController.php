@@ -93,10 +93,20 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+         $parameters = $request->all();
+        $avatar = $parameters["avatar"];
+        $extention = $extension = $avatar->getClientOriginalExtension();
+        if($extension == "jpg" ||$extension == "png" || $extension == "gif" || $extension == "jpeg")
+        {
+            $user->update($request->all());
+            return redirect()->route('users.index')->withSuccess('Modification Effectuée');
+        }
+        else
+        {
+          return back()->withErrors("Selectionner une image de type 'jpeg', 'jpg', 'gif' ou 'png'");
+        }
 
-        $user->update($request->all());
 
-        return redirect()->route('users.index')->withSuccess('Modification Effectuée');
     }
 
     /**

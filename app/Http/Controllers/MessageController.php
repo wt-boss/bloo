@@ -114,7 +114,7 @@ class MessageController extends Controller
             $operations = Operation::all();
 
         }
-        else if ($AuthUser->role === 1)
+        else if ($AuthUser->role === 1 || $AuthUser->role === 0)
         {
             /**
              * On recupere l'operation a laquelle il participe;

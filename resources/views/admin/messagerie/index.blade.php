@@ -5,7 +5,7 @@
 @section('content-header')
 @endsection
 
-@if (auth()->user()->hasRole('Superadmin|Account Manager|Lecteur'))
+@if (auth()->user()->hasRole('Account Manager'))
 @section('content')
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
@@ -44,7 +44,7 @@
 
                     <div class="box-body" style="margin-top: -13px;">
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                 <div class='col-md-12'>
+                         <div class='col-md-12'>
 
                          <div>
                              <h5>{{ trans('Lecteurs') }}</h5>
@@ -100,10 +100,82 @@
 @endif
 
 
+@if (auth()->user()->hasRole('Superadmin'))
+@section('content')
+<div class="panel panel-flat panel-wb">
+    <div class="panel-body" style="padding: 0;">
+        <div class="row">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="box-title">
+                                    {{ trans('Opérations') }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body" >
+                        <ul class="menu-list">
+                            @foreach($operations as $operation)
+                            <li id="{{$operation->id}}">
+                                <div class="cir-image" id="{{$operation->id}}">
+                                    <div class="widget-user-image text-center op-msg-list operation" id="{{$operation->id}}">
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$operation->id}}">
+                                        <p id="{{$operation->id}}">{{$operation->nom}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+                <div class="box box-primary">
+
+                    <div class="box-body" style="margin-top: -13px;">
+
+                         <div class='col-md-12'>
+
+                         <div>
+                             <h5>{{ trans('Accounts_Manager') }}</h5>
+                             <div>
+                                 <ul id="allmanagers"></ul>
+                             </div>
+                         </div>
+                         <hr>
+                     </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="box box-primary" style="height: 100%;">
+                    <div class="box-header with-border">
+                        <ul class="box-title" id="receiver">
+                        </ul>
+                    </div>
+                    <div class="box-body">
+                        <div id="messages">
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@endif
 
 
-
-@if (auth()->user()->hasRole('Opérateur'))
+@if (auth()->user()->hasRole('Opérateur|Lecteur'))
 @section('content')
     @include('partials.alert', ['name' => 'index'])
     <div class="panel panel-flat panel-wb" >
@@ -163,7 +235,7 @@
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+    @if (auth()->user()->hasRole('Account Manager'))
     <script type="application/javascript">
         let receiver_id = '';
         let my_id = "{{ Auth::id() }}";
@@ -304,7 +376,7 @@
     </script>
     @endif
 
-      @if (auth()->user()->hasRole('Opérateur'))
+    @if (auth()->user()->hasRole('Opérateur|Lecteur'))
         <script type="application/javascript">
                 var receiver_id = '';
                 var operation_id = "{{$operation->id}}";
@@ -509,7 +581,7 @@
         </script>
     @endif
 
-    @if (auth()->user()->hasRole('Lecteur'))
+    @if (auth()->user()->hasRole('Lecteur|Superadmin'))
             <script type="application/javascript">
                 let receiver_id = '';
                 let my_id = "{{ Auth::id() }}";
