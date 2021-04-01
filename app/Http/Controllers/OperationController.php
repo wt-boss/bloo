@@ -125,8 +125,9 @@ class OperationController extends Controller
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
-
+        dd($parameters);
         $operation = Operation::findOrFail($parameters['operation']);
+
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs'] as $lecteur) {
             $user = User::findOrFail($lecteur);
@@ -148,7 +149,6 @@ class OperationController extends Controller
     public function addoperateurs(Request $request)
     {
         $parameters = $request->all();
-
         $operation = Operation::findOrFail($parameters['operation']);
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs']as $operateur) {
@@ -231,7 +231,8 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = Helper::buildUsersTable($opusers);
+        //$viewData = Helper::buildUsersTable($opusers);
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
         return response()->json($viewData);
     }
 
@@ -280,7 +281,7 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers'));
+        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
 //        $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
     }
@@ -729,7 +730,6 @@ class OperationController extends Controller
         ];
     }
 
-
     public function TryVilles($id, $ville)
     {
 
@@ -812,7 +812,6 @@ class OperationController extends Controller
         ];
     }
 
-
     /**
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -831,9 +830,8 @@ class OperationController extends Controller
     {
 
         $operation = Operation::with('cities')->findOrFail($id);
-        return response()->json($operation->cities);
+        return response()->json($operation->cities->unique('id'));
     }
-
 
     public function tryOperateurs($id)
     {
@@ -842,6 +840,11 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
+    public function loveme(Request $request)
+    {
+         $parameters = $request->all();
+         return response()->json($parameters);
+    }
 
     public function AllLocation($operationid,$userid)
     {
@@ -854,5 +857,4 @@ class OperationController extends Controller
     {
         return view('admin.operation.localisation',compact('userid','operationid'));
     }
-
 }

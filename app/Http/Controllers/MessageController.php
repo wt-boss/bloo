@@ -138,20 +138,22 @@ class MessageController extends Controller
                        }
                    }
                 }
-        } else
+        }
+        else
         {
-              //$operations = collect();
+              $ALLoperations = collect();
               $Entreprises = $AuthUser->entreprises()->get();
-//               foreach ($Entreprises as $Entreprise)
-//              {
-//                 $Operations = $Entreprise->operations()->get();
-//                 foreach ($Operations as $Operation)
-//                 {
-//                     $operations->push($Operation);
-//                 }
-//              }
+               foreach ($Entreprises as $Entreprise)
+              {
+                 $Operations = $Entreprise->operations()->get();
+                 foreach ($Operations as $Operation)
+                 {
+                     $ALLoperations->push($Operation);
+                 }
+              }
             $User = User::with('operations')->findOrFail($AuthUser->id);
-            $operations = $User->operations()->with('form','entreprise')->get();
+            //$operations = $User->operations()->with('form','entreprise')->get();
+            $operations = $ALLoperations;
         }
         return view('admin.messagerie.index',compact('operations','users','operation'));
     }

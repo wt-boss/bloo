@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>@yield('title') - {{ config('app.name') }}</title> --}}
-    <title>{{ config('app.name') }} |  @yield('title')</title>
+    <title> Bloo |  @yield('title')</title>
     <link href="{{ asset('favicon.ico') }}" rel="icon">
 
     <!-- Global stylesheets -->

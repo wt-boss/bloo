@@ -500,32 +500,36 @@
     <div class="panel panel-flat panel-wb">
         <div class="panel-body" style="padding: 0;">
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-white">
-                      <div class="inner">
-                        <h3>{{$comptes->count()}}</h3>
+                <a href="/compte">
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-white">
+                          <div class="inner">
+                            <h3>{{$comptes->count()}}</h3>
 
-                        <p>{{ trans('accounts') }}</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-briefcase"></i>
-                      </div>
+                            <p>{{ trans('accounts') }}</p>
+                          </div>
+                          <div class="icon">
+                            <i class="ion ion-briefcase"></i>
+                          </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-white">
-                      <div class="inner">
-                        <h3>{{$operations->count()}}</h3>
+                </a>
+               <a href="/operation">
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-white">
+                        <div class="inner">
+                            <h3>{{$operations->count()}}</h3>
 
-                        <p>{{ trans('operations') }}</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-social-buffer"></i>
-                      </div>
+                            <p>{{ trans('operations') }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-social-buffer"></i>
+                        </div>
+                        </div>
                     </div>
-                </div>
+                </a>
                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->

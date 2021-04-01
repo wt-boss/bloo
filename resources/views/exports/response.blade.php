@@ -11,6 +11,7 @@
     </thead>
     <tbody>
     @foreach($responses as $response)
+
         <tr>
             @foreach ($fields as $field)
                 @php
@@ -32,9 +33,9 @@
                 </td>
                 <td>
                     @php
-                        if(!empty($response->site_id))
+                        if(!empty($response->respondent_site))
                           {
-                               $site = \App\Site::findOrFail($response->site_id);
+                               $site = \App\Site::findOrFail($response->respondent_site);
                           }
                     @endphp
                     @if(isset($site))

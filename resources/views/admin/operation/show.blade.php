@@ -148,9 +148,24 @@
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
                              @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                            <a href="{{ route('forms.response.export', $form->code) }}">
+                            <a href="{{ route('forms.response.export', $form->code) }}" id="download_exel">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
+                                <a id="download_country_exel" style="display: none">
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
+                                </a>
+
+                                <a id="download_site_exel" style="display: none">
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
+                                </a>
+
+                                <a id="download_ville_exel" style="display: none">
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
+                                </a>
+
+                                <a id="download_user_exel" style="display: none">
+                                <img src="{{ asset('assets/images/exel.png') }}" ></img>
+                                </a>
                             @endif
                         </span>
                     </div>
@@ -274,7 +289,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {{-- <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button> --}}
+                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
                         </div>
                     </div>
@@ -323,7 +338,7 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_lecteurs1')}}</font></font></h4>
             </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('ajoutlecteur') }}">
+                    <form method="POST" action="{{ route('ajoutlecteur') }}" name="lecteur" id="lecteur">
                         @csrf
                         <input type="hidden" name="operation" value="{{ $operation->id }}" />
                         <div id="datalecteurs">
@@ -351,14 +366,14 @@
                 <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('add_ops') }}</font></font></h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('ajoutoperateur') }}">
+                <form method="POST" action="{{ route('ajoutoperateur') }}" name="operateur" id="operateur">
                     @csrf
                     <input type="hidden" name="operation" value="{{ $operation->id }}" />
                     <div id="dataoperateurs">
 
                     </div>
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('Close') }}</font></font></button>
-                    <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
+                    <button type="submit" class="btn btn-primary" id="send" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('savee') }}</font></font></button>
                 </form>
             </div>
       </div>
@@ -451,43 +466,7 @@
             $.get('/listlecteurs/' + operation_id, function (data) {
                 console.log(data);
                  $('#datalecteurs').empty();
-                 $('#datalecteurs').append(data.name);
-                 $('#'+data.id).DataTable({
-                     "language": {
-                         @if( app()->getLocale() === "fr" )
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                         @endif
-                             @if( app()->getLocale() === "en")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                         @endif
-                             @if( app()->getLocale() === "es")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                         @endif
-                             @if( app()->getLocale() === "pt")
-                         "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                         @endif
-                     },
-
-                     responsive: {
-                         details: {
-                             type: 'column',
-                             target: 'tr'
-                         }
-                     },
-                     columnDefs: [
-                         {
-                             className: 'control',
-                             orderable: false,
-                             targets:   0
-                         },
-                         {
-                             orderable: false,
-                             targets: [-1]
-                         },
-                         { responsivePriority: 1, targets: 0 },
-                     ]
-                    })
-
+                 $('#datalecteurs').append(data);
             });
         });
 
@@ -720,16 +699,26 @@
                     let button4 = document.getElementById('download_ville_pdf');
                     let button5 = document.getElementById('download_user_pdf');
 
+                    let button6 = document.getElementById('download_exel');
+                    let button7 = document.getElementById('download_country_exel');
+                    let button8 = document.getElementById('download_site_exel');
+                    let button9 = document.getElementById('download_ville_exel');
+                    let button10 = document.getElementById('download_user_exel');
+
                     button1.style.display = "initial";
                     button2.style.display = "none";
                     button3.style.display = "none";
                     button4.style.display = "none";
                     button5.style.display = "none";
 
+                    button6.style.display = "initial";
+                    button7.style.display = "none";
+                    button8.style.display = "none";
+                    button9.style.display = "none";
+                    button10.style.display = "none";
 
                     $('#responses').empty()
                         .append(response.response_view);
-
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
@@ -772,6 +761,7 @@
                     let element2 = document.getElementById('select2');
                     let element3 = document.getElementById('select3');
                     let element4 = document.getElementById('select4');
+
                     element1.style.display = "initial";
                     element2.style.display = "none";
                     element3.style.display = "none";
@@ -859,17 +849,26 @@
                     let button4 = document.getElementById('download_ville_pdf');
                     let button5 = document.getElementById('download_user_pdf');
 
+                    let button6 = document.getElementById('download_exel');
+                    let button7 = document.getElementById('download_country_exel');
+                    let button8 = document.getElementById('download_site_exel');
+                    let button9 = document.getElementById('download_ville_exel');
+                    let button10 = document.getElementById('download_user_exel');
+
                     button1.style.display = "none";
                     button2.style.display = "initial";
                     button3.style.display = "none";
                     button4.style.display = "none";
                     button5.style.display = "none";
 
-
+                    button6.style.display = "none";
+                    button7.style.display = "initial";
+                    button8.style.display = "none";
+                    button9.style.display = "none";
+                    button10.style.display = "none";
 
                     $('#responses').empty()
                         .append(response.response_view);
-
 
                     data_for_chart = JSON.parse(response.data_for_chart);
 
@@ -899,7 +898,9 @@
                         printpdf();
                         setInterval(reload, 3000);
                     };
-
+                    document.getElementById('download_country_exel').onclick = function () {
+                        window.location.href='/forms/'+'{{$form->code}}'+'/responses/download/'+pays_id;
+                    };
                 });
             }
         });
@@ -916,11 +917,23 @@
                     let button4 = document.getElementById('download_ville_pdf');
                     let button5 = document.getElementById('download_user_pdf');
 
+                    let button6 = document.getElementById('download_exel');
+                    let button7 = document.getElementById('download_country_exel');
+                    let button8 = document.getElementById('download_site_exel');
+                    let button9 = document.getElementById('download_ville_exel');
+                    let button10 = document.getElementById('download_user_exel');
+
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "initial";
                     button4.style.display = "none";
                     button5.style.display = "none";
+
+                    button6.style.display = "none";
+                    button7.style.display = "none";
+                    button8.style.display = "initial";
+                    button9.style.display = "none";
+                    button10.style.display = "none";
 
 
                     $('#responses').empty()
@@ -949,6 +962,9 @@
                         printpdf();
                         setInterval(reload, 3000);
                     };
+                    document.getElementById('download_site_exel').onclick = function () {
+                        window.location.href='/forms/'+'{{$form->code}}'+'/responses/downloadsite/'+site_id;
+                    };
                 });
             }
         });
@@ -964,11 +980,23 @@
                     let button4 = document.getElementById('download_ville_pdf');
                     let button5 = document.getElementById('download_user_pdf');
 
+                    let button6 = document.getElementById('download_exel');
+                    let button7 = document.getElementById('download_country_exel');
+                    let button8 = document.getElementById('download_site_exel');
+                    let button9 = document.getElementById('download_ville_exel');
+                    let button10 = document.getElementById('download_user_exel');
+
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "none";
-                    button5.style.display = "none";
                     button4.style.display = "initial";
+                    button5.style.display = "none";
+
+                    button6.style.display = "none";
+                    button7.style.display = "none";
+                    button8.style.display = "none";
+                    button9.style.display = "initial";
+                    button10.style.display = "none";
 
                     $('#responses').empty()
                         .append(response.response_view);
@@ -996,6 +1024,9 @@
                         printpdf();
                         setInterval(reload, 3000);
                     };
+                    document.getElementById('download_ville_exel').onclick = function () {
+                        window.location.href='/forms/'+'{{$form->code}}'+'/responses/downloadville/'+ville;
+                    };
                 });
             }
         });
@@ -1011,12 +1042,23 @@
                     let button4 = document.getElementById('download_ville_pdf');
                     let button5 = document.getElementById('download_user_pdf');
 
+                    let button6 = document.getElementById('download_exel');
+                    let button7 = document.getElementById('download_country_exel');
+                    let button8 = document.getElementById('download_site_exel');
+                    let button9 = document.getElementById('download_ville_exel');
+                    let button10 = document.getElementById('download_user_exel');
+
                     button1.style.display = "none";
                     button2.style.display = "none";
                     button3.style.display = "none";
                     button4.style.display = "none";
                     button5.style.display = "initial";
 
+                    button6.style.display = "none";
+                    button7.style.display = "none";
+                    button8.style.display = "none";
+                    button9.style.display = "none";
+                    button10.style.display = "initial";
 
                     $('#responses').empty()
                         .append(response.response_view);
@@ -1043,6 +1085,9 @@
                         drawCharts(data_for_chart2);
                         printpdf();
                         setInterval(reload, 3000);
+                    };
+                    document.getElementById('download_user_exel').onclick = function () {
+                        window.location.href='/forms/'+'{{$form->code}}'+'/responses/downloaduser/'+userid;
                     };
                 });
             }

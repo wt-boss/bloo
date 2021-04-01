@@ -653,7 +653,6 @@
     "Are you sure you want to delete this": "Êtes-vous sûr de vouloir supprimer cette opération ?",
     "Yes": "Oui",
     "No": "Non",
-
     "general_error": "Une erreur s'est produite",
     "new_account": "Nouveau compte créé avec succès",
     "disabled_account": "Votre compte a été désactivé",
@@ -680,5 +679,14 @@
     "no_site_operation": "Aucun site pour cette opération",
     "no_current_operation": "Aucune opération en cours",
     "availability_updated": "Disponibilité mise à jour",
-    "token_saved": "Token enregistré"
+    "token_saved": "Token enregistré",
+    
+    "Page not found":"Page introuvable",
+    "forbidden":"Page interdite",
+    "method not allowed":"Méthode non supportée",
+    "unauthorized1":"Accès non autorisé",
+    "internal server error":"Erreur Interne du Serveur",
+    "return back":"Revenir en arrière",
+    "page expired":"Page Expirée",
+    "Select an operator": "Selectionnez un operateur"
 }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Form;
 
+use App\Exports\FormResponseCityExport;
+use App\Exports\FormResponseCountryExport;
+use App\Exports\FormResponseSiteExport;
+use App\Exports\FormResponseUserExport;
 use App\Form;
 use App\Location;
 use App\Operation;
@@ -186,6 +190,35 @@ class ResponseController extends Controller
         $filename = Str::slug($form->title) . '.Xlsx';
         return Excel::download(new FormResponseExport($form), $filename);
     }
+
+    public function exportcountry(Form $form,$country_id)
+    {
+        $current_user = Auth::user();
+        $filename = Str::slug($form->title) . '.Xlsx';
+        return Excel::download(new FormResponseCountryExport($form,$country_id), $filename);
+    }
+
+    public function exportsite(Form $form,$site_id)
+    {
+        $current_user = Auth::user();
+        $filename = Str::slug($form->title) . '.Xlsx';
+        return Excel::download(new FormResponseSiteExport($form,$site_id), $filename);
+    }
+
+    public function exportville(Form $form,$city_id)
+    {
+        $current_user = Auth::user();
+        $filename = Str::slug($form->title) . '.Xlsx';
+        return Excel::download(new FormResponseCityExport($form,$city_id), $filename);
+    }
+
+    public function exportuser(Form $form,$user_id)
+    {
+        $current_user = Auth::user();
+        $filename = Str::slug($form->title) . '.Xlsx';
+        return Excel::download(new FormResponseUserExport($form,$user_id), $filename);
+    }
+
 
     public function destroy(Form $form, FormResponse $response)
     {
