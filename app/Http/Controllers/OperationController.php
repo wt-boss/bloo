@@ -125,7 +125,6 @@ class OperationController extends Controller
     public function addlecteurs(Request $request)
     {
         $parameters = $request->all();
-        dd($parameters);
         $operation = Operation::findOrFail($parameters['operation']);
 
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
@@ -295,6 +294,18 @@ class OperationController extends Controller
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
         $users = $operation->users()->where('role', '0')->get();
+        $viewData = Helper::buildUsersList($users);
+        return response()->json($viewData);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getoperationAdmins(Request $request)
+    {
+        $users = User::where('role', '5')->get();
         $viewData = Helper::buildUsersList($users);
         return response()->json($viewData);
     }
@@ -854,5 +865,14 @@ class OperationController extends Controller
     public function VueAllLocation($userid,$operationid)
     {
         return view('admin.operation.localisation',compact('userid','operationid'));
+    }
+
+    /**
+     *
+     */
+    public function listAdmin()
+    {
+        $users = User::where('role','5')->get();
+        return response()->json($users);
     }
 }

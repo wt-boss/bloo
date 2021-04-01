@@ -45,18 +45,26 @@
                     <div class="box-body" style="margin-top: -13px;">
                         @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                          <div class='col-md-12'>
-
-                         <div>
+                            <div>
                              <h5>{{ trans('Lecteurs') }}</h5>
                              <div>
                                  <ul id="alllect"></ul>
                              </div>
-                         </div>
+                           </div>
+
                          <hr>
+
                          <div>
                              <h5>{{ trans('Opérateurs') }}</h5>
                              <div>
                                  <ul id="alloperat"></ul>
+                             </div>
+                         </div>
+                             <hr>
+                         <div>
+                             <h5>SuperAdmin</h5>
+                             <div>
+                                 <ul id="alladmin"></ul>
                              </div>
                          </div>
                      </div>
@@ -242,7 +250,7 @@
 
         $('.operation').click(function(e){
             $('#receiver').empty();
-            console.log(e);
+
             var operation_id = e.target.id;
             var datas = null;
             $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
@@ -250,11 +258,16 @@
                 $('#alloperat').append(data.name);
                 $('#messages').html(datas);
                   $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
-                      $('#alllect').empty();
-                      $('#alllect').append(data.name);
-                      $('#messages').html(datas);
-                      showMessages(operation_id);
-                   });
+                    $('#alllect').empty();
+                    $('#alllect').append(data.name);
+                    $('#messages').html(datas);
+                      $.get('/json-superadmin',function(data) {
+                          $('#alladmin').empty();
+                          $('#alladmin').append(data.name);
+                          $('#messages').html(datas);
+                          showMessages(operation_id);
+                      });
+                });
                });
         });
 
@@ -265,6 +278,7 @@
                 $(this).addClass('active');
                 $(this).find('.pending').remove();
                 receiver_id = $(this).attr('id');
+                console.log(receiver_id);
                 //let receiver_id = e.target.id
                 $.get('/json-user?user_id=' + receiver_id,function(data) {
                     $('#receiver').empty();
@@ -278,10 +292,12 @@
                     success: function (data) {
                         $('#messages').html(data);
                         $('.input-text input').on('keyup', function (e) {
-                            console.log(operation_id);
+
                             var message = $(this).val();
+
                             // check if enter key is pressed and message is not null also receiver is selected
                             if (e.keyCode == 13 && message != '' && receiver_id != '') {
+
                                 $(this).val(''); // while pressed enter text box will be empty
                                 var datastr = "receiver_id=" + receiver_id + "&message=" + message + "&operation_id=" + operation_id;
                                 $.ajax({
@@ -301,6 +317,7 @@
 
                         $('#send').on('click', function (e) {
                             console.log(operation_id);
+                            console.log("Abena");
                             var message = $('.input-text input').val();
                             console.log(message);
                             // check if enter key is pressed and message is not null also receiver is selected
@@ -363,6 +380,8 @@
                         } else {
                             $('#' + data.from).append('<span class="pending">1</span>');
                         }
+                        $('#' + data.from).click();
+                        $('#' + data.to).click();
                     }
                 }
             });

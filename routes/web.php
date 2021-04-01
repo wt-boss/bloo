@@ -234,6 +234,7 @@ Route::get('/json-lecteursoperations','OperationController@getoperationLecteurs'
 Route::get('/json-operateuroperations','OperationController@getoperationOperateurs');
 Route::get('/json-manageroperations','OperationController@getoperationManager');
 Route::get('/json-operateurs','OperationController@listOperateurs');
+Route::get('/json-superadmin','OperationController@getoperationAdmins');
 Route::get('/json-states','CompteController@getregions');
 Route::get('/json-cities','CompteController@getvilles');
 Route::get('/json-user','MessageController@getUser');
