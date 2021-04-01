@@ -56,6 +56,7 @@ class UserController extends Controller
             $user = JWTAuth::user();
             $user->pieces->isNotEmpty();
             $user->operations;
+            $user->city;
 
             $expireAt = Carbon::now()->addMinutes(2);
             Cache::put('user-is-online-'.Auth::id(), true, $expireAt);

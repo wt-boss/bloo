@@ -184,4 +184,5 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     Route::get('countries', 'LocalizationController@countries');
     Route::get('countries/{country_id}/states', 'LocalizationController@states');
     Route::get('states/{state_id}/cities', 'LocalizationController@cities');
+    Route::get('cities/{city_id}', 'LocalizationController@city');
 });

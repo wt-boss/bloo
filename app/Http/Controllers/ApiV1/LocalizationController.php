@@ -55,14 +55,30 @@ class LocalizationController extends Controller
      * 
      * @param int $state_id
      *
-     * @return @return Illuminate\Http\JsonResponse
+     * @return Illuminate\Http\JsonResponse
      */
     public function cities($state_id)
     {
         try {
             $cities = City::where('state_id', $state_id)->get();
-
             return $this->api->conditionnalResponse($cities, 'no_city_found');
+        } catch (Exception $e) {
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+
+    /**
+     * Display specified city
+     * 
+     * @param int $city_id
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function city($city_id)
+    {
+        try {
+            $city = City::findOrFail($city_id)->get();
+            return $this->api->conditionnalResponse($city, 'no_city_found');
         } catch (Exception $e) {
             return $this->api->jsonResponse(false, $e->getMessage());
         }

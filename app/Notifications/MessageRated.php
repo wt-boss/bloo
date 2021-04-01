@@ -66,5 +66,4 @@ class MessageRated extends Notification
             'user' => (integer)$this->user_id
         ];
     }
-
 }
