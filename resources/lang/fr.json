@@ -680,6 +680,9 @@
     "no_operation": "Aucune opération trouvée",
     "no_site_operation": "Aucun site pour cette opération",
     "no_current_operation": "Aucune opération en cours",
+    "availability_updated": "Disponibilité mise à jour",
+    "token_saved": "Token enregistré",
+    
     "Page not found":"Page introuvable",
     "forbidden":"Page interdite",
     "method not allowed":"Méthode non supportée",

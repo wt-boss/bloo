@@ -13,7 +13,6 @@ use App\Operation_user_save;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Repositories\Api\ApiRepository;

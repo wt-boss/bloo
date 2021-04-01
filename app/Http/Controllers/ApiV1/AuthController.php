@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public $api;
-    public function __construct(ApiRepository $apiRepository)
+    public $api, $token;
+
+    public function __construct(ApiRepository $apiRepository, Request $request)
     {
         $this->api = $apiRepository;
+        $this->token = $request->header('Authorization');
     }
 
     /**
@@ -82,20 +84,59 @@ class AuthController extends Controller
     /**
      * Log the authenticated user out
      *
-     * @param  \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function logout()
     {
-        $token = $request->header('Authorization');
-
         try {
-            JWTAuth::invalidate($token);
-
+            JWTAuth::invalidate($this->token);
             return $this->api->jsonResponse(true, trans('logout_success'), Response::HTTP_OK);
 
         } catch (Exception $e) {
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+
+    /**
+     * Save the authenticated user's device token
+     *
+     * @param  \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveDeviceToken(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'device_token' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->api->jsonResponse(false, $validator->errors()->first(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
+        }
+        // return $request->device_token;
+        try{
+            $user = JWTAuth::user();
+            $user->device_token = $request->device_token;
+            $user->save();
+            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK, JWTAuth::user()->device_token);
+        }catch(Exception $e){
+            return $this->api->jsonResponse(false, $e->getMessage());
+        }
+    }
+
+    /**
+     * Update authenticated user's availabity
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function available()
+    {
+        try{
+            $user = JWTAuth::user();
+            $user->available = $user->available ? 0 : 1;
+            $user->save();
+            return $this->api->jsonResponse(true, trans('availability_updated'), Response::HTTP_OK);
+        }catch(Exception $e){
             return $this->api->jsonResponse(false, $e->getMessage());
         }
     }

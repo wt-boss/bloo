@@ -628,6 +628,9 @@
     "no_operation": "No operation found",
     "no_site_operation": "No site for this operation",
     "no_current_operation": "No current operation",
+    "availability_updated": "Availability has been updated",
+    "token_saved": "Token has been saved",
+    
     "Page not found":"Page not found",
     "forbidden":"Forbidden",
     "method not allowed":"¨Method not allowed",
