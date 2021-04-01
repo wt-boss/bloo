@@ -96,11 +96,12 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     Route::post('/user', 'UserController@register');
     // User's routes
     Route::prefix('user')->middleware(['jwt.verify'])->group(function(){
-        /* Save user's token
-            1. 200 if saving successfull
-            2. 500 if an exception occured
+        /* Save user's device token
+            1. 422 if device token is not present
+            2. 200 if saving successfull
+            3. 500 if an exception occured
         */
-        Route::get('token', 'AuthController@saveToken');
+        Route::patch('device-token', 'AuthController@saveDeviceToken');
 
         /* Update user's availability
             1. 200 if availabilty has been successfully updated

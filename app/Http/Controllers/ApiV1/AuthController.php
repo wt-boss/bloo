@@ -84,11 +84,9 @@ class AuthController extends Controller
     /**
      * Log the authenticated user out
      *
-     * @param  \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function logout()
     {
         try {
             JWTAuth::invalidate($this->token);
@@ -100,17 +98,27 @@ class AuthController extends Controller
     }
 
     /**
-     * Save the authenticated user's token
+     * Save the authenticated user's device token
      *
+     * @param  \Illuminate\Http\Request $request
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function saveToken()
+    public function saveDeviceToken(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'device_token' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->api->jsonResponse(false, $validator->errors()->first(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
+        }
+        // return $request->device_token;
         try{
-            JWTAuth::user()->update([
-                'api_token' => $this->token
-            ]);
-            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK, $this->token);
+            $user = JWTAuth::user();
+            $user->device_token = $request->device_token;
+            $user->save();
+            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK, JWTAuth::user()->device_token);
         }catch(Exception $e){
             return $this->api->jsonResponse(false, $e->getMessage());
         }
