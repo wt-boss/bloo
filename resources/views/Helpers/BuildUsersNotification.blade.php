@@ -23,21 +23,23 @@
         <ul class="menu">
             <li>
                 <!-- start message -->
-                <a href="#">
-                    <div class="pull-left">
-                        <!-- User Image -->
-                        @foreach ($notifications as $notification)
-                            <!-- Message title and timestamp -->
-                            <h4 class="pull-right">
-                                <small><i
-                                        class="fa fa-clock-o"></i>{{ $notification->created_at }}</small>
-                                <br>
-                            </h4>
-                            <!-- The message -->
-                            <p> {{ $notification->data['message'] }} </p>
-                        @endforeach
-                    </div>
-                </a>
+                <div style="padding-left: 10px; padding-right:10px;">
+                    <!-- User Image -->
+                @foreach (auth()->user()->unreadNotifications as $notification)
+                    <!-- The message -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <p class="card-body">
+                                        {{strlen($notification->data['message'])>30 ? substr($notification->data['message'] ,0,30 ). " ... " : $notification->data['message'] }}
+                                        <small class="pull-right" style="color:rgb(49, 49, 49)">{{ $notification->created_at->diffForHumans() }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    @endforeach
+                </div>
             </li>
             <!-- end message -->
         </ul>
