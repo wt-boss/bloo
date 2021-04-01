@@ -211,8 +211,8 @@ $current_user = auth()->user();
                                         <span
                                             class="label label-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="header">@lang("You have")
+                                    <ul class="dropdown-menu" >
+                                        <li class="header text-center" style="margin-top: 15px !important; margin-bottom: 10px !important;" >@lang("You have")
                                             @php
                                                 $count = auth()
                                                     ->user()
@@ -225,26 +225,28 @@ $current_user = auth()->user();
                                             @endif
                                         </li>
                                         <li>
+
                                             <!-- inner menu: contains the messages -->
                                             <ul class="menu">
                                                 <li>
                                                     <!-- start message -->
-                                                    <a href="#">
-                                                        <div class="pull-left">
+                                                        <div style="padding-left: 10px; padding-right:10px;">
                                                             <!-- User Image -->
                                                             @foreach (auth()->user()->unreadNotifications as $notification)
-                                                                <!-- Message title and timestamp -->
-                                                                <h4 class="pull-right">
-                                                                    <small><i
-                                                                            class="fa fa-clock-o"></i>{{ $notification->created_at }}</small>
-                                                                    <br>
-                                                                </h4>
-
-                                                                <!-- The message -->
-                                                                <p> {{ $notification->data['message'] }} </p>
+                                                            <!-- The message -->
+                                                               <div class="card">
+                                                                   <div class="card-body">
+                                                                       <div class="card-title">
+                                                                        <p class="card-body">
+                                                                            {{strlen($notification->data['message'])>30 ? substr($notification->data['message'] ,0,30 ). " ... " : $notification->data['message'] }}
+                                                                            <small class="pull-right" style="color:rgb(49, 49, 49)">{{ $notification->created_at->diffForHumans() }}</small>
+                                                                        </p>
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
+                                                               <hr>
                                                             @endforeach
                                                         </div>
-                                                    </a>
                                                 </li>
                                                 <!-- end message -->
                                             </ul>
