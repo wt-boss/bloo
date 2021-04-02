@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ApiV1;
 
+use App\Notifications\EventNotification;
+use App\Operation;
 use App\User;
 use Carbon\Carbon;
 use Exception;
@@ -101,7 +103,7 @@ class AuthController extends Controller
      * Save the authenticated user's device token
      *
      * @param  \Illuminate\Http\Request $request
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function saveDeviceToken(Request $request)
@@ -129,12 +131,38 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function available()
+    public function available($id)
     {
         try{
             $user = JWTAuth::user();
             $user->available = $user->available ? 0 : 1;
             $user->save();
+            $users = collect();
+
+            /**
+             * On recupere l'operation a laquelle il participe;
+             */
+            $operation = Operation::findOrFail($id);
+            /**
+             * Si il appartient effectivement a une operation on recupere l'entreprise qui gere cette operation;
+             */
+            if($operation !== null)
+            {
+                $entreprise = $operation->entreprise()->get()->last();
+                $AllUsers = $entreprise->users()->get();
+                /**
+                 * On recherche l'acount Manager de cette operation;
+                 */
+                foreach ($AllUsers as $user)
+                {
+                    if ($user->role === 4)
+                    {
+                        $users->push($user);
+                    }
+                }
+            }
+            $message = " L'operateur ".$user->first_name." ".$user->last_name."est disponlible pour votre operation";
+            $user->notify(new EventNotification($message));
             return $this->api->jsonResponse(true, trans('availability_updated'), Response::HTTP_OK);
         }catch(Exception $e){
             return $this->api->jsonResponse(false, $e->getMessage());
