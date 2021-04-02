@@ -2,15 +2,36 @@
 @extends('admin.top-nav')
 
 
+
+
 @section('content-header')
 @endsection
-
 @if (auth()->user()->hasRole('Superadmin|Account Manager|Lecteur'))
 @section('content')
+<style>
+    div.scrollmenu {
+      background-color: rgb(255, 255, 255);
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    div.scrollmenu a {
+      display: inline-block;
+      color: rgb(253, 253, 253);
+      text-align: center;
+      padding: 14px;
+      text-decoration: none;
+    }
+
+    div.scrollmenu a:hover {
+      background-color: rgb(251, 251, 251);
+    }
+    </style>
+
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
         <div class="row">
-             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
                         <div class="row">
@@ -22,24 +43,24 @@
                         </div>
                     </div>
                     <div class="box-body" >
-                        <ul class="menu-list">
+                        <div class="scrollmenu">
                             @foreach($operations as $operation)
-                            <li id="{{$operation->id}}">
+                            <a id="{{$operation->id}}">
                                 <div class="cir-image" id="{{$operation->id}}">
                                     <div class="widget-user-image text-center op-msg-list operation" id="{{$operation->id}}">
                                         <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$operation->id}}">
-                                        <p id="{{$operation->id}}">{{$operation->nom}}</p>
+                                        <p style="color: #6F6F6F" id="{{$operation->id}}">{{$operation->nom}}</p>
                                     </div>
                                 </div>
-                            </li>
+                            </a>
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
-             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="lecteurs">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="lecteurs">
                 <div class="box box-primary">
 
                     <div class="box-body" style="margin-top: -13px;">
@@ -48,14 +69,14 @@
 
                          <div>
                              <h5>{{ trans('Lecteurs') }}</h5>
-                             <div>
+                             <div class="scrollmenu">
                                  <ul id="alllect"></ul>
                              </div>
                          </div>
                          <hr>
                          <div>
                              <h5>{{ trans('Opérateurs') }}</h5>
-                             <div>
+                             <div  class="scrollmenu">
                                  <ul id="alloperat"></ul>
                              </div>
                          </div>
@@ -65,7 +86,7 @@
                  @if(auth()->user()->hasRole('Lecteur'))
                          <div class='col-md-12'>
                              <div class='user-wrapper'>
-                                 <div>
+                                 <div class="scrollmenu">
                                      <h6>{{ trans('prix_offre_llimite2') }}</h6>
                                      <div id="allmanagers">
                                      </div>
@@ -79,7 +100,7 @@
                 </div>
                 <!-- /.box -->
             </div>
-             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="box box-primary" style="height: 100%;">
                     <div class="box-header with-border">
                         <ul class="box-title" id="receiver">
@@ -174,12 +195,13 @@
             var operation_id = e.target.id;
             var datas = null;
             $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
+                console.log(data);
                 $('#alloperat').empty();
-                $('#alloperat').append(data.name);
+                $('#alloperat').append(data);
                 $('#messages').html(datas);
                   $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
                       $('#alllect').empty();
-                      $('#alllect').append(data.name);
+                      $('#alllect').append(data);
                       $('#messages').html(datas);
                       showMessages(operation_id);
                    });
@@ -527,7 +549,7 @@
                         }
                         else
                             {
-                                $('#allmanagers').append(data.name);
+                                $('#allmanagers').append(data);
                             }
                         $('#messages').html(datas);
                         showMessages(operation_id);

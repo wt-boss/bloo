@@ -76,7 +76,7 @@
             <div class="col-lg-3 col-xs-12">
                 <div class="box box-solid panel-wb">
                     <!-- /.box-header -->
-                    <div class="box-body" style="padding: 0 10px;">
+                    <div class="box-body" style="padding: 0 ;">
                         <div class="row">
                             <div class="col-lg-12 col-xs-6">
                                 <div class="small-box bg-white">

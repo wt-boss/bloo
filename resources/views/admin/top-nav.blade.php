@@ -135,7 +135,7 @@ $current_user = auth()->user();
                                     class="<?php echo Str::startsWith($route, 'messages') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('messages_index') }}">
                                         <i class="fas fa-envelope"></i>
-                                        <span>Messagerie</span>
+                                        <span>{{ trans('Messagerie') }}</span>
                                     </a>
                                 </li>
                             @endif
@@ -146,7 +146,7 @@ $current_user = auth()->user();
                                     class="<?php echo Str::startsWith($route, 'user') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('users.index') }}">
                                         <i class="nav-icon fas fa-users-cog"></i>
-                                        <span>Utilisateurs</span>
+                                        <span>{{ trans('Users') }}</span>
                                     </a>
                                 </li>
                             @endif

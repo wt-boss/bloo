@@ -1,7 +1,4 @@
-<div class="message-wrapper" style:"    padding: 10px;
-height: 427px;
-background: #fff;
-}">
+<div class="message-wrapper" style:"padding: 10px; height: 427px; background: #fff;}">
     <ul class="messages">
         @foreach($messages as $message)
             <li class="message clearfix">
@@ -17,11 +14,11 @@ background: #fff;
 
 <div class="input-text">
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-11  col-xs-10">
             <input type="text" id="msginput" name="message" class="submit"/>
 
         </div>
-        <div class="col-md-1" style="padding-top: 18px;padding-right: -4px;padding-left: 0px;font-size: 20px;" >
+        <div class="col-md-1  col-xs-2" style="padding-top: 18px;padding-right: -4px;padding-left: 0px;font-size: 23px;" >
             <button id="send"> <i class="fa fa-paper-plane"></i></button>
            </div>
     </div>
