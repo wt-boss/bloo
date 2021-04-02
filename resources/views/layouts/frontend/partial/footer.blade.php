@@ -41,9 +41,9 @@
                 </ul>
               </div>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-linkedin"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-youtube"></span></a></li>
+              <li class="ftco-animate"><a href="https://twitter.com/BlooSurvey" target="_blank"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="https://www.linkedin.com/company/bloosurvey/" target="_blank"><span class="icon-linkedin"></span></a></li>
+              <li class="ftco-animate"><a href="https://facebook.com/BlooSurvey/" target="_blank"><span class="icon-facebook"></span></a></li>
             </ul>
           </div>
         </div>
