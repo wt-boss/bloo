@@ -135,7 +135,7 @@ $current_user = auth()->user();
                                     class="<?php echo Str::startsWith($route, 'messages') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('messages_index') }}">
                                         <i class="fas fa-envelope"></i>
-                                        <span>Messagerie</span>
+                                        <span>{{ trans('Messagerie') }}</span>
                                     </a>
                                 </li>
                             @endif
@@ -146,7 +146,7 @@ $current_user = auth()->user();
                                     class="<?php echo Str::startsWith($route, 'user') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('users.index') }}">
                                         <i class="nav-icon fas fa-users-cog"></i>
-                                        <span>Utilisateurs</span>
+                                        <span>{{ trans('Users') }}</span>
                                     </a>
                                 </li>
                             @endif
@@ -211,8 +211,8 @@ $current_user = auth()->user();
                                         <span
                                             class="label label-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="header">@lang("You have")
+                                    <ul class="dropdown-menu" >
+                                        <li class="header text-center" style="margin-top: 15px !important; margin-bottom: 10px !important;" >@lang("You have")
                                             @php
                                                 $count = auth()
                                                     ->user()
@@ -225,27 +225,28 @@ $current_user = auth()->user();
                                             @endif
                                         </li>
                                         <li>
+
                                             <!-- inner menu: contains the messages -->
                                             <ul class="menu">
                                                 <li>
                                                     <!-- start message -->
-                                                    <div style="padding-left: 10px; padding-right:10px;">
-                                                        <!-- User Image -->
-                                                    @foreach (auth()->user()->unreadNotifications as $notification)
-                                                        <!-- The message -->
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="card-title">
+                                                        <div style="padding-left: 10px; padding-right:10px;">
+                                                            <!-- User Image -->
+                                                            @foreach (auth()->user()->unreadNotifications as $notification)
+                                                            <!-- The message -->
+                                                               <div class="card">
+                                                                   <div class="card-body">
+                                                                       <div class="card-title">
                                                                         <p class="card-body">
                                                                             {{strlen($notification->data['message'])>30 ? substr($notification->data['message'] ,0,30 ). " ... " : $notification->data['message'] }}
                                                                             <small class="pull-right" style="color:rgb(49, 49, 49)">{{ $notification->created_at->diffForHumans() }}</small>
                                                                         </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                        @endforeach
-                                                    </div>
+                                                                       </div>
+                                                                   </div>
+                                                               </div>
+                                                               <hr>
+                                                            @endforeach
+                                                        </div>
                                                 </li>
                                                 <!-- end message -->
                                             </ul>

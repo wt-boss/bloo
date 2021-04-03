@@ -18,7 +18,7 @@ class Helper
         foreach($items as $item) {
 
               $data .=
-                                    "<li class='user' id=$item->id>".
+                                    "<a class='user' id=$item->id>".
                                    "<div class='media' id=$item->id >".
                                    "<div class='media-left' id=$item->id>".
                                    "<img src=$item->avatar alt='' class='media-object' id=$item->id>".
@@ -28,7 +28,7 @@ class Helper
                                    "<p class='email' id=$item->id>".substr($item->email, 0, 24)."</p>".
                                    "</div>".
                                    "</div>".
-                                   "</li>" ;
+                                   "</a>" ;
 
 
             }

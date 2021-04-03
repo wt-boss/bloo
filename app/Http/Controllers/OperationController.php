@@ -327,7 +327,8 @@ class OperationController extends Controller
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
         $users = $operation->users()->where('role', '0')->get();
-        $viewData = Helper::buildUsersList($users);
+        //$viewData = Helper::buildUsersList($users);
+        $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
     }
 
@@ -352,7 +353,8 @@ class OperationController extends Controller
         $operation_id = $request->input('operation_id');
         $operation = Operation::findOrFail($operation_id);
         $users = $operation->users()->where('role', '1')->get();
-        $viewData = Helper::buildUsersList($users);
+        //$viewData = Helper::buildUsersList($users);
+        $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
 
     }
@@ -376,7 +378,8 @@ class OperationController extends Controller
                 $users->push($user);
             }
         }
-        $viewData = Helper::buildUsersList($users);
+       // $viewData = Helper::buildUsersList($users);
+        $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
     }
 
