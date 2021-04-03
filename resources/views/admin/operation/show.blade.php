@@ -186,7 +186,9 @@
                                     {{ trans('Lecteurs') }}
                                 </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                    @if($operation->status != "TERMINER")
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
+                                        @endif
                                 @endif
                             </div>
                         </div>
@@ -208,7 +210,9 @@
                                        {{ $user->first_name }} {{ $user->last_name }}
                                       <span class="pull-right">
                                           @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                                      <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                              @if($operation->status != "TERMINER")
+                                               <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                              @endif
                                         @endif
                                       </span>
                                     </td>
@@ -237,7 +241,9 @@
                                     {{ trans('Opérateurs') }}
                                 </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
-                                <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
+                                        @if($operation->status != "TERMINER")
+                                <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>{{$operation->status}}
+                                    @endif
                                 @endif
                             </div>
                             </div>
@@ -268,7 +274,9 @@
                                         <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                                         <span class="pull-right">
                                             @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                                @if($operation->status != "TERMINER")
                                                 <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                                    @endif
                                             @endif
                                        </span>
                                     </td>
@@ -281,7 +289,7 @@
 
                                     </td>
                                     <td>
-                                        <a href="{{route('AllPoints',[$operation->id,$user->id])}}" target="_blank">Locations</a>
+                                        <a href="{{route('AllPoints',[$operation->id,$user->id])}}" target="_blank">{{trans('Location')}}</a>
                                     </td>
                                 </tr>
                                     @endif

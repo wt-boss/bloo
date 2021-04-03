@@ -43,3 +43,77 @@ if (!function_exists('get_form_templates')) {
         return ($alias) ? $templates->first() : $templates;
     }
 }
+
+
+function send_notification_FCM($notification_id, $title, $message, $id,$type) {
+
+    $accesstoken = env('FCM_KEY');
+
+    //$accesstoken = 'AAAAzj3G7mo:APA91bHBFqTt72ffhdg05ihOqTBTa8YgKZS72hrxUanp3ICrowFMxWvoSkcUMch_6Qp0GG2U-aAg9jdcl5nQ2EeFY-em6h5ZXkGOCAQizTDv_InrX66jVJ5_7Uls7Zx9Rhs7TKNH83aR';
+    $URL = 'https://fcm.googleapis.com/fcm/send';
+
+    $post_data = '{
+            "to" : "' . $notification_id . '",
+            "data" : {
+              "body" : "",
+              "title" : "' . $title . '",
+              "type" : "' . $type . '",
+              "id" : "' . $id . '",
+              "message" : "' . $message . '",
+            },
+            "notification" : {
+                 "body" : "' . $message . '",
+                 "title" : "' . $title . '",
+                  "type" : "' . $type . '",
+                 "id" : "' . $id . '",
+                 "message" : "' . $message . '",
+                "icon" : "new",
+                "sound" : "default"
+                },
+
+          }';
+    //print_r($post_data);die;
+
+    // Set POST variables
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $headers = array(
+        'Authorization: key=' . $accesstoken,
+        'Content-Type: application/json'
+    );
+
+    //print_r($headers);die();
+    // Open connection
+    $ch = curl_init();
+
+    // Set the url, number of POST vars, POST data
+    curl_setopt( $ch, CURLOPT_URL, $url );
+
+    curl_setopt( $ch, CURLOPT_POST, true );
+    curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers );
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+    // Disabling SSL Certificate support temporarly
+    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+
+    curl_setopt( $ch, CURLOPT_POSTFIELDS,  $post_data  );
+
+    // Execute post
+    $result = curl_exec( $ch );
+
+    //print_r($result);die();
+
+    if ($result === false) {
+        // throw new Exception('Curl error: ' . curl_error($crl));
+        //print_r('Curl error: ' . curl_error($crl));
+        $result_noti = 0;
+    } else {
+
+        $result_noti = 1;
+    }
+
+   // Close connection
+    curl_close( $ch );
+    return $result_noti;
+
+}

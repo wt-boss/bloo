@@ -682,7 +682,7 @@
     "no_current_operation": "Aucune opération en cours",
     "availability_updated": "Disponibilité mise à jour",
     "token_saved": "Token enregistré",
-    
+
     "Page not found":"Page introuvable",
     "forbidden":"Page interdite",
     "method not allowed":"Méthode non supportée",
@@ -690,5 +690,13 @@
     "internal server error":"Erreur Interne du Serveur",
     "return back":"Revenir en arrière",
     "page expired":"Page Expirée",
-    "Select an operator": "Selectionnez un operateur"
+    "Select an operator": "Selectionnez un operateur",
+    "Location": "Localisation",
+    "this operation has to start" : "cette opération a commencé",
+    "You have been added as an operator to this operation" : "Vous avez été ajouté en tant qu'opérateur à cette opération",
+    "You have been removed as an operator from this operation" : "Vous avez été retiré en tant qu'opérateur de cette opération",
+    "has just ended": "vient de se terminer",
+    "Operataion": "Opérataion",
+    "to start": "a débuter"
+
 }

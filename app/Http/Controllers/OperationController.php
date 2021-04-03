@@ -153,16 +153,31 @@ class OperationController extends Controller
         foreach ($parameters['lecteurs']as $operateur) {
             $user = User::findOrFail($operateur);
             $user->operations()->attach($operation);
-
             $savedata =  new Operation_user_save();
             $savedata->user_id = $user->id;
             $savedata->operation_id = $operation->id;
             $savedata->save();
 
+            /** Envoie de notification a l'application moblie */
+            $notification_id = $user->notification_id;
+            $title = trans("Operataion").$operation->name;
+            $message = trans("You have been added as an operator to this operation");
+            $id = $user->id;
+            $type = "basic";
+            $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+//            if($res == 1){
+//
+//                // success code
+//
+//            }else{
+//
+//                // fail code
+//            }
 
             /** Mail aux operateurs **/
             Mail::to($user->email)->send(new BlooOperateur());
             $user->notify(new EventNotification($message));
+
             $pusher = App::make('pusher');
             $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
             $pusher->trigger('my-channel', 'notification-event', $data);
@@ -200,8 +215,26 @@ class OperationController extends Controller
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
-        $message = "Vous avez été retirer de l'operration : " . $operation->nom;
+        $message = $operation->nom." ". trans("You have been removed as an operator from this operation");
         $user->notify(new EventNotification($message));
+
+        /** Envoie de notification a l'application moblie */
+        $notification_id = $user->notification_id;
+        $title = trans("Operataion").$operation->name;
+        $message = trans("You have been removed as an operator from this operation");
+        $id = $user->id;
+        $type = "basic";
+        $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+//            if($res == 1){
+//
+//                // success code
+//
+//            }else{
+//
+//                // fail code
+//            }
+
+
         $pusher = App::make('pusher');
         $data = ['moving and operator']; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'notification-event', $data);
@@ -604,11 +637,25 @@ class OperationController extends Controller
 
         $AllUser = $operation->users()->where('role', '1')->get();
         foreach ($AllUser as $User) {
+            /** Envoie de notification a l'application moblie */
+            $notification_id = $User->notification_id;
+            $title = trans("Operataion").$operation->name;
+            $message = trans("Operataion").$operation->name.trans("has just ended");
+            $id = $User->id;
+            $type = "basic";
+            $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+//            if($res == 1){
+//
+//                // success code
+//
+//            }else{
+//
+//                // fail code
+//            }
             $operation->users()->detach($User);
         }
         $operation->status = "TERMINER";
         $operation->save();
-
         return back()->withSuccess(trans('Fin_operation'));
     }
 
@@ -628,6 +675,26 @@ class OperationController extends Controller
             $pusher = App::make('pusher');
             $data = ['clossing an operation']; // sending from and to user id when pressed enter
             $pusher->trigger('my-channel', 'notification-event', $data);
+        }
+
+        $AllUser = $operation->users()->where('role', '1')->get();
+        foreach ($AllUser as $User) {
+            /** Envoie de notification a l'application moblie */
+            $notification_id = $User->notification_id;
+            $title = trans("Operataion").$operation->name;
+            $message = trans("Operataion").$operation->name.trans("to start");
+            $id = $User->id;
+            $type = "basic";
+            $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+//            if($res == 1){
+//
+//                // success code
+//
+//            }else{
+//
+//                // fail code
+//            }
+            $operation->users()->detach($User);
         }
         $operation->status = "EN COUR";
         $form->save();
