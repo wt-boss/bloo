@@ -12,6 +12,7 @@ use App\Repositories\Api\APiRepository;
 class LocalizationController extends Controller
 {    
     public $api;
+
     public function __construct(ApiRepository $apiRepository)
     {
         $this->api = $apiRepository;
@@ -77,8 +78,8 @@ class LocalizationController extends Controller
     public function city($city_id)
     {
         try {
-            $city = City::findOrFail($city_id)->get();
-            return $this->api->conditionnalResponse($city, 'no_city_found');
+            $city = City::findOrFail($city_id);
+            return $this->api->conditionnalResponse(collect($city), 'no_city_found');
         } catch (Exception $e) {
             return $this->api->jsonResponse(false, $e->getMessage());
         }

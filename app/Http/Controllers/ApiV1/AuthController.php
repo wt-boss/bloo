@@ -48,9 +48,9 @@ class AuthController extends Controller
         if($user){
             $password = Hash::check($request->password, $user->password);
             if(!$password){
-                return $this->api->jsonResponse(false, trans('credentials_not_found'));
+                return $this->api->jsonResponse(false, trans('credentials_not_found'), Response::HTTP_OK);
             }else if ($user->active === 0) {
-                return $this->api->jsonResponse(false, trans('disabled_account'));
+                return $this->api->jsonResponse(false, trans('disabled_account'), Response::HTTP_OK);
             }
 
             $token = JWTAuth::attempt([
@@ -113,12 +113,12 @@ class AuthController extends Controller
         if($validator->fails()){
             return $this->api->jsonResponse(false, $validator->errors()->first(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
         }
-        // return $request->device_token;
+        
         try{
             $user = JWTAuth::user();
             $user->device_token = $request->device_token;
             $user->save();
-            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK, JWTAuth::user()->device_token);
+            return $this->api->jsonResponse(true, trans('token_saved'), Response::HTTP_OK);
         }catch(Exception $e){
             return $this->api->jsonResponse(false, $e->getMessage());
         }

@@ -140,12 +140,12 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
             2. 200 with "false" status if null content
             3. 500 if an exception occured
         */
-        Route::middleware('operator')->group(function(){
+        // Route::middleware('operator')->group(function(){
             // User's current operation
             Route::get('/operation', 'OperationsController@operation');
             // User's passed operations
             Route::get('/operations', 'OperationsController@passedOperations');
-        });
+        // });
 
     });
 
