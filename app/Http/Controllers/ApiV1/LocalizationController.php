@@ -7,7 +7,7 @@ use App\State;
 use App\Country;
 use Exception;
 use App\Http\Controllers\Controller;
-use App\Repositories\Api\APiRepository;
+use App\Repositories\API\ApiRepository;
 
 class LocalizationController extends Controller
 {    
