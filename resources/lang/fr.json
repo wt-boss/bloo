@@ -658,7 +658,7 @@
     "general_error": "Une erreur s'est produite",
     "new_account": "Nouveau compte créé avec succès",
     "disabled_account": "Votre compte a été désactivé",
-    "credentials_not_found": "Vos paramètres ne correspondent pas avec nos données",
+    "credentials_not_found": "Vos paramètres des connexion sont incorrects",
     "user_not_found": "Utilisateur inexistant",
     "auth_success": "Authentifié avec succès",
     "refreshed_token": "Token rafraîchi avec succès",
@@ -680,9 +680,6 @@
     "no_operation": "Aucune opération trouvée",
     "no_site_operation": "Aucun site pour cette opération",
     "no_current_operation": "Aucune opération en cours",
-    "availability_updated": "Disponibilité mise à jour",
-    "token_saved": "Token enregistré",
-
     "Page not found":"Page introuvable",
     "forbidden":"Page interdite",
     "method not allowed":"Méthode non supportée",
@@ -697,6 +694,8 @@
     "You have been removed as an operator from this operation" : "Vous avez été retiré en tant qu'opérateur de cette opération",
     "has just ended": "vient de se terminer",
     "Operataion": "Opérataion",
-    "to start": "a débuter"
+    "to start": "a débuter",
+    "availability_updated": "Disponibilité mise à jour",
+    "token_saved": "Token enregistré"
 
 }

@@ -62,7 +62,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
 
     // Authentication routes
     Route::prefix('auth')->group(function(){
-        
+
         /* Log user in and generate a token with 6 months ttl
             Returns:
             1. 200 with "true" status if authentication has been successfully passed
@@ -107,6 +107,11 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
             2. 500 if an exception occured
         */
         Route::get('available', 'AuthController@available');
+
+
+        Route::patch('device-token', 'AuthController@saveDeviceToken');
+        Route::post('forms/{form}/responses', 'ResponceController2@store')->name('forms.responses.store.mobile2');
+
 
         /* Display current user's informations
             Returns:

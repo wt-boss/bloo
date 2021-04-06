@@ -45,7 +45,7 @@ class UserController extends Controller
             return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
-    
+
     /**
      * Display user's details
      *
@@ -68,7 +68,7 @@ class UserController extends Controller
 
     /**
      * Update user's details
-     * 
+     *
      * @param App\Http\Requests\UpdateUserRequest $request
      *
      * @return Illuminate\Http\JsonResponse

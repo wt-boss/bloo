@@ -224,11 +224,14 @@
 
             submit_button = $form.find('#submit');
             submit_button.button('loading');
-
+            myToken = new URLSearchParams(window.location.search).get('token');
             $.ajax({
                 url: $form.attr('action'),
                 type: $form.attr('method'),
                 data: $form.serialize(),
+                headers: {
+                    "Authorization": myToken
+                },
                 dataType: 'json'
             })
             .done(function (response) {

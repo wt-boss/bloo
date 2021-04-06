@@ -602,7 +602,6 @@
     "Rayon": "Ray",
     "Actions": "Actions",
     "siver": "Silver",
-
     "general_error": "An error occured",
     "new_account": "New Account Successfuly created",
     "disabled_account": "Your account has been disabled",
@@ -628,15 +627,13 @@
     "no_operation": "No operation found",
     "no_site_operation": "No site for this operation",
     "no_current_operation": "No current operation",
-    "availability_updated": "Availability has been updated",
-    "token_saved": "Token has been saved",
-    
-    "Page not found":"Page not found",
+    "Page not found":"Page Not Found",
     "forbidden":"Forbidden",
     "method not allowed":"¨Method not allowed",
     "unauthorized1":"Unauthorized",
-    "internal server error":"Internal server error",
-    "return back":"Return back",
-    "page expired":"Page Expired"
-
+    "internal server error":"Internal Server Error",
+    "return back":"Return Back",
+    "page expired":"Page Expired",
+    "availability_updated": "Availability has been updated",
+    "token_saved": "Token has been saved"
 }
