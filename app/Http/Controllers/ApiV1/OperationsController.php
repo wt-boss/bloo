@@ -43,8 +43,8 @@ class OperationsController extends Controller
             $operation = Operation::whereIn('id', $user_operations_ids)
                                    ->whereStatus('EN COUR')
                                    ->get();
-            if($operation->isEmpty()){
-                return $this->api->jsonResponse(false, trans('no_current_operation'), Response::HTTP_OK);
+            if($operation->isEmpty()) {
+                return $this->api->jsonResponse(false, trans('no_current_operation'));
             }
             return $this->api->jsonResponse(true, $operation->count(), Response::HTTP_OK, $operation, null, $operation->first()->form->code);
         } catch (Exception $e) {
@@ -98,7 +98,7 @@ class OperationsController extends Controller
                                     ->get();
             return $this->api->conditionnalResponse($operations, 'no_operation');
         } catch (Exception $e) {
-            return $this->api->jsonResponse(false, $e->getMessage());
+            return $this->api->jsonResponse(false, $e->getMessage(),500,[]);
         }
     }
 
@@ -114,16 +114,16 @@ class OperationsController extends Controller
     {
         try {
             $operation = Operation::findOrFail($operation_id);
+            $city = $city_id != 0 ? City::findOrFail($city_id) : null;
+
             if (!$operation) {
-                return $this->api->jsonResponse(false, trans('no_operation'), Response::HTTP_OK);
-            }
-            if ($city_id == 0) {
-                $sites = Site::whereOperationId($operation->id)->get();
-            }else {
-                $city = City::findOrFail($city_id);
-                if(!$city){
-                    return $this->api->jsonResponse(false, trans('no_city_found'), Response::HTTP_OK);
-                }
+                return $this->api->jsonResponse(false, trans('no_operation'), Response::HTTP_OK, []);
+            }else if(!$city){
+                $sites = Site::whereOperationId($operation->id)
+                            ->orderBy('ville')
+                            ->get();
+                // return $this->api->jsonResponse(false, trans('no_city_found'), Response::HTTP_OK);
+            } else {
                 $sites = Site::whereOperationId($operation->id)
                             ->whereCityId($city->id)
                             ->get();

@@ -39,7 +39,7 @@ $fields = $form->fields()->filled()->get();
                         @endphp
 
                         @if($mobile == "true")
-                        <form id="user-form" action="{{ ($view_type === 'form') ? route('forms.responses.store.mobile', $form->code) : "#" }}" method="{{ ($view_type === 'form') ? "post" : "get" }}" autocomplete="off">
+                        <form id="user-form" action="{{ ($view_type === 'form') ? route('forms.responses.store.mobile2', $form->code) : "#" }}" method="{{ ($view_type === 'form') ? "post" : "get" }}" autocomplete="off">
                         @else
                         <form id="user-form" action="{{ ($view_type === 'form') ? route('forms.responses.store', $form->code) : "#" }}" method="{{ ($view_type === 'form') ? "post" : "get" }}" autocomplete="off">
                         @endif

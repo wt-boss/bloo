@@ -41,6 +41,6 @@ class ApiRepository
      */
     public function conditionnalResponse($locale, $message)
     {
-        return (!$locale->isEmpty()) ? $this->jsonResponse(true, $locale->count(), Response::HTTP_OK, $locale) : $this->jsonResponse(false, trans($message), Response::HTTP_OK);
+        return (!$locale->isEmpty()) ? $this->jsonResponse(true, $locale->count(), Response::HTTP_OK, $locale) : $this->jsonResponse(false, trans($message), Response::HTTP_OK, []);
     }
 }
