@@ -168,4 +168,5 @@ class AuthController extends Controller
             return $this->api->jsonResponse(false, $e->getMessage());
         }
     }
+
 }
