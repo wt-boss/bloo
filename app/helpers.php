@@ -56,7 +56,7 @@ function send_notification_FCM($notification_id, $title, $message, $id,$type) {
             "to" : "' . $notification_id . '",
             "data" : {
               "body" : "",
-              "title" : "' . $title . '",git 
+              "title" : "' . $title . '",
               "type" : "' . $type . '",
               "id" : "' . $id . '",
               "message" : "' . $message . '",
@@ -103,17 +103,49 @@ function send_notification_FCM($notification_id, $title, $message, $id,$type) {
 
     //print_r($result);die();
 
-    if ($result === false) {
-        // throw new Exception('Curl error: ' . curl_error($crl));
-        //print_r('Curl error: ' . curl_error($crl));
-        $result_noti = 0;
-    } else {
-
-        $result_noti = 1;
+    if ( $result === false ) {
+        die( 'Curl failed: ' . curl_error( $ch ) );
     }
 
-   // Close connection
+    // Close connection
     curl_close( $ch );
-    return $result_noti;
 
+    return $result;
+
+
+
+
+
+//    $crl = curl_init();
+//    $headr = array();
+//    $headr[] = 'Content-type: application/json';
+//    $headr[] = 'Authorization: key='.$accesstoken;
+//
+//
+//
+//      //print_r($headr);die;
+//    curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
+//
+//    curl_setopt($crl, CURLOPT_URL, $URL);
+//    curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
+//
+//    curl_setopt($crl, CURLOPT_POST, true);
+//    curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
+//    curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+//
+//    $rest = curl_exec($crl);
+//    print_r($rest);die;
+//
+//    if ($rest === false) {
+//        // throw new Exception('Curl error: ' . curl_error($crl));
+//        //print_r('Curl error: ' . curl_error($crl));
+//        $result_noti = 0;
+//    } else {
+//
+//        $result_noti = 1;
+//    }
+//
+//    //curl_close($crl);
+//    //print_r($result_noti);die;
+//    return $result_noti;
 }
