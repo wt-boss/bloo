@@ -159,7 +159,7 @@ class OperationController extends Controller
             $savedata->save();
 
             /** Envoie de notification a l'application moblie */
-            $notification_id = $user->notification_id;
+            $notification_id = $user->device_token;
             $title = trans("Operataion").$operation->name;
             $message = trans("You have been added as an operator to this operation");
             $id = $user->id;
@@ -219,7 +219,7 @@ class OperationController extends Controller
         $user->notify(new EventNotification($message));
 
         /** Envoie de notification a l'application moblie */
-        $notification_id = $user->notification_id;
+        $notification_id = $user->device_token;
         $title = trans("Operataion").$operation->name;
         $message = trans("You have been removed as an operator from this operation");
         $id = $user->id;
@@ -641,7 +641,7 @@ class OperationController extends Controller
         $AllUser = $operation->users()->where('role', '1')->get();
         foreach ($AllUser as $User) {
             /** Envoie de notification a l'application moblie */
-            $notification_id = $User->notification_id;
+            $notification_id = $user->device_token;
             $title = trans("Operataion").$operation->name;
             $message = trans("Operataion").$operation->name.trans("has just ended");
             $id = $User->id;
@@ -683,7 +683,7 @@ class OperationController extends Controller
         $AllUser = $operation->users()->where('role', '1')->get();
         foreach ($AllUser as $User) {
             /** Envoie de notification a l'application moblie */
-            $notification_id = $User->notification_id;
+            $notification_id = $user->device_token;
             $title = trans("Operataion").$operation->name;
             $message = trans("Operataion").$operation->name.trans("to start");
             $id = $User->id;
