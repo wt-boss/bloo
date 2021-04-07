@@ -47,16 +47,16 @@ if (!function_exists('get_form_templates')) {
 
 function send_notification_FCM($notification_id, $title, $message, $id,$type) {
 
-    $accesstoken = env('FCM_KEY');
+    //$accesstoken = env('FCM_KEY');
 
-    //$accesstoken = 'AAAAzj3G7mo:APA91bHBFqTt72ffhdg05ihOqTBTa8YgKZS72hrxUanp3ICrowFMxWvoSkcUMch_6Qp0GG2U-aAg9jdcl5nQ2EeFY-em6h5ZXkGOCAQizTDv_InrX66jVJ5_7Uls7Zx9Rhs7TKNH83aR';
+    $accesstoken = 'AAAA1qrIg38:APA91bFJsMtflr5Ln7supYPRGljjRpbfZ0UytkJA3qE_7sBoAwijjx2RMRhRopXH31NjDn6g0lTbe9rl2i8XgTvtFfbGRaymuRnSRsS36bu_WF0ywqmusO6CuLCMHRPlSI2A0kWEYWId';
     $URL = 'https://fcm.googleapis.com/fcm/send';
 
     $post_data = '{
             "to" : "' . $notification_id . '",
             "data" : {
               "body" : "",
-              "title" : "' . $title . '",
+              "title" : "' . $title . '",git 
               "type" : "' . $type . '",
               "id" : "' . $id . '",
               "message" : "' . $message . '",
