@@ -220,7 +220,7 @@ class OperationController extends Controller
 
         /** Envoie de notification a l'application moblie */
         $notification_id = $user->device_token;
-        $title = trans("Operation").$operation->nom;
+        $title = trans("Operation")." ".$operation->nom;
         $message = trans("You have been removed as an operator from this operation");
         $id = $user->id;
         $type = "basic";
