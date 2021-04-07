@@ -160,7 +160,7 @@ class OperationController extends Controller
 
             /** Envoie de notification a l'application moblie */
             $notification_id = $user->device_token;
-            $title = trans("Operataion")." ".$operation->nom;
+            $title = trans("Operation")." ".$operation->nom;
             $message = trans("You have been added as an operator to this operation");
             $id = $user->id;
             $type = "basic";

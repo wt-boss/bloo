@@ -67,8 +67,7 @@ function send_notification_FCM($notification_id, $title, $message, $id,$type) {
                   "type" : "' . $type . '",
                  "id" : "' . $id . '",
                  "message" : "' . $message . '",
-                "icon" : "new",
-                "sound" : "default"
+                "icon" : "new"
                 },
 
           }';
