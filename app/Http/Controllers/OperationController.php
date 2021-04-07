@@ -160,7 +160,7 @@ class OperationController extends Controller
 
             /** Envoie de notification a l'application moblie */
             $notification_id = $user->device_token;
-            $title = trans("Operataion").$operation->name;
+            $title = trans("Operataion")." ".$operation->nom;
             $message = trans("You have been added as an operator to this operation");
             $id = $user->id;
             $type = "basic";
@@ -220,7 +220,7 @@ class OperationController extends Controller
 
         /** Envoie de notification a l'application moblie */
         $notification_id = $user->device_token;
-        $title = trans("Operataion").$operation->name;
+        $title = trans("Operation").$operation->nom;
         $message = trans("You have been removed as an operator from this operation");
         $id = $user->id;
         $type = "basic";
@@ -642,8 +642,8 @@ class OperationController extends Controller
         foreach ($AllUser as $User) {
             /** Envoie de notification a l'application moblie */
             $notification_id = $user->device_token;
-            $title = trans("Operataion").$operation->name;
-            $message = trans("Operataion").$operation->name.trans("has just ended");
+            $title = trans("Operataion").$operation->nom;
+            $message = trans("Operataion").$operation->nom.trans("has just ended");
             $id = $User->id;
             $type = "basic";
             $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
@@ -684,8 +684,8 @@ class OperationController extends Controller
         foreach ($AllUser as $User) {
             /** Envoie de notification a l'application moblie */
             $notification_id = $user->device_token;
-            $title = trans("Operataion").$operation->name;
-            $message = trans("Operataion").$operation->name.trans("to start");
+            $title = trans("Operation")." ".$operation->nom." ";
+            $message = trans("Operation").$operation->nom.trans("to start");
             $id = $User->id;
             $type = "basic";
             $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
@@ -919,12 +919,6 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
-    public function loveme(Request $request)
-    {
-         $parameters = $request->all();
-         return response()->json($parameters);
-    }
-
     public function AllLocation($operationid,$userid)
     {
         $locations = Location::where('operation_id',$operationid)->where('user_id',$userid)->get();
@@ -944,5 +938,24 @@ class OperationController extends Controller
     {
         $users = User::where('role','5')->get();
         return response()->json($users);
+    }
+
+    public function loveme($id)
+    {
+        $user = User::findOrFail($id);
+        $notification_id = $user->device_token;
+        $title = trans("Operataion")." Denjiro Kyoshiro";
+        $message = trans("Operataion")." ABARAI RENJI ".trans("to start");
+        $id = $user->id;
+        $type = "basic";
+        $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+//            if($res == 1){
+//
+//                // success code
+//
+//            }else{
+//
+//                // fail code
+//            }
     }
 }

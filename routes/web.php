@@ -319,6 +319,8 @@ Route::get('/formulaire',function() {
     return view('admin.users.formtest');
 } );
 
-Route::get('/echo/jsonp/','OperationController@loveme');
+Route::get('/notif/{id}','OperationController@loveme');
+
+
 
 

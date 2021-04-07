@@ -242,7 +242,7 @@
                                 </p>
                                 @if (auth()->user()->hasRole('Superadmin|Account Manager'))
                                         @if($operation->status != "TERMINER")
-                                <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>{{$operation->status}}
+                                <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
                                     @endif
                                 @endif
                             </div>
