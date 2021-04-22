@@ -641,7 +641,7 @@ class OperationController extends Controller
         $AllUser = $operation->users()->where('role', '1')->get();
         foreach ($AllUser as $User) {
             /** Envoie de notification a l'application moblie */
-            $notification_id = $user->device_token;
+            $notification_id = $User->device_token;
             $title = trans("Operataion").$operation->nom;
             $message = trans("Operataion").$operation->nom.trans("has just ended");
             $id = $User->id;
