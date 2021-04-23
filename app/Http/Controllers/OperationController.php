@@ -643,7 +643,7 @@ class OperationController extends Controller
             /** Envoie de notification a l'application moblie */
             $notification_id = $User->device_token;
             $title = trans("Operataion").$operation->nom;
-            $message = trans("Operataion").$operation->nom.trans("has just ended");
+            $message = trans("Operataion").": ".$operation->nom." ".trans("has just ended");
             $id = $User->id;
             $type = "basic";
             $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
@@ -685,7 +685,7 @@ class OperationController extends Controller
             /** Envoie de notification a l'application moblie */
             $notification_id = $User->device_token;
             $title = trans("Operation")." ".$operation->nom." ";
-            $message = trans("Operation").$operation->nom.trans("to start");
+            $message = trans("Operation").": ".$operation->nom." ".trans("to start");
             $id = $User->id;
             $type = "basic";
             $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
