@@ -1,9 +1,6 @@
 @section('page_title', trans('Messagerie'))
 @extends('admin.top-nav')
 
-
-
-
 @section('content-header')
 @endsection
 
@@ -281,24 +278,11 @@
                 $('#alloperat').append(data);
                 $('#messages').html(datas);
                   $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
-<<<<<<< HEAD
-                    $('#alllect').empty();
-                    $('#alllect').append(data.name);
-                    $('#messages').html(datas);
-                      $.get('/json-superadmin',function(data) {
-                          $('#alladmin').empty();
-                          $('#alladmin').append(data.name);
-                          $('#messages').html(datas);
-                          showMessages(operation_id);
-                      });
-                });
-=======
                       $('#alllect').empty();
                       $('#alllect').append(data);
                       $('#messages').html(datas);
                       showMessages(operation_id);
                    });
->>>>>>> 8d8c819385c1818dd55d80827f2f62fb1ccb6525
                });
         });
 
