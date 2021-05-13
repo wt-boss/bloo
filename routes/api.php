@@ -110,7 +110,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
 
 
         Route::patch('device-token', 'AuthController@saveDeviceToken');
-        Route::post('forms/{form}/responses', 'ResponceController2@store')->name('forms.responses.store.mobile2');
+        Route::post('forms/{form}/responses', 'ResponseController2@store')->name('forms.responses.store.mobile2');
 
 
         /* Display current user's informations
