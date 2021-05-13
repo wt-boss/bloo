@@ -21,7 +21,7 @@ use App\Site;
 use Maatwebsite\Excel\Facades\Excel;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ResponceController2 extends Controller
+class ResponseController2 extends Controller
 {
 
     public function __construct()
