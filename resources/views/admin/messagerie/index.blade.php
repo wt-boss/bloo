@@ -43,11 +43,11 @@
                     <div class="box-body" >
                         <div class="scrollmenu">
                             @foreach($operations as $operation)
-                            <a id="{{$operation->id}}">
-                                <div class="cir-image" id="{{$operation->id}}">
-                                    <div class="widget-user-image text-center op-msg-list operation" id="{{$operation->id}}">
-                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$operation->id}}">
-                                        <p style="color: #6F6F6F" id="{{$operation->id}}">{{$operation->nom}}</p>
+                            <a data-id="{{$operation->id}}">
+                                <div class="cir-image" data-id="{{$operation->id}}">
+                                    <div class="widget-user-image text-center op-msg-list operation" data-id="{{$operation->id}}">
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" data-id="{{$operation->id}}">
+                                        <p style="color: #6F6F6F" data-id="{{$operation->id}}">{{$operation->nom}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -269,19 +269,25 @@
 
         $('.operation').click(function(e){
             $('#receiver').empty();
-
-            var operation_id = e.target.id;
+            var operation_id = e.target.getAttribute("data-id");
+            //console.log(operation_id);
             var datas = null;
             $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
-                console.log(data);
+                $('#receiver').empty();
                 $('#alloperat').empty();
                 $('#alloperat').append(data);
                 $('#messages').html(datas);
                   $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
+                      $('#receiver').empty();
                       $('#alllect').empty();
                       $('#alllect').append(data);
                       $('#messages').html(datas);
-                      showMessages(operation_id);
+                      $.get('/json-superadmin',function(data) {
+                          $('#alladmin').empty();
+                          $('#alladmin').append(data.name);
+                          $('#messages').html(datas);
+                          showMessages(operation_id);
+                      });
                    });
                });
         });
@@ -331,8 +337,8 @@
                         });
 
                         $('#send').on('click', function (e) {
-                            console.log(operation_id);
-                            console.log("Abena");
+                            // console.log(operation_id);
+                            // console.log("Abena");
                             var message = $('.input-text input').val();
                             console.log(message);
                             // check if enter key is pressed and message is not null also receiver is selected
@@ -621,11 +627,11 @@
                 let my_id = "{{ Auth::id() }}";
 
                 $('.operation').on('click', function(e){
-                    console.log(e);
+                    $('#receiver').empty();
                     var operation_id = e.target.id;
                     var datas = null;
                     $.get('/json-manageroperations?operation_id=' + operation_id,function(data) {
-                        console.log(data);
+                        $('#receiver').empty();
                         $('#allmanagers').empty();
                         if (data.name === "")
                         {
@@ -733,11 +739,13 @@
                         if (my_id == data.from) {
                             //alert(JSON.stringify(data));
                             $('#' + data.to).click();
+                            $('#msginput').focus();
                         }
                         else if (my_id == data.to) {
                             if (receiver_id == data.from) {
                                 // if receiver is selected, reload the selected user ...
                                 $('#' + data.from).click();
+                                $('#msginput').focus();
                             } else {
                                 // if receiver is not seleted, add notification for that user
                                 var pending = parseInt($('#' + data.from).find('.pending').html());
