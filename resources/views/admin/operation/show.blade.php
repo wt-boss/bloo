@@ -1,6 +1,4 @@
 
-
-
 @extends('admin.top-nav')
 @section('page_title', trans('operations'))
 @section('content-header')

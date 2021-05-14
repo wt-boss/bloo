@@ -16,6 +16,7 @@
                             <a style="color: #fff;" href="{{ route('forms.logout_free') }}">
                                 @lang('home_fil')
                             </a>
+
                         </button>
                 </div>
             </div>
