@@ -297,7 +297,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button>
+                            <a href="{{route("messages_index")}}"><button class="btn btn-xs-bloo disabled m_btn_op m_btn_message"><i class="icon ions ion-chatboxes"></i> {{ trans('Message') }}</button></a>
                             <button class="btn btn-xs-bloo disabled m_btn_op m_btn_location"><i class="icon ions ion-location"></i> {{ trans('Localisation') }}</button>
                         </div>
                     </div>
