@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\APIV1;
+namespace App\Http\Controllers\ApiV1;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -21,7 +21,7 @@ use App\Site;
 use Maatwebsite\Excel\Facades\Excel;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ResponceController2 extends Controller
+class ResponseController2 extends Controller
 {
 
     public function __construct()

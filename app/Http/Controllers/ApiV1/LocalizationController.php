@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\APIV1;
+namespace App\Http\Controllers\ApiV1;
 
 use App\City;
 use App\State;
