@@ -479,6 +479,8 @@ class OperationController extends Controller
 
         $view = (string)View::make('admin.operation.partials.response', compact('operation', 'form', 'responses'));
         $viewprint = (string)View::make('admin.operation.partials.responseprint', compact('operation', 'form','responses'));
+        $viewoperateurs = (string)View::make('admin.operation.partials.responseoperateur', compact('operation'));
+
 
 
 
@@ -487,7 +489,8 @@ class OperationController extends Controller
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
                 'response_view2' => $viewprint,
-               'data_for_chart2' => json_encode($data_for_chart2)
+               'data_for_chart2' => json_encode($data_for_chart2),
+                'response_operateurs' => $viewoperateurs
             ];
         } else {
             return view('admin.operation.show', compact('view','viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart','data_for_chart2','Villes'));

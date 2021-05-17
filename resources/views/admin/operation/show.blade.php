@@ -677,7 +677,11 @@
                     .append(response.response_view);
 
                 $('#responsesprint').empty()
-                    .append(response.response_view2);
+                    .append(response.response_view2)
+
+                $('#operateurs').empty()
+                    .append(response.response_operateurs);
+
 
                 data_for_chart = JSON.parse(response.data_for_chart);
                 drawCharts(data_for_chart);
