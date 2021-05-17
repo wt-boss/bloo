@@ -719,13 +719,6 @@
                             { responsivePriority: 1, targets: 0 },
                         ],
                     });
-
-                    // Enable Select2 select for the length option
-                    $('.dataTables_length select').select2({
-                        minimumResultsForSearch: Infinity,
-                        width: 'auto'
-                    });
-
                 });
 
                 data_for_chart = JSON.parse(response.data_for_chart);
