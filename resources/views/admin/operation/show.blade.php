@@ -683,43 +683,29 @@
                     .append(response.response_operateurs);
 
                 $(function() {
-                    $('.datatable').DataTable({
-
-                        "language": {
-                            @if( app()->getLocale() === "fr" )
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                            @endif
-                                @if( app()->getLocale() === "en")
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                            @endif
-                                @if( app()->getLocale() === "es")
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                            @endif
-                                @if( app()->getLocale() === "pt")
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                            @endif
-                        },
-
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
+                    $('.datatable').DataTable(
+                        {
+                            "bLengthChange" : false, //thought this line could hide the LengthMenu
+                            "searching": false,
+                            "language": {
+                                @if( app()->getLocale() === "fr" )
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                                @endif
+                                    @if( app()->getLocale() === "en")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                                @endif
+                                    @if( app()->getLocale() === "es")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                                @endif
+                                    @if( app()->getLocale() === "pt")
+                                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                                @endif
                             }
-                        },
-                        columnDefs: [
-                            {
-                                className: 'control',
-                                orderable: false,
-                                targets:   0
-                            },
-                            {
-                                orderable: false,
-                                targets: [-1]
-                            },
-                            { responsivePriority: 1, targets: 0 },
-                        ],
-                    });
+
+                        })
                 });
+
+
 
                 data_for_chart = JSON.parse(response.data_for_chart);
                 drawCharts(data_for_chart);
