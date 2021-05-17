@@ -1,4 +1,4 @@
-<table class="datatable table stripe">
+<table id="datatable2" class="datatable table stripe">
     <thead>
     <tr>
         <th></th>

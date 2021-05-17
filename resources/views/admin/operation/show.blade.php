@@ -683,7 +683,7 @@
                     .append(response.response_operateurs);
 
                 $(function() {
-                    $('.datatable').DataTable(
+                    $('#datatable2').DataTable(
                         {
                             "bLengthChange" : false, //thought this line could hide the LengthMenu
                             "searching": false,
