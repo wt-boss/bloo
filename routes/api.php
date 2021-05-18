@@ -100,7 +100,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
             2. 200 if saving successfull
             3. 500 if an exception occured
         */
-        Route::patch('device-token', 'AuthController@saveDeviceToken');
+        Route::match(["patch","put"], 'device-token', 'AuthController@saveDeviceToken');
 
         /* Update user's availability for specified operation
             1. 200 if availabilty has been successfully updated
@@ -108,7 +108,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
         */
         Route::patch('available/{id}', 'AuthController@available');
 
-        Route::patch('device-token', 'AuthController@saveDeviceToken');
+        // Route::patch('device-token', 'AuthController@saveDeviceToken');
 
         Route::post('forms/{form}/responses', 'ResponseController2@store')->name('forms.responses.store.mobile2');
 
