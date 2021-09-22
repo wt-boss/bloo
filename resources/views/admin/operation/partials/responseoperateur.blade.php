@@ -21,7 +21,7 @@
 
                     <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                     <span class="pull-right">
-                                            @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                            @if (auth()->user()->hasRole('Superadmin|Client'))
                             @if($operation->status != "TERMINER")
                                 <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                             @endif

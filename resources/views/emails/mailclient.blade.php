@@ -38,7 +38,7 @@
                 <td class="content-cell" >
                     <h1 >Bienvenue sur Bloo,</h1>
                 <p>
-                    Votre paiement d'acompte a bien été réceptionné. Un <i>Account Manager</i>  vous contacte
+                    Votre paiement d'acompte a bien été réceptionné. Un <i>Client</i>  vous contacte
                     au plus vite et vous accompagnera pour toutes vos opérations.
                 </p>
 

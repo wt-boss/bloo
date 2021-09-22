@@ -11,13 +11,13 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body" style="padding: 0;">
-        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+        @if (auth()->user()->hasRole('Superadmin|Client'))
         <div class="panel-heading pull-right">
             <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> {{trans('acount')}}</a>
         </div>
             @endif
     </div>
-    @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+    @if (auth()->user()->hasRole('Superadmin|Client'))
         @if ($comptes->isEmpty())
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
@@ -83,7 +83,7 @@
                                                             <span style="color: #0065A1;">
                                                                 @php echo !empty($compte->users()->where('role','4')->get()->pluck('last_name')->last()) ?
                                                                         $compte->users()->where('role','4')->get()->pluck('last_name')->last() :
-                                                                        trans('no account manager');
+                                                                        trans('no Client');
                                                                 @endphp
                                                             </span>
 

@@ -80,7 +80,7 @@ $current_user = auth()->user();
                     <div class="navbar-header">
                         <a href=@if (auth()
         ->user()
-    ->hasRole('Superadmin|Account Manager|Opérateur|Lecteur')) "{{ route('admin') }}"    @else "#" @endif
+    ->hasRole('Superadmin|Client|Opérateur|Lecteur')) "{{ route('admin') }}"    @else "#" @endif
                             class="navbar-brand"><img class="b_logo"
                                 src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -94,7 +94,7 @@ $current_user = auth()->user();
 
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+        ->hasRole('Superadmin|Client|Opérateur|Lecteur'))
                                 <li
                                     class="<?php echo Str::startsWith($route, 'operation.index') || Str::startsWith($route, 'operation.view') || Str::startsWith($route, 'edit') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('operation.index') }}">
@@ -106,7 +106,7 @@ $current_user = auth()->user();
 
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+        ->hasRole('Superadmin|Client|Opérateur|Lecteur'))
                                 <li
                                     class="<?php echo Str::startsWith($route, 'admin') || Str::startsWith($route, 'operation.show') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('admin') }}">
@@ -118,7 +118,7 @@ $current_user = auth()->user();
 
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin|Account Manager'))
+        ->hasRole('Superadmin|Client'))
                                 <li
                                     class="<?php echo Str::startsWith($route, 'compte') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('compte.index') }}">
@@ -130,7 +130,7 @@ $current_user = auth()->user();
 
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+        ->hasRole('Superadmin|Client|Opérateur|Lecteur'))
                                 <li
                                     class="<?php echo Str::startsWith($route, 'messages') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('messages_index') }}">
@@ -160,7 +160,7 @@ $current_user = auth()->user();
                         <ul class="nav navbar-nav">
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin|Account Manager|Opérateur|Lecteur'))
+        ->hasRole('Superadmin|Client|Opérateur|Lecteur'))
                                 {{-- <!-- Notifications Menu --> --}}
                                 {{-- <li class="dropdown notifications-menu" id="notif"> --}}
                                 {{-- <!-- Menu toggle button --> --}}

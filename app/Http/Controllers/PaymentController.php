@@ -153,7 +153,7 @@ class PaymentController extends Controller
             }
 
             $user->api_token = Str::random(80);
-            $user->role = 0;
+            $user->role = 4;
             $user->active = 1;
             // $user->save();
             // $user_id = $user->id;

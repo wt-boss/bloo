@@ -4,7 +4,7 @@
 @section('content-header')
 @endsection
 
-@if (auth()->user()->hasRole('Account Manager'))
+@if (auth()->user()->hasRole('Client'))
 @section('content')
 <style>
     div.scrollmenu {
@@ -62,7 +62,7 @@
                 <div class="box box-primary">
 
                     <div class="box-body" style="margin-top: -13px;">
-                        @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                        @if (auth()->user()->hasRole('Superadmin|Client'))
                          <div class='col-md-12'>
                             <div>
                              <h5>{{ trans('Lecteurs') }}</h5>
@@ -262,7 +262,7 @@
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    @if (auth()->user()->hasRole('Account Manager'))
+    @if (auth()->user()->hasRole('Client'))
     <script type="application/javascript">
         let receiver_id = '';
         let my_id = "{{ Auth::id() }}";

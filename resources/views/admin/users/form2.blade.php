@@ -32,7 +32,7 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
     <select class="form-control" id="role" name="role" >
         <option value="0">Lecteur</option>
         <option value="1" selected="selected">Opérateur</option>
-        <option value="4">Account Manager</option>
+        <option value="4">Client</option>
         <option value="5">Superadmin</option></select>
 </div>
 

@@ -107,7 +107,7 @@
                                     <td>12</td>
                                   </tr>
                                   <tr>
-                                    <td>  <p class="rg">{{ trans('Account manager') }} </p>    </td>
+                                    <td>  <p class="rg">{{ trans('Client') }} </p>    </td>
                                     <td><span class="expanded"><i class="icon-remove icon-4x" style="color: #bf3030;;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>
                                     <td><span class="expanded"><i class="icon-check icon-4x" style="color: #217dff;"></i></span></td>

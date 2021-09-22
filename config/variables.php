@@ -10,7 +10,7 @@ return [
 '0' => 'Lecteur',
 '1' => 'Opérateur',
 '3' => 'Free',
-'4' => 'Account Manager',
+'4' => 'Client',
 '5' => 'Superadmin',
 ],
 

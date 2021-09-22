@@ -145,7 +145,7 @@
                             <a id="download_user_pdf" style="display: none" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-                             @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                             @if (auth()->user()->hasRole('Superadmin|Client'))
                             <a href="{{ route('forms.response.export', $form->code) }}" id="download_exel">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
@@ -183,7 +183,7 @@
                                 <p class="box-title">
                                     {{ trans('Lecteurs') }}
                                 </p>
-                                @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                @if (auth()->user()->hasRole('Superadmin|Client'))
                                     @if($operation->status != "TERMINER")
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
                                         @endif
@@ -207,7 +207,7 @@
                                      <td>
                                        {{ $user->first_name }} {{ $user->last_name }}
                                       <span class="pull-right">
-                                          @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                          @if (auth()->user()->hasRole('Superadmin|Client'))
                                               @if($operation->status != "TERMINER")
                                                <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                                               @endif
@@ -238,7 +238,7 @@
                                 <p class="box-title">
                                     {{ trans('Opérateurs') }}
                                 </p>
-                                @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                @if (auth()->user()->hasRole('Superadmin|Client'))
                                         @if($operation->status != "TERMINER")
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
                                     @endif
@@ -271,7 +271,7 @@
 
                                         <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                                         <span class="pull-right">
-                                            @if (auth()->user()->hasRole('Superadmin|Account Manager'))
+                                            @if (auth()->user()->hasRole('Superadmin|Client'))
                                                 @if($operation->status != "TERMINER")
                                                 <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                                                     @endif

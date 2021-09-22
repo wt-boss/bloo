@@ -351,7 +351,7 @@
                     </div>
                     <!-- /.box -->
                 </div>
-{{--                @if (auth()->user()->hasRole('Superadmin|Account Manager|Opérateur'))--}}
+{{--                @if (auth()->user()->hasRole('Superadmin|Client|Opérateur'))--}}
 {{--                <div class="col-md-6">--}}
 {{--                    <div class="container-fluid">--}}
 {{--                        <div class="row">--}}

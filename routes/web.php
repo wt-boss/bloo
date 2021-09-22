@@ -145,41 +145,41 @@ Route::middleware(['auth','verified'])->namespace('Form')->group(function () {
     Route::get('forms', 'FormController@index')->name('forms.index');
     Route::get('forms/create', 'FormController@create')->name('forms.create');
     Route::post('forms', 'FormController@store')->name('forms.store');
-    Route::get('forms/{form}', 'FormController@show')->name('forms.show')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/edit', 'FormController@edit')->name('forms.edit')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::put('forms/{form}', 'FormController@update')->name('forms.update')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::delete('forms/{form}', 'FormController@destroy')->name('forms.destroy')->middleware('Role:Superadmin|Account Manager');
+    Route::get('forms/{form}', 'FormController@show')->name('forms.show')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/edit', 'FormController@edit')->name('forms.edit')->middleware('Role:Superadmin|Client|Free');
+    Route::put('forms/{form}', 'FormController@update')->name('forms.update')->middleware('Role:Superadmin|Client|Free');
+    Route::delete('forms/{form}', 'FormController@destroy')->name('forms.destroy')->middleware('Role:Superadmin|Client');
 
-    Route::post('forms/{form}/draft', 'FormController@draftForm')->name('forms.draft')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/preview', 'FormController@previewForm')->name('forms.preview')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::post('forms/{form}/open', 'FormController@openFormForResponse')->name('forms.open')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::post('forms/{form}/close', 'FormController@closeFormToResponse')->name('forms.close')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::post('forms/{form}/draft', 'FormController@draftForm')->name('forms.draft')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/preview', 'FormController@previewForm')->name('forms.preview')->middleware('Role:Superadmin|Client|Free');
+    Route::post('forms/{form}/open', 'FormController@openFormForResponse')->name('forms.open')->middleware('Role:Superadmin|Client|Free');
+    Route::post('forms/{form}/close', 'FormController@closeFormToResponse')->name('forms.close')->middleware('Role:Superadmin|Client|Free');
 
-    Route::post('forms/{form}/share-via-email', 'FormController@shareViaEmail')->name('form.share.email')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::post('forms/{form}/form-availability', 'FormAvailabilityController@save')->name('form.availability.save')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::delete('forms/{form}/form-availability/reset', 'FormAvailabilityController@reset')->name('form.availability.reset')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::post('forms/{form}/share-via-email', 'FormController@shareViaEmail')->name('form.share.email')->middleware('Role:Superadmin|Client|Free');
+    Route::post('forms/{form}/form-availability', 'FormAvailabilityController@save')->name('form.availability.save')->middleware('Role:Superadmin|Client|Free');
+    Route::delete('forms/{form}/form-availability/reset', 'FormAvailabilityController@reset')->name('form.availability.reset')->middleware('Role:Superadmin|Client|Free');
 
     //Form Field Routes
-    Route::post('forms/{form}/fields/add', 'FieldController@store')->name('forms.fields.store')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::post('forms/{form}/fields/delete', 'FieldController@destroy')->name('forms.fields.destroy')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::post('forms/{form}/fields/add', 'FieldController@store')->name('forms.fields.store')->middleware('Role:Superadmin|Client|Free');
+    Route::post('forms/{form}/fields/delete', 'FieldController@destroy')->name('forms.fields.destroy')->middleware('Role:Superadmin|Client|Free');
 
     //Form Response Routes
-    Route::get('forms/{form}/responses', 'ResponseController@index')->name('forms.responses.index')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::get('forms/{form}/responses', 'ResponseController@index')->name('forms.responses.index')->middleware('Role:Superadmin|Client|Free');
 
-    Route::get('forms/{form}/responses/download', 'ResponseController@export')->name('forms.response.export')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/responses/download/{country_id}', 'ResponseController@exportcountry')->name('forms.response.exportcountry')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/responses/downloadsite/{site_id}', 'ResponseController@exportsite')->name('forms.response.exportsite')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/responses/downloadville/{ville}', 'ResponseController@exportville')->name('forms.response.exportville')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::get('forms/{form}/responses/downloaduser/{user_id}', 'ResponseController@exportuser')->name('forms.response.exportuser')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::get('forms/{form}/responses/download', 'ResponseController@export')->name('forms.response.export')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/responses/download/{country_id}', 'ResponseController@exportcountry')->name('forms.response.exportcountry')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/responses/downloadsite/{site_id}', 'ResponseController@exportsite')->name('forms.response.exportsite')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/responses/downloadville/{ville}', 'ResponseController@exportville')->name('forms.response.exportville')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/{form}/responses/downloaduser/{user_id}', 'ResponseController@exportuser')->name('forms.response.exportuser')->middleware('Role:Superadmin|Client|Free');
 
 
 
-    Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::delete('forms/{form}/responses', 'ResponseController@destroyAll')->name('forms.responses.destroy.all')->middleware('Role:Superadmin|Client|Free');
+    Route::delete('forms/{form}/responses/{response}', 'ResponseController@destroy')->name('forms.responses.destroy.single')->middleware('Role:Superadmin|Client|Free');
 
     //Form Collaborator Routes
-    Route::post('forms/{form}/collaborators', 'CollaboratorController@store')->name('form.collaborators.store')->middleware('Role:Superadmin|Account Manager|Free');
-    Route::delete('forms/{form}/collaborators/{collaborator}', 'CollaboratorController@destroy')->name('form.collaborator.destroy')->middleware('Role:Superadmin|Account Manager|Free');
+    Route::post('forms/{form}/collaborators', 'CollaboratorController@store')->name('form.collaborators.store')->middleware('Role:Superadmin|Client|Free');
+    Route::delete('forms/{form}/collaborators/{collaborator}', 'CollaboratorController@destroy')->name('form.collaborator.destroy')->middleware('Role:Superadmin|Client|Free');
 });
 
 
@@ -188,7 +188,7 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 
 //Questionnaire get
 
-Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Account Manager|Lecteur|Opérateur','Free','verification']);
+Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Client|Lecteur|Opérateur','Free','verification']);
 
 //language
 Route::get('language', 'PagesController@language')->name('language');
@@ -209,8 +209,8 @@ Route::resource('operation', 'OperationController')->middleware('auth','Free');
 Route::post('subscribe', 'NewletterController@store')->name('subscribe');
 
 //Comptes
-Route::resource('compte','CompteController')->middleware('Role:Superadmin|Account Manager','Free');
-Route::post('compte/gift','CompteController@savegift')->name('savegift')->middleware('Role:Superadmin|Account Manager');
+Route::resource('compte','CompteController')->middleware('Role:Superadmin|Client','Free');
+Route::post('compte/gift','CompteController@savegift')->name('savegift')->middleware('Role:Superadmin|Client');
 
 
 //Messagerie Route
