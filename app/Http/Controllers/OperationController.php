@@ -145,45 +145,63 @@ class OperationController extends Controller
     }
 
     /**
+     * @param $operateur
+     * @param $operation
+     */
+
+    private function addoperateursprocess($operateur,$operation){
+
+        $user = User::findOrFail($operateur);
+        $user->operations()->attach($operation);
+        $savedata =  new Operation_user_save();
+        $savedata->user_id = $user->id;
+        $savedata->operation_id = $operation->id;
+        $savedata->save();
+
+        /** Envoie de notification a l'application moblie */
+        $notification_id = $user->device_token;
+        $title = trans("Operation")." ".$operation->nom;
+        $message = trans("You have been added as an operator to this operation");
+        $id = $user->id;
+        $type = "basic";
+        $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
+        /** Mail aux operateurs **/
+        Mail::to($user->email)->send(new BlooOperateur());
+        $user->notify(new EventNotification($message));
+
+        $pusher = App::make('pusher');
+        $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
+        $pusher->trigger('my-channel', 'notification-event', $data);
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function addoperateurs(Request $request)
     {
+        $Auth = auth()->user();
         $parameters = $request->all();
         $operation = Operation::findOrFail($parameters['operation']);
         $message = "Vous avez été ajouter à l'operration : " . $operation->nom;
         foreach ($parameters['lecteurs']as $operateur) {
-            $user = User::findOrFail($operateur);
-            $user->operations()->attach($operation);
-            $savedata =  new Operation_user_save();
-            $savedata->user_id = $user->id;
-            $savedata->operation_id = $operation->id;
-            $savedata->save();
+            if($Auth->payg === 1 )
+            {
+                $tokens = Token::where('user_id',$Auth->id)->get()->first();
+                $count = $tokens->own;
+                if($count > 0)
+                {
+                    $this->addoperateursprocess($operateur, $operation);
+                    --$tokens->own;
+                    ++$tokens->gift;
+                    $tokens->save();
+                }
+            }
+            else
+            {
+                $this->addoperateursprocess($operateur, $operation);
+            }
 
-            /** Envoie de notification a l'application moblie */
-            $notification_id = $user->device_token;
-            $title = trans("Operation")." ".$operation->nom;
-            $message = trans("You have been added as an operator to this operation");
-            $id = $user->id;
-            $type = "basic";
-            $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
-//            if($res == 1){
-//
-//                // success code
-//
-//            }else{
-//
-//                // fail code
-//            }
-
-            /** Mail aux operateurs **/
-            Mail::to($user->email)->send(new BlooOperateur());
-            $user->notify(new EventNotification($message));
-
-            $pusher = App::make('pusher');
-            $data = ['from' => 1, 'to' => 2]; // sending from and to user id when pressed enter
-            $pusher->trigger('my-channel', 'notification-event', $data);
         }
         return back();
     }
