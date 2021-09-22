@@ -11,6 +11,7 @@ use App\Offre;
 use App\Operation;
 use App\Operation_user;
 use App\Paiement;
+use App\Token;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -185,6 +186,14 @@ class PaymentController extends Controller
         /** Si l'offre choisi est primus alors, creation d'une operation */
         if($data['amount'] == "3466.22" )
         {
+            $user->payg = 1;
+            $user->save();
+
+            $tokens = new Token();
+            $tokens->user_id = $user->id;
+            $tokens->own = 10 ;
+            $tokens->save();
+
             $form = new Form([
                 'title' => ucfirst($data["operation_name"]),
                 'description' => ucfirst($data["operation_purpose"]),

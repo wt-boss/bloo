@@ -11,6 +11,7 @@ use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
 use App\Operation_user_save;
 use App\State;
+use App\Token;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -52,10 +53,12 @@ class OperationController extends Controller
     {
         $user = auth()->user();
         $operation = null;
+        $tokens = null;
 
         if ($user->role === 5) {
             $operations = Operation::with('form', 'entreprise')->orderBy('id','DESC')->get();
         } else if ($user->role === 4) {
+            $tokens = Token::where('user_id',$user->id)->get()->first();
             $comptes = $user->entreprises()->get();
             $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
             foreach ($comptes as $entreprise) {
@@ -68,7 +71,7 @@ class OperationController extends Controller
             $User = User::with('operations')->findOrFail($user->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
         }
-        return view('admin.operation.index', compact('operations', 'operation'));
+        return view('admin.operation.index', compact('operations', 'operation','tokens'));
     }
 
 
@@ -313,7 +316,7 @@ class OperationController extends Controller
             }
             $opusers[] = $opuser;
         }
-        $viewData = (string)View::make('Helpers.BuildUsersTable', compact('opusers','operation'));
+        $viewData = (string)View::make('Helpers.BuildOperateursList', compact('opusers','operation'));
 //        $viewData = Helper::buildUsersTable($opusers);
         return response()->json($viewData);
     }

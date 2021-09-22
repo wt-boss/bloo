@@ -11,9 +11,15 @@
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
             @if (auth()->user()->hasRole('Superadmin|Client'))
-            <div class="panel-heading pull-right">
-                <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>
-            </div>
+                @if(auth()->user()->payg == 0)
+                  <div class="panel-heading pull-right">
+                      <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>
+                  </div>
+                    @else
+                    <div class="panel-heading pull-right">
+                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>
+                    </div>
+                    @endif
                 @endif
         </div>
         @if (auth()->user()->hasRole('Superadmin|Client'))

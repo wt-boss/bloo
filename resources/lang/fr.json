@@ -696,6 +696,8 @@
     "Operataion": "Opérataion",
     "to start": "a débuter",
     "availability_updated": "Disponibilité mise à jour",
-    "token_saved": "Token enregistré"
+    "token_saved": "Token enregistré",
+    "You still have": "Il vous reste",
+    "tokens" : "jetons"
 
 }

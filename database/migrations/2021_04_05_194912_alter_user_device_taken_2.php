@@ -14,7 +14,7 @@ class AlterUserDeviceTaken2 extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('device_token', 80)->after('password')
+            $table->longText('device_token', 80)->after('password')
                 ->nullable()
                 ->default(null);
         });
