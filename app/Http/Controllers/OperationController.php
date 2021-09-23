@@ -228,11 +228,9 @@ class OperationController extends Controller
     /**
      * @param $id
      * @param $id1
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function removeoperateur($id, $id1)
+    private function removeoperateurprocess($id,$id1)
     {
-
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
         $operation->users()->detach($user);
@@ -246,19 +244,31 @@ class OperationController extends Controller
         $id = $user->id;
         $type = "basic";
         $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
-//            if($res == 1){
-//
-//                // success code
-//
-//            }else{
-//
-//                // fail code
-//            }
-
-
         $pusher = App::make('pusher');
         $data = ['moving and operator']; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'notification-event', $data);
+    }
+
+    /**
+     * @param $id
+     * @param $id1
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeoperateur($id, $id1)
+    {
+        $Auth = auth()->user();
+        if($Auth->payg === 1 )
+        {
+            $tokens = Token::where('user_id',$Auth->id)->get()->first();
+            $this->removeoperateurprocess($id,$id1);
+            ++$tokens->own;
+            --$tokens->gift;
+            $tokens->save();
+        }
+        else
+        {
+            $this->removeoperateurprocess($id,$id1);
+        }
         return response()->json('true');
     }
 

@@ -86,6 +86,14 @@
                                     <a href="{{ route('operation.index') }}"  class="btn form-control">{{ trans('Selectionner_une_opération') }}</a>
                                 </div>
                             </div>
+                            @if(auth()->user()->payg ===  1)
+                            <div class="col-lg-12 col-xs-6">
+                                <div class="small-box bg-white">
+                                    <a href="#"  class="btn form-control">{{trans("You still have")}}   {{trans("tokens")}}</a>
+                                </div>
+                            </div>
+                            @endif
+
                         </div>
                     </div>
                     <!-- /.box-body -->
