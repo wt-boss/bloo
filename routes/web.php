@@ -232,6 +232,7 @@ Route::get('/profile','HomeController@profile')->name('profile')->middleware('au
 Route::get('/json-lecteurs','OperationController@listLecteurs');
 Route::get('/json-lecteursoperations','OperationController@getoperationLecteurs');
 Route::get('/json-operateuroperations','OperationController@getoperationOperateurs');
+Route::get('/json-operateurstable/{id}','OperationController@getOperateursTable');
 Route::get('/json-manageroperations','OperationController@getoperationManager');
 Route::get('/json-operateurs','OperationController@listOperateurs');
 Route::get('/json-superadmin','OperationController@getoperationAdmins');

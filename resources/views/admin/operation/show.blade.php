@@ -87,9 +87,9 @@
                                 </div>
                             </div>
                             @if(auth()->user()->payg ===  1)
-                            <div class="col-lg-12 col-xs-6">
+                            <div class="col-lg-12 col-xs-6" id="token">
                                 <div class="small-box bg-white">
-                                    <a href="#"  class="btn form-control">{{trans("You still have")}}   {{trans("tokens")}}</a>
+                                    <a href="#"  class="btn form-control">{{trans("You still have")}} {{$tokens->own}}  {{trans("tokens")}}</a>
                                 </div>
                             </div>
                             @endif
@@ -414,9 +414,9 @@
 
     <script type="text/javascript">
         function scrollToAnchor(hash) {
-            console.log(hash);
+
             tag = $(hash);
-            console.log(tag);
+
             $('html,body').animate({scrollTop: tag.offset().top}, 'slow', function() {
                 window.location.hash = hash
             });
@@ -444,8 +444,6 @@
                 }else{
                     lat = $(this).attr("data_lat");
                     lng = $(this).attr("data_lng");
-                    console.log(lat);
-                    console.log(lng);
                     first_name = $(this).find(".op_first_name").html();
                     last_name = $(this).find(".op_last_name").html();
                     $(this).addClass('op_active');
@@ -461,7 +459,7 @@
                 scrollToAnchor('#'+tagId);
 
                 let position = { lat: parseFloat(lat), lng: parseFloat(lng) };
-                console.log(position);
+
                 map.setCenter(position);
                 let marker = new google.maps.Marker({
                     position: position,
@@ -485,24 +483,24 @@
 
         function addlecteur() {
             $('#listlecteur').on('click', function (e) {
-                //console.log(e);
+
                 let lecteur_id = e.target.id;
-                console.log(lecteur_id);
+
             });
         }
 
         $('#getlecteur').on('click', function (e) {
-            console.log(e);
+
             let operation_id = e.target.title;
             $.get('/listlecteurs/' + operation_id, function (data) {
-                console.log(data);
+
                  $('#datalecteurs').empty();
                  $('#datalecteurs').append(data);
             });
         });
 
         $('.removelecteur').on('click', function (e) {
-            console.log(e);
+
             let operation_id = e.target.lang;
             let user_id = e.target.title;
             $.get('/removelecteurs/' + user_id + '/' + operation_id , function (data) {
@@ -513,21 +511,26 @@
         });
 
         $('.removeoperateur').on('click', function (e) {
-            console.log(e);
+
             let operation_id = e.target.lang;
             let user_id = e.target.title;
             $.get('/removeoperateurs/' + user_id + '/' + operation_id , function (data) {
                 if(data && $.parseJSON('true') == true){
                     $(e.target).parents('tr').remove();
+                    $.get('/json-operateurstable/' + operation_id, function (data) {
+                        $(e.target).parents('tr').remove();
+                        $('#token').empty();
+                        @if(auth()->user()->payg === 1)
+                        $('#token').append(data);
+                        @endif
+                    });
                 }
             });
         });
 
         $('#getoperateur').on('click', function (e) {
-            console.log(e);
             let operation_id = e.target.title;
             $.get('/listoperateurs/' + operation_id, function (data) {
-                console.log(data);
                 $('#dataoperateurs').empty();
                 $('#dataoperateurs').append(data);
             });
@@ -559,7 +562,6 @@
                 let totalPages = pdf.internal.getNumberOfPages();
 
                 for (i = 1; i <= totalPages; i++) {
-                    console.log('here', i);
                     pdf.setPage(i);
                     // pdf.addFont('Baloo-Regular.ttf', 'custom', 'normal');
                     //
@@ -741,7 +743,6 @@
             if(sortoption == 0)
             {
                 $.get('/operation/'+'{{$operation->id}}',function(response) {
-                    console.log(response);
 
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
@@ -814,7 +815,6 @@
             if(sortoption == 1)
             {
                 $.get('/jsonmapcountries2',function(data) {
-                    console.log(data);
                     $('#select1').empty();
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
@@ -836,7 +836,6 @@
             if(sortoption == 2)
             {
                 $.get('/operationsites/'+{{$operation->id}},function(data) {
-                    console.log(data);
                     $('#select2').empty();
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
@@ -856,7 +855,7 @@
             if(sortoption == 3)
             {
                 $.get('/operationvilles/'+{{$operation->id}},function(data) {
-                    console.log(data);
+
                     $('#select3').empty();
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
@@ -876,7 +875,7 @@
             if(sortoption == 4)
             {
                 $.get('/tryoperateurs/'+{{$operation->id}},function(data) {
-                    console.log(data);
+
                     $('#select4').empty();
                     let element1 = document.getElementById('select1');
                     let element2 = document.getElementById('select2');
@@ -901,7 +900,7 @@
             let pays_id = e.target.value;
             {
                 $.get('/operation/'+'{{$operation->id}}'+'/'+ pays_id,function(response) {
-                    console.log(response);
+
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
@@ -968,7 +967,7 @@
             let site_id = e.target.value;
             {
                 $.get('/siteoperation/'+'{{$operation->id}}'+'/'+ site_id,function(response) {
-                    console.log(response);
+
 
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
@@ -1032,7 +1031,7 @@
             let ville = e.target.value;
             {
                 $.get('/villeoperation/'+'{{$operation->id}}'+'/'+ ville,function(response) {
-                    console.log(response);
+
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');
@@ -1094,7 +1093,7 @@
             let userid = e.target.value;
             {
                 $.get('/useroperation/'+'{{$operation->id}}'+'/'+ userid,function(response) {
-                    console.log(response);
+
                     let button1 = document.getElementById('download_pdf');
                     let button2 = document.getElementById('download_country_pdf');
                     let button3 = document.getElementById('download_site_pdf');

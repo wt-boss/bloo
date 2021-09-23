@@ -387,7 +387,20 @@ class OperationController extends Controller
         //$viewData = Helper::buildUsersList($users);
         $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
+    }
 
+    public function getOperateursTable($id)
+    {
+        $Auth = auth()->user();
+        $tokens = null;
+        $viewData = null;
+        $operation = Operation::findOrFail($id);
+        if($Auth->payg === 1)
+        {
+            $tokens = Token::where('user_id',$Auth->id)->get()->first();
+            $viewData = (string)View::make('Helpers.BuildUserToken', compact('tokens'));
+        }
+        return response()->json($viewData);
     }
 
     /**
@@ -466,6 +479,11 @@ class OperationController extends Controller
      */
     public function show($id, Request $request)
     {
+        $tokens = null;
+        if(auth()->user()->payg === 1 )
+        {
+            $tokens = Token::where('user_id',auth()->user()->id)->get()->last();
+        }
         $Villes = collect();
         $operation = Operation::with('entreprise','sites')->findOrFail($id);
         $sites = $operation->sites()->get()->GroupBy('ville');
@@ -521,10 +539,11 @@ class OperationController extends Controller
                 'data_for_chart' => json_encode($data_for_chart),
                 'response_view2' => $viewprint,
                'data_for_chart2' => json_encode($data_for_chart2),
-                'response_operateurs' => $viewoperateurs
+                'response_operateurs' => $viewoperateurs,
+                'tokens' => $tokens
             ];
         } else {
-            return view('admin.operation.show', compact('view','viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart','data_for_chart2','Villes'));
+            return view('admin.operation.show', compact('view','viewprint', 'operation', 'form', 'query', 'responses', 'data_for_chart','data_for_chart2','Villes','tokens'));
         }
     }
 
