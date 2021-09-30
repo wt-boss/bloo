@@ -15,6 +15,8 @@ class AddCaseToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean("payg")->default(0);
+            $table->boolean("abonnement")->default(0);
+
         });
     }
 

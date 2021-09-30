@@ -70,7 +70,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
         */
         Route::post('login', 'AuthController@login');
 
-        Route::middleware('jwt.verify')->group(function(){
+        Route::middleware('auth.verify')->group(function(){
             /* Log the current user out and invalidate his token
                 Returns:
                 1. 200 with "true" status if authentication has been successfully passed
@@ -94,7 +94,7 @@ Route::namespace('ApiV1')->prefix('v1.1')->middleware('api')->group(function(){
     */
     Route::post('/user', 'UserController@register');
     // User's routes
-    Route::prefix('user')->middleware(['jwt.verify'])->group(function(){
+    Route::prefix('user')->middleware(['auth.verify'])->group(function(){
         /* Save user's device token
             1. 422 if device token is not present
             2. 200 if saving successfull

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use AkibTanjim\Currency\Currency;
+use App\Abonnement;
 use App\Entreprise;
 use App\Form;
 use App\FormAvailability;
@@ -13,6 +14,7 @@ use App\Operation_user;
 use App\Paiement;
 use App\Token;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -191,7 +193,7 @@ class PaymentController extends Controller
 
             $tokens = new Token();
             $tokens->user_id = $user->id;
-            $tokens->own = 10 ;
+            $tokens->own = $parameters["number_operator"] ;
             $tokens->save();
 
             $form = new Form([
@@ -219,6 +221,16 @@ class PaymentController extends Controller
             $operation->entreprise_id = $entreprise->id;
             $operation->save();
             $operation->users()->attach($user);
+        }
+        else
+        {
+            $date1 = Carbon::now();
+            $date2 = Carbon::now()->addMonths(1);
+            $abonnement = New Abonnement();
+            $abonnement->user_id = $user->id;
+            $abonnement->start =  $date1->toDateTimeString();
+            $abonnement->end =  $date2->toDateTimeString();
+            $abonnement->save();
         }
         /** Recherche de l'offre choisi**/
        //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();

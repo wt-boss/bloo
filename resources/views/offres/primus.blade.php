@@ -35,16 +35,23 @@
                     @csrf
                     <h4><span class="step">{{ trans('infos') }}</span></h4>
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="operation_name">{{ trans('free_form1_label1') }}</label>
                             <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" value="{{old('operation_name')}}" placeholder="{{ trans('Entrer') }}" required>
                             <div class="invalid-feedback">
-                               {{ trans('num_contribuable_valid') }}
+                                {{ trans('num_contribuable_valid') }}
                             </div>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="operation_purpose">{{ trans('free_form1_label2') }}</label>
                             <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" value="{{old('operation_purpose')}}" placeholder="{{ trans('Entre2') }}" required>
+                            <div class="invalid-feedback">
+                                {{ trans('num_contribuable_valid') }}
+                            </div>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="number_operator">{{ trans('free_form1_label5') }}</label>
+                            <input type="number" class="form-control form-input-check" id="number_operator" name="number_operator" value="{{old('number_operator')}}" placeholder="{{ trans('Entre3') }}" required>
                             <div class="invalid-feedback">
                                 {{ trans('num_contribuable_valid') }}
                             </div>
@@ -359,6 +366,11 @@
 
         if (is_null_or_whithe_space($('#operation_purpose').val())){
             $('#operation_purpose').addClass("is-invalid");
+            return false;
+        }
+
+        if (($('#number_operator').val() === '')) {
+            $('#number_operator').addClass("is-invalid");
             return false;
         }
 

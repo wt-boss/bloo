@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbonnementsTable extends Migration
+class CreateUserPaygsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAbonnementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('abonnements', function (Blueprint $table) {
-            $table->Increments('id');
-            $table->unsignedBigInteger("user_id");
-            $table->date("start");
-            $table->date("end");
+        Schema::create('user_paygs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('operation_id');
+            $table->date('start');
+            $table->date('end');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAbonnementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abonnements');
+        Schema::dropIfExists('user_paygs');
     }
 }
