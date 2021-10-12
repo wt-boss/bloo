@@ -28,9 +28,9 @@ class UpdateUserssTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('payg');
-            $table->dropColumn('abonnement');
-            $table->dropColumn('abonnement_id');
+            $table->integer('payg');
+            $table->integer('abonnement');
+            $table->integer('abonnement_id');
         });
     }
 }
