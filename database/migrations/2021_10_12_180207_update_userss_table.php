@@ -16,6 +16,7 @@ class UpdateUserssTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('payg');
             $table->dropColumn('abonnement');
+            $table->dropForeign('users_abonnement_id_foreign');
             $table->dropColumn('abonnement_id');
         });
     }

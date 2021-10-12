@@ -13,14 +13,15 @@ class UpdatePaiementsTable extends Migration
      */
     public function up()
     {
+        //Schema::dropIfExists('paiements');
         Schema::table('paiements', function (Blueprint $table) {
 
 //            DROPPING OLD COLUMNS
-            $table->dropPrimary('id');
-            $table->dropColumn('id');
-            $table->dropColumn('paiement_id');
-            $table->dropColumn('user_id');
-            $table->dropColumn('offre_id');
+            #$table->dropPrimary('paiements_id_primary');
+//            $table->dropColumn('id');
+//            $table->dropColumn('paiement_id');
+//            $table->dropColumn('user_id');
+//            $table->dropColumn('offre_id');
 
 //            ADDING NEW COLOUMNS
 
@@ -42,22 +43,23 @@ class UpdatePaiementsTable extends Migration
      */
     public function down()
     {
-        Schema::table('paiements', function (Blueprint $table) {
-//            DROPPING FK
-            $table->dropForeign('consomations_subscription_id_foreign');
-//            DROPPING ALL CREATED COLUMNS
-            $table->dropColumn('motif');
-            $table->dropColumn('date');
-            $table->dropColumn('validity');
-            $table->dropColumn('cost');
-            $table->dropColumn('discount');
-            $table->dropColumn('netRate');
-            $table->dropColumn('subscription_id');
-//              ADDING OLD COLUMNS
-            $table->bigIncrements('id');
-            $table->string('paiement_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('offre_id')->nullable();
-        });
+        Schema::dropIfExists('paiements');
+//        Schema::table('paiements', function (Blueprint $table) {
+////            DROPPING FK
+//            $table->dropForeign('consomations_subscription_id_foreign');
+////            DROPPING ALL CREATED COLUMNS
+//            $table->dropColumn('motif');
+//            $table->dropColumn('date');
+//            $table->dropColumn('validity');
+//            $table->dropColumn('cost');
+//            $table->dropColumn('discount');
+//            $table->dropColumn('netRate');
+//            $table->dropColumn('subscription_id');
+////              ADDING OLD COLUMNS
+//            $table->bigIncrements('id');
+//            $table->string('paiement_id');
+//            $table->unsignedBigInteger('user_id');
+//            $table->unsignedBigInteger('offre_id')->nullable();
+//        });
     }
 }
