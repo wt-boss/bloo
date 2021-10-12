@@ -37,4 +37,9 @@ class Operation extends Model
         return Cache::has('user-is-online-' . $this->id);
     }
 
+    public function consomations()
+    {
+        return $this->hasOne(Consomation::class);
+    }
+
 }

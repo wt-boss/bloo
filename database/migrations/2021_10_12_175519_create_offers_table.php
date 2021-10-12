@@ -16,10 +16,10 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('intitule');
-            $table->unsignedBigInteger('payementCycle');
-            $table->unsignedBigInteger('timeTest');
-            $table->unsignedBigInteger('userTest');
-            $table->unsignedBigInteger('reduction');
+            $table->unsignedBigInteger('payementCycle')->nullable();
+            $table->unsignedBigInteger('timeTest')->nullable();
+            $table->unsignedBigInteger('userTest')->nullable();
+            $table->unsignedBigInteger('reduction')->nullable();
             $table->timestamps();
         });
     }

@@ -231,5 +231,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Subscription');
     }
+    public function consomations()
+    {
+        return $this->hasMany(Consomation::class);
+    }
 
 }
