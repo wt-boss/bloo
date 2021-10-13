@@ -9,7 +9,7 @@ class OfferController extends Controller
 {
     public function index(){
         $offers=Offer::all();
-        return view('offer.index',compact('offers'));
+        return view('admin.offers.index',compact('offers'));
     }
     public function create(){
         return view('offers.create');

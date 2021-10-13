@@ -322,6 +322,9 @@ Route::get('/formulaire',function() {
 
 Route::get('/notif/{id}','OperationController@loveme');
 
+//  Offers Routes
+Route::resource('offers','OfferController')->middleware(['Role:Superadmin','Free']);
+
 
 
 

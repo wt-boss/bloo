@@ -700,6 +700,12 @@
     "availability_updated": "Disponibilité mise à jour",
     "token_saved": "Token enregistré",
     "You still have": "Il vous reste",
-    "tokens" : "jetons"
+    "tokens" : "jetons",
+    "aucune_offre": "Aucune offre disponible",
+    "intitule": "Intitulé de l'offre",
+    "payementCycle": "Durée de l'offre",
+    "timeTest": "Durée max d'essai",
+    "userTest": "Durée d'essai échue",
+    "reduction": "Réduction"
 
 }

@@ -2,10 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-class OfferSeeder extends Seeder
+class OffersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
