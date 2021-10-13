@@ -71,6 +71,7 @@ class OperationController extends Controller
             $User = User::with('operations')->findOrFail($user->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
         }
+
         return view('admin.operation.index', compact('operations', 'operation','tokens'));
     }
 

@@ -9,6 +9,7 @@ class OfferController extends Controller
 {
     public function index(){
         $offers=Offer::all();
+
         return view('admin.offers.index',compact('offers'));
     }
     public function create(){
@@ -18,11 +19,14 @@ class OfferController extends Controller
         $offer=Request::all();
         $offer->save();
     }
-    public function edit(){
-
+    public function edit($id){
+        $offer=Offer::findOrFail($id);
+        return view('admin.offers.edit',compact('offer'));
     }
-    public function update(){
-
+    public function update(Request $request,$id){
+        $offer=Offer::findOrFail($id);
+        $offer->update($request->all());
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
     }
     public function destroy(){
 

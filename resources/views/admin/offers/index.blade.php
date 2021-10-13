@@ -51,32 +51,21 @@
                             <tbody>
                             @foreach($offers as $offer)
                                 <tr>
-                                    {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                     <td></td>
                                     <td class="text-center">{{ $offer->intitule }}</td>
                                     <td class="text-center">{{ $offer->payementCycle }}</td>
                                     <td class="text-center">{{ $offer->timeTest }}</td>
                                     <td class="text-center">{{ $offer->userTest }}</td>
                                     <td class="text-center">{{ $offer->reduction}}</td>
-{{--                                    <td class="text-center">--}}
-{{--                                        @if($operation->status === "CREER")--}}
-{{--                                            <a href="#" class="badge badge-primary">    </a>--}}
-{{--                                        @endif--}}
-{{--                                        @if($operation->status === "EN COUR")--}}
-{{--                                            <a href="#" class="badge badge-success">    </a>--}}
-{{--                                        @endif--}}
-{{--                                        @if($operation->status === "TERMINER")--}}
-{{--                                            <a href="#" class="badge badge-danger">    </a>--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
+
                                     <td class="text-center" >
-                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+{{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                         <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
-                                        @if(Auth::user()->rolename() == "Superadmin")
-                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')
-                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
-                                            </form>
-                                        @endif
+{{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
+{{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
+{{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
+{{--                                            </form>--}}
+{{--                                        @endif--}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -86,58 +75,7 @@
                 </div>
             @endif
         @endif
-{{--        @if (auth()->user()->hasRole('Lecteur|Opérateur'))--}}
-{{--            @if ($operations->isEmpty())--}}
-{{--                <div class="panel-body text-center">--}}
-{{--                    <div class="mt-30 mb-30">--}}
-{{--                        <h6 class="text-semibold">--}}
-{{--                            {{ trans('pasoperation') }}--}}
-{{--                        </h6>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @else--}}
-{{--                <div class="panel panel-flat">--}}
-{{--                    <!-- /.box-header -->--}}
-{{--                    <div  style="padding: 15px">--}}
-{{--                        <table id="operations-tab" class="table stripe">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th></th>--}}
-{{--                                <th class="text-center">{{ trans('op_name') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('start_date') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('end_date') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('enterprise') }}</th>--}}
-{{--                                --}}{{--                        <th class="text-center">{{ trans('city') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('sites') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('operator') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('Status') }}</th>--}}
-{{--                                <th class="text-center">{{ trans('actions') }}</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-{{--                            @foreach($operations as $operation)--}}
-{{--                                <tr>--}}
-{{--                                    --}}{{-- @php dd($operation->entreprise->nom) @endphp --}}
-{{--                                    <td></td>--}}
-{{--                                    <td class="text-center">{{$operation->nom }}</td>--}}
-{{--                                    <td class="text-center">{{$operation->date_start }}</td>--}}
-{{--                                    <td class="text-center">{{$operation->date_end }}</td>--}}
-{{--                                    <td class="text-center">{{$operation->entreprise->nom }}</td>--}}
-{{--                                    --}}{{--                                <td class="text-center">{{$operation->sites()->count()}}</td>--}}
-{{--                                    <td class="text-center">{{$operation->sites()->count()}}</td>--}}
-{{--                                    <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>--}}
-{{--                                    <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>--}}
-{{--                                    <td class="text-center" style="position: relative;">--}}
-{{--                                        @include('admin.operation.partials.op-action')--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-{{--                            </tbody>--}}
-{{--                        </table>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--        @endif--}}
+
     </div>
 
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>

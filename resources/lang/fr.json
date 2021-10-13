@@ -706,6 +706,7 @@
     "payementCycle": "Durée de l'offre",
     "timeTest": "Durée max d'essai",
     "userTest": "Durée d'essai échue",
-    "reduction": "Réduction"
+    "reduction": "Réduction",
+    "update_offer": "Mise à jour de l'offre"
 
 }
