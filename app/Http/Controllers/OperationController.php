@@ -217,7 +217,7 @@ class OperationController extends Controller
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
-        $message = "Vous avez été retier de l'operration : " . $operation->nom;
+        $message = "Vous avez été retiré de l'operation : " . $operation->nom;
         $operation->users()->detach($user);
         $user->notify(new EventNotification($message));
         $pusher = App::make('pusher');

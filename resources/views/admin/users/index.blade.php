@@ -62,6 +62,7 @@
 
                                 </td>
                                 <td class="text-center">
+                                    @if(Auth::user()->rolename() == "Superadmin")
                                     <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
                                     @if(($user->rolename() == "Opérateur") && ($user->active == 0))
@@ -71,6 +72,7 @@
                                     <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('users.destroy', [$user->id]) }}" > @csrf @method('DELETE')
                                         <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
                                     </form>
+                                    @endif
                                     @endif
                                 </td>
                             </tr>

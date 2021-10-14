@@ -2,7 +2,7 @@
 $allowedRoles = config('variables.role');
 if (Auth::user()->rolename() !== "Superadmin") {
     foreach ($allowedRoles as $key => $value ) {
-        if ($key >= Auth::user()->role) {
+        if ($key > Auth::user()->role) {
             unset($allowedRoles[$key]);
         }
     }

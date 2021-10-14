@@ -13,7 +13,7 @@ class Role
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next,$role)
     {
         //Non enregistré
         if (!Auth::check()) {
@@ -21,9 +21,11 @@ class Role
         }
 
         // Interdit
+
         if($role !== null && !$request->user()->hasRole($role)) {
             return abort(403);
         }
+
 
         return $next($request);
     }

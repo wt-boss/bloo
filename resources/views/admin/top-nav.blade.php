@@ -141,7 +141,7 @@ $current_user = auth()->user();
                             @endif
                             @if (auth()
         ->user()
-        ->hasRole('Superadmin'))
+        ->hasRole('Superadmin|Client'))
                                 <li
                                     class="<?php echo Str::startsWith($route, 'user') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('users.index') }}">
