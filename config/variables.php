@@ -7,11 +7,12 @@ return [
 ],
 
 'role' => [
-'0' => 'Lecteur',
-'1' => 'Opérateur',
-'3' => 'Free',
-'4' => 'Client',
-'5' => 'Superadmin',
+    '0' => 'Lecteur',
+    '1' => 'Opérateur',
+    '3' => 'Free',
+    '4' => 'Client',
+    '5' => 'Superadmin',
+    '6' => 'Admin'
 ],
 
 'status' => [

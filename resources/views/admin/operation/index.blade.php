@@ -10,7 +10,7 @@
 
     <div class="panel panel-flat">
         <div class="panel-body" style="padding: 0;">
-            @if (auth()->user()->hasRole('Superadmin|Client'))
+            @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                 @if(auth()->user()->payg == 0)
                   <div class="panel-heading pull-right">
                       <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>
@@ -22,7 +22,7 @@
                     @endif
                 @endif
         </div>
-        @if (auth()->user()->hasRole('Superadmin|Client'))
+        @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
             @if ($operations->isEmpty())
                 <div class="panel-body text-center">
                     <div class="mt-30 mb-30">
@@ -43,7 +43,6 @@
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('start_date') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('end_date') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('enterprise') }}</th>
-{{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('city') }}</th>--}}
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('sites') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('operator') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('Status') }}</th>
@@ -53,13 +52,11 @@
                             <tbody>
                                 @foreach($operations as $operation)
                                     <tr>
-                                        {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                         <td></td>
                                         <td class="text-center">{{ $operation->nom }}</td>
                                         <td class="text-center">{{ $operation->date_start }}</td>
                                         <td class="text-center">{{ $operation->date_end }}</td>
                                         <td class="text-center">{{ $operation->entreprise->nom }}</td>
-{{--                                        <td class="text-center">{{$operation->sites()->count()}}</td>--}}
                                         <td class="text-center">{{$operation->sites()->count()}}</td>
                                         <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                         <td class="text-center">
@@ -105,7 +102,6 @@
                         <th class="text-center">{{ trans('start_date') }}</th>
                         <th class="text-center">{{ trans('end_date') }}</th>
                         <th class="text-center">{{ trans('enterprise') }}</th>
-{{--                        <th class="text-center">{{ trans('city') }}</th>--}}
                         <th class="text-center">{{ trans('sites') }}</th>
                         <th class="text-center">{{ trans('operator') }}</th>
                         <th class="text-center">{{ trans('Status') }}</th>
@@ -115,13 +111,11 @@
                     <tbody>
                         @foreach($operations as $operation)
                             <tr>
-                                {{-- @php dd($operation->entreprise->nom) @endphp --}}
                                 <td></td>
                                 <td class="text-center">{{$operation->nom }}</td>
                                 <td class="text-center">{{$operation->date_start }}</td>
                                 <td class="text-center">{{$operation->date_end }}</td>
                                 <td class="text-center">{{$operation->entreprise->nom }}</td>
-{{--                                <td class="text-center">{{$operation->sites()->count()}}</td>--}}
                                 <td class="text-center">{{$operation->sites()->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
@@ -168,9 +162,7 @@
 @endsection
 
 @section('laraform_script2')
-    {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
-{{--    <script src="{{ asset('assets/js/custom/main.js') }}"></script>--}}
     <script>
         $(function() {
             window.csrf_token = csrfToken();

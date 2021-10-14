@@ -613,7 +613,6 @@
 @endsection
 
 @section('page-script')
-    {{-- <script src="{{ asset('assets/js/custom/pages/datatable.js') }}"></script> --}}
     <script>
         $(function() {
 
@@ -894,7 +893,6 @@
             }
 
         });
-
 
         $('#select1').on('change', function(e){
             let pays_id = e.target.value;

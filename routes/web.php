@@ -93,7 +93,7 @@ Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')-
 /**Back End */
 
 
-Route::resource('users','UsersController')->middleware(['Role:Superadmin','Free']);
+Route::resource('users','UsersController')->middleware(['Role:Superadmin|Admin','Free']);
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');
@@ -188,7 +188,7 @@ Route::get('/questionnaire/create/free','PagesController@free')->name('questionn
 
 //Questionnaire get
 
-Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Client|Lecteur|Opérateur','Free','verification']);
+Route::get('/administration', 'HomeController@admin')->name('admin')->middleware(['Role:Superadmin|Client|Lecteur|Opérateur|Admin','Free','verification']);
 
 //language
 Route::get('language', 'PagesController@language')->name('language');
@@ -214,16 +214,19 @@ Route::post('compte/gift','CompteController@savegift')->name('savegift')->middle
 
 
 //Messagerie Route
+Route::get('themessages','TheMessageController@index')->name('messages_index');
+Route::post('message', 'TheMessageController@sendMessage');
+Route::get('/message/{id}', 'TheMessageController@getMessage')->name('message');
+
+
+
+
 Route::get('messages','MessageController@index')->name('messages_index');
 Route::post('messages_show/{operation}','MessageController@show')->name('messages_show');
 Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
 Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
 Route::get('/users_list','MessageController@users');
-Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
 Route::get('/operation_messages/{id1}/{id2}', 'MessageController@getOperationMessage')->name('operationmessage');
-Route::post('message', 'MessageController@sendMessage');
-Route::post('message', 'MessageController@sendMessage');
-
 
 //Route Profile
 Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');

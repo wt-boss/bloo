@@ -6,13 +6,11 @@
 
 @section('content')
 
-
 @include('partials.alert', ['name' => 'index'])
 <div class="panel panel-flat">
     <div class="row">
         <div class="d-none d-sm-block col-sm-5 left-side-bloo">
             <img class="bg-img" src="{{ asset('assets/images/background_create_enterprise.jpg') }}" alt="" />
-            {{-- <img class="logo-img" src="{{ asset('assets/images/bloo_logo-white.png') }}" alt="Bloo" /> --}}
             <h1>@lang('create_operation_title')</h1>
         </div>
         <div class="col-sm-7">
@@ -99,10 +97,7 @@
                     </div>
                 </div>
 
-                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-reader">Ajout lecteur</button> --}}
-                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-operator">Ajout Operateur</button> --}}
-                    {{-- <button type="button" class="btn btn-bloo btn-bloo-action" disabled id="btn-add-place">Ajout zone</button> --}}
-                </form>
+             </form>
             </div>
         </div>
     </div>
@@ -238,4 +233,5 @@
     }
 
 </script>
+
 @endsection
