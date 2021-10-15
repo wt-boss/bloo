@@ -34,28 +34,60 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="box-title">
-                                    {{ trans('Opérations') }}
+                                    {{ trans('Administrator') }}
                                 </h3>
                             </div>
                         </div>
                     </div>
                     <div class="box-body" >
-                        <div class="scrollmenu">
-                            @foreach($operations as $operation)
-                            <a data-id="{{$operation->id}}">
-                                <div class="cir-image" data-id="{{$operation->id}}">
-                                    <div class="widget-user-image text-center op-msg-list operation" data-id="{{$operation->id}}">
-                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" data-id="{{$operation->id}}">
-                                        <p style="color: #6F6F6F" data-id="{{$operation->id}}">{{$operation->nom}}</p>
+                        <ul class="menu-list"   class="users">
+                            @foreach($clients as $Client)
+                            <li id="{{$Client->id}}" class="user">
+                                <div class="cir-image" id="{{$Client->id}}">
+                                    <div class="widget-user-image text-center op-msg-list user" id="{{$Client->id}}">
+                                        @if($Client->unread)
+                                            <span class="pending">{{ $Client->unread }}</span>
+                                        @endif
+                                        <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$Client->id}}">
+                                        <p id="{{$Client->id}}">{{$Client->first_name}} {{$Client->last_name}}</p>
                                     </div>
                                 </div>
-                            </a>
+                            </li>
                             @endforeach
-                        </div>
+                        </ul>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
+
+                 <!-- box -->
+                 <div class="box box-primary">
+                     <div class="box-header">
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <h3 class="box-title">
+                                     {{ trans('Opérations') }}
+                                 </h3>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="box-body" >
+                         <div class="scrollmenu">
+                             @foreach($operations as $operation)
+                                 <a data-id="{{$operation->id}}">
+                                     <div class="cir-image" data-id="{{$operation->id}}">
+                                         <div class="widget-user-image text-center op-msg-list operation" data-id="{{$operation->id}}">
+                                             <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" data-id="{{$operation->id}}">
+                                             <p style="color: #6F6F6F" data-id="{{$operation->id}}">{{$operation->nom}}</p>
+                                         </div>
+                                     </div>
+                                 </a>
+                             @endforeach
+                         </div>
+                     </div>
+                     <!-- /.box-body -->
+                 </div>
+
             </div>
              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="lecteurs">
                 <div class="box box-primary">
@@ -192,7 +224,7 @@
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    @if (auth()->user()->hasRole('Admin'))
+    @if (auth()->user()->hasRole('Admin|Client'))
         <script>
             var receiver_id = '';
             var my_id = "{{ Auth::id() }}";

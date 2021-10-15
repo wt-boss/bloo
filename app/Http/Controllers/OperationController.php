@@ -58,15 +58,8 @@ class OperationController extends Controller
         if ($user->role === 5) {
             $operations = Operation::with('form', 'entreprise')->orderBy('id','DESC')->get();
         } else if ($user->role === 4) {
-            $tokens = Token::where('user_id',$user->id)->get()->first();
-            $comptes = $user->entreprises()->get();
-            $operations = collect(); //Toutes les operations de l'utilisateurs connecté.
-            foreach ($comptes as $entreprise) {
-                $Operations = $entreprise->operations()->get();
-                foreach ($Operations as $operation) {
-                    $operations->push($operation);
-                }
-            }
+            $User = User::with('operations')->findOrFail($user->id);
+            $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
         } else {
             $User = User::with('operations')->findOrFail($user->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();

@@ -26,17 +26,28 @@ class TheMessageController extends Controller
         $clientId = array();
         $operation = "";
         $operations = "";
+
         //Si le client est un Admin cote Bloo, On recupere les clients qui lui sont assigne et les affiches;
-        $clientIdArray = Admin_Client::where('admin_id',$AuthUser->id)->get("client_id");
-        foreach($clientIdArray as $client){
-            $clientId[] = $client->client_id;
+        if($AuthUser->role === 6){
+            $clientIdArray = Admin_Client::where('admin_id',$AuthUser->id)->get("client_id");
+            foreach($clientIdArray as $client){
+                $clientId[] = $client->client_id;
+            }
+        }else if($AuthUser->role === 4){
+            $clientIdArray = Admin_Client::where('client_id',$AuthUser->id)->get("admin_id")->first();
+            $clientId[] = $clientIdArray->admin_id;
+            $User = User::with('operations')->findOrFail($AuthUser->id);
+            $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
+
         }
         $clientId = implode(",",$clientId);
+
         $clients = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
         from users LEFT  JOIN  messages ON users.id = messages.receiver_id and is_read = 0 and messages.user_id = " . Auth::id() . "
         where users.id in(" . $clientId . ")
         group by users.id, users.first_name, users.last_name, users.avatar, users.email");
-        return view('admin.themessage.index',compact('clients'));
+
+        return view('admin.themessage.index',compact('clients','operations'));
     }
 
 
