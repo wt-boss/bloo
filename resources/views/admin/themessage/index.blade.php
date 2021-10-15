@@ -44,7 +44,7 @@
                             @foreach($clients as $Client)
                             <li id="{{$Client->id}}" class="user">
                                 <div class="cir-image" id="{{$Client->id}}">
-                                    <div class="widget-user-image text-center op-msg-list user" id="{{$Client->id}}">
+                                    <div class="widget-user-image text-center op-msg-list" id="{{$Client->id}}">
                                         @if($Client->unread)
                                             <span class="pending">{{ $Client->unread }}</span>
                                         @endif
@@ -74,10 +74,10 @@
                      <div class="box-body" >
                          <div class="scrollmenu">
                              @foreach($operations as $operation)
-                                 <a data-id="{{$operation->id}}">
-                                     <div class="cir-image" data-id="{{$operation->id}}">
-                                         <div class="widget-user-image text-center op-msg-list operation" data-id="{{$operation->id}}">
-                                             <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" data-id="{{$operation->id}}">
+                                 <a data-id="{{$operation->id}}" >
+                                     <div class="cir-image operation" data-id="{{$operation->id}}">
+                                         <div class="widget-user-image text-center op-msg-list" data-id="{{$operation->id}}">
+                                             <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" class="operation" data-id="{{$operation->id}}">
                                              <p style="color: #6F6F6F" data-id="{{$operation->id}}">{{$operation->nom}}</p>
                                          </div>
                                      </div>
@@ -95,43 +95,15 @@
                     <div class="box-body" style="margin-top: -13px;">
                         @if (auth()->user()->hasRole('Superadmin|Client'))
                          <div class='col-md-12'>
-                            <div>
-                             <h5>{{ trans('Lecteurs') }}</h5>
-                             <div class="scrollmenu">
-                                 <ul id="alllect"></ul>
-                             </div>
-                           </div>
-
-                         <hr>
-
                          <div>
                              <h5>{{ trans('Opérateurs') }}</h5>
                              <div  class="scrollmenu">
                                  <ul id="alloperat"></ul>
                              </div>
                          </div>
-                             <hr>
-                         <div>
-                             <h5>SuperAdmin</h5>
-                             <div>
-                                 <ul id="alladmin"></ul>
-                             </div>
-                         </div>
                      </div>
 
                  @endif
-                 @if(auth()->user()->hasRole('Lecteur'))
-                         <div class='col-md-12'>
-                             <div class='user-wrapper'>
-                                 <div class="scrollmenu">
-                                     <h6>{{ trans('prix_offre_llimite2') }}</h6>
-                                     <div id="allmanagers">
-                                     </div>
-                                 </div>
-
-                             </div>
-                         </div>
-                     @endif
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -163,7 +135,6 @@
 <div class="panel panel-flat panel-wb">
     <div class="panel-body" style="padding: 0;">
         <div class="row">
-
              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="box box-primary">
                     <div class="box-header">
@@ -316,6 +287,86 @@
                     scrollTop: $('.message-wrapper').get(0).scrollHeight
                 }, 50);
             }
+
+           $('.operation').click(function(e){
+               $('#receiver').empty();
+                var operation_id = e.target.getAttribute("data-id");
+                //console.log(operation_id);
+                var datas = null;
+               $.get('/json-operateuroperations?operation_id=' + operation_id,function(data) {
+                $('#receiver').empty();
+                $('#alloperat').empty();
+                $('#alloperat').append(data);
+                $('#messages').html(datas);
+                console.log(data);
+                  $.get('/json-lecteursoperations?operation_id=' + operation_id,function(data) {
+                      $('#receiver').empty();
+                      $('#alllect').empty();
+                      $('#alllect').append(data);
+                      $('#messages').html(datas);
+                      $.get('/json-superadmin',function(data) {
+                          $('#alladmin').empty();
+                          $('#alladmin').append(data.name);
+                          $('#messages').html(datas);
+                          $(document).ready(function () {
+                // ajax setup form csrf token
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
+
+                $('.operateur').click(function () {
+                    $('.operateur').removeClass('active');
+                    $(this).addClass('active');
+                    $(this).find('.pending').remove();
+
+                    receiver_id = $(this).attr('id');
+                    $.ajax({
+                        type: "get",
+                        url: "message/" + receiver_id, // need to create this route
+                        data: "",
+                        cache: false,
+                        success: function (data) {
+                            $('#messages').html(data);
+                            scrollToBottomFunc();
+                        }
+                    });
+                });
+
+                $(document).on('keyup', '.input-text input', function (e) {
+                    var message = $(this).val();
+
+                    // check if enter key is pressed and message is not null also receiver is selected
+                    if (e.keyCode === 13 && message !== '' && receiver_id !== '') {
+                        $(this).val(''); // while pressed enter text box will be empty
+
+                        var datastr = "receiver_id=" + receiver_id + "&message=" + message;
+                        $.ajax({
+                            type: "post",
+                            url: "message", // need to create this post route
+                            data: datastr,
+                            cache: false,
+                            success: function (data) {
+
+                            },
+                            error: function (jqXHR, status, err) {
+                            },
+                            complete: function () {
+                                scrollToBottomFunc();
+                            }
+                        })
+                    }
+                });
+            });
+                      });
+                   });
+               });
+            });
+
+
         </script>
     @endif
 @endsection

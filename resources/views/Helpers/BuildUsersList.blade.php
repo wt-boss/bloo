@@ -1,6 +1,6 @@
 
 @foreach($users as $item)
-<a class='user' id='{{$item->id}}'>
+<a class='operateur' id='{{$item->id}}'>
     <div class="cir-image">
         <div class="widget-user-image text-center op-msg-list operation" ">
             <img src="{{$item->avatar}}" alt="avatar_image" class="img-circle" " height="50px" width="auto">
