@@ -2,6 +2,47 @@
 @extends('admin.top-nav')
 
 
+@if (auth()->user()->hasRole('Opérateur'))
+@section('content')
+    @include('partials.alert', ['name' => 'index'])
+    <div class="panel panel-flat panel-wb" >
+        <div class="panel-body" style="padding: 0;" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class=" box box-primary ">
+                                    <ul class="users">
+                                        <center><i><h5>{{ trans('Accounts_Manager') }}</h5></i></center>
+                                        @foreach($clients as $Client)
+                                        <li id="{{$Client->id}}" class="user">
+                                            <div class="cir-image" id="{{$Client->id}}">
+                                                <div class="widget-user-image text-center op-msg-list user" id="{{$Client->id}}">
+                                                    @if($Client->unread)
+                                                        <span class="pending">{{ $Client->unread }}</span>
+                                                    @endif
+                                                    <img src="{{ asset('assets/images/bg_1.jpg') }}" alt="LOGO HERE" class="img-circle" id="{{$Client->id}}">
+                                                    <p id="{{$Client->id}}">{{$Client->first_name}} {{$Client->last_name}}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-8" id="messages" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@endif
+
+
 @if (auth()->user()->hasRole('Client'))
 @section('content')
 <style>
@@ -195,7 +236,7 @@
 @section('admin_lte_script')
     <!-- jQuery 3 -->
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    @if (auth()->user()->hasRole('Admin|Client'))
+    @if (auth()->user()->hasRole('Admin|Client|Opérateur'))
         <script>
             var receiver_id = '';
             var my_id = "{{ Auth::id() }}";

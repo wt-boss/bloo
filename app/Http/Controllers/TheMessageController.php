@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin_Client;
+use App\Form;
 use App\Message;
 use App\Operation;
 use App\User;
@@ -39,6 +40,11 @@ class TheMessageController extends Controller
             $User = User::with('operations')->findOrFail($AuthUser->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
 
+        }else if($AuthUser->role === 1){
+            $User = User::with('operations')->findOrFail($AuthUser->id);
+            $operation = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get()->first();
+            $form = Form::findOrFail($operation->form_id);
+            $clientId[] = $form->user_id;
         }
         $clientId = implode(",",$clientId);
 
