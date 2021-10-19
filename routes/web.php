@@ -93,8 +93,7 @@ Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')-
 /**Back End */
 
 
-Route::resource('users','UsersController')->except(['destroy'])->middleware(["Role:Superadmin|Client",'Free']);
-Route::resource('users','UsersController')->only(['destroy'])->middleware(["Role:Superadmin",'Free']);
+Route::resource('users','UsersController')->middleware(["Role:Superadmin",'Free']);
 
 Route::get('listlecteurs/{id}','OperationController@listLecteurs');
 Route::get('listoperateurs/{id}','OperationController@listOperateurs');

@@ -19,7 +19,7 @@ class CreateConsomationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('operation_id');
             $table->foreign('operation_id')->references('id')->on('operations');
-            $table->unsignedBigInteger('validity');
+            $table->unsignedBigInteger('cost');
 
             $table->timestamps();
         });

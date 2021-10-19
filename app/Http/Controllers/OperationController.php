@@ -1012,4 +1012,16 @@ class OperationController extends Controller
 //                // fail code
 //            }
     }
+    public function add_extra(){
+
+    }
+    public function add_admin(){
+
+    }
+    public function add_operator(){
+
+    }
+    public function add_lecteur(){
+
+    }
 }
