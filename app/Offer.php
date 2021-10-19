@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
 
-    protected $fillable = ['payementCycle','timeTest','userTest','reduction'];
+    protected $fillable = ['Montant','payementCycle','timeTest','userTest','reduction'];
 
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription');
+        return $this->belongsToMany('App\Subscription');
     }
 
 }

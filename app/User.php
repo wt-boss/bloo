@@ -229,7 +229,7 @@ class User extends Authenticatable implements JWTSubject
     }
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription');
+        return $this->hasOne('App\Subscription');
     }
     public function consomations()
     {

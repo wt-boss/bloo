@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Entreprise;
+use App\Extra;
 use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
@@ -11,8 +12,10 @@ use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
 use App\Operation_user_save;
 use App\State;
+use App\Subscription;
 use App\Token;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -423,7 +426,7 @@ class OperationController extends Controller
                 $users->push($user);
             }
         }
-       // $viewData = Helper::buildUsersList($users);
+        // $viewData = Helper::buildUsersList($users);
         $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
     }
@@ -539,7 +542,7 @@ class OperationController extends Controller
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
                 'response_view2' => $viewprint,
-               'data_for_chart2' => json_encode($data_for_chart2),
+                'data_for_chart2' => json_encode($data_for_chart2),
                 'response_operateurs' => $viewoperateurs,
                 'tokens' => $tokens
             ];
@@ -951,8 +954,8 @@ class OperationController extends Controller
      */
     public function getSites($id)
     {
-         $operation = Operation::with('sites')->findOrFail($id);
-         return response()->json($operation->sites()->get());
+        $operation = Operation::with('sites')->findOrFail($id);
+        return response()->json($operation->sites()->get());
     }
 
     /**
@@ -1012,16 +1015,34 @@ class OperationController extends Controller
 //                // fail code
 //            }
     }
-    public function add_extra(){
+    public function list_extra(Request $request){
+        $user=Auth::user();
+        $subscription=$user->subscriptions()->first();
+        $extra=$subscription->extras()->get();
+        return view('admin.extras.index',compact('extra'));
+    }
+    public function add_extra(Request $request ,$id){
+        $user=Auth::user();
+        $subscription=$user->subscriptions()->first();
+        $extra=Extra::find($id);
+        $extra->subscriptions()->associate($subscription);
+        return redirect(route('list_extra'))->withSuccess('Extra ajouté avec sucess');
 
     }
-    public function add_admin(){
+    public function create_extra(Request $request){
+        $this->validate($request, User::rules());
+        User::create(request()->all());
+        return redirect(route('list_extra'))->withSuccess('Extra créer avec sucess');
 
     }
-    public function add_operator(){
+    public function remove_extra($id){
 
     }
-    public function add_lecteur(){
-
+    public function disable_extra($id){
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>false]);
     }
+    public function enable_extra($id){
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>true]);
+    }
+
 }

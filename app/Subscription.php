@@ -12,11 +12,11 @@ class Subscription extends Model
     }
     public function users()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
     public function offers()
     {
-        return $this->belongsTo(Offer::class);
+        return $this->hasOne(Offer::class);
     }
     public function extras(){
         return $this->hasMany(Extra::class);
@@ -24,6 +24,6 @@ class Subscription extends Model
 
     public function paiements()
     {
-        return $this->hasOne(Paiement::class);
+       // return $this->hasOne(Paiement::class);
     }
 }

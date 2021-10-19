@@ -324,6 +324,10 @@ Route::get('/notif/{id}','OperationController@loveme');
 
 //  Offers Routes
 Route::resource('offers','OfferController')->middleware(['Role:Superadmin','Free']);
+Route::post('extra/list','OperationController@list_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.list');
+Route::post('extra/create','OperationController@create_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.create');
+Route::post('extra/disable','OperationController@disable_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.disable');
+Route::post('extra/enable','OperationController@enable_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.enable');
 
 
 
