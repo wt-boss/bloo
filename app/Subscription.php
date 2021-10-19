@@ -19,7 +19,8 @@ class Subscription extends Model
         return $this->hasOne(Offer::class);
     }
     public function extras(){
-        return $this->hasMany(Extra::class);
+//        return $this->hasManyThrough(Extra::class,ExtraSubscription::class,'subscription_id','id','id','extra_id');
+        return $this->belongsToMany(Extra::class)->using(ExtraSubscription::class);
     }
 
     public function paiements()

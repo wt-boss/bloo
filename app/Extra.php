@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Extra extends Model
 {
-  protected $fillabe=['user_id','type','cost','susbscription_id'];
+  protected $fillabe=['user_id','type','cost'];
 
     public function subscriptions()
     {
-        return $this->belongsTo(Subscription::class);
+        return $this->belongsToMany(Subscription::class)->using(ExtraSubscription::class);
     }
     public function users()
     {

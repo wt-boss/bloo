@@ -15,6 +15,7 @@ use App\State;
 use App\Subscription;
 use App\Token;
 use Carbon\Carbon;
+use http\Env\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -1015,34 +1016,41 @@ class OperationController extends Controller
 //                // fail code
 //            }
     }
+
+
     public function list_extra(Request $request){
         $user=Auth::user();
         $subscription=$user->subscriptions()->first();
         $extra=$subscription->extras()->get();
-        return view('admin.extras.index',compact('extra'));
+        dd($extra);
+        return response()->json($extra);
+       // return view('admin.extras.index',compact('extra'));
     }
-    public function add_extra(Request $request ,$id){
-        $user=Auth::user();
-        $subscription=$user->subscriptions()->first();
-        $extra=Extra::find($id);
-        $extra->subscriptions()->associate($subscription);
-        return redirect(route('list_extra'))->withSuccess('Extra ajouté avec sucess');
+    public function add_extra(){
+        return view('admin.extras.add');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
-    public function create_extra(Request $request){
+    public function store_extra(Request $request){
+
         $this->validate($request, User::rules());
         User::create(request()->all());
-        return redirect(route('list_extra'))->withSuccess('Extra créer avec sucess');
+        $extra_user=User::OrderBy('id','desc')->first();
+        $user=Auth::user();
+        $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
+        $extra=Extra::where('type','=',$extra_user->rolename())->get();
+        $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
+        return redirect(route('extra.list'))->withSuccess('Extra créer avec sucess');
 
     }
     public function remove_extra($id){
 
     }
     public function disable_extra($id){
-        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>false]);
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>0]);
     }
     public function enable_extra($id){
-        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>true]);
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>1]);
     }
 
 }
