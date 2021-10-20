@@ -246,6 +246,8 @@
         }
     });
 
+
+
     function notify(type, message) {
         noty({
             width: 200,

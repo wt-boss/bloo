@@ -698,6 +698,8 @@
     "availability_updated": "Disponibilité mise à jour",
     "token_saved": "Token enregistré",
     "You still have": "Il vous reste",
-    "tokens" : "jetons"
+    "tokens" : "jetons",
+    "Conditional logic":"Logique conditionnel",
+    "Please choose an option": "Veuillez choisir une option"
 
 }

@@ -146,6 +146,8 @@ Route::middleware(['auth','verified'])->namespace('Form')->group(function () {
     Route::get('forms/create', 'FormController@create')->name('forms.create');
     Route::post('forms', 'FormController@store')->name('forms.store');
     Route::get('forms/{form}', 'FormController@show')->name('forms.show')->middleware('Role:Superadmin|Client|Free');
+    Route::get('forms/conditional/{form}', 'FormController@conditional')->name('forms.conditional')->middleware('Role:Superadmin|Client|Free');
+    Route::post('forms/conditional', 'FormController@conditionalpost')->name('forms.conditionalpost')->middleware('Role:Superadmin|Client|Free');
     Route::get('forms/{form}/edit', 'FormController@edit')->name('forms.edit')->middleware('Role:Superadmin|Client|Free');
     Route::put('forms/{form}', 'FormController@update')->name('forms.update')->middleware('Role:Superadmin|Client|Free');
     Route::delete('forms/{form}', 'FormController@destroy')->name('forms.destroy')->middleware('Role:Superadmin|Client');

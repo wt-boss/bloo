@@ -55,7 +55,7 @@ class OperationController extends Controller
         $operation = null;
         $tokens = null;
 
-        if ($user->role === 5) {
+        if ($user->role === 6) {
             $operations = Operation::with('form', 'entreprise')->orderBy('id','DESC')->get();
         } else if ($user->role === 4) {
             $User = User::with('operations')->findOrFail($user->id);

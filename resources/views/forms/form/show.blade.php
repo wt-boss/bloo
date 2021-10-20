@@ -109,6 +109,7 @@
 	</div>
 </div>
 
+
 <div class="container-detached">
 	<div class="content-detached">
 

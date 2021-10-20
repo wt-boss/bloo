@@ -50,7 +50,7 @@ $fields = $form->fields()->filled()->get();
                                     {{-- <p class="content-group text-danger"><strong>Fields with * are required</strong></p> --}}
                                     @foreach ($fields as $field)
                                         @php $template = get_form_templates($field->template) @endphp
-                                        <div class="field" data-id="{{ $field->id }}" data-attribute="{{ $field->attribute }}" data-attribute-type="{{ $template['attribute_type'] === 'string' ? 'single' : 'multiple' }}">
+                                        <div class="field" data-id="{{ $field->id }}" data-attribute="{{ $field->attribute }}" style="display: {{$field->display}}" data-attribute-type="{{ $template['attribute_type'] === 'string' ? 'single' : 'multiple' }}">
                                             {!! $template['main_template'] !!}
                                         </div>
                                         @php
@@ -111,6 +111,20 @@ $fields = $form->fields()->filled()->get();
             window.addEventListener("load", function(){
                 showPage();
             });
+        </script>
+        <script type="text/javascript">
+
+            window.onload = function(){
+                @foreach ($conditions as $item)
+                $("#user-form input[name='{{$item->field_name}}']").click(function(){
+                    alert('You clicked radio!');
+                    if($('input:radio[name=type]:checked').val() == "walk_in"){
+                        alert($('input:radio[name=type]:checked').val());
+                        //$('#select-table > .roomNumber').attr('enabled',false);
+                    }
+                });
+                @endforeach
+            };
         </script>
         @include('forms.partials._script-view')
     @endsection

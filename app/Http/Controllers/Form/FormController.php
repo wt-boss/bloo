@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Form;
 
 
+use App\Conditional;
 use App\Form;
 use App\FormAvailability;
+use App\FormField;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -124,6 +126,35 @@ class FormController extends Controller
         $form->load('fields', 'collaborationUsers', 'availability');
 
         return view('forms.form.show', compact('form'));
+
+    }
+
+    public function conditional(Form $form){
+        //Recuperation des questions du formulaire;
+        $questions = FormField::where('form_id',$form->id)->get();
+
+        return view('forms.form.conditional', compact('questions'));
+    }
+
+    public function conditionalpost(Request $request){
+
+        $display = $request->get('display');
+        $question = $request->get('questions');
+        $value = $request->get('value');
+        $questions = $request["questions_check"];
+        foreach($questions as $item){
+            FormField::where('id',$item)->update(['display' => $display]);
+        }
+        $field = FormField::findOrFail($question);
+
+        //Enregistrement de la condition
+        $conditional = new Conditional();
+        $conditional->form_id = $field->form_id;
+        $conditional->field_id = $field->id;
+        $conditional->field_name = $field->attribute;
+        $conditional->value = $value;
+        $conditional->display = $display;
+        $conditional->save();
 
     }
 
@@ -293,7 +324,10 @@ class FormController extends Controller
     public function previewForm(Form $form)
     {
         $current_user = Auth::user();
-        return view('forms.form.view_form', ['form' => $form, 'view_type' => 'preview']);
+        //Recuperation des condtions du formulaire;
+        $conditions = Conditional::where('form_id', $form->id)->get();
+
+        return view('forms.form.view_form', ['form' => $form, 'conditions' => $conditions, 'view_type' => 'preview']);
     }
 
     public function openFormForResponse(Form $form)

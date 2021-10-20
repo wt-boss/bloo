@@ -86,7 +86,7 @@ class HomeController extends Controller
             ->get();
         $diagram =  collect();
         $diagram->push(['Client','Operation']);
-        if($user->role === 5)
+        if($user->role === 6)
         {
             $comptes = Entreprise::with('operations')->get();
             foreach ($comptes as $compte)
@@ -140,7 +140,7 @@ class HomeController extends Controller
         $user = auth()->user();
         $diagram =  collect();
         $diagram->push(['Client','Operation']);
-        if($user->role === 5)
+        if($user->role === 6)
         {
             $comptes = Entreprise::with('operations')->get();
             foreach ($comptes as $compte)
