@@ -702,11 +702,14 @@
     "You still have": "Il vous reste",
     "tokens" : "jetons",
     "aucune_offre": "Aucune offre disponible",
-    "intitule": "Intitulé de l'offre",
-    "payementCycle": "Durée de l'offre",
-    "timeTest": "Durée max d'essai",
-    "userTest": "Durée d'essai échue",
+    "intitule": "Offre",
+    "payementCycle": "Durée",
+    "timeTest": "Essai",
+    "userTest": "Extras",
     "reduction": "Réduction",
-    "update_offer": "Mise à jour de l'offre"
+    "update_offer": "Mise à jour de l'offre",
+    "cost": "Prix",
+    "type": "Libellé",
+    "update": "Mise à jour"
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Extra;
 use App\Offer;
 
 use Illuminate\Http\Request;
@@ -9,8 +10,8 @@ class OfferController extends Controller
 {
     public function index(){
         $offers=Offer::all();
-
-        return view('admin.offers.index',compact('offers'));
+        $extras=Extra::all();
+        return view('admin.offers.index',compact('offers','extras'));
     }
     public function create(){
         return view('offers.create');

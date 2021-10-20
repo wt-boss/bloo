@@ -8,32 +8,32 @@
 
     @include('partials.alert', ['name' => 'index'])
 
-    <div class="panel panel-flat">
-        <div class="panel-body" style="padding: 0;">
-{{--            @if (auth()->user()->hasRole('Superadmin'))--}}
-{{--                @if(auth()->user()->payg == 0)--}}
-{{--                    <div class="panel-heading pull-right">--}}
-{{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
-{{--                    </div>--}}
-{{--                @else--}}
-{{--                    <div class="panel-heading pull-right">--}}
-{{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
-{{--            @endif--}}
+    <div class="panel panel-flat col-md-5">
+        <div class="panel-body " style="padding: 0;">
+            {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
+            {{--                @if(auth()->user()->payg == 0)--}}
+            {{--                    <div class="panel-heading pull-right">--}}
+            {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
+            {{--                    </div>--}}
+            {{--                @else--}}
+            {{--                    <div class="panel-heading pull-right">--}}
+            {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
+            {{--                    </div>--}}
+            {{--                @endif--}}
+            {{--            @endif--}}
         </div>
         @if (auth()->user()->hasRole('Superadmin'))
             @if ($offers->isEmpty())
                 <div class="panel-body text-center">
                     <div class="mt-30 mb-30">
                         <h6 class="text-semibold">
-{{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
+                            {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
                             Aucune offre disponible
                         </h6>
                     </div>
                 </div>
             @else
-                <div class="panel panel-flat">
+                <div class="">
                     <!-- /.box-header -->
                     <div  style="padding: 15px">
                         <table id="offers-tab" class="table stripe">
@@ -42,9 +42,10 @@
                                 <th></th>
                                 <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
                                 <th class="text-center "style="color:#0065A1 !important">{{ trans('payementCycle') }}</th>
-                                <th class="text-center "style="color:#0065A1 !important">{{ trans('timeTest') }}</th>
-                                <th class="text-center "style="color:#0065A1 !important">{{ trans('userTest') }}</th>
-                                <th class="text-center "style="color:#0065A1 !important">{{ trans('reduction') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
+                                {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('userTest') }}</th>--}}
+                                {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('reduction') }}</th>--}}
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
 
                             </tr>
                             </thead>
@@ -54,20 +55,89 @@
                                     <td></td>
                                     <td class="text-center">{{ $offer->intitule }}</td>
                                     <td class="text-center">{{ $offer->payementCycle }}</td>
-                                    <td class="text-center">{{ $offer->timeTest }}</td>
-                                    <td class="text-center">{{ $offer->userTest }}</td>
-                                    <td class="text-center">{{ $offer->reduction}}</td>
-
+                                    <td class="text-center">{{ $offer->montant }}</td>
+                                    {{--                                    <td class="text-center">{{ $offer->userTest }}</td>--}}
+                                    {{--                                    <td class="text-center">{{ $offer->reduction}}</td>--}}
                                     <td class="text-center" >
-{{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
-{{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-{{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-{{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-{{--                                            </form>--}}
-{{--                                        @endif--}}
+                                        {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+                                        {{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
+                                        <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
+                                        {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
+                                        {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
+                                        {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
+                                        {{--                                            </form>--}}
+                                        {{--                                        @endif--}}
                                     </td>
                                 </tr>
+                                @include('admin.offers.offer_modal',['offer'=>$offer])
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+        @endif
+
+    </div>
+
+
+    <div class="panel panel-flat col-md-6 col-md-offset-1">
+        <div class="panel-body " style="padding: 0;">
+            {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
+            {{--                @if(auth()->user()->payg == 0)--}}
+            {{--                    <div class="panel-heading pull-right">--}}
+            {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
+            {{--                    </div>--}}
+            {{--                @else--}}
+            {{--                    <div class="panel-heading pull-right">--}}
+            {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
+            {{--                    </div>--}}
+            {{--                @endif--}}
+            {{--            @endif--}}
+        </div>
+        @if (auth()->user()->hasRole('Superadmin'))
+            @if ($extras->isEmpty())
+                <div class="panel-body text-center">
+                    <div class="mt-30 mb-30">
+                        <h6 class="text-semibold">
+                            {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
+                            Aucune offre disponible
+                        </h6>
+                    </div>
+                </div>
+            @else
+                <div class="">
+                    <!-- /.box-header -->
+                    <div  style="padding: 15px">
+                        <table id="extra-tab" class="table stripe">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" style="color:#0065A1 !important">{{ trans('type') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('update') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($extras as $extra)
+                                <tr>
+                                    <td></td>
+                                    <td class="text-center">{{ $extra->type }}</td>
+                                    <td class="text-center">{{ $extra->cost}}</td>
+                                    <td class="text-center">{{ $extra->updated_at }}</td>
+                                    <td class="text-center" >
+                                        {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+{{--                                        <a href="{{  route('extra.edit', [$extra->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>--}}
+                                        <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#extraModal-{{$extra->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
+                                        @if(Auth::user()->rolename() == "Superadmin")
+                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('extra.destroy', [$extra->id]) }}" > @csrf @method('DELETE')
+                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @include('admin.offers.extra_modal',['extra'=>$extra])
                             @endforeach
                             </tbody>
                         </table>
@@ -289,6 +359,42 @@
     <script>
         $(function() {
             $('#offers-tab').DataTable({
+
+                "language": {
+                    @if( app()->getLocale() === "fr" )
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
+                    @endif
+                            @if( app()->getLocale() === "en")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+                    @endif
+                            @if( app()->getLocale() === "es")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                    @endif
+                            @if( app()->getLocale() === "pt")
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+                    @endif
+                },
+
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [
+                    {
+                        className: 'control',
+                        orderable: false,
+                        targets:   0
+                    },
+                    {
+                        orderable: false,
+                        targets: [-1]
+                    },
+                    { responsivePriority: 1, targets: 0 },
+                ],
+            });
+            $('#extra-tab').DataTable({
 
                 "language": {
                     @if( app()->getLocale() === "fr" )

@@ -1031,6 +1031,11 @@ class OperationController extends Controller
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
+    public function update_extra(){
+        return view('admin.extras.update');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
     public function store_extra(Request $request){
 
         $this->validate($request, User::rules());
