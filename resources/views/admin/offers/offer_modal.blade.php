@@ -10,31 +10,30 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="">
-                    <div class="my-content create-user">
-                        {!! Form::model($offer, [
-                                'action' => ['OfferController@update', $offer->id],
-                                'method' => 'put',
 
-                            ])
-                        !!}
-                        @csrf
-                        <?php
-                        $allowedRoles = config('variables.role');
-                        if (Auth::user()->rolename() !== "Superadmin") {
-                            foreach ($allowedRoles as $key => $value ) {
-                                if ($key >= Auth::user()->role) {
-                                    unset($allowedRoles[$key]);
-                                }
-                            }
+                <form id="form_offer_{{$offer->id}}" method='POST' action="{{route('offers.update',$offer->id)}}">
+                @csrf
+                    @method('PUT')
+                <?php
+                $allowedRoles = config('variables.role');
+                if (Auth::user()->rolename() !== "Superadmin") {
+                    foreach ($allowedRoles as $key => $value ) {
+                        if ($key >= Auth::user()->role) {
+                            unset($allowedRoles[$key]);
                         }
+                    }
+                }
 
-                        //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
-                        //$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
-                        ?>
+                ?>
+                    <div class="my-content create-user">
+
                         <div class="form-group focused" >
                             <label for="intitule">Intitule</label>
                             <input class="form-control" name="intitulé" type="text" value="{{$offer->intitule}}" id="intitule" disabled>
+                        </div>
+                        <div class="form-group focused" >
+                            <label for="montant">Prix</label>
+                            <input class="form-control" name="montant" type="text" value="{{$offer->montant}}" id="payementCycle" >
                         </div>
 
                         <div class="form-group focused" >
@@ -61,14 +60,15 @@
                         {{--                        <button class="btn btn-bloo">{{ trans('Mettre_jour') }}</button>--}}
                         {!! Form::close() !!}
                     </div>
-                </div>
+
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-bloo-cancel" data-dismiss="modal">{{trans('Annuler')}}</button>
-                <button type="button"  class="btn btn-bloo legitRipple">{{trans('Mettre_jour')}}</button>
+                <button onclick="form_submit('form_offer_{{$offer->id}}')" class="btn btn-bloo legitRipple">{{trans('Mettre_jour')}}</button>
 
             </div>
+            </form>
         </div>
     </div>
 </div>

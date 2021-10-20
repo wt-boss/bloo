@@ -10,6 +10,7 @@ use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\Offer;
 use App\Operation_user_save;
 use App\State;
 use App\Subscription;
@@ -1031,8 +1032,10 @@ class OperationController extends Controller
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
-    public function update_extra(){
-        return view('admin.extras.update');
+    public function update_extra(Request $request,$id){
+        $extra=Extra::findOrFail($id);
+        $extra->update($request->all());
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }

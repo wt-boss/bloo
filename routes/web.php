@@ -329,7 +329,7 @@ Route::resource('offers','OfferController')->middleware(['Role:Superadmin','Free
 //Route::get('extra/list','OperationController@list_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.list');
 Route::get('extra/list','OperationController@list_extra')->name('extra.list');
 Route::get('extra/add','OperationController@add_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.add');
-Route::get('extra/update','OperationController@update_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.update');
+Route::put('extra/update/{extra}','OperationController@update_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.update');
 Route::post('extra/store','OperationController@store_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.store');
 Route::post('extra/destroy','OperationController@destroy_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.destroy');
 Route::post('extra/disable','OperationController@disable_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.disable');

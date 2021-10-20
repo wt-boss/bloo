@@ -182,6 +182,9 @@
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
     {{--    <script src="{{ asset('assets/js/custom/main.js') }}"></script>--}}
     <script>
+        function form_submit(id) {
+            document.getElementById(id).submit();
+        }
         $(function() {
             window.csrf_token = csrfToken();
 

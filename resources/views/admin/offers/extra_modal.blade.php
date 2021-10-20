@@ -12,34 +12,29 @@
             <div class="modal-body">
                 <div class="">
                     <div class="my-content create-user">
-                        {!! Form::model($extra, [
-                                'action' => ['OperationController@update_extra', $extra->id],
-                                'method' => 'put',
 
-                            ])
-                        !!}
-                        @csrf
-                        <?php
-                        $allowedRoles = config('variables.role');
-                        if (Auth::user()->rolename() !== "Superadmin") {
-                            foreach ($allowedRoles as $key => $value ) {
-                                if ($key >= Auth::user()->role) {
-                                    unset($allowedRoles[$key]);
+                        <form id="form_extra_{{$extra->id}}" method='POST' action="{{route('extra.update',$extra->id)}}">
+                            @csrf
+                            @method('PUT')
+                            <?php
+                            $allowedRoles = config('variables.role');
+                            if (Auth::user()->rolename() !== "Superadmin") {
+                                foreach ($allowedRoles as $key => $value ) {
+                                    if ($key >= Auth::user()->role) {
+                                        unset($allowedRoles[$key]);
+                                    }
                                 }
                             }
-                        }
 
-                        //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
-                        //$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
-                        ?>
+                            ?>
                         <div class="form-group focused" >
-                            <label for="intitule">Type</label>
-                            <input class="form-control" name="intitulé" type="text" value="{{$extra->type}}" id="intitule" disabled>
+                            <label for="type">Type</label>
+                            <input class="form-control" name="type" type="text" value="{{$extra->type}}" id="type" disabled>
                         </div>
 
                         <div class="form-group focused" >
-                            <label for="payementCycle">Prix</label>
-                            <input class="form-control" name="payementCycle" type="text" value="{{$extra->cost}}" id="payementCycle" >
+                            <label for="cost">Prix</label>
+                            <input class="form-control" name="cost" type="text" value="{{$extra->cost}}" id="cost" >
                         </div>
 
 
@@ -47,14 +42,15 @@
                         <br>
                         {{--                        <a class="btn btn-bloo-cancel" href="{{ route('offers.index') }}">{{ trans('Annuler') }}</a>--}}
                         {{--                        <button class="btn btn-bloo">{{ trans('Mettre_jour') }}</button>--}}
-                        {!! Form::close() !!}
+
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-bloo-cancel" data-dismiss="modal">{{trans('Annuler')}}</button>
-                <button type="button"  class="btn btn-bloo legitRipple">{{trans('Mettre_jour')}}</button>
+                <button onclick="form_submit('form_extra_{{$extra->id}}')" class="btn btn-bloo legitRipple">{{trans('Mettre_jour')}}</button>
+                {!! Form::close() !!}
 
             </div>
         </div>
