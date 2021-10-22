@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminClient;
 use App\City;
 use App\Entreprise;
 use App\Extra;
@@ -1059,6 +1060,11 @@ class OperationController extends Controller
     }
     public function enable_extra($id){
         DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>1]);
+    }
+    public function set_admin($client_id,$admin_id){
+        $admin=User::findOrfail($admin_id);
+        $client=User::findOrfail($client_id);
+        $admin->admins()->attach($client);
     }
 
 }

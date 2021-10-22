@@ -235,5 +235,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Consomation::class);
     }
+    public function admins(){
+        return $this->belongsToMany(User::class)->using(AdminClient::class);
+    }
 
 }

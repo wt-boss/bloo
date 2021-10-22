@@ -8,7 +8,7 @@
 
     @include('partials.alert', ['name' => 'index'])
     <div class="col-md-6">
-        <div class="panel panel-flat col-md-11">
+        <div class="panel panel-flat col-md-12">
             <div class="panel-body " style="padding: 0;">
                 {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
                 {{--                @if(auth()->user()->payg == 0)--}}
@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-flat col-md-11">
+        <div class="panel panel-flat col-md-12">
             <div class="panel-body " style="padding: 0;">
                 {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
                 {{--                @if(auth()->user()->payg == 0)--}}
