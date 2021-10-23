@@ -700,6 +700,11 @@
     "You still have": "Il vous reste",
     "tokens" : "jetons",
     "Conditional logic":"Logique conditionnel",
-    "Please choose an option": "Veuillez choisir une option"
+    "Please choose an option": "Veuillez choisir une option",
+    "Conditions":"Les conditions",
+    "I WANT TO SHOW THE QUESTIONS": "JE VEUX MONTRER LES QUESTIONS",
+    "WHEN": "LORSQUE",
+    "IS EQUAL TO": "EST ÉGAL À",
+    "CONDITIONS MANAGEMENT": "GESTION DES CONDITIONS"
 
 }

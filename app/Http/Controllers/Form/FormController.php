@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Form;
 
 
 use App\Conditional;
+use App\Conditional_field;
 use App\Form;
 use App\FormAvailability;
 use App\FormField;
@@ -133,17 +134,15 @@ class FormController extends Controller
         //Recuperation des questions du formulaire;
         $questions = FormField::where('form_id',$form->id)->get();
 
-        return view('forms.form.conditional', compact('questions'));
+        return view('forms.form.conditional', compact('questions','form'));
     }
 
     public function conditionalpost(Request $request){
-
-        $display = $request->get('display');
         $question = $request->get('questions');
         $value = $request->get('value');
         $questions = $request["questions_check"];
         foreach($questions as $item){
-            FormField::where('id',$item)->update(['display' => $display]);
+            FormField::where('id',$item)->update(['display' => 'none']);
         }
         $field = FormField::findOrFail($question);
 
@@ -153,9 +152,18 @@ class FormController extends Controller
         $conditional->field_id = $field->id;
         $conditional->field_name = $field->attribute;
         $conditional->value = $value;
-        $conditional->display = $display;
+        $conditional->display = "contents";
         $conditional->save();
 
+        //Enregistrement des questions liees a la conditions
+        foreach($questions as $item){
+            $conditional_fields = new Conditional_field();
+            $conditional_fields->conditional_id = $conditional->id;
+            $conditional_fields->field_id = $item;
+            $conditional_fields->save();
+        }
+
+        return redirect()->route('forms.show', $request->form);
     }
 
     public function show_free(Request $request)
@@ -325,8 +333,7 @@ class FormController extends Controller
     {
         $current_user = Auth::user();
         //Recuperation des condtions du formulaire;
-        $conditions = Conditional::where('form_id', $form->id)->get();
-
+        $conditions = Conditional::with('conditional_fields')->where('form_id', $form->id)->get();
         return view('forms.form.view_form', ['form' => $form, 'conditions' => $conditions, 'view_type' => 'preview']);
     }
 

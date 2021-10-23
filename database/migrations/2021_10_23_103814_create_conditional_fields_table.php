@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConditionalsTable extends Migration
+class CreateConditionalFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateConditionalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('conditionals', function (Blueprint $table) {
+        Schema::create('conditional_fields', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('form_id');
+            $table->unsignedBigInteger('conditional_id');
             $table->unsignedInteger('field_id');
-            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('conditional_id')->references('id')->on("conditionals");
             $table->foreign('field_id')->references('id')->on('form_fields');
-            $table->string('field_name');
-            $table->string('value');
-            $table->string('display');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateConditionalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conditionals');
+        Schema::dropIfExists('conditional_fields');
     }
 }

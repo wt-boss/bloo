@@ -16,39 +16,23 @@
 @endsection
 
 @section('content')
-    <div class="panel panel-flat border-left-xlg border-left-success">
-        <div class="panel-heading">
-            <h4 class="panel-title text-semibold">My Forms</h4>
-            <div class="heading-elements">
-                <a href="{{ route('forms.index') }}" class="btn btn-primary heading-btn">All Forms</a>
-            </div>
-        </div>
-    </div>
 
     <div class="panel panel-flat border-top-lg border-top-success">
         <div class="panel-heading">
-            <h5 class="panel-title">Create a Form</h5>
+            <h5 class="panel-title">{{trans("CONDITIONS MANAGEMENT")}}</h5>
         </div>
         <div class="panel-body">
             <form id="forms" method="post" action="{{route("forms.conditionalpost")}}" autocomplete="off">
                 @csrf
-                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                    <label for="description">I WANT TO : <span class="text-danger">*</span></label>
-                    <select name="display"  class="form-control">
-                        <option value="none">HIDE</option>
-                        <option value="contents">SHOW</option>
-                    </select>
-                </div>
-
                 <div class="form-group">
-                    <label for="description">FIELDS : <span class="text-danger">*</span></label><br>
+                    <label for="description">{{trans("I WANT TO SHOW THE QUESTIONS")}} : <span class="text-danger">*</span></label><br>
                     @foreach($questions as $key => $field)
                         <input type="checkbox"  value="{{$field->id}}" name="questions_check[]"> Question {{$key + 1 }} : {{$field->question}} {{$field->template}} <br>
                     @endforeach
                 </div>
 
                 <div class="form-group">
-                    <label for="description">WHEN : <span class="text-danger">*</span></label><br>
+                    <label for="description">{{trans("WHEN")}} : <span class="text-danger">*</span></label><br>
                     <select name="questions" id="question-select" class="form-control">
                     @foreach($questions as $key => $field)
                             @if($field->template == "multiple-choices")
@@ -59,12 +43,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description">EQUQL TO : <span class="text-danger">*</span></label><br>
+                    <label for="description">{{trans("IS EQUAL TO")}} : <span class="text-danger">*</span></label><br>
                     <input type="text" class="form-control" id="value" name="value" placeholder="Value"  required>
+                    <input type="hidden"  value="{{$form->code}}" name="form">
                 </div>
 
                 <div class="text-right">
-                    <button style="background-color: #0065a1;"  type="submit" id="submit" class="btn mt-20 btn-{{  'success' }}">{{ 'Créer' }}</button>
+                    <button style="background-color: #0065a1;"  type="submit" id="submit" class="btn mt-20 btn-{{  'success' }}">{{ trans('save') }}</button>
                 </div>
             </form>
         </div>

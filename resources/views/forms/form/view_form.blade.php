@@ -117,10 +117,14 @@ $fields = $form->fields()->filled()->get();
             window.onload = function(){
                 @foreach ($conditions as $item)
                 $("#user-form input[name='{{$item->field_name}}']").click(function(){
-                    alert('You clicked radio!');
-                    if($('input:radio[name=type]:checked').val() == "walk_in"){
-                        alert($('input:radio[name=type]:checked').val());
-                        //$('#select-table > .roomNumber').attr('enabled',false);
+                    if($('input:radio[name="{{$item->field_name}}"]:checked').val() === "{{$item->value}}"){
+                        @foreach($item->conditional_fields as $key => $field)
+                            document.querySelector(`[data-id="{{$field->field_id}}"]`).style.display="{{$item->display}}";
+                        @endforeach
+                    }else{
+                        @foreach($item->conditional_fields as $key => $field)
+                           document.querySelector(`[data-id="{{$field->field_id}}"]`).style.display="none";
+                        @endforeach
                     }
                 });
                 @endforeach

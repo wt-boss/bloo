@@ -71,7 +71,8 @@
         @endif
         {{-- <a href="{{ ($form_is_ready) ? route('forms.preview', $form->code) : 'javascript:void(0)' }}" class="btn btn-primary btn-xs position-right{{ ($form_is_ready) ? '' : ' hidden' }}" target="_blank" id="form-preview"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a> --}}
         <a   style="background-color: #0080BB; margin-left:0px; " href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
-        @if(auth()->user()->hasRole('Free'))
+        <a   style=" background-color:#8AD2E6; color: #fff; margin-left:0px; " href="{{ route('forms.conditional', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('Conditions') }}</a>
+    @if(auth()->user()->hasRole('Free'))
             @include('forms.partials._form-share-free')
         @endif
     </div>
@@ -140,6 +141,7 @@
                     @endif
                     {{-- <a href="{{ ($form_is_ready) ? route('forms.preview', $form->code) : 'javascript:void(0)' }}" class="btn btn-primary btn-xs position-right{{ ($form_is_ready) ? '' : ' hidden' }}" target="_blank" id="form-preview"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a> --}}
                     <a   style="background-color: #0080BB; margin-left:0px; " href="{{ route('forms.preview', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('preview') }}</a>
+                    <a   style=" background-color:#8AD2E6; color: #fff; margin-left:0px; " href="{{ route('forms.conditional', $form->code) }}" class="btn btn-primary btn-xs position-right legitRipple" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> {{ trans('Conditions') }}</a>
                     @if(auth()->user()->hasRole('Free'))
                         @include('forms.partials._form-share-free')
                     @endif
