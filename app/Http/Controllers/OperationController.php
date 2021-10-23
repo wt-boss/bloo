@@ -1066,5 +1066,10 @@ class OperationController extends Controller
         $client=User::findOrfail($client_id);
         $admin->admins()->attach($client);
     }
+    public function unset_admin($client_id,$admin_id){
+    $admin=User::findOrfail($admin_id);
+    $client=User::findOrfail($client_id);
+    $admin->admins()->detach($client);
+}
 
 }

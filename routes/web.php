@@ -334,7 +334,5 @@ Route::post('extra/store','OperationController@store_extra')->middleware(['Role:
 Route::post('extra/destroy','OperationController@destroy_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.destroy');
 Route::post('extra/disable','OperationController@disable_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.disable');
 Route::post('extra/enable','OperationController@enable_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.enable');
-
-
-
-
+Route::post('users/admin','OperationController@set_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.setadmin');
+Route::post('users','OperationController@unset_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.unsetadmin');
