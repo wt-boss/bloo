@@ -375,8 +375,9 @@ class FormController extends Controller
     {
         $not_allowed = !in_array($form->status, [Form::STATUS_OPEN, Form::STATUS_CLOSED]);
         abort_if($not_allowed, 404);
-
-        return view('forms.form.view_form', ['form' => $form, 'view_type' => 'form']);
+        //Recuperation des condtions du formulaire;
+        $conditions = Conditional::with('conditional_fields')->where('form_id', $form->id)->get();
+        return view('forms.form.view_form', ['form' => $form, 'conditions' => $conditions, 'view_type' => 'form']);
     }
 
     public function shareViaEmail(Request $request, $form)
