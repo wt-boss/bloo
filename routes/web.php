@@ -220,16 +220,6 @@ Route::get('themessages','TheMessageController@index')->name('messages_index');
 Route::post('message', 'TheMessageController@sendMessage');
 Route::get('/message/{id}', 'TheMessageController@getMessage')->name('message');
 
-
-
-
-Route::get('messages','MessageController@index')->name('messages_index');
-Route::post('messages_show/{operation}','MessageController@show')->name('messages_show');
-Route::get('/private-message/{user}/{operation}','MessageController@privateMessages');
-Route::post('/private-message/{user}/{operation}','MessageController@sendPrivateMessage');
-Route::get('/users_list','MessageController@users');
-Route::get('/operation_messages/{id1}/{id2}', 'MessageController@getOperationMessage')->name('operationmessage');
-
 //Route Profile
 Route::get('/profile','HomeController@profile')->name('profile')->middleware('auth');
 

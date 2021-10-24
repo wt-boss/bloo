@@ -31,13 +31,21 @@ class TheMessageController extends Controller
         //Si le client est un Admin cote Bloo, On recupere les clients qui lui sont assigne et les affiches;
         if($AuthUser->role === 6){
             $clientIdArray = Admin_Client::where('admin_id',$AuthUser->id)->get("client_id");
-            foreach($clientIdArray as $client){
-                $clientId[] = $client->client_id;
+            if(isset($clientIdArray)){
+                foreach($clientIdArray as $client){
+                    $clientId[] = $client->client_id;
+                }
+            }else{
+                $clientId[] = 0 ;
             }
         }else if($AuthUser->role === 4){
             $clientIdArray = Admin_Client::where('client_id',$AuthUser->id)->get("admin_id")->first();
-            $clientId[] = $clientIdArray->admin_id;
-            $User = User::with('operations')->findOrFail($AuthUser->id);
+            if(isset($clientIdArray)){
+                $clientId[] = $clientIdArray->admin_id;
+            }else {
+                $clientId[] = 0 ;
+            }
+        $User = User::with('operations')->findOrFail($AuthUser->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
 
         }else if($AuthUser->role === 1){
@@ -46,6 +54,7 @@ class TheMessageController extends Controller
             $form = Form::findOrFail($operation->form_id);
             $clientId[] = $form->user_id;
         }
+
         $clientId = implode(",",$clientId);
 
         $clients = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
