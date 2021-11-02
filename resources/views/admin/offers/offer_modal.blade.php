@@ -1,5 +1,5 @@
 
-<div id="myModal-{{$offer->id}}" class="modal" tabindex="-1">
+<div id="myModal-{{$offer->id}}" class="modal" tabindex="-1" data-easein="bounce" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">

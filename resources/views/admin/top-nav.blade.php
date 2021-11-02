@@ -15,6 +15,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    {{--    modal css --}}
+    <link rel="stylesheet" href="{{asset('css/modal.css')}}">
+
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Rubik:wght@300&display=swap"
           rel="stylesheet">
     <!-- Bootstrap 3.3.7 -->

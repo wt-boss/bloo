@@ -168,6 +168,7 @@
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+
 @endsection
 
 @section('plugin-scripts')
@@ -434,6 +435,8 @@
                 ],
             });
 
+
+
             // Enable Select2 select for the length option
             $('.dataTables_length select').select2({
                 minimumResultsForSearch: Infinity,
@@ -442,5 +445,6 @@
             // Set onclick cbg-colour .btn-success
         });
     </script>
+
 @endsection
 

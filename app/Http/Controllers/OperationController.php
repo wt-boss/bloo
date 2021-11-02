@@ -1026,7 +1026,7 @@ class OperationController extends Controller
         $extra=$subscription->extras()->get();
         dd($extra);
         return response()->json($extra);
-       // return view('admin.extras.index',compact('extra'));
+        // return view('admin.extras.index',compact('extra'));
     }
     public function add_extra(){
         return view('admin.extras.add');
@@ -1036,6 +1036,7 @@ class OperationController extends Controller
     public function update_extra(Request $request,$id){
         $extra=Extra::findOrFail($id);
         $extra->update($request->all());
+        $this->change_extra($extra);
         return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
@@ -1067,9 +1068,37 @@ class OperationController extends Controller
         $admin->admins()->attach($client);
     }
     public function unset_admin($client_id,$admin_id){
-    $admin=User::findOrfail($admin_id);
-    $client=User::findOrfail($client_id);
-    $admin->admins()->detach($client);
-}
+        $admin=User::findOrfail($admin_id);
+        $client=User::findOrfail($client_id);
+        $admin->admins()->detach($client);
+    }
+    public function change_extra($extra){
+        $date_chg=date("Y-m-d h:i:s");
+        $ended_date=strtotime($date_chg."+100 years");
+        $ended_date=date("Y-m-d h:i:s",$ended_date);
+        $record=DB::table('extra_changes')->where('extra_id',$extra->id)->latest();
+        if($record){
+            $record->update(['ended_date'=>$date_chg]);
+        }
+        DB::table('extra_changes')->insert(['extra_id'=>$extra->id,'montant'=>$extra->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
+
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
+    public function change_offer($offer){
+        $date_chg=date("Y-m-d h:i:s");
+        $ended_date=strtotime($date_chg."+100 years");
+        $ended_date=date("Y-m-d h:i:s",$ended_date);
+        $record=DB::table('offer_changes')->where('offer_id',$offer->id)->latest();
+        if($record){
+            $record->update(['ended_date'=>$date_chg]);
+        }
+       // DB::table('offer_changes')->where('extra_id',$offer->id)->first()->update(['ended_date'=>$date_chg]);
+        DB::table('offer_changes')->insert(['offer_id'=>$offer->id,'montant'=>$offer->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
 
 }
