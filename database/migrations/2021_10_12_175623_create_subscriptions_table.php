@@ -20,6 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->unsignedBigInteger('offer_id');
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->dateTime('date');
+            $table->string('state');
             $table->timestamps();
         });
     }
