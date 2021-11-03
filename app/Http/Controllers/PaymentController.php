@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use AkibTanjim\Currency\Currency;
 use App\Abonnement;
 use App\Entreprise;
+use App\Extra;
+use App\Facture;
 use App\Form;
 use App\FormAvailability;
 use App\Http\Requests\OffreRequest;
+use App\Offer;
 use App\Offre;
 use App\Operation;
 use App\Operation_user;
@@ -17,6 +20,7 @@ use App\Token;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -34,6 +38,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use phpDocumentor\Reflection\Types\Array_;
 use Redirect;
 use Session;
 use URL;
@@ -194,8 +199,10 @@ class PaymentController extends Controller
         $subscription->state='demo';
         $subscription->date=date('Y-m-d H:i:s');
         $subscription->save();
+
         $user->sendEmailVerificationNotification();
         $entreprise->users()->attach($user);
+        $this->make_bill($subscription);
 
         /** Si l'offre choisi est primus alors, creation d'une operation */
 //        if($data['amount'] == "3466.22" )
@@ -245,6 +252,8 @@ class PaymentController extends Controller
             $abonnement->end =  $date2->toDateTimeString();
             $abonnement->save();
         }
+
+
         /** Recherche de l'offre choisi**/
         //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();
         /** Création du paiement **/
@@ -259,6 +268,21 @@ class PaymentController extends Controller
 //        \Session::put('error', 'Unknown error occurred');
 
         return view('successoffre');
+    }
+    public function make_bill($subscription){
+        $facture=new Facture();
+        $json=[];
+        $offer=Offer::findOrFail($subscription->offer_id);
+
+        $json['subscription_id']=$subscription->id;
+        $json['offer_id']=$subscription->offer_id;
+        $json['offer_price']=$offer->montant;
+        $json['date']=Carbon::now();
+        $facture->subscriptions_id=$subscription->id;
+        $facture->date=Carbon::now();
+        $facture->Total=$offer->montant;
+        $facture->info_json=json_encode($json);
+        $facture->save();
     }
 
 //    public function getPaymentStatus()
