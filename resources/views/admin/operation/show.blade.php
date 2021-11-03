@@ -270,6 +270,8 @@
                                 <tr>
                                     @php
                                       $location = \App\Location::where('user_id',$user->id)->get()->last();
+                                      $responce = \App\FormResponse::where('form_id',$operation->form_id)->where('respondent_id',$user->id)->get()->count();
+
                                     @endphp
                                     <td class="m_operateur"
                                     @if(!is_null($location))
@@ -281,8 +283,12 @@
                                         <span class="pull-right">
                                             @if (auth()->user()->hasRole('Superadmin|Client'))
                                                 @if($operation->status != "TERMINER")
-                                                <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                                    @if(auth()->user()->payg === 1)
+                                                        @if($responce <= 0)
+                                                            <i class="fa fa-minus-circle removeoperateur"  id="removeoperateur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
+                                                        @endif
                                                     @endif
+                                                @endif
                                             @endif
                                        </span>
                                     </td>

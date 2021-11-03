@@ -26,7 +26,7 @@ class ApiRepository
             'status' => $status,
             'message' => $message,
             'content' => $content,
-            'token' => ($token) ? 'Bearer ' . $token : null,
+            'token' => ($token) ?: null,
             'extra' => $extra
         ], $code);
     }

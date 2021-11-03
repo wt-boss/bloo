@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use AkibTanjim\Currency\Currency;
+use App\Abonnement;
 use App\Entreprise;
 use App\Form;
 use App\FormAvailability;
@@ -11,8 +12,10 @@ use App\Offre;
 use App\Operation;
 use App\Operation_user;
 use App\Paiement;
+use App\Subscription;
 use App\Token;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,19 +69,19 @@ class PaymentController extends Controller
         $parameters = $request->all();
 
 
-          if($parameters['options'] === "PARTICULIER")
-          {
-              if($parameters['user_password'] != $parameters['user_conf_password'])
-              {
-                  return back()->withErrors("Veillez confirmer votre mot de passe.");
-              }
-          }
-          else{
-              if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
-              {
-                  return back()->withErrors("Veillez confirmer votre mot de passe.");
-              }
-          }
+        if($parameters['options'] === "PARTICULIER")
+        {
+            if($parameters['user_password'] != $parameters['user_conf_password'])
+            {
+                return back()->withErrors("Veillez confirmer votre mot de passe.");
+            }
+        }
+        else{
+            if($parameters['user_password_entreprise'] != $parameters['user_conf_password_entreprise'])
+            {
+                return back()->withErrors("Veillez confirmer votre mot de passe.");
+            }
+        }
 
         $data = $request->except('_token');
 
@@ -180,18 +183,30 @@ class PaymentController extends Controller
 
         $entreprise->save();
         $user->save();
+        $subscription=new Subscription();
+        $subscription->user_id=$user->id;
+        if($data['offer']=='Monthly'){
+            $subscription->offer_id=2;
+        }else{
+            $subscription->offer_id=1;
+        }
+
+        $subscription->state='demo';
+        $subscription->date=date('Y-m-d H:i:s');
+        $subscription->save();
         $user->sendEmailVerificationNotification();
         $entreprise->users()->attach($user);
 
         /** Si l'offre choisi est primus alors, creation d'une operation */
-        if($data['amount'] == "3466.22" )
+//        if($data['amount'] == "3466.22" )
+        if($data['offer'] == "PayAsYouGo" )
         {
             $user->payg = 1;
             $user->save();
 
             $tokens = new Token();
             $tokens->user_id = $user->id;
-            $tokens->own = 10 ;
+            $tokens->own = $parameters["number_operator"] ;
             $tokens->save();
 
             $form = new Form([
@@ -220,8 +235,18 @@ class PaymentController extends Controller
             $operation->save();
             $operation->users()->attach($user);
         }
+        else
+        {
+            $date1 = Carbon::now();
+            $date2 = Carbon::now()->addMonths(1);
+            $abonnement = New Abonnement();
+            $abonnement->user_id = $user->id;
+            $abonnement->start =  $date1->toDateTimeString();
+            $abonnement->end =  $date2->toDateTimeString();
+            $abonnement->save();
+        }
         /** Recherche de l'offre choisi**/
-       //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();
+        //$offre_id = Offre::where('montant','=',$data['amount'])->pluck('id')->get()->first();
         /** Création du paiement **/
         // $paiement = new Paiement();
         // $paiement->paiement_id = $payment->getId();

@@ -227,5 +227,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(City::class);
     }
+    public function subscriptions()
+    {
+        return $this->hasOne('App\Subscription');
+    }
+    public function consomations()
+    {
+        return $this->hasMany(Consomation::class);
+    }
+    public function admins(){
+        return $this->belongsToMany(User::class)->using(AdminClient::class);
+    }
 
 }

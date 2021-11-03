@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <div class="form-group col-6">
-                            <input type="hidden"  value="" name="amount" id="amount" class="address-city form-control" >
+                            <input type="hidden"  value="Monthly" name="offer" id="offer" class="address-city form-control" >
                         </div>
                     </div>
                     <div class="row">

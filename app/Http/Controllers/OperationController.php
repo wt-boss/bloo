@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminClient;
 use App\City;
 use App\Entreprise;
+use App\Extra;
 use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
 use App\Notifications\EventNotification;
 use App\Notifications\MessageRated;
+use App\Offer;
 use App\Operation_user_save;
 use App\State;
+use App\Subscription;
 use App\Token;
 use Carbon\Carbon;
+use http\Env\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -64,6 +70,7 @@ class OperationController extends Controller
             $User = User::with('operations')->findOrFail($user->id);
             $operations = $User->operations()->with('form', 'entreprise')->orderBy('id','DESC')->get();
         }
+
         return view('admin.operation.index', compact('operations', 'operation','tokens'));
     }
 
@@ -209,7 +216,7 @@ class OperationController extends Controller
 
         $user = User::findOrFail($id);
         $operation = Operation::findOrFail($id1);
-        $message = "Vous avez été retier de l'operration : " . $operation->nom;
+        $message = "Vous avez été retiré de l'operation : " . $operation->nom;
         $operation->users()->detach($user);
         $user->notify(new EventNotification($message));
         $pusher = App::make('pusher');
@@ -415,7 +422,7 @@ class OperationController extends Controller
                 $users->push($user);
             }
         }
-       // $viewData = Helper::buildUsersList($users);
+        // $viewData = Helper::buildUsersList($users);
         $viewData = (string)View::make('Helpers.BuildUsersList', compact('users'));
         return response()->json($viewData);
     }
@@ -531,7 +538,7 @@ class OperationController extends Controller
                 'response_view' => $view,
                 'data_for_chart' => json_encode($data_for_chart),
                 'response_view2' => $viewprint,
-               'data_for_chart2' => json_encode($data_for_chart2),
+                'data_for_chart2' => json_encode($data_for_chart2),
                 'response_operateurs' => $viewoperateurs,
                 'tokens' => $tokens
             ];
@@ -943,8 +950,8 @@ class OperationController extends Controller
      */
     public function getSites($id)
     {
-         $operation = Operation::with('sites')->findOrFail($id);
-         return response()->json($operation->sites()->get());
+        $operation = Operation::with('sites')->findOrFail($id);
+        return response()->json($operation->sites()->get());
     }
 
     /**
@@ -1004,4 +1011,87 @@ class OperationController extends Controller
 //                // fail code
 //            }
     }
+
+
+    public function list_extra(Request $request){
+        $user=Auth::user();
+        $subscription=$user->subscriptions()->first();
+        $extra=$subscription->extras()->get();
+        dd($extra);
+        return response()->json($extra);
+        // return view('admin.extras.index',compact('extra'));
+    }
+    public function add_extra(){
+        return view('admin.extras.add');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
+    public function update_extra(Request $request,$id){
+        $extra=Extra::findOrFail($id);
+        $extra->update($request->all());
+        $this->change_extra($extra);
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
+    public function store_extra(Request $request){
+
+        $this->validate($request, User::rules());
+        User::create(request()->all());
+        $extra_user=User::OrderBy('id','desc')->first();
+        $user=Auth::user();
+        $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
+        $extra=Extra::where('type','=',$extra_user->rolename())->get();
+        $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
+        return redirect(route('extra.list'))->withSuccess('Extra créer avec sucess');
+
+    }
+    public function remove_extra($id){
+
+    }
+    public function disable_extra($id){
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>0]);
+    }
+    public function enable_extra($id){
+        DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>1]);
+    }
+    public function set_admin($client_id,$admin_id){
+        $admin=User::findOrfail($admin_id);
+        $client=User::findOrfail($client_id);
+        $admin->admins()->attach($client);
+    }
+    public function unset_admin($client_id,$admin_id){
+        $admin=User::findOrfail($admin_id);
+        $client=User::findOrfail($client_id);
+        $admin->admins()->detach($client);
+    }
+    public function change_extra($extra){
+        $date_chg=date("Y-m-d h:i:s");
+        $ended_date=strtotime($date_chg."+100 years");
+        $ended_date=date("Y-m-d h:i:s",$ended_date);
+        $record=DB::table('extra_changes')->where('extra_id',$extra->id)->latest();
+        if($record){
+            $record->update(['ended_date'=>$date_chg]);
+        }
+        DB::table('extra_changes')->insert(['extra_id'=>$extra->id,'montant'=>$extra->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
+
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
+    public function change_offer($offer){
+        $date_chg=date("Y-m-d h:i:s");
+        $ended_date=strtotime($date_chg."+100 years");
+        $ended_date=date("Y-m-d h:i:s",$ended_date);
+        $record=DB::table('offer_changes')->where('offer_id',$offer->id)->latest();
+        if($record){
+            $record->update(['ended_date'=>$date_chg]);
+        }
+       // DB::table('offer_changes')->where('extra_id',$offer->id)->first()->update(['ended_date'=>$date_chg]);
+        DB::table('offer_changes')->insert(['offer_id'=>$offer->id,'montant'=>$offer->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
+        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
+
+    }
+
 }

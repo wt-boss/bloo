@@ -9,6 +9,8 @@ use App\Exports\FormResponseUserExport;
 use App\Form;
 use App\Location;
 use App\Operation;
+use App\User_payg;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +60,20 @@ class ResponseController extends Controller
             //On verfie si c'est un sondage gratuit ou payant
             if(!empty($operation))
             {
+                //on verifie de nombre de reponse que cet operateurs a deja soumise
+                $id = Auth::check() ? Auth::user()->id : 0;
+                $responce = FormResponse::where('form_id',$operation->form_id)->where('respondent_id',$id)->get()->count();
+                $date1 = Carbon::now();
+                $date2 =  Carbon::now()->add(1, 'day');
+                if($responce <= 0)
+                {
+                    $payg = new User_payg();
+                    $payg->user_id = $id;
+                    $payg->operation_id = $operation->id;
+                    $payg->start =  $date1->toDateTimeString();
+                    $payg->end = $date2->toDateTimeString();
+                    $payg->save();
+                }
                 //Sauvegarde de la position de l'operateur
                 $location = new Location([
                     'user_id' =>  Auth::check() ? Auth::user()->id : 0,

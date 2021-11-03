@@ -182,6 +182,7 @@
     "free_form1_label2": "Objectif :",
     "free_form1_label3": "Date de début :",
     "free_form1_label4": "Date de fin :",
+    "free_form1_label5": "Nombre d'opérateurs",
     "free_form2_label1": "Titre : ",
     "free_form2_label2": "Mot de passe : ",
     "Verify Email Address": "Vérifier l'adresse E-mail",
@@ -412,6 +413,7 @@
     "entre4": "Entrer l'adresse de l'entreprise",
     "entrer3": "Entrer le nom de l'entreprise",
     "Entre2": "Entrer l'objectif de l'opération",
+    "Entre3": "Entrer le nombre d'operateurs voulus",
     "Entrer": "Entrer le nom de l'opération",
     "create_user": "Création d'un utilisateur",
     "first_name": "Noms",
@@ -705,6 +707,17 @@
     "I WANT TO SHOW THE QUESTIONS": "JE VEUX MONTRER LES QUESTIONS",
     "WHEN": "LORSQUE",
     "IS EQUAL TO": "EST ÉGAL À",
-    "CONDITIONS MANAGEMENT": "GESTION DES CONDITIONS"
+    "CONDITIONS MANAGEMENT": "GESTION DES CONDITIONS",
+    "aucune_offre": "Aucune offre disponible",
+    "intitule": "Offre",
+    "payementCycle": "Durée",
+    "timeTest": "Essai",
+    "userTest": "Extras",
+    "reduction": "Réduction",
+    "update_offer": "Mise à jour de l'offre",
+    "update_extra": "Mise à jour de l'extra",
+    "cost": "Prix",
+    "type": "Libellé",
+    "update": "Mise à jour"
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCaseToUsersTable extends Migration
+class UpdateUserssTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ class AddCaseToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean("payg")->default(0);
-            $table->boolean("abonnement")->default(0);
-
+            $table->dropColumn('payg');
+            $table->dropColumn('abonnement');
+            $table->dropForeign('users_abonnement_id_foreign');
+            $table->dropColumn('abonnement_id');
         });
     }
 
@@ -28,7 +29,9 @@ class AddCaseToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->integer('payg');
+            $table->integer('abonnement');
+            $table->integer('abonnement_id');
         });
     }
 }
