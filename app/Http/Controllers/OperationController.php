@@ -1052,6 +1052,8 @@ class OperationController extends Controller
         $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
         $extra=Extra::where('type','=',$extra_user->rolename())->get();
         $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
+
+
         $facture=Facture::where('subscription_id',$subscription->id);
         $date=date();
         $json=$facture->infos_json;
@@ -1118,6 +1120,11 @@ class OperationController extends Controller
         $father_id=DB::table('extra_subscription')->where('extra_id',$user->id)->first();
         $father=User::findOrFail($father_id);
         return response()->json($father);
+    }
+    public function retrieve_children_list($id){
+        $father=User::findOrFail($id);
+        $children=DB::table('extra_subscription')->where('suscriber_id',$father->id)->get();
+        return response()->json($children);
     }
 
 }
