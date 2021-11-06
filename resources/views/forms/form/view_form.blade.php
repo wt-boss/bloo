@@ -124,6 +124,12 @@ $fields = $form->fields()->filled()->get();
                     }else{
                         @foreach($item->conditional_fields as $key => $field)
                            document.querySelector(`[data-id="{{$field->field_id}}"]`).style.display="none";
+                            let firstDiv{{$key}} = document.querySelector(`[data-id="{{$field->field_id}}"]`).firstElementChild;
+                            let secondDiv{{$key}} = firstDiv{{$key}}.firstElementChild;
+                            let thirdDiv{{$key}} = secondDiv{{$key}}.firstElementChild;
+                            let lastDiv{{$key}} = thirdDiv{{$key}}.lastElementChild;
+                            lastDiv{{$key}}.required = false;
+                            console.log(lastDiv{{$key}});
                         @endforeach
                     }
                 });

@@ -114,7 +114,7 @@ class ResponseController extends Controller
             }
 
             foreach ($inputs as $attribute => $input) {
-                $rule = ($input['required']) ? 'required|' : 'nullable|';
+                $rule =  'nullable|';
                 $messages = ($input['required']) ? ['required' => 'All questions with * are required'] : [];
 
                 switch ($input['template']) {
