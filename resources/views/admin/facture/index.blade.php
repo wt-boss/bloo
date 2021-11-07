@@ -152,9 +152,10 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th class="text-center" style="color:#0065A1 !important">{{ trans('Description') }}</th>
                                         <th class="text-center" style="color:#0065A1 !important">{{ trans('Status') }}</th>
                                         <th class="text-center "style="color:#0065A1 !important">{{ trans('Date') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('Total') }}</th>
+                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('Montant') }}</th>
                                         <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
 
                                     </tr>
@@ -163,7 +164,8 @@
                                     @foreach($factures as $facture)
                                         <tr>
                                             <td></td>
-                                            <td class="text-center">{{ $facture->state }}</td>
+                                            <td class="text-center">{{ $facture->description }} <br><span style="font-size: 11px"><a href="">{{$facture->updated_at.' - '}}</a><a href="#">{{$facture->updated_at->addMonth(1)}}</a></span></td>
+                                            <td class="text-center">{{ $facture->state }} <br><span style="font-size: 11px"><a href="">view invoice</a></span></td>
                                             <td class="text-center">{{ $facture->date }}</td>
                                             <td class="text-center">{{ $facture->Total }}</td>
                                             <td class="text-center" >
