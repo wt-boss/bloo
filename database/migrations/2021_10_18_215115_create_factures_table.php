@@ -16,6 +16,7 @@ class CreateFacturesTable extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscriptions_id');
+            $table->string('description');
             $table->text('info_json');
             $table->foreign('subscriptions_id')->references('id')->on('subscriptions');
             $table->dateTime('date');

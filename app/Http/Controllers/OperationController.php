@@ -1054,13 +1054,29 @@ class OperationController extends Controller
         $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
 
 
-        $facture=Facture::where('subscription_id',$subscription->id);
-        $date=date();
-        $json=$facture->infos_json;
-        $facture->Total=$facture->Total+$extra->cost;
+//        $facture=Facture::where('subscription_id',$subscription->id);
+//        $date=date();
+//        $json=$facture->infos_json;
+//        $facture->Total=$facture->Total+$extra->cost;
+//
+//        $facture->infos_json=$json;
+//        $facture->save();
+
+        $facture=new Facture();
+        $json=[];
+        $date=Carbon::now();
+        $offer=Offer::findOrFail($subscription->offer_id);
+        $json['subscription_id']=$subscription->id;
+        $json['offer_id']=$subscription->offer_id;
+        $json['offer_price']=$offer->montant;
         $json['extra-'.$date.'-name']=$extra->type;
         $json['extra-'.$date.'-cost']=$extra->cost;
-        $facture->infos_json=$json;
+        $json['date']=Carbon::now();
+        $facture->description="Achat ".$extra->type;
+        $facture->subscriptions_id=$subscription->id;
+        $facture->date=$date;
+        $facture->Total=$extra->cost;
+        $facture->info_json=json_encode($json);
         $facture->save();
 
 

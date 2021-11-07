@@ -341,3 +341,7 @@ Route::get('extra/father','OperationController@retrieve_father')->middleware(['R
 
 Route::post('users/admin','OperationController@set_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.setadmin');
 Route::post('users','OperationController@unset_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.unsetadmin');
+
+Route::resource('factures','FactureController')->middleware(['Role:Superadmin','Free']);
+Route::post('users','OperationController@unset_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.unsetadmin');
+Route::post('users','OperationController@unset_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.unsetadmin');
