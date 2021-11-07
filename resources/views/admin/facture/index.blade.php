@@ -26,50 +26,7 @@
 
 @endsection
 
-@section('page-script')
-    <script>
-        $(function() {
-            $('#region').DataTable({
-                "language": {
-                    @if( app()->getLocale() === "fr" )
-                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json"
-                    @endif
-                            @if( app()->getLocale() === "en")
-                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
-                    @endif
-                            @if( app()->getLocale() === "es")
-                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                    @endif
-                            @if( app()->getLocale() === "pt")
-                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
-                    @endif
-                },
-                responsive: {
-                    details: {
-                        type: 'column',
-                        target: 'tr'
-                    }
-                },
-                columnDefs: [
-                    {
-                        className: 'control',
-                        orderable: false,
-                        targets:   0
-                    },
-                    {
-                        orderable: false,
-                        targets: [-1]
-                    },
-                    { responsivePriority: 1, targets: 0 },
-                ],
-                "bLengthChange" : false, //thought this line could hide the LengthMenu
-                "bInfo":false,
-            })
-        });
-    </script>
 
-
-@endsection
 
 @section('content')
 
@@ -115,10 +72,11 @@
                             <div class="inner">
                                 <h3>{{$operateurs->count()}}</h3>
 
-                                <p>{{ trans('operators') }}</p>
+                                <p>{{ trans('Factures') }}</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-android-person"></i>
+
+                                <i class="ion ion-document-text"></i>
                             </div>
                         </div>
                     </div>
@@ -128,10 +86,10 @@
                             <div class="inner">
                                 <h3>{{$rapports->count()}}</h3>
 
-                                <p>{{ trans('reports') }}</p>
+                                <p>{{ trans('Credit') }}</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-document-text"></i>
+                                <i class="ion ion-social-usd"></i>
                             </div>
                         </div>
                     </div>
@@ -155,8 +113,8 @@
                                         <th class="text-center" style="color:#0065A1 !important">{{ trans('Description') }}</th>
                                         <th class="text-center" style="color:#0065A1 !important">{{ trans('Status') }}</th>
                                         <th class="text-center "style="color:#0065A1 !important">{{ trans('Date') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('Montant') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
+                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('Prix') }}</th>
+{{--                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>--}}
 
                                     </tr>
                                     </thead>
@@ -167,17 +125,22 @@
                                             <td class="text-center">{{ $facture->description }} <br><span style="font-size: 11px"><a href="">{{$facture->updated_at.' - '}}</a><a href="#">{{$facture->updated_at->addMonth(1)}}</a></span></td>
                                             <td class="text-center">{{ $facture->state }} <br><span style="font-size: 11px"><a href="">view invoice</a></span></td>
                                             <td class="text-center">{{ $facture->date }}</td>
-                                            <td class="text-center">{{ $facture->Total }}</td>
-                                            <td class="text-center" >
-                                                {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                {{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
+                                            @if($facture->state=='paid')
+                                                <td class="text-center">{{ "$".$facture->Total  }}</td>
+                                            @else
+                                                <td class="text-center">
+                                                    <form action="{{route('paypal')}}" method="POST"><input type="text" value="{{$facture->id}}" hidden> <button class="btn-bloo" type="submit">Pay</button></form></td>
+                                                @endif
+{{--                                            <td class="text-center" >--}}
+{{--                                                --}}{{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+{{--                                                --}}{{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
 {{--                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
-                                                {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-                                                {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-                                                {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-                                                {{--                                            </form>--}}
-                                                {{--                                        @endif--}}
-                                            </td>
+{{--                                                --}}{{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
+{{--                                                --}}{{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
+{{--                                                --}}{{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
+{{--                                                --}}{{--                                            </form>--}}
+{{--                                                --}}{{--                                        @endif--}}
+{{--                                            </td>--}}
                                         </tr>
 {{--                                        @include('admin.offers.offer_modal',['offer'=>$offer])--}}
                                     @endforeach
