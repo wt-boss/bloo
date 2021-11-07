@@ -31,7 +31,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Confirm Your ' . config('app.name'). ' Account')
+        return $this->subject(trans('Confirm Your Account') . '/' . config('app.name'). ' ')
                     ->markdown('emails.email-verification');
     }
 }

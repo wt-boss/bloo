@@ -26,6 +26,6 @@ class VerificationController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('forms.index');
+        return redirect()->route('admin');
     }
 }
