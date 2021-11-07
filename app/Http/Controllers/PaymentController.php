@@ -188,9 +188,10 @@ class PaymentController extends Controller
 
         $entreprise->save();
         $user->save();
+
         $subscription=new Subscription();
         $subscription->user_id=$user->id;
-        if($data['offer']=='Monthly'){
+        if($data['offer'] === 'Monthly'){
             $subscription->offer_id=2;
         }else{
             $subscription->offer_id=1;
@@ -206,7 +207,7 @@ class PaymentController extends Controller
 
         /** Si l'offre choisi est primus alors, creation d'une operation */
 //        if($data['amount'] == "3466.22" )
-        if($data['offer'] == "PayAsYouGo" )
+        if($data['offer'] === "PayAsYouGo" )
         {
             $user->payg = 1;
             $user->save();
