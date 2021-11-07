@@ -279,6 +279,7 @@ class PaymentController extends Controller
         $json['offer_id']=$subscription->offer_id;
         $json['offer_price']=$offer->montant;
         $json['date']=Carbon::now();
+        $facture->description="Achat ".$offer->intitule;
         $facture->subscriptions_id=$subscription->id;
         $facture->date=Carbon::now();
         $facture->Total=$offer->montant;

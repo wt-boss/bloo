@@ -711,6 +711,7 @@
     "update_extra": "Mise à jour de l'extra",
     "cost": "Prix",
     "type": "Libellé",
-    "update": "Mise à jour"
+    "update": "Mise à jour",
+    "client_bill": "Facture Client"
 
 }
