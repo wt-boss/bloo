@@ -718,6 +718,14 @@
     "update_extra": "Mise à jour de l'extra",
     "cost": "Prix",
     "type": "Libellé",
-    "update": "Mise à jour"
+    "update": "Mise à jour",
+    "client_bill": "Facture Client",
+    "Hello": "Salut",
+    "Thank you for signing up on": "Merci de vous être inscrit sur",
+    "To complete your signup, please verify your email by clicking on the button below": "Pour terminer votre inscription, veuillez vérifier votre email en cliquant sur le bouton ci-dessous",
+    "If you need any help or have any suggestion, kindly send us a mail at": "Si vous avez besoin d'aide ou avez des suggestions, veuillez nous envoyer un mail à",
+    "Thanks": "Merci",
+    "The": "La",
+    "Confirm Your Account": "Confirmez votre compte"
 
 }

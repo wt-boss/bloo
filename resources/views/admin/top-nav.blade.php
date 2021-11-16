@@ -143,6 +143,17 @@
                             </li>
                         @endif
                         @if (auth()
+->user()
+->hasRole('Superadmin|Client|Opérateur|Lecteur'))
+                            <li
+                                    class="<?php echo Str::startsWith($route, 'factures') ? 'active' : ''; ?>">
+                                <a class="m-link" href="{{ route('factures.index') }}">
+                                    <i class="fas fa-history"></i>
+                                    <span>{{ trans('Paiement') }}</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()
     ->user()
     ->hasRole('Superadmin'))
                             <li

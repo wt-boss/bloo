@@ -6,6 +6,7 @@ use App\AdminClient;
 use App\City;
 use App\Entreprise;
 use App\Extra;
+use App\Facture;
 use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
@@ -1021,7 +1022,8 @@ class OperationController extends Controller
         return response()->json($extra);
         // return view('admin.extras.index',compact('extra'));
     }
-    public function add_extra(){
+    public function add_extra(Request $request){
+
         return view('admin.extras.add');
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
@@ -1043,6 +1045,35 @@ class OperationController extends Controller
         $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
         $extra=Extra::where('type','=',$extra_user->rolename())->get();
         $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
+
+
+//        $facture=Facture::where('subscription_id',$subscription->id);
+//        $date=date();
+//        $json=$facture->infos_json;
+//        $facture->Total=$facture->Total+$extra->cost;
+//
+//        $facture->infos_json=$json;
+//        $facture->save();
+
+        $facture=new Facture();
+        $json=[];
+        $date=Carbon::now();
+        $offer=Offer::findOrFail($subscription->offer_id);
+        $json['subscription_id']=$subscription->id;
+        $json['offer_id']=$subscription->offer_id;
+        $json['offer_price']=$offer->montant;
+        $json['extra-'.$date.'-name']=$extra->type;
+        $json['extra-'.$date.'-cost']=$extra->cost;
+        $json['date']=Carbon::now();
+        $facture->description="Achat ".$extra->type;
+        $facture->subscriptions_id=$subscription->id;
+        $facture->date=$date;
+        $facture->Total=$extra->cost;
+        $facture->info_json=json_encode($json);
+        $facture->save();
+
+
+
         return redirect(route('extra.list'))->withSuccess('Extra créer avec sucess');
 
     }
@@ -1087,11 +1118,22 @@ class OperationController extends Controller
         if($record){
             $record->update(['ended_date'=>$date_chg]);
         }
-       // DB::table('offer_changes')->where('extra_id',$offer->id)->first()->update(['ended_date'=>$date_chg]);
+        // DB::table('offer_changes')->where('extra_id',$offer->id)->first()->update(['ended_date'=>$date_chg]);
         DB::table('offer_changes')->insert(['offer_id'=>$offer->id,'montant'=>$offer->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
         return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
+    }
+    public function retrieve_father($id){
+        $user=User::findOrFail($id);
+        $father_id=DB::table('extra_subscription')->where('extra_id',$user->id)->first();
+        $father=User::findOrFail($father_id);
+        return response()->json($father);
+    }
+    public function retrieve_children_list($id){
+        $father=User::findOrFail($id);
+        $children=DB::table('extra_subscription')->where('suscriber_id',$father->id)->get();
+        return response()->json($children);
     }
 
 }
