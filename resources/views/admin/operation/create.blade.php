@@ -22,8 +22,9 @@
                 <p class="text-justify">
 
                 </p>
-                <form method="post" action="{{ route('operation.store') }}" id="sondage-form">
+                <form method="post" action="{{ route('operation.store') }}" id="sondage-form" >
                     @csrf
+                    @if (auth()->user()->hasRole('Superadmin|Admin'))
                     <div class="row">
                         @if(isset($entreprise))
                             <select class="form-control" name="entreprise_id">
@@ -43,7 +44,7 @@
                             </div>
                         @endif
                     </div>
-
+                   @endif
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="bloo-bloc col-md-5 text-center b-first">
@@ -140,7 +141,7 @@
         $("#sondage-form").on('submit', function(e){
             let valid = validateForm();
             if(!valid){
-                e.preventDefault();;
+                e.preventDefault();
             }
         });
 
@@ -171,7 +172,7 @@
         if (is_null_or_whithe_space(date_start)){
             $('input[name="date_debut"]').addClass("mik-is-invalid");
             $('input[name="date_debut"]').next(".mik-invalid-feedback").show();
-            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("Ce champ ne peut être vide");
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("@lang('This field cannot be empty')");
             return false;
         }
 
@@ -179,7 +180,7 @@
         if (is_null_or_whithe_space(date_end)) {
             $('input[name="date_fin"]').addClass("mik-is-invalid");
             $('input[name="date_fin"]').next(".mik-invalid-feedback").show();
-            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("Ce champ ne peut être vide");
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("@lang('This field cannot be empty')");
             return false;
         }
 
@@ -189,14 +190,14 @@
         if (date_start.getTime() < (new Date().datePart().getTime())) {
             $('input[name="date_debut"]').addClass("mik-is-invalid");
             $('input[name="date_debut"]').next(".mik-invalid-feedback").show();
-            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("Choisir une date supérieure à la date du jour");
+            $('input[name="date_debut"]').next(".mik-invalid-feedback").html("@lang("Choose a date greater than today's date")");
             return false;
         }
 
         if (date_start.getTime() > date_end.getTime()) {
             $('input[name="date_fin"]').addClass("mik-is-invalid");
             $('input[name="date_fin"]').next(".mik-invalid-feedback").show();
-            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("Choisir une date supérieure à la date de début");
+            $('input[name="date_fin"]').next(".mik-invalid-feedback").html("@lang("Choose a date greater than today's date")");
             return false;
         }
 
@@ -212,11 +213,11 @@
             return false;
         }
 
-        if (!$('select[name="entreprise_id"]').val()){
-            $('select[name="entreprise_id"]').addClass("mik-is-invalid");
-            $('select[name="entreprise_id"]').next(".mik-invalid-feedback").show();
-            return false;
-        }
+        // if (!$('select[name="entreprise_id"]').val()){
+        //     $('select[name="entreprise_id"]').addClass("mik-is-invalid");
+        //     $('select[name="entreprise_id"]').next(".mik-invalid-feedback").show();
+        //     return false;
+        // }
 
         return true;
     }

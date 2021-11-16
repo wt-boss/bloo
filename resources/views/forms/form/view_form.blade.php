@@ -23,7 +23,7 @@ $fields = $form->fields()->filled()->get();
                 <div class="panel-heading">
                     <h5 class="panel-title">{{ $page }}</h5>
                 </div>
-
+                @php $formatted_fields = []; @endphp
                 @if ($form->status === App\Form::STATUS_CLOSED)
                     <div class="panel-body">
                         {{ optional($form->availability)->closed_form_message ?? 'Sorry, this form has been closed to responses.' }}
@@ -86,7 +86,6 @@ $fields = $form->fields()->filled()->get();
         <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
     @endsection
 
-@if ($form->status === App\Form::STATUS_OPEN)
     @section('plugin-scripts')
         <script src="{{ asset('assets/js/plugins/uniform.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/autosize.min.js') }}"></script>
@@ -138,4 +137,4 @@ $fields = $form->fields()->filled()->get();
         </script>
         @include('forms.partials._script-view')
     @endsection
-@endif
+

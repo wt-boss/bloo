@@ -13,20 +13,20 @@
     <div id="map"></div>
     <div class="pac-card" id="pac-card">
         <div id="pac-container">
-            <a class="pac-return" href="{{route('operation.show',[$operation->id])}}"></a>
+            <a class="pac-return" href="{{route('operation.edit',[$operation->id])}}"></a>
             <input id="pac-input" class="controls pac-search" type="text" placeholder="{{ trans('Enter a location') }}">
         </div>
         <div id="info-container">
             <form class="pac-form" method="post" action={{route('sites.store')}}>
                 @csrf
-                <input id="nom" name="nom" class="controls" type="text" placeholder="Nom du site" required>
-                <input id="rayon" name="rayon"class="controls" type="number" placeholder="Rayon" required>
-                <input id="pays" name="pays" class="controls" type="text" placeholder="Pays">
-                <input id="ville" name="ville" class="controls" type="text" placeholder="Ville">
+                <input id="nom" name="nom" class="controls" type="text" placeholder="@lang("Name of the site")" required>
+                <input id="rayon" name="rayon"class="controls" type="number" placeholder="@lang("Radius (in meters)")" required>
+                <input id="pays" name="pays" class="controls" type="text" placeholder="@lang("Country")" required>
+                <input id="ville" name="ville" class="controls" type="text" placeholder="@lang("City")" required>
                 <input id="lat" name="lat" class="controls" type="hidden">
                 <input id="long" name="lng" class="controls" type="hidden">
                 <input type="hidden" name="operation_id" value="{{$operation->id}}">
-                <input class="controls-btn" type="submit" value="Enregistrer">
+                <input class="controls-btn" type="submit" value="@lang("Save")" >
             </form>
         </div>
         <div class="pac-table">

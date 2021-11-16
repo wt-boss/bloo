@@ -11,13 +11,13 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body" style="padding: 0;">
-        @if (auth()->user()->hasRole('Superadmin|Client'))
+        @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
         <div class="panel-heading pull-right">
             <a href="{{route('compte.create')}}" class="btn btn-bloo heading-btn legitRipple"><i class="fas fa-plus-circle"></i> {{trans('acount')}}</a>
         </div>
             @endif
     </div>
-    @if (auth()->user()->hasRole('Superadmin|Client'))
+    @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
         @if ($comptes->isEmpty())
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">

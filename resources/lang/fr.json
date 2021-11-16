@@ -726,6 +726,13 @@
     "If you need any help or have any suggestion, kindly send us a mail at": "Si vous avez besoin d'aide ou avez des suggestions, veuillez nous envoyer un mail à",
     "Thanks": "Merci",
     "The": "La",
-    "Confirm Your Account": "Confirmez votre compte"
+    "Confirm Your Account": "Confirmez votre compte",
+    "This field cannot be empty": "Ce champ ne peut être vide",
+    "Choose a date greater than today's date": "Choisir une date supérieure à la date du jour",
+    "edit_sondage": "Modifier l'opération !",
+    "Name of the site": "Nom du site",
+    "Radius (in meters)": "Rayon (en mètres)",
+    "Modification Done": "Modification effectuée"
+
 
 }

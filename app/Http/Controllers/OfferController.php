@@ -29,7 +29,7 @@ class OfferController extends Controller
         $offer=Offer::findOrFail($id);
         $offer->update($request->all());
         $this->change_offer($offer);
-        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
     }
     public function destroy(){
 
@@ -43,7 +43,7 @@ class OfferController extends Controller
             $record->update(['ended_date'=>$date_chg]);
         }
         DB::table('offer_changes')->insert(['offer_id'=>$offer->id,'montant'=>$offer->montant,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
-        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
 
     }
 

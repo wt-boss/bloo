@@ -62,7 +62,7 @@
                 <div class="box box-primary">
 
                     <div class="box-body" style="margin-top: -13px;">
-                        @if (auth()->user()->hasRole('Superadmin|Client'))
+                        @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                          <div class='col-md-12'>
                             <div>
                              <h5>{{ trans('Lecteurs') }}</h5>

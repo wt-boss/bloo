@@ -25,9 +25,9 @@
         <li><a href="{{ route('forms.show', $form->code) }}">{{trans('menu_form_10')}}</a></li>
     @endif
 
-    @if (in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_CLOSED]))
-        <li><a href="{{ route('forms.open', $form->code) }}" data-method="post">{{trans('menu_form_11')}}</a></li>
-    @endif
+{{--    @if (in_array($form->status, [$form::STATUS_PENDING, $form::STATUS_CLOSED]))--}}
+{{--        <li><a href="{{ route('forms.open', $form->code) }}" data-method="post">{{trans('menu_form_11')}}</a></li>--}}
+{{--    @endif--}}
     @if ($form->status === $form::STATUS_OPEN)
         <li><a href="{{ route('forms.close', $form->code) }}" data-method="post">{{trans('menu_form_12')}}</a></li>
     @endif

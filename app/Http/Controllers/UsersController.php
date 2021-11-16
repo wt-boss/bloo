@@ -103,7 +103,7 @@ class UsersController extends Controller
              if($extension == "jpg" ||$extension == "png" || $extension == "gif" || $extension == "jpeg")
              {
                  $user->update($request->all());
-                 return redirect()->route('users.index')->withSuccess('Modification Effectuée');
+                 return redirect()->route('users.index')->withSuccess(trans("Modification Done"));
              }
              else
              {

@@ -1,13 +1,16 @@
   <?php
 $allowedRoles = config('variables.role');
+  unset($allowedRoles["3"]);
+  unset($allowedRoles["4"]);
+  unset($allowedRoles["6"]);
 if (Auth::user()->rolename() !== "Superadmin") {
     foreach ($allowedRoles as $key => $value ) {
         if ($key > Auth::user()->role) {
             unset($allowedRoles[$key]);
         }
     }
-}
 
+}
 //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
 $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'edit-lect-btn.png');
 ?>

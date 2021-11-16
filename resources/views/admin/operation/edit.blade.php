@@ -27,25 +27,25 @@
                 <div class="pull-right">
                     <a href="{{ route('operation.index') }}" class="btn btn-bloo-w heading-btn">{{ trans('next') }}</a>
                 </div>
-                <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('create_sondage') }}</h2>
+                <h2 class="bloo-primary left-side-bloo border-left-primary">{{ trans('edit_sondage') }}</h2>
                 <p class="text-justify">
                 </p>
                 <form method="post" action="{{ route('operation.update',[$operation->id]) }}">
                     @method('PUT')
                     @csrf
-                    <div class="row">
-                        @if(isset($entreprise))
-                            <select class="form-control" name="entreprise_id">
-                                <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
-                            </select>
-                        @else
-                        <select class="form-control" name="entreprise_id">
-                            @foreach($entreprises as $entreprise)
-                                <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
-                                @endforeach
-                        </select>
-                        @endif
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        @if(isset($entreprise))--}}
+{{--                            <select class="form-control" name="entreprise_id">--}}
+{{--                                <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>--}}
+{{--                            </select>--}}
+{{--                        @else--}}
+{{--                        <select class="form-control" name="entreprise_id">--}}
+{{--                            @foreach($entreprises as $entreprise)--}}
+{{--                                <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>--}}
+{{--                                @endforeach--}}
+{{--                        </select>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
 
                 <div class="row">
                     <div class="col-xs-12">

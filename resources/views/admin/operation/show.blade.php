@@ -49,20 +49,20 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-3">
-                            <div class="info">
-                                <p class="label">{{ trans('Client') }}</p>
-                                <p class="info-value">{{$operation->entreprise->nom}}</p>
-                            </div>
+{{--                            <div class="info">--}}
+{{--                                <p class="label">{{ trans('Client') }}</p>--}}
+{{--                                <p class="info-value">{{$operation->entreprise->nom}}</p>--}}
+{{--                            </div>--}}
                             <div class="info">
                                 <p class="label">{{ trans('Fondé') }}</p>
                                 <p class="info-value">
-                                    @php
-                                        $entreprise = $operation->entreprise()->with('users')->get()->last();
-                                        $user = $entreprise->users()->get()->last();
-                                    @endphp
-                                    @if($user != null)
-                                        {{ $user->first_name }} {{ $user->last_name }}
-                                    @endif
+{{--                                    @php--}}
+{{--                                        $entreprise = $operation->entreprise()->with('users')->get()->last();--}}
+{{--                                        $user = $entreprise->users()->get()->last();--}}
+{{--                                    @endphp--}}
+{{--                                    @if($user != null)--}}
+{{--                                        {{ $user->first_name }} {{ $user->last_name }}--}}
+{{--                                    @endif--}}
                                 </p>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                             <a id="download_user_pdf" style="display: none" >
                                <img src="{{ asset('assets/images/PDF_24.png') }}" ></img>
                              </a>
-                             @if (auth()->user()->hasRole('Superadmin|Client'))
+                             @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                             <a href="{{ route('forms.response.export', $form->code) }}" id="download_exel">
                                 <img src="{{ asset('assets/images/exel.png') }}" ></img>
                             </a>
@@ -191,7 +191,7 @@
                                 <p class="box-title">
                                     {{ trans('Lecteurs') }}
                                 </p>
-                                @if (auth()->user()->hasRole('Superadmin|Client'))
+                                @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                                     @if($operation->status != "TERMINER")
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur" title="{{ $operation->id }}" data-toggle="modal" data-target="#modal-default"></i>
                                         @endif
@@ -215,7 +215,7 @@
                                      <td>
                                        {{ $user->first_name }} {{ $user->last_name }}
                                       <span class="pull-right">
-                                          @if (auth()->user()->hasRole('Superadmin|Client'))
+                                          @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                                               @if($operation->status != "TERMINER")
                                                <i class="fa fa-minus-circle removelecteur"  id="removelecteur" title="{{ $user->id }}"  lang="{{ $operation->id }}" aria-hidden="true"></i>
                                               @endif
@@ -246,7 +246,7 @@
                                 <p class="box-title">
                                     {{ trans('Opérateurs') }}
                                 </p>
-                                @if (auth()->user()->hasRole('Superadmin|Client'))
+                                @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                                         @if($operation->status != "TERMINER")
                                 <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getoperateur" title="{{ $operation->id }}" data-toggle="modal" data-target="#operateur-default"></i>
                                     @endif
@@ -281,7 +281,7 @@
 
                                         <span class="op_first_name">{{ $user->first_name }}</span> <span class="op_last_name">{{ $user->last_name }}</span>
                                         <span class="pull-right">
-                                            @if (auth()->user()->hasRole('Superadmin|Client'))
+                                            @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
                                                 @if($operation->status != "TERMINER")
                                                     @if(auth()->user()->payg === 1)
                                                         @if($responce <= 0)

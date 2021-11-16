@@ -394,13 +394,13 @@
 
         if (date_start.getTime() < (new Date().datePart().getTime())) {
             $('#date_start').addClass("is-invalid");
-            $('#date_start').next(".invalid-feedback").html("Choisir une date supérieure à la date du jour");
+            $('#date_start').next(".invalid-feedback").html("Choisir une dat");
             return false;
         }
 
         if (date_start.getTime() > date_end.getTime()) {
             $('#date_end').addClass("is-invalid");
-            $('#date_end').next(".invalid-feedback").html("Choisir une date supérieure à la date de début");
+            $('#date_end').next(".invalid-feedback").html("la date de début");
             return false;
         }
 
@@ -426,7 +426,7 @@
                 email = $('input[name="user_email_entreprise"]').val();
                 if (is_null_or_whithe_space(email)){
                     $('input[name="user_email_entreprise"]').addClass("is-invalid");
-                    $('input[name="user_email_entreprise"]').next(".invalid-feedback").html("Ce champ ne peut être vide.");
+                    $('input[name="user_email_entreprise"]').next(".invalid-feedback").html("@lang('This field cannot be empty')");
                     return false;
                 }
                 if (!is_valid_email(email)){
@@ -469,7 +469,7 @@
                 email = $('input[name="user_email"]').val();
                 if (is_null_or_whithe_space(email)){
                     $('input[name="user_email"]').addClass("is-invalid");
-                    $('input[name="user_email"]').next(".invalid-feedback").html("Ce champ ne peut être vide.");
+                    $('input[name="user_email"]').next(".invalid-feedback").html("@lang('This field cannot be empty')");
                     return false;
                 }
                 if (!is_valid_email(email)){

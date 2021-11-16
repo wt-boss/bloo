@@ -103,7 +103,16 @@ class OperationController extends Controller
             ->orwhere('id','7')
             ->orwhere('id','51')
             ->get();
-        return view('admin.operation.entreprise', compact('entreprises', 'countries'));
+
+        if(auth()->user()->role === "6")
+        {
+            return view('admin.operation.entreprise', compact('entreprises', 'countries'));
+        }
+        else
+        {
+            return  redirect()->route('operation.create');
+        }
+
     }
 
     /**
@@ -445,6 +454,7 @@ class OperationController extends Controller
             'user_id' => auth()->user()->id,
 
         ]);
+
         $form->generateCode();
         $form->save();
         $form_id = $form->id;
@@ -461,9 +471,10 @@ class OperationController extends Controller
         $operation->form_id = $form_id;
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
+        if(auth()->user()->hasRole('Superadmin|Admin')){
         $operation->entreprise_id = $parameters['entreprise_id'];
+        }
         $operation->save();
-
         $user = User::findOrFail(Auth::user()->id);
         $operation->users()->attach($user);
         $pusher = App::make('pusher');
@@ -609,9 +620,9 @@ class OperationController extends Controller
     public function edit($id)
     {
         $operation = Operation::findOrFail($id);
-        $entreprise_id = $operation->entreprise_id;
-        $entreprise = Entreprise::findOrFail($entreprise_id);
-        return view('admin.operation.edit', compact('operation', 'entreprise'));
+        //$entreprise_id = $operation->entreprise_id;
+        //$entreprise = Entreprise::findOrFail($entreprise_id);
+        return view('admin.operation.edit', compact('operation'));
     }
 
     /**
@@ -638,7 +649,7 @@ class OperationController extends Controller
         $form->description = ucfirst($parameters['description_formulaire']);
         $form->save();
 
-        return redirect()->route('operation.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('operation.index')->withSuccess(trans("Modification Done"));
     }
 
     /**
@@ -713,6 +724,12 @@ class OperationController extends Controller
         }
         $operation->status = "TERMINER";
         $operation->save();
+
+        $form = Form::findOrFail($operation->form_id);
+        $form->status = Form::STATUS_CLOSED;
+        $form->save();
+
+
         return back()->withSuccess(trans('Fin_operation'));
     }
 
@@ -1032,7 +1049,7 @@ class OperationController extends Controller
         $extra=Extra::findOrFail($id);
         $extra->update($request->all());
         $this->change_extra($extra);
-        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
@@ -1106,7 +1123,7 @@ class OperationController extends Controller
         }
         DB::table('extra_changes')->insert(['extra_id'=>$extra->id,'montant'=>$extra->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
 
-        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
@@ -1120,7 +1137,7 @@ class OperationController extends Controller
         }
         // DB::table('offer_changes')->where('extra_id',$offer->id)->first()->update(['ended_date'=>$date_chg]);
         DB::table('offer_changes')->insert(['offer_id'=>$offer->id,'montant'=>$offer->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
-        return redirect()->route('offers.index')->withSuccess('Modification Effectuée');
+        return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }

@@ -121,7 +121,7 @@
 
                         @if (auth()
     ->user()
-    ->hasRole('Superadmin|Client'))
+    ->hasRole('Superadmin|Client|Admin'))
                             <li
                                     class="<?php echo Str::startsWith($route, 'compte') ? 'active' : ''; ?>">
                                     <a class="m-link" href="{{ route('compte.index') }}">
