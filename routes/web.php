@@ -86,6 +86,7 @@ Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middlewar
 Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middleware('Free');
 
 // offres
+Route::get('/offres','SurveyController@signup')->name('signup')->middleware('Free');
 Route::get('/offres/primus','SurveyController@primus')->name('primus')->middleware('Free');
 Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')->middleware('Free');
 
@@ -341,4 +342,8 @@ Route::post('users/admin','OperationController@set_admin')->middleware(['Role:Su
 Route::resource('factures','FactureController')->middleware(['Role:Superadmin|Client','Free']);
 
 //Route::post('users','OperationController@unset_admin')->middleware(['Role:Superadmin|Client','Free'])->name('users.unsetadmin');
+
+Route::resource('topics','TopicController')->middleware(['auth']);
+
+Route::resource('templates','TemplateController')->middleware(['auth']);
 

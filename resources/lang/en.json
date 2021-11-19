@@ -638,5 +638,7 @@
     "return back":"Return Back",
     "page expired":"Page Expired",
     "availability_updated": "Availability has been updated",
-    "token_saved": "Token has been saved"
+    "token_saved": "Token has been saved",
+    "signup_1": "PERSONAL INFORMATIONS",
+    "signup_2": "COMPANY INFORMATION"
 }

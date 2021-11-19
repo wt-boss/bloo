@@ -732,7 +732,18 @@
     "edit_sondage": "Modifier l'opération !",
     "Name of the site": "Nom du site",
     "Radius (in meters)": "Rayon (en mètres)",
-    "Modification Done": "Modification effectuée"
+    "Modification Done": "Modification effectuée",
+    "signup_1": "INFORMATIONS PERSONNELLES",
+    "signup_2": "INFORMATIONS DE L'ENTREPRISE",
+    "CREATE": "CRÉER",
+    "CREATE AN OPERATION": "CRÉER UNE OPÉRATION",
+    "SOCIAL REASON": "RAISON SOCIALE",
+    "PASS": "PASSER",
+    "Choose a date greater than or equal to today's date": "Choisissez une date supérieure ou égale à la date du jour",
+    "The start date must be less than the end date": "la date de début doit etre inferieur à la date de fin",
+    "Topics": "Sujets",
+    "Templates": "Modèles",
+    "Create a topic": "Créer un sujet"
 
 
 }
