@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Form;
 use App\Template;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TemplateController extends Controller
 {
@@ -35,7 +37,27 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current_user = Auth::user();
+
+        $form = new Form([
+            'title' => ucfirst($request->name),
+            'description' => ucfirst($request->description),
+            'status' => Form::STATUS_DRAFT
+        ]);
+
+        $form->generateCode();
+
+        $form->generatePassword();
+
+        $current_user->forms()->save($form);
+
+        $template = new Template([
+            'form_id' => $form->id ,
+            'topic_id' => $request->topic_id
+        ]);
+
+        $template->save();
+        return redirect()->route('topics.index');
     }
 
     /**

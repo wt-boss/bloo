@@ -49,6 +49,7 @@
                                     <p class="box-title">
                                         {{ trans('Templates') }}
                                     </p>
+                                    <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur"  data-toggle="modal" data-target="#template-default"></i>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +108,57 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    <div class="modal fade bd-example-modal-lg"  id="template-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span></button>
+                    <h4 class="modal-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('Create a template') }}</font></font></h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('templates.store') }}">
+                        @csrf
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="@lang("Name")" value="{{ old('name') }}" required autofocus>
+                            <div class="form-control-feedback">
+                                <i class="icon-user text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" name="description" id="description" placeholder="@lang("Description")" value="{{ old('description') }}" required autofocus>
+                            <div class="form-control-feedback">
+                                <i class="icon-book3 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <select class="form-control" name="topic_id" id="description">
+                                @foreach($topics as $topic)
+                                    <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="form-control-feedback">
+                                <i class="icon-book3 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn bg-teal btn-block">{{ trans('savee') }} <i class="icon-arrow-right14 position-right"></i></button>
+                        </div>
+
+                        <div class="content-divider text-muted form-group"><span></span></div>
+                        <button type="button" class="btn btn-default btn-block content-group" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ trans('Close') }}</font></font></button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 
 @endsection
 

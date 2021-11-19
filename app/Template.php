@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
+    protected $guarded = [];
     public function forms()
     {
         return $this->belongsTo(Form::class)->using(ExtraSubscription::class);

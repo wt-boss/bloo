@@ -743,7 +743,8 @@
     "The start date must be less than the end date": "la date de début doit etre inferieur à la date de fin",
     "Topics": "Sujets",
     "Templates": "Modèles",
-    "Create a topic": "Créer un sujet"
+    "Create a topic": "Créer un sujet",
+    "Create a template": "Créer un modèle"
 
 
 }
