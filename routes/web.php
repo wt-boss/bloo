@@ -347,5 +347,7 @@ Route::resource('topics','TopicController')->middleware(['auth']);
 
 Route::resource('templates','TemplateController')->middleware(['auth']);
 
+Route::get('usetemplate/{id}','TemplateController@use')->name("usetemplate")->middleware(['auth']);
+
 Route::get('/json-templates','TemplateController@alltemplates')->middleware(['auth']);
 

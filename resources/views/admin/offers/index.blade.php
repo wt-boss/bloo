@@ -82,6 +82,20 @@
             </div>
         </div>
         <div class="col-md-4">
+            <div class="box box-solid panel-wb">
+                <!-- /.box-header -->
+                <div class="box-body" style="padding: 0 ;">
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-6">
+                            <div class="small-box bg-white">
+                                <a href="{{route('topics.index')}}" class="btn form-control">{{ trans('Templates') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
             <div class="panel panel-flat col-md-12">
                 <div class="panel-body " style="padding: 0;">
                     {{--            @if (auth()->user()->hasRole('Superadmin'))--}}

@@ -18,28 +18,35 @@
                                         {{ trans('Topics') }}
                                     </p>
                                             <i class="fa fa-plus-circle pull-right" aria-hidden="true" id="getlecteur"  data-toggle="modal" data-target="#modal-default"></i>
-
                                 </div>
                             </div>
                         </div>
 
-                        <div class="box-body" >
-                            <div class="col-12">
-                            <ul class="nav navbar-nav" style="margin: 0 0 0 20px;">
-                                @foreach($topics as $topic)
-                                    <a class="m-link">
-                                        <li class="topic" id="{{ $topic->id }}" >
-                                            <i class="fas fa-layer-group"></i>
-                                            {{ $topic->name }}
-                                        </li>
-                                    </a>
-                                @endforeach
-                            </ul>
-                            </div>
-                        </div>
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
+
+                    <div class="box box-solid panel-wb">
+                        <!-- /.box-header -->
+                        @foreach($topics as $topic)
+                        <div class="box-body" style="padding: 0 ;">
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-6">
+                                    <div class="small-box bg-white">
+                                        <a href="#" class="btn form-control topic"  id="{{ $topic->id }}">
+                                            <i class="fas fa-layer-group"></i>
+                                            {{ $topic->name }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       @endforeach
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+
                 </div>
                 <div class="col-md-9">
                     <div class="box box-success">
@@ -56,7 +63,24 @@
 
                         <div class="box-body" >
                             <div class="row" id="templates">
+                                <div class="row">
+                                    <div class="col-lg-4 col-xs-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-aqua">
+                                            <div class="inner">
+                                                <h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">150</font></font></h3>
 
+                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nouvelles commandes</font></font></p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="fa fa-bookmark"></i>
+                                            </div>
+                                            <a href="#" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                        Plus d'informations </font></font><i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.box-body -->

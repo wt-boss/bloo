@@ -447,40 +447,29 @@ class OperationController extends Controller
     {
         $parameters = $request->all();
 
-        $form = new Form([
-            'title' => ucfirst($parameters['nom_formulaire']),
-            'description' => ucfirst($parameters['description_formulaire']),
-            'status' => Form::STATUS_DRAFT,
-            'user_id' => auth()->user()->id,
 
-        ]);
 
-        $form->generateCode();
-        $form->save();
-        $form_id = $form->id;
-
-        $formavalide = new FormAvailability();
-        $formavalide->form_id = $form_id;
-        $formavalide->open_form_at = $parameters['date_debut'];
-        $formavalide->close_form_at = $parameters['date_fin'];
-        $formavalide->closed_form_message = "Formulaire clos";
-        $formavalide->save();
-
+        /*
+         * Creation de l'operation
+         * */
         $operation = new Operation();
         $operation->nom = $parameters['nom_operation'];
-        $operation->form_id = $form_id;
+        $operation->form_id = 0;
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
         if(auth()->user()->hasRole('Superadmin|Admin')){
-        $operation->entreprise_id = $parameters['entreprise_id'];
+          $operation->entreprise_id = $parameters['entreprise_id'];
         }
         $operation->save();
+
+
         $user = User::findOrFail(Auth::user()->id);
         $operation->users()->attach($user);
         $pusher = App::make('pusher');
         $data = "Une operation a été créer";
         $pusher->trigger('my-channel', 'operation-event', $data);
-        return redirect()->route('operation.index');
+
+        return redirect()->route('templates.index');
     }
 
     /**
