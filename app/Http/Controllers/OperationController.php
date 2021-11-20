@@ -1088,9 +1088,6 @@ class OperationController extends Controller
         $facture->Total=$extra->cost;
         $facture->info_json=json_encode($json);
         $facture->save();
-
-
-
         return redirect(route('extra.list'))->withSuccess('Extra créer avec sucess');
 
     }

@@ -6,9 +6,21 @@ use App\Form;
 use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class TemplateController extends Controller
 {
+
+    public function alltemplates(Request $request)
+    {
+        $topic_id = $request->input('topic_id');
+        $templates = Template::with('form')->where('topic_id', $topic_id)->get();
+        $viewData = (string)View::make('Helpers.template', compact('templates'));
+        return response()->json($viewData);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *

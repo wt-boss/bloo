@@ -27,12 +27,12 @@
                             <div class="col-12">
                             <ul class="nav navbar-nav" style="margin: 0 0 0 20px;">
                                 @foreach($topics as $topic)
-                                    <li>
-                                        <a class="m-link" href="#">
+                                    <a class="m-link">
+                                        <li class="topic" id="{{ $topic->id }}" >
                                             <i class="fas fa-layer-group"></i>
-                                            <span>{{ $topic->name }}</span>
-                                        </a>
-                                    </li>
+                                            {{ $topic->name }}
+                                        </li>
+                                    </a>
                                 @endforeach
                             </ul>
                             </div>
@@ -55,7 +55,9 @@
                         </div>
 
                         <div class="box-body" >
+                            <div class="row" id="templates">
 
+                            </div>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -180,6 +182,19 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="{{ asset('assets/js/custom/pages/response-summary.js') }}"></script>
+
+    <script>
+        $('.topic').on('click', function (e) {
+            let topic_id = e.target.id;
+            $.get('/json-templates?topic_id=' + topic_id,function(data) {
+                $('#templates').empty();
+                $('#templates').append(data);
+            });
+        });
+
+
+
+    </script>
 
 @endsection
 

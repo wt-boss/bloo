@@ -101,4 +101,10 @@ class Form extends Model
     {
     return $this->hasMany(Operation::class);
     }
+
+    public function template()
+    {
+        return $this->hasMany(Template::class);
+    }
+
 }

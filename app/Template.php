@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     protected $guarded = [];
-    public function forms()
+
+    public function form()
     {
-        return $this->belongsTo(Form::class)->using(ExtraSubscription::class);
+        return $this->belongsTo(Form::class);
     }
+
     public function topic()
     {
         return $this->belongsTo(User::class);
