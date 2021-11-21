@@ -122,7 +122,8 @@
                     // This function shows a transaction success message to your buyer.
                     fetch("/json-payfacture?facture_id={{$facture->id}}")
                         .catch(error => alert("Erreur : " + error));
-                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    window.location.href = "{{route('factures.index')}}";
+                    //alert('Transaction completed by ' + details.payer.name.given_name);
                 });
             }
         }).render('#paypal-button-container');
@@ -182,7 +183,10 @@
                         // execution. Set up a webhook or plugin to listen for the
                         // payment_intent.succeeded event that handles any business critical
                         // post-payment actions.
+                        fetch("/json-payfacture?facture_id={{$facture->id}}")
+                            .catch(error => alert("Erreur : " + error));
                         console.log(result.paymentIntent);
+                        window.location.href = "{{route('factures.index')}}";
                     }
                 }
             });

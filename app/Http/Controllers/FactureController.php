@@ -133,6 +133,6 @@ class FactureController extends Controller
         $subscription =  Subscription::findOrFail($template->subscriptions_id);
         $subscription->state = "paid";
         $subscription->save();
-        return true;
+        return response()->json(['success' => true],200);
     }
 }
