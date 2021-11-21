@@ -86,7 +86,7 @@ Route::get('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middlewar
 Route::post('cv_submit', 'FileUploadController@cv')->name('cv_submit')->middleware('Free');
 
 // offres
-Route::get('/offres','SurveyController@signup')->name('signup')->middleware('Free');
+Route::get('/offres/{name}','SurveyController@signup')->name('signup')->middleware('Free');
 Route::get('/offres/primus','SurveyController@primus')->name('primus')->middleware('Free');
 Route::get('/offres/illimité','SurveyController@illimité')->name('illimité')->middleware('Free');
 
@@ -203,7 +203,7 @@ Route::get('localization/{locale}','LocalizationController@index');
 //paypal
 
 // route for processing payment
-Route::post('paypal', 'PaymentController@payWithpaypal')->name('paypal')->middleware('Free');
+Route::post('enregistrement', 'PaymentController@payWithpaypal')->name('enregistrement')->middleware('Free');
 
 // route for check status of the payment
 Route::get('status/', 'PaymentController@getPaymentStatus')->name('status')->middleware('Free');
@@ -350,4 +350,8 @@ Route::resource('templates','TemplateController')->middleware(['auth']);
 Route::get('usetemplate/{id}','TemplateController@use')->name("usetemplate")->middleware(['auth']);
 
 Route::get('/json-templates','TemplateController@alltemplates')->middleware(['auth']);
+
+Route::get('/showfacture/{subscription}','FactureController@showfaacture')->middleware(['auth'])->name("showfacture");
+
+Route::get('/json-payfacture','FactureController@payement')->middleware(['auth'])->name("showfacture");
 

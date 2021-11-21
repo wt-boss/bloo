@@ -86,8 +86,8 @@
     "prix_title": "Nos offres",
     "prix_content": "Soucrivez à une offre",
     "prix_free": "Offre free ",
-    "prix_prenuim": "Offre Silver",
-    "prix_illimite": "Offre Platinum",
+    "prix_prenuim": "Offre à la demande",
+    "prix_illimite": "Offre Mensuelle",
     "prix_introduc1": "Contrôler et anticiper qu'importe les changements",
     "prix_btn": "Commencer",
     "prix_offre_freee": "100% gratuit. ",
@@ -745,7 +745,8 @@
     "Templates": "Modèles",
     "Create a topic": "Créer un sujet",
     "Create a template": "Créer un modèle",
-    "Use this template": "Utiliser ce modèle"
+    "Use this template": "Utiliser ce modèle",
+    "Invoice information": "Informations sur la facture"
 
 
 }

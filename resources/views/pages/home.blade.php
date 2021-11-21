@@ -72,6 +72,7 @@
                     </div>
               </div>
             </div>
+
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
                 <div class="d-flex justify-content-center">
@@ -84,6 +85,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md-4 d-flex align-self-stretch ftco-animate">
               <div class="media block-6 services d-block text-center">
                 <div class="d-flex justify-content-center">

@@ -20,7 +20,7 @@
                         </a>
                     </button>
                     <button  style="background-color: #0065a1;" id="submit" type="button" class="btn btn-bloo pull-right mt-5">
-                        <a style="color: #fff;" href="{{ route('forms.logout_free') }}">
+                        <a style="color: #fff;" href="{{ route('login') }}">
                             @lang('login')
                         </a>
                     </button>

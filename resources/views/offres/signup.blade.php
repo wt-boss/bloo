@@ -19,7 +19,7 @@
             <div class="row no-gutters d-flex slider-text align-items-center justify-content-center" data-scrollax-parent="true">
                 <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                     <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{{ route('home') }}">{{ trans('Register') }}</a></span> <span>{{ trans('bloo live') }}</span></p>{{ trans('') }}
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ trans('offre_silver') }}</h1>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ $name }}</h1>
                 </div>
             </div>
         </div>
@@ -29,10 +29,11 @@
         <div class="row">
             <div class="col-sm-12 msf-form">
                 @include('admin.common.flash')
-                <form role="form"  method="POST" id="payment-form" action="{{route('paypal')}}">
+                <form role="form"  method="POST" id="payment-form" action="{{route('enregistrement')}}">
                     <div id="step1">
                         <br>
                         @csrf
+                        <input type="hidden" name="mode" value="{{$name}}">
                         <h4><span class="step">{{ trans('signup_1') }}</span></h4>
                         <div class="row">
                             <div class="form-group col-6">
@@ -85,6 +86,36 @@
                                 </div>
                             </div>
 
+                            <div class="form-group col-4">
+                                <label for="country">{{ trans('pays_entreprise') }}</label><br>
+                                <select class="form-control" name="country_id" id="country" >
+                                    @foreach($countries as $country)
+                                        <option value="{{$country->id}}">{{$country->name}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    {{ trans('adress_entreprise_valid') }}
+                                </div>
+                            </div>
+
+                            <div id="div_region" class="form-group col-4">
+                                <label for="region"> {{ trans('region_entreprise') }}</label><br>
+                                <select class="form-control form-input-check" name="state_id" id="region" >
+                                </select>
+                                <div class="invalid-feedback">
+                                    {{ trans('adress_entreprise_valid') }}
+                                </div>
+                            </div>
+
+                            <div id="div_ville" class="form-group col-4">
+                                <label for="ville-date"> {{ trans('ville_entreprise') }}</label><br>
+                                <select class="form-control form-input-check" name="city_id" id="ville" >
+                                </select>
+                                <div class="invalid-feedback">
+                                    {{ trans('adress_entreprise_valid') }}
+                                </div>
+                            </div>
+
                             <div class="form-group col-6 offset-6">
                                 <button type="button" data-step-nav="next" data-action="verifyFirstStep" data-continue-with="verifySecondStep" class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('CREATE') }}</button>
                             </div>
@@ -97,7 +128,7 @@
                                 <h4><span class="step">{{ trans('signup_2') }}</span></h4>
                             </div>
                             <div class="form-group col-6">
-                                <button type="button" data-step-nav="next" data-action="passEnterprise" data-continue-with="" class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('PASS') }}</button>
+                                <button type="button"  class="btn btn-next col-6 btn-outline-primary float-right guren">{{ trans('PASS') }}</button>
                             </div>
                         </div>
                         <div class="row">
@@ -116,14 +147,14 @@
                                     {{ trans('adress_entreprise_valid') }}
                                 </div>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label for="contribuanle_enterprise">{{ trans('num_contribuable') }}</label>
                                 <input type="text" name="contribuanle_enterprise" value="{{old('contribuanle_enterprise')}}" class="birth-country form-control" id="contribuanle_enterprise" placeholder="">
                                 <div class="invalid-feedback">
                                     {{ trans('adress_entreprise_valid') }}
                                 </div>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label for="siret_enterprise">{{ trans('num_sirect') }}</label><br>
                                 <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control d-block" id="siret_enterprise"  placeholder="">
                                 <div class="invalid-feedback">
@@ -131,35 +162,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-6">
-                                <label for="country">{{ trans('pays_entreprise') }}</label><br>
-                                <select class="form-control" name="" id="country" required>
-                                    @foreach($countries as $country)
-                                        <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">
-                                    {{ trans('adress_entreprise_valid') }}
-                                </div>
-                            </div>
-                            <div id="div_region" class="form-group col-6">
-                                <label for="region"> {{ trans('region_entreprise') }}</label><br>
-                                <select class="form-control form-input-check" name="" id="region" required>
-                                </select>
-                                <div class="invalid-feedback">
-                                    {{ trans('adress_entreprise_valid') }}
-                                </div>
-                            </div>
-                            <div id="div_ville" class="form-group col-6">
-                                <label for="ville-date"> {{ trans('ville_entreprise') }}</label><br>
-                                <select class="form-control form-input-check" name="city_id" id="ville" required>
-                                </select>
-                                <div class="invalid-feedback">
-                                    {{ trans('adress_entreprise_valid') }}
-                                </div>
-                            </div>
-
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label for="birth-date">{{ trans('telephone_entreprise') }}</label><br>
                                 <input type="text" name="telephone_entreprise" value="{{old('telephone_entreprise')}}" class="birth-date form-control" id="birth-date" >
                                 <div class="invalid-feedback">
@@ -215,22 +218,22 @@
                                 <button type="button" data-step-nav="next" data-action="back2" data-continue-with="verifyThirdStep" class="btn btn-next col-6 btn-outline-primary">{{ trans('Précedent') }}</button>
                             </div>
                             <div class="form-group col-6">
-                                <button type="button" data-step-nav="next" data-action="verifyThirdStep" data-continue-with="verifyThirdStep" class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('next') }}</button>
+                                <button type="submit" data-step-nav="next" data-action="verifyThirdStep" data-continue-with="verifyThirdStep" class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('CREATE') }}</button>
                             </div>
                         </div>
                     </div>
 
-                    <div id="step4" style="display:none">
-                    <h4><span class="step">{{ trans('CREATE AN OPERATION') }}</span></h4>
-                        <div class="row">
-                             <div class="col-8">
-                               <h5>  VOS INFORMATIONS ONT ETE ENREGISTRER, VOULEZ VOUS CREER VOTRE COMPTE ?</h5>
-                             </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary">{{ trans('CREATE') }}</button>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div id="step4" style="display:none">--}}
+{{--                    <h4><span class="step">{{ trans('CREATE AN OPERATION') }}</span></h4>--}}
+{{--                        <div class="row">--}}
+{{--                             <div class="col-8">--}}
+{{--                               <h5>  VOS INFORMATIONS ONT ETE ENREGISTRER, VOULEZ VOUS CREER VOTRE COMPTE ?</h5>--}}
+{{--                             </div>--}}
+{{--                            <div class="col-4">--}}
+{{--                                <button type="submit" class="btn btn-primary">{{ trans('CREATE') }}</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                 </form>
             </div>
@@ -308,12 +311,12 @@
                 verifyFirstStep();
             });
 
-            $("#payment-form").on('submit', function(e){
-                let valid = verifySecondStep();
-                if(!valid){
-                    e.preventDefault();;
-                }
-            });
+            // $("#payment-form").on('submit', function(e){
+            //    // let valid = verifySecondStep();
+            //     if(!valid){
+            //         e.preventDefault();;
+            //     }
+            // });
 
             //controle form on navigate
             $('.form-control').focus(function(){
@@ -345,6 +348,7 @@
                 }
             });
         });
+
         function affCache(idDiv) {
             var div = document.getElementById(idDiv);
             if (div.style.display === "none"){
@@ -399,6 +403,21 @@
                 return false;
             }
 
+            if ($('#country').value === ""){
+                $('#country').addClass("is-invalid");
+                return false;
+            }
+
+            if ($('#region').value === ""){
+                $('#region').addClass("is-invalid");
+                return false;
+            }
+
+            if ($('#ville').value === ""){
+                $('#ville').addClass("is-invalid");
+                return false;
+            }
+
             affCache("step1");
             affCache("step2");
 
@@ -414,21 +433,6 @@
 
             if (is_null_or_whithe_space($('#address_enterprise').val())){
                         $('#address_enterprise').addClass("is-invalid");
-                        return false;
-            }
-
-            if ($('#country').value === ""){
-                        $('#country').addClass("is-invalid");
-                        return false;
-            }
-
-            if ($('#country').value === ""){
-                        $('#country').addClass("is-invalid");
-                        return false;
-            }
-
-            if ($('#ville').value === ""){
-                        $('#ville').addClass("is-invalid");
                         return false;
             }
 
@@ -449,7 +453,6 @@
             affCache("step3");
             return true;
         }
-
 
         function passEnterprise() {
             affCache("step3");
@@ -501,10 +504,19 @@
                 $('#date_end').next(".invalid-feedback").html("@lang("The start date must be less than the end date")");
                 return false;
             }
-            affCache("step3");
-            affCache("step4");
+            // affCache("step3");
+            // affCache("step4");
             return true;
         }
+    </script>
+
+
+    <script>
+        $('.guren').on('click', function (e) {
+            affCache("step3");
+            affCache("step2");
+        });
+
 
 
     </script>

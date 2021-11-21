@@ -10,7 +10,7 @@ use function Composer\Autoload\includeFile;
 class SurveyController extends Controller
 {
 
-    public function signup(){
+    public function signup($name){
         $countries  = Country::where('id','38')
             ->orwhere('id','42')
             ->orwhere('id','50')
@@ -21,7 +21,7 @@ class SurveyController extends Controller
             ->orwhere('id','7')
             ->orwhere('id','51')
             ->get();
-        return view('offres.signup',compact('countries'));
+        return view('offres.signup',compact('countries','name'));
     }
 
     public function primus(){

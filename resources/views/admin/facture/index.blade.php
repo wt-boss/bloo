@@ -124,30 +124,20 @@
                                             <td class="text-center">{{ $facture->description }} <br><span style="font-size: 11px"><a href="">{{$facture->updated_at.' - '}}</a><a href="#">{{$facture->updated_at->addMonth(1)}}</a></span></td>
                                             <td class="text-center">{{ $facture->state }} <br><span style="font-size: 11px"><a href="">view invoice</a></span></td>
                                             <td class="text-center">{{ $facture->date }}</td>
-                                            @if($facture->state=='paid')
+                                            @if($facture->state ==='paid')
                                                 <td class="text-center">{{ "$".$facture->Total  }}</td>
                                             @else
                                                 <td class="text-center">
-                                                    <form action="{{route('paypal')}}" method="POST"><input type="text" value="{{$facture->id}}" hidden> <button class="btn-bloo" type="submit">Pay</button></form></td>
-                                                @endif
-{{--                                            <td class="text-center" >--}}
-{{--                                                --}}{{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-{{--                                                --}}{{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
-{{--                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
-{{--                                                --}}{{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-{{--                                                --}}{{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-{{--                                                --}}{{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-{{--                                                --}}{{--                                            </form>--}}
-{{--                                                --}}{{--                                        @endif--}}
-{{--                                            </td>--}}
+                                                    <a href="{{ url('showfacture',[$facture->id])}}">
+                                                        <button class="btn-bloo" type="submit">Pay</button>
+                                                    </a>
+                                                </td>
+                                            @endif
                                         </tr>
-{{--                                        @include('admin.offers.offer_modal',['offer'=>$offer])--}}
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
-{{--                            <div id="piechart" style="width: 500px; height: 400px;"></div>--}}
                         </div>
                         <!-- /.box-body -->
                     </div>
