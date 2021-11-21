@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Extra;
 use App\Offer;
 
+use App\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,8 @@ class OfferController extends Controller
     public function index(){
         $offers=Offer::all();
         $extras=Extra::all();
-        return view('admin.offers.index',compact('offers','extras'));
+        $promotion=Promotion::with('offer')->get();
+        return view('admin.offers.index',compact('offers','extras','promotion'));
     }
     public function create(){
         return view('offers.create');

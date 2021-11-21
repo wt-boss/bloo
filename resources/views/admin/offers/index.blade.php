@@ -10,25 +10,11 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-flat col-md-12">
-                <div class="panel-body " style="padding: 0;">
-                    {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
-                    {{--                @if(auth()->user()->payg == 0)--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
-                    {{--                    </div>--}}
-                    {{--                @else--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
-                    {{--                    </div>--}}
-                    {{--                @endif--}}
-                    {{--            @endif--}}
-                </div>
                 @if (auth()->user()->hasRole('Superadmin'))
                     @if ($offers->isEmpty())
                         <div class="panel-body text-center">
                             <div class="mt-30 mb-30">
                                 <h6 class="text-semibold">
-                                    {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
                                     Aucune offre disponible
                                 </h6>
                             </div>
@@ -42,12 +28,8 @@
                                     <tr>
                                         <th></th>
                                         <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('payementCycle') }}</th>
                                         <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('userTest') }}</th>--}}
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('reduction') }}</th>--}}
                                         <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -55,19 +37,9 @@
                                         <tr>
                                             <td></td>
                                             <td class="text-center">{{ $offer->intitule }}</td>
-                                            <td class="text-center">{{ $offer->payementCycle }}</td>
                                             <td class="text-center">{{ $offer->montant }}</td>
-                                            {{--                                    <td class="text-center">{{ $offer->userTest }}</td>--}}
-                                            {{--                                    <td class="text-center">{{ $offer->reduction}}</td>--}}
-                                            <td class="text-center" >
-                                                {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                {{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
+                                          <td class="text-center" >
                                                 <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                                                {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-                                                {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-                                                {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-                                                {{--                                            </form>--}}
-                                                {{--                                        @endif--}}
                                             </td>
                                         </tr>
                                         @include('admin.offers.offer_modal',['offer'=>$offer])
@@ -95,221 +67,46 @@
                 </div>
                 <!-- /.box-body -->
             </div>
+
+            <div class="box" style="height: 100%;">
+                <div class="box-header with-border">
+                    <ul class="box-title" style="font-size: 15px;;">
+                        <li>{{ trans('Promotions') }}</li>
+                        <li>
+                            <a href="#" class="btn btn-xs btn-primary  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#myModal" data-toggle="modal">@lang("Add promotion")</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-body">
+                    <div  style="padding: 15px">
+                        <table id="offers-tab" class="table stripe">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th  style="color:#0065A1 !important">{{ trans('intitule') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('Fin') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($promotion as $item)
+                                <tr>
+                                    <td></td>
+                                    <td >{{ $item->offer->intitule }}</td>
+                                    <td class="text-center">{{ $item->end_date }}</td>
+                                </tr>
+                                @include('admin.offers.offer_modal',['offer'=>$offer])
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
             <!-- /.box -->
-            <div class="panel panel-flat col-md-12">
-                <div class="panel-body " style="padding: 0;">
-                    {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
-                    {{--                @if(auth()->user()->payg == 0)--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
-                    {{--                    </div>--}}
-                    {{--                @else--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
-                    {{--                    </div>--}}
-                    {{--                @endif--}}
-                    {{--            @endif--}}
-                </div>
-                @if (auth()->user()->hasRole('Superadmin'))
-                    @if ($offers->isEmpty())
-                        <div class="panel-body text-center">
-                            <div class="mt-30 mb-30">
-                                <h6 class="text-semibold">
-                                    {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
-                                    Aucune offre disponible
-                                </h6>
-                            </div>
-                        </div>
-                    @else
-                        <div class="">
-                            <!-- /.box-header -->
-                            <div  style="padding: 15px">
-                                <table id="offers-tab" class="table stripe">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('payementCycle') }}</th>
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('userTest') }}</th>--}}
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('reduction') }}</th>--}}
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($offers as $offer)
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">{{ $offer->intitule }}</td>
-                                            <td class="text-center">{{ $offer->payementCycle }}</td>
-                                            {{--                                    <td class="text-center">{{ $offer->userTest }}</td>--}}
-                                            {{--                                    <td class="text-center">{{ $offer->reduction}}</td>--}}
-                                            <td class="text-center" >
-                                                {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                {{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
-                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                                                {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-                                                {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-                                                {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-                                                {{--                                            </form>--}}
-                                                {{--                                        @endif--}}
-                                            </td>
-                                        </tr>
-                                        @include('admin.offers.offer_modal',['offer'=>$offer])
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
-                @endif
-
-            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-flat col-md-12">
-                <div class="panel-body " style="padding: 0;">
-                    {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
-                    {{--                @if(auth()->user()->payg == 0)--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
-                    {{--                    </div>--}}
-                    {{--                @else--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
-                    {{--                    </div>--}}
-                    {{--                @endif--}}
-                    {{--            @endif--}}
-                </div>
-                @if (auth()->user()->hasRole('Superadmin'))
-                    @if ($extras->isEmpty())
-                        <div class="panel-body text-center">
-                            <div class="mt-30 mb-30">
-                                <h6 class="text-semibold">
-                                    {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
-                                    Aucune offre disponible
-                                </h6>
-                            </div>
-                        </div>
-                    @else
-                        <div class="">
-                            <!-- /.box-header -->
-                            <div  style="padding: 15px">
-                                <table id="extra-tab" class="table stripe">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center" style="color:#0065A1 !important">{{ trans('type') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('update') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($extras as $extra)
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">{{ $extra->type }}</td>
-                                            <td class="text-center">{{ $extra->cost}}</td>
-                                            <td class="text-center">{{ $extra->updated_at }}</td>
-                                            <td class="text-center" >
-                                                {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                {{--                                        <a href="{{  route('extra.edit', [$extra->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>--}}
-                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#extraModal-{{$extra->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                                                {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-                                                {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('extra.destroy', [$extra->id]) }}" > @csrf @method('DELETE')--}}
-                                                {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-                                                {{--                                            </form>--}}
-                                                {{--                                        @endif--}}
-                                            </td>
-                                        </tr>
-                                        @include('admin.offers.extra_modal',['extra'=>$extra])
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
-                @endif
 
-            </div>
-        </div>
-        <div class="col-md-4"> <div class="panel panel-flat col-md-12">
-                <div class="panel-body " style="padding: 0;">
-                    {{--            @if (auth()->user()->hasRole('Superadmin'))--}}
-                    {{--                @if(auth()->user()->payg == 0)--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="{{ route('entreprise') }}" class="btn btn-bloo heading-btn"><i class="fas fa-plus-circle"></i> {{ trans('Create') }}</a>--}}
-                    {{--                    </div>--}}
-                    {{--                @else--}}
-                    {{--                    <div class="panel-heading pull-right">--}}
-                    {{--                        <a href="#" class="btn btn-bloo heading-btn"> {{trans("You still have")}}  {{ $tokens->own  }}  {{trans("tokens")}} </a>--}}
-                    {{--                    </div>--}}
-                    {{--                @endif--}}
-                    {{--            @endif--}}
-                </div>
-                @if (auth()->user()->hasRole('Superadmin'))
-                    @if ($offers->isEmpty())
-                        <div class="panel-body text-center">
-                            <div class="mt-30 mb-30">
-                                <h6 class="text-semibold">
-                                    {{--                            {{ trans('Creer_des_maintenant_votre_premiere_operation') }}--}}
-                                    Aucune offre disponible
-                                </h6>
-                            </div>
-                        </div>
-                    @else
-                        <div class="">
-                            <!-- /.box-header -->
-                            <div  style="padding: 15px">
-                                <table id="offers-tab" class="table stripe">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('payementCycle') }}</th>
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('userTest') }}</th>--}}
-                                        {{--                                <th class="text-center "style="color:#0065A1 !important">{{ trans('reduction') }}</th>--}}
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($offers as $offer)
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">{{ $offer->intitule }}</td>
-                                            <td class="text-center">{{ $offer->payementCycle }}</td>
-                                            {{--                                    <td class="text-center">{{ $offer->userTest }}</td>--}}
-                                            {{--                                    <td class="text-center">{{ $offer->reduction}}</td>--}}
-                                            <td class="text-center" >
-                                                {{--                                        <a href="{{ route('offers.show', [$offer->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                {{--                                        <a href="{{  route('offers.edit', [$offer->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#modal" data-toggle="modal"><i class="fa fa-edit"></i></a>--}}
-                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                                                {{--                                        @if(Auth::user()->rolename() == "Superadmin")--}}
-                                                {{--                                            <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('offers.destroy', [$offer->id]) }}" > @csrf @method('DELETE')--}}
-                                                {{--                                                <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>--}}
-                                                {{--                                            </form>--}}
-                                                {{--                                        @endif--}}
-                                            </td>
-                                        </tr>
-                                        @include('admin.offers.offer_modal',['offer'=>$offer])
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
-                @endif
-
-            </div></div>
-
-
-    </div>
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    {{--    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>--}}
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -339,9 +136,7 @@
 @endsection
 
 @section('laraform_script2')
-    {{-- <script src="{{ asset('assets/js/core/app.js') }}"></script> --}}
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>
-    {{--    <script src="{{ asset('assets/js/custom/main.js') }}"></script>--}}
     <script>
         function form_submit(id) {
             document.getElementById(id).submit();
@@ -388,18 +183,6 @@
                     }
                 });
             });
-
-            // $('a[href="javascript:void(0)"]').click(function() {
-            // 	$.ajax({
-            // 		url: route,
-            // 		type: 'POST',
-            // 		dataType: 'json',
-            // 		data: data_serialized,
-            // 	})
-            // 	.done(function (response) {
-            // 		$(this).find('.no-click').addClass("text-muted");
-            // 	});
-            // });
 
             $(document).on('click', 'a[href]', function(e) {
                 var method = $(this).data('method');
@@ -605,6 +388,5 @@
             // Set onclick cbg-colour .btn-success
         });
     </script>
-
 @endsection
 

@@ -355,3 +355,5 @@ Route::get('/showfacture/{subscription}','FactureController@showfaacture')->midd
 
 Route::get('/json-payfacture','FactureController@payement')->middleware(['auth'])->name("showfacture");
 
+Route::resource('promotion','PromotionController')->middleware(['auth']);
+

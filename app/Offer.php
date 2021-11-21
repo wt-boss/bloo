@@ -14,4 +14,10 @@ class Offer extends Model
         return $this->belongsToMany('App\Subscription');
     }
 
+    public function promotions()
+    {
+        return $this->hasMany('App\Promotion');
+    }
+
+
 }
