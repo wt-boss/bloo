@@ -9,49 +9,105 @@
     @include('partials.alert', ['name' => 'index'])
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel-flat col-md-12">
-                @if (auth()->user()->hasRole('Superadmin'))
-                    @if ($offers->isEmpty())
-                        <div class="panel-body text-center">
-                            <div class="mt-30 mb-30">
-                                <h6 class="text-semibold">
-                                    Aucune offre disponible
-                                </h6>
-                            </div>
-                        </div>
-                    @else
-                        <div class="">
-                            <!-- /.box-header -->
-                            <div  style="padding: 15px">
-                                <table id="offers-tab" class="table stripe">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
-                                        <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($offers as $offer)
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">{{ $offer->intitule }}</td>
-                                            <td class="text-center">{{ $offer->montant }}</td>
-                                          <td class="text-center" >
-                                                <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
-                                            </td>
-                                        </tr>
-                                        @include('admin.offers.offer_modal',['offer'=>$offer])
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @endif
-                @endif
-
+            @if (auth()->user()->hasRole('Superadmin'))
+            <div class="box" style="height: 100%;">
+                <div class="box-header with-border">
+                    <ul class="box-title" style="font-size: 15px;;">
+                        <li>{{ trans('Offers') }}</li>
+                    </ul>
+                </div>
+                <div class="box-body">
+                    <div  style="padding: 15px">
+                        <table id="offers-tab" class="table stripe">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" style="color:#0065A1 !important">{{ trans('intitule') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('cost') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($offers as $offer)
+                                <tr>
+                                    <td></td>
+                                    <td class="text-center">{{ $offer->intitule }}</td>
+                                    <td class="text-center">{{ $offer->montant }}</td>
+                                    <td class="text-center" >
+                                        <a href="#" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;" data-target="#myModal-{{$offer->id}}" data-toggle="modal"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                                @include('admin.offers.offer_modal',['offer'=>$offer])
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
             </div>
+            <!-- /.box -->
+            @endif
+                <div class="box" style="height: 100%;">
+                    <div class="box-header with-border">
+                        <ul class="box-title" style="font-size: 15px;;">
+                            <li>{{ trans('Extra') }}</li>
+                        </ul>
+                    </div>
+                    <div class="box-body">
+                        @if(auth()->user()->hasRole('Superadmin'))
+                        <div class="panel-heading pull-left">
+                            <a href="#" class="btn btn-bloo heading-btn  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#theExtra" data-toggle="modal">
+                                <i class="fas fa-cogs"></i>
+                                @lang("Configure an extra")
+                            </a>
+                        </div>
+                        @endif
+                        <div class="panel-heading pull-right">
+                            <a href="#" class="btn btn-bloo heading-btn  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#myExtra" data-toggle="modal">
+                                <i class="fas fa-plus-circle"></i>
+                                @lang("Add an extra")
+                            </a>
+                        </div>
+                        <div  style="padding: 15px">
+                            <table id="offers-tab" class="table stripe">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-center" style="color:#0065A1 !important">{{ trans('first_name') }}</th>
+                                    <th class="text-center "style="color:#0065A1 !important">{{ trans('last_name') }}</th>
+                                    <th class="text-center" style="color:#0065A1 !important">{{ trans('role') }}</th>
+                                    <th class="text-center "style="color:#0065A1 !important">{{ trans('email') }}</th>
+                                    <th class="text-center" style="color:#0065A1 !important">{{ trans('Price') }}</th>
+                                    <th class="text-center" style="color:#0065A1 !important">{{ trans('Statut Paid') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($users as $offer)
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">{{ $offer->first_name }}</td>
+                                        <td class="text-center">{{ $offer->last_name }}</td>
+                                        <td class="text-center">{{ $offer->rolename() }}</td>
+                                        <td class="text-center">{{ $offer->email }}</td>
+                                        <td class="text-center">{{ $offer->cost }}</td>
+                                        <td class="text-center">
+                                            @if( $offer->active === 0)
+                                                NO
+                                                @else
+                                                YES
+                                            @endif
+                                        </td>
+
+                                    </tr>
+                                    @include('admin.offers.offer_modal',['offer'=>$offer])
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
         </div>
         <div class="col-md-4">
             <div class="box box-solid panel-wb">
@@ -72,10 +128,13 @@
                 <div class="box-header with-border">
                     <ul class="box-title" style="font-size: 15px;;">
                         <li>{{ trans('Promotions') }}</li>
-                        <li>
-                            <a href="#" class="btn btn-xs btn-primary  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#myModal" data-toggle="modal">@lang("Add promotion")</a>
-                        </li>
                     </ul>
+                    <div class="panel-heading pull-right">
+                        <a href="#" class="btn btn-bloo heading-btn  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#myModal" data-toggle="modal">
+                            <i class="fas fa-plus-circle"></i>
+                            @lang("Add promotion")
+                        </a>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div  style="padding: 15px">

@@ -108,7 +108,6 @@ class PaymentController extends Controller
         $facture = new Facture();
         $json=[];
         $offer=Offer::findOrFail($subscription->offer_id);
-
         $json['subscription_id']=$subscription->id;
         $json['offer_id']=$subscription->offer_id;
         $json['offer_price']=$offer->montant;

@@ -8,7 +8,7 @@ return [
 
 'role' => [
     '0' => 'Lecteur',
-    '1' => 'Opérateur',
+    '1' => 'Operateur',
     '3' => 'Free',
     '4' => 'Client',
     '5' => 'Admin',

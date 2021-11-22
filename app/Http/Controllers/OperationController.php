@@ -447,8 +447,6 @@ class OperationController extends Controller
     {
         $parameters = $request->all();
 
-
-
         /*
          * Creation de l'operation
          * */
@@ -1000,25 +998,6 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
-    public function loveme($id)
-    {
-        $user = User::findOrFail($id);
-        $notification_id = $user->device_token;
-        $title = trans("Operataion")." Denjiro Kyoshiro";
-        $message = trans("Operataion")." ABARAI RENJI ".trans("to start");
-        $id = $user->id;
-        $type = "basic";
-        $res = send_notification_FCM($notification_id, $title, $message, $id,$type);
-//            if($res == 1){
-//
-//                // success code
-//
-//            }else{
-//
-//                // fail code
-//            }
-    }
-
 
     public function list_extra(Request $request){
         $user=Auth::user();
@@ -1028,39 +1007,31 @@ class OperationController extends Controller
         return response()->json($extra);
         // return view('admin.extras.index',compact('extra'));
     }
+
     public function add_extra(Request $request){
 
         return view('admin.extras.add');
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
-    public function update_extra(Request $request,$id){
-        $extra=Extra::findOrFail($id);
-        $extra->update($request->all());
+    public function update_extra(Request $request){
+        $extra=Extra::findOrFail($request->extra_id);
+        $extra->cost= $request->montant;
+        $extra->save();
         $this->change_extra($extra);
         return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
-    public function store_extra(Request $request){
 
+    public function store_extra(Request $request){
         $this->validate($request, User::rules());
         User::create(request()->all());
         $extra_user=User::OrderBy('id','desc')->first();
         $user=Auth::user();
         $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
-        $extra=Extra::where('type','=',$extra_user->rolename())->get();
+        $extra=Extra::where('type','=',$extra_user->rolename())->where('offer_id',$request->offer_id)->get()->last();
         $subscription->extras()->attach($extra,['suscriber_id'=>$user->id,'user_id'=>$extra_user->id,'active'=>0]);
-
-
-//        $facture=Facture::where('subscription_id',$subscription->id);
-//        $date=date();
-//        $json=$facture->infos_json;
-//        $facture->Total=$facture->Total+$extra->cost;
-//
-//        $facture->infos_json=$json;
-//        $facture->save();
-
         $facture=new Facture();
         $json=[];
         $date=Carbon::now();
@@ -1077,28 +1048,34 @@ class OperationController extends Controller
         $facture->Total=$extra->cost;
         $facture->info_json=json_encode($json);
         $facture->save();
-        return redirect(route('extra.list'))->withSuccess('Extra créer avec sucess');
-
+        return back()->withSuccess('Extra créer avec sucess');
+        //return redirect(route('offers.list'))->withSuccess('Extra créer avec sucess');
     }
+
     public function remove_extra($id){
 
     }
+
     public function disable_extra($id){
         DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>0]);
     }
+
     public function enable_extra($id){
         DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>1]);
     }
+
     public function set_admin($client_id,$admin_id){
         $admin=User::findOrfail($admin_id);
         $client=User::findOrfail($client_id);
         $admin->admins()->attach($client);
     }
+
     public function unset_admin($client_id,$admin_id){
         $admin=User::findOrfail($admin_id);
         $client=User::findOrfail($client_id);
         $admin->admins()->detach($client);
     }
+
     public function change_extra($extra){
         $date_chg=date("Y-m-d h:i:s");
         $ended_date=strtotime($date_chg."+100 years");
@@ -1108,11 +1085,9 @@ class OperationController extends Controller
             $record->update(['ended_date'=>$date_chg]);
         }
         DB::table('extra_changes')->insert(['extra_id'=>$extra->id,'montant'=>$extra->cost,'date_chg'=>$date_chg,'ended_date'=>$ended_date]);
-
         return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
-        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
-
     }
+
     public function change_offer($offer){
         $date_chg=date("Y-m-d h:i:s");
         $ended_date=strtotime($date_chg."+100 years");
@@ -1127,12 +1102,15 @@ class OperationController extends Controller
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
+
     public function retrieve_father($id){
         $user=User::findOrFail($id);
         $father_id=DB::table('extra_subscription')->where('extra_id',$user->id)->first();
         $father=User::findOrFail($father_id);
         return response()->json($father);
     }
+
+
     public function retrieve_children_list($id){
         $father=User::findOrFail($id);
         $children=DB::table('extra_subscription')->where('suscriber_id',$father->id)->get();

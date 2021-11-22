@@ -9,4 +9,10 @@ class ExtraSubscription extends Pivot
 {
     protected $guarded=[];
     public $incrementing = true;
+
+
+    public function rolename()
+    {
+        return config('variables.role')[$this->attributes['role']];
+    }
 }

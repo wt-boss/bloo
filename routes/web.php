@@ -319,7 +319,7 @@ Route::get('/formulaire',function() {
 Route::get('/notif/{id}','OperationController@loveme');
 
 //  Offers Routes
-Route::resource('offers','OfferController')->middleware(['Role:Superadmin','Free']);
+Route::resource('offers','OfferController')->middleware(['Role:Superadmin|Client','Free']);
 
 //  Extra Routes
 //Route::get('extra/list','OperationController@list_extra')->middleware(['Role:Superadmin|Client','Free'])->name('extra.list');
@@ -357,3 +357,8 @@ Route::get('/json-payfacture','FactureController@payement')->middleware(['auth']
 
 Route::resource('promotion','PromotionController')->middleware(['auth']);
 
+Route::resource('extras','ExtraController')->middleware(['auth']);
+
+Route::post('updateoffers','OperationController@update_extra')->middleware(['Role:Superadmin|Client','auth'])->name("updateoffers");
+
+Route::post('storeoffers','OperationController@store_extra')->middleware(['Role:Superadmin|Client','auth'])->name("storeoffers");

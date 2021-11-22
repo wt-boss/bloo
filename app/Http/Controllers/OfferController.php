@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Extra;
+use App\ExtraSubscription;
 use App\Offer;
 
 use App\Promotion;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,11 @@ class OfferController extends Controller
         $offers=Offer::all();
         $extras=Extra::all();
         $promotion=Promotion::with('offer')->get();
-        return view('admin.offers.index',compact('offers','extras','promotion'));
+        $users = ExtraSubscription::where('suscriber_id',auth()->user()->id)
+            ->join("extras","extra_subscription.extra_id","extras.id")
+            ->join("users","extra_subscription.user_id","users.id")
+            ->get();
+        return view('admin.offers.index',compact('offers','extras','promotion','users'));
     }
     public function create(){
         return view('offers.create');

@@ -12,8 +12,13 @@ class Extra extends Model
     {
         return $this->belongsToMany(Subscription::class)->using(ExtraSubscription::class);
     }
+
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function offer(){
+        return $this->belongsTo(Offer::class);
     }
 }
