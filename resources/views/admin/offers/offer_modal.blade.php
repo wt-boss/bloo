@@ -204,7 +204,9 @@
                         </div>
                     </div>
 
+                    @isset($offer->offer_id)
                     <input type="hidden" name="offer_id" value="{{$offer->offer_id}}">
+                    @endisset
 
                     <div class="form-group has-feedback has-feedback-left">
                         <select class="form-control" name="role" id="description" required>

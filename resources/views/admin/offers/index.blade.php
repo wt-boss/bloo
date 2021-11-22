@@ -109,6 +109,7 @@
                 </div>
                 <!-- /.box -->
         </div>
+        @if(auth()->user()->hasRole('Superadmin'))
         <div class="col-md-4">
             <div class="box box-solid panel-wb">
                 <!-- /.box-header -->
@@ -119,6 +120,7 @@
                                 <a href="{{route('topics.index')}}" class="btn form-control">{{ trans('Templates') }}</a>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -163,6 +165,7 @@
             </div>
             <!-- /.box -->
         </div>
+        @endif
     </div>
 
     <script type="application/javascript"  src="{{asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>

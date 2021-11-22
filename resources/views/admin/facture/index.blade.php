@@ -128,6 +128,7 @@
                                                 <td class="text-center">{{ "$".$facture->Total  }}</td>
                                             @else
                                                 <td class="text-center">
+                                                    {{ "$".$facture->Total  }}
                                                     <a href="{{ url('showfacture',[$facture->id])}}">
                                                         <button class="btn-bloo" type="submit">Pay</button>
                                                     </a>

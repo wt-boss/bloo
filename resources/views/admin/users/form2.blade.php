@@ -29,15 +29,21 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
 
 <div class="form-group focused">
     <label for="role">Role</label>
-    <select class="form-control" id="role" name="role" >
+    <select class="form-control" id="role" name="role"  required>
+        <option value="" selected="selected"></option>
         <option value="0">Lecteur</option>
-        <option value="1" selected="selected">Opérateur</option>
-        <option value="4">Client</option>
-        <option value="5">Superadmin</option></select>
+        <option value="1" >Opérateur</option>
+        <option value="5" >Admin</option>
+    </select>
 </div>
 
 <div class="form-group focused" >
-    <label for="active" >Active</label><select class="form-control" id="active" name="active" ><option value="0" selected="selected">Non</option><option value="1">Oui</option></select>
+    <label for="active" >Active</label>
+    <select class="form-control" id="active" name="active" required>
+        <option value="" selected="selected"></option>
+        <option value="0" >Non</option>
+        <option value="1">Oui</option>
+    </select>
 </div>
 
 

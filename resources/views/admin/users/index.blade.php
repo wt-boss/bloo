@@ -68,10 +68,12 @@
                                     @if(($user->rolename() == "Opérateur") && ($user->active == 0))
                                     <a id="activation" href="{{route('activation', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-user-check"></i></a>
                                     @endif
-                                    @if(Auth::user()->rolename() == "Superadmin")
-                                    <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('users.destroy', [$user->id]) }}" > @csrf @method('DELETE')
-                                        <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
-                                    </form>
+                                    @if(Auth::user()->rolename() === "Superadmin")
+                                        @if($user->rolename() !== "Superadmin")
+                                        <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('users.destroy', [$user->id]) }}" > @csrf @method('DELETE')
+                                           <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
+                                        </form>
+                                            @endif
                                     @endif
                                     @endif
                                 </td>

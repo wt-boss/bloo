@@ -53,7 +53,6 @@ class PaymentController extends Controller
     {
 
         $data = $request->except('_token');
-
         // Creation de l'user
         $user = new User();
         $user->first_name = $data["first_name"];
@@ -79,7 +78,7 @@ class PaymentController extends Controller
             $entreprise->adresse = $data["address_enterprise"];
             $entreprise->contribuable = $data["contribuanle_enterprise"];
             $entreprise->siret = $data["siret_enterprise"];
-            $entreprise->city_id = $data["city_id"];
+            $entreprise->type = "Personne Morale";
             $entreprise->telephone =  $data["telephone_entreprise"];
             $entreprise->save();
             $entreprise->users()->attach($user);
@@ -88,10 +87,12 @@ class PaymentController extends Controller
          //souscription au forfait
         $subscription = new Subscription();
         $subscription->user_id = $user->id;
-        if($data['mode'] === 'monthly'){
+        if($data['mode'] === 'illimité'){
                 $subscription->offer_id = 2;
+                $subscription->state='demo';
         }else{
                 $subscription->offer_id = 1;
+               $subscription->state='paid';
         }
         $subscription->state='demo';
         $subscription->date=date('Y-m-d H:i:s');
