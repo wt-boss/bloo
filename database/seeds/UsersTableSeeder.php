@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'email'    => 'superadmin@fake.com',
             'password' =>  Hash::make('123456'),
             'api_token' => Str::random(80),
-            'role'     => 5,
+            'role'     => 6,
             'active'     => 1,
             'avatar'   => 'avatar1.jpg',
             'email_verified_at' => '2020-04-30 17:24:47',

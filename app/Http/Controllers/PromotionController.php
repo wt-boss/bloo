@@ -37,9 +37,10 @@ class PromotionController extends Controller
     {
         $data = $request->except("_token");
         $promotion = new Promotion();
-        $promotion->percentage = $data['montant'] ;
+        $promotion->intitule = $data['intitule'];
+        $promotion->percentage = $data['percentage'] ;
         $promotion->offer_id = $data['offer'] ;
-        $promotion->start_date = date('Y-m-d');
+        $promotion->start_date = $data['start_date'] ;
         $promotion->end_date = $data['end_date'];
         $promotion->save();
 

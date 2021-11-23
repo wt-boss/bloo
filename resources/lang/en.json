@@ -640,5 +640,8 @@
     "availability_updated": "Availability has been updated",
     "token_saved": "Token has been saved",
     "signup_1": "PERSONAL INFORMATIONS",
-    "signup_2": "COMPANY INFORMATION"
+    "signup_2": "COMPANY INFORMATION",
+    "Sucess_create": "Your account has been successfully created",
+    "Confirmation_msg": "A confirmation email has been sent to you."
+
 }

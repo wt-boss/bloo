@@ -20,7 +20,6 @@ class CreateOffersTable extends Migration
             $table->unsignedBigInteger('payementCycle')->nullable();
             $table->unsignedBigInteger('timeTest')->nullable();
             $table->unsignedBigInteger('userTest')->nullable();
-            $table->unsignedBigInteger('reduction')->nullable();
             $table->timestamps();
         });
     }

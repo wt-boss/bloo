@@ -75,29 +75,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ trans('update_promotion') }}</h5>
+                <h5 class="modal-title">{{ trans('Add promotion') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form_offer" method='POST' action="{{route('promotion.store')}}">
+            <form id="promition-form" method='POST' action="{{route('promotion.store')}}">
             <div class="modal-body">
-
-
                     @csrf
                     @php
                       $offers = \App\Offer::all();
                     @endphp
 
                     <div class="my-content create-user">
-
                         <div class="form-group focused" >
-                            <label for="montant">Pourcentage</label>
-                            <input class="form-control" name="montant" type="number"  required>
+                            <label for="intitule">@lang("Entitled")</label>
+                            <input class="form-control" name="intitule" type="text"  required>
                         </div>
 
                         <div class="form-group focused" >
-                            <label for="montant">Offre</label>
+                            <label for="percentage">@lang("Percentage")</label>
+                            <input class="form-control" name="percentage" type="number" min="0" max="100" required>
+                        </div>
+
+                        <div class="form-group focused" >
+                            <label for="montant">@lang("offer")</label>
                             <select class="form-control" name="offer">
                                 @foreach($offers as $item)
                                 <option value="{{$item->id}}">{{$item->intitule}}</option>
@@ -105,10 +107,22 @@
                             </select>
                         </div>
 
-                        <div class="form-group focused" >
-                                <label for="userTest">Date de fin </label>
-                                <input class="form-control" name="end_date" type="date"  required>
+                        <div class="form-group col-6">
+                            <label for="date_start">{{ trans('free_form1_label3') }} </label>
+                            <input type="date" class="form-control form-input-check" value="{{old('date_start')}}" id="date_start" name="date_start"  required>
+                            <div class="invalid-feedback">
+
+                            </div>
                         </div>
+
+                        <div class="form-group col-6">
+                            <label for="date_end">{{ trans('free_form1_label4') }} </label>
+                            <input type="date" class="form-control form-input-check" value="{{old('date_end')}}" id="date_end" name="date_end"  required>
+                            <div class="invalid-feedback">
+
+                            </div>
+                        </div>
+
                     </div>
 
             </div>

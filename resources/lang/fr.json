@@ -748,7 +748,13 @@
     "Use this template": "Utiliser ce modèle",
     "Invoice information": "Informations sur la facture",
     "Add promotion": "Ajouter une promotion",
-    "View this model": "Visualiser ce modèle"
+    "View this model": "Visualiser ce modèle",
+    "Add an extra": "Ajouter un extra",
+    "Entitled": "Intitulé",
+    "Percentage": "Pourcentage",
+    "Start date": "Date de début",
+    "End date": "Date de fin",
+    "Offer": "Offre"
 
 
 }

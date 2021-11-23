@@ -15,11 +15,11 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('intitule');
             $table->date("start_date");
             $table->date("end_date");
             $table->integer("percentage");
             $table->unsignedInteger('offer_id');
-            $table->unsignedInteger('extra_id');
             $table->timestamps();
         });
     }

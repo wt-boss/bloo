@@ -17,7 +17,7 @@ class CreateExtrasTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('offer_id')->references('id')->on('offers');
             $table->unsignedBigInteger('cost');
             $table->unsignedBigInteger('subscription_id');
             $table->foreign('subscription_id')->references('id')->on('subscriptions');

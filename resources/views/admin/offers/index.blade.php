@@ -2,13 +2,11 @@
 @section('page_title', 'Offers')
 
 
-
-
 @section('content')
 
     @include('partials.alert', ['name' => 'index'])
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             @if (auth()->user()->hasRole('Superadmin'))
             <div class="box" style="height: 100%;">
                 <div class="box-header with-border">
@@ -62,12 +60,14 @@
                             </a>
                         </div>
                         @endif
+                        @if(auth()->user()->role !== 6 )
                         <div class="panel-heading pull-right">
                             <a href="#" class="btn btn-bloo heading-btn  mb-2 position-right float-right" style="background-color: #0065A1;" data-target="#myExtra" data-toggle="modal">
                                 <i class="fas fa-plus-circle"></i>
                                 @lang("Add an extra")
                             </a>
                         </div>
+                            @endif
                         <div  style="padding: 15px">
                             <table id="offers-tab" class="table stripe">
                                 <thead>
@@ -110,7 +110,7 @@
                 <!-- /.box -->
         </div>
         @if(auth()->user()->hasRole('Superadmin'))
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box box-solid panel-wb">
                 <!-- /.box-header -->
                 <div class="box-body" style="padding: 0 ;">
@@ -145,14 +145,20 @@
                             <tr>
                                 <th></th>
                                 <th  style="color:#0065A1 !important">{{ trans('intitule') }}</th>
-                                <th class="text-center "style="color:#0065A1 !important">{{ trans('Fin') }}</th>
+                                <th  style="color:#0065A1 !important">{{ trans('Offer') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('Percentage') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('Start date') }}</th>
+                                <th class="text-center "style="color:#0065A1 !important">{{ trans('End date') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($promotion as $item)
                                 <tr>
                                     <td></td>
+                                    <td>{{ $item->intitule }}</td>
                                     <td >{{ $item->offer->intitule }}</td>
+                                    <td class="text-center">{{ $item->percentage }}</td>
+                                    <td >{{ $item->start_date }}</td>
                                     <td class="text-center">{{ $item->end_date }}</td>
                                 </tr>
                                 @include('admin.offers.offer_modal',['offer'=>$offer])
@@ -361,6 +367,61 @@
                 }
             }
         });
+    </script>
+    <script type="text/javascript">
+
+        $("#promition-form").on('submit', function(e){
+            let valid = verify();
+            if(!valid){
+                e.preventDefault();
+            }
+        });
+
+        function verify() {
+
+            var date_start = $('#date_start').val();
+            if (is_null_or_whithe_space(date_start)){
+                $('#date_start').addClass("is-invalid");
+                $('#date_start').next(".invalid-feedback").html("@lang('This field cannot be empty')");
+                return false;
+            }
+
+            var date_end = $('#date_end').val();
+            if (is_null_or_whithe_space(date_end)) {
+                $('#date_end').addClass("is-invalid");
+                $('#date_end').next(".invalid-feedback").html("@lang('This field cannot be empty')");
+                return false;
+            }
+
+            date_start = new Date(date_start);
+            date_end = new Date(date_end);
+
+            if (date_start.getTime() < (new Date().datePart().getTime())) {
+                $('#date_start').addClass("is-invalid");
+                $('#date_start').next(".invalid-feedback").html("@lang("Choose a date greater than or equal to today's date")");
+                return false;
+            }
+
+            if (date_start.getTime() > date_end.getTime()) {
+                $('#date_end').addClass("is-invalid");
+                $('#date_end').next(".invalid-feedback").html("@lang("The start date must be less than the end date")");
+                return false;
+            }
+
+            return true;
+        }
+
+        const is_null_or_whithe_space = function(input) {
+            return !input || !(typeof(input) == 'string') || input.replace(/\s/g, '').length < 3;
+        };
+
+        const date_part_only = function () {
+            var d = new Date(this);
+            d.setHours(0, 0, 0, 0);
+            return d;
+        };
+
+        Date.prototype.datePart = date_part_only;
     </script>
 @endsection
 

@@ -13,7 +13,7 @@ class ExtraSubscription extends Migration
      */
     public function up()
     {
-        Schema::create('extra_subscriptions', function (Blueprint $table) {
+        Schema::create('extra_subscription', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('extra_id');
             $table->foreign('extra_id')->references('id')->on('extras');
@@ -34,6 +34,6 @@ class ExtraSubscription extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extra_subscriptions');
+        Schema::dropIfExists('extra_subscription');
     }
 }

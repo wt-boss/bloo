@@ -92,7 +92,7 @@ class PaymentController extends Controller
                 $subscription->state='demo';
         }else{
                 $subscription->offer_id = 1;
-               $subscription->state='paid';
+                $subscription->state='paid';
         }
         $subscription->state='demo';
         $subscription->date=date('Y-m-d H:i:s');
