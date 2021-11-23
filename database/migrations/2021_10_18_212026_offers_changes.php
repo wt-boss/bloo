@@ -15,7 +15,7 @@ class OffersChanges extends Migration
     {
         Schema::create('offer_changes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('offer_id');
+            $table->unsignedInteger('offer_id');
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->unsignedBigInteger('montant');
             $table->dateTime('date_chg');

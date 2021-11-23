@@ -14,7 +14,7 @@ class CreateOffersTable extends Migration
     public function up()
     {
         Schema::create('offers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
             $table->string('intitule');
             $table->unsignedBigInteger('montant')->nullable();
             $table->unsignedBigInteger('payementCycle')->nullable();

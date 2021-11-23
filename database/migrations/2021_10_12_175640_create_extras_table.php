@@ -16,11 +16,9 @@ class CreateExtrasTable extends Migration
         Schema::create('extras', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('offer_id');
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->unsignedBigInteger('cost');
-            $table->unsignedBigInteger('subscription_id');
-            $table->foreign('subscription_id')->references('id')->on('subscriptions');
             $table->timestamps();
         });
     }

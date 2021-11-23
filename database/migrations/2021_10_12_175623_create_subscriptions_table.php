@@ -17,7 +17,7 @@ class CreateSubscriptionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('offer_id');
+            $table->unsignedInteger('offer_id');
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->dateTime('date');
             $table->string('state');
