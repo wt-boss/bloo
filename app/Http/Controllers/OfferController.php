@@ -14,7 +14,7 @@ class OfferController extends Controller
 {
     public function index(){
         $offers=Offer::all();
-        $extras=Extra::all();
+        $extras=Extra::with('offer')->get();
         $promotion=Promotion::with('offer')->get();
         $users = ExtraSubscription::where('suscriber_id',auth()->user()->id)
             ->join("extras","extra_subscription.extra_id","extras.id")

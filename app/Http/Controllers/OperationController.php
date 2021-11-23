@@ -1020,8 +1020,6 @@ class OperationController extends Controller
         $extra->save();
         $this->change_extra($extra);
         return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
-        #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
-
     }
 
     public function store_extra(Request $request){
