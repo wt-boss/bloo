@@ -131,6 +131,7 @@
                                 <button type="button"  class="btn btn-next col-6 btn-outline-primary float-right guren">{{ trans('PASS') }}</button>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="name_enterprise"> {{ trans('SOCIAL REASON') }}</label>
@@ -147,6 +148,7 @@
                                     {{ trans('adress_entreprise_valid') }}
                                 </div>
                             </div>
+
                             <div class="form-group col-4">
                                 <label for="contribuanle_enterprise">{{ trans('num_contribuable') }}</label>
                                 <input type="text" name="contribuanle_enterprise" value="{{old('contribuanle_enterprise')}}" class="birth-country form-control" id="contribuanle_enterprise" placeholder="">
@@ -154,6 +156,7 @@
                                     {{ trans('adress_entreprise_valid') }}
                                 </div>
                             </div>
+
                             <div class="form-group col-4">
                                 <label for="siret_enterprise">{{ trans('num_sirect') }}</label><br>
                                 <input type="text" name="siret_enterprise" value="{{old('siret_enterprise')}}" class="birth-country form-control d-block" id="siret_enterprise"  placeholder="">
@@ -169,7 +172,6 @@
                                     {{ trans('adress_entreprise_valid') }}
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="form-group col-6">
@@ -182,37 +184,46 @@
                    </div>
 
                     <div id="step3" style="display:none">
-                    <h4><span class="step">{{ trans('CREATE AN OPERATION') }}</span></h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <h4><span class="step">{{ trans('CREATE AN OPERATION') }}</span></h4>
+                            </div>
+                            <div class="form-group col-6">
+                                <button type="submit"  class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('PASS') }}</button>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="operation_name">{{ trans('free_form1_label1') }}</label>
-                                <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" value="{{old('operation_name')}}" placeholder="{{ trans('Entrer') }}" required>
+                                <input type="text" class="form-control form-input-check" id="operation_name" name="operation_name" value="{{old('operation_name')}}" placeholder="{{ trans('Entrer') }}" >
                                 <div class="invalid-feedback">
                                     {{ trans('num_contribuable_valid') }}
                                 </div>
                             </div>
                             <div class="form-group col-6">
                                 <label for="operation_purpose">{{ trans('free_form1_label2') }}</label>
-                                <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" value="{{old('operation_purpose')}}" placeholder="{{ trans('Entre2') }}" required>
+                                <input type="text" class="form-control form-input-check" id="operation_purpose" name="operation_purpose" value="{{old('operation_purpose')}}" placeholder="{{ trans('Entre2') }}" >
                                 <div class="invalid-feedback">
                                     {{ trans('num_contribuable_valid') }}
                                 </div>
                             </div>
                             <div class="form-group col-6">
                                 <label for="date_start">{{ trans('free_form1_label3') }} </label>
-                                <input type="date" class="form-control form-input-check" value="{{old('date_start')}}" id="date_start" name="date_start"  required>
+                                <input type="date" class="form-control form-input-check" value="{{old('date_start')}}" id="date_start" name="date_start"  >
                                 <div class="invalid-feedback">
                                     {{ trans('num_contribuable_valid') }}
                                 </div>
                             </div>
                             <div class="form-group col-6">
                                 <label for="date_end">{{ trans('free_form1_label4') }} </label>
-                                <input type="date" class="form-control form-input-check" value="{{old('date_end')}}" id="date_end" name="date_end"  required>
+                                <input type="date" class="form-control form-input-check" value="{{old('date_end')}}" id="date_end" name="date_end"  >
                                 <div class="invalid-feedback">
                                     {{ trans('num_contribuable_valid') }}
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-6">
                                 <button type="button" data-step-nav="next" data-action="back2" data-continue-with="verifyThirdStep" class="btn btn-next col-6 btn-outline-primary">{{ trans('Précedent') }}</button>
@@ -221,20 +232,8 @@
                                 <button type="submit" data-step-nav="next" data-action="verifyThirdStep" data-continue-with="verifyThirdStep" class="btn btn-next col-6 btn-outline-primary float-right">{{ trans('CREATE') }}</button>
                             </div>
                         </div>
+
                     </div>
-
-{{--                    <div id="step4" style="display:none">--}}
-{{--                    <h4><span class="step">{{ trans('CREATE AN OPERATION') }}</span></h4>--}}
-{{--                        <div class="row">--}}
-{{--                             <div class="col-8">--}}
-{{--                               <h5>  VOS INFORMATIONS ONT ETE ENREGISTRER, VOULEZ VOUS CREER VOTRE COMPTE ?</h5>--}}
-{{--                             </div>--}}
-{{--                            <div class="col-4">--}}
-{{--                                <button type="submit" class="btn btn-primary">{{ trans('CREATE') }}</button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
                 </form>
             </div>
         </div>
@@ -262,6 +261,7 @@
                     })
                 });
             });
+
             // changement de pays
             $('#country').change(function(e){
                 let country_id = e.target.value;

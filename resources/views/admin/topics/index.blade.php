@@ -64,22 +64,6 @@
                         <div class="box-body" >
                             <div class="row" id="templates">
                                 <div class="row">
-                                    <div class="col-lg-4 col-xs-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-aqua">
-                                            <div class="inner">
-                                                <h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">150</font></font></h3>
-
-                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nouvelles commandes</font></font></p>
-                                            </div>
-                                            <div class="icon">
-                                                <i class="fa fa-bookmark"></i>
-                                            </div>
-                                            <a href="#" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                                        Plus d'informations </font></font><i class="fa fa-arrow-circle-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
