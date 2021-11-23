@@ -280,6 +280,7 @@
                     });
                 });
             });
+
             // changement de régions
             $('#region').on('change', function(e){
                 let state_id = e.target.value;

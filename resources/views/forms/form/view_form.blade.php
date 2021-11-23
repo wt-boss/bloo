@@ -6,7 +6,7 @@ $module = ($view_type === 'preview') ? 'My Form' : config('app.name');
 $fields = $form->fields()->filled()->get();
 @endphp
 
-@section('title', "{$module} | {$page}")
+@section('title', " {$page}")
 
 @extends('layouts.auth')
 
@@ -24,11 +24,19 @@ $fields = $form->fields()->filled()->get();
                     <h5 class="panel-title">{{ $page }}</h5>
                 </div>
                 @php $formatted_fields = []; @endphp
+
+
                 @if ($form->status === App\Form::STATUS_CLOSED)
                     <div class="panel-body">
                         {{ optional($form->availability)->closed_form_message ?? 'Sorry, this form has been closed to responses.' }}
                     </div>
-                @else
+                @elseif($form->status === App\Form::STATUS_PENDING)
+                    <div class="panel-body">
+                        {{ optional($form->availability)->closed_form_message ?? 'Sorry, this form has been closed to responses.' }}
+                    </div>
+                    @elseif($form->status === App\Form::STATUS_DRAFT)
+
+                    @else
                     <div class="panel-body">
                         {!! str_convert_line_breaks($form->description) !!}
                     </div>

@@ -25,17 +25,10 @@
             <form id="forms" method="post" action="{{route("forms.conditionalpost")}}" autocomplete="off">
                 @csrf
                 <div class="form-group">
-                    <label for="description">{{trans("I WANT TO SHOW THE QUESTIONS")}} : <span class="text-danger">*</span></label><br>
-                    @foreach($questions as $key => $field)
-                        <input type="checkbox"  value="{{$field->id}}" name="questions_check[]"> Question {{$key + 1 }} : {{$field->question}} {{$field->template}} <br>
-                    @endforeach
-                </div>
-
-                <div class="form-group">
                     <label for="description">{{trans("WHEN")}} : <span class="text-danger">*</span></label><br>
                     <select name="questions" id="question-select" class="form-control">
                     @foreach($questions as $key => $field)
-                            @if($field->template == "multiple-choices")
+                            @if($field->template === "multiple-choices")
                               <option value="{{$field->id}}">Question {{$key + 1 }} : {{$field->question}}</option>
                             @endif
                     @endforeach
@@ -44,8 +37,16 @@
 
                 <div class="form-group">
                     <label for="description">{{trans("IS EQUAL TO")}} : <span class="text-danger">*</span></label><br>
-                    <input type="text" class="form-control" id="value" name="value" placeholder="Value"  required>
-                    <input type="hidden"  value="{{$form->code}}" name="form">
+                    <select name="questions" id="response" class="form-control">
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">{{trans("I WANT TO SHOW THE QUESTIONS")}} : <span class="text-danger">*</span></label><br>
+                    @foreach($questions as $key => $field)
+                        <input type="checkbox"  value="{{$field->id}}" name="questions_check[]"> Question {{$key + 1 }} : {{$field->question}} <br>
+                    @endforeach
                 </div>
 
                 <div class="text-right">
@@ -54,13 +55,32 @@
             </form>
         </div>
     </div>
+
+
+
+
 @endsection
 @section('laraform_script1')
     <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/blockui.min.js') }}"></script>
+    <script>
+        // changement de pays
+        $('#question-select').change(function(e){
+            let question_id = e.target.value;
+            $.get('/json_response?question_id=' + question_id,function(data) {
+                $('#response').empty();
+                $.each(data, function(index, stateObj){
+                    $('#response').append('<option value="'+ stateObj.id +'">'+ stateObj.value +'</option>');
+                });
+            });
+        });
+
+    </script>
 @endsection
+
+
 @section('laraform_script2')
     <script src="{{ asset('assets/js/core/app.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/ripple.min.js') }}"></script>

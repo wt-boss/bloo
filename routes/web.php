@@ -362,3 +362,6 @@ Route::resource('extras','ExtraController')->middleware(['auth']);
 Route::post('updateoffers','OperationController@update_extra')->middleware(['Role:Superadmin|Client','auth'])->name("updateoffers");
 
 Route::post('storeoffers','OperationController@store_extra')->middleware(['Role:Superadmin|Client','auth'])->name("storeoffers");
+
+
+Route::get("/json_response","OperationController@getResponse")->name("Allresponse");

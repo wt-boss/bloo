@@ -373,8 +373,8 @@ class FormController extends Controller
 
     public function viewForm(Form $form)
     {
-        $not_allowed = !in_array($form->status, [Form::STATUS_OPEN, Form::STATUS_CLOSED]);
-        abort_if($not_allowed, 404);
+//        $not_allowed = !in_array($form->status, [Form::STATUS_OPEN, Form::STATUS_CLOSED, Form::STATUS_DRAFT]);
+//        abort_if($not_allowed, 404);
         //Recuperation des condtions du formulaire;
         $conditions = Conditional::with('conditional_fields')->where('form_id', $form->id)->get();
         return view('forms.form.view_form', ['form' => $form, 'conditions' => $conditions, 'view_type' => 'form']);

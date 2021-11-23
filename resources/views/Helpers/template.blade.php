@@ -15,7 +15,7 @@
                             @lang("Use this template") </font></font><i class="fa fa-arrow-circle-right"></i>
                 </a>
                 <a href="{{route('forms.show',[$item->form->code])}}" target="_blank" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                            @lang("Use this template") </font></font><i class="fa fa-eye "></i>
+                            @lang("View this template") </font></font><i class="fa fa-eye "></i>
                 </a>
             </div>
         </div>

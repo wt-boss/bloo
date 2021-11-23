@@ -7,6 +7,7 @@ use App\City;
 use App\Entreprise;
 use App\Extra;
 use App\Facture;
+use App\FormField;
 use App\Location;
 use App\Mail\BlooLecteur;
 use App\Mail\BlooOperateur;
@@ -36,6 +37,7 @@ use App\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helper;
+use stdClass;
 
 class OperationController extends Controller
 {
@@ -983,14 +985,13 @@ class OperationController extends Controller
         return response()->json($locations);
     }
 
-
     public function VueAllLocation($userid,$operationid)
     {
         return view('admin.operation.localisation',compact('userid','operationid'));
     }
 
     /**
-     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function listAdmin()
     {
@@ -998,7 +999,10 @@ class OperationController extends Controller
         return response()->json($users);
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list_extra(Request $request){
         $user=Auth::user();
         $subscription=$user->subscriptions()->first();
@@ -1014,6 +1018,11 @@ class OperationController extends Controller
         #return redirect(route('extra.list'))->withSuccess('Extra ajouté avec sucess');
 
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function update_extra(Request $request){
         $extra=Extra::findOrFail($request->extra_id);
         $extra->cost= $request->montant;
@@ -1022,6 +1031,11 @@ class OperationController extends Controller
         return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store_extra(Request $request){
         $this->validate($request, User::rules());
         User::create(request()->all());
@@ -1050,30 +1064,55 @@ class OperationController extends Controller
         //return redirect(route('offers.list'))->withSuccess('Extra créer avec sucess');
     }
 
+    /**
+     * @param $id
+     */
     public function remove_extra($id){
 
     }
 
+
+    /**
+     * @param $id
+     */
     public function disable_extra($id){
         DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>0]);
     }
 
+    /**
+     * @param $id
+     */
     public function enable_extra($id){
         DB::table('extra_subscriptions')->where('subscription_id','=',$id)->update(['active'=>1]);
     }
 
+
+    /**
+     * @param $client_id
+     * @param $admin_id
+     */
     public function set_admin($client_id,$admin_id){
         $admin=User::findOrfail($admin_id);
         $client=User::findOrfail($client_id);
         $admin->admins()->attach($client);
     }
 
+
+    /**
+     * @param $client_id
+     * @param $admin_id
+     */
     public function unset_admin($client_id,$admin_id){
         $admin=User::findOrfail($admin_id);
         $client=User::findOrfail($client_id);
         $admin->admins()->detach($client);
     }
 
+
+    /**
+     * @param $extra
+     * @return mixed
+     */
     public function change_extra($extra){
         $date_chg=date("Y-m-d h:i:s");
         $ended_date=strtotime($date_chg."+100 years");
@@ -1086,6 +1125,11 @@ class OperationController extends Controller
         return redirect()->route('offers.index')->withSuccess(trans("Modification Done"));
     }
 
+
+    /**
+     * @param $offer
+     * @return mixed
+     */
     public function change_offer($offer){
         $date_chg=date("Y-m-d h:i:s");
         $ended_date=strtotime($date_chg."+100 years");
@@ -1101,6 +1145,11 @@ class OperationController extends Controller
 
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function retrieve_father($id){
         $user=User::findOrFail($id);
         $father_id=DB::table('extra_subscription')->where('extra_id',$user->id)->first();
@@ -1108,11 +1157,28 @@ class OperationController extends Controller
         return response()->json($father);
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function retrieve_children_list($id){
         $father=User::findOrFail($id);
         $children=DB::table('extra_subscription')->where('suscriber_id',$father->id)->get();
         return response()->json($children);
+    }
+
+    public function getResponse(Request $request){
+        $options = collect();
+        $question_id = $request->input('question_id');
+        $responses = FormField::findOrFail($question_id);
+        $Alloptions = $responses->options ;
+        foreach($Alloptions as $key => $value){
+            $object =  new stdClass();
+            $object->id = $key;
+            $object->value = $value;
+            $options->push($object);
+        }
+        return response()->json($options);
     }
 
 }
