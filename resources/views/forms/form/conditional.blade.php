@@ -29,7 +29,7 @@
                     <select name="questions" id="question-select" class="form-control">
                     @foreach($questions as $key => $field)
                             @if($field->template === "multiple-choices")
-                              <option value="{{$field->id}}">Question {{$key + 1 }} : {{$field->question}}</option>
+                              <option lang="fr" id="{{$field->key}}" value="{{$field->id}}"> Question {{$key + 1 }} : {{$field->question}}</option>
                             @endif
                     @endforeach
                     </select>
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="description">{{trans("I WANT TO SHOW THE QUESTIONS")}} : <span class="text-danger">*</span></label><br>
                     @foreach($questions as $key => $field)
-                        <input type="checkbox"  value="{{$field->id}}" name="questions_check[]"> Question {{$key + 1 }} : {{$field->question}} <br>
+                        <input type="checkbox" class="guren"  value="{{$field->id}}" name="questions_check[]"> Question {{$key + 1 }} : {{$field->question}} <br>
                     @endforeach
                 </div>
 
@@ -69,11 +69,20 @@
         // changement de pays
         $('#question-select').change(function(e){
             let question_id = e.target.value;
+            //alert("Bonjour"+id);
+            console.log(question_id);
             $.get('/json_response?question_id=' + question_id,function(data) {
                 $('#response').empty();
                 $.each(data, function(index, stateObj){
                     $('#response').append('<option value="'+ stateObj.id +'">'+ stateObj.value +'</option>');
                 });
+                $('.guren').each(function (index, objet) {
+                    if(question_id >= objet.value) {
+                        objet.disabled = true;
+                    }else{
+                        objet.disabled = false;
+                    }
+                })
             });
         });
 

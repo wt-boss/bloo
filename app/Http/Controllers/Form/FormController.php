@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use stdClass;
 
 class FormController extends Controller
 {
@@ -132,8 +133,15 @@ class FormController extends Controller
 
     public function conditional(Form $form){
         //Recuperation des questions du formulaire;
-        $questions = FormField::where('form_id',$form->id)->get();
+        $questions = collect();
+        $Allquestions = FormField::where('form_id',$form->id)->get();
 
+        foreach($Allquestions as $key => $value){
+            $object =  new stdClass();
+            $object = $value;
+            $object->key = $key;
+            $questions->push($object);
+        }
         return view('forms.form.conditional', compact('questions','form'));
     }
 
