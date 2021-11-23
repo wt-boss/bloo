@@ -18,7 +18,7 @@ class ExtraTable extends Seeder
         ]);
 
         DB::table('extras')->insert([
-            'type' => 'Opérateur',
+            'type' => 'Operateur',
             'offer_id' => 1,
             'cost' => 1000
         ]);

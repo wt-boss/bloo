@@ -1038,7 +1038,7 @@ class OperationController extends Controller
      */
     public function store_extra(Request $request){
         $this->validate($request, User::rules());
-        User::create(request()->all());
+        //User::create(request()->all());
         $extra_user=User::OrderBy('id','desc')->first();
         $user=Auth::user();
         $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
