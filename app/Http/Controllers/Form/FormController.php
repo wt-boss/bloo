@@ -149,6 +149,7 @@ class FormController extends Controller
         $question = $request->get('questions');
         $value = $request->get('value');
         $questions = $request["questions_check"];
+
         foreach($questions as $item){
             FormField::where('id',$item)->update(['display' => 'none']);
         }
@@ -156,6 +157,7 @@ class FormController extends Controller
 
         //Enregistrement de la condition
         $conditional = new Conditional();
+
         $conditional->form_id = $field->form_id;
         $conditional->field_id = $field->id;
         $conditional->field_name = $field->attribute;
@@ -171,7 +173,7 @@ class FormController extends Controller
             $conditional_fields->save();
         }
 
-        return redirect()->route('forms.show', $request->form);
+        return back()->withSuccess(trans('Saved condition'));
     }
 
     public function show_free(Request $request)

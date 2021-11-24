@@ -120,7 +120,6 @@ $fields = $form->fields()->filled()->get();
             });
         </script>
         <script type="text/javascript">
-
             window.onload = function(){
                 @foreach ($conditions as $item)
                 $("#user-form input[name='{{$item->field_name}}']").click(function(){
@@ -136,7 +135,6 @@ $fields = $form->fields()->filled()->get();
                             let thirdDiv{{$key}} = secondDiv{{$key}}.firstElementChild;
                             let lastDiv{{$key}} = thirdDiv{{$key}}.lastElementChild;
                             lastDiv{{$key}}.required = false;
-                            console.log(lastDiv{{$key}});
                         @endforeach
                     }
                 });

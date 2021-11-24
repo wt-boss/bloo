@@ -21,6 +21,7 @@ class CreateFormFieldsTable extends Migration
             $table->string('question')->nullable();
             $table->boolean('required')->nullable();
             $table->text('options')->nullable();
+            $table->text('display')->nullable();
             $table->boolean('filled')->default(false);
             $table->softDeletes();
             $table->timestamps();

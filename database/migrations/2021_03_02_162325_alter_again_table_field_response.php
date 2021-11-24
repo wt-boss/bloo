@@ -14,7 +14,7 @@ class AlterAgainTableFieldResponse extends Migration
     public function up()
     {
         Schema::table('field_responses', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
         });
     }
 
