@@ -365,8 +365,10 @@
                             <select class="form-control" name="role" id="description" required>
                                 <option value=""></option>
                                 <option value="4">Client</option>
+                                @isset($offer->offer_id)
                                  @if($offer->offer_id === 1)<option value="1">Operateur</option>
                                  @endif
+                                @endisset
                             </select>
                             <div class="form-control-feedback">
                                 <i class="icon-book3 text-muted"></i>
