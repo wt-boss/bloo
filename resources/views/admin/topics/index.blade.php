@@ -194,7 +194,7 @@
     <script>
         $('.topic').on('click', function (e) {
             let topic_id = e.target.id;
-            $.get('/json-templates?topic_id=' + topic_id,function(data) {
+            $.get('/json-templates2?topic_id=' + topic_id,function(data) {
                 $('#templates').empty();
                 $('#templates').append(data);
             });

@@ -33,15 +33,7 @@
                             <div class="mik-invalid-feedback">
                                 @lang('field_cant_be_nil')
                             </div>
-                        @else
-                            <select class="form-control" name="entreprise_id">
-                                @foreach($entreprises as $entreprise)
-                                    <option  value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
-                                @endforeach
-                            </select>
-                            <div class="mik-invalid-feedback">
-                                @lang('field_cant_be_nil')
-                            </div>
+
                         @endif
                     </div>
                    @endif

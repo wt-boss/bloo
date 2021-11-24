@@ -71,7 +71,14 @@
                                                 @endif
                                         </td>
                                         <td class="text-center" style="position: relative;">
+                                            @if($operation->form_id !== 0)
                                             @include('admin.operation.partials.op-action')
+                                                @else
+                                                <button class="btn btn-xs btn-bloo-c3 dropdown-toggle" data-toggle="dropdown" style="margin-left: 10px;">{{ trans('actions') }} <span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right" style="padding: 10px;">
+                                                    <li><a href="{{ route('templates.index') }}" class="btn btn-bloo-action mb-5">{{ trans('Complete creation') }}</a></li>
+                                                </ul>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -81,6 +88,9 @@
                 </div>
             @endif
         @endif
+
+
+
         @if (auth()->user()->hasRole('Lecteur|Opérateur'))
         @if ($operations->isEmpty())
         <div class="panel-body text-center">
@@ -119,9 +129,13 @@
                                 <td class="text-center">{{$operation->sites()->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
                                 <td class="text-center">{{$operation->users()->where('role','1')->count()}}</td>
+
                                 <td class="text-center" style="position: relative;">
+                                    @if($operation->form_id !== 0)
                                     @include('admin.operation.partials.op-action')
+                                    @endif
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

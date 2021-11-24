@@ -756,7 +756,9 @@
     "End date": "Date de fin",
     "Offer": "Offre",
     "View this template": "Visualiser ce template",
-    "Saved condition": "Condition sauvegardée"
+    "Saved condition": "Condition sauvegardée",
+    "Please finalize the creation of your last transaction": "Veuillez finaliser la création de votre dernière opération",
+    "Complete creation": "Terminer la création "
 
 
 }

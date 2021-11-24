@@ -351,6 +351,8 @@ Route::get('usetemplate/{id}','TemplateController@use')->name("usetemplate")->mi
 
 Route::get('/json-templates','TemplateController@alltemplates')->middleware(['auth']);
 
+Route::get('/json-templates2','TemplateController@alltemplates2')->middleware(['auth']);
+
 Route::get('/showfacture/{subscription}','FactureController@showfaacture')->middleware(['auth'])->name("showfacture");
 
 Route::get('/json-payfacture','FactureController@payement')->middleware(['auth'])->name("showfacture");

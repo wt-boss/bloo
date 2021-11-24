@@ -85,6 +85,12 @@ class OperationController extends Controller
      */
     public function create()
     {
+        $operation_user = Operation_User::where('user_id', auth()->user()->id)->get()->last();
+        $operation = Operation::findOrFail($operation_user->operation_id);
+         if($operation->form_id === 0 )
+         {
+             return back()->withErrors(trans('Please finalize the creation of your last transaction'));
+         }
         $entreprises = Entreprise::all();
         return view('admin.operation.create', compact('entreprises'));
     }
@@ -457,11 +463,10 @@ class OperationController extends Controller
         $operation->form_id = 0;
         $operation->date_start = $parameters['date_debut'];
         $operation->date_end = $parameters['date_fin'];
-        if(auth()->user()->hasRole('Superadmin|Admin')){
+        if(isset($parameters['entreprise_id'])){
           $operation->entreprise_id = $parameters['entreprise_id'];
         }
         $operation->save();
-
 
         $user = User::findOrFail(Auth::user()->id);
         $operation->users()->attach($user);

@@ -29,6 +29,14 @@ class TemplateController extends Controller
 
     }
 
+    public function alltemplates2(Request $request)
+    {
+        $topic_id = $request->input('topic_id');
+        $templates = Template::with('form')->where('topic_id', $topic_id)->get();
+        $viewData = (string)View::make('Helpers.template2', compact('templates'));
+        return response()->json($viewData);
+    }
+
 
     public function use($id){
         /**
@@ -42,6 +50,7 @@ class TemplateController extends Controller
         /**
          * Creation du fomrulaire;
          */
+
         $form = new Form([
             'title' => $theform->title,
             'description' => $theform->description,
