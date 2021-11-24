@@ -35,8 +35,6 @@ $fields = $form->fields()->filled()->get();
                         {{ optional($form->availability)->closed_form_message ?? 'Sorry, this form has been closed to responses.' }}
                     </div>
                     @elseif($form->status === App\Form::STATUS_DRAFT)
-
-                    @else
                     <div class="panel-body">
                         {!! str_convert_line_breaks($form->description) !!}
                     </div>
