@@ -35,24 +35,8 @@
                         <input class="form-control" type="text" name="adresse" placeholder="{{ trans('Address') }}" required>
                         <input class="form-control" type="text" name="contribuable" placeholder="N° Contribuable">
                         <input class="form-control" type="text" name="siret" placeholder="N° SIRET/RCCM">
-                        <select class="form-control" name="" id="country" required>
-                            @foreach($countries as $country)
-                                <option value="{{$country->id}}">{{$country->name}}</option>
-                            @endforeach
-                        </select>
-                        <div id="div_region" style="display:none">
-                            <select class="form-control" name="city_id" id="region" required>
-
-                            </select>
-                        </div>
-                        <div id="div_ville" style="display:none">
-                            <select class="form-control" name="city_id" id="ville" required>
-
-                            </select>
-                        </div>
                         <input class="form-control" type="hidden" name="type" value="Personne Morale">
                         <input class="form-control" type="text" name="telephone" placeholder="{{ trans('Phone') }}"required>
-                        <input class="form-control" type="email" name="email" placeholder="{{ trans('Email') }}" required>
                         <br>
                         <button type="submit" class="btn btn-bloo">{{ trans('save') }}</button>
                     </form>

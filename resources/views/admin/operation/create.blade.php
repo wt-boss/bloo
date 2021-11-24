@@ -27,7 +27,7 @@
                     @if (auth()->user()->hasRole('Superadmin|Admin'))
                     <div class="row">
                         @if(isset($entreprise))
-                            <select class="form-control" name="entreprise_id">
+                            <select class="form-control" name="entreprise_id" requirred>
                                 <option value="{{$entreprise->id}}">{{$entreprise->nom}}</option>
                             </select>
                             <div class="mik-invalid-feedback">
