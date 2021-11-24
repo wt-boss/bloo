@@ -9,7 +9,7 @@ if (Auth::user()->rolename() !== "Superadmin") {
 }
 
 //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
-$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
+$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar1.png');
 ?>
 
 <div class="form-group focused" >
@@ -29,20 +29,28 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
 
 <div class="form-group focused">
     <label for="role">Role</label>
+    @if($user->role === 4)
+        <select class="form-control" id="role" name="role"  disabled>
+            <option value="4" selected="selected">Client</option>
+        </select>
+        @elseif($user->role === 5)
+        <select class="form-control" id="role" name="role"  disabled>
+            <option value="5" selected="selected">Admin</option>
+        </select>
+    @else
     <select class="form-control" id="role" name="role"  required>
         <option value="" selected="selected"></option>
-        <option value="0">Lecteur</option>
-        <option value="1" >Opérateur</option>
-        <option value="5" >Admin</option>
+        <option value="0" @if($user->role === 0) selected @endif>Lecteur</option>
+        <option value="1" @if($user->role === 1) selected @endif>Opérateur</option>
     </select>
+    @endif
 </div>
 
 <div class="form-group focused" >
     <label for="active" >Active</label>
     <select class="form-control" id="active" name="active" required>
-        <option value="" selected="selected"></option>
-        <option value="0" >Non</option>
-        <option value="1">Oui</option>
+        <option value="0" @if($user->active === 0) selected @endif>Non</option>
+        <option value="1" @if($user->active === 1) selected @endif>Oui</option>
     </select>
 </div>
 

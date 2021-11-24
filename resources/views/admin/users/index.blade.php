@@ -65,7 +65,7 @@
                                     @if(Auth::user()->rolename() == "Superadmin")
                                     <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
-                                    @if(($user->rolename() == "Opérateur") && ($user->active == 0))
+                                    @if(($user->rolename() == "Operateur") && ($user->active == 0))
                                     <a id="activation" href="{{route('activation', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-user-check"></i></a>
                                     @endif
                                     @if(Auth::user()->rolename() === "Superadmin")

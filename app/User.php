@@ -99,7 +99,7 @@ class User extends Authenticatable implements JWTSubject
     {
         if (!$value) {
 
-            return url('/') . config('variables.avatar.public') . 'avatar0.png';
+            return url('/') . config('variables.avatar.public') . 'avatar1.jpg';
         }
 
         return url('/') . config('variables.avatar.public') . $value;
