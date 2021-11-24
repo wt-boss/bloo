@@ -12,7 +12,7 @@ if (Auth::user()->rolename() !== "Superadmin") {
 
 }
 //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
-$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'edit-lect-btn.png');
+$img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.public') . 'avatar1.jpg') ;
 ?>
 {!! Form::myInput('text', 'first_name', trans('first_name')) !!}
 
@@ -39,9 +39,9 @@ $img_url = (isset($user) ? $user->avatar : url('/') . config('variables.avatar.p
       </select>
   </div>
 
-{!! Form::myInput('text', 'password', trans('password')) !!}
+{!! Form::myInput('password', 'password', trans('password')) !!}
 
-{!! Form::myInput('text', 'password_confirmation', trans('password_confirmation')) !!}
+{!! Form::myInput('password', 'password_confirmation', trans('password_confirmation')) !!}
 
 {!! Form::mySelect('role', 'Rôle', $allowedRoles) !!}
 
