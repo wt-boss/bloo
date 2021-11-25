@@ -501,7 +501,7 @@
         <div class="panel-body" style="padding: 0;">
             <div class="row">
                 <a href="/compte">
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-4 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-white">
                           <div class="inner">
@@ -516,7 +516,7 @@
                     </div>
                 </a>
                <a href="/operation">
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-4 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-white">
                         <div class="inner">
@@ -531,7 +531,7 @@
                     </div>
                 </a>
                 @if (auth()->user()->hasRole('Superadmin|Client|Admin'))
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-white">
                       <div class="inner">
@@ -544,19 +544,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-white">
-                      <div class="inner">
-                        <h3>{{$rapports->count()}}</h3>
 
-                        <p>{{ trans('reports') }}</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-document-text"></i>
-                      </div>
-                    </div>
-                </div>
                 @endif
             </div>
             <div class="row">

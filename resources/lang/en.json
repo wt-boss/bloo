@@ -642,6 +642,10 @@
     "signup_1": "PERSONAL INFORMATIONS",
     "signup_2": "COMPANY INFORMATION",
     "Sucess_create": "Your account has been successfully created",
-    "Confirmation_msg": "A confirmation email has been sent to you."
+    "Confirmation_msg": "A confirmation email has been sent to you.",
+    "Lecteur":"Reader",
+    "Operateur": "Operator",
+    "Oui": "Yes",
+    "Non": "No"
 
 }

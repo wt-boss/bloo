@@ -155,7 +155,7 @@
                         @endif
                         @if (auth()
     ->user()
-    ->hasRole('Superadmin'))
+    ->hasRole('Superadmin|Admin'))
                             <li
                                     class="<?php echo Str::startsWith($route, 'user') ? 'active' : ''; ?>">
                                 <a class="m-link" href="{{ route('users.index') }}">

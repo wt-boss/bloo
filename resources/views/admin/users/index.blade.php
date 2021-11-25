@@ -13,6 +13,7 @@
                 <a href="{{ route('users.create') }}" class="btn btn-bloo"><i class="fas fa-plus-circle"></i> {{ trans('create_user') }}</a>
             </div>
         </div>
+
         @if ($users->isEmpty())
             <div class="panel-body text-center">
                 <div class="mt-30 mb-30">
@@ -20,6 +21,7 @@
                 </div>
             </div>
         @else
+
         <div class="panel panel-flat">
             <!-- /.box-header -->
             <div  style="padding: 15px">
@@ -32,7 +34,7 @@
                             <th class="text-center">{{ trans('Rôle') }}</th>
                             <th class="text-center">{{ trans('Compte Actif') }}</th>
                             <th class="text-center">Status</th>
-                            @if(Auth::user()->rolename() == "Superadmin")
+                            @if(auth()->user()->hasRole('Superadmin|Admin'))
                             <th class="text-center">{{ trans('actions') }}</th>
                             @endif
                         </tr>
@@ -40,6 +42,7 @@
                     <tbody>
 
                         @foreach($users as $user)
+                            @if(auth()->user()->hasRole('Superadmin'))
                             <tr>
                                 <td></td>
                             <td>{{$user->first_name}} {{$user->last_name}}</td>
@@ -78,6 +81,53 @@
                                     @endif
                                 </td>
                             </tr>
+                            @endif
+
+                            @if(auth()->user()->hasRole('Admin'))
+                                @if($user->hasRole('Lecteur|Operateur'))
+                                <tr>
+                                    <td></td>
+                                    <td>{{$user->first_name}} {{$user->last_name}}</td>
+                                    <td class="text-center">{{$user->email}}</td>
+                                    <td class="text-center">{{ Helper::getRolename($user->role) }}</td>
+                                    <td class="text-center">
+                                        @if($user->active == 1)
+                                            <i class="fas fa-check-square " style="color: #0065A1;"></i>
+                                        @else
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if(Cache::has('user-is-online-' . $user->id))
+                                            <span class="text-success">Online</span>
+                                        @else
+                                            <span class="text-secondary">Offline</span>
+                                        @endif
+
+                                    </td>
+                                    <td class="text-center">
+                                        @if(auth()->user()->hasRole('Superadmin|Admin'))
+                                            <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-xs btn-info mb-5" style="background-color: #0065A1;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="{{  route('users.edit', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-edit"></i></a>
+
+                                            @if(($user->rolename() === "Operateur") && ($user->active == 0))
+                                                <a id="activation" href="{{route('activation', [$user->id]) }}" class="btn btn-xs btn-primary  mb-5 position-right" style="background-color: #0065A1;"><i class="fa fa-user-check"></i></a>
+                                            @endif
+
+                                            @if(auth()->user()->hasRole('Superadmin|Admin'))
+                                                @if($user->rolename() !== "Superadmin")
+                                                    <form  id="myForm" class="btn btn-xs  position-right" method="POST" action="{{route('users.destroy', [$user->id]) }}" > @csrf @method('DELETE')
+                                                        <button  class="btn btn-xs btn-primary  mb-5 position- submit" style="background-color: #0065A1;" > <i class="fa fa-trash"></i> </button>
+                                                    </form>
+                                                @endif
+                                            @endif
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endif
+                            @endif
+
                         @endforeach
                     </tbody>
                 </table>

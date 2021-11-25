@@ -56,6 +56,12 @@ class TheMessageController extends Controller
         }
 
         $clientId = implode(",",$clientId);
+        if($AuthUser->role === 6){
+            if(empty($clientId)){
+                return redirect()->route('operation.index')->withErrors(trans('You have not yet been assigned to a customer'));
+            }
+        }
+
 
         $clients = DB::select("select users.id, users.first_name, users.last_name,users.avatar, users.email, count(is_read) as unread
         from users LEFT  JOIN  messages ON users.id = messages.receiver_id and is_read = 0 and messages.user_id = " . Auth::id() . "

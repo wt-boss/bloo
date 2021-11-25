@@ -758,7 +758,8 @@
     "View this template": "Visualiser ce template",
     "Saved condition": "Condition sauvegardée",
     "Please finalize the creation of your last transaction": "Veuillez finaliser la création de votre dernière opération",
-    "Complete creation": "Terminer la création "
+    "Complete creation": "Terminer la création",
+    "You have not yet been assigned to a customer": "Vous n'avez pas encore été affecté à un client"
 
 
 }

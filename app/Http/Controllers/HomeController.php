@@ -74,6 +74,7 @@ class HomeController extends Controller
     public function admin()
     {
         $user = auth()->user();
+
         $countries  = Country::where('id','38')
             ->orwhere('id','42')
             ->orwhere('id','50')
@@ -84,8 +85,10 @@ class HomeController extends Controller
             ->orwhere('id','7')
             ->orwhere('id','51')
             ->get();
+
         $diagram =  collect();
         $diagram->push(['Client','Operation']);
+
         if($user->role === 6)
         {
             $comptes = Entreprise::with('operations')->get();

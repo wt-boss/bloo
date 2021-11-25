@@ -86,13 +86,21 @@ class OperationController extends Controller
     public function create()
     {
         $operation_user = Operation_User::where('user_id', auth()->user()->id)->get()->last();
-        $operation = Operation::findOrFail($operation_user->operation_id);
-         if($operation->form_id === 0 )
-         {
-             return back()->withErrors(trans('Please finalize the creation of your last transaction'));
-         }
         $entreprises = Entreprise::all();
-        return view('admin.operation.create', compact('entreprises'));
+        if($operation_user === null)
+        {
+            return view('admin.operation.create', compact('entreprises'));
+        }
+        else{
+            $operation = Operation::findOrFail($operation_user->operation_id);
+
+            if($operation->form_id === 0 )
+            {
+                return back()->withErrors(trans('Please finalize the creation of your last transaction'));
+            }
+
+            return view('admin.operation.create', compact('entreprises'));
+        }
     }
 
     /**
@@ -1043,8 +1051,8 @@ class OperationController extends Controller
      */
     public function store_extra(Request $request){
         $this->validate($request, User::rules());
-        //User::create(request()->all());
-        $extra_user=User::OrderBy('id','desc')->first();
+        $extra_user = User::create(request()->all());
+        //$extra_user = User::OrderBy('id','desc')->first();
         $user=Auth::user();
         $subscription=$user->subscriptions()->first(); //TODO en principe on doit creer une souscription s'il n'y en a pas
         $extra=Extra::where('type','=',$extra_user->rolename())->where('offer_id',$request->offer_id)->get()->last();
