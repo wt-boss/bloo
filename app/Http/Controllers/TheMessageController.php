@@ -56,7 +56,7 @@ class TheMessageController extends Controller
         }
 
         $clientId = implode(",",$clientId);
-        if($AuthUser->role === 6){
+        if($AuthUser->role === 5){
             if(empty($clientId)){
                 return redirect()->route('operation.index')->withErrors(trans('You have not yet been assigned to a customer'));
             }
